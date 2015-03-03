@@ -94,9 +94,9 @@ Class.extend = function(props, statics) {
  * Object Pool
  */
 var ObjectPool = go2d.ObjectPool = Class.extend({
-	__init: function(constructor, size) {
+	__init: function(factory, size) {
 		this._pool = [];
-		this._class = constructor;
+		this._factory = factory;
 		this.size = size || 30;
 
 		Object.defineProperty(this, 'length', {
@@ -107,7 +107,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 		});
 	},
 	create: function() {
-		return new this._class();
+		return new this._factory();
 	},
 	get: function() {
 		if (this._pool.length) {
@@ -129,7 +129,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	},
 	dispose: function() {
 		this._pool = null;
-		this._constructor = null;
+		this._factory = null;
 	}
 });
 
