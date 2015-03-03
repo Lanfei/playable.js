@@ -1,5 +1,5 @@
 /**
- * Go2d 1.3.0
+ * Go2d 1.3.1
  * https://github.com/Lanfei/Go2d
  * (c) 2014 [Lanfei](http://www.clanfei.com/)
  * A lightweight HTML5 game engine
@@ -14,7 +14,7 @@
 })(this, function() {
 
 var go2d = {
-	version: '1.3.0'
+	version: '1.3.1'
 };
 
 /**
@@ -908,6 +908,7 @@ var Tween = go2d.Tween = EventDispatcher.extend({
 					current = 0;
 					if (loops > 0 && --loops === 0) {
 						that.pause();
+						that.emit('complete');
 					} else {
 						forEach(beginProps, function(value, name) {
 							target[name] = value;

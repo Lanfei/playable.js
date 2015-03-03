@@ -52,6 +52,7 @@ var Tween = go2d.Tween = EventDispatcher.extend({
 					current = 0;
 					if (loops > 0 && --loops === 0) {
 						that.pause();
+						that.emit('complete');
 					} else {
 						forEach(beginProps, function(value, name) {
 							target[name] = value;
