@@ -66,7 +66,7 @@ module.exports = function(grunt) {
 		},
 		jsdoc2md: {
 			dist: {
-				src: 'src/*/*.js',
+				src: ['src/go2d.js', 'src/*/*.js'],
 				dest: 'docs/api.md'
 			}
 		}
