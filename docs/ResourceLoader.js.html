@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: net/ResourceLoader.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: net/ResourceLoader.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
+ * 资源加载器类，可用于加载和管理游戏资源。
+ * @author Lanfei
+ * @class go2d.ResourceLoader
+ * @extends go2d.EventDispatcher
+ * @param {Object} resources 资源路径数据对象，格式如下：
+ * &lt;pre>&lt;code>
+ * {
+ *     text: {
+ *         name1: url1,
+ *         name2: url2
+ *         // ...
+ *     },
+ *     image: {
+ *         name1: url1,
+ *         name2: url2
+ *         // ...
+ *     }
+ *     // ...
+ * }
+ * @param {Object} [options] 配置参数
+ * @param {Object} [options.retryTimes=3] 失败重试次数
+ * &lt;/code>&lt;/pre>
+ */
+var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
+	__init: function(resources, options) {
+		options = options || {};
+		this._super();
+
+		/**
+		 * 缓存的资源对象
+		 * @private
+		 * @member go2d.ResourceLoader#_cache
+		 * @type {Object}
+		 */
+		this._cache = {};
+
+		/**
+		 * 资源路径数据对象
+		 * @private
+		 * @member go2d.ResourceLoader#_resources
+		 * @type {Object}
+		 */
+		this._resources = resources;
+
+		/**
+		 * 资源总数
+		 * @readonly
+		 * @member go2d.ResourceLoader#total
+		 * @type {number}
+		 */
+		this.total = 0;
+
+		/**
+		 * 加载失败资源数量
+		 * @readonly
+		 * @member go2d.ResourceLoader#errorCount
+		 * @type {number}
+		 */
+		this.errorCount = 0;
+
+		/**
+		 * 加载完成资源数量
+		 * @readonly
+		 * @member go2d.ResourceLoader#loadedCount
+		 * @type {number}
+		 */
+		this.loadedCount = 0;
+
+		/**
+		 * 失败重试次数
+		 * @member go2d.ResourceLoader#retryTimes
+		 * @type {number}
+		 * @default 3
+		 */
+		this.retryTimes = options.retryTimes === undefined ? 3 : options.retryTimes;
+	},
+	_request: function(type, name, url, retryTimes) {
+		var errorHandler,
+			that = this;
+
+		if (retryTimes &lt; this.retryTimes) {
+			errorHandler = function() {
+				that._request(type, name, url, retryTimes + 1);
+			};
+		} else {
+			errorHandler = function() {
+				that._onError(name);
+			};
+		}
+
+		switch (type) {
+			case ResourceLoader.TYPE_IMAGE:
+				var image = new Image();
+				image.addEventListener('load', function() {
+					that._onLoad();
+				});
+				image.addEventListener('error', errorHandler);
+				image.src = url;
+				this._save(type, name, image);
+				break;
+			case ResourceLoader.TYPE_AUDIO:
+				var audio = document.createElement('audio');
+				// TODO (iOS)
+				audio.addEventListener('canplay', function() {
+					that._onLoad();
+				});
+				audio.addEventListener('error', errorHandler);
+				audio.src = url;
+				this._save(type, name, audio);
+				if ('ontouchend' in document) {
+					var playing = false;
+					var fnPlay = audio.play;
+					var fnPause = audio.pause;
+					audio.play = function() {
+						playing = true;
+						fnPlay.call(this);
+					};
+					audio.pause = function() {
+						playing = false;
+						fnPause.call(this);
+					};
+					document.addEventListener('touchstart', function() {
+						if (playing) {
+							audio.play();
+						} else {
+							audio.play();
+							audio.pause();
+						}
+						document.removeEventListener('touchstart', arguments.callee, true);
+					}, true);
+				}
+				break;
+			case ResourceLoader.TYPE_XML:
+			case ResourceLoader.TYPE_JSON:
+			case ResourceLoader.TYPE_TEXT:
+			default:
+				var urlRequest = new URLRequest(url, {
+					dataType: type,
+					responseType: type === 'binary' ? 'arraybuffer' : ''
+				});
+				urlRequest.on('success', function(response) {
+					that._save(type, name, response);
+					that._onLoad();
+				});
+				urlRequest.on('error', errorHandler);
+				urlRequest.send();
+		}
+	},
+	_save: function(type, name, resource) {
+		this._cache[type] = this._cache[type] || {};
+		this._cache[type][name] = resource;
+	},
+	_onLoad: function() {
+		/**
+		 * 加载进度事件
+		 * @event go2d.ResourceLoader#progress
+		 * @param {number} loadedCount 已加载数量
+		 * @param {number} total 总数量
+		 */
+		this.emit('progress', ++this.loadedCount, this.total);
+		this._checkStatus();
+	},
+	_onError: function(name) {
+		++this.errorCount;
+		/**
+		 * 加载错误事件
+		 * @event go2d.ResourceLoader#error
+		 * @param {string} name 加载出错资源名称
+		 */
+		this.emit('error', name);
+		this._checkStatus();
+	},
+	_checkStatus: function() {
+		if (this.loadedCount === this.total) {
+			/**
+			 * 加载完全事件
+			 * @event go2d.ResourceLoader#complete
+			 */
+			this.emit('complete');
+		}
+		if (this.loadedCount + this.errorCount === this.total) {
+			/**
+			 * 加载完毕事件
+			 * @event go2d.ResourceLoader#finish
+			 */
+			this.emit('finish');
+		}
+	},
+	/**
+	 * 开始加载资源
+	 * @function go2d.ResourceLoader#load
+	 * @return {this}
+	 */
+	load: function() {
+		var that = this,
+			data = this._resources;
+		forEach(data, function(list, type) {
+			forEach(list, function(url, name) {
+				++that.total;
+				that._request(type, name, url);
+			});
+		});
+		return this;
+	},
+	/**
+	 * 获取资源对象
+	 * @function go2d.ResourceLoader#get
+	 * @param {string} type 资源类型
+	 * @param {string} name 资源名称
+	 * @return {Object} 对应的资源对象
+	 */
+	get: function(type, name) {
+		if (this._cache[type]) {
+			return this._cache[type][name];
+		}
+	},
+	/**
+	 * 获取 XML 资源
+	 * @function go2d.ResourceLoader#getXML
+	 * @param {string} name 资源名称
+	 * @return {Object} 对应的资源对象
+	 */
+	getXML: function(name) {
+		return this.get(ResourceLoader.TYPE_XML, name);
+	},
+	/**
+	 * 获取 JSON 资源
+	 * @function go2d.ResourceLoader#getJSON
+	 * @param {string} name 资源名称
+	 * @return {Object} 对应的资源对象
+	 */
+	getJSON: function(name) {
+		return this.get(ResourceLoader.TYPE_JSON, name);
+	},
+	/**
+	 * 获取文本资源
+	 * @function go2d.ResourceLoader#getText
+	 * @param {string} name 资源名称
+	 * @return {Object} 对应的资源对象
+	 */
+	getText: function(name) {
+		return this.get(ResourceLoader.TYPE_TEXT, name);
+	},
+	/**
+	 * 获取图像资源
+	 * @function go2d.ResourceLoader#getImage
+	 * @param {string} name 资源名称
+	 * @return {Object} 对应的资源对象
+	 */
+	getImage: function(name) {
+		return this.get(ResourceLoader.TYPE_IMAGE, name);
+	},
+	/**
+	 * 获取音频资源
+	 * @function go2d.ResourceLoader#getAudio
+	 * @param {string} name 资源名称
+	 * @return {Object} 对应的资源对象
+	 */
+	getAudio: function(name) {
+		return this.get(ResourceLoader.TYPE_AUDIO, name);
+	},
+	/**
+	 * 获取二进制资源
+	 * @function go2d.ResourceLoader#getBinary
+	 * @param {string} name 资源名称
+	 * @return {Object} 对应的资源对象
+	 */
+	getBinary: function(name) {
+		return this.get(ResourceLoader.TYPE_BINARY, name);
+	},
+	/**
+	 * 移除资源
+	 * @function go2d.ResourceLoader#destroy
+	 * @param {string} [type] 资源类型，为空时移除所有资源
+	 * @param {string} [name] 资源名称，为空时移除所有指定类型资源
+	 * @return {this}
+	 */
+	destroy: function(type, name) {
+		if (type === undefined) {
+			this._cache = {};
+		} else if (name === undefined) {
+			delete this._cache[type];
+		} else if (this._cache[type]) {
+			delete this._cache[type][name];
+		}
+		return this;
+	},
+	/**
+	 * 移除 XML 资源
+	 * @function go2d.ResourceLoader#destroyXML
+	 * @param {string} name 资源名称
+	 * @return {this}
+	 */
+	destroyXML: function(name) {
+		return this.destroy(ResourceLoader.TYPE_XML, name);
+	},
+	/**
+	 * 移除 JSON 资源
+	 * @function go2d.ResourceLoader#destroyJSON
+	 * @param {string} name 资源名称
+	 * @return {this}
+	 */
+	destroyJSON: function(name) {
+		return this.destroy(ResourceLoader.TYPE_JSON, name);
+	},
+	/**
+	 * 移除文本资源
+	 * @function go2d.ResourceLoader#destroyText
+	 * @param {string} name 资源名称
+	 * @return {this}
+	 */
+	destroyText: function(name) {
+		return this.destroy(ResourceLoader.TYPE_TEXT, name);
+	},
+	/**
+	 * 移除图像资源
+	 * @function go2d.ResourceLoader#destroyImage
+	 * @param {string} name 资源名称
+	 * @return {this}
+	 */
+	destroyImage: function(name) {
+		return this.destroy(ResourceLoader.TYPE_IMAGE, name);
+	},
+	/**
+	 * 移除音频资源
+	 * @function go2d.ResourceLoader#destroyAudio
+	 * @param {string} name 资源名称
+	 * @return {this}
+	 */
+	destroyAudio: function(name) {
+		return this.destroy(ResourceLoader.TYPE_AUDIO, name);
+	},
+	/**
+	 * 移除二进制资源
+	 * @function go2d.ResourceLoader#destroyBinary
+	 * @param {string} name 资源名称
+	 * @return {this}
+	 */
+	destroyBinary: function(name) {
+		return this.destroy(ResourceLoader.TYPE_BINARY, name);
+	},
+	/**
+	 * 移除所有资源
+	 * @function go2d.ResourceLoader#destroyAll
+	 * @return {this}
+	 */
+	destroyAll: function() {
+		this._cache = {};
+		return this;
+	},
+	/**
+	 * 释放加载器内存
+	 * @function go2d.ResourceLoader#dispose
+	 */
+	dispose: function() {
+		this._resources = null;
+		this._super();
+	}
+}, {
+	
+	/**
+	 * XML 数据
+	 * @constant go2d.ResourceLoader.TYPE_XML
+	 * @type {string}
+	 * @default xml
+	 */
+	TYPE_XML: 'xml',
+	
+	/**
+	 * JSON 数据
+	 * @constant go2d.ResourceLoader.TYPE_JSON
+	 * @type {string}
+	 * @default json
+	 */
+	TYPE_JSON: 'json',
+	
+	/**
+	 * 文本数据
+	 * @constant go2d.ResourceLoader.TYPE_TEXT
+	 * @type {string}
+	 * @default text
+	 */
+	TYPE_TEXT: 'text',
+	
+	/**
+	 * 图像
+	 * @constant go2d.ResourceLoader.TYPE_IMAGE
+	 * @type {string}
+	 * @default image
+	 */
+	TYPE_IMAGE: 'image',
+	
+	/**
+	 * 音频
+	 * @constant go2d.ResourceLoader.TYPE_AUDIO
+	 * @type {string}
+	 * @default audio
+	 */
+	TYPE_AUDIO: 'audio',
+	
+	/**
+	 * 二进制数据
+	 * @constant go2d.ResourceLoader.TYPE_BINARY
+	 * @type {string}
+	 * @default binary
+	 */
+	TYPE_BINARY: 'binary'
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="go2d.Class.html">Class</a></li><li><a href="go2d.Director.html">Director</a></li><li><a href="go2d.DisplayObject.html">DisplayObject</a></li><li><a href="go2d.Ease.html">Ease</a></li><li><a href="go2d.Event.html">Event</a></li><li><a href="go2d.EventDispatcher.html">EventDispatcher</a></li><li><a href="go2d.ImageView.html">ImageView</a></li><li><a href="go2d.Matrix.html">Matrix</a></li><li><a href="go2d.ObjectPool.html">ObjectPool</a></li><li><a href="go2d.ResizeEvent.html">ResizeEvent</a></li><li><a href="go2d.ResourceLoader.html">ResourceLoader</a></li><li><a href="go2d.ScrollView.html">ScrollView</a></li><li><a href="go2d.Sprite.html">Sprite</a></li><li><a href="go2d.Stage.html">Stage</a></li><li><a href="go2d.TextField.html">TextField</a></li><li><a href="go2d.TouchEvent.html">TouchEvent</a></li><li><a href="go2d.Tween.html">Tween</a></li><li><a href="go2d.URLRequest.html">URLRequest</a></li><li><a href="go2d.Vector.html">Vector</a></li></ul><h3>Events</h3><ul><li><a href="go2d.DisplayObject.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.DisplayObject.html#event:paint">paint</a></li><li><a href="go2d.DisplayObject.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.DisplayObject.html#event:render">render</a></li><li><a href="go2d.DisplayObject.html#event:resize">resize</a></li><li><a href="go2d.DisplayObject.html#event:step">step</a></li><li><a href="go2d.DisplayObject.html#event:touchend">touchend</a></li><li><a href="go2d.DisplayObject.html#event:touchmove">touchmove</a></li><li><a href="go2d.DisplayObject.html#event:touchstart">touchstart</a></li><li><a href="go2d.DisplayObject.html#event:touchtap">touchtap</a></li><li><a href="go2d.ImageView.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.ImageView.html#event:paint">paint</a></li><li><a href="go2d.ImageView.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.ImageView.html#event:render">render</a></li><li><a href="go2d.ImageView.html#event:resize">resize</a></li><li><a href="go2d.ImageView.html#event:step">step</a></li><li><a href="go2d.ImageView.html#event:touchend">touchend</a></li><li><a href="go2d.ImageView.html#event:touchmove">touchmove</a></li><li><a href="go2d.ImageView.html#event:touchstart">touchstart</a></li><li><a href="go2d.ImageView.html#event:touchtap">touchtap</a></li><li><a href="go2d.ResourceLoader.html#event:complete">complete</a></li><li><a href="go2d.ResourceLoader.html#event:error">error</a></li><li><a href="go2d.ResourceLoader.html#event:finish">finish</a></li><li><a href="go2d.ResourceLoader.html#event:progress">progress</a></li><li><a href="go2d.ScrollView.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.ScrollView.html#event:paint">paint</a></li><li><a href="go2d.ScrollView.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.ScrollView.html#event:render">render</a></li><li><a href="go2d.ScrollView.html#event:resize">resize</a></li><li><a href="go2d.ScrollView.html#event:scroll">scroll</a></li><li><a href="go2d.ScrollView.html#event:step">step</a></li><li><a href="go2d.ScrollView.html#event:touchend">touchend</a></li><li><a href="go2d.ScrollView.html#event:touchmove">touchmove</a></li><li><a href="go2d.ScrollView.html#event:touchstart">touchstart</a></li><li><a href="go2d.ScrollView.html#event:touchtap">touchtap</a></li><li><a href="go2d.Sprite.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.Sprite.html#event:paint">paint</a></li><li><a href="go2d.Sprite.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.Sprite.html#event:render">render</a></li><li><a href="go2d.Sprite.html#event:resize">resize</a></li><li><a href="go2d.Sprite.html#event:step">step</a></li><li><a href="go2d.Sprite.html#event:touchend">touchend</a></li><li><a href="go2d.Sprite.html#event:touchmove">touchmove</a></li><li><a href="go2d.Sprite.html#event:touchstart">touchstart</a></li><li><a href="go2d.Sprite.html#event:touchtap">touchtap</a></li><li><a href="go2d.Stage.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.Stage.html#event:paint">paint</a></li><li><a href="go2d.Stage.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.Stage.html#event:render">render</a></li><li><a href="go2d.Stage.html#event:resize">resize</a></li><li><a href="go2d.Stage.html#event:step">step</a></li><li><a href="go2d.Stage.html#event:touchend">touchend</a></li><li><a href="go2d.Stage.html#event:touchmove">touchmove</a></li><li><a href="go2d.Stage.html#event:touchstart">touchstart</a></li><li><a href="go2d.Stage.html#event:touchtap">touchtap</a></li><li><a href="go2d.TextField.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.TextField.html#event:paint">paint</a></li><li><a href="go2d.TextField.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.TextField.html#event:render">render</a></li><li><a href="go2d.TextField.html#event:resize">resize</a></li><li><a href="go2d.TextField.html#event:step">step</a></li><li><a href="go2d.TextField.html#event:touchend">touchend</a></li><li><a href="go2d.TextField.html#event:touchmove">touchmove</a></li><li><a href="go2d.TextField.html#event:touchstart">touchstart</a></li><li><a href="go2d.TextField.html#event:touchtap">touchtap</a></li><li><a href="go2d.URLRequest.html#event:error">error</a></li><li><a href="go2d.URLRequest.html#event:success">success</a></li></ul><h3>Namespaces</h3><ul><li><a href="go2d.html">go2d</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Mar 06 2015 19:03:29 GMT+0800 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

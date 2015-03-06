@@ -1,15 +1,63 @@
 /**
- * Tween
+ * 缓动动画控制类，负责处理显示对象的缓动动画。
+ * @author Lanfei
+ * @class go2d.Tween
+ * @extends go2d.Class
+ * @param {go2d.Sprite} target 动画应用对象
+ * @param {Object} [options] 配置参数
+ * @param {Object} [options.loops=1] 循环次数，为 0 时无限循环
+ * @todo 缓动时间控制应依据全局还是对象？
+ * @todo 代码结构有待整理
  */
-var Tween = go2d.Tween = EventDispatcher.extend({
+var Tween = go2d.Tween = Class.extend({
 	__init: function(target, options) {
 		options = options || {};
-		this._super();
-		this._target = target;
+
+		/**
+		 * 动画步骤
+		 * @private
+		 * @member go2d.Tween#_steps
+		 * @type {Array}
+		 */
 		this._steps = [];
+
+		/**
+		 * 动画应用对象
+		 * @private
+		 * @member go2d.Tween#_target
+		 * @type {go2d.Sprite}
+		 */
+		this._target = target;
+
+		/**
+		 * 循环次数，为 0 时无限循环
+		 * @private
+		 * @member go2d.Tween#_loops
+		 * @type {number}
+		 */
 		this._loops = options.loops === undefined ? 1 : options.loops;
+
+		/**
+		 * 是否已暂停
+		 * @private
+		 * @member go2d.Tween#_paused
+		 * @type {Boolean}
+		 */
+		this._paused = false;
+
+		/**
+		 * 动画步骤数量
+		 * @readonly
+		 * @member go2d.Tween#length
+		 * @type {number}
+		 */
+		Object.defineProperty(this, 'length', {
+			set: function() {},
+			get: function() {
+				return this._steps.length;
+			}
+		});
 		this._initEvent();
-		this.paused = false;
 		this.play();
 	},
 	_initEvent: function() {
@@ -23,28 +71,36 @@ var Tween = go2d.Tween = EventDispatcher.extend({
 			offsetTime = 0,
 			prevProps;
 		this._onStep = function(deltaTime) {
-			if (that.paused) {
+			if (that._paused) {
 				return;
 			}
-			var step = steps[current];
-			var props = step.props;
-			var duration = step.duration || 0;
-			var ease = step.ease || Ease.linear;
-			if (prevProps === undefined) {
-				prevProps = {};
-				forEach(props, function(value, name) {
-					beginProps[name] = beginProps[name] === undefined ? target[name] : beginProps[name];
-					prevProps[name] = target[name];
-				}, target);
-			}
-			offsetTime = Math.min(offsetTime + deltaTime, duration);
-			forEach(props, function(value, name) {
-				if (duration > 0) {
-					target[name] = ease(offsetTime, prevProps[name], value - prevProps[name], duration);
-				} else {
-					target[name] = value;
+			var step = steps[current],
+				props = step.props,
+				duration = step.duration || 0,
+				ease = step.ease,
+				callback = step.callback;
+
+			if (callback) {
+				callback();
+			} else {
+				if (prevProps === undefined) {
+					prevProps = {};
+					forEach(props, function(value, name) {
+						beginProps[name] = beginProps[name] === undefined ? target[name] : beginProps[name];
+						prevProps[name] = target[name];
+					}, target);
 				}
-			});
+
+				offsetTime = Math.min(offsetTime + deltaTime, duration);
+				forEach(props, function(value, name) {
+					if (duration > 0) {
+						target[name] = ease(offsetTime, prevProps[name], value - prevProps[name], duration);
+					} else {
+						target[name] = value;
+					}
+				});
+			}
+
 			if (offsetTime === duration) {
 				prevProps = undefined;
 				offsetTime = 0;
@@ -52,7 +108,6 @@ var Tween = go2d.Tween = EventDispatcher.extend({
 					current = 0;
 					if (loops > 0 && --loops === 0) {
 						that.pause();
-						that.emit('complete');
 					} else {
 						forEach(beginProps, function(value, name) {
 							target[name] = value;
@@ -62,33 +117,65 @@ var Tween = go2d.Tween = EventDispatcher.extend({
 			}
 		};
 	},
+	/**
+	 * 等待指定时间后进行下一个动画
+	 * @function go2d.Tween#wait
+	 * @param {number} duration 毫秒数
+	 * @return {this}
+	 */
 	wait: function(duration) {
 		this._steps.push({
 			duration: duration
 		});
 		return this;
 	},
+	/**
+	 * 更新属性值后进行下一个动画
+	 * @function go2d.Tween#from
+	 * @param {Object} props 要更新的属性集合
+	 * @return {this}
+	 */
 	from: function(props) {
 		this._steps.push({
 			props: props
 		});
 		return this;
 	},
+	/**
+	 * 为指定属性集合设置动画
+	 * @function go2d.Tween#to
+	 * @param {Object} props 要动画的属性集合
+	 * @param {number} duration 持续毫秒数
+	 * @param {function} [ease=go2d.Ease.linear] 缓动函数
+	 * @return {this}
+	 */
 	to: function(props, duration, ease) {
 		this._steps.push({
 			props: props,
 			duration: duration,
-			ease: ease
+			ease: ease || Ease.linear
+		});
+		return this;
+	},
+	/**
+	 * 执行回调后进行下一个动画
+	 * @function go2d.Tween#call
+	 * @param {function} callback 回调函数
+	 * @return {this}
+	 */
+	call: function(callback) {
+		this._steps.push({
+			callback: callback
 		});
 		return this;
 	},
 	play: function() {
-		this.paused = false;
+		this._paused = false;
 		this._target.on('step', this._onStep);
 		return this;
 	},
 	pause: function() {
-		this.paused = true;
+		this._paused = true;
 		this._target.off('step', this._onStep);
 		return this;
 	}

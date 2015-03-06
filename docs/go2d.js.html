@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: go2d.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: go2d.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
+ * Go2d 命名空间
+ * @namespace
+ * @property {string} version Go2d 版本号
+ */
+var go2d = {
+	version: '@VERSION'
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="go2d.Class.html">Class</a></li><li><a href="go2d.Director.html">Director</a></li><li><a href="go2d.DisplayObject.html">DisplayObject</a></li><li><a href="go2d.Ease.html">Ease</a></li><li><a href="go2d.Event.html">Event</a></li><li><a href="go2d.EventDispatcher.html">EventDispatcher</a></li><li><a href="go2d.ImageView.html">ImageView</a></li><li><a href="go2d.Matrix.html">Matrix</a></li><li><a href="go2d.ObjectPool.html">ObjectPool</a></li><li><a href="go2d.ResizeEvent.html">ResizeEvent</a></li><li><a href="go2d.ResourceLoader.html">ResourceLoader</a></li><li><a href="go2d.ScrollView.html">ScrollView</a></li><li><a href="go2d.Sprite.html">Sprite</a></li><li><a href="go2d.Stage.html">Stage</a></li><li><a href="go2d.TextField.html">TextField</a></li><li><a href="go2d.TouchEvent.html">TouchEvent</a></li><li><a href="go2d.Tween.html">Tween</a></li><li><a href="go2d.URLRequest.html">URLRequest</a></li><li><a href="go2d.Vector.html">Vector</a></li></ul><h3>Events</h3><ul><li><a href="go2d.DisplayObject.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.DisplayObject.html#event:paint">paint</a></li><li><a href="go2d.DisplayObject.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.DisplayObject.html#event:render">render</a></li><li><a href="go2d.DisplayObject.html#event:resize">resize</a></li><li><a href="go2d.DisplayObject.html#event:step">step</a></li><li><a href="go2d.DisplayObject.html#event:touchend">touchend</a></li><li><a href="go2d.DisplayObject.html#event:touchmove">touchmove</a></li><li><a href="go2d.DisplayObject.html#event:touchstart">touchstart</a></li><li><a href="go2d.DisplayObject.html#event:touchtap">touchtap</a></li><li><a href="go2d.ImageView.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.ImageView.html#event:paint">paint</a></li><li><a href="go2d.ImageView.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.ImageView.html#event:render">render</a></li><li><a href="go2d.ImageView.html#event:resize">resize</a></li><li><a href="go2d.ImageView.html#event:step">step</a></li><li><a href="go2d.ImageView.html#event:touchend">touchend</a></li><li><a href="go2d.ImageView.html#event:touchmove">touchmove</a></li><li><a href="go2d.ImageView.html#event:touchstart">touchstart</a></li><li><a href="go2d.ImageView.html#event:touchtap">touchtap</a></li><li><a href="go2d.ResourceLoader.html#event:complete">complete</a></li><li><a href="go2d.ResourceLoader.html#event:error">error</a></li><li><a href="go2d.ResourceLoader.html#event:finish">finish</a></li><li><a href="go2d.ResourceLoader.html#event:progress">progress</a></li><li><a href="go2d.ScrollView.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.ScrollView.html#event:paint">paint</a></li><li><a href="go2d.ScrollView.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.ScrollView.html#event:render">render</a></li><li><a href="go2d.ScrollView.html#event:resize">resize</a></li><li><a href="go2d.ScrollView.html#event:scroll">scroll</a></li><li><a href="go2d.ScrollView.html#event:step">step</a></li><li><a href="go2d.ScrollView.html#event:touchend">touchend</a></li><li><a href="go2d.ScrollView.html#event:touchmove">touchmove</a></li><li><a href="go2d.ScrollView.html#event:touchstart">touchstart</a></li><li><a href="go2d.ScrollView.html#event:touchtap">touchtap</a></li><li><a href="go2d.Sprite.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.Sprite.html#event:paint">paint</a></li><li><a href="go2d.Sprite.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.Sprite.html#event:render">render</a></li><li><a href="go2d.Sprite.html#event:resize">resize</a></li><li><a href="go2d.Sprite.html#event:step">step</a></li><li><a href="go2d.Sprite.html#event:touchend">touchend</a></li><li><a href="go2d.Sprite.html#event:touchmove">touchmove</a></li><li><a href="go2d.Sprite.html#event:touchstart">touchstart</a></li><li><a href="go2d.Sprite.html#event:touchtap">touchtap</a></li><li><a href="go2d.Stage.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.Stage.html#event:paint">paint</a></li><li><a href="go2d.Stage.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.Stage.html#event:render">render</a></li><li><a href="go2d.Stage.html#event:resize">resize</a></li><li><a href="go2d.Stage.html#event:step">step</a></li><li><a href="go2d.Stage.html#event:touchend">touchend</a></li><li><a href="go2d.Stage.html#event:touchmove">touchmove</a></li><li><a href="go2d.Stage.html#event:touchstart">touchstart</a></li><li><a href="go2d.Stage.html#event:touchtap">touchtap</a></li><li><a href="go2d.TextField.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.TextField.html#event:paint">paint</a></li><li><a href="go2d.TextField.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.TextField.html#event:render">render</a></li><li><a href="go2d.TextField.html#event:resize">resize</a></li><li><a href="go2d.TextField.html#event:step">step</a></li><li><a href="go2d.TextField.html#event:touchend">touchend</a></li><li><a href="go2d.TextField.html#event:touchmove">touchmove</a></li><li><a href="go2d.TextField.html#event:touchstart">touchstart</a></li><li><a href="go2d.TextField.html#event:touchtap">touchtap</a></li><li><a href="go2d.URLRequest.html#event:error">error</a></li><li><a href="go2d.URLRequest.html#event:success">success</a></li></ul><h3>Namespaces</h3><ul><li><a href="go2d.html">go2d</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Mar 06 2015 19:03:29 GMT+0800 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

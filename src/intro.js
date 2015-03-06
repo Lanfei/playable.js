@@ -12,7 +12,3 @@
 		global.go2d = factory();
 	}
 })(this, function() {
-
-var go2d = {
-	version: '@VERSION'
-};

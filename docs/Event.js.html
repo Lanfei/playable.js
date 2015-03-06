@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: event/Event.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: event/Event.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
+ * 事件类，所有事件对象的基类。
+ * @author Lanfei
+ * @class go2d.Event
+ * @extends go2d.Class
+ * @param {string} type 事件类型
+ * @param {Object} [data] 事件参数
+ */
+var Event = go2d.Event = Class.extend({
+	__init: function(type, data) {
+		for (var key in data) {
+			this[key] = data[key];
+		}
+
+		/**
+		 * 事件类型
+		 * @member go2d.Event#type
+		 * @type string
+		 */
+		this.type = type;
+
+		/**
+		 * 是否已停止冒泡
+		 * @protected
+		 * @member go2d.Event#_propagationStopped
+		 * @type Boolean
+		 */
+		this._propagationStopped = false;
+
+		/**
+		 * 是否已阻止默认事件
+		 * @protected
+		 * @member go2d.Event#_defaultPrevented
+		 * @type Boolean
+		 */
+		this._defaultPrevented = false;
+	},
+	/**
+	 * 停止冒泡
+	 * @function go2d.Event#stopPropagation
+	 * @return {this}
+	 */
+	stopPropagation: function() {
+		this._propagationStopped = true;
+		return this;
+	},
+	/**
+	 * 获取是否已停止冒泡
+	 * @function go2d.Event#isPropagationStopped
+	 * @return {Boolean}
+	 */
+	isPropagationStopped: function() {
+		return this._propagationStopped;
+	},
+	/**
+	 * 阻止默认事件
+	 * @function go2d.Event#preventDefault
+	 * @return {this}
+	 */
+	preventDefault: function() {
+		this._defaultPrevented = true;
+		return this;
+	},
+	/**
+	 * 获取是否已阻止默认事件
+	 * @function go2d.Event#isDefaultPrevented
+	 * @return {Boolean}
+	 */
+	isDefaultPrevented: function() {
+		return this._defaultPrevented;
+	}
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="go2d.Class.html">Class</a></li><li><a href="go2d.Director.html">Director</a></li><li><a href="go2d.DisplayObject.html">DisplayObject</a></li><li><a href="go2d.Ease.html">Ease</a></li><li><a href="go2d.Event.html">Event</a></li><li><a href="go2d.EventDispatcher.html">EventDispatcher</a></li><li><a href="go2d.ImageView.html">ImageView</a></li><li><a href="go2d.Matrix.html">Matrix</a></li><li><a href="go2d.ObjectPool.html">ObjectPool</a></li><li><a href="go2d.ResizeEvent.html">ResizeEvent</a></li><li><a href="go2d.ResourceLoader.html">ResourceLoader</a></li><li><a href="go2d.ScrollView.html">ScrollView</a></li><li><a href="go2d.Sprite.html">Sprite</a></li><li><a href="go2d.Stage.html">Stage</a></li><li><a href="go2d.TextField.html">TextField</a></li><li><a href="go2d.TouchEvent.html">TouchEvent</a></li><li><a href="go2d.Tween.html">Tween</a></li><li><a href="go2d.URLRequest.html">URLRequest</a></li><li><a href="go2d.Vector.html">Vector</a></li></ul><h3>Events</h3><ul><li><a href="go2d.DisplayObject.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.DisplayObject.html#event:paint">paint</a></li><li><a href="go2d.DisplayObject.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.DisplayObject.html#event:render">render</a></li><li><a href="go2d.DisplayObject.html#event:resize">resize</a></li><li><a href="go2d.DisplayObject.html#event:step">step</a></li><li><a href="go2d.DisplayObject.html#event:touchend">touchend</a></li><li><a href="go2d.DisplayObject.html#event:touchmove">touchmove</a></li><li><a href="go2d.DisplayObject.html#event:touchstart">touchstart</a></li><li><a href="go2d.DisplayObject.html#event:touchtap">touchtap</a></li><li><a href="go2d.ImageView.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.ImageView.html#event:paint">paint</a></li><li><a href="go2d.ImageView.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.ImageView.html#event:render">render</a></li><li><a href="go2d.ImageView.html#event:resize">resize</a></li><li><a href="go2d.ImageView.html#event:step">step</a></li><li><a href="go2d.ImageView.html#event:touchend">touchend</a></li><li><a href="go2d.ImageView.html#event:touchmove">touchmove</a></li><li><a href="go2d.ImageView.html#event:touchstart">touchstart</a></li><li><a href="go2d.ImageView.html#event:touchtap">touchtap</a></li><li><a href="go2d.ResourceLoader.html#event:complete">complete</a></li><li><a href="go2d.ResourceLoader.html#event:error">error</a></li><li><a href="go2d.ResourceLoader.html#event:finish">finish</a></li><li><a href="go2d.ResourceLoader.html#event:progress">progress</a></li><li><a href="go2d.ScrollView.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.ScrollView.html#event:paint">paint</a></li><li><a href="go2d.ScrollView.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.ScrollView.html#event:render">render</a></li><li><a href="go2d.ScrollView.html#event:resize">resize</a></li><li><a href="go2d.ScrollView.html#event:scroll">scroll</a></li><li><a href="go2d.ScrollView.html#event:step">step</a></li><li><a href="go2d.ScrollView.html#event:touchend">touchend</a></li><li><a href="go2d.ScrollView.html#event:touchmove">touchmove</a></li><li><a href="go2d.ScrollView.html#event:touchstart">touchstart</a></li><li><a href="go2d.ScrollView.html#event:touchtap">touchtap</a></li><li><a href="go2d.Sprite.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.Sprite.html#event:paint">paint</a></li><li><a href="go2d.Sprite.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.Sprite.html#event:render">render</a></li><li><a href="go2d.Sprite.html#event:resize">resize</a></li><li><a href="go2d.Sprite.html#event:step">step</a></li><li><a href="go2d.Sprite.html#event:touchend">touchend</a></li><li><a href="go2d.Sprite.html#event:touchmove">touchmove</a></li><li><a href="go2d.Sprite.html#event:touchstart">touchstart</a></li><li><a href="go2d.Sprite.html#event:touchtap">touchtap</a></li><li><a href="go2d.Stage.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.Stage.html#event:paint">paint</a></li><li><a href="go2d.Stage.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.Stage.html#event:render">render</a></li><li><a href="go2d.Stage.html#event:resize">resize</a></li><li><a href="go2d.Stage.html#event:step">step</a></li><li><a href="go2d.Stage.html#event:touchend">touchend</a></li><li><a href="go2d.Stage.html#event:touchmove">touchmove</a></li><li><a href="go2d.Stage.html#event:touchstart">touchstart</a></li><li><a href="go2d.Stage.html#event:touchtap">touchtap</a></li><li><a href="go2d.TextField.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.TextField.html#event:paint">paint</a></li><li><a href="go2d.TextField.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.TextField.html#event:render">render</a></li><li><a href="go2d.TextField.html#event:resize">resize</a></li><li><a href="go2d.TextField.html#event:step">step</a></li><li><a href="go2d.TextField.html#event:touchend">touchend</a></li><li><a href="go2d.TextField.html#event:touchmove">touchmove</a></li><li><a href="go2d.TextField.html#event:touchstart">touchstart</a></li><li><a href="go2d.TextField.html#event:touchtap">touchtap</a></li><li><a href="go2d.URLRequest.html#event:error">error</a></li><li><a href="go2d.URLRequest.html#event:success">success</a></li></ul><h3>Namespaces</h3><ul><li><a href="go2d.html">go2d</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Mar 06 2015 19:03:29 GMT+0800 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

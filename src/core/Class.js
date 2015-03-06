@@ -1,8 +1,18 @@
 /**
- * Class
+ * Go2d 的基础类，Go2d 的所有类都继承于该类。
+ * @author Lanfei
+ * @class go2d.Class
  */
 var Class = go2d.Class = function() {};
 
+/**
+ * 创建一个继承于该类的新类
+ * @static
+ * @function go2d.Class.extend
+ * @param {object} props 新类的属性或方法
+ * @param {object} [statics] 新类的静态属性或方法
+ * @return {function} 新类的构造函数
+ */
 Class.extend = function(props, statics) {
 	var prototype = this.prototype;
 

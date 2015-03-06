@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: Director</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Class: Director</h1>
+    
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+        <span class="ancestors"><a href="go2d.html">go2d</a>.</span>
+    
+    Director
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <h4 class="name" id="Director"><span class="type-signature"></span>new Director<span class="signature">(stage, <span class="optional">options</span>)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        导演类，负责游戏逻辑流程的管理。
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>stage</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="go2d.Stage.html">go2d.Stage</a></span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last"></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">配置参数
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>frameRate</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">默认帧频</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>Lanfei</li>
+        </ul>
+    </dd>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Director.js.html">core/Director.js</a>, <a href="Director.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>导演类是否单例？</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+        
+        <ul>
+            <li><a href="go2d.Class.html">go2d.Class</a></li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="_paused"><span class="type-signature">&lt;protected> </span>_paused<span class="type-signature"> :Boolean</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        是否已暂停
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>true</li>
+        </ul></dd>
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Director.js.html">core/Director.js</a>, <a href="Director.js.html#line39">line 39</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="fps"><span class="type-signature">&lt;readonly> </span>fps<span class="type-signature"> :number</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        当前帧频
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Director.js.html">core/Director.js</a>, <a href="Director.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="frameRate"><span class="type-signature"></span>frameRate<span class="type-signature"> :number</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        默认帧频
+    </div>
+    
+    
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>60</li>
+        </ul></dd>
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Director.js.html">core/Director.js</a>, <a href="Director.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="_mainLoop"><span class="type-signature">&lt;protected> </span>_mainLoop<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        游戏主循环
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Director.js.html">core/Director.js</a>, <a href="Director.js.html#line122">line 122</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="pause"><span class="type-signature"></span>pause<span class="signature">()</span><span class="type-signature"> &rarr; {this}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        暂停游戏主循环
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Director.js.html">core/Director.js</a>, <a href="Director.js.html#line153">line 153</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">this</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="play"><span class="type-signature"></span>play<span class="signature">()</span><span class="type-signature"> &rarr; {this}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        开始游戏主循环
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Director.js.html">core/Director.js</a>, <a href="Director.js.html#line139">line 139</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">this</span>
+
+
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="go2d.Class.html">Class</a></li><li><a href="go2d.Director.html">Director</a></li><li><a href="go2d.DisplayObject.html">DisplayObject</a></li><li><a href="go2d.Ease.html">Ease</a></li><li><a href="go2d.Event.html">Event</a></li><li><a href="go2d.EventDispatcher.html">EventDispatcher</a></li><li><a href="go2d.ImageView.html">ImageView</a></li><li><a href="go2d.Matrix.html">Matrix</a></li><li><a href="go2d.ObjectPool.html">ObjectPool</a></li><li><a href="go2d.ResizeEvent.html">ResizeEvent</a></li><li><a href="go2d.ResourceLoader.html">ResourceLoader</a></li><li><a href="go2d.ScrollView.html">ScrollView</a></li><li><a href="go2d.Sprite.html">Sprite</a></li><li><a href="go2d.Stage.html">Stage</a></li><li><a href="go2d.TextField.html">TextField</a></li><li><a href="go2d.TouchEvent.html">TouchEvent</a></li><li><a href="go2d.Tween.html">Tween</a></li><li><a href="go2d.URLRequest.html">URLRequest</a></li><li><a href="go2d.Vector.html">Vector</a></li></ul><h3>Events</h3><ul><li><a href="go2d.DisplayObject.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.DisplayObject.html#event:paint">paint</a></li><li><a href="go2d.DisplayObject.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.DisplayObject.html#event:render">render</a></li><li><a href="go2d.DisplayObject.html#event:resize">resize</a></li><li><a href="go2d.DisplayObject.html#event:step">step</a></li><li><a href="go2d.DisplayObject.html#event:touchend">touchend</a></li><li><a href="go2d.DisplayObject.html#event:touchmove">touchmove</a></li><li><a href="go2d.DisplayObject.html#event:touchstart">touchstart</a></li><li><a href="go2d.DisplayObject.html#event:touchtap">touchtap</a></li><li><a href="go2d.ImageView.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.ImageView.html#event:paint">paint</a></li><li><a href="go2d.ImageView.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.ImageView.html#event:render">render</a></li><li><a href="go2d.ImageView.html#event:resize">resize</a></li><li><a href="go2d.ImageView.html#event:step">step</a></li><li><a href="go2d.ImageView.html#event:touchend">touchend</a></li><li><a href="go2d.ImageView.html#event:touchmove">touchmove</a></li><li><a href="go2d.ImageView.html#event:touchstart">touchstart</a></li><li><a href="go2d.ImageView.html#event:touchtap">touchtap</a></li><li><a href="go2d.ResourceLoader.html#event:complete">complete</a></li><li><a href="go2d.ResourceLoader.html#event:error">error</a></li><li><a href="go2d.ResourceLoader.html#event:finish">finish</a></li><li><a href="go2d.ResourceLoader.html#event:progress">progress</a></li><li><a href="go2d.ScrollView.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.ScrollView.html#event:paint">paint</a></li><li><a href="go2d.ScrollView.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.ScrollView.html#event:render">render</a></li><li><a href="go2d.ScrollView.html#event:resize">resize</a></li><li><a href="go2d.ScrollView.html#event:scroll">scroll</a></li><li><a href="go2d.ScrollView.html#event:step">step</a></li><li><a href="go2d.ScrollView.html#event:touchend">touchend</a></li><li><a href="go2d.ScrollView.html#event:touchmove">touchmove</a></li><li><a href="go2d.ScrollView.html#event:touchstart">touchstart</a></li><li><a href="go2d.ScrollView.html#event:touchtap">touchtap</a></li><li><a href="go2d.Sprite.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.Sprite.html#event:paint">paint</a></li><li><a href="go2d.Sprite.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.Sprite.html#event:render">render</a></li><li><a href="go2d.Sprite.html#event:resize">resize</a></li><li><a href="go2d.Sprite.html#event:step">step</a></li><li><a href="go2d.Sprite.html#event:touchend">touchend</a></li><li><a href="go2d.Sprite.html#event:touchmove">touchmove</a></li><li><a href="go2d.Sprite.html#event:touchstart">touchstart</a></li><li><a href="go2d.Sprite.html#event:touchtap">touchtap</a></li><li><a href="go2d.Stage.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.Stage.html#event:paint">paint</a></li><li><a href="go2d.Stage.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.Stage.html#event:render">render</a></li><li><a href="go2d.Stage.html#event:resize">resize</a></li><li><a href="go2d.Stage.html#event:step">step</a></li><li><a href="go2d.Stage.html#event:touchend">touchend</a></li><li><a href="go2d.Stage.html#event:touchmove">touchmove</a></li><li><a href="go2d.Stage.html#event:touchstart">touchstart</a></li><li><a href="go2d.Stage.html#event:touchtap">touchtap</a></li><li><a href="go2d.TextField.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.TextField.html#event:paint">paint</a></li><li><a href="go2d.TextField.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.TextField.html#event:render">render</a></li><li><a href="go2d.TextField.html#event:resize">resize</a></li><li><a href="go2d.TextField.html#event:step">step</a></li><li><a href="go2d.TextField.html#event:touchend">touchend</a></li><li><a href="go2d.TextField.html#event:touchmove">touchmove</a></li><li><a href="go2d.TextField.html#event:touchstart">touchstart</a></li><li><a href="go2d.TextField.html#event:touchtap">touchtap</a></li><li><a href="go2d.URLRequest.html#event:error">error</a></li><li><a href="go2d.URLRequest.html#event:success">success</a></li></ul><h3>Namespaces</h3><ul><li><a href="go2d.html">go2d</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Mar 06 2015 19:03:30 GMT+0800 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

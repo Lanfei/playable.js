@@ -1,17 +1,67 @@
 /**
- * Director
+ * 导演类，负责游戏逻辑流程的管理。
+ * @class go2d.Director
+ * @author Lanfei
+ * @extends go2d.Class
+ * @param {go2d.Stage} stage
+ * @param {Object} [options] 配置参数
+ * @param {Object} [options.frameRate] 默认帧频
+ * @todo 导演类是否单例？
  */
 var Director = go2d.Director = Class.extend({
 	__init: function(stage, options) {
 		options = options || {};
+
+		/**
+		 * 当前帧频
+		 * @readonly
+		 * @member go2d.Director#fps
+		 * @type number
+		 */
 		this.fps = 0;
-		this.stage = stage;
-		this.paused = true;
+
+		/**
+		 * 默认帧频
+		 * @member go2d.Director#frameRate
+		 * @type number
+		 * @default 60
+		 */
 		this.frameRate = options.frameRate || 60;
+
+		/**
+		 * 舞台对象
+		 * @protected
+		 * @member go2d.DisplayObject#_stage
+		 * @type go2d.Stage
+		 */
+		this._stage = stage;
+
+		/**
+		 * 是否已暂停
+		 * @protected
+		 * @member go2d.Director#_paused
+		 * @type Boolean
+		 * @default true
+		 */
+		this._paused = true;
+
+		/**
+		 * 主循环定时器
+		 * @protected
+		 * @member go2d.DisplayObject#_timer
+		 * @type Object
+		 */
+		this._timer = null;
+
+		/**
+		 * 上一帧时间戳，用于计算帧频
+		 * @protected
+		 * @member go2d.DisplayObject#_prevTime
+		 * @type number
+		 */
+		this._prevTime = null;
 		this._initEvent();
 		this._initTimer();
-		this._timer = null;
-		this._prevTime = null;
 	},
 	_initEvent: function() {
 		var that = this;
@@ -21,7 +71,7 @@ var Director = go2d.Director = Class.extend({
 			if (document[prefix + 'hidden'] !== undefined) {
 				document.addEventListener(prefix + 'visibilitychange', function() {
 					if (document[prefix + 'hidden']) {
-						if (!that.paused) {
+						if (!that._paused) {
 							that.pause();
 							sleep = true;
 						}
@@ -69,29 +119,46 @@ var Director = go2d.Director = Class.extend({
 			this.clearAnimationInterval = clearTimeBasedTimer;
 		}
 	},
-	mainLoop: function() {
+	/**
+	 * 游戏主循环
+	 * @protected
+	 * @function go2d.Director#_mainLoop
+	 */
+	_mainLoop: function() {
 		var deltaTime,
 			now = +new Date();
 		if (this._prevTime) {
-			deltaTime = Math.min(1000, now - this._prevTime);
+			deltaTime = now - this._prevTime;
 			this.fps = Math.round(1000 / deltaTime);
 		} else {
 			deltaTime = Math.round(1000 / this.frameRate);
 		}
-		this.stage.render().tick(deltaTime);
+		this._stage.render().tick(deltaTime);
 		this._prevTime = now;
 	},
+	/**
+	 * 开始游戏主循环
+	 * @function go2d.Director#play
+	 * @return {this}
+	 */
 	play: function() {
 		var that = this;
 		this._timer = this.setAnimationInterval(function() {
-			that.mainLoop();
+			that._mainLoop();
 			that.play();
 		});
-		this.paused = false;
+		this._paused = false;
+		return this;
 	},
+	/**
+	 * 暂停游戏主循环
+	 * @function go2d.Director#pause
+	 * @return {this}
+	 */
 	pause: function() {
 		this.clearAnimationInterval(this._timer);
-		this.paused = true;
+		this._paused = true;
 		this._prevTime = 0;
+		return this;
 	}
 });

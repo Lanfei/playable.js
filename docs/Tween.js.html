@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: tween/Tween.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: tween/Tween.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
+ * 缓动动画控制类，负责处理显示对象的缓动动画。
+ * @author Lanfei
+ * @class go2d.Tween
+ * @extends go2d.Class
+ * @param {go2d.Sprite} target 动画应用对象
+ * @param {Object} [options] 配置参数
+ * @param {Object} [options.loops=1] 循环次数，为 0 时无限循环
+ * @todo 缓动时间控制应依据全局还是对象？
+ * @todo 代码结构有待整理
+ */
+var Tween = go2d.Tween = Class.extend({
+	__init: function(target, options) {
+		options = options || {};
+
+		/**
+		 * 动画步骤
+		 * @private
+		 * @member go2d.Tween#_steps
+		 * @type {Array}
+		 */
+		this._steps = [];
+
+		/**
+		 * 动画应用对象
+		 * @private
+		 * @member go2d.Tween#_target
+		 * @type {go2d.Sprite}
+		 */
+		this._target = target;
+
+		/**
+		 * 循环次数，为 0 时无限循环
+		 * @private
+		 * @member go2d.Tween#_loops
+		 * @type {number}
+		 */
+		this._loops = options.loops === undefined ? 1 : options.loops;
+
+		/**
+		 * 是否已暂停
+		 * @private
+		 * @member go2d.Tween#_paused
+		 * @type {Boolean}
+		 */
+		this._paused = false;
+
+		/**
+		 * 动画步骤数量
+		 * @readonly
+		 * @member go2d.Tween#length
+		 * @type {number}
+		 */
+		Object.defineProperty(this, 'length', {
+			set: function() {},
+			get: function() {
+				return this._steps.length;
+			}
+		});
+		this._initEvent();
+		this.play();
+	},
+	_initEvent: function() {
+		var that = this,
+			target = this._target,
+			steps = this._steps,
+			loops = this._loops,
+			current = 0,
+			reversing = false,
+			beginProps = {},
+			offsetTime = 0,
+			prevProps;
+		this._onStep = function(deltaTime) {
+			if (that._paused) {
+				return;
+			}
+			var step = steps[current],
+				props = step.props,
+				duration = step.duration || 0,
+				ease = step.ease,
+				callback = step.callback;
+
+			if (callback) {
+				callback();
+			} else {
+				if (prevProps === undefined) {
+					prevProps = {};
+					forEach(props, function(value, name) {
+						beginProps[name] = beginProps[name] === undefined ? target[name] : beginProps[name];
+						prevProps[name] = target[name];
+					}, target);
+				}
+
+				offsetTime = Math.min(offsetTime + deltaTime, duration);
+				forEach(props, function(value, name) {
+					if (duration > 0) {
+						target[name] = ease(offsetTime, prevProps[name], value - prevProps[name], duration);
+					} else {
+						target[name] = value;
+					}
+				});
+			}
+
+			if (offsetTime === duration) {
+				prevProps = undefined;
+				offsetTime = 0;
+				if (++current >= steps.length) {
+					current = 0;
+					if (loops > 0 && --loops === 0) {
+						that.pause();
+					} else {
+						forEach(beginProps, function(value, name) {
+							target[name] = value;
+						});
+					}
+				}
+			}
+		};
+	},
+	/**
+	 * 等待指定时间后进行下一个动画
+	 * @function go2d.Tween#wait
+	 * @param {number} duration 毫秒数
+	 * @return {this}
+	 */
+	wait: function(duration) {
+		this._steps.push({
+			duration: duration
+		});
+		return this;
+	},
+	/**
+	 * 更新属性值后进行下一个动画
+	 * @function go2d.Tween#from
+	 * @param {Object} props 要更新的属性集合
+	 * @return {this}
+	 */
+	from: function(props) {
+		this._steps.push({
+			props: props
+		});
+		return this;
+	},
+	/**
+	 * 为指定属性集合设置动画
+	 * @function go2d.Tween#to
+	 * @param {Object} props 要动画的属性集合
+	 * @param {number} duration 持续毫秒数
+	 * @param {function} [ease=go2d.Ease.linear] 缓动函数
+	 * @return {this}
+	 */
+	to: function(props, duration, ease) {
+		this._steps.push({
+			props: props,
+			duration: duration,
+			ease: ease || Ease.linear
+		});
+		return this;
+	},
+	/**
+	 * 执行回调后进行下一个动画
+	 * @function go2d.Tween#call
+	 * @param {function} callback 回调函数
+	 * @return {this}
+	 */
+	call: function(callback) {
+		this._steps.push({
+			callback: callback
+		});
+		return this;
+	},
+	play: function() {
+		this._paused = false;
+		this._target.on('step', this._onStep);
+		return this;
+	},
+	pause: function() {
+		this._paused = true;
+		this._target.off('step', this._onStep);
+		return this;
+	}
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="go2d.Class.html">Class</a></li><li><a href="go2d.Director.html">Director</a></li><li><a href="go2d.DisplayObject.html">DisplayObject</a></li><li><a href="go2d.Ease.html">Ease</a></li><li><a href="go2d.Event.html">Event</a></li><li><a href="go2d.EventDispatcher.html">EventDispatcher</a></li><li><a href="go2d.ImageView.html">ImageView</a></li><li><a href="go2d.Matrix.html">Matrix</a></li><li><a href="go2d.ObjectPool.html">ObjectPool</a></li><li><a href="go2d.ResizeEvent.html">ResizeEvent</a></li><li><a href="go2d.ResourceLoader.html">ResourceLoader</a></li><li><a href="go2d.ScrollView.html">ScrollView</a></li><li><a href="go2d.Sprite.html">Sprite</a></li><li><a href="go2d.Stage.html">Stage</a></li><li><a href="go2d.TextField.html">TextField</a></li><li><a href="go2d.TouchEvent.html">TouchEvent</a></li><li><a href="go2d.Tween.html">Tween</a></li><li><a href="go2d.URLRequest.html">URLRequest</a></li><li><a href="go2d.Vector.html">Vector</a></li></ul><h3>Events</h3><ul><li><a href="go2d.DisplayObject.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.DisplayObject.html#event:paint">paint</a></li><li><a href="go2d.DisplayObject.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.DisplayObject.html#event:render">render</a></li><li><a href="go2d.DisplayObject.html#event:resize">resize</a></li><li><a href="go2d.DisplayObject.html#event:step">step</a></li><li><a href="go2d.DisplayObject.html#event:touchend">touchend</a></li><li><a href="go2d.DisplayObject.html#event:touchmove">touchmove</a></li><li><a href="go2d.DisplayObject.html#event:touchstart">touchstart</a></li><li><a href="go2d.DisplayObject.html#event:touchtap">touchtap</a></li><li><a href="go2d.ImageView.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.ImageView.html#event:paint">paint</a></li><li><a href="go2d.ImageView.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.ImageView.html#event:render">render</a></li><li><a href="go2d.ImageView.html#event:resize">resize</a></li><li><a href="go2d.ImageView.html#event:step">step</a></li><li><a href="go2d.ImageView.html#event:touchend">touchend</a></li><li><a href="go2d.ImageView.html#event:touchmove">touchmove</a></li><li><a href="go2d.ImageView.html#event:touchstart">touchstart</a></li><li><a href="go2d.ImageView.html#event:touchtap">touchtap</a></li><li><a href="go2d.ResourceLoader.html#event:complete">complete</a></li><li><a href="go2d.ResourceLoader.html#event:error">error</a></li><li><a href="go2d.ResourceLoader.html#event:finish">finish</a></li><li><a href="go2d.ResourceLoader.html#event:progress">progress</a></li><li><a href="go2d.ScrollView.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.ScrollView.html#event:paint">paint</a></li><li><a href="go2d.ScrollView.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.ScrollView.html#event:render">render</a></li><li><a href="go2d.ScrollView.html#event:resize">resize</a></li><li><a href="go2d.ScrollView.html#event:scroll">scroll</a></li><li><a href="go2d.ScrollView.html#event:step">step</a></li><li><a href="go2d.ScrollView.html#event:touchend">touchend</a></li><li><a href="go2d.ScrollView.html#event:touchmove">touchmove</a></li><li><a href="go2d.ScrollView.html#event:touchstart">touchstart</a></li><li><a href="go2d.ScrollView.html#event:touchtap">touchtap</a></li><li><a href="go2d.Sprite.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.Sprite.html#event:paint">paint</a></li><li><a href="go2d.Sprite.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.Sprite.html#event:render">render</a></li><li><a href="go2d.Sprite.html#event:resize">resize</a></li><li><a href="go2d.Sprite.html#event:step">step</a></li><li><a href="go2d.Sprite.html#event:touchend">touchend</a></li><li><a href="go2d.Sprite.html#event:touchmove">touchmove</a></li><li><a href="go2d.Sprite.html#event:touchstart">touchstart</a></li><li><a href="go2d.Sprite.html#event:touchtap">touchtap</a></li><li><a href="go2d.Stage.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.Stage.html#event:paint">paint</a></li><li><a href="go2d.Stage.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.Stage.html#event:render">render</a></li><li><a href="go2d.Stage.html#event:resize">resize</a></li><li><a href="go2d.Stage.html#event:step">step</a></li><li><a href="go2d.Stage.html#event:touchend">touchend</a></li><li><a href="go2d.Stage.html#event:touchmove">touchmove</a></li><li><a href="go2d.Stage.html#event:touchstart">touchstart</a></li><li><a href="go2d.Stage.html#event:touchtap">touchtap</a></li><li><a href="go2d.TextField.html#event:addedtostage">addedtostage</a></li><li><a href="go2d.TextField.html#event:paint">paint</a></li><li><a href="go2d.TextField.html#event:removedfromstage">removedfromstage</a></li><li><a href="go2d.TextField.html#event:render">render</a></li><li><a href="go2d.TextField.html#event:resize">resize</a></li><li><a href="go2d.TextField.html#event:step">step</a></li><li><a href="go2d.TextField.html#event:touchend">touchend</a></li><li><a href="go2d.TextField.html#event:touchmove">touchmove</a></li><li><a href="go2d.TextField.html#event:touchstart">touchstart</a></li><li><a href="go2d.TextField.html#event:touchtap">touchtap</a></li><li><a href="go2d.URLRequest.html#event:error">error</a></li><li><a href="go2d.URLRequest.html#event:success">success</a></li></ul><h3>Namespaces</h3><ul><li><a href="go2d.html">go2d</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Fri Mar 06 2015 19:03:29 GMT+0800 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
