@@ -15,7 +15,7 @@ Go2d is a cross-platform 2D game engine written in Javascript. It allow develope
 
  - iOS 5.0+
  - Android 2.3+
- - Windows Phone 8(未测试)
+ - Windows Phone 8(?)
 
 ## Documentation
 
