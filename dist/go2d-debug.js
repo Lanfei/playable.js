@@ -2462,7 +2462,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 						child.render();
 						ctx.globalAlpha = child.opacity;
 						if (matrix.a === 1 && matrix.b === 0 && matrix.c === 0 && matrix.d === 1) {
-							ctx.drawImage(child.canvas, child.x, child.y, child.width, child.height);
+							ctx.drawImage(child.canvas, matrix.tx, matrix.ty, child.width, child.height);
 						} else {
 							ctx.save();
 							ctx.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
@@ -2918,7 +2918,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 			offsetY = this.anchorOffsetY + this.anchorY * this.height;
 		matrix.translate(-offsetX, -offsetY);
 		matrix.rotate(this.rotation).scale(this.scaleX, this.scaleY).skew(this.skewX, this.skewY);
-		matrix.translate(this.x + offsetX, this.y + offsetY);
+		matrix.translate(this.x, this.y);
 		return matrix;
 	},
 	/**
@@ -2986,6 +2986,7 @@ var ImageView = go2d.ImageView = Sprite.extend({
  * @class go2d.ScrollView
  * @extends go2d.Sprite
  * @param {Sprite} content 滚动视图的内容对象
+ * @待优化重构
  */
 var ScrollView = go2d.ScrollView = Sprite.extend({
 	__init: function(content) {

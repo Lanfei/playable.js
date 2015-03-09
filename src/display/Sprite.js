@@ -137,7 +137,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 			offsetY = this.anchorOffsetY + this.anchorY * this.height;
 		matrix.translate(-offsetX, -offsetY);
 		matrix.rotate(this.rotation).scale(this.scaleX, this.scaleY).skew(this.skewX, this.skewY);
-		matrix.translate(this.x + offsetX, this.y + offsetY);
+		matrix.translate(this.x, this.y);
 		return matrix;
 	},
 	/**

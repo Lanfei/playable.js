@@ -314,7 +314,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 						child.render();
 						ctx.globalAlpha = child.opacity;
 						if (matrix.a === 1 && matrix.b === 0 && matrix.c === 0 && matrix.d === 1) {
-							ctx.drawImage(child.canvas, child.x, child.y, child.width, child.height);
+							ctx.drawImage(child.canvas, matrix.tx, matrix.ty, child.width, child.height);
 						} else {
 							ctx.save();
 							ctx.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);

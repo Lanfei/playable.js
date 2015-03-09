@@ -4,6 +4,7 @@
  * @class go2d.ScrollView
  * @extends go2d.Sprite
  * @param {Sprite} content 滚动视图的内容对象
+ * @待优化重构
  */
 var ScrollView = go2d.ScrollView = Sprite.extend({
 	__init: function(content) {
