@@ -1,5 +1,5 @@
 /**
- * Go2d 1.4.0
+ * Go2d 1.4.1
  * https://github.com/Lanfei/Go2d
  * (c) 2014 [Lanfei](http://www.clanfei.com/)
  * A lightweight HTML5 game engine
@@ -19,7 +19,7 @@
  * @property {string} version Go2d 版本号
  */
 var go2d = {
-	version: '1.4.0'
+	version: '1.4.1'
 };
 
 /**
@@ -2244,6 +2244,13 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		 */
 		this._children = [];
 
+		/**
+		 * 遮罩层
+		 * @member go2d.DisplayObject#mask
+		 * @type go2d.Sprite
+		 */
+		this._mask = null;
+
 		var properties = {
 
 			/**
@@ -2431,6 +2438,30 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		}
 	},
 	/**
+	 * 绘制子对象
+	 * @function go2d.DisplayObject#_draw
+	 * @param {go2d.Sprite} child 要绘制的对象
+	 * @param {string} [blendMode] 混合模式
+	 * @return {this}
+	 */
+	_draw: function(child, blendMode) {
+		var ctx = this.context,
+			matrix = child.getTransform();
+
+		ctx.save();
+		ctx.globalAlpha = child.opacity;
+		ctx.globalCompositeOperation = blendMode || child.blendMode;
+		child.render();
+
+		if (matrix.a === 1 && matrix.b === 0 && matrix.c === 0 && matrix.d === 1) {
+			ctx.drawImage(child.canvas, matrix.tx, matrix.ty, child.width, child.height);
+		} else {
+			ctx.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
+			ctx.drawImage(child.canvas, 0, 0, child.width, child.height);
+		}
+		ctx.restore();
+	},
+	/**
 	 * 渲染该对象
 	 * @function go2d.DisplayObject#render
 	 * @return {this}
@@ -2458,19 +2489,12 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 			if (!event.isDefaultPrevented()) {
 				forEach(children, function(child) {
 					if (child.visible && child.opacity) {
-						var matrix = child.getTransform();
-						child.render();
-						ctx.globalAlpha = child.opacity;
-						if (matrix.a === 1 && matrix.b === 0 && matrix.c === 0 && matrix.d === 1) {
-							ctx.drawImage(child.canvas, matrix.tx, matrix.ty, child.width, child.height);
-						} else {
-							ctx.save();
-							ctx.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
-							ctx.drawImage(child.canvas, 0, 0, child.width, child.height);
-							ctx.restore();
-						}
+						this._draw(child);
 					}
-				});
+				}, this);
+				if (this._mask) {
+					this._draw(this._mask, 'destination-in');
+				}
 			}
 			/**
 			 * 绘制完毕事件
@@ -2517,7 +2541,11 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	 */
 	addChildAt: function(child, index) {
 		if (child.parent) {
-			child.parent.removeChild(child);
+			if (child.parent.getMask() === child) {
+				child.parent.removeMask();
+			} else {
+				child.parent.removeChild(child);
+			}
 		}
 		child.parent = this;
 		if (this.stage) {
@@ -2730,6 +2758,54 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		return this;
 	},
 	/**
+	 * 设置遮罩对象
+	 * @function go2d.DisplayObject#setMask
+	 * @param {go2d.Sprite} mask 遮罩对象
+	 * @return {this}
+	 */
+	setMask: function(mask) {
+		if (!mask) {
+			this.removeMask();
+		}
+		if (mask.parent) {
+			if (mask.parent.getMask() === mask) {
+				mask.parent.removeMask();
+			} else {
+				mask.parent.removeChild(mask);
+			}
+		}
+		mask.parent = this;
+		if (this.stage) {
+			mask._onAddedToStage(this.stage);
+		}
+		this._mask = mask;
+		this.update();
+		return this;
+	},
+	/**
+	 * 获取遮罩对象
+	 * @function go2d.DisplayObject#getMask
+	 * @return {go2d.Sprite}
+	 */
+	getMask: function() {
+		return this._mask;
+	},
+	/**
+	 * 移除遮罩对象
+	 * @function go2d.DisplayObject#removeMask
+	 * @param {Boolean} cleanup 是否销毁遮罩对象
+	 * @return {this}
+	 */
+	removeMask: function(cleanup) {
+		var mask = this._mask;
+		mask.parent = null;
+		if (cleanup) {
+			mask.dispose();
+		}
+		this._mask = null;
+		this.update();
+	},
+	/**
 	 * 开始该对象的帧播放
 	 * @function go2d.DisplayObject#play
 	 * @return {this}
@@ -2778,7 +2854,6 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		this._super();
 	}
 });
-
 /**
  * 显示对象元素类，所有舞台上的显示对象都基于此类。
  * @author Lanfei
@@ -2892,7 +2967,16 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 			 * @type Boolean
 			 * @default true
 			 */
-			visible: true
+			visible: true,
+
+			/**
+			 * 混合模式
+			 * @member go2d.DisplayObject#blendMode
+			 * @type string
+			 * @default source-over
+			 * @todo 应有一个 BlendMode 类
+			 */
+			blendMode: 'source-over'
 		};
 
 		forEach(properties, function(value, key) {
@@ -2940,7 +3024,6 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 		return this;
 	}
 });
-
 /**
  * 图像显示类，用于显示一张图像。
  * @author Lanfei
@@ -2960,6 +3043,8 @@ var ImageView = go2d.ImageView = Sprite.extend({
 		 */
 		this._image = null;
 		this.setImage(image);
+		this.width = image.width;
+		this.height = image.height;
 		this.on('paint', this._onPaint);
 	},
 	_onPaint: function(ctx) {

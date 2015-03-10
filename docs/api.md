@@ -53,6 +53,7 @@ Go2d 命名空间
     * [displayObject._dirty](#go2d.DisplayObject#_dirty)
     * [displayObject._touches](#go2d.DisplayObject#_touches)
     * [displayObject._children](#go2d.DisplayObject#_children)
+    * [displayObject.mask](#go2d.DisplayObject#mask)
     * [displayObject.opacity](#go2d.DisplayObject#opacity)
     * [displayObject.background](#go2d.DisplayObject#background)
     * [displayObject.width](#go2d.DisplayObject#width)
@@ -70,6 +71,8 @@ Go2d 命名空间
     * [displayObject.anchorOffsetY](#go2d.DisplayObject#anchorOffsetY)
     * [displayObject.rotation](#go2d.DisplayObject#rotation)
     * [displayObject.visible](#go2d.DisplayObject#visible)
+    * [displayObject.blendMode](#go2d.DisplayObject#blendMode)
+    * [displayObject._draw(child, [blendMode])](#go2d.DisplayObject#_draw)
     * [displayObject.render()](#go2d.DisplayObject#render)
     * [displayObject.update()](#go2d.DisplayObject#update)
     * [displayObject.addChild(child)](#go2d.DisplayObject#addChild)
@@ -87,6 +90,9 @@ Go2d 命名空间
     * [displayObject.removeChildrenByName(name, cleanup)](#go2d.DisplayObject#removeChildrenByName)
     * [displayObject.removeChildrenByTag(tag, cleanup)](#go2d.DisplayObject#removeChildrenByTag)
     * [displayObject.removeAllChildren(cleanup)](#go2d.DisplayObject#removeAllChildren)
+    * [displayObject.setMask(mask)](#go2d.DisplayObject#setMask)
+    * [displayObject.getMask()](#go2d.DisplayObject#getMask)
+    * [displayObject.removeMask(cleanup)](#go2d.DisplayObject#removeMask)
     * [displayObject.play()](#go2d.DisplayObject#play)
     * [displayObject.pause()](#go2d.DisplayObject#pause)
     * [displayObject.tick()](#go2d.DisplayObject#tick)
@@ -124,6 +130,7 @@ Go2d 命名空间
     * [imageView._dirty](#go2d.ImageView#_dirty)
     * [imageView._touches](#go2d.ImageView#_touches)
     * [imageView._children](#go2d.ImageView#_children)
+    * [imageView.mask](#go2d.ImageView#mask)
     * [imageView.opacity](#go2d.ImageView#opacity)
     * [imageView.background](#go2d.ImageView#background)
     * [imageView.width](#go2d.ImageView#width)
@@ -141,10 +148,12 @@ Go2d 命名空间
     * [imageView.anchorOffsetY](#go2d.ImageView#anchorOffsetY)
     * [imageView.rotation](#go2d.ImageView#rotation)
     * [imageView.visible](#go2d.ImageView#visible)
+    * [imageView.blendMode](#go2d.ImageView#blendMode)
     * [imageView.setImage(image)](#go2d.ImageView#setImage)
     * [imageView.getTransform()](#go2d.ImageView#getTransform)
     * [imageView.show()](#go2d.ImageView#show)
     * [imageView.hide()](#go2d.ImageView#hide)
+    * [imageView._draw(child, [blendMode])](#go2d.ImageView#_draw)
     * [imageView.render()](#go2d.ImageView#render)
     * [imageView.update()](#go2d.ImageView#update)
     * [imageView.addChild(child)](#go2d.ImageView#addChild)
@@ -162,6 +171,9 @@ Go2d 命名空间
     * [imageView.removeChildrenByName(name, cleanup)](#go2d.ImageView#removeChildrenByName)
     * [imageView.removeChildrenByTag(tag, cleanup)](#go2d.ImageView#removeChildrenByTag)
     * [imageView.removeAllChildren(cleanup)](#go2d.ImageView#removeAllChildren)
+    * [imageView.setMask(mask)](#go2d.ImageView#setMask)
+    * [imageView.getMask()](#go2d.ImageView#getMask)
+    * [imageView.removeMask(cleanup)](#go2d.ImageView#removeMask)
     * [imageView.play()](#go2d.ImageView#play)
     * [imageView.pause()](#go2d.ImageView#pause)
     * [imageView.tick()](#go2d.ImageView#tick)
@@ -200,6 +212,7 @@ Go2d 命名空间
     * [scrollView._dirty](#go2d.ScrollView#_dirty)
     * [scrollView._touches](#go2d.ScrollView#_touches)
     * [scrollView._children](#go2d.ScrollView#_children)
+    * [scrollView.mask](#go2d.ScrollView#mask)
     * [scrollView.opacity](#go2d.ScrollView#opacity)
     * [scrollView.background](#go2d.ScrollView#background)
     * [scrollView.width](#go2d.ScrollView#width)
@@ -217,12 +230,14 @@ Go2d 命名空间
     * [scrollView.anchorOffsetY](#go2d.ScrollView#anchorOffsetY)
     * [scrollView.rotation](#go2d.ScrollView#rotation)
     * [scrollView.visible](#go2d.ScrollView#visible)
+    * [scrollView.blendMode](#go2d.ScrollView#blendMode)
     * [scrollView.setContent(content)](#go2d.ScrollView#setContent)
     * [scrollView.getContent()](#go2d.ScrollView#getContent)
     * [scrollView.removeContent(cleanup)](#go2d.ScrollView#removeContent)
     * [scrollView.getTransform()](#go2d.ScrollView#getTransform)
     * [scrollView.show()](#go2d.ScrollView#show)
     * [scrollView.hide()](#go2d.ScrollView#hide)
+    * [scrollView._draw(child, [blendMode])](#go2d.ScrollView#_draw)
     * [scrollView.render()](#go2d.ScrollView#render)
     * [scrollView.update()](#go2d.ScrollView#update)
     * [scrollView.addChild(child)](#go2d.ScrollView#addChild)
@@ -240,6 +255,9 @@ Go2d 命名空间
     * [scrollView.removeChildrenByName(name, cleanup)](#go2d.ScrollView#removeChildrenByName)
     * [scrollView.removeChildrenByTag(tag, cleanup)](#go2d.ScrollView#removeChildrenByTag)
     * [scrollView.removeAllChildren(cleanup)](#go2d.ScrollView#removeAllChildren)
+    * [scrollView.setMask(mask)](#go2d.ScrollView#setMask)
+    * [scrollView.getMask()](#go2d.ScrollView#getMask)
+    * [scrollView.removeMask(cleanup)](#go2d.ScrollView#removeMask)
     * [scrollView.play()](#go2d.ScrollView#play)
     * [scrollView.pause()](#go2d.ScrollView#pause)
     * [scrollView.tick()](#go2d.ScrollView#tick)
@@ -277,6 +295,7 @@ Go2d 命名空间
     * [sprite._dirty](#go2d.Sprite#_dirty)
     * [sprite._touches](#go2d.Sprite#_touches)
     * [sprite._children](#go2d.Sprite#_children)
+    * [sprite.mask](#go2d.Sprite#mask)
     * [sprite.opacity](#go2d.Sprite#opacity)
     * [sprite.background](#go2d.Sprite#background)
     * [sprite.width](#go2d.Sprite#width)
@@ -294,9 +313,11 @@ Go2d 命名空间
     * [sprite.anchorOffsetY](#go2d.Sprite#anchorOffsetY)
     * [sprite.rotation](#go2d.Sprite#rotation)
     * [sprite.visible](#go2d.Sprite#visible)
+    * [sprite.blendMode](#go2d.Sprite#blendMode)
     * [sprite.getTransform()](#go2d.Sprite#getTransform)
     * [sprite.show()](#go2d.Sprite#show)
     * [sprite.hide()](#go2d.Sprite#hide)
+    * [sprite._draw(child, [blendMode])](#go2d.Sprite#_draw)
     * [sprite.render()](#go2d.Sprite#render)
     * [sprite.update()](#go2d.Sprite#update)
     * [sprite.addChild(child)](#go2d.Sprite#addChild)
@@ -314,6 +335,9 @@ Go2d 命名空间
     * [sprite.removeChildrenByName(name, cleanup)](#go2d.Sprite#removeChildrenByName)
     * [sprite.removeChildrenByTag(tag, cleanup)](#go2d.Sprite#removeChildrenByTag)
     * [sprite.removeAllChildren(cleanup)](#go2d.Sprite#removeAllChildren)
+    * [sprite.setMask(mask)](#go2d.Sprite#setMask)
+    * [sprite.getMask()](#go2d.Sprite#getMask)
+    * [sprite.removeMask(cleanup)](#go2d.Sprite#removeMask)
     * [sprite.play()](#go2d.Sprite#play)
     * [sprite.pause()](#go2d.Sprite#pause)
     * [sprite.tick()](#go2d.Sprite#tick)
@@ -350,6 +374,7 @@ Go2d 命名空间
     * [stage._dirty](#go2d.Stage#_dirty)
     * [stage._touches](#go2d.Stage#_touches)
     * [stage._children](#go2d.Stage#_children)
+    * [stage.mask](#go2d.Stage#mask)
     * [stage.opacity](#go2d.Stage#opacity)
     * [stage.background](#go2d.Stage#background)
     * [stage.width](#go2d.Stage#width)
@@ -367,6 +392,8 @@ Go2d 命名空间
     * [stage.anchorOffsetY](#go2d.Stage#anchorOffsetY)
     * [stage.rotation](#go2d.Stage#rotation)
     * [stage.visible](#go2d.Stage#visible)
+    * [stage.blendMode](#go2d.Stage#blendMode)
+    * [stage._draw(child, [blendMode])](#go2d.Stage#_draw)
     * [stage.render()](#go2d.Stage#render)
     * [stage.update()](#go2d.Stage#update)
     * [stage.addChild(child)](#go2d.Stage#addChild)
@@ -384,6 +411,9 @@ Go2d 命名空间
     * [stage.removeChildrenByName(name, cleanup)](#go2d.Stage#removeChildrenByName)
     * [stage.removeChildrenByTag(tag, cleanup)](#go2d.Stage#removeChildrenByTag)
     * [stage.removeAllChildren(cleanup)](#go2d.Stage#removeAllChildren)
+    * [stage.setMask(mask)](#go2d.Stage#setMask)
+    * [stage.getMask()](#go2d.Stage#getMask)
+    * [stage.removeMask(cleanup)](#go2d.Stage#removeMask)
     * [stage.play()](#go2d.Stage#play)
     * [stage.pause()](#go2d.Stage#pause)
     * [stage.tick()](#go2d.Stage#tick)
@@ -441,6 +471,7 @@ Go2d 命名空间
     * [textField._dirty](#go2d.TextField#_dirty)
     * [textField._touches](#go2d.TextField#_touches)
     * [textField._children](#go2d.TextField#_children)
+    * [textField.mask](#go2d.TextField#mask)
     * [textField.opacity](#go2d.TextField#opacity)
     * [textField.background](#go2d.TextField#background)
     * [textField.width](#go2d.TextField#width)
@@ -458,9 +489,11 @@ Go2d 命名空间
     * [textField.anchorOffsetY](#go2d.TextField#anchorOffsetY)
     * [textField.rotation](#go2d.TextField#rotation)
     * [textField.visible](#go2d.TextField#visible)
+    * [textField.blendMode](#go2d.TextField#blendMode)
     * [textField.getTransform()](#go2d.TextField#getTransform)
     * [textField.show()](#go2d.TextField#show)
     * [textField.hide()](#go2d.TextField#hide)
+    * [textField._draw(child, [blendMode])](#go2d.TextField#_draw)
     * [textField.render()](#go2d.TextField#render)
     * [textField.update()](#go2d.TextField#update)
     * [textField.addChild(child)](#go2d.TextField#addChild)
@@ -478,6 +511,9 @@ Go2d 命名空间
     * [textField.removeChildrenByName(name, cleanup)](#go2d.TextField#removeChildrenByName)
     * [textField.removeChildrenByTag(tag, cleanup)](#go2d.TextField#removeChildrenByTag)
     * [textField.removeAllChildren(cleanup)](#go2d.TextField#removeAllChildren)
+    * [textField.setMask(mask)](#go2d.TextField#setMask)
+    * [textField.getMask()](#go2d.TextField#getMask)
+    * [textField.removeMask(cleanup)](#go2d.TextField#removeMask)
     * [textField.play()](#go2d.TextField#play)
     * [textField.pause()](#go2d.TextField#pause)
     * [textField.tick()](#go2d.TextField#tick)
@@ -917,6 +953,7 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [displayObject._dirty](#go2d.DisplayObject#_dirty)
   * [displayObject._touches](#go2d.DisplayObject#_touches)
   * [displayObject._children](#go2d.DisplayObject#_children)
+  * [displayObject.mask](#go2d.DisplayObject#mask)
   * [displayObject.opacity](#go2d.DisplayObject#opacity)
   * [displayObject.background](#go2d.DisplayObject#background)
   * [displayObject.width](#go2d.DisplayObject#width)
@@ -934,6 +971,8 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [displayObject.anchorOffsetY](#go2d.DisplayObject#anchorOffsetY)
   * [displayObject.rotation](#go2d.DisplayObject#rotation)
   * [displayObject.visible](#go2d.DisplayObject#visible)
+  * [displayObject.blendMode](#go2d.DisplayObject#blendMode)
+  * [displayObject._draw(child, [blendMode])](#go2d.DisplayObject#_draw)
   * [displayObject.render()](#go2d.DisplayObject#render)
   * [displayObject.update()](#go2d.DisplayObject#update)
   * [displayObject.addChild(child)](#go2d.DisplayObject#addChild)
@@ -951,6 +990,9 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [displayObject.removeChildrenByName(name, cleanup)](#go2d.DisplayObject#removeChildrenByName)
   * [displayObject.removeChildrenByTag(tag, cleanup)](#go2d.DisplayObject#removeChildrenByTag)
   * [displayObject.removeAllChildren(cleanup)](#go2d.DisplayObject#removeAllChildren)
+  * [displayObject.setMask(mask)](#go2d.DisplayObject#setMask)
+  * [displayObject.getMask()](#go2d.DisplayObject#getMask)
+  * [displayObject.removeMask(cleanup)](#go2d.DisplayObject#removeMask)
   * [displayObject.play()](#go2d.DisplayObject#play)
   * [displayObject.pause()](#go2d.DisplayObject#pause)
   * [displayObject.tick()](#go2d.DisplayObject#tick)
@@ -1065,6 +1107,11 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Array`  
 **Access**: protected  
+<a name="go2d.DisplayObject#mask"></a>
+###displayObject.mask
+遮罩层
+
+**Type**: [Sprite](#go2d.Sprite)  
 <a name="go2d.DisplayObject#opacity"></a>
 ###displayObject.opacity
 不透明度
@@ -1164,6 +1211,22 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Boolean`  
 **Default**: `true`  
+<a name="go2d.DisplayObject#blendMode"></a>
+###displayObject.blendMode
+混合模式
+
+**Type**: `string`  
+**Default**: `source-over`  
+<a name="go2d.DisplayObject#_draw"></a>
+###displayObject._draw(child, [blendMode])
+绘制子对象
+
+**Params**
+
+- child <code>[Sprite](#go2d.Sprite)</code> - 要绘制的对象  
+- \[blendMode\] `string` - 混合模式  
+
+**Returns**: `this`  
 <a name="go2d.DisplayObject#render"></a>
 ###displayObject.render()
 渲染该对象
@@ -1310,6 +1373,29 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 **Params**
 
 - cleanup `Boolean` - 是否销毁子对象  
+
+**Returns**: `this`  
+<a name="go2d.DisplayObject#setMask"></a>
+###displayObject.setMask(mask)
+设置遮罩对象
+
+**Params**
+
+- mask <code>[Sprite](#go2d.Sprite)</code> - 遮罩对象  
+
+**Returns**: `this`  
+<a name="go2d.DisplayObject#getMask"></a>
+###displayObject.getMask()
+获取遮罩对象
+
+**Returns**: [Sprite](#go2d.Sprite)  
+<a name="go2d.DisplayObject#removeMask"></a>
+###displayObject.removeMask(cleanup)
+移除遮罩对象
+
+**Params**
+
+- cleanup `Boolean` - 是否销毁遮罩对象  
 
 **Returns**: `this`  
 <a name="go2d.DisplayObject#play"></a>
@@ -1487,6 +1573,7 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [imageView._dirty](#go2d.ImageView#_dirty)
   * [imageView._touches](#go2d.ImageView#_touches)
   * [imageView._children](#go2d.ImageView#_children)
+  * [imageView.mask](#go2d.ImageView#mask)
   * [imageView.opacity](#go2d.ImageView#opacity)
   * [imageView.background](#go2d.ImageView#background)
   * [imageView.width](#go2d.ImageView#width)
@@ -1504,10 +1591,12 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [imageView.anchorOffsetY](#go2d.ImageView#anchorOffsetY)
   * [imageView.rotation](#go2d.ImageView#rotation)
   * [imageView.visible](#go2d.ImageView#visible)
+  * [imageView.blendMode](#go2d.ImageView#blendMode)
   * [imageView.setImage(image)](#go2d.ImageView#setImage)
   * [imageView.getTransform()](#go2d.ImageView#getTransform)
   * [imageView.show()](#go2d.ImageView#show)
   * [imageView.hide()](#go2d.ImageView#hide)
+  * [imageView._draw(child, [blendMode])](#go2d.ImageView#_draw)
   * [imageView.render()](#go2d.ImageView#render)
   * [imageView.update()](#go2d.ImageView#update)
   * [imageView.addChild(child)](#go2d.ImageView#addChild)
@@ -1525,6 +1614,9 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [imageView.removeChildrenByName(name, cleanup)](#go2d.ImageView#removeChildrenByName)
   * [imageView.removeChildrenByTag(tag, cleanup)](#go2d.ImageView#removeChildrenByTag)
   * [imageView.removeAllChildren(cleanup)](#go2d.ImageView#removeAllChildren)
+  * [imageView.setMask(mask)](#go2d.ImageView#setMask)
+  * [imageView.getMask()](#go2d.ImageView#getMask)
+  * [imageView.removeMask(cleanup)](#go2d.ImageView#removeMask)
   * [imageView.play()](#go2d.ImageView#play)
   * [imageView.pause()](#go2d.ImageView#pause)
   * [imageView.tick()](#go2d.ImageView#tick)
@@ -1645,6 +1737,11 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Array`  
 **Access**: protected  
+<a name="go2d.ImageView#mask"></a>
+###imageView.mask
+遮罩层
+
+**Type**: [Sprite](#go2d.Sprite)  
 <a name="go2d.ImageView#opacity"></a>
 ###imageView.opacity
 不透明度
@@ -1744,6 +1841,12 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Boolean`  
 **Default**: `true`  
+<a name="go2d.ImageView#blendMode"></a>
+###imageView.blendMode
+混合模式
+
+**Type**: `string`  
+**Default**: `source-over`  
 <a name="go2d.ImageView#setImage"></a>
 ###imageView.setImage(image)
 设置要绘制的图像或画布元素
@@ -1766,6 +1869,16 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 <a name="go2d.ImageView#hide"></a>
 ###imageView.hide()
 隐藏该对象
+
+**Returns**: `this`  
+<a name="go2d.ImageView#_draw"></a>
+###imageView._draw(child, [blendMode])
+绘制子对象
+
+**Params**
+
+- child <code>[Sprite](#go2d.Sprite)</code> - 要绘制的对象  
+- \[blendMode\] `string` - 混合模式  
 
 **Returns**: `this`  
 <a name="go2d.ImageView#render"></a>
@@ -1914,6 +2027,29 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 **Params**
 
 - cleanup `Boolean` - 是否销毁子对象  
+
+**Returns**: `this`  
+<a name="go2d.ImageView#setMask"></a>
+###imageView.setMask(mask)
+设置遮罩对象
+
+**Params**
+
+- mask <code>[Sprite](#go2d.Sprite)</code> - 遮罩对象  
+
+**Returns**: `this`  
+<a name="go2d.ImageView#getMask"></a>
+###imageView.getMask()
+获取遮罩对象
+
+**Returns**: [Sprite](#go2d.Sprite)  
+<a name="go2d.ImageView#removeMask"></a>
+###imageView.removeMask(cleanup)
+移除遮罩对象
+
+**Params**
+
+- cleanup `Boolean` - 是否销毁遮罩对象  
 
 **Returns**: `this`  
 <a name="go2d.ImageView#play"></a>
@@ -2092,6 +2228,7 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [scrollView._dirty](#go2d.ScrollView#_dirty)
   * [scrollView._touches](#go2d.ScrollView#_touches)
   * [scrollView._children](#go2d.ScrollView#_children)
+  * [scrollView.mask](#go2d.ScrollView#mask)
   * [scrollView.opacity](#go2d.ScrollView#opacity)
   * [scrollView.background](#go2d.ScrollView#background)
   * [scrollView.width](#go2d.ScrollView#width)
@@ -2109,12 +2246,14 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [scrollView.anchorOffsetY](#go2d.ScrollView#anchorOffsetY)
   * [scrollView.rotation](#go2d.ScrollView#rotation)
   * [scrollView.visible](#go2d.ScrollView#visible)
+  * [scrollView.blendMode](#go2d.ScrollView#blendMode)
   * [scrollView.setContent(content)](#go2d.ScrollView#setContent)
   * [scrollView.getContent()](#go2d.ScrollView#getContent)
   * [scrollView.removeContent(cleanup)](#go2d.ScrollView#removeContent)
   * [scrollView.getTransform()](#go2d.ScrollView#getTransform)
   * [scrollView.show()](#go2d.ScrollView#show)
   * [scrollView.hide()](#go2d.ScrollView#hide)
+  * [scrollView._draw(child, [blendMode])](#go2d.ScrollView#_draw)
   * [scrollView.render()](#go2d.ScrollView#render)
   * [scrollView.update()](#go2d.ScrollView#update)
   * [scrollView.addChild(child)](#go2d.ScrollView#addChild)
@@ -2132,6 +2271,9 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [scrollView.removeChildrenByName(name, cleanup)](#go2d.ScrollView#removeChildrenByName)
   * [scrollView.removeChildrenByTag(tag, cleanup)](#go2d.ScrollView#removeChildrenByTag)
   * [scrollView.removeAllChildren(cleanup)](#go2d.ScrollView#removeAllChildren)
+  * [scrollView.setMask(mask)](#go2d.ScrollView#setMask)
+  * [scrollView.getMask()](#go2d.ScrollView#getMask)
+  * [scrollView.removeMask(cleanup)](#go2d.ScrollView#removeMask)
   * [scrollView.play()](#go2d.ScrollView#play)
   * [scrollView.pause()](#go2d.ScrollView#pause)
   * [scrollView.tick()](#go2d.ScrollView#tick)
@@ -2259,6 +2401,11 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Array`  
 **Access**: protected  
+<a name="go2d.ScrollView#mask"></a>
+###scrollView.mask
+遮罩层
+
+**Type**: [Sprite](#go2d.Sprite)  
 <a name="go2d.ScrollView#opacity"></a>
 ###scrollView.opacity
 不透明度
@@ -2358,6 +2505,12 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Boolean`  
 **Default**: `true`  
+<a name="go2d.ScrollView#blendMode"></a>
+###scrollView.blendMode
+混合模式
+
+**Type**: `string`  
+**Default**: `source-over`  
 <a name="go2d.ScrollView#setContent"></a>
 ###scrollView.setContent(content)
 设置滚动视图的内容对象
@@ -2394,6 +2547,16 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 <a name="go2d.ScrollView#hide"></a>
 ###scrollView.hide()
 隐藏该对象
+
+**Returns**: `this`  
+<a name="go2d.ScrollView#_draw"></a>
+###scrollView._draw(child, [blendMode])
+绘制子对象
+
+**Params**
+
+- child <code>[Sprite](#go2d.Sprite)</code> - 要绘制的对象  
+- \[blendMode\] `string` - 混合模式  
 
 **Returns**: `this`  
 <a name="go2d.ScrollView#render"></a>
@@ -2542,6 +2705,29 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 **Params**
 
 - cleanup `Boolean` - 是否销毁子对象  
+
+**Returns**: `this`  
+<a name="go2d.ScrollView#setMask"></a>
+###scrollView.setMask(mask)
+设置遮罩对象
+
+**Params**
+
+- mask <code>[Sprite](#go2d.Sprite)</code> - 遮罩对象  
+
+**Returns**: `this`  
+<a name="go2d.ScrollView#getMask"></a>
+###scrollView.getMask()
+获取遮罩对象
+
+**Returns**: [Sprite](#go2d.Sprite)  
+<a name="go2d.ScrollView#removeMask"></a>
+###scrollView.removeMask(cleanup)
+移除遮罩对象
+
+**Params**
+
+- cleanup `Boolean` - 是否销毁遮罩对象  
 
 **Returns**: `this`  
 <a name="go2d.ScrollView#play"></a>
@@ -2722,6 +2908,7 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [sprite._dirty](#go2d.Sprite#_dirty)
   * [sprite._touches](#go2d.Sprite#_touches)
   * [sprite._children](#go2d.Sprite#_children)
+  * [sprite.mask](#go2d.Sprite#mask)
   * [sprite.opacity](#go2d.Sprite#opacity)
   * [sprite.background](#go2d.Sprite#background)
   * [sprite.width](#go2d.Sprite#width)
@@ -2739,9 +2926,11 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [sprite.anchorOffsetY](#go2d.Sprite#anchorOffsetY)
   * [sprite.rotation](#go2d.Sprite#rotation)
   * [sprite.visible](#go2d.Sprite#visible)
+  * [sprite.blendMode](#go2d.Sprite#blendMode)
   * [sprite.getTransform()](#go2d.Sprite#getTransform)
   * [sprite.show()](#go2d.Sprite#show)
   * [sprite.hide()](#go2d.Sprite#hide)
+  * [sprite._draw(child, [blendMode])](#go2d.Sprite#_draw)
   * [sprite.render()](#go2d.Sprite#render)
   * [sprite.update()](#go2d.Sprite#update)
   * [sprite.addChild(child)](#go2d.Sprite#addChild)
@@ -2759,6 +2948,9 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [sprite.removeChildrenByName(name, cleanup)](#go2d.Sprite#removeChildrenByName)
   * [sprite.removeChildrenByTag(tag, cleanup)](#go2d.Sprite#removeChildrenByTag)
   * [sprite.removeAllChildren(cleanup)](#go2d.Sprite#removeAllChildren)
+  * [sprite.setMask(mask)](#go2d.Sprite#setMask)
+  * [sprite.getMask()](#go2d.Sprite#getMask)
+  * [sprite.removeMask(cleanup)](#go2d.Sprite#removeMask)
   * [sprite.play()](#go2d.Sprite#play)
   * [sprite.pause()](#go2d.Sprite#pause)
   * [sprite.tick()](#go2d.Sprite#tick)
@@ -2869,6 +3061,11 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Array`  
 **Access**: protected  
+<a name="go2d.Sprite#mask"></a>
+###sprite.mask
+遮罩层
+
+**Type**: [Sprite](#go2d.Sprite)  
 <a name="go2d.Sprite#opacity"></a>
 ###sprite.opacity
 不透明度
@@ -2968,6 +3165,12 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Boolean`  
 **Default**: `true`  
+<a name="go2d.Sprite#blendMode"></a>
+###sprite.blendMode
+混合模式
+
+**Type**: `string`  
+**Default**: `source-over`  
 <a name="go2d.Sprite#getTransform"></a>
 ###sprite.getTransform()
 获取变化矩阵
@@ -2981,6 +3184,16 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 <a name="go2d.Sprite#hide"></a>
 ###sprite.hide()
 隐藏该对象
+
+**Returns**: `this`  
+<a name="go2d.Sprite#_draw"></a>
+###sprite._draw(child, [blendMode])
+绘制子对象
+
+**Params**
+
+- child <code>[Sprite](#go2d.Sprite)</code> - 要绘制的对象  
+- \[blendMode\] `string` - 混合模式  
 
 **Returns**: `this`  
 <a name="go2d.Sprite#render"></a>
@@ -3129,6 +3342,29 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 **Params**
 
 - cleanup `Boolean` - 是否销毁子对象  
+
+**Returns**: `this`  
+<a name="go2d.Sprite#setMask"></a>
+###sprite.setMask(mask)
+设置遮罩对象
+
+**Params**
+
+- mask <code>[Sprite](#go2d.Sprite)</code> - 遮罩对象  
+
+**Returns**: `this`  
+<a name="go2d.Sprite#getMask"></a>
+###sprite.getMask()
+获取遮罩对象
+
+**Returns**: [Sprite](#go2d.Sprite)  
+<a name="go2d.Sprite#removeMask"></a>
+###sprite.removeMask(cleanup)
+移除遮罩对象
+
+**Params**
+
+- cleanup `Boolean` - 是否销毁遮罩对象  
 
 **Returns**: `this`  
 <a name="go2d.Sprite#play"></a>
@@ -3305,6 +3541,7 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [stage._dirty](#go2d.Stage#_dirty)
   * [stage._touches](#go2d.Stage#_touches)
   * [stage._children](#go2d.Stage#_children)
+  * [stage.mask](#go2d.Stage#mask)
   * [stage.opacity](#go2d.Stage#opacity)
   * [stage.background](#go2d.Stage#background)
   * [stage.width](#go2d.Stage#width)
@@ -3322,6 +3559,8 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [stage.anchorOffsetY](#go2d.Stage#anchorOffsetY)
   * [stage.rotation](#go2d.Stage#rotation)
   * [stage.visible](#go2d.Stage#visible)
+  * [stage.blendMode](#go2d.Stage#blendMode)
+  * [stage._draw(child, [blendMode])](#go2d.Stage#_draw)
   * [stage.render()](#go2d.Stage#render)
   * [stage.update()](#go2d.Stage#update)
   * [stage.addChild(child)](#go2d.Stage#addChild)
@@ -3339,6 +3578,9 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [stage.removeChildrenByName(name, cleanup)](#go2d.Stage#removeChildrenByName)
   * [stage.removeChildrenByTag(tag, cleanup)](#go2d.Stage#removeChildrenByTag)
   * [stage.removeAllChildren(cleanup)](#go2d.Stage#removeAllChildren)
+  * [stage.setMask(mask)](#go2d.Stage#setMask)
+  * [stage.getMask()](#go2d.Stage#getMask)
+  * [stage.removeMask(cleanup)](#go2d.Stage#removeMask)
   * [stage.play()](#go2d.Stage#play)
   * [stage.pause()](#go2d.Stage#pause)
   * [stage.tick()](#go2d.Stage#tick)
@@ -3453,6 +3695,11 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Array`  
 **Access**: protected  
+<a name="go2d.Stage#mask"></a>
+###stage.mask
+遮罩层
+
+**Type**: [Sprite](#go2d.Sprite)  
 <a name="go2d.Stage#opacity"></a>
 ###stage.opacity
 不透明度
@@ -3552,6 +3799,22 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Boolean`  
 **Default**: `true`  
+<a name="go2d.Stage#blendMode"></a>
+###stage.blendMode
+混合模式
+
+**Type**: `string`  
+**Default**: `source-over`  
+<a name="go2d.Stage#_draw"></a>
+###stage._draw(child, [blendMode])
+绘制子对象
+
+**Params**
+
+- child <code>[Sprite](#go2d.Sprite)</code> - 要绘制的对象  
+- \[blendMode\] `string` - 混合模式  
+
+**Returns**: `this`  
 <a name="go2d.Stage#render"></a>
 ###stage.render()
 渲染该对象
@@ -3698,6 +3961,29 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 **Params**
 
 - cleanup `Boolean` - 是否销毁子对象  
+
+**Returns**: `this`  
+<a name="go2d.Stage#setMask"></a>
+###stage.setMask(mask)
+设置遮罩对象
+
+**Params**
+
+- mask <code>[Sprite](#go2d.Sprite)</code> - 遮罩对象  
+
+**Returns**: `this`  
+<a name="go2d.Stage#getMask"></a>
+###stage.getMask()
+获取遮罩对象
+
+**Returns**: [Sprite](#go2d.Sprite)  
+<a name="go2d.Stage#removeMask"></a>
+###stage.removeMask(cleanup)
+移除遮罩对象
+
+**Params**
+
+- cleanup `Boolean` - 是否销毁遮罩对象  
 
 **Returns**: `this`  
 <a name="go2d.Stage#play"></a>
@@ -3895,6 +4181,7 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [textField._dirty](#go2d.TextField#_dirty)
   * [textField._touches](#go2d.TextField#_touches)
   * [textField._children](#go2d.TextField#_children)
+  * [textField.mask](#go2d.TextField#mask)
   * [textField.opacity](#go2d.TextField#opacity)
   * [textField.background](#go2d.TextField#background)
   * [textField.width](#go2d.TextField#width)
@@ -3912,9 +4199,11 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [textField.anchorOffsetY](#go2d.TextField#anchorOffsetY)
   * [textField.rotation](#go2d.TextField#rotation)
   * [textField.visible](#go2d.TextField#visible)
+  * [textField.blendMode](#go2d.TextField#blendMode)
   * [textField.getTransform()](#go2d.TextField#getTransform)
   * [textField.show()](#go2d.TextField#show)
   * [textField.hide()](#go2d.TextField#hide)
+  * [textField._draw(child, [blendMode])](#go2d.TextField#_draw)
   * [textField.render()](#go2d.TextField#render)
   * [textField.update()](#go2d.TextField#update)
   * [textField.addChild(child)](#go2d.TextField#addChild)
@@ -3932,6 +4221,9 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [textField.removeChildrenByName(name, cleanup)](#go2d.TextField#removeChildrenByName)
   * [textField.removeChildrenByTag(tag, cleanup)](#go2d.TextField#removeChildrenByTag)
   * [textField.removeAllChildren(cleanup)](#go2d.TextField#removeAllChildren)
+  * [textField.setMask(mask)](#go2d.TextField#setMask)
+  * [textField.getMask()](#go2d.TextField#getMask)
+  * [textField.removeMask(cleanup)](#go2d.TextField#removeMask)
   * [textField.play()](#go2d.TextField#play)
   * [textField.pause()](#go2d.TextField#pause)
   * [textField.tick()](#go2d.TextField#tick)
@@ -4168,6 +4460,11 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Array`  
 **Access**: protected  
+<a name="go2d.TextField#mask"></a>
+###textField.mask
+遮罩层
+
+**Type**: [Sprite](#go2d.Sprite)  
 <a name="go2d.TextField#opacity"></a>
 ###textField.opacity
 不透明度
@@ -4267,6 +4564,12 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Type**: `Boolean`  
 **Default**: `true`  
+<a name="go2d.TextField#blendMode"></a>
+###textField.blendMode
+混合模式
+
+**Type**: `string`  
+**Default**: `source-over`  
 <a name="go2d.TextField#getTransform"></a>
 ###textField.getTransform()
 获取变化矩阵
@@ -4280,6 +4583,16 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 <a name="go2d.TextField#hide"></a>
 ###textField.hide()
 隐藏该对象
+
+**Returns**: `this`  
+<a name="go2d.TextField#_draw"></a>
+###textField._draw(child, [blendMode])
+绘制子对象
+
+**Params**
+
+- child <code>[Sprite](#go2d.Sprite)</code> - 要绘制的对象  
+- \[blendMode\] `string` - 混合模式  
 
 **Returns**: `this`  
 <a name="go2d.TextField#render"></a>
@@ -4428,6 +4741,29 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 **Params**
 
 - cleanup `Boolean` - 是否销毁子对象  
+
+**Returns**: `this`  
+<a name="go2d.TextField#setMask"></a>
+###textField.setMask(mask)
+设置遮罩对象
+
+**Params**
+
+- mask <code>[Sprite](#go2d.Sprite)</code> - 遮罩对象  
+
+**Returns**: `this`  
+<a name="go2d.TextField#getMask"></a>
+###textField.getMask()
+获取遮罩对象
+
+**Returns**: [Sprite](#go2d.Sprite)  
+<a name="go2d.TextField#removeMask"></a>
+###textField.removeMask(cleanup)
+移除遮罩对象
+
+**Params**
+
+- cleanup `Boolean` - 是否销毁遮罩对象  
 
 **Returns**: `this`  
 <a name="go2d.TextField#play"></a>

@@ -17,6 +17,8 @@ var ImageView = go2d.ImageView = Sprite.extend({
 		 */
 		this._image = null;
 		this.setImage(image);
+		this.width = image.width;
+		this.height = image.height;
 		this.on('paint', this._onPaint);
 	},
 	_onPaint: function(ctx) {

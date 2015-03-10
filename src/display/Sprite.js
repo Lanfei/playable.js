@@ -111,7 +111,16 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 			 * @type Boolean
 			 * @default true
 			 */
-			visible: true
+			visible: true,
+
+			/**
+			 * 混合模式
+			 * @member go2d.DisplayObject#blendMode
+			 * @type string
+			 * @default source-over
+			 * @todo 应有一个 BlendMode 类
+			 */
+			blendMode: 'source-over'
 		};
 
 		forEach(properties, function(value, key) {
