@@ -50,27 +50,39 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	 * 创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池
 	 * @protected
 	 * @function go2d.ObjectPool#_create
-	 * @return {mixed} 新的对象示例
+	 * @return {mixed} 新的对象
 	 */
 	_create: function() {
 		return new this._factory();
 	},
 	/**
+	 * 初始化对象，可以重载该方法，以初始化从对象池中获取到的对象
+	 * @protected
+	 * @function go2d.ObjectPool#_initialize
+	 * @param {mixed} obj 要重置的对象
+	 * @return {mixed} 重置后的对象
+	 */
+	_initialize: function(obj) {
+		return obj;
+	},
+	/**
 	 * 获取一个对象
 	 * @function go2d.ObjectPool#get
-	 * @return {mixed} 对象示例
+	 * @return {mixed} 取出的对象
 	 */
 	get: function() {
+		var obj;
 		if (this._pool.length) {
-			return this._pool.shift();
+			obj = this._pool.shift();
 		} else {
-			return this._create();
+			obj = this._create();
 		}
+		return this._initialize(obj);
 	},
 	/**
 	 * 回收一个对象
 	 * @function go2d.ObjectPool#recycle
-	 * @param {mixed} 对象示例
+	 * @param {mixed} 要回收的对象
 	 * @return {this}
 	 */
 	recycle: function(obj) {

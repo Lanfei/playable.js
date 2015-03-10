@@ -15,7 +15,7 @@ var Tween = go2d.Tween = Class.extend({
 
 		/**
 		 * 动画步骤
-		 * @private
+		 * @protected
 		 * @member go2d.Tween#_steps
 		 * @type {Array}
 		 */
@@ -23,7 +23,7 @@ var Tween = go2d.Tween = Class.extend({
 
 		/**
 		 * 动画应用对象
-		 * @private
+		 * @protected
 		 * @member go2d.Tween#_target
 		 * @type {go2d.Sprite}
 		 */
@@ -31,7 +31,7 @@ var Tween = go2d.Tween = Class.extend({
 
 		/**
 		 * 循环次数，为 0 时无限循环
-		 * @private
+		 * @protected
 		 * @member go2d.Tween#_loops
 		 * @type {number}
 		 */
@@ -39,7 +39,7 @@ var Tween = go2d.Tween = Class.extend({
 
 		/**
 		 * 是否已暂停
-		 * @private
+		 * @protected
 		 * @member go2d.Tween#_paused
 		 * @type {Boolean}
 		 */

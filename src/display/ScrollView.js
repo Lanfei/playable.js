@@ -12,7 +12,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 
 		/**
 		 * 内容对象
-		 * @private
+		 * @protected
 		 * @member go2d.ScrollView#_content
 		 * @type go2d.Sprite
 		 */

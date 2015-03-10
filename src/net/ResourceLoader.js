@@ -29,7 +29,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 
 		/**
 		 * 缓存的资源对象
-		 * @private
+		 * @protected
 		 * @member go2d.ResourceLoader#_cache
 		 * @type {Object}
 		 */
@@ -37,7 +37,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 
 		/**
 		 * 资源路径数据对象
-		 * @private
+		 * @protected
 		 * @member go2d.ResourceLoader#_resources
 		 * @type {Object}
 		 */

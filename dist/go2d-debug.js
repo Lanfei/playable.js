@@ -199,27 +199,39 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	 * 创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池
 	 * @protected
 	 * @function go2d.ObjectPool#_create
-	 * @return {mixed} 新的对象示例
+	 * @return {mixed} 新的对象
 	 */
 	_create: function() {
 		return new this._factory();
 	},
 	/**
+	 * 初始化对象，可以重载该方法，以初始化从对象池中获取到的对象
+	 * @protected
+	 * @function go2d.ObjectPool#_initialize
+	 * @param {mixed} obj 要重置的对象
+	 * @return {mixed} 重置后的对象
+	 */
+	_initialize: function(obj) {
+		return obj;
+	},
+	/**
 	 * 获取一个对象
 	 * @function go2d.ObjectPool#get
-	 * @return {mixed} 对象示例
+	 * @return {mixed} 取出的对象
 	 */
 	get: function() {
+		var obj;
 		if (this._pool.length) {
-			return this._pool.shift();
+			obj = this._pool.shift();
 		} else {
-			return this._create();
+			obj = this._create();
 		}
+		return this._initialize(obj);
 	},
 	/**
 	 * 回收一个对象
 	 * @function go2d.ObjectPool#recycle
-	 * @param {mixed} 对象示例
+	 * @param {mixed} 要回收的对象
 	 * @return {this}
 	 */
 	recycle: function(obj) {
@@ -248,7 +260,6 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 		this._super();
 	}
 });
-
 /**
  * 导演类，负责游戏逻辑流程的管理。
  * @class go2d.Director
@@ -1270,7 +1281,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 
 		/**
 		 * 缓存的资源对象
-		 * @private
+		 * @protected
 		 * @member go2d.ResourceLoader#_cache
 		 * @type {Object}
 		 */
@@ -1278,7 +1289,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 
 		/**
 		 * 资源路径数据对象
-		 * @private
+		 * @protected
 		 * @member go2d.ResourceLoader#_resources
 		 * @type {Object}
 		 */
@@ -1980,7 +1991,7 @@ var Tween = go2d.Tween = Class.extend({
 
 		/**
 		 * 动画步骤
-		 * @private
+		 * @protected
 		 * @member go2d.Tween#_steps
 		 * @type {Array}
 		 */
@@ -1988,7 +1999,7 @@ var Tween = go2d.Tween = Class.extend({
 
 		/**
 		 * 动画应用对象
-		 * @private
+		 * @protected
 		 * @member go2d.Tween#_target
 		 * @type {go2d.Sprite}
 		 */
@@ -1996,7 +2007,7 @@ var Tween = go2d.Tween = Class.extend({
 
 		/**
 		 * 循环次数，为 0 时无限循环
-		 * @private
+		 * @protected
 		 * @member go2d.Tween#_loops
 		 * @type {number}
 		 */
@@ -2004,7 +2015,7 @@ var Tween = go2d.Tween = Class.extend({
 
 		/**
 		 * 是否已暂停
-		 * @private
+		 * @protected
 		 * @member go2d.Tween#_paused
 		 * @type {Boolean}
 		 */
@@ -3079,7 +3090,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 
 		/**
 		 * 内容对象
-		 * @private
+		 * @protected
 		 * @member go2d.ScrollView#_content
 		 * @type go2d.Sprite
 		 */

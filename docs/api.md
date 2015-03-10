@@ -33,8 +33,9 @@ Go2d 命名空间
     * [objectPool.size](#go2d.ObjectPool#size)
     * [objectPool.length](#go2d.ObjectPool#length)
     * [objectPool._create()](#go2d.ObjectPool#_create)
+    * [objectPool._initialize(obj)](#go2d.ObjectPool#_initialize)
     * [objectPool.get()](#go2d.ObjectPool#get)
-    * [objectPool.recycle(对象示例)](#go2d.ObjectPool#recycle)
+    * [objectPool.recycle(要回收的对象)](#go2d.ObjectPool#recycle)
     * [objectPool.clear()](#go2d.ObjectPool#clear)
     * [objectPool.dispose()](#go2d.ObjectPool#dispose)
   * [class: go2d.DisplayObject](#go2d.DisplayObject)
@@ -196,6 +197,7 @@ Go2d 命名空间
     * [event: "step"](#go2d.ImageView#event_step)
   * [class: go2d.ScrollView](#go2d.ScrollView)
     * [new go2d.ScrollView(content)](#new_go2d.ScrollView)
+    * [scrollView._content](#go2d.ScrollView#_content)
     * [scrollView.scrollTop](#go2d.ScrollView#scrollTop)
     * [scrollView.scrollLeft](#go2d.ScrollView#scrollLeft)
     * [scrollView._stage](#go2d.ScrollView#_stage)
@@ -618,6 +620,8 @@ Go2d 命名空间
     * [vector.clone()](#go2d.Vector#clone)
   * [class: go2d.ResourceLoader](#go2d.ResourceLoader)
     * [new go2d.ResourceLoader(resources, [options])](#new_go2d.ResourceLoader)
+    * [resourceLoader._cache](#go2d.ResourceLoader#_cache)
+    * [resourceLoader._resources](#go2d.ResourceLoader#_resources)
     * [resourceLoader.total](#go2d.ResourceLoader#total)
     * [resourceLoader.errorCount](#go2d.ResourceLoader#errorCount)
     * [resourceLoader.loadedCount](#go2d.ResourceLoader#loadedCount)
@@ -707,6 +711,10 @@ Go2d 命名空间
     * [Ease.easeInOutBounce()](#go2d.Ease.easeInOutBounce)
   * [class: go2d.Tween](#go2d.Tween)
     * [new go2d.Tween(target, [options])](#new_go2d.Tween)
+    * [tween._steps](#go2d.Tween#_steps)
+    * [tween._target](#go2d.Tween#_target)
+    * [tween._loops](#go2d.Tween#_loops)
+    * [tween._paused](#go2d.Tween#_paused)
     * [tween.length](#go2d.Tween#length)
     * [tween.wait(duration)](#go2d.Tween#wait)
     * [tween.from(props)](#go2d.Tween#from)
@@ -863,8 +871,9 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
   * [objectPool.size](#go2d.ObjectPool#size)
   * [objectPool.length](#go2d.ObjectPool#length)
   * [objectPool._create()](#go2d.ObjectPool#_create)
+  * [objectPool._initialize(obj)](#go2d.ObjectPool#_initialize)
   * [objectPool.get()](#go2d.ObjectPool#get)
-  * [objectPool.recycle(对象示例)](#go2d.ObjectPool#recycle)
+  * [objectPool.recycle(要回收的对象)](#go2d.ObjectPool#recycle)
   * [objectPool.clear()](#go2d.ObjectPool#clear)
   * [objectPool.dispose()](#go2d.ObjectPool#dispose)
 
@@ -907,20 +916,30 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 ###objectPool._create()
 创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池
 
-**Returns**: `mixed` - 新的对象示例  
+**Returns**: `mixed` - 新的对象  
+**Access**: protected  
+<a name="go2d.ObjectPool#_initialize"></a>
+###objectPool._initialize(obj)
+初始化对象，可以重载该方法，以初始化从对象池中获取到的对象
+
+**Params**
+
+- obj `mixed` - 要重置的对象  
+
+**Returns**: `mixed` - 重置后的对象  
 **Access**: protected  
 <a name="go2d.ObjectPool#get"></a>
 ###objectPool.get()
 获取一个对象
 
-**Returns**: `mixed` - 对象示例  
+**Returns**: `mixed` - 取出的对象  
 <a name="go2d.ObjectPool#recycle"></a>
-###objectPool.recycle(对象示例)
+###objectPool.recycle(要回收的对象)
 回收一个对象
 
 **Params**
 
-- 对象示例 `mixed`  
+- 要回收的对象 `mixed`  
 
 **Returns**: `this`  
 <a name="go2d.ObjectPool#clear"></a>
@@ -2212,6 +2231,7 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 * [class: go2d.ScrollView](#go2d.ScrollView)
   * [new go2d.ScrollView(content)](#new_go2d.ScrollView)
+  * [scrollView._content](#go2d.ScrollView#_content)
   * [scrollView.scrollTop](#go2d.ScrollView#scrollTop)
   * [scrollView.scrollLeft](#go2d.ScrollView#scrollLeft)
   * [scrollView._stage](#go2d.ScrollView#_stage)
@@ -2306,6 +2326,12 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Extends**: `go2d.Sprite`  
 **Author**: Lanfei  
+<a name="go2d.ScrollView#_content"></a>
+###scrollView._content
+内容对象
+
+**Type**: [Sprite](#go2d.Sprite)  
+**Access**: protected  
 <a name="go2d.ScrollView#scrollTop"></a>
 ###scrollView.scrollTop
 纵向滑动距离
@@ -5581,6 +5607,8 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 * [class: go2d.ResourceLoader](#go2d.ResourceLoader)
   * [new go2d.ResourceLoader(resources, [options])](#new_go2d.ResourceLoader)
+  * [resourceLoader._cache](#go2d.ResourceLoader#_cache)
+  * [resourceLoader._resources](#go2d.ResourceLoader#_resources)
   * [resourceLoader.total](#go2d.ResourceLoader#total)
   * [resourceLoader.errorCount](#go2d.ResourceLoader#errorCount)
   * [resourceLoader.loadedCount](#go2d.ResourceLoader#loadedCount)
@@ -5645,6 +5673,18 @@ Go2d 的基础类，Go2d 的所有类都继承于该类。
 
 **Extends**: `go2d.EventDispatcher`  
 **Author**: Lanfei  
+<a name="go2d.ResourceLoader#_cache"></a>
+###resourceLoader._cache
+缓存的资源对象
+
+**Type**: `Object`  
+**Access**: protected  
+<a name="go2d.ResourceLoader#_resources"></a>
+###resourceLoader._resources
+资源路径数据对象
+
+**Type**: `Object`  
+**Access**: protected  
 <a name="go2d.ResourceLoader#total"></a>
 ###resourceLoader.total
 资源总数
@@ -6261,6 +6301,10 @@ XMLHttpRequest 对象
 
 * [class: go2d.Tween](#go2d.Tween)
   * [new go2d.Tween(target, [options])](#new_go2d.Tween)
+  * [tween._steps](#go2d.Tween#_steps)
+  * [tween._target](#go2d.Tween#_target)
+  * [tween._loops](#go2d.Tween#_loops)
+  * [tween._paused](#go2d.Tween#_paused)
   * [tween.length](#go2d.Tween#length)
   * [tween.wait(duration)](#go2d.Tween#wait)
   * [tween.from(props)](#go2d.Tween#from)
@@ -6279,6 +6323,30 @@ XMLHttpRequest 对象
 
 **Extends**: `go2d.Class`  
 **Author**: Lanfei  
+<a name="go2d.Tween#_steps"></a>
+###tween._steps
+动画步骤
+
+**Type**: `Array`  
+**Access**: protected  
+<a name="go2d.Tween#_target"></a>
+###tween._target
+动画应用对象
+
+**Type**: [Sprite](#go2d.Sprite)  
+**Access**: protected  
+<a name="go2d.Tween#_loops"></a>
+###tween._loops
+循环次数，为 0 时无限循环
+
+**Type**: `number`  
+**Access**: protected  
+<a name="go2d.Tween#_paused"></a>
+###tween._paused
+是否已暂停
+
+**Type**: `Boolean`  
+**Access**: protected  
 <a name="go2d.Tween#length"></a>
 ###tween.length
 动画步骤数量
