@@ -44,7 +44,7 @@ Go2d 是一个使用 JavaScript 编写的轻量级跨平台 2D 游戏引擎。�
 
  - iOS 5.0+
  - Android 2.3+
- - Windows Phone 8(未测试)
+ - Windows Phone 8（未测试）
 
 ## 文档与教程
 
