@@ -25,7 +25,7 @@ Go2d is a cross-platform 2D game engine written in Javascript. It allow develope
 
 ##License
 
-God is available under the terms of the [MIT License](https://github.com/Lanfei/Go2d/blob/master/LICENSE), it free for anyone to use.
+Go2d is available under the terms of the [MIT License](https://github.com/Lanfei/Go2d/blob/master/LICENSE), it is free for anyone to use.
 
 ## 简介
 
