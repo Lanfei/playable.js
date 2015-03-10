@@ -1,6 +1,6 @@
 # Go2d
 
-Go2d is a cross-platform 2D game engine written in Javascript. It allow developers to create HTML5 games quickly.
+Go2d is a cross-platform 2D game engine written in Javascript. It allows developers to create HTML5 games quickly.
 
 ## Platforms
 
