@@ -2,7 +2,7 @@
  * URL 请求类，用于发起 AJAX 请求，并获取返回数据。
  * @author Lanfei
  * @class URLRequest
- * @extends EventDispatcher
+ * @extends EventEmitter
  *
  * @constructor
  * @param {number} url 请求地址
@@ -12,7 +12,7 @@
  * @param {string} [options.contentType=application/x-www-form-urlencoded] 发送数据类型
  * @param {string} [options.responseType] 返回数据类型
  */
-var URLRequest = go2d.URLRequest = EventDispatcher.extend({
+var URLRequest = go2d.URLRequest = EventEmitter.extend({
 	__init: function(url, options) {
 		options = options || {};
 		this._super();

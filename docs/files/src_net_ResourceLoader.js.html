@@ -43,7 +43,7 @@
                                 <li><a href="../classes/DisplayObject.html">DisplayObject</a></li>
                                 <li><a href="../classes/Ease.html">Ease</a></li>
                                 <li><a href="../classes/Event.html">Event</a></li>
-                                <li><a href="../classes/EventDispatcher.html">EventDispatcher</a></li>
+                                <li><a href="../classes/EventEmitter.html">EventEmitter</a></li>
                                 <li><a href="../classes/go2d.html">go2d</a></li>
                                 <li><a href="../classes/ImageView.html">ImageView</a></li>
                                 <li><a href="../classes/Matrix.html">Matrix</a></li>
@@ -103,7 +103,7 @@
  * 资源加载器类，可用于加载和管理游戏资源。
  * @author Lanfei
  * @class ResourceLoader
- * @extends EventDispatcher
+ * @extends EventEmitter
  * 
  * @constructor
  * @param {Object} resources 资源路径数据对象，格式如下：
@@ -126,7 +126,7 @@
  * });
  * &lt;/code&gt;&lt;/pre&gt;
  */
-var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
+var ResourceLoader = go2d.ResourceLoader = EventEmitter.extend({
 	__init: function(resources, options) {
 		options = options || {};
 		this._super();

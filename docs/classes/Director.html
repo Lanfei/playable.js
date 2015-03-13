@@ -43,7 +43,7 @@
                                 <li><a href="../classes/DisplayObject.html">DisplayObject</a></li>
                                 <li><a href="../classes/Ease.html">Ease</a></li>
                                 <li><a href="../classes/Event.html">Event</a></li>
-                                <li><a href="../classes/EventDispatcher.html">EventDispatcher</a></li>
+                                <li><a href="../classes/EventEmitter.html">EventEmitter</a></li>
                                 <li><a href="../classes/go2d.html">go2d</a></li>
                                 <li><a href="../classes/ImageView.html">ImageView</a></li>
                                 <li><a href="../classes/Matrix.html">Matrix</a></li>
@@ -99,11 +99,11 @@
 <div class="box meta">
 
         <div class="extends">
-            Extends <a href="../classes/Class.html" class="crosslink">Class</a>
+            Extends <a href="../classes/EventEmitter.html" class="crosslink">EventEmitter</a>
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_core_Director.js.html#l1"><code>src\core\Director.js:1</code></a>
+            Defined in: <a href="../files/src_system_Director.js.html#l1"><code>src\system\Director.js:1</code></a>
         </div>
 
             Module: <a href="../modules/go2d.html">go2d</a>
@@ -116,89 +116,6 @@
 
 </div>
 
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_Director" class="method item">
-            <h3 class="name"><code>Director</code></h3>
-        
-                <div class="args">
-                    <span class="paren">(</span><ul class="args-list inline commas">
-                        <li class="arg">
-                                <code>stage</code>
-                        </li>
-                        <li class="arg">
-                                <code class="optional">[options]</code>
-                        </li>
-                    </ul><span class="paren">)</span>
-                </div>
-        
-        
-        
-        
-        
-        
-        
-        
-            <div class="meta">
-                        <p>
-                        Defined in
-                <a href="../files/src_core_Director.js.html#l1"><code>src\core\Director.js:1</code></a>
-                </p>
-        
-        
-        
-            </div>
-        
-            <div class="description">
-                
-            </div>
-        
-                <div class="params">
-                    <h4>Parameters:</h4>
-        
-                    <ul class="params-list">
-                        <li class="param">
-                                <code class="param-name">stage</code>
-                                <span class="type">go2d.Stage</span>
-        
-        
-                            <div class="param-description">
-                                 
-                            </div>
-        
-                        </li>
-                        <li class="param">
-                                <code class="param-name optional">[options]</code>
-                                <span class="type">Object</span>
-                                <span class="flag optional" title="This parameter is optional.">optional</span>
-        
-        
-                            <div class="param-description">
-                                <p>配置参数</p>
-        
-                            </div>
-        
-                                <ul class="params-list">
-                                    <li class="param">
-                                            <code class="param-name optional">[frameRate]</code>
-                                            <span class="type">Object</span>
-                                            <span class="flag optional" title="This parameter is optional.">optional</span>
-        
-                                        <div class="param-description">
-                                            <p>默认帧频</p>
-        
-                                        </div>
-        
-                                    </li>
-                                </ul>
-                        </li>
-                    </ul>
-                </div>
-        
-        
-        
-        </div>
-    </div>
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
@@ -217,7 +134,28 @@
 
                     <ul class="index-list methods extends">
                             <li class="index-item method protected">
-                                <a href="#method__mainLoop">_mainLoop</a>
+                                <a href="#method__tick">_tick</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_dispose">dispose</a>
+
+                            </li>
+                            <li class="index-item method inherited inherited">
+                                <a href="#method_emit">emit</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getInstance">getInstance</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_off">off</a>
+
+                            </li>
+                            <li class="index-item method inherited inherited">
+                                <a href="#method_on">on</a>
 
                             </li>
                             <li class="index-item method">
@@ -225,7 +163,7 @@
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_play">play</a>
+                                <a href="#method_run">run</a>
 
                             </li>
                     </ul>
@@ -235,12 +173,21 @@
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
+                            <li class="index-item property private inherited">
+                                <a href="#property___events">__events</a>
+
+                            </li>
+                            <li class="index-item property protected">
+                                <a href="#property__instance">_instance</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
                             <li class="index-item property protected">
                                 <a href="#property__paused">_paused</a>
 
                             </li>
                             <li class="index-item property protected">
-                                <a href="#property__prevTime">_prevTime</a>
+                                <a href="#property__prevFrame">_prevFrame</a>
 
                             </li>
                             <li class="index-item property protected">
@@ -255,10 +202,6 @@
                                 <a href="#property_fps">fps</a>
 
                             </li>
-                            <li class="index-item property">
-                                <a href="#property_frameRate">frameRate</a>
-
-                            </li>
                     </ul>
                 </div>
 
@@ -268,8 +211,8 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method__mainLoop" class="method item protected">
-    <h3 class="name"><code>_mainLoop</code></h3>
+<div id="method__tick" class="method item protected">
+    <h3 class="name"><code>_tick</code></h3>
 
         <span class="paren">()</span>
 
@@ -284,7 +227,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_core_Director.js.html#l124"><code>src\core\Director.js:124</code></a>
+        <a href="../files/src_system_Director.js.html#l101"><code>src\system\Director.js:101</code></a>
         </p>
 
 
@@ -292,11 +235,326 @@
     </div>
 
     <div class="description">
-        <p>游戏主循环</p>
+        <p>游戏心跳</p>
 
     </div>
 
 
+
+
+</div>
+<div id="method_dispose" class="method item inherited">
+    <h3 class="name"><code>dispose</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/EventEmitter.html#method_dispose">EventEmitter</a>:
+        <a href="../files/src_event_EventEmitter.js.html#l103"><code>src\event\EventEmitter.js:103</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>释放事件派发器内存</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_emit" class="method item inherited">
+    <h3 class="name"><code>emit</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[event]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">This</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+            <p>Inherited from
+            <a href="../classes/EventEmitter.html#method_emit">
+                EventEmitter
+            </a>
+            but overwritten in
+        <a href="../files/src_event_EventEmitter.js.html#l71"><code>src\event\EventEmitter.js:71</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>通过事件对象派发事件</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>事件名称</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[event]</code>
+                        <span class="type">go2d.Event</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>事件对象</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">This</span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getInstance" class="method item">
+    <h3 class="name"><code>getInstance</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Director.html" class="crosslink">Director</a></span>
+        </span>
+
+
+
+
+        <span class="flag static">static</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_system_Director.js.html#l153"><code>src\system\Director.js:153</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>暂停心跳</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="../classes/Director.html" class="crosslink">Director</a></span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method_off" class="method item inherited">
+    <h3 class="name"><code>off</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[callback]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">This</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/EventEmitter.html#method_off">EventEmitter</a>:
+        <a href="../files/src_event_EventEmitter.js.html#l49"><code>src\event\EventEmitter.js:49</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>移除事件侦听器</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>事件名称</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[callback]</code>
+                        <span class="type">Function</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>回调函数，当该参数为空时将移除该事件的所有回调</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">This</span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method_on" class="method item inherited">
+    <h3 class="name"><code>on</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code>callback</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">This</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+            <p>Inherited from
+            <a href="../classes/EventEmitter.html#method_on">
+                EventEmitter
+            </a>
+            but overwritten in
+        <a href="../files/src_event_EventEmitter.js.html#l21"><code>src\event\EventEmitter.js:21</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>添加事件侦听器</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>事件名称</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">callback</code>
+                        <span class="type">Function</span>
+
+
+                    <div class="param-description">
+                        <p>回调函数</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">This</span>:
+            </div>
+        </div>
 
 
 </div>
@@ -318,7 +576,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_core_Director.js.html#l155"><code>src\core\Director.js:155</code></a>
+        <a href="../files/src_system_Director.js.html#l133"><code>src\system\Director.js:133</code></a>
         </p>
 
 
@@ -326,7 +584,7 @@
     </div>
 
     <div class="description">
-        <p>暂停游戏主循环</p>
+        <p>暂停心跳</p>
 
     </div>
 
@@ -341,8 +599,8 @@
 
 
 </div>
-<div id="method_play" class="method item">
-    <h3 class="name"><code>play</code></h3>
+<div id="method_run" class="method item">
+    <h3 class="name"><code>run</code></h3>
 
         <span class="paren">()</span>
 
@@ -359,7 +617,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_core_Director.js.html#l141"><code>src\core\Director.js:141</code></a>
+        <a href="../files/src_system_Director.js.html#l119"><code>src\system\Director.js:119</code></a>
         </p>
 
 
@@ -367,7 +625,7 @@
     </div>
 
     <div class="description">
-        <p>开始游戏主循环</p>
+        <p>开始心跳</p>
 
     </div>
 
@@ -387,6 +645,59 @@
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
+                    <div id="property___events" class="property item private inherited">
+                        <h3 class="name"><code>__events</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/EventEmitter.html#property___events">EventEmitter</a>:
+                            <a href="../files/src_event_EventEmitter.js.html#l13"><code>src\event\EventEmitter.js:13</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>侦听器哈希表</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property__instance" class="property item protected">
+                        <h3 class="name"><code>_instance</code></h3>
+                        <span class="type"><a href="../classes/Director.html" class="crosslink">Director</a></span>
+                    
+                    
+                            <span class="flag protected">protected</span>
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_system_Director.js.html#l145"><code>src\system\Director.js:145</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>暂停心跳</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property__paused" class="property item protected">
                         <h3 class="name"><code>_paused</code></h3>
                         <span class="type">Boolean</span>
@@ -399,7 +710,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_core_Director.js.html#l41"><code>src\core\Director.js:41</code></a>
+                            <a href="../files/src_system_Director.js.html#l35"><code>src\system\Director.js:35</code></a>
                             </p>
                     
                     
@@ -414,8 +725,8 @@
                     
                     
                     </div>
-                    <div id="property__prevTime" class="property item protected">
-                        <h3 class="name"><code>_prevTime</code></h3>
+                    <div id="property__prevFrame" class="property item protected">
+                        <h3 class="name"><code>_prevFrame</code></h3>
                         <span class="type">Number</span>
                     
                     
@@ -426,14 +737,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_core_Director.js.html#l58"><code>src\core\Director.js:58</code></a>
+                            <a href="../files/src_system_Director.js.html#l27"><code>src\system\Director.js:27</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>上一帧时间戳，用于计算帧频</p>
+                            <p>上一帧时间戳</p>
                     
                         </div>
                     
@@ -452,7 +763,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_core_Director.js.html#l33"><code>src\core\Director.js:33</code></a>
+                            <a href="../files/src_system_Director.js.html#l19"><code>src\system\Director.js:19</code></a>
                             </p>
                     
                     
@@ -478,7 +789,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_core_Director.js.html#l50"><code>src\core\Director.js:50</code></a>
+                            <a href="../files/src_system_Director.js.html#l44"><code>src\system\Director.js:44</code></a>
                             </p>
                     
                     
@@ -503,7 +814,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_core_Director.js.html#l17"><code>src\core\Director.js:17</code></a>
+                            <a href="../files/src_system_Director.js.html#l11"><code>src\system\Director.js:11</code></a>
                             </p>
                     
                     
@@ -514,32 +825,6 @@
                     
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_frameRate" class="property item">
-                        <h3 class="name"><code>frameRate</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_core_Director.js.html#l25"><code>src\core\Director.js:25</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>默认帧频</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> 60</p>
                     
                     
                     </div>

@@ -155,288 +155,6 @@ Class.extend = function(props, statics) {
 };
 
 /**
- * 对象池类，一个简单的对象池实现，适用于构造函数无参数的对象。
- * @author Lanfei
- * @class ObjectPool
- * @extends Class
- * 
- * @constructor
- * @param {function} factory 要进行缓存的类
- * @param {number} size 对象池的最大容量
- */
-var ObjectPool = go2d.ObjectPool = Class.extend({
-	__init: function(factory, size) {
-
-		/**
-		 * 已缓存的对象数组
-		 * @protected
-		 * @property _pool
-		 * @type Array
-		 */
-		this._pool = [];
-
-		/**
-		 * 要进行缓存的类
-		 * @protected
-		 * @property _factory
-		 * @type function
-		 */
-		this._factory = factory;
-
-		/**
-		 * 对象池的最大容量
-		 * @property size
-		 * @type number
-		 * @default 30
-		 */
-		this.size = size || 30;
-
-		/**
-		 * 已缓存的对象数量
-		 * @readonly
-		 * @property length
-		 * @type number
-		 */
-		Object.defineProperty(this, 'length', {
-			set: function() {},
-			get: function() {
-				return this._pool.length;
-			}
-		});
-	},
-	/**
-	 * 创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池
-	 * @protected
-	 * @function _create
-	 * @return {mixed} 新的对象
-	 */
-	_create: function() {
-		return new this._factory();
-	},
-	/**
-	 * 初始化对象，可以重载该方法，以初始化从对象池中获取到的对象
-	 * @protected
-	 * @function _initialize
-	 * @param {mixed} obj 要重置的对象
-	 * @return {mixed} 重置后的对象
-	 */
-	_initialize: function(obj) {
-		return obj;
-	},
-	/**
-	 * 获取一个对象
-	 * @function get
-	 * @return {mixed} 取出的对象
-	 */
-	get: function() {
-		var obj;
-		if (this._pool.length) {
-			obj = this._pool.shift();
-		} else {
-			obj = this._create();
-		}
-		return this._initialize(obj);
-	},
-	/**
-	 * 回收一个对象
-	 * @function recycle
-	 * @param {mixed} 要回收的对象
-	 * @return {this}
-	 */
-	recycle: function(obj) {
-		this._pool.push(obj);
-		if (this._pool.length > this._size) {
-			this._pool.shift();
-		}
-		return this;
-	},
-	/**
-	 * 清空对象池
-	 * @function clear
-	 * @return {this}
-	 */
-	clear: function() {
-		this._pool = [];
-		return this;
-	},
-	/**
-	 * 释放对象池内存
-	 * @function dispose
-	 */
-	dispose: function() {
-		this._pool = null;
-		this._factory = null;
-		this._super();
-	}
-});
-/**
- * 导演类，负责游戏逻辑流程的管理。
- * @author Lanfei
- * @class Director
- * @extends Class
- * 
- * @constructor
- * @param {go2d.Stage} stage
- * @param {Object} [options] 配置参数
- * @param {Object} [options.frameRate] 默认帧频
- * @todo 导演类是否单例？
- */
-var Director = go2d.Director = Class.extend({
-	__init: function(stage, options) {
-		options = options || {};
-
-		/**
-		 * 当前帧频
-		 * @readonly
-		 * @property fps
-		 * @type number
-		 */
-		this.fps = 0;
-
-		/**
-		 * 默认帧频
-		 * @property frameRate
-		 * @type number
-		 * @default 60
-		 */
-		this.frameRate = options.frameRate || 60;
-
-		/**
-		 * 舞台对象
-		 * @protected
-		 * @property _stage
-		 * @type Stage
-		 */
-		this._stage = stage;
-
-		/**
-		 * 是否已暂停
-		 * @protected
-		 * @property _paused
-		 * @type Boolean
-		 * @default true
-		 */
-		this._paused = true;
-
-		/**
-		 * 主循环定时器
-		 * @protected
-		 * @property _timer
-		 * @type Object
-		 */
-		this._timer = null;
-
-		/**
-		 * 上一帧时间戳，用于计算帧频
-		 * @protected
-		 * @property _prevTime
-		 * @type number
-		 */
-		this._prevTime = null;
-		this._initEvent();
-		this._initTimer();
-	},
-	_initEvent: function() {
-		var that = this;
-		var sleep = false;
-		var prefixes = ['', 'ms', 'moz', 'webkit'];
-		forEach(prefixes, function(prefix) {
-			if (document[prefix + 'hidden'] !== undefined) {
-				document.addEventListener(prefix + 'visibilitychange', function() {
-					if (document[prefix + 'hidden']) {
-						if (!that._paused) {
-							that.pause();
-							sleep = true;
-						}
-					} else if (sleep) {
-						sleep = false;
-						that.play();
-					}
-				});
-				return false;
-			}
-		});
-	},
-	_initTimer: function() {
-		var frameRate = this.frameRate;
-
-		function setTimeBasedTimer(callback) {
-			return setTimeout(callback, 1000 / frameRate);
-		}
-
-		function clearTimeBasedTimer(timer) {
-			return clearTimeout(timer);
-		}
-
-		if (this.frameRate === 60) {
-			window.requestAnimationFrame =
-				window.requestAnimationFrame ||
-				window.webkitRequestAnimationFrame ||
-				window.mozRequestAnimationFrame ||
-				setTimeBasedTimer;
-			this.setAnimationInterval = function(callback) {
-				return requestAnimationFrame.call(null, callback);
-			};
-			window.cancelAnimationFrame =
-				window.cancelAnimationFrame ||
-				window.webkitCancelAnimationFrame ||
-				window.webkitCancelRequestAnimationFrame ||
-				window.mozCancelAnimationFrame ||
-				window.mozCancelRequestAnimationFrame ||
-				clearTimeBasedTimer;
-			this.clearAnimationInterval = function(timer) {
-				cancelAnimationFrame(timer);
-			};
-		} else {
-			this.setAnimationInterval = setTimeBasedTimer;
-			this.clearAnimationInterval = clearTimeBasedTimer;
-		}
-	},
-	/**
-	 * 游戏主循环
-	 * @protected
-	 * @function _mainLoop
-	 */
-	_mainLoop: function() {
-		var deltaTime,
-			now = +new Date();
-		if (this._prevTime) {
-			deltaTime = now - this._prevTime;
-			this.fps = Math.round(1000 / deltaTime);
-		} else {
-			deltaTime = Math.round(1000 / this.frameRate);
-		}
-		this._stage.render().tick(deltaTime);
-		this._prevTime = now;
-	},
-	/**
-	 * 开始游戏主循环
-	 * @function play
-	 * @return {this}
-	 */
-	play: function() {
-		var that = this;
-		this._timer = this.setAnimationInterval(function() {
-			that._mainLoop();
-			that.play();
-		});
-		this._paused = false;
-		return this;
-	},
-	/**
-	 * 暂停游戏主循环
-	 * @function pause
-	 * @return {this}
-	 */
-	pause: function() {
-		this.clearAnimationInterval(this._timer);
-		this._paused = true;
-		this._prevTime = 0;
-		return this;
-	}
-});
-
-/**
  * 向量类，实现向量基本运算，可表达一个二维坐标。
  * @author Lanfei
  * @class Vector
@@ -822,14 +540,14 @@ var Matrix = go2d.Matrix = Class.extend({
 /**
  * 事件派发器类，负责事件的派发和侦听。
  * @author Lanfei
- * @class EventDispatcher
+ * @class EventEmitter
  * @extends Class
- * 
+ *
  * @constructor
  * @param {string} type 事件类型
  * @param {Object} [data] 事件参数
  */
-var EventDispatcher = go2d.EventDispatcher = Class.extend({
+var EventEmitter = go2d.EventEmitter = Class.extend({
 	__init: function() {
 		/**
 		 * 侦听器哈希表
@@ -852,16 +570,18 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 	 * @param {Object} listeners 以事件名称为键名，回调函数为键值的哈希表
 	 * @return {this}
 	 */
-	on: function(name, callback) {
-		if (arguments.length === 1) {
-			var listeners = arguments[0];
-			for (name in listeners) {
-				this.on(name, listeners[name]);
-			}
+	on: function(name, callback, thisArg) {
+		if (isObject(arguments[0]) === 1) {
+			forEach(arguments[0], function(callback, name) {
+				this.on(name, callback, arguments[1]);
+			}, this);
 		} else {
 			name = name.toLowerCase();
 			this.__events[name] = this.__events[name] || [];
-			this.__events[name].push(callback);
+			this.__events[name].push({
+				callback: callback,
+				thisArg: thisArg
+			});
 		}
 		return this;
 	},
@@ -872,7 +592,7 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 	 * @param {function} [callback] 回调函数，当该参数为空时将移除该事件的所有回调
 	 * @return {this}
 	 */
-	off: function(name, callback) {
+	off: function(name, callback, thisArg) {
 		name = name.toLowerCase();
 		if (callback === undefined) {
 			delete this.__events[name];
@@ -880,7 +600,7 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 		}
 		var callbacks = this.__events[name] || [];
 		for (var i = callbacks.length - 1; i >= 0; --i) {
-			if (callbacks[i] === callback) {
+			if (callbacks[i].callback === callback && callbacks[i].thisArg === thisArg) {
 				callbacks.splice(i, 1);
 				break;
 			}
@@ -905,8 +625,11 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 		name = name.toLowerCase();
 		var callbacks = this.__events[name] || [],
 			args = Array.prototype.slice.call(arguments, 1);
-		forEach(callbacks, function(callback) {
-			if (isFunction(callback) && callback.apply(this, args) === false) {
+		forEach(callbacks, function(item) {
+			if (item.callback === undefined) {
+				console.log(name, item);
+			}
+			if (item.callback.apply(item.thisArg || this, args) === false) {
 				if (event instanceof Event) {
 					event.preventDefault();
 					event.stopPropagation();
@@ -924,7 +647,6 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 		this.__events = null;
 	}
 });
-
 /**
  * 事件类，所有事件对象的基类。
  * @author Lanfei
@@ -1133,10 +855,290 @@ var ResizeEvent = Event.ResizeEvent = Event.extend({
 });
 
 /**
+ * 对象池类，一个简单的对象池实现，适用于构造函数无参数的对象。
+ * @author Lanfei
+ * @class ObjectPool
+ * @extends Class
+ * 
+ * @constructor
+ * @param {function} factory 要进行缓存的类
+ * @param {number} size 对象池的最大容量
+ */
+var ObjectPool = go2d.ObjectPool = Class.extend({
+	__init: function(factory, size) {
+
+		/**
+		 * 已缓存的对象数组
+		 * @protected
+		 * @property _pool
+		 * @type Array
+		 */
+		this._pool = [];
+
+		/**
+		 * 要进行缓存的类
+		 * @protected
+		 * @property _factory
+		 * @type function
+		 */
+		this._factory = factory;
+
+		/**
+		 * 对象池的最大容量
+		 * @property size
+		 * @type number
+		 * @default 30
+		 */
+		this.size = size || 30;
+
+		/**
+		 * 已缓存的对象数量
+		 * @readonly
+		 * @property length
+		 * @type number
+		 */
+		Object.defineProperty(this, 'length', {
+			set: function() {},
+			get: function() {
+				return this._pool.length;
+			}
+		});
+	},
+	/**
+	 * 创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池
+	 * @protected
+	 * @function _create
+	 * @return {mixed} 新的对象
+	 */
+	_create: function() {
+		return new this._factory();
+	},
+	/**
+	 * 初始化对象，可以重载该方法，以初始化从对象池中获取到的对象
+	 * @protected
+	 * @function _initialize
+	 * @param {mixed} obj 要重置的对象
+	 * @return {mixed} 重置后的对象
+	 */
+	_initialize: function(obj) {
+		return obj;
+	},
+	/**
+	 * 获取一个对象
+	 * @function get
+	 * @return {mixed} 取出的对象
+	 */
+	get: function() {
+		var obj;
+		if (this._pool.length) {
+			obj = this._pool.shift();
+		} else {
+			obj = this._create();
+		}
+		return this._initialize(obj);
+	},
+	/**
+	 * 回收一个对象
+	 * @function recycle
+	 * @param {mixed} 要回收的对象
+	 * @return {this}
+	 */
+	recycle: function(obj) {
+		this._pool.push(obj);
+		if (this._pool.length > this._size) {
+			this._pool.shift();
+		}
+		return this;
+	},
+	/**
+	 * 清空对象池
+	 * @function clear
+	 * @return {this}
+	 */
+	clear: function() {
+		this._pool = [];
+		return this;
+	},
+	/**
+	 * 释放对象池内存
+	 * @function dispose
+	 */
+	dispose: function() {
+		this._pool = null;
+		this._factory = null;
+		this._super();
+	}
+});
+/**
+ * 导演类，负责游戏逻辑流程的管理。
+ * @author Lanfei
+ * @class Director
+ * @extends EventEmitter
+ */
+var Director = go2d.Director = EventEmitter.extend({
+	__init: function() {
+		this._super();
+
+		/**
+		 * 当前帧频
+		 * @readonly
+		 * @property fps
+		 * @type number
+		 */
+		this.fps = 0;
+
+		/**
+		 * 舞台对象
+		 * @protected
+		 * @property _stage
+		 * @type Stage
+		 */
+		this._stage = stage;
+
+		/**
+		 * 上一帧时间戳
+		 * @protected
+		 * @property _prevFrame
+		 * @type number
+		 */
+		this._prevFrame = null;
+
+		/**
+		 * 是否已暂停
+		 * @protected
+		 * @property _paused
+		 * @type Boolean
+		 * @default true
+		 */
+		this._paused = true;
+
+		/**
+		 * 主循环定时器
+		 * @protected
+		 * @property _timer
+		 * @type Object
+		 */
+		this._timer = null;
+
+		this._initTimer();
+		this._initEvent();
+		this.run();
+		Director.instance = this;
+	},
+	_initEvent: function() {
+		var that = this;
+		var sleep = false;
+		var prefixes = ['', 'ms', 'moz', 'webkit'];
+		forEach(prefixes, function(prefix) {
+			if (document[prefix + 'hidden'] !== undefined) {
+				document.addEventListener(prefix + 'visibilitychange', function() {
+					if (document[prefix + 'hidden']) {
+						if (!that._paused) {
+							that.pause();
+							sleep = true;
+						}
+					} else if (sleep) {
+						sleep = false;
+						that.run();
+					}
+				});
+				return false;
+			}
+		});
+	},
+	_initTimer: function() {
+
+		function setTimeBasedTimer(callback) {
+			return setTimeout(callback, 1000 / 60);
+		}
+
+		function clearTimeBasedTimer(timer) {
+			return clearTimeout(timer);
+		}
+
+		window.requestAnimationFrame =
+			window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			setTimeBasedTimer;
+		window.cancelAnimationFrame =
+			window.cancelAnimationFrame ||
+			window.webkitCancelAnimationFrame ||
+			window.webkitCancelRequestAnimationFrame ||
+			window.mozCancelAnimationFrame ||
+			window.mozCancelRequestAnimationFrame ||
+			clearTimeBasedTimer;
+	},
+	/**
+	 * 游戏心跳
+	 * @protected
+	 * @function _tick
+	 */
+	_tick: function() {
+		var deltaTime,
+			now = +new Date();
+		if (this._prevFrame > 0) {
+			deltaTime = now - this._prevFrame;
+			this.fps = Math.round(1000 / deltaTime);
+		} else {
+			deltaTime = 1000 / 60;
+			this.fps = 60;
+		}
+		this._prevFrame = now;
+		this.emit('tick', deltaTime);
+	},
+	/**
+	 * 开始心跳
+	 * @function run
+	 * @return {this}
+	 */
+	run: function() {
+		var that = this;
+		this._timer = requestAnimationFrame(function() {
+			that._tick();
+			that.run();
+		});
+		this._paused = false;
+		return this;
+	},
+	/**
+	 * 暂停心跳
+	 * @function pause
+	 * @return {this}
+	 */
+	pause: function() {
+		cancelAnimationFrame(this._timer);
+		this._paused = true;
+		this._prevFrame = 0;
+		return this;
+	}
+}, {
+	/**
+	 * 暂停心跳
+	 * @static
+	 * @protected
+	 * @property _instance
+	 * @type Director
+	 */
+	_instance: null,
+	/**
+	 * 暂停心跳
+	 * @static
+	 * @function getInstance
+	 * @return {Director}
+	 */
+	getInstance: function() {
+		if (!Director._instance) {
+			Director._instance = new Director();
+		}
+		return Director._instance;
+	}
+});
+/**
  * URL 请求类，用于发起 AJAX 请求，并获取返回数据。
  * @author Lanfei
  * @class URLRequest
- * @extends EventDispatcher
+ * @extends EventEmitter
  *
  * @constructor
  * @param {number} url 请求地址
@@ -1146,7 +1148,7 @@ var ResizeEvent = Event.ResizeEvent = Event.extend({
  * @param {string} [options.contentType=application/x-www-form-urlencoded] 发送数据类型
  * @param {string} [options.responseType] 返回数据类型
  */
-var URLRequest = go2d.URLRequest = EventDispatcher.extend({
+var URLRequest = go2d.URLRequest = EventEmitter.extend({
 	__init: function(url, options) {
 		options = options || {};
 		this._super();
@@ -1287,7 +1289,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
  * 资源加载器类，可用于加载和管理游戏资源。
  * @author Lanfei
  * @class ResourceLoader
- * @extends EventDispatcher
+ * @extends EventEmitter
  * 
  * @constructor
  * @param {Object} resources 资源路径数据对象，格式如下：
@@ -1310,7 +1312,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
  * });
  * </code></pre>
  */
-var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
+var ResourceLoader = go2d.ResourceLoader = EventEmitter.extend({
 	__init: function(resources, options) {
 		options = options || {};
 		this._super();
@@ -2241,12 +2243,12 @@ var Tween = go2d.Tween = Class.extend({
  * 显示对象基类，实现了显示对象的基本渲染和事件逻辑，显示对象元素类和舞台类都基于此类。
  * @author Lanfei
  * @class DisplayObject
- * @extends EventDispatcher
- * 
+ * @extends EventEmitter
+ *
  * @constructor
  * @param {object} canvas 用于渲染的画布对象
  */
-var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
+var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	__init: function(canvas) {
 		this._super();
 
@@ -2320,6 +2322,14 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		 * @default true
 		 */
 		this._dirty = true;
+
+		/**
+		 * 上一帧时间戳
+		 * @protected
+		 * @property _prevFrame
+		 * @type number
+		 */
+		this._prevFrame = null;
 
 		/**
 		 * 触摸标识数组
@@ -2403,6 +2413,8 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 				return this.canvas.height;
 			}
 		});
+
+		Director.getInstance().on('tick', this._tick, this);
 	},
 	_onTouch: function(event) {
 		if (!this.touchable) {
@@ -2531,6 +2543,22 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		}
 	},
 	/**
+	 * 进入下一帧，该方法应只由引擎本身调用
+	 * @function _tick
+	 * @return {this}
+	 */
+	_tick: function(deltaTime) {
+		if (!this.paused) {
+			/**
+			 * 步进（进入下一帧）事件
+			 * @event step
+			 * @param {number} deltaTime 两帧时间差
+			 */
+			this.emit('step', deltaTime);
+		}
+		return this;
+	},
+	/**
 	 * 绘制子对象
 	 * @protected
 	 * @function _draw
@@ -2590,13 +2618,13 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 					this._draw(this._mask, 'destination-in');
 				}
 			}
+			this._dirty = false;
 			/**
 			 * 绘制完毕事件
 			 * @event paint
 			 * @param {object} context 绘制上下文对象
 			 */
 			this.emit('paint', ctx);
-			this._dirty = false;
 		}
 		return this;
 	},
@@ -2918,25 +2946,6 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		return this;
 	},
 	/**
-	 * 进入下一帧，该方法应只由引擎本身调用
-	 * @function tick
-	 * @return {this}
-	 */
-	tick: function(deltaTime) {
-		if (!this.paused) {
-			forEach(this._children, function(child) {
-				child.tick(deltaTime);
-			});
-			/**
-			 * 步进（进入下一帧）事件
-			 * @event step
-			 * @param {number} deltaTime 两帧时间差
-			 */
-			this.emit('step', deltaTime);
-		}
-		return this;
-	},
-	/**
 	 * 释放对象内存
 	 * @function dispose
 	 */
@@ -2945,6 +2954,9 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 			this.parent.removeChild(this);
 		}
 		this.removeAllChildren(true);
+
+		Director.getInstance().off('tick', this._tick, this);
+
 		this._super();
 	}
 });
@@ -3736,7 +3748,7 @@ var TextField = go2d.TextField = Sprite.extend({
  * @author Lanfei
  * @class Stage
  * @extends DisplayObject
- * 
+ *
  * @constructor
  * @param {object} canvas 用于渲染的画布对象
  */
@@ -3811,9 +3823,12 @@ var Stage = go2d.Stage = DisplayObject.extend({
 				emitTouch('touchtap', event);
 			});
 		}
+	},
+	_tick: function(deltaTime) {
+		this._super(deltaTime);
+		this.render();
 	}
 });
-
 return go2d;
 
 });

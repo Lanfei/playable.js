@@ -2,7 +2,7 @@
  * 资源加载器类，可用于加载和管理游戏资源。
  * @author Lanfei
  * @class ResourceLoader
- * @extends EventDispatcher
+ * @extends EventEmitter
  * 
  * @constructor
  * @param {Object} resources 资源路径数据对象，格式如下：
@@ -25,7 +25,7 @@
  * });
  * </code></pre>
  */
-var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
+var ResourceLoader = go2d.ResourceLoader = EventEmitter.extend({
 	__init: function(resources, options) {
 		options = options || {};
 		this._super();

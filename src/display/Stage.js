@@ -3,7 +3,7 @@
  * @author Lanfei
  * @class Stage
  * @extends DisplayObject
- * 
+ *
  * @constructor
  * @param {object} canvas 用于渲染的画布对象
  */
@@ -78,5 +78,9 @@ var Stage = go2d.Stage = DisplayObject.extend({
 				emitTouch('touchtap', event);
 			});
 		}
+	},
+	_tick: function(deltaTime) {
+		this._super(deltaTime);
+		this.render();
 	}
 });

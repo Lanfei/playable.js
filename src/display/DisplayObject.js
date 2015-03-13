@@ -2,12 +2,12 @@
  * 显示对象基类，实现了显示对象的基本渲染和事件逻辑，显示对象元素类和舞台类都基于此类。
  * @author Lanfei
  * @class DisplayObject
- * @extends EventDispatcher
- * 
+ * @extends EventEmitter
+ *
  * @constructor
  * @param {object} canvas 用于渲染的画布对象
  */
-var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
+var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	__init: function(canvas) {
 		this._super();
 
@@ -81,6 +81,14 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		 * @default true
 		 */
 		this._dirty = true;
+
+		/**
+		 * 上一帧时间戳
+		 * @protected
+		 * @property _prevFrame
+		 * @type number
+		 */
+		this._prevFrame = null;
 
 		/**
 		 * 触摸标识数组
@@ -164,6 +172,8 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 				return this.canvas.height;
 			}
 		});
+
+		Director.getInstance().on('tick', this._tick, this);
 	},
 	_onTouch: function(event) {
 		if (!this.touchable) {
@@ -292,6 +302,22 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		}
 	},
 	/**
+	 * 进入下一帧，该方法应只由引擎本身调用
+	 * @function _tick
+	 * @return {this}
+	 */
+	_tick: function(deltaTime) {
+		if (!this.paused) {
+			/**
+			 * 步进（进入下一帧）事件
+			 * @event step
+			 * @param {number} deltaTime 两帧时间差
+			 */
+			this.emit('step', deltaTime);
+		}
+		return this;
+	},
+	/**
 	 * 绘制子对象
 	 * @protected
 	 * @function _draw
@@ -351,13 +377,13 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 					this._draw(this._mask, 'destination-in');
 				}
 			}
+			this._dirty = false;
 			/**
 			 * 绘制完毕事件
 			 * @event paint
 			 * @param {object} context 绘制上下文对象
 			 */
 			this.emit('paint', ctx);
-			this._dirty = false;
 		}
 		return this;
 	},
@@ -679,25 +705,6 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		return this;
 	},
 	/**
-	 * 进入下一帧，该方法应只由引擎本身调用
-	 * @function tick
-	 * @return {this}
-	 */
-	tick: function(deltaTime) {
-		if (!this.paused) {
-			forEach(this._children, function(child) {
-				child.tick(deltaTime);
-			});
-			/**
-			 * 步进（进入下一帧）事件
-			 * @event step
-			 * @param {number} deltaTime 两帧时间差
-			 */
-			this.emit('step', deltaTime);
-		}
-		return this;
-	},
-	/**
 	 * 释放对象内存
 	 * @function dispose
 	 */
@@ -706,6 +713,9 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 			this.parent.removeChild(this);
 		}
 		this.removeAllChildren(true);
+
+		Director.getInstance().off('tick', this._tick, this);
+
 		this._super();
 	}
 });

@@ -15,24 +15,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\core\\Director.js": {
-            "name": "src\\core\\Director.js",
-            "modules": {},
-            "classes": {
-                "Director": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "src\\core\\ObjectPool.js": {
-            "name": "src\\core\\ObjectPool.js",
-            "modules": {},
-            "classes": {
-                "ObjectPool": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "src\\display\\DisplayObject.js": {
             "name": "src\\display\\DisplayObject.js",
             "modules": {},
@@ -96,11 +78,11 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\event\\EventDispatcher.js": {
-            "name": "src\\event\\EventDispatcher.js",
+        "src\\event\\EventEmitter.js": {
+            "name": "src\\event\\EventEmitter.js",
             "modules": {},
             "classes": {
-                "EventDispatcher": 1
+                "EventEmitter": 1
             },
             "fors": {},
             "namespaces": {}
@@ -159,6 +141,24 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\system\\Director.js": {
+            "name": "src\\system\\Director.js",
+            "modules": {},
+            "classes": {
+                "Director": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\system\\ObjectPool.js": {
+            "name": "src\\system\\ObjectPool.js",
+            "modules": {},
+            "classes": {
+                "ObjectPool": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\tween\\Ease.js": {
             "name": "src\\tween\\Ease.js",
             "modules": {},
@@ -209,8 +209,6 @@
             "submodules": {},
             "classes": {
                 "Class": 1,
-                "Director": 1,
-                "ObjectPool": 1,
                 "DisplayObject": 1,
                 "ImageView": 1,
                 "ScrollView": 1,
@@ -218,13 +216,15 @@
                 "Stage": 1,
                 "TextField": 1,
                 "Event": 1,
-                "EventDispatcher": 1,
+                "EventEmitter": 1,
                 "ResizeEvent": 1,
                 "TouchEvent": 1,
                 "Matrix": 1,
                 "Vector": 1,
                 "ResourceLoader": 1,
                 "URLRequest": 1,
+                "Director": 1,
+                "ObjectPool": 1,
                 "Ease": 1,
                 "Tween": 1,
                 "go2d": 1
@@ -254,74 +254,6 @@
             "description": "Go2d 的基础类，Go2d 的所有类都继承于该类。",
             "author": "Lanfei"
         },
-        "Director": {
-            "name": "Director",
-            "shortname": "Director",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "go2d",
-            "file": "src\\core\\Director.js",
-            "line": 1,
-            "description": "导演类，负责游戏逻辑流程的管理。",
-            "author": "Lanfei",
-            "extends": "Class",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "stage",
-                    "description": "",
-                    "type": "go2d.Stage"
-                },
-                {
-                    "name": "options",
-                    "description": "配置参数",
-                    "type": "Object",
-                    "optional": true,
-                    "props": [
-                        {
-                            "name": "frameRate",
-                            "description": "默认帧频",
-                            "type": "Object",
-                            "optional": true
-                        }
-                    ]
-                }
-            ],
-            "todo": [
-                "导演类是否单例？"
-            ]
-        },
-        "ObjectPool": {
-            "name": "ObjectPool",
-            "shortname": "ObjectPool",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "go2d",
-            "file": "src\\core\\ObjectPool.js",
-            "line": 1,
-            "description": "对象池类，一个简单的对象池实现，适用于构造函数无参数的对象。",
-            "author": "Lanfei",
-            "extends": "Class",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "factory",
-                    "description": "要进行缓存的类",
-                    "type": "Function"
-                },
-                {
-                    "name": "size",
-                    "description": "对象池的最大容量",
-                    "type": "Number"
-                }
-            ]
-        },
         "DisplayObject": {
             "name": "DisplayObject",
             "shortname": "DisplayObject",
@@ -335,7 +267,7 @@
             "line": 1,
             "description": "显示对象基类，实现了显示对象的基本渲染和事件逻辑，显示对象元素类和舞台类都基于此类。",
             "author": "Lanfei",
-            "extends": "EventDispatcher",
+            "extends": "EventEmitter",
             "is_constructor": 1,
             "params": [
                 {
@@ -483,16 +415,16 @@
                 }
             ]
         },
-        "EventDispatcher": {
-            "name": "EventDispatcher",
-            "shortname": "EventDispatcher",
+        "EventEmitter": {
+            "name": "EventEmitter",
+            "shortname": "EventEmitter",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
             "module": "go2d",
-            "file": "src\\event\\EventDispatcher.js",
+            "file": "src\\event\\EventEmitter.js",
             "line": 1,
             "description": "事件派发器类，负责事件的派发和侦听。",
             "author": "Lanfei",
@@ -701,7 +633,7 @@
             "line": 1,
             "description": "资源加载器类，可用于加载和管理游戏资源。",
             "author": "Lanfei",
-            "extends": "EventDispatcher",
+            "extends": "EventEmitter",
             "is_constructor": 1,
             "params": [
                 {
@@ -742,7 +674,7 @@
             "line": 1,
             "description": "URL 请求类，用于发起 AJAX 请求，并获取返回数据。",
             "author": "Lanfei",
-            "extends": "EventDispatcher",
+            "extends": "EventEmitter",
             "is_constructor": 1,
             "params": [
                 {
@@ -783,6 +715,49 @@
                             "optional": true
                         }
                     ]
+                }
+            ]
+        },
+        "Director": {
+            "name": "Director",
+            "shortname": "Director",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\system\\Director.js",
+            "line": 1,
+            "description": "导演类，负责游戏逻辑流程的管理。",
+            "author": "Lanfei",
+            "extends": "EventEmitter"
+        },
+        "ObjectPool": {
+            "name": "ObjectPool",
+            "shortname": "ObjectPool",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\system\\ObjectPool.js",
+            "line": 1,
+            "description": "对象池类，一个简单的对象池实现，适用于构造函数无参数的对象。",
+            "author": "Lanfei",
+            "extends": "Class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "factory",
+                    "description": "要进行缓存的类",
+                    "type": "Function"
+                },
+                {
+                    "name": "size",
+                    "description": "对象池的最大容量",
+                    "type": "Number"
                 }
             ]
         },
@@ -886,233 +861,6 @@
             "class": "Class"
         },
         {
-            "file": "src\\core\\Director.js",
-            "line": 17,
-            "description": "当前帧频",
-            "readonly": "",
-            "itemtype": "property",
-            "name": "fps",
-            "type": "number",
-            "class": "Director"
-        },
-        {
-            "file": "src\\core\\Director.js",
-            "line": 25,
-            "description": "默认帧频",
-            "itemtype": "property",
-            "name": "frameRate",
-            "type": "number",
-            "default": "60",
-            "class": "Director"
-        },
-        {
-            "file": "src\\core\\Director.js",
-            "line": 33,
-            "description": "舞台对象",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "property",
-            "name": "_stage",
-            "type": "Stage",
-            "class": "Director"
-        },
-        {
-            "file": "src\\core\\Director.js",
-            "line": 41,
-            "description": "是否已暂停",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "property",
-            "name": "_paused",
-            "type": "Boolean",
-            "default": "true",
-            "class": "Director"
-        },
-        {
-            "file": "src\\core\\Director.js",
-            "line": 50,
-            "description": "主循环定时器",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "property",
-            "name": "_timer",
-            "type": "Object",
-            "class": "Director"
-        },
-        {
-            "file": "src\\core\\Director.js",
-            "line": 58,
-            "description": "上一帧时间戳，用于计算帧频",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "property",
-            "name": "_prevTime",
-            "type": "number",
-            "class": "Director"
-        },
-        {
-            "file": "src\\core\\Director.js",
-            "line": 124,
-            "description": "游戏主循环",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_mainLoop",
-            "class": "Director"
-        },
-        {
-            "file": "src\\core\\Director.js",
-            "line": 141,
-            "description": "开始游戏主循环",
-            "itemtype": "method",
-            "name": "play",
-            "return": {
-                "description": "",
-                "type": "This"
-            },
-            "class": "Director"
-        },
-        {
-            "file": "src\\core\\Director.js",
-            "line": 155,
-            "description": "暂停游戏主循环",
-            "itemtype": "method",
-            "name": "pause",
-            "return": {
-                "description": "",
-                "type": "This"
-            },
-            "class": "Director"
-        },
-        {
-            "file": "src\\core\\ObjectPool.js",
-            "line": 14,
-            "description": "已缓存的对象数组",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "property",
-            "name": "_pool",
-            "type": "Array",
-            "class": "ObjectPool"
-        },
-        {
-            "file": "src\\core\\ObjectPool.js",
-            "line": 22,
-            "description": "要进行缓存的类",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "property",
-            "name": "_factory",
-            "type": "function",
-            "class": "ObjectPool"
-        },
-        {
-            "file": "src\\core\\ObjectPool.js",
-            "line": 30,
-            "description": "对象池的最大容量",
-            "itemtype": "property",
-            "name": "size",
-            "type": "number",
-            "default": "30",
-            "class": "ObjectPool"
-        },
-        {
-            "file": "src\\core\\ObjectPool.js",
-            "line": 38,
-            "description": "已缓存的对象数量",
-            "readonly": "",
-            "itemtype": "property",
-            "name": "length",
-            "type": "number",
-            "class": "ObjectPool"
-        },
-        {
-            "file": "src\\core\\ObjectPool.js",
-            "line": 51,
-            "description": "创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_create",
-            "return": {
-                "description": "新的对象",
-                "type": "Mixed"
-            },
-            "class": "ObjectPool"
-        },
-        {
-            "file": "src\\core\\ObjectPool.js",
-            "line": 60,
-            "description": "初始化对象，可以重载该方法，以初始化从对象池中获取到的对象",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_initialize",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": "要重置的对象",
-                    "type": "Mixed"
-                }
-            ],
-            "return": {
-                "description": "重置后的对象",
-                "type": "Mixed"
-            },
-            "class": "ObjectPool"
-        },
-        {
-            "file": "src\\core\\ObjectPool.js",
-            "line": 70,
-            "description": "获取一个对象",
-            "itemtype": "method",
-            "name": "get",
-            "return": {
-                "description": "取出的对象",
-                "type": "Mixed"
-            },
-            "class": "ObjectPool"
-        },
-        {
-            "file": "src\\core\\ObjectPool.js",
-            "line": 84,
-            "description": "回收一个对象",
-            "itemtype": "method",
-            "name": "recycle",
-            "params": [
-                {
-                    "name": "要回收的对象",
-                    "description": "",
-                    "type": "Mixed"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "This"
-            },
-            "class": "ObjectPool"
-        },
-        {
-            "file": "src\\core\\ObjectPool.js",
-            "line": 97,
-            "description": "清空对象池",
-            "itemtype": "method",
-            "name": "clear",
-            "return": {
-                "description": "",
-                "type": "This"
-            },
-            "class": "ObjectPool"
-        },
-        {
-            "file": "src\\core\\ObjectPool.js",
-            "line": 106,
-            "description": "释放对象池内存",
-            "itemtype": "method",
-            "name": "dispose",
-            "class": "ObjectPool"
-        },
-        {
             "file": "src\\display\\DisplayObject.js",
             "line": 14,
             "description": "用于渲染的画布对象",
@@ -1205,6 +953,17 @@
         {
             "file": "src\\display\\DisplayObject.js",
             "line": 85,
+            "description": "上一帧时间戳",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_prevFrame",
+            "type": "number",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 93,
             "description": "触摸标识数组",
             "access": "protected",
             "tagname": "",
@@ -1215,7 +974,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 93,
+            "line": 101,
             "description": "子对象数组",
             "access": "protected",
             "tagname": "",
@@ -1226,7 +985,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 101,
+            "line": 109,
             "description": "遮罩层",
             "itemtype": "property",
             "name": "mask",
@@ -1235,7 +994,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 110,
+            "line": 118,
             "description": "不透明度",
             "itemtype": "property",
             "name": "opacity",
@@ -1245,7 +1004,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 118,
+            "line": 126,
             "description": "背景颜色或样式",
             "itemtype": "property",
             "name": "background",
@@ -1255,7 +1014,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 140,
+            "line": 148,
             "description": "宽度",
             "itemtype": "property",
             "name": "width",
@@ -1264,7 +1023,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 154,
+            "line": 162,
             "description": "高度",
             "itemtype": "property",
             "name": "height",
@@ -1273,7 +1032,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 188,
+            "line": 198,
             "description": "触摸开始事件",
             "itemtype": "event",
             "name": "touchstart",
@@ -1288,7 +1047,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 199,
+            "line": 209,
             "description": "触摸移动事件",
             "itemtype": "event",
             "name": "touchmove",
@@ -1303,7 +1062,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 209,
+            "line": 219,
             "description": "触摸结束事件",
             "itemtype": "event",
             "name": "touchend",
@@ -1318,7 +1077,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 220,
+            "line": 230,
             "description": "触摸点击事件",
             "itemtype": "event",
             "name": "touchtap",
@@ -1333,7 +1092,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 246,
+            "line": 256,
             "description": "添加到舞台事件",
             "itemtype": "event",
             "name": "addedtostage",
@@ -1348,7 +1107,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 258,
+            "line": 268,
             "description": "移除出舞台事件",
             "itemtype": "event",
             "name": "removedfromstage",
@@ -1363,7 +1122,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 282,
+            "line": 292,
             "description": "宽高变化事件",
             "itemtype": "event",
             "name": "resize",
@@ -1378,7 +1137,34 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 294,
+            "line": 304,
+            "description": "进入下一帧，该方法应只由引擎本身调用",
+            "itemtype": "method",
+            "name": "_tick",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 311,
+            "description": "步进（进入下一帧）事件",
+            "itemtype": "event",
+            "name": "step",
+            "params": [
+                {
+                    "name": "deltaTime",
+                    "description": "两帧时间差",
+                    "type": "Number"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 320,
             "description": "绘制子对象",
             "access": "protected",
             "tagname": "",
@@ -1405,7 +1191,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 319,
+            "line": 345,
             "description": "渲染该对象",
             "itemtype": "method",
             "name": "render",
@@ -1417,7 +1203,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 338,
+            "line": 364,
             "description": "开始渲染事件",
             "itemtype": "event",
             "name": "render",
@@ -1432,7 +1218,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 354,
+            "line": 381,
             "description": "绘制完毕事件",
             "itemtype": "event",
             "name": "paint",
@@ -1447,7 +1233,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 364,
+            "line": 390,
             "description": "更新对象渲染状态，当该对象需要重新渲染时调用",
             "itemtype": "method",
             "name": "update",
@@ -1459,7 +1245,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 380,
+            "line": 406,
             "description": "添加子对象",
             "itemtype": "method",
             "name": "addChild",
@@ -1478,7 +1264,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 390,
+            "line": 416,
             "description": "在指定深度添加子对象",
             "itemtype": "method",
             "name": "addChildAt",
@@ -1502,7 +1288,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 417,
+            "line": 443,
             "description": "获取指定名字的子对象",
             "itemtype": "method",
             "name": "getChildByName",
@@ -1521,7 +1307,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 433,
+            "line": 459,
             "description": "获取指定标签的子对象",
             "itemtype": "method",
             "name": "getChildrenByTag",
@@ -1540,7 +1326,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 448,
+            "line": 474,
             "description": "获取指定深度的子对象",
             "itemtype": "method",
             "name": "getChildAt",
@@ -1559,7 +1345,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 457,
+            "line": 483,
             "description": "获取指定子对象的深度",
             "itemtype": "method",
             "name": "getChildIndex",
@@ -1578,7 +1364,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 472,
+            "line": 498,
             "description": "交换两个子对象的深度",
             "itemtype": "method",
             "name": "swapChildren",
@@ -1602,7 +1388,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 487,
+            "line": 513,
             "description": "交换两个子对象的深度",
             "itemtype": "method",
             "name": "swapChildrenAt",
@@ -1626,7 +1412,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 506,
+            "line": 532,
             "description": "排列子对象",
             "itemtype": "method",
             "name": "sortChildren",
@@ -1645,7 +1431,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 516,
+            "line": 542,
             "description": "获取所有子对象",
             "itemtype": "method",
             "name": "getAllChildren",
@@ -1657,7 +1443,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 524,
+            "line": 550,
             "description": "移除指定的子对象",
             "itemtype": "method",
             "name": "removeChild",
@@ -1681,7 +1467,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 540,
+            "line": 566,
             "description": "移除指定深度的子对象",
             "itemtype": "method",
             "name": "removeChildAt",
@@ -1705,7 +1491,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 562,
+            "line": 588,
             "description": "移除指定名字的子对象",
             "itemtype": "method",
             "name": "removeChildrenByName",
@@ -1729,7 +1515,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 579,
+            "line": 605,
             "description": "移除指定标签的子对象",
             "itemtype": "method",
             "name": "removeChildrenByTag",
@@ -1753,7 +1539,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 595,
+            "line": 621,
             "description": "移除所有子对象",
             "itemtype": "method",
             "name": "removeAllChildren",
@@ -1772,7 +1558,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 615,
+            "line": 641,
             "description": "设置遮罩对象",
             "itemtype": "method",
             "name": "setMask",
@@ -1791,7 +1577,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 640,
+            "line": 666,
             "description": "获取遮罩对象",
             "itemtype": "method",
             "name": "getMask",
@@ -1803,7 +1589,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 648,
+            "line": 674,
             "description": "移除遮罩对象",
             "itemtype": "method",
             "name": "removeMask",
@@ -1822,7 +1608,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 663,
+            "line": 689,
             "description": "开始该对象的帧播放",
             "itemtype": "method",
             "name": "play",
@@ -1834,7 +1620,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 672,
+            "line": 698,
             "description": "暂停该对象的帧播放",
             "itemtype": "method",
             "name": "pause",
@@ -1846,34 +1632,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 681,
-            "description": "进入下一帧，该方法应只由引擎本身调用",
-            "itemtype": "method",
-            "name": "tick",
-            "return": {
-                "description": "",
-                "type": "This"
-            },
-            "class": "DisplayObject"
-        },
-        {
-            "file": "src\\display\\DisplayObject.js",
-            "line": 691,
-            "description": "步进（进入下一帧）事件",
-            "itemtype": "event",
-            "name": "step",
-            "params": [
-                {
-                    "name": "deltaTime",
-                    "description": "两帧时间差",
-                    "type": "Number"
-                }
-            ],
-            "class": "DisplayObject"
-        },
-        {
-            "file": "src\\display\\DisplayObject.js",
-            "line": 700,
+            "line": 707,
             "description": "释放对象内存",
             "itemtype": "method",
             "name": "dispose",
@@ -2474,7 +2233,7 @@
             "class": "Event"
         },
         {
-            "file": "src\\event\\EventDispatcher.js",
+            "file": "src\\event\\EventEmitter.js",
             "line": 13,
             "description": "侦听器哈希表",
             "access": "private",
@@ -2482,10 +2241,10 @@
             "itemtype": "property",
             "name": "__events",
             "type": "Object",
-            "class": "EventDispatcher"
+            "class": "EventEmitter"
         },
         {
-            "file": "src\\event\\EventDispatcher.js",
+            "file": "src\\event\\EventEmitter.js",
             "line": 21,
             "description": "添加事件侦听器",
             "itemtype": "method",
@@ -2506,10 +2265,10 @@
                 "description": "",
                 "type": "This"
             },
-            "class": "EventDispatcher"
+            "class": "EventEmitter"
         },
         {
-            "file": "src\\event\\EventDispatcher.js",
+            "file": "src\\event\\EventEmitter.js",
             "line": 28,
             "description": "批量添加事件侦听器",
             "itemtype": "method",
@@ -2525,11 +2284,11 @@
                 "description": "",
                 "type": "This"
             },
-            "class": "EventDispatcher"
+            "class": "EventEmitter"
         },
         {
-            "file": "src\\event\\EventDispatcher.js",
-            "line": 47,
+            "file": "src\\event\\EventEmitter.js",
+            "line": 49,
             "description": "移除事件侦听器",
             "itemtype": "method",
             "name": "off",
@@ -2550,11 +2309,11 @@
                 "description": "",
                 "type": "This"
             },
-            "class": "EventDispatcher"
+            "class": "EventEmitter"
         },
         {
-            "file": "src\\event\\EventDispatcher.js",
-            "line": 69,
+            "file": "src\\event\\EventEmitter.js",
+            "line": 71,
             "description": "通过事件对象派发事件",
             "itemtype": "method",
             "name": "emit",
@@ -2575,11 +2334,11 @@
                 "description": "",
                 "type": "This"
             },
-            "class": "EventDispatcher"
+            "class": "EventEmitter"
         },
         {
-            "file": "src\\event\\EventDispatcher.js",
-            "line": 76,
+            "file": "src\\event\\EventEmitter.js",
+            "line": 78,
             "description": "通过任意事件参数派发事件",
             "itemtype": "method",
             "name": "emit",
@@ -2600,15 +2359,15 @@
                 "description": "",
                 "type": "This"
             },
-            "class": "EventDispatcher"
+            "class": "EventEmitter"
         },
         {
-            "file": "src\\event\\EventDispatcher.js",
-            "line": 98,
+            "file": "src\\event\\EventEmitter.js",
+            "line": 103,
             "description": "释放事件派发器内存",
             "itemtype": "method",
             "name": "dispose",
-            "class": "EventDispatcher"
+            "class": "EventEmitter"
         },
         {
             "file": "src\\event\\ResizeEvent.js",
@@ -3828,6 +3587,248 @@
             "class": "URLRequest"
         },
         {
+            "file": "src\\system\\Director.js",
+            "line": 11,
+            "description": "当前帧频",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "fps",
+            "type": "number",
+            "class": "Director"
+        },
+        {
+            "file": "src\\system\\Director.js",
+            "line": 19,
+            "description": "舞台对象",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_stage",
+            "type": "Stage",
+            "class": "Director"
+        },
+        {
+            "file": "src\\system\\Director.js",
+            "line": 27,
+            "description": "上一帧时间戳",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_prevFrame",
+            "type": "number",
+            "class": "Director"
+        },
+        {
+            "file": "src\\system\\Director.js",
+            "line": 35,
+            "description": "是否已暂停",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_paused",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Director"
+        },
+        {
+            "file": "src\\system\\Director.js",
+            "line": 44,
+            "description": "主循环定时器",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_timer",
+            "type": "Object",
+            "class": "Director"
+        },
+        {
+            "file": "src\\system\\Director.js",
+            "line": 101,
+            "description": "游戏心跳",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_tick",
+            "class": "Director"
+        },
+        {
+            "file": "src\\system\\Director.js",
+            "line": 119,
+            "description": "开始心跳",
+            "itemtype": "method",
+            "name": "run",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Director"
+        },
+        {
+            "file": "src\\system\\Director.js",
+            "line": 133,
+            "description": "暂停心跳",
+            "itemtype": "method",
+            "name": "pause",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Director"
+        },
+        {
+            "file": "src\\system\\Director.js",
+            "line": 145,
+            "description": "暂停心跳",
+            "static": 1,
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_instance",
+            "type": "Director",
+            "class": "Director"
+        },
+        {
+            "file": "src\\system\\Director.js",
+            "line": 153,
+            "description": "暂停心跳",
+            "static": 1,
+            "itemtype": "method",
+            "name": "getInstance",
+            "return": {
+                "description": "",
+                "type": "Director"
+            },
+            "class": "Director"
+        },
+        {
+            "file": "src\\system\\ObjectPool.js",
+            "line": 14,
+            "description": "已缓存的对象数组",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_pool",
+            "type": "Array",
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\system\\ObjectPool.js",
+            "line": 22,
+            "description": "要进行缓存的类",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_factory",
+            "type": "function",
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\system\\ObjectPool.js",
+            "line": 30,
+            "description": "对象池的最大容量",
+            "itemtype": "property",
+            "name": "size",
+            "type": "number",
+            "default": "30",
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\system\\ObjectPool.js",
+            "line": 38,
+            "description": "已缓存的对象数量",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "length",
+            "type": "number",
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\system\\ObjectPool.js",
+            "line": 51,
+            "description": "创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_create",
+            "return": {
+                "description": "新的对象",
+                "type": "Mixed"
+            },
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\system\\ObjectPool.js",
+            "line": 60,
+            "description": "初始化对象，可以重载该方法，以初始化从对象池中获取到的对象",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_initialize",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "要重置的对象",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "重置后的对象",
+                "type": "Mixed"
+            },
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\system\\ObjectPool.js",
+            "line": 70,
+            "description": "获取一个对象",
+            "itemtype": "method",
+            "name": "get",
+            "return": {
+                "description": "取出的对象",
+                "type": "Mixed"
+            },
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\system\\ObjectPool.js",
+            "line": 84,
+            "description": "回收一个对象",
+            "itemtype": "method",
+            "name": "recycle",
+            "params": [
+                {
+                    "name": "要回收的对象",
+                    "description": "",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\system\\ObjectPool.js",
+            "line": 97,
+            "description": "清空对象池",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\system\\ObjectPool.js",
+            "line": 106,
+            "description": "释放对象池内存",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "ObjectPool"
+        },
+        {
             "file": "src\\tween\\Ease.js",
             "line": 8,
             "description": "匀速缓动函数",
@@ -4514,55 +4515,15 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\core\\Director.js:124"
+            "line": " src\\display\\DisplayObject.js:304"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\core\\Director.js:141"
+            "line": " src\\display\\DisplayObject.js:320"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\core\\Director.js:155"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\core\\ObjectPool.js:51"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\core\\ObjectPool.js:60"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\core\\ObjectPool.js:70"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\core\\ObjectPool.js:84"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\core\\ObjectPool.js:97"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\core\\ObjectPool.js:106"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:294"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:319"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:364"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:380"
+            "line": " src\\display\\DisplayObject.js:345"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4570,83 +4531,87 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:417"
+            "line": " src\\display\\DisplayObject.js:406"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:433"
+            "line": " src\\display\\DisplayObject.js:416"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:448"
+            "line": " src\\display\\DisplayObject.js:443"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:457"
+            "line": " src\\display\\DisplayObject.js:459"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:472"
+            "line": " src\\display\\DisplayObject.js:474"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:487"
+            "line": " src\\display\\DisplayObject.js:483"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:506"
+            "line": " src\\display\\DisplayObject.js:498"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:516"
+            "line": " src\\display\\DisplayObject.js:513"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:524"
+            "line": " src\\display\\DisplayObject.js:532"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:540"
+            "line": " src\\display\\DisplayObject.js:542"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:562"
+            "line": " src\\display\\DisplayObject.js:550"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:579"
+            "line": " src\\display\\DisplayObject.js:566"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:595"
+            "line": " src\\display\\DisplayObject.js:588"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:615"
+            "line": " src\\display\\DisplayObject.js:605"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:640"
+            "line": " src\\display\\DisplayObject.js:621"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:648"
+            "line": " src\\display\\DisplayObject.js:641"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:663"
+            "line": " src\\display\\DisplayObject.js:666"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:672"
+            "line": " src\\display\\DisplayObject.js:674"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:681"
+            "line": " src\\display\\DisplayObject.js:689"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:700"
+            "line": " src\\display\\DisplayObject.js:698"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:707"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4698,27 +4663,27 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventDispatcher.js:21"
+            "line": " src\\event\\EventEmitter.js:21"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventDispatcher.js:28"
+            "line": " src\\event\\EventEmitter.js:28"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventDispatcher.js:47"
+            "line": " src\\event\\EventEmitter.js:49"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventDispatcher.js:69"
+            "line": " src\\event\\EventEmitter.js:71"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventDispatcher.js:76"
+            "line": " src\\event\\EventEmitter.js:78"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventDispatcher.js:98"
+            "line": " src\\event\\EventEmitter.js:103"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4883,6 +4848,46 @@
         {
             "message": "replacing incorrect tag: function with method",
             "line": " src\\net\\URLRequest.js:141"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\system\\Director.js:101"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\system\\Director.js:119"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\system\\Director.js:133"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\system\\Director.js:153"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\system\\ObjectPool.js:51"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\system\\ObjectPool.js:60"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\system\\ObjectPool.js:70"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\system\\ObjectPool.js:84"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\system\\ObjectPool.js:97"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\system\\ObjectPool.js:106"
         },
         {
             "message": "replacing incorrect tag: function with method",

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\core\Director.js - Go2d</title>
+    <title>src\event\EventEmitter.js - Go2d</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -43,7 +43,7 @@
                                 <li><a href="../classes/DisplayObject.html">DisplayObject</a></li>
                                 <li><a href="../classes/Ease.html">Ease</a></li>
                                 <li><a href="../classes/Event.html">Event</a></li>
-                                <li><a href="../classes/EventDispatcher.html">EventDispatcher</a></li>
+                                <li><a href="../classes/EventEmitter.html">EventEmitter</a></li>
                                 <li><a href="../classes/go2d.html">go2d</a></li>
                                 <li><a href="../classes/ImageView.html">ImageView</a></li>
                                 <li><a href="../classes/Matrix.html">Matrix</a></li>
@@ -95,177 +95,120 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src\core\Director.js</h1>
+<h1 class="file-heading">File: src\event\EventEmitter.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * 导演类，负责游戏逻辑流程的管理。
+ * 事件派发器类，负责事件的派发和侦听。
  * @author Lanfei
- * @class Director
+ * @class EventEmitter
  * @extends Class
- * 
+ *
  * @constructor
- * @param {go2d.Stage} stage
- * @param {Object} [options] 配置参数
- * @param {Object} [options.frameRate] 默认帧频
- * @todo 导演类是否单例？
+ * @param {string} type 事件类型
+ * @param {Object} [data] 事件参数
  */
-var Director = go2d.Director = Class.extend({
-	__init: function(stage, options) {
-		options = options || {};
-
+var EventEmitter = go2d.EventEmitter = Class.extend({
+	__init: function() {
 		/**
-		 * 当前帧频
-		 * @readonly
-		 * @property fps
-		 * @type number
-		 */
-		this.fps = 0;
-
-		/**
-		 * 默认帧频
-		 * @property frameRate
-		 * @type number
-		 * @default 60
-		 */
-		this.frameRate = options.frameRate || 60;
-
-		/**
-		 * 舞台对象
-		 * @protected
-		 * @property _stage
-		 * @type Stage
-		 */
-		this._stage = stage;
-
-		/**
-		 * 是否已暂停
-		 * @protected
-		 * @property _paused
-		 * @type Boolean
-		 * @default true
-		 */
-		this._paused = true;
-
-		/**
-		 * 主循环定时器
-		 * @protected
-		 * @property _timer
+		 * 侦听器哈希表
+		 * @private
+		 * @property __events
 		 * @type Object
 		 */
-		this._timer = null;
-
-		/**
-		 * 上一帧时间戳，用于计算帧频
-		 * @protected
-		 * @property _prevTime
-		 * @type number
-		 */
-		this._prevTime = null;
-		this._initEvent();
-		this._initTimer();
+		this.__events = {};
 	},
-	_initEvent: function() {
-		var that = this;
-		var sleep = false;
-		var prefixes = [&#x27;&#x27;, &#x27;ms&#x27;, &#x27;moz&#x27;, &#x27;webkit&#x27;];
-		forEach(prefixes, function(prefix) {
-			if (document[prefix + &#x27;hidden&#x27;] !== undefined) {
-				document.addEventListener(prefix + &#x27;visibilitychange&#x27;, function() {
-					if (document[prefix + &#x27;hidden&#x27;]) {
-						if (!that._paused) {
-							that.pause();
-							sleep = true;
-						}
-					} else if (sleep) {
-						sleep = false;
-						that.play();
-					}
-				});
+	/**
+	 * 添加事件侦听器
+	 * @function on
+	 * @param {string} name 事件名称
+	 * @param {function} callback 回调函数
+	 * @return {this}
+	 */
+	/**
+	 * 批量添加事件侦听器
+	 * @function on
+	 * @param {Object} listeners 以事件名称为键名，回调函数为键值的哈希表
+	 * @return {this}
+	 */
+	on: function(name, callback, thisArg) {
+		if (isObject(arguments[0]) === 1) {
+			forEach(arguments[0], function(callback, name) {
+				this.on(name, callback, arguments[1]);
+			}, this);
+		} else {
+			name = name.toLowerCase();
+			this.__events[name] = this.__events[name] || [];
+			this.__events[name].push({
+				callback: callback,
+				thisArg: thisArg
+			});
+		}
+		return this;
+	},
+	/**
+	 * 移除事件侦听器
+	 * @function off
+	 * @param {string} name 事件名称
+	 * @param {function} [callback] 回调函数，当该参数为空时将移除该事件的所有回调
+	 * @return {this}
+	 */
+	off: function(name, callback, thisArg) {
+		name = name.toLowerCase();
+		if (callback === undefined) {
+			delete this.__events[name];
+			return this;
+		}
+		var callbacks = this.__events[name] || [];
+		for (var i = callbacks.length - 1; i &gt;= 0; --i) {
+			if (callbacks[i].callback === callback &amp;&amp; callbacks[i].thisArg === thisArg) {
+				callbacks.splice(i, 1);
+				break;
+			}
+		}
+		return this;
+	},
+	/**
+	 * 通过事件对象派发事件
+	 * @function emit
+	 * @param {string} name 事件名称
+	 * @param {go2d.Event} [event] 事件对象
+	 * @return {this}
+	 */
+	/**
+	 * 通过任意事件参数派发事件
+	 * @function emit
+	 * @param {string} name 事件名称
+	 * @param {...*} [params] 事件参数
+	 * @return {this}
+	 */
+	emit: function(name, event) {
+		name = name.toLowerCase();
+		var callbacks = this.__events[name] || [],
+			args = Array.prototype.slice.call(arguments, 1);
+		forEach(callbacks, function(item) {
+			if (item.callback === undefined) {
+				console.log(name, item);
+			}
+			if (item.callback.apply(item.thisArg || this, args) === false) {
+				if (event instanceof Event) {
+					event.preventDefault();
+					event.stopPropagation();
+				}
 				return false;
 			}
-		});
-	},
-	_initTimer: function() {
-		var frameRate = this.frameRate;
-
-		function setTimeBasedTimer(callback) {
-			return setTimeout(callback, 1000 / frameRate);
-		}
-
-		function clearTimeBasedTimer(timer) {
-			return clearTimeout(timer);
-		}
-
-		if (this.frameRate === 60) {
-			window.requestAnimationFrame =
-				window.requestAnimationFrame ||
-				window.webkitRequestAnimationFrame ||
-				window.mozRequestAnimationFrame ||
-				setTimeBasedTimer;
-			this.setAnimationInterval = function(callback) {
-				return requestAnimationFrame.call(null, callback);
-			};
-			window.cancelAnimationFrame =
-				window.cancelAnimationFrame ||
-				window.webkitCancelAnimationFrame ||
-				window.webkitCancelRequestAnimationFrame ||
-				window.mozCancelAnimationFrame ||
-				window.mozCancelRequestAnimationFrame ||
-				clearTimeBasedTimer;
-			this.clearAnimationInterval = function(timer) {
-				cancelAnimationFrame(timer);
-			};
-		} else {
-			this.setAnimationInterval = setTimeBasedTimer;
-			this.clearAnimationInterval = clearTimeBasedTimer;
-		}
-	},
-	/**
-	 * 游戏主循环
-	 * @protected
-	 * @function _mainLoop
-	 */
-	_mainLoop: function() {
-		var deltaTime,
-			now = +new Date();
-		if (this._prevTime) {
-			deltaTime = now - this._prevTime;
-			this.fps = Math.round(1000 / deltaTime);
-		} else {
-			deltaTime = Math.round(1000 / this.frameRate);
-		}
-		this._stage.render().tick(deltaTime);
-		this._prevTime = now;
-	},
-	/**
-	 * 开始游戏主循环
-	 * @function play
-	 * @return {this}
-	 */
-	play: function() {
-		var that = this;
-		this._timer = this.setAnimationInterval(function() {
-			that._mainLoop();
-			that.play();
-		});
-		this._paused = false;
+		}, this);
 		return this;
 	},
 	/**
-	 * 暂停游戏主循环
-	 * @function pause
-	 * @return {this}
+	 * 释放事件派发器内存
+	 * @function dispose
 	 */
-	pause: function() {
-		this.clearAnimationInterval(this._timer);
-		this._paused = true;
-		this._prevTime = 0;
-		return this;
+	dispose: function() {
+		this.__events = null;
 	}
 });
-
     </pre>
 </div>
                     </div>

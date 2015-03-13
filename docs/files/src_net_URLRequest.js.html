@@ -43,7 +43,7 @@
                                 <li><a href="../classes/DisplayObject.html">DisplayObject</a></li>
                                 <li><a href="../classes/Ease.html">Ease</a></li>
                                 <li><a href="../classes/Event.html">Event</a></li>
-                                <li><a href="../classes/EventDispatcher.html">EventDispatcher</a></li>
+                                <li><a href="../classes/EventEmitter.html">EventEmitter</a></li>
                                 <li><a href="../classes/go2d.html">go2d</a></li>
                                 <li><a href="../classes/ImageView.html">ImageView</a></li>
                                 <li><a href="../classes/Matrix.html">Matrix</a></li>
@@ -103,7 +103,7 @@
  * URL 请求类，用于发起 AJAX 请求，并获取返回数据。
  * @author Lanfei
  * @class URLRequest
- * @extends EventDispatcher
+ * @extends EventEmitter
  *
  * @constructor
  * @param {number} url 请求地址
@@ -113,7 +113,7 @@
  * @param {string} [options.contentType=application/x-www-form-urlencoded] 发送数据类型
  * @param {string} [options.responseType] 返回数据类型
  */
-var URLRequest = go2d.URLRequest = EventDispatcher.extend({
+var URLRequest = go2d.URLRequest = EventEmitter.extend({
 	__init: function(url, options) {
 		options = options || {};
 		this._super();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\event\EventDispatcher.js - Go2d</title>
+    <title>src\system\ObjectPool.js - Go2d</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -43,7 +43,7 @@
                                 <li><a href="../classes/DisplayObject.html">DisplayObject</a></li>
                                 <li><a href="../classes/Ease.html">Ease</a></li>
                                 <li><a href="../classes/Event.html">Event</a></li>
-                                <li><a href="../classes/EventDispatcher.html">EventDispatcher</a></li>
+                                <li><a href="../classes/EventEmitter.html">EventEmitter</a></li>
                                 <li><a href="../classes/go2d.html">go2d</a></li>
                                 <li><a href="../classes/ImageView.html">ImageView</a></li>
                                 <li><a href="../classes/Matrix.html">Matrix</a></li>
@@ -95,116 +95,125 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src\event\EventDispatcher.js</h1>
+<h1 class="file-heading">File: src\system\ObjectPool.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * 事件派发器类，负责事件的派发和侦听。
+ * 对象池类，一个简单的对象池实现，适用于构造函数无参数的对象。
  * @author Lanfei
- * @class EventDispatcher
+ * @class ObjectPool
  * @extends Class
  * 
  * @constructor
- * @param {string} type 事件类型
- * @param {Object} [data] 事件参数
+ * @param {function} factory 要进行缓存的类
+ * @param {number} size 对象池的最大容量
  */
-var EventDispatcher = go2d.EventDispatcher = Class.extend({
-	__init: function() {
+var ObjectPool = go2d.ObjectPool = Class.extend({
+	__init: function(factory, size) {
+
 		/**
-		 * 侦听器哈希表
-		 * @private
-		 * @property __events
-		 * @type Object
+		 * 已缓存的对象数组
+		 * @protected
+		 * @property _pool
+		 * @type Array
 		 */
-		this.__events = {};
+		this._pool = [];
+
+		/**
+		 * 要进行缓存的类
+		 * @protected
+		 * @property _factory
+		 * @type function
+		 */
+		this._factory = factory;
+
+		/**
+		 * 对象池的最大容量
+		 * @property size
+		 * @type number
+		 * @default 30
+		 */
+		this.size = size || 30;
+
+		/**
+		 * 已缓存的对象数量
+		 * @readonly
+		 * @property length
+		 * @type number
+		 */
+		Object.defineProperty(this, &#x27;length&#x27;, {
+			set: function() {},
+			get: function() {
+				return this._pool.length;
+			}
+		});
 	},
 	/**
-	 * 添加事件侦听器
-	 * @function on
-	 * @param {string} name 事件名称
-	 * @param {function} callback 回调函数
-	 * @return {this}
+	 * 创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池
+	 * @protected
+	 * @function _create
+	 * @return {mixed} 新的对象
 	 */
+	_create: function() {
+		return new this._factory();
+	},
 	/**
-	 * 批量添加事件侦听器
-	 * @function on
-	 * @param {Object} listeners 以事件名称为键名，回调函数为键值的哈希表
-	 * @return {this}
+	 * 初始化对象，可以重载该方法，以初始化从对象池中获取到的对象
+	 * @protected
+	 * @function _initialize
+	 * @param {mixed} obj 要重置的对象
+	 * @return {mixed} 重置后的对象
 	 */
-	on: function(name, callback) {
-		if (arguments.length === 1) {
-			var listeners = arguments[0];
-			for (name in listeners) {
-				this.on(name, listeners[name]);
-			}
+	_initialize: function(obj) {
+		return obj;
+	},
+	/**
+	 * 获取一个对象
+	 * @function get
+	 * @return {mixed} 取出的对象
+	 */
+	get: function() {
+		var obj;
+		if (this._pool.length) {
+			obj = this._pool.shift();
 		} else {
-			name = name.toLowerCase();
-			this.__events[name] = this.__events[name] || [];
-			this.__events[name].push(callback);
+			obj = this._create();
+		}
+		return this._initialize(obj);
+	},
+	/**
+	 * 回收一个对象
+	 * @function recycle
+	 * @param {mixed} 要回收的对象
+	 * @return {this}
+	 */
+	recycle: function(obj) {
+		this._pool.push(obj);
+		if (this._pool.length &gt; this._size) {
+			this._pool.shift();
 		}
 		return this;
 	},
 	/**
-	 * 移除事件侦听器
-	 * @function off
-	 * @param {string} name 事件名称
-	 * @param {function} [callback] 回调函数，当该参数为空时将移除该事件的所有回调
+	 * 清空对象池
+	 * @function clear
 	 * @return {this}
 	 */
-	off: function(name, callback) {
-		name = name.toLowerCase();
-		if (callback === undefined) {
-			delete this.__events[name];
-			return this;
-		}
-		var callbacks = this.__events[name] || [];
-		for (var i = callbacks.length - 1; i &gt;= 0; --i) {
-			if (callbacks[i] === callback) {
-				callbacks.splice(i, 1);
-				break;
-			}
-		}
+	clear: function() {
+		this._pool = [];
 		return this;
 	},
 	/**
-	 * 通过事件对象派发事件
-	 * @function emit
-	 * @param {string} name 事件名称
-	 * @param {go2d.Event} [event] 事件对象
-	 * @return {this}
-	 */
-	/**
-	 * 通过任意事件参数派发事件
-	 * @function emit
-	 * @param {string} name 事件名称
-	 * @param {...*} [params] 事件参数
-	 * @return {this}
-	 */
-	emit: function(name, event) {
-		name = name.toLowerCase();
-		var callbacks = this.__events[name] || [],
-			args = Array.prototype.slice.call(arguments, 1);
-		forEach(callbacks, function(callback) {
-			if (isFunction(callback) &amp;&amp; callback.apply(this, args) === false) {
-				if (event instanceof Event) {
-					event.preventDefault();
-					event.stopPropagation();
-				}
-				return false;
-			}
-		}, this);
-		return this;
-	},
-	/**
-	 * 释放事件派发器内存
+	 * 释放对象池内存
 	 * @function dispose
 	 */
 	dispose: function() {
-		this.__events = null;
+		this._pool = null;
+		this._factory = null;
+		this._super();
 	}
 });
-
     </pre>
 </div>
                     </div>

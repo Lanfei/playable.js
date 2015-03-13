@@ -1,14 +1,14 @@
 /**
  * 事件派发器类，负责事件的派发和侦听。
  * @author Lanfei
- * @class EventDispatcher
+ * @class EventEmitter
  * @extends Class
- * 
+ *
  * @constructor
  * @param {string} type 事件类型
  * @param {Object} [data] 事件参数
  */
-var EventDispatcher = go2d.EventDispatcher = Class.extend({
+var EventEmitter = go2d.EventEmitter = Class.extend({
 	__init: function() {
 		/**
 		 * 侦听器哈希表
@@ -31,16 +31,18 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 	 * @param {Object} listeners 以事件名称为键名，回调函数为键值的哈希表
 	 * @return {this}
 	 */
-	on: function(name, callback) {
-		if (arguments.length === 1) {
-			var listeners = arguments[0];
-			for (name in listeners) {
-				this.on(name, listeners[name]);
-			}
+	on: function(name, callback, thisArg) {
+		if (isObject(arguments[0]) === 1) {
+			forEach(arguments[0], function(callback, name) {
+				this.on(name, callback, arguments[1]);
+			}, this);
 		} else {
 			name = name.toLowerCase();
 			this.__events[name] = this.__events[name] || [];
-			this.__events[name].push(callback);
+			this.__events[name].push({
+				callback: callback,
+				thisArg: thisArg
+			});
 		}
 		return this;
 	},
@@ -51,7 +53,7 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 	 * @param {function} [callback] 回调函数，当该参数为空时将移除该事件的所有回调
 	 * @return {this}
 	 */
-	off: function(name, callback) {
+	off: function(name, callback, thisArg) {
 		name = name.toLowerCase();
 		if (callback === undefined) {
 			delete this.__events[name];
@@ -59,7 +61,7 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 		}
 		var callbacks = this.__events[name] || [];
 		for (var i = callbacks.length - 1; i >= 0; --i) {
-			if (callbacks[i] === callback) {
+			if (callbacks[i].callback === callback && callbacks[i].thisArg === thisArg) {
 				callbacks.splice(i, 1);
 				break;
 			}
@@ -84,8 +86,11 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 		name = name.toLowerCase();
 		var callbacks = this.__events[name] || [],
 			args = Array.prototype.slice.call(arguments, 1);
-		forEach(callbacks, function(callback) {
-			if (isFunction(callback) && callback.apply(this, args) === false) {
+		forEach(callbacks, function(item) {
+			if (item.callback === undefined) {
+				console.log(name, item);
+			}
+			if (item.callback.apply(item.thisArg || this, args) === false) {
 				if (event instanceof Event) {
 					event.preventDefault();
 					event.stopPropagation();

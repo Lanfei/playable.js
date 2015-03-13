@@ -6,7 +6,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "DisplayObject",
         "Ease",
         "Event",
-        "EventDispatcher",
+        "EventEmitter",
         "ImageView",
         "Matrix",
         "ObjectPool",

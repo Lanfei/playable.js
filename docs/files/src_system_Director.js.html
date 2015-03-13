@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\core\ObjectPool.js - Go2d</title>
+    <title>src\system\Director.js - Go2d</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -43,7 +43,7 @@
                                 <li><a href="../classes/DisplayObject.html">DisplayObject</a></li>
                                 <li><a href="../classes/Ease.html">Ease</a></li>
                                 <li><a href="../classes/Event.html">Event</a></li>
-                                <li><a href="../classes/EventDispatcher.html">EventDispatcher</a></li>
+                                <li><a href="../classes/EventEmitter.html">EventEmitter</a></li>
                                 <li><a href="../classes/go2d.html">go2d</a></li>
                                 <li><a href="../classes/ImageView.html">ImageView</a></li>
                                 <li><a href="../classes/Matrix.html">Matrix</a></li>
@@ -95,123 +95,173 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src\core\ObjectPool.js</h1>
+<h1 class="file-heading">File: src\system\Director.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * 对象池类，一个简单的对象池实现，适用于构造函数无参数的对象。
+ * 导演类，负责游戏逻辑流程的管理。
  * @author Lanfei
- * @class ObjectPool
- * @extends Class
- * 
- * @constructor
- * @param {function} factory 要进行缓存的类
- * @param {number} size 对象池的最大容量
+ * @class Director
+ * @extends EventEmitter
  */
-var ObjectPool = go2d.ObjectPool = Class.extend({
-	__init: function(factory, size) {
+var Director = go2d.Director = EventEmitter.extend({
+	__init: function() {
+		this._super();
 
 		/**
-		 * 已缓存的对象数组
-		 * @protected
-		 * @property _pool
-		 * @type Array
-		 */
-		this._pool = [];
-
-		/**
-		 * 要进行缓存的类
-		 * @protected
-		 * @property _factory
-		 * @type function
-		 */
-		this._factory = factory;
-
-		/**
-		 * 对象池的最大容量
-		 * @property size
-		 * @type number
-		 * @default 30
-		 */
-		this.size = size || 30;
-
-		/**
-		 * 已缓存的对象数量
+		 * 当前帧频
 		 * @readonly
-		 * @property length
+		 * @property fps
 		 * @type number
 		 */
-		Object.defineProperty(this, &#x27;length&#x27;, {
-			set: function() {},
-			get: function() {
-				return this._pool.length;
+		this.fps = 0;
+
+		/**
+		 * 舞台对象
+		 * @protected
+		 * @property _stage
+		 * @type Stage
+		 */
+		this._stage = stage;
+
+		/**
+		 * 上一帧时间戳
+		 * @protected
+		 * @property _prevFrame
+		 * @type number
+		 */
+		this._prevFrame = null;
+
+		/**
+		 * 是否已暂停
+		 * @protected
+		 * @property _paused
+		 * @type Boolean
+		 * @default true
+		 */
+		this._paused = true;
+
+		/**
+		 * 主循环定时器
+		 * @protected
+		 * @property _timer
+		 * @type Object
+		 */
+		this._timer = null;
+
+		this._initTimer();
+		this._initEvent();
+		this.run();
+		Director.instance = this;
+	},
+	_initEvent: function() {
+		var that = this;
+		var sleep = false;
+		var prefixes = [&#x27;&#x27;, &#x27;ms&#x27;, &#x27;moz&#x27;, &#x27;webkit&#x27;];
+		forEach(prefixes, function(prefix) {
+			if (document[prefix + &#x27;hidden&#x27;] !== undefined) {
+				document.addEventListener(prefix + &#x27;visibilitychange&#x27;, function() {
+					if (document[prefix + &#x27;hidden&#x27;]) {
+						if (!that._paused) {
+							that.pause();
+							sleep = true;
+						}
+					} else if (sleep) {
+						sleep = false;
+						that.run();
+					}
+				});
+				return false;
 			}
 		});
 	},
-	/**
-	 * 创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池
-	 * @protected
-	 * @function _create
-	 * @return {mixed} 新的对象
-	 */
-	_create: function() {
-		return new this._factory();
+	_initTimer: function() {
+
+		function setTimeBasedTimer(callback) {
+			return setTimeout(callback, 1000 / 60);
+		}
+
+		function clearTimeBasedTimer(timer) {
+			return clearTimeout(timer);
+		}
+
+		window.requestAnimationFrame =
+			window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			setTimeBasedTimer;
+		window.cancelAnimationFrame =
+			window.cancelAnimationFrame ||
+			window.webkitCancelAnimationFrame ||
+			window.webkitCancelRequestAnimationFrame ||
+			window.mozCancelAnimationFrame ||
+			window.mozCancelRequestAnimationFrame ||
+			clearTimeBasedTimer;
 	},
 	/**
-	 * 初始化对象，可以重载该方法，以初始化从对象池中获取到的对象
+	 * 游戏心跳
 	 * @protected
-	 * @function _initialize
-	 * @param {mixed} obj 要重置的对象
-	 * @return {mixed} 重置后的对象
+	 * @function _tick
 	 */
-	_initialize: function(obj) {
-		return obj;
-	},
-	/**
-	 * 获取一个对象
-	 * @function get
-	 * @return {mixed} 取出的对象
-	 */
-	get: function() {
-		var obj;
-		if (this._pool.length) {
-			obj = this._pool.shift();
+	_tick: function() {
+		var deltaTime,
+			now = +new Date();
+		if (this._prevFrame &gt; 0) {
+			deltaTime = now - this._prevFrame;
+			this.fps = Math.round(1000 / deltaTime);
 		} else {
-			obj = this._create();
+			deltaTime = 1000 / 60;
+			this.fps = 60;
 		}
-		return this._initialize(obj);
+		this._prevFrame = now;
+		this.emit(&#x27;tick&#x27;, deltaTime);
 	},
 	/**
-	 * 回收一个对象
-	 * @function recycle
-	 * @param {mixed} 要回收的对象
+	 * 开始心跳
+	 * @function run
 	 * @return {this}
 	 */
-	recycle: function(obj) {
-		this._pool.push(obj);
-		if (this._pool.length &gt; this._size) {
-			this._pool.shift();
-		}
+	run: function() {
+		var that = this;
+		this._timer = requestAnimationFrame(function() {
+			that._tick();
+			that.run();
+		});
+		this._paused = false;
 		return this;
 	},
 	/**
-	 * 清空对象池
-	 * @function clear
+	 * 暂停心跳
+	 * @function pause
 	 * @return {this}
 	 */
-	clear: function() {
-		this._pool = [];
+	pause: function() {
+		cancelAnimationFrame(this._timer);
+		this._paused = true;
+		this._prevFrame = 0;
 		return this;
-	},
+	}
+}, {
 	/**
-	 * 释放对象池内存
-	 * @function dispose
+	 * 暂停心跳
+	 * @static
+	 * @protected
+	 * @property _instance
+	 * @type Director
 	 */
-	dispose: function() {
-		this._pool = null;
-		this._factory = null;
-		this._super();
+	_instance: null,
+	/**
+	 * 暂停心跳
+	 * @static
+	 * @function getInstance
+	 * @return {Director}
+	 */
+	getInstance: function() {
+		if (!Director._instance) {
+			Director._instance = new Director();
+		}
+		return Director._instance;
 	}
 });
     </pre>

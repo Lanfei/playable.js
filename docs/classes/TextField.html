@@ -43,7 +43,7 @@
                                 <li><a href="../classes/DisplayObject.html">DisplayObject</a></li>
                                 <li><a href="../classes/Ease.html">Ease</a></li>
                                 <li><a href="../classes/Event.html">Event</a></li>
-                                <li><a href="../classes/EventDispatcher.html">EventDispatcher</a></li>
+                                <li><a href="../classes/EventEmitter.html">EventEmitter</a></li>
                                 <li><a href="../classes/go2d.html">go2d</a></li>
                                 <li><a href="../classes/ImageView.html">ImageView</a></li>
                                 <li><a href="../classes/Matrix.html">Matrix</a></li>
@@ -196,6 +196,10 @@
 
                             </li>
                             <li class="index-item method inherited">
+                                <a href="#method__tick">_tick</a>
+
+                            </li>
+                            <li class="index-item method inherited">
                                 <a href="#method_addChild">addChild</a>
 
                             </li>
@@ -312,10 +316,6 @@
 
                             </li>
                             <li class="index-item method inherited">
-                                <a href="#method_tick">tick</a>
-
-                            </li>
-                            <li class="index-item method inherited">
                                 <a href="#method_update">update</a>
 
                             </li>
@@ -336,6 +336,10 @@
                             </li>
                             <li class="index-item property protected inherited">
                                 <a href="#property__dirty">_dirty</a>
+
+                            </li>
+                            <li class="index-item property protected inherited">
+                                <a href="#property__prevFrame">_prevFrame</a>
 
                             </li>
                             <li class="index-item property protected inherited">
@@ -617,7 +621,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method__draw">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l294"><code>src\display\DisplayObject.js:294</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l320"><code>src\display\DisplayObject.js:320</code></a>
         </p>
 
 
@@ -669,6 +673,47 @@
 
 
 </div>
+<div id="method__tick" class="method item inherited">
+    <h3 class="name"><code>_tick</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">This</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/DisplayObject.html#method__tick">DisplayObject</a>:
+        <a href="../files/src_display_DisplayObject.js.html#l304"><code>src\display\DisplayObject.js:304</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>进入下一帧，该方法应只由引擎本身调用</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">This</span>:
+            </div>
+        </div>
+
+
+</div>
 <div id="method_addChild" class="method item inherited">
     <h3 class="name"><code>addChild</code></h3>
 
@@ -693,7 +738,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_addChild">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l380"><code>src\display\DisplayObject.js:380</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l406"><code>src\display\DisplayObject.js:406</code></a>
         </p>
 
 
@@ -760,7 +805,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_addChildAt">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l390"><code>src\display\DisplayObject.js:390</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l416"><code>src\display\DisplayObject.js:416</code></a>
         </p>
 
 
@@ -825,11 +870,11 @@
 
     <div class="meta">
             <p>Inherited from
-            <a href="../classes/EventDispatcher.html#method_dispose">
-                EventDispatcher
+            <a href="../classes/EventEmitter.html#method_dispose">
+                EventEmitter
             </a>
             but overwritten in
-        <a href="../files/src_display_DisplayObject.js.html#l700"><code>src\display\DisplayObject.js:700</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l707"><code>src\display\DisplayObject.js:707</code></a>
         </p>
 
 
@@ -871,11 +916,11 @@
 
     <div class="meta">
             <p>Inherited from
-            <a href="../classes/EventDispatcher.html#method_emit">
-                EventDispatcher
+            <a href="../classes/EventEmitter.html#method_emit">
+                EventEmitter
             </a>
             but overwritten in
-        <a href="../files/src_event_EventDispatcher.js.html#l69"><code>src\event\EventDispatcher.js:69</code></a>
+        <a href="../files/src_event_EventEmitter.js.html#l71"><code>src\event\EventEmitter.js:71</code></a>
         </p>
 
 
@@ -945,7 +990,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_getAllChildren">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l516"><code>src\display\DisplayObject.js:516</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l542"><code>src\display\DisplayObject.js:542</code></a>
         </p>
 
 
@@ -994,7 +1039,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_getChildAt">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l448"><code>src\display\DisplayObject.js:448</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l474"><code>src\display\DisplayObject.js:474</code></a>
         </p>
 
 
@@ -1060,7 +1105,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_getChildByName">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l417"><code>src\display\DisplayObject.js:417</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l443"><code>src\display\DisplayObject.js:443</code></a>
         </p>
 
 
@@ -1126,7 +1171,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_getChildIndex">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l457"><code>src\display\DisplayObject.js:457</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l483"><code>src\display\DisplayObject.js:483</code></a>
         </p>
 
 
@@ -1192,7 +1237,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_getChildrenByTag">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l433"><code>src\display\DisplayObject.js:433</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l459"><code>src\display\DisplayObject.js:459</code></a>
         </p>
 
 
@@ -1252,7 +1297,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_getMask">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l640"><code>src\display\DisplayObject.js:640</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l666"><code>src\display\DisplayObject.js:666</code></a>
         </p>
 
 
@@ -1383,8 +1428,8 @@
 
     <div class="meta">
                 <p>Inherited from
-                <a href="../classes/EventDispatcher.html#method_off">EventDispatcher</a>:
-        <a href="../files/src_event_EventDispatcher.js.html#l47"><code>src\event\EventDispatcher.js:47</code></a>
+                <a href="../classes/EventEmitter.html#method_off">EventEmitter</a>:
+        <a href="../files/src_event_EventEmitter.js.html#l49"><code>src\event\EventEmitter.js:49</code></a>
         </p>
 
 
@@ -1462,11 +1507,11 @@
 
     <div class="meta">
             <p>Inherited from
-            <a href="../classes/EventDispatcher.html#method_on">
-                EventDispatcher
+            <a href="../classes/EventEmitter.html#method_on">
+                EventEmitter
             </a>
             but overwritten in
-        <a href="../files/src_event_EventDispatcher.js.html#l21"><code>src\event\EventDispatcher.js:21</code></a>
+        <a href="../files/src_event_EventEmitter.js.html#l21"><code>src\event\EventEmitter.js:21</code></a>
         </p>
 
 
@@ -1535,7 +1580,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_pause">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l672"><code>src\display\DisplayObject.js:672</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l698"><code>src\display\DisplayObject.js:698</code></a>
         </p>
 
 
@@ -1576,7 +1621,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_play">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l663"><code>src\display\DisplayObject.js:663</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l689"><code>src\display\DisplayObject.js:689</code></a>
         </p>
 
 
@@ -1623,7 +1668,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_removeAllChildren">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l595"><code>src\display\DisplayObject.js:595</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l621"><code>src\display\DisplayObject.js:621</code></a>
         </p>
 
 
@@ -1690,7 +1735,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_removeChild">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l524"><code>src\display\DisplayObject.js:524</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l550"><code>src\display\DisplayObject.js:550</code></a>
         </p>
 
 
@@ -1768,7 +1813,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_removeChildAt">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l540"><code>src\display\DisplayObject.js:540</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l566"><code>src\display\DisplayObject.js:566</code></a>
         </p>
 
 
@@ -1846,7 +1891,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_removeChildrenByName">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l562"><code>src\display\DisplayObject.js:562</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l588"><code>src\display\DisplayObject.js:588</code></a>
         </p>
 
 
@@ -1924,7 +1969,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_removeChildrenByTag">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l579"><code>src\display\DisplayObject.js:579</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l605"><code>src\display\DisplayObject.js:605</code></a>
         </p>
 
 
@@ -1999,7 +2044,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_removeMask">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l648"><code>src\display\DisplayObject.js:648</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l674"><code>src\display\DisplayObject.js:674</code></a>
         </p>
 
 
@@ -2057,7 +2102,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_render">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l319"><code>src\display\DisplayObject.js:319</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l345"><code>src\display\DisplayObject.js:345</code></a>
         </p>
 
 
@@ -2104,7 +2149,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_setMask">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l615"><code>src\display\DisplayObject.js:615</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l641"><code>src\display\DisplayObject.js:641</code></a>
         </p>
 
 
@@ -2250,7 +2295,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_sortChildren">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l506"><code>src\display\DisplayObject.js:506</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l532"><code>src\display\DisplayObject.js:532</code></a>
         </p>
 
 
@@ -2317,7 +2362,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_swapChildren">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l472"><code>src\display\DisplayObject.js:472</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l498"><code>src\display\DisplayObject.js:498</code></a>
         </p>
 
 
@@ -2395,7 +2440,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_swapChildrenAt">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l487"><code>src\display\DisplayObject.js:487</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l513"><code>src\display\DisplayObject.js:513</code></a>
         </p>
 
 
@@ -2446,47 +2491,6 @@
 
 
 </div>
-<div id="method_tick" class="method item inherited">
-    <h3 class="name"><code>tick</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">This</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>Inherited from
-                <a href="../classes/DisplayObject.html#method_tick">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l681"><code>src\display\DisplayObject.js:681</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>进入下一帧，该方法应只由引擎本身调用</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">This</span>:
-            </div>
-        </div>
-
-
-</div>
 <div id="method_update" class="method item inherited">
     <h3 class="name"><code>update</code></h3>
 
@@ -2505,7 +2509,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/DisplayObject.html#method_update">DisplayObject</a>:
-        <a href="../files/src_display_DisplayObject.js.html#l364"><code>src\display\DisplayObject.js:364</code></a>
+        <a href="../files/src_display_DisplayObject.js.html#l390"><code>src\display\DisplayObject.js:390</code></a>
         </p>
 
 
@@ -2544,8 +2548,8 @@
                     
                         <div class="meta">
                                     <p>Inherited from
-                                    <a href="../classes/EventDispatcher.html#property___events">EventDispatcher</a>:
-                            <a href="../files/src_event_EventDispatcher.js.html#l13"><code>src\event\EventDispatcher.js:13</code></a>
+                                    <a href="../classes/EventEmitter.html#property___events">EventEmitter</a>:
+                            <a href="../files/src_event_EventEmitter.js.html#l13"><code>src\event\EventEmitter.js:13</code></a>
                             </p>
                     
                     
@@ -2571,7 +2575,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#property__children">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l93"><code>src\display\DisplayObject.js:93</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l101"><code>src\display\DisplayObject.js:101</code></a>
                             </p>
                     
                     
@@ -2612,6 +2616,32 @@
                     
                     
                     </div>
+                    <div id="property__prevFrame" class="property item protected inherited">
+                        <h3 class="name"><code>_prevFrame</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                            <span class="flag protected">protected</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/DisplayObject.html#property__prevFrame">DisplayObject</a>:
+                            <a href="../files/src_display_DisplayObject.js.html#l85"><code>src\display\DisplayObject.js:85</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>上一帧时间戳</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="property__touches" class="property item protected inherited">
                         <h3 class="name"><code>_touches</code></h3>
                         <span class="type">Array</span>
@@ -2624,7 +2654,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#property__touches">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l85"><code>src\display\DisplayObject.js:85</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l93"><code>src\display\DisplayObject.js:93</code></a>
                             </p>
                     
                     
@@ -2779,7 +2809,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#property_background">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l118"><code>src\display\DisplayObject.js:118</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l126"><code>src\display\DisplayObject.js:126</code></a>
                             </p>
                     
                     
@@ -3011,7 +3041,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#property_height">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l154"><code>src\display\DisplayObject.js:154</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l162"><code>src\display\DisplayObject.js:162</code></a>
                             </p>
                     
                     
@@ -3088,7 +3118,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#property_mask">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l101"><code>src\display\DisplayObject.js:101</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l109"><code>src\display\DisplayObject.js:109</code></a>
                             </p>
                     
                     
@@ -3190,7 +3220,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#property_opacity">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l110"><code>src\display\DisplayObject.js:110</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l118"><code>src\display\DisplayObject.js:118</code></a>
                             </p>
                     
                     
@@ -3807,7 +3837,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#property_width">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l140"><code>src\display\DisplayObject.js:140</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l148"><code>src\display\DisplayObject.js:148</code></a>
                             </p>
                     
                     
@@ -3890,7 +3920,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#event_addedtostage">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l246"><code>src\display\DisplayObject.js:246</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l256"><code>src\display\DisplayObject.js:256</code></a>
                             </p>
                     
                     
@@ -3932,7 +3962,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#event_paint">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l354"><code>src\display\DisplayObject.js:354</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l381"><code>src\display\DisplayObject.js:381</code></a>
                             </p>
                     
                     
@@ -3974,7 +4004,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#event_removedfromstage">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l258"><code>src\display\DisplayObject.js:258</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l268"><code>src\display\DisplayObject.js:268</code></a>
                             </p>
                     
                     
@@ -4016,7 +4046,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#event_render">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l338"><code>src\display\DisplayObject.js:338</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l364"><code>src\display\DisplayObject.js:364</code></a>
                             </p>
                     
                     
@@ -4058,7 +4088,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#event_resize">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l282"><code>src\display\DisplayObject.js:282</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l292"><code>src\display\DisplayObject.js:292</code></a>
                             </p>
                     
                     
@@ -4100,7 +4130,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#event_step">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l691"><code>src\display\DisplayObject.js:691</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l311"><code>src\display\DisplayObject.js:311</code></a>
                             </p>
                     
                     
@@ -4142,7 +4172,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#event_touchend">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l209"><code>src\display\DisplayObject.js:209</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l219"><code>src\display\DisplayObject.js:219</code></a>
                             </p>
                     
                     
@@ -4184,7 +4214,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#event_touchmove">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l199"><code>src\display\DisplayObject.js:199</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l209"><code>src\display\DisplayObject.js:209</code></a>
                             </p>
                     
                     
@@ -4226,7 +4256,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#event_touchstart">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l188"><code>src\display\DisplayObject.js:188</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l198"><code>src\display\DisplayObject.js:198</code></a>
                             </p>
                     
                     
@@ -4268,7 +4298,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/DisplayObject.html#event_touchtap">DisplayObject</a>:
-                            <a href="../files/src_display_DisplayObject.js.html#l220"><code>src\display\DisplayObject.js:220</code></a>
+                            <a href="../files/src_display_DisplayObject.js.html#l230"><code>src\display\DisplayObject.js:230</code></a>
                             </p>
                     
                     
