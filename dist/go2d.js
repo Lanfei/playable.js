@@ -1,5 +1,5 @@
 /**
- * Go2d 1.4.2
+ * Go2d 1.5.0
  * https://github.com/Lanfei/Go2d
  * (c) 2014 [Lanfei](http://www.clanfei.com/)
  * A lightweight HTML5 game engine
@@ -20,7 +20,7 @@
  * @property {string} version Go2d 版本号
  */
 var go2d = {
-	version: '1.4.2'
+	version: '1.5.0'
 };
 
 /**
