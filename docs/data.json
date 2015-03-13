@@ -1,0 +1,5040 @@
+{
+    "project": {
+        "name": "Go2d",
+        "description": "A lightweight HTML5 game engine",
+        "version": "1.4.2",
+        "url": "https://github.com/Lanfei/Go2d"
+    },
+    "files": {
+        "src\\core\\Class.js": {
+            "name": "src\\core\\Class.js",
+            "modules": {},
+            "classes": {
+                "Class": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\core\\Director.js": {
+            "name": "src\\core\\Director.js",
+            "modules": {},
+            "classes": {
+                "Director": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\core\\ObjectPool.js": {
+            "name": "src\\core\\ObjectPool.js",
+            "modules": {},
+            "classes": {
+                "ObjectPool": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\display\\DisplayObject.js": {
+            "name": "src\\display\\DisplayObject.js",
+            "modules": {},
+            "classes": {
+                "DisplayObject": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\display\\ImageView.js": {
+            "name": "src\\display\\ImageView.js",
+            "modules": {},
+            "classes": {
+                "ImageView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\display\\ScrollView.js": {
+            "name": "src\\display\\ScrollView.js",
+            "modules": {},
+            "classes": {
+                "ScrollView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\display\\Sprite.js": {
+            "name": "src\\display\\Sprite.js",
+            "modules": {},
+            "classes": {
+                "Sprite": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\display\\Stage.js": {
+            "name": "src\\display\\Stage.js",
+            "modules": {},
+            "classes": {
+                "Stage": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\display\\TextField.js": {
+            "name": "src\\display\\TextField.js",
+            "modules": {},
+            "classes": {
+                "TextField": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\event\\Event.js": {
+            "name": "src\\event\\Event.js",
+            "modules": {},
+            "classes": {
+                "Event": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\event\\EventDispatcher.js": {
+            "name": "src\\event\\EventDispatcher.js",
+            "modules": {},
+            "classes": {
+                "EventDispatcher": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\event\\ResizeEvent.js": {
+            "name": "src\\event\\ResizeEvent.js",
+            "modules": {},
+            "classes": {
+                "ResizeEvent": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\event\\TouchEvent.js": {
+            "name": "src\\event\\TouchEvent.js",
+            "modules": {},
+            "classes": {
+                "TouchEvent": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\math\\Matrix.js": {
+            "name": "src\\math\\Matrix.js",
+            "modules": {},
+            "classes": {
+                "Matrix": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\math\\Vector.js": {
+            "name": "src\\math\\Vector.js",
+            "modules": {},
+            "classes": {
+                "Vector": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\net\\ResourceLoader.js": {
+            "name": "src\\net\\ResourceLoader.js",
+            "modules": {},
+            "classes": {
+                "ResourceLoader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\net\\URLRequest.js": {
+            "name": "src\\net\\URLRequest.js",
+            "modules": {},
+            "classes": {
+                "URLRequest": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\tween\\Ease.js": {
+            "name": "src\\tween\\Ease.js",
+            "modules": {},
+            "classes": {
+                "Ease": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\tween\\Tween.js": {
+            "name": "src\\tween\\Tween.js",
+            "modules": {},
+            "classes": {
+                "Tween": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\util\\lang.js": {
+            "name": "src\\util\\lang.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\go2d.js": {
+            "name": "src\\go2d.js",
+            "modules": {
+                "go2d": 1
+            },
+            "classes": {
+                "go2d": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\intro.js": {
+            "name": "src\\intro.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "go2d": {
+            "name": "go2d",
+            "submodules": {},
+            "classes": {
+                "Class": 1,
+                "Director": 1,
+                "ObjectPool": 1,
+                "DisplayObject": 1,
+                "ImageView": 1,
+                "ScrollView": 1,
+                "Sprite": 1,
+                "Stage": 1,
+                "TextField": 1,
+                "Event": 1,
+                "EventDispatcher": 1,
+                "ResizeEvent": 1,
+                "TouchEvent": 1,
+                "Matrix": 1,
+                "Vector": 1,
+                "ResourceLoader": 1,
+                "URLRequest": 1,
+                "Ease": 1,
+                "Tween": 1,
+                "go2d": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\go2d.js",
+            "line": 1,
+            "description": "Go2d 命名空间",
+            "itemtype": "property",
+            "type": "String"
+        }
+    },
+    "classes": {
+        "Class": {
+            "name": "Class",
+            "shortname": "Class",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\core\\Class.js",
+            "line": 1,
+            "description": "Go2d 的基础类，Go2d 的所有类都继承于该类。",
+            "author": "Lanfei"
+        },
+        "Director": {
+            "name": "Director",
+            "shortname": "Director",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\core\\Director.js",
+            "line": 1,
+            "description": "导演类，负责游戏逻辑流程的管理。",
+            "author": "Lanfei",
+            "extends": "Class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "stage",
+                    "description": "",
+                    "type": "go2d.Stage"
+                },
+                {
+                    "name": "options",
+                    "description": "配置参数",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "frameRate",
+                            "description": "默认帧频",
+                            "type": "Object",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "todo": [
+                "导演类是否单例？"
+            ]
+        },
+        "ObjectPool": {
+            "name": "ObjectPool",
+            "shortname": "ObjectPool",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\core\\ObjectPool.js",
+            "line": 1,
+            "description": "对象池类，一个简单的对象池实现，适用于构造函数无参数的对象。",
+            "author": "Lanfei",
+            "extends": "Class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "factory",
+                    "description": "要进行缓存的类",
+                    "type": "Function"
+                },
+                {
+                    "name": "size",
+                    "description": "对象池的最大容量",
+                    "type": "Number"
+                }
+            ]
+        },
+        "DisplayObject": {
+            "name": "DisplayObject",
+            "shortname": "DisplayObject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\display\\DisplayObject.js",
+            "line": 1,
+            "description": "显示对象基类，实现了显示对象的基本渲染和事件逻辑，显示对象元素类和舞台类都基于此类。",
+            "author": "Lanfei",
+            "extends": "EventDispatcher",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "canvas",
+                    "description": "用于渲染的画布对象",
+                    "type": "Object"
+                }
+            ]
+        },
+        "ImageView": {
+            "name": "ImageView",
+            "shortname": "ImageView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\display\\ImageView.js",
+            "line": 1,
+            "description": "图像显示类，用于显示一张图像。",
+            "author": "Lanfei",
+            "extends": "Sprite",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "image",
+                    "description": "要绘制的图像或画布元素",
+                    "type": "Object"
+                }
+            ]
+        },
+        "ScrollView": {
+            "name": "ScrollView",
+            "shortname": "ScrollView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\display\\ScrollView.js",
+            "line": 1,
+            "description": "滑动视图类，可以在该视图中显示超过视图大小的显示对象，并可以通过滑动来显示内容视图的不同部分。",
+            "author": "Lanfei",
+            "extends": "Sprite",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "content",
+                    "description": "滚动视图的内容对象",
+                    "type": "Sprite"
+                }
+            ]
+        },
+        "Sprite": {
+            "name": "Sprite",
+            "shortname": "Sprite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\display\\Sprite.js",
+            "line": 1,
+            "description": "显示对象元素类，所有舞台上的显示对象都基于此类。",
+            "author": "Lanfei",
+            "extends": "DisplayObject",
+            "is_constructor": 1
+        },
+        "Stage": {
+            "name": "Stage",
+            "shortname": "Stage",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\display\\Stage.js",
+            "line": 1,
+            "description": "舞台类，最顶层的显示对象，游戏内容的主绘图区。",
+            "author": "Lanfei",
+            "extends": "DisplayObject",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "canvas",
+                    "description": "用于渲染的画布对象",
+                    "type": "Object"
+                }
+            ]
+        },
+        "TextField": {
+            "name": "TextField",
+            "shortname": "TextField",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\display\\TextField.js",
+            "line": 1,
+            "description": "文本显示类，用于文本排列和显示。",
+            "author": "Lanfei",
+            "extends": "Sprite",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "text",
+                    "description": "要显示的文本",
+                    "type": "String",
+                    "optional": true
+                }
+            ]
+        },
+        "Event": {
+            "name": "Event",
+            "shortname": "Event",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\event\\Event.js",
+            "line": 1,
+            "description": "事件类，所有事件对象的基类。",
+            "author": "Lanfei",
+            "extends": "Class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "事件类型",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "事件参数",
+                    "type": "Object",
+                    "optional": true
+                }
+            ]
+        },
+        "EventDispatcher": {
+            "name": "EventDispatcher",
+            "shortname": "EventDispatcher",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\event\\EventDispatcher.js",
+            "line": 1,
+            "description": "事件派发器类，负责事件的派发和侦听。",
+            "author": "Lanfei",
+            "extends": "Class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "事件类型",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "事件参数",
+                    "type": "Object",
+                    "optional": true
+                }
+            ]
+        },
+        "ResizeEvent": {
+            "name": "ResizeEvent",
+            "shortname": "ResizeEvent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\event\\ResizeEvent.js",
+            "line": 1,
+            "description": "事件类，所有事件对象的基类。",
+            "author": "Lanfei",
+            "extends": "Event",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "oldSize",
+                    "description": "对象原宽高",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "width",
+                            "description": "对象原宽度",
+                            "type": "Number"
+                        },
+                        {
+                            "name": "height",
+                            "description": "对象原高度",
+                            "type": "Number"
+                        }
+                    ]
+                },
+                {
+                    "name": "newSize",
+                    "description": "对象新宽高",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "width",
+                            "description": "对象新宽度",
+                            "type": "Number"
+                        },
+                        {
+                            "name": "height",
+                            "description": "对象新高度",
+                            "type": "Number"
+                        }
+                    ]
+                }
+            ]
+        },
+        "TouchEvent": {
+            "name": "TouchEvent",
+            "shortname": "TouchEvent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\event\\TouchEvent.js",
+            "line": 1,
+            "description": "触摸事件类",
+            "author": "Lanfei",
+            "extends": "Event",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "type",
+                    "description": "事件类型",
+                    "type": "String"
+                },
+                {
+                    "name": "x",
+                    "description": "事件水平坐标",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "事件垂直坐标",
+                    "type": "Number"
+                },
+                {
+                    "name": "globalX",
+                    "description": "全局水平坐标",
+                    "type": "Number"
+                },
+                {
+                    "name": "globalY",
+                    "description": "全局垂直坐标",
+                    "type": "Number"
+                },
+                {
+                    "name": "identifier",
+                    "description": "触摸对象唯一标识，用于多点触摸识别",
+                    "type": "Number"
+                }
+            ]
+        },
+        "Matrix": {
+            "name": "Matrix",
+            "shortname": "Matrix",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\math\\Matrix.js",
+            "line": 1,
+            "description": "变化矩阵类，实现矩阵基本运算，可表达两个二维向量空间之间的仿射变换。\n<pre><code>\n            |a  b  0|\n(x, y, 1) * |c  d  0| = (ax + cy + tx, bx + dy + ty, 1)\n            |tx ty 1|\n</code></pre>",
+            "author": "Lanfei",
+            "extends": "Class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "a",
+                    "description": "缩放或旋转时水平方向的参数",
+                    "type": "Number"
+                },
+                {
+                    "name": "b",
+                    "description": "旋转或倾斜时垂直方向的参数",
+                    "type": "Number"
+                },
+                {
+                    "name": "c",
+                    "description": "旋转或倾斜时水平方向的参数",
+                    "type": "Number"
+                },
+                {
+                    "name": "d",
+                    "description": "缩放或旋转时垂直方向的参数",
+                    "type": "Number"
+                },
+                {
+                    "name": "tx",
+                    "description": "水平方向的平移距离",
+                    "type": "Number"
+                },
+                {
+                    "name": "ty",
+                    "description": "垂直方向的平移距离",
+                    "type": "Number"
+                }
+            ]
+        },
+        "Vector": {
+            "name": "Vector",
+            "shortname": "Vector",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\math\\Vector.js",
+            "line": 1,
+            "description": "向量类，实现向量基本运算，可表达一个二维坐标。",
+            "author": "Lanfei",
+            "extends": "Class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "x",
+                    "description": "向量水平坐标",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "向量垂直坐标",
+                    "type": "Number"
+                }
+            ]
+        },
+        "ResourceLoader": {
+            "name": "ResourceLoader",
+            "shortname": "ResourceLoader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 1,
+            "description": "资源加载器类，可用于加载和管理游戏资源。",
+            "author": "Lanfei",
+            "extends": "EventDispatcher",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "resources",
+                    "description": "资源路径数据对象，格式如下：",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "配置参数",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "retryTimes",
+                            "description": "失败重试次数",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "3"
+                        }
+                    ]
+                }
+            ],
+            "example": [
+                "\n<pre><code>\nnew ResourceLoader({\n    text: {\n        name1: url1,\n        name2: url2\n        // ...\n    },\n    image: {\n        name1: url1,\n        name2: url2\n        // ...\n    }\n    // ...\n});\n</code></pre>"
+            ]
+        },
+        "URLRequest": {
+            "name": "URLRequest",
+            "shortname": "URLRequest",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\net\\URLRequest.js",
+            "line": 1,
+            "description": "URL 请求类，用于发起 AJAX 请求，并获取返回数据。",
+            "author": "Lanfei",
+            "extends": "EventDispatcher",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "url",
+                    "description": "请求地址",
+                    "type": "Number"
+                },
+                {
+                    "name": "options",
+                    "description": "配置参数",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "type",
+                            "description": "请求类型",
+                            "type": "String",
+                            "optional": true,
+                            "optdefault": "GET"
+                        },
+                        {
+                            "name": "dataType",
+                            "description": "返回数据格式",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "contentType",
+                            "description": "发送数据类型",
+                            "type": "String",
+                            "optional": true,
+                            "optdefault": "application/x-www-form-urlencoded"
+                        },
+                        {
+                            "name": "responseType",
+                            "description": "返回数据类型",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "Ease": {
+            "name": "Ease",
+            "shortname": "Ease",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\tween\\Ease.js",
+            "line": 1,
+            "description": "缓动函数集合，用于实现不同变化速度类型的动画。",
+            "author": "Lanfei",
+            "extends": "Class"
+        },
+        "Tween": {
+            "name": "Tween",
+            "shortname": "Tween",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\tween\\Tween.js",
+            "line": 1,
+            "description": "缓动动画控制类，负责处理显示对象的缓动动画。",
+            "author": "Lanfei",
+            "extends": "Class",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "target",
+                    "description": "动画应用对象",
+                    "type": "go2d.Sprite"
+                },
+                {
+                    "name": "options",
+                    "description": "配置参数",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "loops",
+                            "description": "循环次数，为 0 时无限循环",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "1"
+                        }
+                    ]
+                }
+            ],
+            "todo": [
+                "缓动时间控制应依据全局还是对象？",
+                "代码结构有待整理"
+            ]
+        },
+        "go2d": {
+            "name": "go2d",
+            "shortname": "go2d",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "namespace": "",
+            "file": "src\\go2d.js",
+            "line": 1,
+            "description": "Go2d 命名空间"
+        }
+    },
+    "classitems": [
+        {
+            "file": "src\\core\\Class.js",
+            "line": 8,
+            "description": "创建一个继承于该类的新类",
+            "static": 1,
+            "itemtype": "method",
+            "name": "extend",
+            "params": [
+                {
+                    "name": "props",
+                    "description": "新类的属性或方法",
+                    "type": "Object"
+                },
+                {
+                    "name": "statics",
+                    "description": "新类的静态属性或方法",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "新类的构造函数",
+                "type": "Function"
+            },
+            "class": "Class"
+        },
+        {
+            "file": "src\\core\\Director.js",
+            "line": 17,
+            "description": "当前帧频",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "fps",
+            "type": "number",
+            "class": "Director"
+        },
+        {
+            "file": "src\\core\\Director.js",
+            "line": 25,
+            "description": "默认帧频",
+            "itemtype": "property",
+            "name": "frameRate",
+            "type": "number",
+            "default": "60",
+            "class": "Director"
+        },
+        {
+            "file": "src\\core\\Director.js",
+            "line": 33,
+            "description": "舞台对象",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_stage",
+            "type": "Stage",
+            "class": "Director"
+        },
+        {
+            "file": "src\\core\\Director.js",
+            "line": 41,
+            "description": "是否已暂停",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_paused",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Director"
+        },
+        {
+            "file": "src\\core\\Director.js",
+            "line": 50,
+            "description": "主循环定时器",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_timer",
+            "type": "Object",
+            "class": "Director"
+        },
+        {
+            "file": "src\\core\\Director.js",
+            "line": 58,
+            "description": "上一帧时间戳，用于计算帧频",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_prevTime",
+            "type": "number",
+            "class": "Director"
+        },
+        {
+            "file": "src\\core\\Director.js",
+            "line": 124,
+            "description": "游戏主循环",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_mainLoop",
+            "class": "Director"
+        },
+        {
+            "file": "src\\core\\Director.js",
+            "line": 141,
+            "description": "开始游戏主循环",
+            "itemtype": "method",
+            "name": "play",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Director"
+        },
+        {
+            "file": "src\\core\\Director.js",
+            "line": 155,
+            "description": "暂停游戏主循环",
+            "itemtype": "method",
+            "name": "pause",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Director"
+        },
+        {
+            "file": "src\\core\\ObjectPool.js",
+            "line": 14,
+            "description": "已缓存的对象数组",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_pool",
+            "type": "Array",
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\core\\ObjectPool.js",
+            "line": 22,
+            "description": "要进行缓存的类",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_factory",
+            "type": "function",
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\core\\ObjectPool.js",
+            "line": 30,
+            "description": "对象池的最大容量",
+            "itemtype": "property",
+            "name": "size",
+            "type": "number",
+            "default": "30",
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\core\\ObjectPool.js",
+            "line": 38,
+            "description": "已缓存的对象数量",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "length",
+            "type": "number",
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\core\\ObjectPool.js",
+            "line": 51,
+            "description": "创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_create",
+            "return": {
+                "description": "新的对象",
+                "type": "Mixed"
+            },
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\core\\ObjectPool.js",
+            "line": 60,
+            "description": "初始化对象，可以重载该方法，以初始化从对象池中获取到的对象",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_initialize",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "要重置的对象",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "重置后的对象",
+                "type": "Mixed"
+            },
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\core\\ObjectPool.js",
+            "line": 70,
+            "description": "获取一个对象",
+            "itemtype": "method",
+            "name": "get",
+            "return": {
+                "description": "取出的对象",
+                "type": "Mixed"
+            },
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\core\\ObjectPool.js",
+            "line": 84,
+            "description": "回收一个对象",
+            "itemtype": "method",
+            "name": "recycle",
+            "params": [
+                {
+                    "name": "要回收的对象",
+                    "description": "",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\core\\ObjectPool.js",
+            "line": 97,
+            "description": "清空对象池",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\core\\ObjectPool.js",
+            "line": 106,
+            "description": "释放对象池内存",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "ObjectPool"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 14,
+            "description": "用于渲染的画布对象",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "canvas",
+            "type": "object",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 22,
+            "description": "画布的上下文对象",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "context",
+            "type": "object",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 30,
+            "description": "用于标识该对象的名字，该属性在兄弟对象中应该唯一",
+            "itemtype": "property",
+            "name": "name",
+            "type": "string",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 37,
+            "description": "用于标识该对象的标签",
+            "itemtype": "property",
+            "name": "tag",
+            "type": "string",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 44,
+            "description": "该对象所属的舞台对象",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "stage",
+            "type": "Stage",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 52,
+            "description": "是否已暂停",
+            "itemtype": "property",
+            "name": "paused",
+            "type": "Boolean",
+            "default": "false",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 60,
+            "description": "是否可点击",
+            "itemtype": "property",
+            "name": "touchable",
+            "type": "Boolean",
+            "default": "true",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 68,
+            "description": "子节点是否可点击",
+            "itemtype": "property",
+            "name": "touchChildren",
+            "type": "Boolean",
+            "default": "true",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 76,
+            "description": "是否需要重新渲染",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_dirty",
+            "type": "Boolean",
+            "default": "true",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 85,
+            "description": "触摸标识数组",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_touches",
+            "type": "Array",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 93,
+            "description": "子对象数组",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_children",
+            "type": "Array",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 101,
+            "description": "遮罩层",
+            "itemtype": "property",
+            "name": "mask",
+            "type": "Sprite",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 110,
+            "description": "不透明度",
+            "itemtype": "property",
+            "name": "opacity",
+            "type": "number",
+            "default": "1",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 118,
+            "description": "背景颜色或样式",
+            "itemtype": "property",
+            "name": "background",
+            "type": "null|string|Object",
+            "default": "null",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 140,
+            "description": "宽度",
+            "itemtype": "property",
+            "name": "width",
+            "type": "number",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 154,
+            "description": "高度",
+            "itemtype": "property",
+            "name": "height",
+            "type": "number",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 188,
+            "description": "触摸开始事件",
+            "itemtype": "event",
+            "name": "touchstart",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "触摸事件对象",
+                    "type": "go2d.TouchEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 199,
+            "description": "触摸移动事件",
+            "itemtype": "event",
+            "name": "touchmove",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "触摸事件对象",
+                    "type": "go2d.TouchEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 209,
+            "description": "触摸结束事件",
+            "itemtype": "event",
+            "name": "touchend",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "触摸事件对象",
+                    "type": "go2d.TouchEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 220,
+            "description": "触摸点击事件",
+            "itemtype": "event",
+            "name": "touchtap",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "触摸事件对象",
+                    "type": "go2d.TouchEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 246,
+            "description": "添加到舞台事件",
+            "itemtype": "event",
+            "name": "addedtostage",
+            "params": [
+                {
+                    "name": "stage",
+                    "description": "舞台对象",
+                    "type": "go2d.Stage"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 258,
+            "description": "移除出舞台事件",
+            "itemtype": "event",
+            "name": "removedfromstage",
+            "params": [
+                {
+                    "name": "stage",
+                    "description": "舞台对象",
+                    "type": "go2d.Stage"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 282,
+            "description": "宽高变化事件",
+            "itemtype": "event",
+            "name": "resize",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "宽高变化事件对象",
+                    "type": "go2d.ResizeEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 294,
+            "description": "绘制子对象",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_draw",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "要绘制的对象",
+                    "type": "go2d.Sprite"
+                },
+                {
+                    "name": "blendMode",
+                    "description": "混合模式",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 319,
+            "description": "渲染该对象",
+            "itemtype": "method",
+            "name": "render",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 338,
+            "description": "开始渲染事件",
+            "itemtype": "event",
+            "name": "render",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "事件对象",
+                    "type": "go2d.Event"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 354,
+            "description": "绘制完毕事件",
+            "itemtype": "event",
+            "name": "paint",
+            "params": [
+                {
+                    "name": "context",
+                    "description": "绘制上下文对象",
+                    "type": "Object"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 364,
+            "description": "更新对象渲染状态，当该对象需要重新渲染时调用",
+            "itemtype": "method",
+            "name": "update",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 380,
+            "description": "添加子对象",
+            "itemtype": "method",
+            "name": "addChild",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "要添加的子对象",
+                    "type": "go2d.DisplayObject"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 390,
+            "description": "在指定深度添加子对象",
+            "itemtype": "method",
+            "name": "addChildAt",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "要添加的子对象",
+                    "type": "go2d.DisplayObject"
+                },
+                {
+                    "name": "index",
+                    "description": "深度，数值越小层级越低",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 417,
+            "description": "获取指定名字的子对象",
+            "itemtype": "method",
+            "name": "getChildByName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "子对象名字",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "对应的子对象",
+                "type": "go2d.DisplayObject"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 433,
+            "description": "获取指定标签的子对象",
+            "itemtype": "method",
+            "name": "getChildrenByTag",
+            "params": [
+                {
+                    "name": "tag",
+                    "description": "子对象标签",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "对应的子对象数组",
+                "type": "Array"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 448,
+            "description": "获取指定深度的子对象",
+            "itemtype": "method",
+            "name": "getChildAt",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "子对象深度",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "对应的子对象",
+                "type": "go2d.DisplayObject"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 457,
+            "description": "获取指定子对象的深度",
+            "itemtype": "method",
+            "name": "getChildIndex",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "对应的子对象",
+                    "type": "go2d.DisplayObject"
+                }
+            ],
+            "return": {
+                "description": "子对象深度",
+                "type": "Number"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 472,
+            "description": "交换两个子对象的深度",
+            "itemtype": "method",
+            "name": "swapChildren",
+            "params": [
+                {
+                    "name": "child1",
+                    "description": "要交换的子对象一",
+                    "type": "go2d.DisplayObject"
+                },
+                {
+                    "name": "child2",
+                    "description": "要交换的子对象二",
+                    "type": "go2d.DisplayObject"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 487,
+            "description": "交换两个子对象的深度",
+            "itemtype": "method",
+            "name": "swapChildrenAt",
+            "params": [
+                {
+                    "name": "index1",
+                    "description": "要交换的子对象深度一",
+                    "type": "Number"
+                },
+                {
+                    "name": "index2",
+                    "description": "要交换的子对象深度二",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 506,
+            "description": "排列子对象",
+            "itemtype": "method",
+            "name": "sortChildren",
+            "params": [
+                {
+                    "name": "compare",
+                    "description": "用于比较的函数",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 516,
+            "description": "获取所有子对象",
+            "itemtype": "method",
+            "name": "getAllChildren",
+            "return": {
+                "description": "所有子对象数组",
+                "type": "Array"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 524,
+            "description": "移除指定的子对象",
+            "itemtype": "method",
+            "name": "removeChild",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "对应的子对象",
+                    "type": "go2d.DisplayObject"
+                },
+                {
+                    "name": "cleanup",
+                    "description": "是否销毁子对象",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 540,
+            "description": "移除指定深度的子对象",
+            "itemtype": "method",
+            "name": "removeChildAt",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "子对象的深度",
+                    "type": "Number"
+                },
+                {
+                    "name": "cleanup",
+                    "description": "是否销毁子对象",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 562,
+            "description": "移除指定名字的子对象",
+            "itemtype": "method",
+            "name": "removeChildrenByName",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "子对象的名字",
+                    "type": "String"
+                },
+                {
+                    "name": "cleanup",
+                    "description": "是否销毁子对象",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 579,
+            "description": "移除指定标签的子对象",
+            "itemtype": "method",
+            "name": "removeChildrenByTag",
+            "params": [
+                {
+                    "name": "tag",
+                    "description": "子对象的标签",
+                    "type": "String"
+                },
+                {
+                    "name": "cleanup",
+                    "description": "是否销毁子对象",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 595,
+            "description": "移除所有子对象",
+            "itemtype": "method",
+            "name": "removeAllChildren",
+            "params": [
+                {
+                    "name": "cleanup",
+                    "description": "是否销毁子对象",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 615,
+            "description": "设置遮罩对象",
+            "itemtype": "method",
+            "name": "setMask",
+            "params": [
+                {
+                    "name": "mask",
+                    "description": "遮罩对象",
+                    "type": "go2d.Sprite"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 640,
+            "description": "获取遮罩对象",
+            "itemtype": "method",
+            "name": "getMask",
+            "return": {
+                "description": "",
+                "type": "go2d.Sprite"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 648,
+            "description": "移除遮罩对象",
+            "itemtype": "method",
+            "name": "removeMask",
+            "params": [
+                {
+                    "name": "cleanup",
+                    "description": "是否销毁遮罩对象",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 663,
+            "description": "开始该对象的帧播放",
+            "itemtype": "method",
+            "name": "play",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 672,
+            "description": "暂停该对象的帧播放",
+            "itemtype": "method",
+            "name": "pause",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 681,
+            "description": "进入下一帧，该方法应只由引擎本身调用",
+            "itemtype": "method",
+            "name": "tick",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 691,
+            "description": "步进（进入下一帧）事件",
+            "itemtype": "event",
+            "name": "step",
+            "params": [
+                {
+                    "name": "deltaTime",
+                    "description": "两帧时间差",
+                    "type": "Number"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 700,
+            "description": "释放对象内存",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\ImageView.js",
+            "line": 14,
+            "description": "要绘制的图像或画布元素",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_image",
+            "type": "object",
+            "class": "ImageView"
+        },
+        {
+            "file": "src\\display\\ImageView.js",
+            "line": 31,
+            "description": "设置要绘制的图像或画布元素",
+            "itemtype": "method",
+            "name": "setImage",
+            "params": [
+                {
+                    "name": "image",
+                    "description": "要绘制的图像或画布元素",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ImageView"
+        },
+        {
+            "file": "src\\display\\ScrollView.js",
+            "line": 15,
+            "description": "内容对象",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_content",
+            "type": "Sprite",
+            "class": "ScrollView"
+        },
+        {
+            "file": "src\\display\\ScrollView.js",
+            "line": 30,
+            "description": "纵向滑动距离",
+            "itemtype": "property",
+            "name": "scrollTop",
+            "type": "number",
+            "default": "0",
+            "class": "ScrollView"
+        },
+        {
+            "file": "src\\display\\ScrollView.js",
+            "line": 45,
+            "description": "横向滑动距离",
+            "itemtype": "property",
+            "name": "scrollLeft",
+            "type": "number",
+            "default": "0",
+            "class": "ScrollView"
+        },
+        {
+            "file": "src\\display\\ScrollView.js",
+            "line": 114,
+            "description": "触摸移动事件",
+            "itemtype": "event",
+            "name": "scroll",
+            "class": "ScrollView"
+        },
+        {
+            "file": "src\\display\\ScrollView.js",
+            "line": 151,
+            "description": "设置滚动视图的内容对象",
+            "itemtype": "method",
+            "name": "setContent",
+            "params": [
+                {
+                    "name": "content",
+                    "description": "滚动视图的内容对象",
+                    "type": "Sprite"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ScrollView"
+        },
+        {
+            "file": "src\\display\\ScrollView.js",
+            "line": 164,
+            "description": "获取滚动视图的内容对象",
+            "itemtype": "method",
+            "name": "getContent",
+            "return": {
+                "description": "content 滚动视图的内容对象",
+                "type": "Sprite"
+            },
+            "class": "ScrollView"
+        },
+        {
+            "file": "src\\display\\ScrollView.js",
+            "line": 172,
+            "description": "移除滚动视图的内容对象",
+            "itemtype": "method",
+            "name": "removeContent",
+            "params": [
+                {
+                    "name": "cleanup",
+                    "description": "是否销毁内容对象",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ScrollView"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 13,
+            "description": "父对象",
+            "itemtype": "property",
+            "name": "parent",
+            "type": "DisplayObject",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 22,
+            "description": "水平坐标",
+            "itemtype": "property",
+            "name": "x",
+            "type": "number",
+            "default": "0",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 30,
+            "description": "垂直坐标",
+            "itemtype": "property",
+            "name": "y",
+            "type": "number",
+            "default": "0",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 38,
+            "description": "水平方向斜切",
+            "itemtype": "property",
+            "name": "skewX",
+            "type": "number",
+            "default": "0",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 46,
+            "description": "垂直方向斜切",
+            "itemtype": "property",
+            "name": "skewY",
+            "type": "number",
+            "default": "0",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 54,
+            "description": "水平方向缩放",
+            "itemtype": "property",
+            "name": "scaleX",
+            "type": "number",
+            "default": "1",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 62,
+            "description": "垂直方向缩放",
+            "itemtype": "property",
+            "name": "scaleY",
+            "type": "number",
+            "default": "1",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 70,
+            "description": "水平方向锚点偏移比例",
+            "itemtype": "property",
+            "name": "anchorX",
+            "type": "number",
+            "default": "0",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 78,
+            "description": "垂直方向锚点偏移比例",
+            "itemtype": "property",
+            "name": "anchorY",
+            "type": "number",
+            "default": "0",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 86,
+            "description": "水平方向锚点偏移像素",
+            "itemtype": "property",
+            "name": "anchorOffsetX",
+            "type": "number",
+            "default": "0",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 94,
+            "description": "垂直方向锚点偏移像素",
+            "itemtype": "property",
+            "name": "anchorOffsetY",
+            "type": "number",
+            "default": "0",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 102,
+            "description": "旋转角度",
+            "itemtype": "property",
+            "name": "rotation",
+            "type": "number",
+            "default": "0",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 110,
+            "description": "是否可见",
+            "itemtype": "property",
+            "name": "visible",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 118,
+            "description": "混合模式",
+            "itemtype": "property",
+            "name": "blendMode",
+            "type": "string",
+            "default": "source-over",
+            "todo": [
+                "应有一个 BlendMode 类"
+            ],
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 140,
+            "description": "获取变化矩阵",
+            "itemtype": "method",
+            "name": "getTransform",
+            "return": {
+                "description": "",
+                "type": "go2d.Matrix"
+            },
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 154,
+            "description": "显示该对象",
+            "itemtype": "method",
+            "name": "show",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\Sprite.js",
+            "line": 163,
+            "description": "隐藏该对象",
+            "itemtype": "method",
+            "name": "hide",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Sprite"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 17,
+            "description": "是否粗体",
+            "itemtype": "property",
+            "name": "bold",
+            "type": "Boolean",
+            "default": "false",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 25,
+            "description": "是否斜体",
+            "itemtype": "property",
+            "name": "italic",
+            "type": "Boolean",
+            "default": "false",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 33,
+            "description": "字体大小",
+            "itemtype": "property",
+            "name": "fontSize",
+            "type": "number",
+            "default": "24",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 41,
+            "description": "字体颜色或样式",
+            "itemtype": "property",
+            "name": "color",
+            "type": "string",
+            "default": "black |Object",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 49,
+            "description": "对齐方式",
+            "itemtype": "property",
+            "name": "textAlign",
+            "type": "string",
+            "default": "left",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 57,
+            "description": "行高，可为百分比",
+            "itemtype": "property",
+            "name": "lineHeight",
+            "type": "number",
+            "default": "120% |string",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 65,
+            "description": "描边大小",
+            "itemtype": "property",
+            "name": "strokeSize",
+            "type": "number",
+            "default": "0",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 73,
+            "description": "描边颜色或样式",
+            "itemtype": "property",
+            "name": "strokeColor",
+            "type": "string",
+            "default": "null |Object",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 81,
+            "description": "文本字体",
+            "itemtype": "property",
+            "name": "fontFamily",
+            "type": "string",
+            "default": "Arial",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 89,
+            "description": "是否允许在单词内部换行",
+            "itemtype": "property",
+            "name": "breakWord",
+            "type": "Boolean",
+            "default": "false",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 97,
+            "description": "是否自动调整宽高",
+            "itemtype": "property",
+            "name": "autoResize",
+            "type": "Boolean",
+            "default": "false",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 105,
+            "description": "顶部内边距",
+            "itemtype": "property",
+            "name": "paddingTop",
+            "type": "number",
+            "default": "0",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 113,
+            "description": "左部内边距",
+            "itemtype": "property",
+            "name": "paddingLeft",
+            "type": "number",
+            "default": "0",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 121,
+            "description": "右部内边距",
+            "itemtype": "property",
+            "name": "paddingRight",
+            "type": "number",
+            "default": "0",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 129,
+            "description": "底部内边距",
+            "itemtype": "property",
+            "name": "paddingBottom",
+            "type": "number",
+            "default": "0",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 137,
+            "description": "自动调整宽高时的最大宽度",
+            "itemtype": "property",
+            "name": "maxWidth",
+            "type": "number",
+            "default": "0xffffff",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 145,
+            "description": "自动调整宽高时的最大高度",
+            "itemtype": "property",
+            "name": "maxHeight",
+            "type": "number",
+            "default": "0xffffff",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 169,
+            "description": "文字渲染的宽高",
+            "itemtype": "property",
+            "name": "textRange",
+            "type": "number",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 181,
+            "description": "文字渲染的宽度",
+            "itemtype": "property",
+            "name": "textWidth",
+            "type": "number",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 193,
+            "description": "文字渲染的高度",
+            "itemtype": "property",
+            "name": "textHeight",
+            "type": "number",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 205,
+            "description": "要显示的文字",
+            "itemtype": "property",
+            "name": "text",
+            "type": "string",
+            "class": "TextField"
+        },
+        {
+            "file": "src\\display\\TextField.js",
+            "line": 353,
+            "description": "设置要显示的文字",
+            "itemtype": "method",
+            "name": "setText",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "TextField"
+        },
+        {
+            "file": "src\\event\\Event.js",
+            "line": 17,
+            "description": "事件类型",
+            "itemtype": "property",
+            "name": "type",
+            "type": "string",
+            "class": "Event"
+        },
+        {
+            "file": "src\\event\\Event.js",
+            "line": 24,
+            "description": "是否已停止冒泡",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_propagationStopped",
+            "type": "Boolean",
+            "class": "Event"
+        },
+        {
+            "file": "src\\event\\Event.js",
+            "line": 32,
+            "description": "是否已阻止默认事件",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_defaultPrevented",
+            "type": "Boolean",
+            "class": "Event"
+        },
+        {
+            "file": "src\\event\\Event.js",
+            "line": 40,
+            "description": "停止冒泡",
+            "itemtype": "method",
+            "name": "stopPropagation",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Event"
+        },
+        {
+            "file": "src\\event\\Event.js",
+            "line": 49,
+            "description": "获取是否已停止冒泡",
+            "itemtype": "method",
+            "name": "isPropagationStopped",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Event"
+        },
+        {
+            "file": "src\\event\\Event.js",
+            "line": 57,
+            "description": "阻止默认事件",
+            "itemtype": "method",
+            "name": "preventDefault",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Event"
+        },
+        {
+            "file": "src\\event\\Event.js",
+            "line": 66,
+            "description": "获取是否已阻止默认事件",
+            "itemtype": "method",
+            "name": "isDefaultPrevented",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Event"
+        },
+        {
+            "file": "src\\event\\EventDispatcher.js",
+            "line": 13,
+            "description": "侦听器哈希表",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "__events",
+            "type": "Object",
+            "class": "EventDispatcher"
+        },
+        {
+            "file": "src\\event\\EventDispatcher.js",
+            "line": 21,
+            "description": "添加事件侦听器",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "事件名称",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "EventDispatcher"
+        },
+        {
+            "file": "src\\event\\EventDispatcher.js",
+            "line": 28,
+            "description": "批量添加事件侦听器",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "listeners",
+                    "description": "以事件名称为键名，回调函数为键值的哈希表",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "EventDispatcher"
+        },
+        {
+            "file": "src\\event\\EventDispatcher.js",
+            "line": 47,
+            "description": "移除事件侦听器",
+            "itemtype": "method",
+            "name": "off",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "事件名称",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数，当该参数为空时将移除该事件的所有回调",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "EventDispatcher"
+        },
+        {
+            "file": "src\\event\\EventDispatcher.js",
+            "line": 69,
+            "description": "通过事件对象派发事件",
+            "itemtype": "method",
+            "name": "emit",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "事件名称",
+                    "type": "String"
+                },
+                {
+                    "name": "event",
+                    "description": "事件对象",
+                    "type": "go2d.Event",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "EventDispatcher"
+        },
+        {
+            "file": "src\\event\\EventDispatcher.js",
+            "line": 76,
+            "description": "通过任意事件参数派发事件",
+            "itemtype": "method",
+            "name": "emit",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "事件名称",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "事件参数",
+                    "type": "...*",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "EventDispatcher"
+        },
+        {
+            "file": "src\\event\\EventDispatcher.js",
+            "line": 98,
+            "description": "释放事件派发器内存",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "EventDispatcher"
+        },
+        {
+            "file": "src\\event\\ResizeEvent.js",
+            "line": 19,
+            "description": "对象原宽高",
+            "itemtype": "property",
+            "name": "{number} width 对象原宽度",
+            "type": "Object",
+            "class": "ResizeEvent",
+            "subprops": [
+                {
+                    "name": "height",
+                    "description": "对象原高度",
+                    "type": "Number"
+                }
+            ]
+        },
+        {
+            "file": "src\\event\\ResizeEvent.js",
+            "line": 28,
+            "description": "对象新宽高",
+            "itemtype": "property",
+            "name": "{number} width 对象新宽度",
+            "type": "Object",
+            "class": "ResizeEvent",
+            "subprops": [
+                {
+                    "name": "height",
+                    "description": "对象新高度",
+                    "type": "Number"
+                }
+            ]
+        },
+        {
+            "file": "src\\event\\TouchEvent.js",
+            "line": 19,
+            "description": "事件水平坐标",
+            "itemtype": "property",
+            "name": "x",
+            "type": "number",
+            "class": "TouchEvent"
+        },
+        {
+            "file": "src\\event\\TouchEvent.js",
+            "line": 26,
+            "description": "事件垂直坐标",
+            "itemtype": "property",
+            "name": "y",
+            "type": "number",
+            "class": "TouchEvent"
+        },
+        {
+            "file": "src\\event\\TouchEvent.js",
+            "line": 33,
+            "description": "全局水平坐标",
+            "itemtype": "property",
+            "name": "globalX",
+            "type": "number",
+            "class": "TouchEvent"
+        },
+        {
+            "file": "src\\event\\TouchEvent.js",
+            "line": 40,
+            "description": "全局垂直坐标",
+            "itemtype": "property",
+            "name": "globalY",
+            "type": "number",
+            "class": "TouchEvent"
+        },
+        {
+            "file": "src\\event\\TouchEvent.js",
+            "line": 47,
+            "description": "触摸对象唯一标识，用于多点触摸识别",
+            "itemtype": "property",
+            "name": "identifier",
+            "type": "number",
+            "class": "TouchEvent"
+        },
+        {
+            "file": "src\\event\\TouchEvent.js",
+            "line": 56,
+            "description": "触摸开始事件",
+            "static": 1,
+            "final": 1,
+            "itemtype": "property",
+            "name": "TOUCH_START",
+            "type": "{string}",
+            "default": "touchstart",
+            "class": "TouchEvent"
+        },
+        {
+            "file": "src\\event\\TouchEvent.js",
+            "line": 65,
+            "description": "触摸移动事件",
+            "static": 1,
+            "final": 1,
+            "itemtype": "property",
+            "name": "TOUCH_MOVE",
+            "type": "{string}",
+            "default": "touchmove",
+            "class": "TouchEvent"
+        },
+        {
+            "file": "src\\event\\TouchEvent.js",
+            "line": 74,
+            "description": "触摸结束事件",
+            "static": 1,
+            "final": 1,
+            "itemtype": "property",
+            "name": "TOUCH_END",
+            "type": "{string}",
+            "default": "touchend",
+            "class": "TouchEvent"
+        },
+        {
+            "file": "src\\event\\TouchEvent.js",
+            "line": 83,
+            "description": "触摸点击事件",
+            "static": 1,
+            "final": 1,
+            "itemtype": "property",
+            "name": "TOUCH_TAP",
+            "type": "{string}",
+            "default": "touchtap",
+            "class": "TouchEvent"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 24,
+            "description": "设置矩阵属性值，参数同构造函数",
+            "itemtype": "method",
+            "name": "set",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 32,
+            "description": "缩放或旋转时水平方向的参数",
+            "itemtype": "property",
+            "name": "a",
+            "type": "{number}",
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 39,
+            "description": "旋转或倾斜时垂直方向的参数",
+            "itemtype": "property",
+            "name": "b",
+            "type": "{number}",
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 46,
+            "description": "旋转或倾斜时水平方向的参数",
+            "itemtype": "property",
+            "name": "c",
+            "type": "{number}",
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 53,
+            "description": "缩放或旋转时垂直方向的参数",
+            "itemtype": "property",
+            "name": "d",
+            "type": "{number}",
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 60,
+            "description": "水平方向的平移距离",
+            "itemtype": "property",
+            "name": "tx",
+            "type": "{number}",
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 67,
+            "description": "垂直方向的平移距离",
+            "itemtype": "property",
+            "name": "ty",
+            "type": "{number}",
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 80,
+            "description": "设置当前矩阵为单位矩阵",
+            "itemtype": "method",
+            "name": "identity",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 88,
+            "description": "执行当前矩阵的逆转换",
+            "itemtype": "method",
+            "name": "invert",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 109,
+            "description": "前置相乘",
+            "params": [
+                {
+                    "name": "matrix",
+                    "description": "前置矩阵",
+                    "type": "go2d.Matrix"
+                }
+            ],
+            "itemtype": "method",
+            "name": "prepend",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 133,
+            "description": "后置相乘",
+            "params": [
+                {
+                    "name": "matrix",
+                    "description": "后置矩阵",
+                    "type": "go2d.Matrix"
+                }
+            ],
+            "itemtype": "method",
+            "name": "append",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 157,
+            "description": "将变换矩阵乘以向量",
+            "itemtype": "method",
+            "name": "multiply",
+            "params": [
+                {
+                    "name": "vector",
+                    "description": "变换前的向量",
+                    "type": "go2d.Vector"
+                }
+            ],
+            "return": {
+                "description": "变换后的向量",
+                "type": "go2d.Vector"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 168,
+            "description": "缩放",
+            "itemtype": "method",
+            "name": "scale",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "水平方向的缩放比例",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "垂直方向的缩放比例",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 178,
+            "description": "旋转",
+            "itemtype": "method",
+            "name": "rotate",
+            "params": [
+                {
+                    "name": "angle",
+                    "description": "旋转的角度（弧度制）",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 189,
+            "description": "斜切",
+            "itemtype": "method",
+            "name": "skew",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "水平方向的斜切角度（弧度制）",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "垂直方向的斜切角度（弧度制）",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 199,
+            "description": "平移",
+            "itemtype": "method",
+            "name": "translate",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "水平方向的平移像素",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "垂直方向的平移像素",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 209,
+            "description": "创建当前矩阵的克隆对象",
+            "itemtype": "method",
+            "name": "clone",
+            "return": {
+                "description": "当前矩阵的克隆对象",
+                "type": "go2d.Matrix"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 218,
+            "description": "角度制、弧度制换算比例",
+            "itemtype": "property",
+            "name": "DEG_TO_RAD",
+            "type": "{number}",
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 15,
+            "description": "向量长度",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "length",
+            "type": "{number}",
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 28,
+            "description": "设置向量属性值，参数同构造函数",
+            "itemtype": "method",
+            "name": "set",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 38,
+            "description": "向量水平坐标",
+            "itemtype": "property",
+            "name": "x",
+            "type": "{number}",
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 45,
+            "description": "向量垂直坐标",
+            "itemtype": "property",
+            "name": "y",
+            "type": "{number}",
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 54,
+            "description": "向量加法",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "vector",
+                    "description": "要相加的向量",
+                    "type": "go2d.Vector"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 65,
+            "description": "向量减法",
+            "itemtype": "method",
+            "name": "subtract",
+            "params": [
+                {
+                    "name": "vector",
+                    "description": "要相减的向量",
+                    "type": "go2d.Vector"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 76,
+            "description": "向量除法",
+            "itemtype": "method",
+            "name": "divide",
+            "params": [
+                {
+                    "name": "vector",
+                    "description": "要除以的向量",
+                    "type": "go2d.Vector"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 87,
+            "description": "向量点乘",
+            "itemtype": "method",
+            "name": "dotProduct",
+            "params": [
+                {
+                    "name": "vector",
+                    "description": "要点乘的向量",
+                    "type": "go2d.Vector"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 96,
+            "description": "求单位向量",
+            "itemtype": "method",
+            "name": "normalize",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 107,
+            "description": "向量缩放",
+            "itemtype": "method",
+            "name": "scale",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "水平方向缩放比例",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "垂直方向缩放比例",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 119,
+            "description": "向量缩放",
+            "itemtype": "method",
+            "name": "rotate",
+            "params": [
+                {
+                    "name": "angle",
+                    "description": "旋转的角度（弧度制）",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 132,
+            "description": "求向量与水平方向的夹角",
+            "itemtype": "method",
+            "name": "angle",
+            "return": {
+                "description": "向量与水平方向的夹角（弧度制）",
+                "type": "Number"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 140,
+            "description": "求与另一个向量之间的距离",
+            "itemtype": "method",
+            "name": "distance",
+            "params": [
+                {
+                    "name": "vector",
+                    "description": "要求距离的向量",
+                    "type": "go2d.Vector"
+                }
+            ],
+            "return": {
+                "description": "两向量之间的距离",
+                "type": "Number"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 149,
+            "description": "创建当前向量的克隆对象",
+            "itemtype": "method",
+            "name": "clone",
+            "return": {
+                "description": "当前向量的克隆对象",
+                "type": "go2d.Vector"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 33,
+            "description": "缓存的资源对象",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_cache",
+            "type": "{Object}",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 41,
+            "description": "资源路径数据对象",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_resources",
+            "type": "{Object}",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 49,
+            "description": "资源总数",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "total",
+            "type": "{number}",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 57,
+            "description": "加载失败资源数量",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "errorCount",
+            "type": "{number}",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 65,
+            "description": "加载完成资源数量",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "loadedCount",
+            "type": "{number}",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 73,
+            "description": "失败重试次数",
+            "itemtype": "property",
+            "name": "retryTimes",
+            "type": "{number}",
+            "default": "3",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 158,
+            "description": "加载进度事件",
+            "itemtype": "event",
+            "name": "progress",
+            "params": [
+                {
+                    "name": "loadedCount",
+                    "description": "已加载数量",
+                    "type": "Number"
+                },
+                {
+                    "name": "total",
+                    "description": "总数量",
+                    "type": "Number"
+                }
+            ],
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 169,
+            "description": "加载错误事件",
+            "itemtype": "event",
+            "name": "error",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "加载出错资源名称",
+                    "type": "String"
+                }
+            ],
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 179,
+            "description": "加载完全事件",
+            "itemtype": "event",
+            "name": "complete",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 186,
+            "description": "加载完毕事件",
+            "itemtype": "event",
+            "name": "finish",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 193,
+            "description": "开始加载资源",
+            "itemtype": "method",
+            "name": "load",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 209,
+            "description": "获取资源对象",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "资源类型",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "对应的资源对象",
+                "type": "Object"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 221,
+            "description": "获取 XML 资源",
+            "itemtype": "method",
+            "name": "getXML",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "对应的资源对象",
+                "type": "Object"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 230,
+            "description": "获取 JSON 资源",
+            "itemtype": "method",
+            "name": "getJSON",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "对应的资源对象",
+                "type": "Object"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 239,
+            "description": "获取文本资源",
+            "itemtype": "method",
+            "name": "getText",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "对应的资源对象",
+                "type": "Object"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 248,
+            "description": "获取图像资源",
+            "itemtype": "method",
+            "name": "getImage",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "对应的资源对象",
+                "type": "Object"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 257,
+            "description": "获取音频资源",
+            "itemtype": "method",
+            "name": "getAudio",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "对应的资源对象",
+                "type": "Object"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 266,
+            "description": "获取二进制资源",
+            "itemtype": "method",
+            "name": "getBinary",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "对应的资源对象",
+                "type": "Object"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 275,
+            "description": "移除资源",
+            "itemtype": "method",
+            "name": "destroy",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "资源类型，为空时移除所有资源",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "name",
+                    "description": "资源名称，为空时移除所有指定类型资源",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 292,
+            "description": "移除 XML 资源",
+            "itemtype": "method",
+            "name": "destroyXML",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 301,
+            "description": "移除 JSON 资源",
+            "itemtype": "method",
+            "name": "destroyJSON",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 310,
+            "description": "移除文本资源",
+            "itemtype": "method",
+            "name": "destroyText",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 319,
+            "description": "移除图像资源",
+            "itemtype": "method",
+            "name": "destroyImage",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 328,
+            "description": "移除音频资源",
+            "itemtype": "method",
+            "name": "destroyAudio",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 337,
+            "description": "移除二进制资源",
+            "itemtype": "method",
+            "name": "destroyBinary",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "资源名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 346,
+            "description": "移除所有资源",
+            "itemtype": "method",
+            "name": "destroyAll",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 355,
+            "description": "释放加载器内存",
+            "itemtype": "method",
+            "name": "dispose",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 365,
+            "description": "XML 数据",
+            "static": 1,
+            "final": 1,
+            "itemtype": "property",
+            "name": "TYPE_XML",
+            "type": "{string}",
+            "default": "xml",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 375,
+            "description": "JSON 数据",
+            "static": 1,
+            "final": 1,
+            "itemtype": "property",
+            "name": "TYPE_JSON",
+            "type": "{string}",
+            "default": "json",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 385,
+            "description": "文本数据",
+            "static": 1,
+            "final": 1,
+            "itemtype": "property",
+            "name": "TYPE_TEXT",
+            "type": "{string}",
+            "default": "text",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 395,
+            "description": "图像",
+            "static": 1,
+            "final": 1,
+            "itemtype": "property",
+            "name": "TYPE_IMAGE",
+            "type": "{string}",
+            "default": "image",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 405,
+            "description": "音频",
+            "static": 1,
+            "final": 1,
+            "itemtype": "property",
+            "name": "TYPE_AUDIO",
+            "type": "{string}",
+            "default": "audio",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\ResourceLoader.js",
+            "line": 415,
+            "description": "二进制数据",
+            "static": 1,
+            "final": 1,
+            "itemtype": "property",
+            "name": "TYPE_BINARY",
+            "type": "{string}",
+            "default": "binary",
+            "class": "ResourceLoader"
+        },
+        {
+            "file": "src\\net\\URLRequest.js",
+            "line": 20,
+            "description": "请求地址",
+            "itemtype": "property",
+            "name": "url",
+            "type": "{string}",
+            "class": "URLRequest"
+        },
+        {
+            "file": "src\\net\\URLRequest.js",
+            "line": 27,
+            "description": "请求类型",
+            "itemtype": "property",
+            "name": "type",
+            "type": "{string}",
+            "default": "GET",
+            "class": "URLRequest"
+        },
+        {
+            "file": "src\\net\\URLRequest.js",
+            "line": 35,
+            "description": "返回数据格式",
+            "itemtype": "property",
+            "name": "dataType",
+            "type": "{string}",
+            "default": "",
+            "class": "URLRequest"
+        },
+        {
+            "file": "src\\net\\URLRequest.js",
+            "line": 43,
+            "description": "发送数据类型",
+            "itemtype": "property",
+            "name": "contentType",
+            "type": "{string}",
+            "default": "application/x-www-form-urlencoded",
+            "class": "URLRequest"
+        },
+        {
+            "file": "src\\net\\URLRequest.js",
+            "line": 51,
+            "description": "返回数据类型",
+            "itemtype": "property",
+            "name": "responseType",
+            "type": "{string}",
+            "class": "URLRequest"
+        },
+        {
+            "file": "src\\net\\URLRequest.js",
+            "line": 58,
+            "description": "XMLHttpRequest 对象",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "xhr",
+            "type": "{Object}",
+            "class": "URLRequest"
+        },
+        {
+            "file": "src\\net\\URLRequest.js",
+            "line": 66,
+            "description": "发送请求",
+            "itemtype": "method",
+            "name": "send",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "请求数据",
+                    "type": "String|Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "URLRequest"
+        },
+        {
+            "file": "src\\net\\URLRequest.js",
+            "line": 120,
+            "description": "请求成功事件",
+            "itemtype": "event",
+            "name": "success",
+            "params": [
+                {
+                    "name": "response",
+                    "description": "返回数据",
+                    "type": "Mixed"
+                }
+            ],
+            "class": "URLRequest"
+        },
+        {
+            "file": "src\\net\\URLRequest.js",
+            "line": 128,
+            "description": "请求失败事件",
+            "itemtype": "event",
+            "name": "error",
+            "params": [
+                {
+                    "name": "xhr",
+                    "description": "XMLHttpRequest 对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "textStatus",
+                    "description": "失败状态",
+                    "type": "String"
+                }
+            ],
+            "class": "URLRequest"
+        },
+        {
+            "file": "src\\net\\URLRequest.js",
+            "line": 141,
+            "description": "中断请求",
+            "itemtype": "method",
+            "name": "abort",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "URLRequest"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 8,
+            "description": "匀速缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "linear",
+            "params": [
+                {
+                    "name": "t",
+                    "description": "当前时间",
+                    "type": "Number"
+                },
+                {
+                    "name": "b",
+                    "description": "初始值",
+                    "type": "Number"
+                },
+                {
+                    "name": "c",
+                    "description": "变化量",
+                    "type": "Number"
+                },
+                {
+                    "name": "d",
+                    "description": "持续时间",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "当前值",
+                "type": "Number"
+            },
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 21,
+            "description": "加速的二次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInQuad",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 30,
+            "description": "减速的二次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeOutQuad",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 39,
+            "description": "先加速后减速的二次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInOutQuad",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 49,
+            "description": "加速的三次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInCubic",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 58,
+            "description": "减速的三次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeOutCubic",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 67,
+            "description": "先加速后减速的三次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInOutCubic",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 77,
+            "description": "加速的四次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInQuart",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 86,
+            "description": "减速的四次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeOutQuart",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 95,
+            "description": "先加速后减速的四次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInOutQuart",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 105,
+            "description": "加速的五次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInQuint",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 114,
+            "description": "减速的五次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeOutQuint",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 123,
+            "description": "先加速后减速的五次方缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInOutQuint",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 133,
+            "description": "加速的正弦曲线缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInSine",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 142,
+            "description": "减速的正弦曲线缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeOutSine",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 151,
+            "description": "先加速后减速的正弦曲线缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInOutSine",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 160,
+            "description": "加速的指数曲线缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInExpo",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 169,
+            "description": "减速的指数曲线缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeOutExpo",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 178,
+            "description": "先加速后减速的指数曲线缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInOutExpo",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 190,
+            "description": "加速的圆形曲线缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInCirc",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 199,
+            "description": "减速的圆形曲线缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeOutCirc",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 208,
+            "description": "先加速后减速的圆形曲线缓动函数",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInOutCirc",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 218,
+            "description": "加速的指数衰减正弦曲线缓动",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInElastic",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 237,
+            "description": "减速的指数衰减正弦曲线缓动",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeOutElastic",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 256,
+            "description": "先加速后减速的指数衰减正弦曲线缓动",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInOutElastic",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 276,
+            "description": "加速的超范围三次方缓动",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInBack",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 286,
+            "description": "减速的超范围三次方缓动",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeOutBack",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 296,
+            "description": "先加速后减速的超范围三次方缓动",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInOutBack",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 307,
+            "description": "加速的指数衰减反弹缓动",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInBounce",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 316,
+            "description": "减速的指数衰减反弹缓动",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeOutBounce",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Ease.js",
+            "line": 333,
+            "description": "先加速后减速的指数衰减反弹缓动",
+            "static": 1,
+            "itemtype": "method",
+            "name": "easeInOutBounce",
+            "see": [
+                "参数及返回值同 {@link linear}"
+            ],
+            "class": "Ease"
+        },
+        {
+            "file": "src\\tween\\Tween.js",
+            "line": 18,
+            "description": "动画步骤",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_steps",
+            "type": "{Array}",
+            "class": "Tween"
+        },
+        {
+            "file": "src\\tween\\Tween.js",
+            "line": 26,
+            "description": "动画应用对象",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_target",
+            "type": "{go2d.Sprite}",
+            "class": "Tween"
+        },
+        {
+            "file": "src\\tween\\Tween.js",
+            "line": 34,
+            "description": "循环次数，为 0 时无限循环",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_loops",
+            "type": "{number}",
+            "class": "Tween"
+        },
+        {
+            "file": "src\\tween\\Tween.js",
+            "line": 42,
+            "description": "是否已暂停",
+            "access": "protected",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_paused",
+            "type": "{Boolean}",
+            "class": "Tween"
+        },
+        {
+            "file": "src\\tween\\Tween.js",
+            "line": 50,
+            "description": "动画步骤数量",
+            "readonly": "",
+            "itemtype": "property",
+            "name": "length",
+            "type": "{number}",
+            "class": "Tween"
+        },
+        {
+            "file": "src\\tween\\Tween.js",
+            "line": 122,
+            "description": "等待指定时间后进行下一个动画",
+            "itemtype": "method",
+            "name": "wait",
+            "params": [
+                {
+                    "name": "duration",
+                    "description": "毫秒数",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Tween"
+        },
+        {
+            "file": "src\\tween\\Tween.js",
+            "line": 134,
+            "description": "更新属性值后进行下一个动画",
+            "itemtype": "method",
+            "name": "from",
+            "params": [
+                {
+                    "name": "props",
+                    "description": "要更新的属性集合",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Tween"
+        },
+        {
+            "file": "src\\tween\\Tween.js",
+            "line": 146,
+            "description": "为指定属性集合设置动画",
+            "itemtype": "method",
+            "name": "to",
+            "params": [
+                {
+                    "name": "props",
+                    "description": "要动画的属性集合",
+                    "type": "Object"
+                },
+                {
+                    "name": "duration",
+                    "description": "持续毫秒数",
+                    "type": "Number"
+                },
+                {
+                    "name": "ease",
+                    "description": "缓动函数",
+                    "type": "Function",
+                    "optional": true,
+                    "optdefault": "linear"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Tween"
+        },
+        {
+            "file": "src\\tween\\Tween.js",
+            "line": 162,
+            "description": "执行回调后进行下一个动画",
+            "itemtype": "method",
+            "name": "call",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "回调函数",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Tween"
+        },
+        {
+            "file": "src\\util\\lang.js",
+            "line": 1,
+            "description": "获取类型判断函数",
+            "ignore": "",
+            "class": "go2d"
+        },
+        {
+            "file": "src\\util\\lang.js",
+            "line": 11,
+            "description": "判断是否对象类型",
+            "static": 1,
+            "itemtype": "method",
+            "name": "isObject",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "要判断的对象",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "是否对象类型",
+                "type": "Boolean"
+            },
+            "class": "go2d"
+        },
+        {
+            "file": "src\\util\\lang.js",
+            "line": 20,
+            "description": "判断是否数值类型",
+            "static": 1,
+            "itemtype": "method",
+            "name": "isNumber",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "要判断的对象",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "是否数值类型",
+                "type": "Boolean"
+            },
+            "class": "go2d"
+        },
+        {
+            "file": "src\\util\\lang.js",
+            "line": 29,
+            "description": "判断是否字符串类型",
+            "static": 1,
+            "itemtype": "method",
+            "name": "isString",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "要判断的对象",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "是否字符串类型",
+                "type": "Boolean"
+            },
+            "class": "go2d"
+        },
+        {
+            "file": "src\\util\\lang.js",
+            "line": 38,
+            "description": "判断是否函数类型",
+            "static": 1,
+            "itemtype": "method",
+            "name": "isFunction",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "要判断的对象",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "是否函数类型",
+                "type": "Boolean"
+            },
+            "class": "go2d"
+        },
+        {
+            "file": "src\\util\\lang.js",
+            "line": 47,
+            "description": "判断是否数组类型",
+            "static": 1,
+            "itemtype": "method",
+            "name": "isArray",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "要判断的对象",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "是否数组类型",
+                "type": "Boolean"
+            },
+            "class": "go2d"
+        },
+        {
+            "file": "src\\util\\lang.js",
+            "line": 56,
+            "description": "遍历对象或数组",
+            "static": 1,
+            "itemtype": "method",
+            "name": "forEach",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "要遍历的对象或数组",
+                    "type": "Object|Array"
+                },
+                {
+                    "name": "iterator",
+                    "description": "遍历函数，共有三个参数：元素值、元素索引、被遍历的对象或数组",
+                    "type": "Function"
+                },
+                {
+                    "name": "thisArg",
+                    "description": "遍历时 this 关键字所引用的对象",
+                    "type": "Mixed",
+                    "optional": true,
+                    "optdefault": "obj"
+                }
+            ],
+            "class": "go2d"
+        },
+        {
+            "file": "src\\intro.js",
+            "line": 1,
+            "description": "Go2d @VERSION\nhttps://github.com/Lanfei/Go2d\n(c) 2014 [Lanfei](http://www.clanfei.com/)\nA lightweight HTML5 game engine",
+            "class": "",
+            "module": "go2d"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\core\\Class.js:8"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\core\\Director.js:124"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\core\\Director.js:141"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\core\\Director.js:155"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\core\\ObjectPool.js:51"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\core\\ObjectPool.js:60"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\core\\ObjectPool.js:70"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\core\\ObjectPool.js:84"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\core\\ObjectPool.js:97"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\core\\ObjectPool.js:106"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:294"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:319"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:364"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:380"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:390"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:417"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:433"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:448"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:457"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:472"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:487"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:506"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:516"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:524"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:540"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:562"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:579"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:595"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:615"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:640"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:648"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:663"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:672"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:681"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:700"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\ImageView.js:31"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\ScrollView.js:151"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\ScrollView.js:164"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\ScrollView.js:172"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\Sprite.js:140"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\Sprite.js:154"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\Sprite.js:163"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\TextField.js:353"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\event\\Event.js:40"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\event\\Event.js:49"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\event\\Event.js:57"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\event\\Event.js:66"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\event\\EventDispatcher.js:21"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\event\\EventDispatcher.js:28"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\event\\EventDispatcher.js:47"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\event\\EventDispatcher.js:69"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\event\\EventDispatcher.js:76"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\event\\EventDispatcher.js:98"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:24"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:80"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:88"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:109"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:133"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:157"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:168"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:178"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:189"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:199"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:209"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:28"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:54"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:65"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:76"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:87"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:96"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:107"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:119"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:132"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:140"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:149"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:193"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:209"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:221"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:230"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:239"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:248"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:257"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:266"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:275"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:292"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:301"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:310"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:319"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:328"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:337"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:346"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\ResourceLoader.js:355"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\URLRequest.js:66"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\net\\URLRequest.js:141"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:8"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:21"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:30"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:39"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:49"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:58"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:67"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:77"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:86"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:95"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:105"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:114"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:123"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:133"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:142"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:151"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:160"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:169"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:178"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:190"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:199"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:208"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:218"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:237"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:256"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:276"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:286"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:296"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:307"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:316"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Ease.js:333"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Tween.js:122"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Tween.js:134"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Tween.js:146"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\tween\\Tween.js:162"
+        },
+        {
+            "message": "unknown tag: ignore",
+            "line": " src\\util\\lang.js:1"
+        },
+        {
+            "message": "Missing item type\n获取类型判断函数",
+            "line": " src\\util\\lang.js:1"
+        },
+        {
+            "message": "Missing item type\nGo2d @VERSION\nhttps://github.com/Lanfei/Go2d\n(c) 2014 [Lanfei](http://www.clanfei.com/)\nA lightweight HTML5 game engine",
+            "line": " src\\intro.js:1"
+        }
+    ]
+}

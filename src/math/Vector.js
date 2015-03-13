@@ -1,8 +1,10 @@
 /**
  * 向量类，实现向量基本运算，可表达一个二维坐标。
  * @author Lanfei
- * @class go2d.Vector
- * @extends go2d.Class
+ * @class Vector
+ * @extends Class
+ * 
+ * @constructor
  * @param {number} x 向量水平坐标
  * @param {number} y 向量垂直坐标
  */
@@ -13,7 +15,7 @@ var Vector = go2d.Vector = Class.extend({
 		/**
 		 * 向量长度
 		 * @readonly
-		 * @member go2d.Vector#length
+		 * @property length
 		 * @type {number}
 		 */
 		Object.defineProperty(this, 'length', {
@@ -25,7 +27,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 设置向量属性值，参数同构造函数
-	 * @function go2d.Vector#set
+	 * @function set
 	 * @return {this}
 	 */
 	set: function(x, y) {
@@ -35,14 +37,14 @@ var Vector = go2d.Vector = Class.extend({
 
 			/**
 			 * 向量水平坐标
-			 * @member go2d.Vector#x
+			 * @property x
 			 * @type {number}
 			 */
 			this.x = x || 0;
 
 			/**
 			 * 向量垂直坐标
-			 * @member go2d.Vector#y
+			 * @property y
 			 * @type {number}
 			 */
 			this.y = y || 0;
@@ -51,7 +53,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量加法
-	 * @function go2d.Vector#add
+	 * @function add
 	 * @param {go2d.Vector} vector 要相加的向量
 	 * @return {this}
 	 */
@@ -62,7 +64,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量减法
-	 * @function go2d.Vector#subtract
+	 * @function subtract
 	 * @param {go2d.Vector} vector 要相减的向量
 	 * @return {this}
 	 */
@@ -73,7 +75,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量除法
-	 * @function go2d.Vector#divide
+	 * @function divide
 	 * @param {go2d.Vector} vector 要除以的向量
 	 * @return {this}
 	 */
@@ -84,7 +86,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量点乘
-	 * @function go2d.Vector#dotProduct
+	 * @function dotProduct
 	 * @param {go2d.Vector} vector 要点乘的向量
 	 * @return {this}
 	 */
@@ -93,7 +95,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 求单位向量
-	 * @function go2d.Vector#normalize
+	 * @function normalize
 	 * @return {this}
 	 */
 	normalize: function() {
@@ -104,7 +106,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量缩放
-	 * @function go2d.Vector#scale
+	 * @function scale
 	 * @param {number} x 水平方向缩放比例
 	 * @param {number} y 垂直方向缩放比例
 	 * @return {this}
@@ -116,7 +118,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量缩放
-	 * @function go2d.Vector#rotate
+	 * @function rotate
 	 * @param {number} angle 旋转的角度（弧度制）
 	 * @return {this}
 	 */
@@ -129,7 +131,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 求向量与水平方向的夹角
-	 * @function go2d.Vector#angle
+	 * @function angle
 	 * @return {number} 向量与水平方向的夹角（弧度制）
 	 */
 	angle: function() {
@@ -137,7 +139,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 求与另一个向量之间的距离
-	 * @function go2d.Vector#distance
+	 * @function distance
 	 * @param {go2d.Vector} vector 要求距离的向量
 	 * @return {number} 两向量之间的距离
 	 */
@@ -146,7 +148,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 创建当前向量的克隆对象
-	 * @function go2d.Vector#clone
+	 * @function clone
 	 * @return {go2d.Vector} 当前向量的克隆对象
 	 */
 	clone: function() {

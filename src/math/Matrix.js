@@ -6,8 +6,10 @@
  *             |tx ty 1|
  * </code></pre>
  * @author Lanfei
- * @class go2d.Matrix
- * @extends go2d.Class
+ * @class Matrix
+ * @extends Class
+ * 
+ * @constructor
  * @param {number} a 缩放或旋转时水平方向的参数
  * @param {number} b 旋转或倾斜时垂直方向的参数
  * @param {number} c 旋转或倾斜时水平方向的参数
@@ -21,7 +23,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 设置矩阵属性值，参数同构造函数
-	 * @function go2d.Matrix#set
+	 * @function set
 	 * @return {this}
 	 */
 	set: function(a, b, c, d, tx, ty) {
@@ -29,42 +31,42 @@ var Matrix = go2d.Matrix = Class.extend({
 
 			/**
 			 * 缩放或旋转时水平方向的参数
-			 * @member go2d.Matrix#a
+			 * @property a
 			 * @type {number}
 			 */
 			this.a = a;
 
 			/**
 			 * 旋转或倾斜时垂直方向的参数
-			 * @member go2d.Matrix#b
+			 * @property b
 			 * @type {number}
 			 */
 			this.b = b;
 
 			/**
 			 * 旋转或倾斜时水平方向的参数
-			 * @member go2d.Matrix#c
+			 * @property c
 			 * @type {number}
 			 */
 			this.c = c;
 
 			/**
 			 * 缩放或旋转时垂直方向的参数
-			 * @member go2d.Matrix#d
+			 * @property d
 			 * @type {number}
 			 */
 			this.d = d;
 
 			/**
 			 * 水平方向的平移距离
-			 * @member go2d.Matrix#tx
+			 * @property tx
 			 * @type {number}
 			 */
 			this.tx = tx;
 
 			/**
 			 * 垂直方向的平移距离
-			 * @member go2d.Matrix#ty
+			 * @property ty
 			 * @type {number}
 			 */
 			this.ty = ty;
@@ -77,7 +79,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 设置当前矩阵为单位矩阵
-	 * @function go2d.Matrix#identity
+	 * @function identity
 	 * @return {this}
 	 */
 	identity: function() {
@@ -85,7 +87,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 执行当前矩阵的逆转换
-	 * @function go2d.Matrix#invert
+	 * @function invert
 	 * @return {this}
 	 */
 	invert: function() {
@@ -107,7 +109,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	/**
 	 * 前置相乘
 	 * @param {go2d.Matrix} matrix 前置矩阵
-	 * @function go2d.Matrix#prepend
+	 * @function prepend
 	 * @return {this}
 	 */
 	prepend: function(a, b, c, d, tx, ty) {
@@ -131,7 +133,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	/**
 	 * 后置相乘
 	 * @param {go2d.Matrix} matrix 后置矩阵
-	 * @function go2d.Matrix#append
+	 * @function append
 	 * @return {this}
 	 */
 	append: function(a, b, c, d, tx, ty) {
@@ -154,7 +156,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 将变换矩阵乘以向量
-	 * @function go2d.Matrix#multiply
+	 * @function multiply
 	 * @param {go2d.Vector} vector 变换前的向量
 	 * @return {go2d.Vector} 变换后的向量
 	 */
@@ -165,7 +167,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 缩放
-	 * @function go2d.Matrix#scale
+	 * @function scale
 	 * @param {number} x 水平方向的缩放比例
 	 * @param {number} y 垂直方向的缩放比例
 	 * @return {this}
@@ -175,7 +177,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 旋转
-	 * @function go2d.Matrix#rotate
+	 * @function rotate
 	 * @param {number} angle 旋转的角度（弧度制）
 	 * @return {this}
 	 */
@@ -186,7 +188,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 斜切
-	 * @function go2d.Matrix#skew
+	 * @function skew
 	 * @param {number} x 水平方向的斜切角度（弧度制）
 	 * @param {number} y 垂直方向的斜切角度（弧度制）
 	 * @return {this}
@@ -196,7 +198,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 平移
-	 * @function go2d.Matrix#translate
+	 * @function translate
 	 * @param {number} x 水平方向的平移像素
 	 * @param {number} y 垂直方向的平移像素
 	 * @return {this}
@@ -206,7 +208,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 创建当前矩阵的克隆对象
-	 * @function go2d.Matrix#clone
+	 * @function clone
 	 * @return {go2d.Matrix} 当前矩阵的克隆对象
 	 */
 	clone: function() {
@@ -215,7 +217,7 @@ var Matrix = go2d.Matrix = Class.extend({
 }, {
 	/**
 	 * 角度制、弧度制换算比例
-	 * @member go2d.Matrix.DEG_TO_RAD
+	 * @property DEG_TO_RAD
 	 * @type {number}
 	 */
 	DEG_TO_RAD: Math.PI / 180

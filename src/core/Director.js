@@ -1,8 +1,10 @@
 /**
  * 导演类，负责游戏逻辑流程的管理。
- * @class go2d.Director
  * @author Lanfei
- * @extends go2d.Class
+ * @class Director
+ * @extends Class
+ * 
+ * @constructor
  * @param {go2d.Stage} stage
  * @param {Object} [options] 配置参数
  * @param {Object} [options.frameRate] 默认帧频
@@ -15,14 +17,14 @@ var Director = go2d.Director = Class.extend({
 		/**
 		 * 当前帧频
 		 * @readonly
-		 * @member go2d.Director#fps
+		 * @property fps
 		 * @type number
 		 */
 		this.fps = 0;
 
 		/**
 		 * 默认帧频
-		 * @member go2d.Director#frameRate
+		 * @property frameRate
 		 * @type number
 		 * @default 60
 		 */
@@ -31,15 +33,15 @@ var Director = go2d.Director = Class.extend({
 		/**
 		 * 舞台对象
 		 * @protected
-		 * @member go2d.DisplayObject#_stage
-		 * @type go2d.Stage
+		 * @property _stage
+		 * @type Stage
 		 */
 		this._stage = stage;
 
 		/**
 		 * 是否已暂停
 		 * @protected
-		 * @member go2d.Director#_paused
+		 * @property _paused
 		 * @type Boolean
 		 * @default true
 		 */
@@ -48,7 +50,7 @@ var Director = go2d.Director = Class.extend({
 		/**
 		 * 主循环定时器
 		 * @protected
-		 * @member go2d.DisplayObject#_timer
+		 * @property _timer
 		 * @type Object
 		 */
 		this._timer = null;
@@ -56,7 +58,7 @@ var Director = go2d.Director = Class.extend({
 		/**
 		 * 上一帧时间戳，用于计算帧频
 		 * @protected
-		 * @member go2d.DisplayObject#_prevTime
+		 * @property _prevTime
 		 * @type number
 		 */
 		this._prevTime = null;
@@ -122,7 +124,7 @@ var Director = go2d.Director = Class.extend({
 	/**
 	 * 游戏主循环
 	 * @protected
-	 * @function go2d.Director#_mainLoop
+	 * @function _mainLoop
 	 */
 	_mainLoop: function() {
 		var deltaTime,
@@ -138,7 +140,7 @@ var Director = go2d.Director = Class.extend({
 	},
 	/**
 	 * 开始游戏主循环
-	 * @function go2d.Director#play
+	 * @function play
 	 * @return {this}
 	 */
 	play: function() {
@@ -152,7 +154,7 @@ var Director = go2d.Director = Class.extend({
 	},
 	/**
 	 * 暂停游戏主循环
-	 * @function go2d.Director#pause
+	 * @function pause
 	 * @return {this}
 	 */
 	pause: function() {

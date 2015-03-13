@@ -1,8 +1,10 @@
 /**
  * 文本显示类，用于文本排列和显示。
  * @author Lanfei
- * @class go2d.TextField
- * @extends go2d.Sprite
+ * @class TextField
+ * @extends Sprite
+ * 
+ * @constructor
  * @param {string} [text] 要显示的文本
  */
 var TextField = go2d.TextField = Sprite.extend({
@@ -14,7 +16,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 是否粗体
-			 * @member go2d.TextField#bold
+			 * @property bold
 			 * @type Boolean
 			 * @default false 
 			 */
@@ -22,7 +24,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 是否斜体
-			 * @member go2d.TextField#italic
+			 * @property italic
 			 * @type Boolean
 			 * @default false 
 			 */
@@ -30,7 +32,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 字体大小
-			 * @member go2d.TextField#fontSize
+			 * @property fontSize
 			 * @type number
 			 * @default 24 
 			 */
@@ -38,7 +40,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 字体颜色或样式
-			 * @member go2d.TextField#color
+			 * @property color
 			 * @type string
 			 * @default black |Object
 			 */
@@ -46,7 +48,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 对齐方式
-			 * @member go2d.TextField#textAlign
+			 * @property textAlign
 			 * @type string
 			 * @default left 
 			 */
@@ -54,7 +56,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 行高，可为百分比
-			 * @member go2d.TextField#lineHeight
+			 * @property lineHeight
 			 * @type number
 			 * @default 120% |string
 			 */
@@ -62,7 +64,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 描边大小
-			 * @member go2d.TextField#strokeSize
+			 * @property strokeSize
 			 * @type number
 			 * @default 0 
 			 */
@@ -70,7 +72,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 描边颜色或样式
-			 * @member go2d.TextField#strokeColor
+			 * @property strokeColor
 			 * @type string
 			 * @default null |Object
 			 */
@@ -78,7 +80,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 文本字体
-			 * @member go2d.TextField#fontFamily
+			 * @property fontFamily
 			 * @type string
 			 * @default Arial 
 			 */
@@ -86,7 +88,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 是否允许在单词内部换行
-			 * @member go2d.TextField#breakWord
+			 * @property breakWord
 			 * @type Boolean
 			 * @default false 
 			 */
@@ -94,7 +96,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 是否自动调整宽高
-			 * @member go2d.TextField#autoResize
+			 * @property autoResize
 			 * @type Boolean
 			 * @default false 
 			 */
@@ -102,7 +104,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 顶部内边距
-			 * @member go2d.TextField#paddingTop
+			 * @property paddingTop
 			 * @type number
 			 * @default 0 
 			 */
@@ -110,7 +112,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 左部内边距
-			 * @member go2d.TextField#paddingLeft
+			 * @property paddingLeft
 			 * @type number
 			 * @default 0 
 			 */
@@ -118,7 +120,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 右部内边距
-			 * @member go2d.TextField#paddingRight
+			 * @property paddingRight
 			 * @type number
 			 * @default 0 
 			 */
@@ -126,7 +128,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 底部内边距
-			 * @member go2d.TextField#paddingBottom
+			 * @property paddingBottom
 			 * @type number
 			 * @default 0 
 			 */
@@ -134,7 +136,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 自动调整宽高时的最大宽度
-			 * @member go2d.TextField#maxWidth
+			 * @property maxWidth
 			 * @type number
 			 * @default 0xffffff 
 			 */
@@ -142,7 +144,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 自动调整宽高时的最大高度
-			 * @member go2d.TextField#maxHeight
+			 * @property maxHeight
 			 * @type number
 			 * @default 0xffffff 
 			 */
@@ -166,7 +168,7 @@ var TextField = go2d.TextField = Sprite.extend({
 
 		/**
 		 * 文字渲染的宽高
-		 * @member go2d.TextField#textRange
+		 * @property textRange
 		 * @type number
 		 */
 		Object.defineProperty(this, 'textRange', {
@@ -178,7 +180,7 @@ var TextField = go2d.TextField = Sprite.extend({
 		
 		/**
 		 * 文字渲染的宽度
-		 * @member go2d.TextField#textWidth
+		 * @property textWidth
 		 * @type number
 		 */
 		Object.defineProperty(this, 'textWidth', {
@@ -190,7 +192,7 @@ var TextField = go2d.TextField = Sprite.extend({
 		
 		/**
 		 * 文字渲染的高度
-		 * @member go2d.TextField#textHeight
+		 * @property textHeight
 		 * @type number
 		 */
 		Object.defineProperty(this, 'textHeight', {
@@ -202,7 +204,7 @@ var TextField = go2d.TextField = Sprite.extend({
 		
 		/**
 		 * 要显示的文字
-		 * @member go2d.TextField#text
+		 * @property text
 		 * @type string
 		 */
 		Object.defineProperty(this, 'text', {
@@ -350,7 +352,7 @@ var TextField = go2d.TextField = Sprite.extend({
 	},
 	/**
 	 * 设置要显示的文字
-	 * @function go2d.DisplayObject#setText
+	 * @function setText
 	 * @return {this}
 	 */
 	setText: function(text) {

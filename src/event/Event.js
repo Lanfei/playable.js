@@ -1,8 +1,10 @@
 /**
  * 事件类，所有事件对象的基类。
  * @author Lanfei
- * @class go2d.Event
- * @extends go2d.Class
+ * @class Event
+ * @extends Class
+ * 
+ * @constructor
  * @param {string} type 事件类型
  * @param {Object} [data] 事件参数
  */
@@ -14,7 +16,7 @@ var Event = go2d.Event = Class.extend({
 
 		/**
 		 * 事件类型
-		 * @member go2d.Event#type
+		 * @property type
 		 * @type string
 		 */
 		this.type = type;
@@ -22,7 +24,7 @@ var Event = go2d.Event = Class.extend({
 		/**
 		 * 是否已停止冒泡
 		 * @protected
-		 * @member go2d.Event#_propagationStopped
+		 * @property _propagationStopped
 		 * @type Boolean
 		 */
 		this._propagationStopped = false;
@@ -30,14 +32,14 @@ var Event = go2d.Event = Class.extend({
 		/**
 		 * 是否已阻止默认事件
 		 * @protected
-		 * @member go2d.Event#_defaultPrevented
+		 * @property _defaultPrevented
 		 * @type Boolean
 		 */
 		this._defaultPrevented = false;
 	},
 	/**
 	 * 停止冒泡
-	 * @function go2d.Event#stopPropagation
+	 * @function stopPropagation
 	 * @return {this}
 	 */
 	stopPropagation: function() {
@@ -46,7 +48,7 @@ var Event = go2d.Event = Class.extend({
 	},
 	/**
 	 * 获取是否已停止冒泡
-	 * @function go2d.Event#isPropagationStopped
+	 * @function isPropagationStopped
 	 * @return {Boolean}
 	 */
 	isPropagationStopped: function() {
@@ -54,7 +56,7 @@ var Event = go2d.Event = Class.extend({
 	},
 	/**
 	 * 阻止默认事件
-	 * @function go2d.Event#preventDefault
+	 * @function preventDefault
 	 * @return {this}
 	 */
 	preventDefault: function() {
@@ -63,7 +65,7 @@ var Event = go2d.Event = Class.extend({
 	},
 	/**
 	 * 获取是否已阻止默认事件
-	 * @function go2d.Event#isDefaultPrevented
+	 * @function isDefaultPrevented
 	 * @return {Boolean}
 	 */
 	isDefaultPrevented: function() {

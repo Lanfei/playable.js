@@ -1,8 +1,10 @@
 /**
  * 舞台类，最顶层的显示对象，游戏内容的主绘图区。
  * @author Lanfei
- * @class go2d.Stage
- * @extends go2d.DisplayObject
+ * @class Stage
+ * @extends DisplayObject
+ * 
+ * @constructor
  * @param {object} canvas 用于渲染的画布对象
  */
 var Stage = go2d.Stage = DisplayObject.extend({

@@ -1,8 +1,10 @@
 /**
  * 对象池类，一个简单的对象池实现，适用于构造函数无参数的对象。
  * @author Lanfei
- * @class go2d.ObjectPool
- * @extends go2d.Class
+ * @class ObjectPool
+ * @extends Class
+ * 
+ * @constructor
  * @param {function} factory 要进行缓存的类
  * @param {number} size 对象池的最大容量
  */
@@ -12,7 +14,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 		/**
 		 * 已缓存的对象数组
 		 * @protected
-		 * @member go2d.ObjectPool#_pool
+		 * @property _pool
 		 * @type Array
 		 */
 		this._pool = [];
@@ -20,14 +22,14 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 		/**
 		 * 要进行缓存的类
 		 * @protected
-		 * @member go2d.ObjectPool#_factory
+		 * @property _factory
 		 * @type function
 		 */
 		this._factory = factory;
 
 		/**
 		 * 对象池的最大容量
-		 * @member go2d.ObjectPool#size
+		 * @property size
 		 * @type number
 		 * @default 30
 		 */
@@ -36,7 +38,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 		/**
 		 * 已缓存的对象数量
 		 * @readonly
-		 * @member go2d.ObjectPool#length
+		 * @property length
 		 * @type number
 		 */
 		Object.defineProperty(this, 'length', {
@@ -49,7 +51,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	/**
 	 * 创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池
 	 * @protected
-	 * @function go2d.ObjectPool#_create
+	 * @function _create
 	 * @return {mixed} 新的对象
 	 */
 	_create: function() {
@@ -58,7 +60,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	/**
 	 * 初始化对象，可以重载该方法，以初始化从对象池中获取到的对象
 	 * @protected
-	 * @function go2d.ObjectPool#_initialize
+	 * @function _initialize
 	 * @param {mixed} obj 要重置的对象
 	 * @return {mixed} 重置后的对象
 	 */
@@ -67,7 +69,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	},
 	/**
 	 * 获取一个对象
-	 * @function go2d.ObjectPool#get
+	 * @function get
 	 * @return {mixed} 取出的对象
 	 */
 	get: function() {
@@ -81,7 +83,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	},
 	/**
 	 * 回收一个对象
-	 * @function go2d.ObjectPool#recycle
+	 * @function recycle
 	 * @param {mixed} 要回收的对象
 	 * @return {this}
 	 */
@@ -94,7 +96,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	},
 	/**
 	 * 清空对象池
-	 * @function go2d.ObjectPool#clear
+	 * @function clear
 	 * @return {this}
 	 */
 	clear: function() {
@@ -103,7 +105,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	},
 	/**
 	 * 释放对象池内存
-	 * @function go2d.ObjectPool#dispose
+	 * @function dispose
 	 */
 	dispose: function() {
 		this._pool = null;

@@ -55,19 +55,16 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
-		jsdoc: {
+		yuidoc: {
 			dist: {
-				// options: {
-				// 	template: 'node_modules/grunt-jsdoc/node_modules/ink-docstrap/template'
-				// },
-				src: ['README.md', 'src/go2d.js', 'src/*/*.js'],
-				dest: 'docs'
-			}
-		},
-		jsdoc2md: {
-			dist: {
-				src: ['src/go2d.js', 'src/*/*.js'],
-				dest: 'docs/api.md'
+				name: '<%= pkg.name %>',
+				description: '<%= pkg.description %>',
+				version: '<%= pkg.version %>',
+				url: '<%= pkg.homepage %>',
+				options: {
+					paths: 'src',
+					outdir: 'docs'
+				}
 			}
 		}
 	});
@@ -77,8 +74,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-yuidoc');
 
 	grunt.registerTask('dist', ['concat', 'uglify', 'replace']);
-	grunt.registerTask('doc', ['jsdoc', 'jsdoc2md']);
+	grunt.registerTask('doc', ['yuidoc']);
 	grunt.registerTask('default', ['dist', 'doc']);
 };

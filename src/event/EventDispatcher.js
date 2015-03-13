@@ -1,8 +1,10 @@
 /**
  * 事件派发器类，负责事件的派发和侦听。
  * @author Lanfei
- * @class go2d.EventDispatcher
- * @extends go2d.Class
+ * @class EventDispatcher
+ * @extends Class
+ * 
+ * @constructor
  * @param {string} type 事件类型
  * @param {Object} [data] 事件参数
  */
@@ -11,21 +13,21 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 		/**
 		 * 侦听器哈希表
 		 * @private
-		 * @member go2d.EventDispatcher#__events
+		 * @property __events
 		 * @type Object
 		 */
 		this.__events = {};
 	},
 	/**
 	 * 添加事件侦听器
-	 * @function go2d.EventDispatcher#on
+	 * @function on
 	 * @param {string} name 事件名称
 	 * @param {function} callback 回调函数
 	 * @return {this}
 	 */
 	/**
 	 * 批量添加事件侦听器
-	 * @function go2d.EventDispatcher#on
+	 * @function on
 	 * @param {Object} listeners 以事件名称为键名，回调函数为键值的哈希表
 	 * @return {this}
 	 */
@@ -44,7 +46,7 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 	},
 	/**
 	 * 移除事件侦听器
-	 * @function go2d.EventDispatcher#off
+	 * @function off
 	 * @param {string} name 事件名称
 	 * @param {function} [callback] 回调函数，当该参数为空时将移除该事件的所有回调
 	 * @return {this}
@@ -66,14 +68,14 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 	},
 	/**
 	 * 通过事件对象派发事件
-	 * @function go2d.EventDispatcher#emit
+	 * @function emit
 	 * @param {string} name 事件名称
 	 * @param {go2d.Event} [event] 事件对象
 	 * @return {this}
 	 */
 	/**
 	 * 通过任意事件参数派发事件
-	 * @function go2d.EventDispatcher#emit
+	 * @function emit
 	 * @param {string} name 事件名称
 	 * @param {...*} [params] 事件参数
 	 * @return {this}
@@ -95,7 +97,7 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 	},
 	/**
 	 * 释放事件派发器内存
-	 * @function go2d.EventDispatcher#dispose
+	 * @function dispose
 	 */
 	dispose: function() {
 		this.__events = null;

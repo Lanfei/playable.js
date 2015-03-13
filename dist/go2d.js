@@ -15,7 +15,8 @@
 
 /**
  * Go2d 命名空间
- * @namespace
+ * @module go2d
+ * @class go2d
  * @property {string} version Go2d 版本号
  */
 var go2d = {
@@ -34,7 +35,8 @@ function isType(type) {
 
 /**
  * 判断是否对象类型
- * @function go2d.isObject
+ * @static
+ * @method isObject
  * @param {mixed} obj 要判断的对象
  * @return {Boolean} 是否对象类型
  */
@@ -42,7 +44,8 @@ var isObject = go2d.isObject = isType('Object');
 
 /**
  * 判断是否数值类型
- * @function go2d.isNumber
+ * @static
+ * @method isNumber
  * @param {mixed} obj 要判断的对象
  * @return {Boolean} 是否数值类型
  */
@@ -50,7 +53,8 @@ var isNumber = go2d.isNumber = isType('Number');
 
 /**
  * 判断是否字符串类型
- * @function go2d.isString
+ * @static
+ * @method isString
  * @param {mixed} obj 要判断的对象
  * @return {Boolean} 是否字符串类型
  */
@@ -58,7 +62,8 @@ var isString = go2d.isString = isType('String');
 
 /**
  * 判断是否函数类型
- * @function go2d.isFunction
+ * @static
+ * @method isFunction
  * @param {mixed} obj 要判断的对象
  * @return {Boolean} 是否函数类型
  */
@@ -66,7 +71,8 @@ var isFunction = go2d.isFunction = isType('Function');
 
 /**
  * 判断是否数组类型
- * @function go2d.isArray
+ * @static
+ * @method isArray
  * @param {mixed} obj 要判断的对象
  * @return {Boolean} 是否数组类型
  */
@@ -74,7 +80,8 @@ var isArray = go2d.isArray = Array.isArray || isType('Array');
 
 /**
  * 遍历对象或数组
- * @function go2d.forEach
+ * @static
+ * @method forEach
  * @param {Object|Array} obj 要遍历的对象或数组
  * @param {function} iterator 遍历函数，共有三个参数：元素值、元素索引、被遍历的对象或数组
  * @param {mixed} [thisArg=obj] 遍历时 this 关键字所引用的对象
@@ -95,14 +102,14 @@ var forEach = go2d.forEach = function(obj, iterator, thisArg) {
 /**
  * Go2d 的基础类，Go2d 的所有类都继承于该类。
  * @author Lanfei
- * @class go2d.Class
+ * @class Class
  */
 var Class = go2d.Class = function() {};
 
 /**
  * 创建一个继承于该类的新类
  * @static
- * @function go2d.Class.extend
+ * @function extend
  * @param {object} props 新类的属性或方法
  * @param {object} [statics] 新类的静态属性或方法
  * @return {function} 新类的构造函数
@@ -150,8 +157,10 @@ Class.extend = function(props, statics) {
 /**
  * 对象池类，一个简单的对象池实现，适用于构造函数无参数的对象。
  * @author Lanfei
- * @class go2d.ObjectPool
- * @extends go2d.Class
+ * @class ObjectPool
+ * @extends Class
+ * 
+ * @constructor
  * @param {function} factory 要进行缓存的类
  * @param {number} size 对象池的最大容量
  */
@@ -161,7 +170,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 		/**
 		 * 已缓存的对象数组
 		 * @protected
-		 * @member go2d.ObjectPool#_pool
+		 * @property _pool
 		 * @type Array
 		 */
 		this._pool = [];
@@ -169,14 +178,14 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 		/**
 		 * 要进行缓存的类
 		 * @protected
-		 * @member go2d.ObjectPool#_factory
+		 * @property _factory
 		 * @type function
 		 */
 		this._factory = factory;
 
 		/**
 		 * 对象池的最大容量
-		 * @member go2d.ObjectPool#size
+		 * @property size
 		 * @type number
 		 * @default 30
 		 */
@@ -185,7 +194,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 		/**
 		 * 已缓存的对象数量
 		 * @readonly
-		 * @member go2d.ObjectPool#length
+		 * @property length
 		 * @type number
 		 */
 		Object.defineProperty(this, 'length', {
@@ -198,7 +207,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	/**
 	 * 创建一个新的对象，可以重载该方法，以实现适用于类构造函数有参数的对象池
 	 * @protected
-	 * @function go2d.ObjectPool#_create
+	 * @function _create
 	 * @return {mixed} 新的对象
 	 */
 	_create: function() {
@@ -207,7 +216,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	/**
 	 * 初始化对象，可以重载该方法，以初始化从对象池中获取到的对象
 	 * @protected
-	 * @function go2d.ObjectPool#_initialize
+	 * @function _initialize
 	 * @param {mixed} obj 要重置的对象
 	 * @return {mixed} 重置后的对象
 	 */
@@ -216,7 +225,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	},
 	/**
 	 * 获取一个对象
-	 * @function go2d.ObjectPool#get
+	 * @function get
 	 * @return {mixed} 取出的对象
 	 */
 	get: function() {
@@ -230,7 +239,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	},
 	/**
 	 * 回收一个对象
-	 * @function go2d.ObjectPool#recycle
+	 * @function recycle
 	 * @param {mixed} 要回收的对象
 	 * @return {this}
 	 */
@@ -243,7 +252,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	},
 	/**
 	 * 清空对象池
-	 * @function go2d.ObjectPool#clear
+	 * @function clear
 	 * @return {this}
 	 */
 	clear: function() {
@@ -252,7 +261,7 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 	},
 	/**
 	 * 释放对象池内存
-	 * @function go2d.ObjectPool#dispose
+	 * @function dispose
 	 */
 	dispose: function() {
 		this._pool = null;
@@ -262,9 +271,11 @@ var ObjectPool = go2d.ObjectPool = Class.extend({
 });
 /**
  * 导演类，负责游戏逻辑流程的管理。
- * @class go2d.Director
  * @author Lanfei
- * @extends go2d.Class
+ * @class Director
+ * @extends Class
+ * 
+ * @constructor
  * @param {go2d.Stage} stage
  * @param {Object} [options] 配置参数
  * @param {Object} [options.frameRate] 默认帧频
@@ -277,14 +288,14 @@ var Director = go2d.Director = Class.extend({
 		/**
 		 * 当前帧频
 		 * @readonly
-		 * @member go2d.Director#fps
+		 * @property fps
 		 * @type number
 		 */
 		this.fps = 0;
 
 		/**
 		 * 默认帧频
-		 * @member go2d.Director#frameRate
+		 * @property frameRate
 		 * @type number
 		 * @default 60
 		 */
@@ -293,15 +304,15 @@ var Director = go2d.Director = Class.extend({
 		/**
 		 * 舞台对象
 		 * @protected
-		 * @member go2d.DisplayObject#_stage
-		 * @type go2d.Stage
+		 * @property _stage
+		 * @type Stage
 		 */
 		this._stage = stage;
 
 		/**
 		 * 是否已暂停
 		 * @protected
-		 * @member go2d.Director#_paused
+		 * @property _paused
 		 * @type Boolean
 		 * @default true
 		 */
@@ -310,7 +321,7 @@ var Director = go2d.Director = Class.extend({
 		/**
 		 * 主循环定时器
 		 * @protected
-		 * @member go2d.DisplayObject#_timer
+		 * @property _timer
 		 * @type Object
 		 */
 		this._timer = null;
@@ -318,7 +329,7 @@ var Director = go2d.Director = Class.extend({
 		/**
 		 * 上一帧时间戳，用于计算帧频
 		 * @protected
-		 * @member go2d.DisplayObject#_prevTime
+		 * @property _prevTime
 		 * @type number
 		 */
 		this._prevTime = null;
@@ -384,7 +395,7 @@ var Director = go2d.Director = Class.extend({
 	/**
 	 * 游戏主循环
 	 * @protected
-	 * @function go2d.Director#_mainLoop
+	 * @function _mainLoop
 	 */
 	_mainLoop: function() {
 		var deltaTime,
@@ -400,7 +411,7 @@ var Director = go2d.Director = Class.extend({
 	},
 	/**
 	 * 开始游戏主循环
-	 * @function go2d.Director#play
+	 * @function play
 	 * @return {this}
 	 */
 	play: function() {
@@ -414,7 +425,7 @@ var Director = go2d.Director = Class.extend({
 	},
 	/**
 	 * 暂停游戏主循环
-	 * @function go2d.Director#pause
+	 * @function pause
 	 * @return {this}
 	 */
 	pause: function() {
@@ -428,8 +439,10 @@ var Director = go2d.Director = Class.extend({
 /**
  * 向量类，实现向量基本运算，可表达一个二维坐标。
  * @author Lanfei
- * @class go2d.Vector
- * @extends go2d.Class
+ * @class Vector
+ * @extends Class
+ * 
+ * @constructor
  * @param {number} x 向量水平坐标
  * @param {number} y 向量垂直坐标
  */
@@ -440,7 +453,7 @@ var Vector = go2d.Vector = Class.extend({
 		/**
 		 * 向量长度
 		 * @readonly
-		 * @member go2d.Vector#length
+		 * @property length
 		 * @type {number}
 		 */
 		Object.defineProperty(this, 'length', {
@@ -452,7 +465,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 设置向量属性值，参数同构造函数
-	 * @function go2d.Vector#set
+	 * @function set
 	 * @return {this}
 	 */
 	set: function(x, y) {
@@ -462,14 +475,14 @@ var Vector = go2d.Vector = Class.extend({
 
 			/**
 			 * 向量水平坐标
-			 * @member go2d.Vector#x
+			 * @property x
 			 * @type {number}
 			 */
 			this.x = x || 0;
 
 			/**
 			 * 向量垂直坐标
-			 * @member go2d.Vector#y
+			 * @property y
 			 * @type {number}
 			 */
 			this.y = y || 0;
@@ -478,7 +491,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量加法
-	 * @function go2d.Vector#add
+	 * @function add
 	 * @param {go2d.Vector} vector 要相加的向量
 	 * @return {this}
 	 */
@@ -489,7 +502,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量减法
-	 * @function go2d.Vector#subtract
+	 * @function subtract
 	 * @param {go2d.Vector} vector 要相减的向量
 	 * @return {this}
 	 */
@@ -500,7 +513,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量除法
-	 * @function go2d.Vector#divide
+	 * @function divide
 	 * @param {go2d.Vector} vector 要除以的向量
 	 * @return {this}
 	 */
@@ -511,7 +524,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量点乘
-	 * @function go2d.Vector#dotProduct
+	 * @function dotProduct
 	 * @param {go2d.Vector} vector 要点乘的向量
 	 * @return {this}
 	 */
@@ -520,7 +533,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 求单位向量
-	 * @function go2d.Vector#normalize
+	 * @function normalize
 	 * @return {this}
 	 */
 	normalize: function() {
@@ -531,7 +544,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量缩放
-	 * @function go2d.Vector#scale
+	 * @function scale
 	 * @param {number} x 水平方向缩放比例
 	 * @param {number} y 垂直方向缩放比例
 	 * @return {this}
@@ -543,7 +556,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 向量缩放
-	 * @function go2d.Vector#rotate
+	 * @function rotate
 	 * @param {number} angle 旋转的角度（弧度制）
 	 * @return {this}
 	 */
@@ -556,7 +569,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 求向量与水平方向的夹角
-	 * @function go2d.Vector#angle
+	 * @function angle
 	 * @return {number} 向量与水平方向的夹角（弧度制）
 	 */
 	angle: function() {
@@ -564,7 +577,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 求与另一个向量之间的距离
-	 * @function go2d.Vector#distance
+	 * @function distance
 	 * @param {go2d.Vector} vector 要求距离的向量
 	 * @return {number} 两向量之间的距离
 	 */
@@ -573,7 +586,7 @@ var Vector = go2d.Vector = Class.extend({
 	},
 	/**
 	 * 创建当前向量的克隆对象
-	 * @function go2d.Vector#clone
+	 * @function clone
 	 * @return {go2d.Vector} 当前向量的克隆对象
 	 */
 	clone: function() {
@@ -589,8 +602,10 @@ var Vector = go2d.Vector = Class.extend({
  *             |tx ty 1|
  * </code></pre>
  * @author Lanfei
- * @class go2d.Matrix
- * @extends go2d.Class
+ * @class Matrix
+ * @extends Class
+ * 
+ * @constructor
  * @param {number} a 缩放或旋转时水平方向的参数
  * @param {number} b 旋转或倾斜时垂直方向的参数
  * @param {number} c 旋转或倾斜时水平方向的参数
@@ -604,7 +619,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 设置矩阵属性值，参数同构造函数
-	 * @function go2d.Matrix#set
+	 * @function set
 	 * @return {this}
 	 */
 	set: function(a, b, c, d, tx, ty) {
@@ -612,42 +627,42 @@ var Matrix = go2d.Matrix = Class.extend({
 
 			/**
 			 * 缩放或旋转时水平方向的参数
-			 * @member go2d.Matrix#a
+			 * @property a
 			 * @type {number}
 			 */
 			this.a = a;
 
 			/**
 			 * 旋转或倾斜时垂直方向的参数
-			 * @member go2d.Matrix#b
+			 * @property b
 			 * @type {number}
 			 */
 			this.b = b;
 
 			/**
 			 * 旋转或倾斜时水平方向的参数
-			 * @member go2d.Matrix#c
+			 * @property c
 			 * @type {number}
 			 */
 			this.c = c;
 
 			/**
 			 * 缩放或旋转时垂直方向的参数
-			 * @member go2d.Matrix#d
+			 * @property d
 			 * @type {number}
 			 */
 			this.d = d;
 
 			/**
 			 * 水平方向的平移距离
-			 * @member go2d.Matrix#tx
+			 * @property tx
 			 * @type {number}
 			 */
 			this.tx = tx;
 
 			/**
 			 * 垂直方向的平移距离
-			 * @member go2d.Matrix#ty
+			 * @property ty
 			 * @type {number}
 			 */
 			this.ty = ty;
@@ -660,7 +675,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 设置当前矩阵为单位矩阵
-	 * @function go2d.Matrix#identity
+	 * @function identity
 	 * @return {this}
 	 */
 	identity: function() {
@@ -668,7 +683,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 执行当前矩阵的逆转换
-	 * @function go2d.Matrix#invert
+	 * @function invert
 	 * @return {this}
 	 */
 	invert: function() {
@@ -690,7 +705,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	/**
 	 * 前置相乘
 	 * @param {go2d.Matrix} matrix 前置矩阵
-	 * @function go2d.Matrix#prepend
+	 * @function prepend
 	 * @return {this}
 	 */
 	prepend: function(a, b, c, d, tx, ty) {
@@ -714,7 +729,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	/**
 	 * 后置相乘
 	 * @param {go2d.Matrix} matrix 后置矩阵
-	 * @function go2d.Matrix#append
+	 * @function append
 	 * @return {this}
 	 */
 	append: function(a, b, c, d, tx, ty) {
@@ -737,7 +752,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 将变换矩阵乘以向量
-	 * @function go2d.Matrix#multiply
+	 * @function multiply
 	 * @param {go2d.Vector} vector 变换前的向量
 	 * @return {go2d.Vector} 变换后的向量
 	 */
@@ -748,7 +763,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 缩放
-	 * @function go2d.Matrix#scale
+	 * @function scale
 	 * @param {number} x 水平方向的缩放比例
 	 * @param {number} y 垂直方向的缩放比例
 	 * @return {this}
@@ -758,7 +773,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 旋转
-	 * @function go2d.Matrix#rotate
+	 * @function rotate
 	 * @param {number} angle 旋转的角度（弧度制）
 	 * @return {this}
 	 */
@@ -769,7 +784,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 斜切
-	 * @function go2d.Matrix#skew
+	 * @function skew
 	 * @param {number} x 水平方向的斜切角度（弧度制）
 	 * @param {number} y 垂直方向的斜切角度（弧度制）
 	 * @return {this}
@@ -779,7 +794,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 平移
-	 * @function go2d.Matrix#translate
+	 * @function translate
 	 * @param {number} x 水平方向的平移像素
 	 * @param {number} y 垂直方向的平移像素
 	 * @return {this}
@@ -789,7 +804,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 创建当前矩阵的克隆对象
-	 * @function go2d.Matrix#clone
+	 * @function clone
 	 * @return {go2d.Matrix} 当前矩阵的克隆对象
 	 */
 	clone: function() {
@@ -798,7 +813,7 @@ var Matrix = go2d.Matrix = Class.extend({
 }, {
 	/**
 	 * 角度制、弧度制换算比例
-	 * @member go2d.Matrix.DEG_TO_RAD
+	 * @property DEG_TO_RAD
 	 * @type {number}
 	 */
 	DEG_TO_RAD: Math.PI / 180
@@ -807,8 +822,10 @@ var Matrix = go2d.Matrix = Class.extend({
 /**
  * 事件派发器类，负责事件的派发和侦听。
  * @author Lanfei
- * @class go2d.EventDispatcher
- * @extends go2d.Class
+ * @class EventDispatcher
+ * @extends Class
+ * 
+ * @constructor
  * @param {string} type 事件类型
  * @param {Object} [data] 事件参数
  */
@@ -817,21 +834,21 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 		/**
 		 * 侦听器哈希表
 		 * @private
-		 * @member go2d.EventDispatcher#__events
+		 * @property __events
 		 * @type Object
 		 */
 		this.__events = {};
 	},
 	/**
 	 * 添加事件侦听器
-	 * @function go2d.EventDispatcher#on
+	 * @function on
 	 * @param {string} name 事件名称
 	 * @param {function} callback 回调函数
 	 * @return {this}
 	 */
 	/**
 	 * 批量添加事件侦听器
-	 * @function go2d.EventDispatcher#on
+	 * @function on
 	 * @param {Object} listeners 以事件名称为键名，回调函数为键值的哈希表
 	 * @return {this}
 	 */
@@ -850,7 +867,7 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 	},
 	/**
 	 * 移除事件侦听器
-	 * @function go2d.EventDispatcher#off
+	 * @function off
 	 * @param {string} name 事件名称
 	 * @param {function} [callback] 回调函数，当该参数为空时将移除该事件的所有回调
 	 * @return {this}
@@ -872,14 +889,14 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 	},
 	/**
 	 * 通过事件对象派发事件
-	 * @function go2d.EventDispatcher#emit
+	 * @function emit
 	 * @param {string} name 事件名称
 	 * @param {go2d.Event} [event] 事件对象
 	 * @return {this}
 	 */
 	/**
 	 * 通过任意事件参数派发事件
-	 * @function go2d.EventDispatcher#emit
+	 * @function emit
 	 * @param {string} name 事件名称
 	 * @param {...*} [params] 事件参数
 	 * @return {this}
@@ -901,7 +918,7 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 	},
 	/**
 	 * 释放事件派发器内存
-	 * @function go2d.EventDispatcher#dispose
+	 * @function dispose
 	 */
 	dispose: function() {
 		this.__events = null;
@@ -911,8 +928,10 @@ var EventDispatcher = go2d.EventDispatcher = Class.extend({
 /**
  * 事件类，所有事件对象的基类。
  * @author Lanfei
- * @class go2d.Event
- * @extends go2d.Class
+ * @class Event
+ * @extends Class
+ * 
+ * @constructor
  * @param {string} type 事件类型
  * @param {Object} [data] 事件参数
  */
@@ -924,7 +943,7 @@ var Event = go2d.Event = Class.extend({
 
 		/**
 		 * 事件类型
-		 * @member go2d.Event#type
+		 * @property type
 		 * @type string
 		 */
 		this.type = type;
@@ -932,7 +951,7 @@ var Event = go2d.Event = Class.extend({
 		/**
 		 * 是否已停止冒泡
 		 * @protected
-		 * @member go2d.Event#_propagationStopped
+		 * @property _propagationStopped
 		 * @type Boolean
 		 */
 		this._propagationStopped = false;
@@ -940,14 +959,14 @@ var Event = go2d.Event = Class.extend({
 		/**
 		 * 是否已阻止默认事件
 		 * @protected
-		 * @member go2d.Event#_defaultPrevented
+		 * @property _defaultPrevented
 		 * @type Boolean
 		 */
 		this._defaultPrevented = false;
 	},
 	/**
 	 * 停止冒泡
-	 * @function go2d.Event#stopPropagation
+	 * @function stopPropagation
 	 * @return {this}
 	 */
 	stopPropagation: function() {
@@ -956,7 +975,7 @@ var Event = go2d.Event = Class.extend({
 	},
 	/**
 	 * 获取是否已停止冒泡
-	 * @function go2d.Event#isPropagationStopped
+	 * @function isPropagationStopped
 	 * @return {Boolean}
 	 */
 	isPropagationStopped: function() {
@@ -964,7 +983,7 @@ var Event = go2d.Event = Class.extend({
 	},
 	/**
 	 * 阻止默认事件
-	 * @function go2d.Event#preventDefault
+	 * @function preventDefault
 	 * @return {this}
 	 */
 	preventDefault: function() {
@@ -973,7 +992,7 @@ var Event = go2d.Event = Class.extend({
 	},
 	/**
 	 * 获取是否已阻止默认事件
-	 * @function go2d.Event#isDefaultPrevented
+	 * @function isDefaultPrevented
 	 * @return {Boolean}
 	 */
 	isDefaultPrevented: function() {
@@ -984,8 +1003,10 @@ var Event = go2d.Event = Class.extend({
 /**
  * 触摸事件类
  * @author Lanfei
- * @class go2d.TouchEvent
- * @extends go2d.Event
+ * @class TouchEvent
+ * @extends Event
+ * 
+ * @constructor
  * @param {string} type 事件类型
  * @param {number} x 事件水平坐标
  * @param {number} y 事件垂直坐标
@@ -999,35 +1020,35 @@ var TouchEvent = Event.TouchEvent = Event.extend({
 
 			/**
 			 * 事件水平坐标
-			 * @member go2d.TouchEvent#x
+			 * @property x
 			 * @type number
 			 */
 			x: x,
 
 			/**
 			 * 事件垂直坐标
-			 * @member go2d.TouchEvent#y
+			 * @property y
 			 * @type number
 			 */
 			y: y,
 
 			/**
 			 * 全局水平坐标
-			 * @member go2d.TouchEvent#globalX
+			 * @property globalX
 			 * @type number
 			 */
 			globalX: globalX,
 
 			/**
 			 * 全局垂直坐标
-			 * @member go2d.TouchEvent#globalY
+			 * @property globalY
 			 * @type number
 			 */
 			globalY: globalY,
 
 			/**
 			 * 触摸对象唯一标识，用于多点触摸识别
-			 * @member go2d.TouchEvent#identifier
+			 * @property identifier
 			 * @type number
 			 */
 			identifier: identifier
@@ -1036,28 +1057,36 @@ var TouchEvent = Event.TouchEvent = Event.extend({
 }, {
 	/**
 	 * 触摸开始事件
-	 * @constant go2d.TouchEvent.TOUCH_START
+	 * @static
+	 * @final
+	 * @property TOUCH_START
 	 * @type {string}
 	 * @default touchstart
 	 */
 	TOUCH_START: 'touchstart',
 	/**
 	 * 触摸移动事件
-	 * @constant go2d.TouchEvent.TOUCH_MOVE
+	 * @static
+	 * @final
+	 * @property TOUCH_MOVE
 	 * @type {string}
 	 * @default touchmove
 	 */
 	TOUCH_MOVE: 'touchmove',
 	/**
 	 * 触摸结束事件
-	 * @constant go2d.TouchEvent.TOUCH_END
+	 * @static
+	 * @final
+	 * @property TOUCH_END
 	 * @type {string}
 	 * @default touchend
 	 */
 	TOUCH_END: 'touchend',
 	/**
 	 * 触摸点击事件
-	 * @constant go2d.TouchEvent.TOUCH_TAP
+	 * @static
+	 * @final
+	 * @property TOUCH_TAP
 	 * @type {string}
 	 * @default touchtap
 	 */
@@ -1067,8 +1096,10 @@ var TouchEvent = Event.TouchEvent = Event.extend({
 /**
  * 事件类，所有事件对象的基类。
  * @author Lanfei
- * @class go2d.ResizeEvent
- * @extends go2d.Event
+ * @class ResizeEvent
+ * @extends Event
+ * 
+ * @constructor
  * @param {Object} oldSize 对象原宽高
  * @param {number} oldSize.width 对象原宽度
  * @param {number} oldSize.height 对象原高度
@@ -1082,7 +1113,7 @@ var ResizeEvent = Event.ResizeEvent = Event.extend({
 
 			/**
 			 * 对象原宽高
-			 * @member go2d.ResizeEvent#oldSize
+			 * @property oldSize
 			 * @type Object
 			 * @property {number} width 对象原宽度
 			 * @property {number} height 对象原高度
@@ -1091,7 +1122,7 @@ var ResizeEvent = Event.ResizeEvent = Event.extend({
 
 			/**
 			 * 对象新宽高
-			 * @member go2d.ResizeEvent#newSize
+			 * @property newSize
 			 * @type Object
 			 * @property {number} width 对象新宽度
 			 * @property {number} height 对象新高度
@@ -1104,8 +1135,10 @@ var ResizeEvent = Event.ResizeEvent = Event.extend({
 /**
  * URL 请求类，用于发起 AJAX 请求，并获取返回数据。
  * @author Lanfei
- * @class go2d.URLRequest
- * @extends go2d.EventDispatcher
+ * @class URLRequest
+ * @extends EventDispatcher
+ *
+ * @constructor
  * @param {number} url 请求地址
  * @param {Object} [options] 配置参数
  * @param {string} [options.type=GET] 请求类型
@@ -1120,14 +1153,14 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 		/**
 		 * 请求地址
-		 * @member go2d.URLRequest#url
+		 * @property url
 		 * @type {string}
 		 */
 		this.url = url;
 
 		/**
 		 * 请求类型
-		 * @member go2d.URLRequest#type
+		 * @property type
 		 * @type {string}
 		 * @default GET
 		 */
@@ -1135,7 +1168,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 		/**
 		 * 返回数据格式
-		 * @member go2d.URLRequest#dataType
+		 * @property dataType
 		 * @type {string}
 		 * @default
 		 */
@@ -1143,7 +1176,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 		/**
 		 * 发送数据类型
-		 * @member go2d.URLRequest#contentType
+		 * @property contentType
 		 * @type {string}
 		 * @default application/x-www-form-urlencoded
 		 */
@@ -1151,7 +1184,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 		/**
 		 * 返回数据类型
-		 * @member go2d.URLRequest#responseType
+		 * @property responseType
 		 * @type {string}
 		 */
 		this.responseType = options.responseType || '';
@@ -1159,14 +1192,14 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 		/**
 		 * XMLHttpRequest 对象
 		 * @readonly
-		 * @member go2d.URLRequest#xhr
+		 * @property xhr
 		 * @type {Object}
 		 */
 		this.xhr = new window.XMLHttpRequest();
 	},
 	/**
 	 * 发送请求
-	 * @function go2d.URLRequest#send
+	 * @function send
 	 * @param {string|Object} data 请求数据
 	 * @return {this}
 	 */
@@ -1220,7 +1253,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 					/**
 					 * 请求成功事件
-					 * @event go2d.URLRequest#success
+					 * @event success
 					 * @param {mixed} response 返回数据
 					 */
 					that.emit('success', response);
@@ -1228,7 +1261,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 					/**
 					 * 请求失败事件
-					 * @event go2d.URLRequest#error
+					 * @event error
 					 * @param {Object} xhr XMLHttpRequest 对象
 					 * @param {string} textStatus 失败状态
 					 */
@@ -1241,7 +1274,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 	},
 	/**
 	 * 中断请求
-	 * @function go2d.URLRequest#abort
+	 * @function abort
 	 * @return {this}
 	 */
 	abort: function() {
@@ -1253,11 +1286,16 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 /**
  * 资源加载器类，可用于加载和管理游戏资源。
  * @author Lanfei
- * @class go2d.ResourceLoader
- * @extends go2d.EventDispatcher
+ * @class ResourceLoader
+ * @extends EventDispatcher
+ * 
+ * @constructor
  * @param {Object} resources 资源路径数据对象，格式如下：
+ * @param {Object} [options] 配置参数
+ * @param {Object} [options.retryTimes=3] 失败重试次数
+ * @example
  * <pre><code>
- * {
+ * new ResourceLoader({
  *     text: {
  *         name1: url1,
  *         name2: url2
@@ -1269,9 +1307,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
  *         // ...
  *     }
  *     // ...
- * }
- * @param {Object} [options] 配置参数
- * @param {Object} [options.retryTimes=3] 失败重试次数
+ * });
  * </code></pre>
  */
 var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
@@ -1282,7 +1318,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		/**
 		 * 缓存的资源对象
 		 * @protected
-		 * @member go2d.ResourceLoader#_cache
+		 * @property _cache
 		 * @type {Object}
 		 */
 		this._cache = {};
@@ -1290,7 +1326,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		/**
 		 * 资源路径数据对象
 		 * @protected
-		 * @member go2d.ResourceLoader#_resources
+		 * @property _resources
 		 * @type {Object}
 		 */
 		this._resources = resources;
@@ -1298,7 +1334,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		/**
 		 * 资源总数
 		 * @readonly
-		 * @member go2d.ResourceLoader#total
+		 * @property total
 		 * @type {number}
 		 */
 		this.total = 0;
@@ -1306,7 +1342,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		/**
 		 * 加载失败资源数量
 		 * @readonly
-		 * @member go2d.ResourceLoader#errorCount
+		 * @property errorCount
 		 * @type {number}
 		 */
 		this.errorCount = 0;
@@ -1314,14 +1350,14 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		/**
 		 * 加载完成资源数量
 		 * @readonly
-		 * @member go2d.ResourceLoader#loadedCount
+		 * @property loadedCount
 		 * @type {number}
 		 */
 		this.loadedCount = 0;
 
 		/**
 		 * 失败重试次数
-		 * @member go2d.ResourceLoader#retryTimes
+		 * @property retryTimes
 		 * @type {number}
 		 * @default 3
 		 */
@@ -1406,7 +1442,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	_onLoad: function() {
 		/**
 		 * 加载进度事件
-		 * @event go2d.ResourceLoader#progress
+		 * @event progress
 		 * @param {number} loadedCount 已加载数量
 		 * @param {number} total 总数量
 		 */
@@ -1417,7 +1453,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		++this.errorCount;
 		/**
 		 * 加载错误事件
-		 * @event go2d.ResourceLoader#error
+		 * @event error
 		 * @param {string} name 加载出错资源名称
 		 */
 		this.emit('error', name);
@@ -1427,21 +1463,21 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		if (this.loadedCount === this.total) {
 			/**
 			 * 加载完全事件
-			 * @event go2d.ResourceLoader#complete
+			 * @event complete
 			 */
 			this.emit('complete');
 		}
 		if (this.loadedCount + this.errorCount === this.total) {
 			/**
 			 * 加载完毕事件
-			 * @event go2d.ResourceLoader#finish
+			 * @event finish
 			 */
 			this.emit('finish');
 		}
 	},
 	/**
 	 * 开始加载资源
-	 * @function go2d.ResourceLoader#load
+	 * @function load
 	 * @return {this}
 	 */
 	load: function() {
@@ -1457,7 +1493,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取资源对象
-	 * @function go2d.ResourceLoader#get
+	 * @function get
 	 * @param {string} type 资源类型
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
@@ -1469,7 +1505,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取 XML 资源
-	 * @function go2d.ResourceLoader#getXML
+	 * @function getXML
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -1478,7 +1514,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取 JSON 资源
-	 * @function go2d.ResourceLoader#getJSON
+	 * @function getJSON
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -1487,7 +1523,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取文本资源
-	 * @function go2d.ResourceLoader#getText
+	 * @function getText
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -1496,7 +1532,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取图像资源
-	 * @function go2d.ResourceLoader#getImage
+	 * @function getImage
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -1505,7 +1541,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取音频资源
-	 * @function go2d.ResourceLoader#getAudio
+	 * @function getAudio
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -1514,7 +1550,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取二进制资源
-	 * @function go2d.ResourceLoader#getBinary
+	 * @function getBinary
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -1523,7 +1559,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除资源
-	 * @function go2d.ResourceLoader#destroy
+	 * @function destroy
 	 * @param {string} [type] 资源类型，为空时移除所有资源
 	 * @param {string} [name] 资源名称，为空时移除所有指定类型资源
 	 * @return {this}
@@ -1540,7 +1576,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除 XML 资源
-	 * @function go2d.ResourceLoader#destroyXML
+	 * @function destroyXML
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -1549,7 +1585,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除 JSON 资源
-	 * @function go2d.ResourceLoader#destroyJSON
+	 * @function destroyJSON
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -1558,7 +1594,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除文本资源
-	 * @function go2d.ResourceLoader#destroyText
+	 * @function destroyText
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -1567,7 +1603,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除图像资源
-	 * @function go2d.ResourceLoader#destroyImage
+	 * @function destroyImage
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -1576,7 +1612,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除音频资源
-	 * @function go2d.ResourceLoader#destroyAudio
+	 * @function destroyAudio
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -1585,7 +1621,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除二进制资源
-	 * @function go2d.ResourceLoader#destroyBinary
+	 * @function destroyBinary
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -1594,7 +1630,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除所有资源
-	 * @function go2d.ResourceLoader#destroyAll
+	 * @function destroyAll
 	 * @return {this}
 	 */
 	destroyAll: function() {
@@ -1603,7 +1639,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 释放加载器内存
-	 * @function go2d.ResourceLoader#dispose
+	 * @function dispose
 	 */
 	dispose: function() {
 		this._resources = null;
@@ -1613,7 +1649,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * XML 数据
-	 * @constant go2d.ResourceLoader.TYPE_XML
+	 * @static
+	 * @final
+	 * @property TYPE_XML
 	 * @type {string}
 	 * @default xml
 	 */
@@ -1621,7 +1659,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * JSON 数据
-	 * @constant go2d.ResourceLoader.TYPE_JSON
+	 * @static
+	 * @final
+	 * @property TYPE_JSON
 	 * @type {string}
 	 * @default json
 	 */
@@ -1629,7 +1669,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * 文本数据
-	 * @constant go2d.ResourceLoader.TYPE_TEXT
+	 * @static
+	 * @final
+	 * @property TYPE_TEXT
 	 * @type {string}
 	 * @default text
 	 */
@@ -1637,7 +1679,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * 图像
-	 * @constant go2d.ResourceLoader.TYPE_IMAGE
+	 * @static
+	 * @final
+	 * @property TYPE_IMAGE
 	 * @type {string}
 	 * @default image
 	 */
@@ -1645,7 +1689,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * 音频
-	 * @constant go2d.ResourceLoader.TYPE_AUDIO
+	 * @static
+	 * @final
+	 * @property TYPE_AUDIO
 	 * @type {string}
 	 * @default audio
 	 */
@@ -1653,7 +1699,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * 二进制数据
-	 * @constant go2d.ResourceLoader.TYPE_BINARY
+	 * @static
+	 * @final
+	 * @property TYPE_BINARY
 	 * @type {string}
 	 * @default binary
 	 */
@@ -1663,14 +1711,14 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 /**
  * 缓动函数集合，用于实现不同变化速度类型的动画。
  * @author Lanfei
- * @class go2d.Ease
- * @extends go2d.Class
+ * @class Ease
+ * @extends Class
  */
 var Ease = go2d.Ease = Class.extend({}, {
 	/**
 	 * 匀速缓动函数
 	 * @static
-	 * @function go2d.Ease.linear
+	 * @function linear
 	 * @param {number} t 当前时间
 	 * @param {number} b 初始值
 	 * @param {number} c 变化量
@@ -1682,24 +1730,27 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的二次方缓动函数
-	 * @function go2d.Ease.easeInQuad
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInQuad
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInQuad: function(t, b, c, d) {
 		return c * (t /= d) * t + b;
 	},
 	/**
 	 * 减速的二次方缓动函数
-	 * @function go2d.Ease.easeOutQuad
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutQuad
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutQuad: function(t, b, c, d) {
 		return -c * (t /= d) * (t - 2) + b;
 	},
 	/**
 	 * 先加速后减速的二次方缓动函数
-	 * @function go2d.Ease.easeInOutQuad
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutQuad
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutQuad: function(t, b, c, d) {
 		if ((t /= d / 2) < 1) return c / 2 * t * t + b;
@@ -1707,24 +1758,27 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的三次方缓动函数
-	 * @function go2d.Ease.easeInCubic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInCubic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInCubic: function(t, b, c, d) {
 		return c * (t /= d) * t * t + b;
 	},
 	/**
 	 * 减速的三次方缓动函数
-	 * @function go2d.Ease.easeOutCubic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutCubic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutCubic: function(t, b, c, d) {
 		return c * ((t = t / d - 1) * t * t + 1) + b;
 	},
 	/**
 	 * 先加速后减速的三次方缓动函数
-	 * @function go2d.Ease.easeInOutCubic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutCubic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutCubic: function(t, b, c, d) {
 		if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
@@ -1732,24 +1786,27 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的四次方缓动函数
-	 * @function go2d.Ease.easeInQuart
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInQuart
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInQuart: function(t, b, c, d) {
 		return c * (t /= d) * t * t * t + b;
 	},
 	/**
 	 * 减速的四次方缓动函数
-	 * @function go2d.Ease.easeOutQuart
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutQuart
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutQuart: function(t, b, c, d) {
 		return -c * ((t = t / d - 1) * t * t * t - 1) + b;
 	},
 	/**
 	 * 先加速后减速的四次方缓动函数
-	 * @function go2d.Ease.easeInOutQuart
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutQuart
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutQuart: function(t, b, c, d) {
 		if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
@@ -1757,24 +1814,27 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的五次方缓动函数
-	 * @function go2d.Ease.easeInQuint
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInQuint
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInQuint: function(t, b, c, d) {
 		return c * (t /= d) * t * t * t * t + b;
 	},
 	/**
 	 * 减速的五次方缓动函数
-	 * @function go2d.Ease.easeOutQuint
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutQuint
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutQuint: function(t, b, c, d) {
 		return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
 	},
 	/**
 	 * 先加速后减速的五次方缓动函数
-	 * @function go2d.Ease.easeInOutQuint
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutQuint
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutQuint: function(t, b, c, d) {
 		if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
@@ -1782,48 +1842,54 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的正弦曲线缓动函数
-	 * @function go2d.Ease.easeInSine
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInSine
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInSine: function(t, b, c, d) {
 		return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
 	},
 	/**
 	 * 减速的正弦曲线缓动函数
-	 * @function go2d.Ease.easeOutSine
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutSine
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutSine: function(t, b, c, d) {
 		return c * Math.sin(t / d * (Math.PI / 2)) + b;
 	},
 	/**
 	 * 先加速后减速的正弦曲线缓动函数
-	 * @function go2d.Ease.easeInOutSine
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutSine
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutSine: function(t, b, c, d) {
 		return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
 	},
 	/**
 	 * 加速的指数曲线缓动函数
-	 * @function go2d.Ease.easeInExpo
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInExpo
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInExpo: function(t, b, c, d) {
 		return (t === 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
 	},
 	/**
 	 * 减速的指数曲线缓动函数
-	 * @function go2d.Ease.easeOutExpo
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutExpo
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutExpo: function(t, b, c, d) {
 		return (t === d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
 	},
 	/**
 	 * 先加速后减速的指数曲线缓动函数
-	 * @function go2d.Ease.easeInOutExpo
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutExpo
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutExpo: function(t, b, c, d) {
 		if (t === 0) return b;
@@ -1833,24 +1899,27 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的圆形曲线缓动函数
-	 * @function go2d.Ease.easeInCirc
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInCirc
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInCirc: function(t, b, c, d) {
 		return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
 	},
 	/**
 	 * 减速的圆形曲线缓动函数
-	 * @function go2d.Ease.easeOutCirc
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutCirc
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutCirc: function(t, b, c, d) {
 		return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
 	},
 	/**
 	 * 先加速后减速的圆形曲线缓动函数
-	 * @function go2d.Ease.easeInOutCirc
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutCirc
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutCirc: function(t, b, c, d) {
 		if ((t /= d / 2) < 1) return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
@@ -1858,8 +1927,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的指数衰减正弦曲线缓动
-	 * @function go2d.Ease.easeInElastic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInElastic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInElastic: function(t, b, c, d) {
 		var s = 1.70158;
@@ -1876,8 +1946,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 减速的指数衰减正弦曲线缓动
-	 * @function go2d.Ease.easeOutElastic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutElastic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutElastic: function(t, b, c, d) {
 		var s = 1.70158;
@@ -1894,8 +1965,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 先加速后减速的指数衰减正弦曲线缓动
-	 * @function go2d.Ease.easeInOutElastic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutElastic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutElastic: function(t, b, c, d) {
 		var s = 1.70158;
@@ -1913,8 +1985,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的超范围三次方缓动
-	 * @function go2d.Ease.easeInBack
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInBack
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInBack: function(t, b, c, d, s) {
 		if (s === undefined) s = 1.70158;
@@ -1922,8 +1995,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 减速的超范围三次方缓动
-	 * @function go2d.Ease.easeOutBack
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutBack
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutBack: function(t, b, c, d, s) {
 		if (s === undefined) s = 1.70158;
@@ -1931,8 +2005,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 先加速后减速的超范围三次方缓动
-	 * @function go2d.Ease.easeInOutBack
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutBack
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutBack: function(t, b, c, d, s) {
 		if (s === undefined) s = 1.70158;
@@ -1941,16 +2016,18 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的指数衰减反弹缓动
-	 * @function go2d.Ease.easeInBounce
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInBounce
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInBounce: function(t, b, c, d) {
 		return c - jQuery.easing.easeOutBounce(d - t, 0, c, d) + b;
 	},
 	/**
 	 * 减速的指数衰减反弹缓动
-	 * @function go2d.Ease.easeOutBounce
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutBounce
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutBounce: function(t, b, c, d) {
 		if ((t /= d) < (1 / 2.75)) {
@@ -1965,8 +2042,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 先加速后减速的指数衰减反弹缓动
-	 * @function go2d.Ease.easeInOutBounce
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutBounce
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutBounce: function(t, b, c, d) {
 		if (t < d / 2) return jQuery.easing.easeInBounce(t * 2, 0, c, d) * 0.5 + b;
@@ -1977,8 +2055,10 @@ var Ease = go2d.Ease = Class.extend({}, {
 /**
  * 缓动动画控制类，负责处理显示对象的缓动动画。
  * @author Lanfei
- * @class go2d.Tween
- * @extends go2d.Class
+ * @class Tween
+ * @extends Class
+ *
+ * @constructor
  * @param {go2d.Sprite} target 动画应用对象
  * @param {Object} [options] 配置参数
  * @param {Object} [options.loops=1] 循环次数，为 0 时无限循环
@@ -1992,7 +2072,7 @@ var Tween = go2d.Tween = Class.extend({
 		/**
 		 * 动画步骤
 		 * @protected
-		 * @member go2d.Tween#_steps
+		 * @property _steps
 		 * @type {Array}
 		 */
 		this._steps = [];
@@ -2000,7 +2080,7 @@ var Tween = go2d.Tween = Class.extend({
 		/**
 		 * 动画应用对象
 		 * @protected
-		 * @member go2d.Tween#_target
+		 * @property _target
 		 * @type {go2d.Sprite}
 		 */
 		this._target = target;
@@ -2008,7 +2088,7 @@ var Tween = go2d.Tween = Class.extend({
 		/**
 		 * 循环次数，为 0 时无限循环
 		 * @protected
-		 * @member go2d.Tween#_loops
+		 * @property _loops
 		 * @type {number}
 		 */
 		this._loops = options.loops === undefined ? 1 : options.loops;
@@ -2016,7 +2096,7 @@ var Tween = go2d.Tween = Class.extend({
 		/**
 		 * 是否已暂停
 		 * @protected
-		 * @member go2d.Tween#_paused
+		 * @property _paused
 		 * @type {Boolean}
 		 */
 		this._paused = false;
@@ -2024,7 +2104,7 @@ var Tween = go2d.Tween = Class.extend({
 		/**
 		 * 动画步骤数量
 		 * @readonly
-		 * @member go2d.Tween#length
+		 * @property length
 		 * @type {number}
 		 */
 		Object.defineProperty(this, 'length', {
@@ -2095,7 +2175,7 @@ var Tween = go2d.Tween = Class.extend({
 	},
 	/**
 	 * 等待指定时间后进行下一个动画
-	 * @function go2d.Tween#wait
+	 * @function wait
 	 * @param {number} duration 毫秒数
 	 * @return {this}
 	 */
@@ -2107,7 +2187,7 @@ var Tween = go2d.Tween = Class.extend({
 	},
 	/**
 	 * 更新属性值后进行下一个动画
-	 * @function go2d.Tween#from
+	 * @function from
 	 * @param {Object} props 要更新的属性集合
 	 * @return {this}
 	 */
@@ -2119,10 +2199,10 @@ var Tween = go2d.Tween = Class.extend({
 	},
 	/**
 	 * 为指定属性集合设置动画
-	 * @function go2d.Tween#to
+	 * @function to
 	 * @param {Object} props 要动画的属性集合
 	 * @param {number} duration 持续毫秒数
-	 * @param {function} [ease=go2d.Ease.linear] 缓动函数
+	 * @param {function} [ease=linear] 缓动函数
 	 * @return {this}
 	 */
 	to: function(props, duration, ease) {
@@ -2135,7 +2215,7 @@ var Tween = go2d.Tween = Class.extend({
 	},
 	/**
 	 * 执行回调后进行下一个动画
-	 * @function go2d.Tween#call
+	 * @function call
 	 * @param {function} callback 回调函数
 	 * @return {this}
 	 */
@@ -2160,8 +2240,10 @@ var Tween = go2d.Tween = Class.extend({
 /**
  * 显示对象基类，实现了显示对象的基本渲染和事件逻辑，显示对象元素类和舞台类都基于此类。
  * @author Lanfei
- * @class go2d.DisplayObject
- * @extends go2d.EventDispatcher
+ * @class DisplayObject
+ * @extends EventDispatcher
+ * 
+ * @constructor
  * @param {object} canvas 用于渲染的画布对象
  */
 var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
@@ -2171,7 +2253,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 用于渲染的画布对象
 		 * @readonly
-		 * @member go2d.DisplayObject#canvas
+		 * @property canvas
 		 * @type object
 		 */
 		this.canvas = canvas || document.createElement('canvas');
@@ -2179,21 +2261,21 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 画布的上下文对象
 		 * @readonly
-		 * @member go2d.DisplayObject#context
+		 * @property context
 		 * @type object
 		 */
 		this.context = this.canvas.getContext('2d');
 
 		/**
 		 * 用于标识该对象的名字，该属性在兄弟对象中应该唯一
-		 * @member go2d.DisplayObject#name
+		 * @property name
 		 * @type string
 		 */
 		this.name = '';
 
 		/**
 		 * 用于标识该对象的标签
-		 * @member go2d.DisplayObject#tag
+		 * @property tag
 		 * @type string
 		 */
 		this.tag = '';
@@ -2201,14 +2283,14 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 该对象所属的舞台对象
 		 * @readonly
-		 * @member go2d.DisplayObject#stage
-		 * @type go2d.Stage
+		 * @property stage
+		 * @type Stage
 		 */
 		this.stage = null;
 
 		/**
 		 * 是否已暂停
-		 * @member go2d.DisplayObject#paused
+		 * @property paused
 		 * @type Boolean
 		 * @default false
 		 */
@@ -2216,7 +2298,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 		/**
 		 * 是否可点击
-		 * @member go2d.DisplayObject#touchable
+		 * @property touchable
 		 * @type Boolean
 		 * @default true
 		 */
@@ -2224,7 +2306,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 		/**
 		 * 子节点是否可点击
-		 * @member go2d.DisplayObject#touchChildren
+		 * @property touchChildren
 		 * @type Boolean
 		 * @default true
 		 */
@@ -2233,7 +2315,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 是否需要重新渲染
 		 * @protected
-		 * @member go2d.DisplayObject#_dirty
+		 * @property _dirty
 		 * @type Boolean
 		 * @default true
 		 */
@@ -2242,7 +2324,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 触摸标识数组
 		 * @protected
-		 * @member go2d.DisplayObject#_touches
+		 * @property _touches
 		 * @type Array
 		 */
 		this._touches = [];
@@ -2250,15 +2332,15 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 子对象数组
 		 * @protected
-		 * @member go2d.DisplayObject#_children
+		 * @property _children
 		 * @type Array
 		 */
 		this._children = [];
 
 		/**
 		 * 遮罩层
-		 * @member go2d.DisplayObject#mask
-		 * @type go2d.Sprite
+		 * @property mask
+		 * @type Sprite
 		 */
 		this._mask = null;
 
@@ -2266,7 +2348,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 			/**
 			 * 不透明度
-			 * @member go2d.DisplayObject#opacity
+			 * @property opacity
 			 * @type number
 			 * @default 1
 			 */
@@ -2274,7 +2356,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 			/**
 			 * 背景颜色或样式
-			 * @member go2d.DisplayObject#background
+			 * @property background
 			 * @type null|string|Object
 			 * @default null
 			 */
@@ -2296,7 +2378,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 		/**
 		 * 宽度
-		 * @member go2d.DisplayObject#width
+		 * @property width
 		 * @type number
 		 */
 		Object.defineProperty(this, 'width', {
@@ -2310,7 +2392,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 		/**
 		 * 高度
-		 * @member go2d.DisplayObject#height
+		 * @property height
 		 * @type number
 		 */
 		Object.defineProperty(this, 'height', {
@@ -2344,7 +2426,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 							if (inRect) {
 								/**
 								 * 触摸开始事件
-								 * @event go2d.DisplayObject#touchstart
+								 * @event touchstart
 								 * @param {go2d.TouchEvent} event 触摸事件对象
 								 */
 								emit = true;
@@ -2355,7 +2437,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 							if (touches[identifier]) {
 								/**
 								 * 触摸移动事件
-								 * @event go2d.DisplayObject#touchmove
+								 * @event touchmove
 								 * @param {go2d.TouchEvent} event 触摸事件对象
 								 */
 								emit = true;
@@ -2365,7 +2447,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 							if (touches[identifier]) {
 								/**
 								 * 触摸结束事件
-								 * @event go2d.DisplayObject#touchend
+								 * @event touchend
 								 * @param {go2d.TouchEvent} event 触摸事件对象
 								 */
 								emit = true;
@@ -2376,7 +2458,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 							if (inRect && touches[identifier] !== undefined) {
 								/**
 								 * 触摸点击事件
-								 * @event go2d.DisplayObject#touchtap
+								 * @event touchtap
 								 * @param {go2d.TouchEvent} event 触摸事件对象
 								 */
 								emit = true;
@@ -2402,7 +2484,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	_onAddedToStage: function(stage) {
 		/**
 		 * 添加到舞台事件
-		 * @event go2d.DisplayObject#addedtostage
+		 * @event addedtostage
 		 * @param {go2d.Stage} stage 舞台对象
 		 */
 		this.stage = stage;
@@ -2414,7 +2496,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	_onRemovedFromStage: function(stage) {
 		/**
 		 * 移除出舞台事件
-		 * @event go2d.DisplayObject#removedfromstage
+		 * @event removedfromstage
 		 * @param {go2d.Stage} stage 舞台对象
 		 */
 		this.stage = null;
@@ -2438,7 +2520,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		});
 		/**
 		 * 宽高变化事件
-		 * @event go2d.DisplayObject#resize
+		 * @event resize
 		 * @param {go2d.ResizeEvent} event 宽高变化事件对象
 		 */
 		this.emit('resize', event);
@@ -2450,7 +2532,8 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 绘制子对象
-	 * @function go2d.DisplayObject#_draw
+	 * @protected
+	 * @function _draw
 	 * @param {go2d.Sprite} child 要绘制的对象
 	 * @param {string} [blendMode] 混合模式
 	 * @return {this}
@@ -2474,7 +2557,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 渲染该对象
-	 * @function go2d.DisplayObject#render
+	 * @function render
 	 * @return {this}
 	 */
 	render: function() {
@@ -2493,7 +2576,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 			}
 			/**
 			 * 开始渲染事件
-			 * @event go2d.DisplayObject#render
+			 * @event render
 			 * @param {go2d.Event} event 事件对象
 			 */
 			this.emit('render', event);
@@ -2509,7 +2592,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 			}
 			/**
 			 * 绘制完毕事件
-			 * @event go2d.DisplayObject#paint
+			 * @event paint
 			 * @param {object} context 绘制上下文对象
 			 */
 			this.emit('paint', ctx);
@@ -2519,7 +2602,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 更新对象渲染状态，当该对象需要重新渲染时调用
-	 * @function go2d.DisplayObject#update
+	 * @function update
 	 * @return {this}
 	 */
 	update: function() {
@@ -2535,7 +2618,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 添加子对象
-	 * @function go2d.DisplayObject#addChild
+	 * @function addChild
 	 * @param {go2d.DisplayObject} child 要添加的子对象
 	 * @return {this}
 	 */
@@ -2545,7 +2628,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 在指定深度添加子对象
-	 * @function go2d.DisplayObject#addChildAt
+	 * @function addChildAt
 	 * @param {go2d.DisplayObject} child 要添加的子对象
 	 * @param {number} index 深度，数值越小层级越低
 	 * @return {this}
@@ -2572,7 +2655,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取指定名字的子对象
-	 * @function go2d.DisplayObject#getChildByName
+	 * @function getChildByName
 	 * @param {string} name 子对象名字
 	 * @return {go2d.DisplayObject} 对应的子对象
 	 */
@@ -2588,7 +2671,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取指定标签的子对象
-	 * @function go2d.DisplayObject#getChildrenByTag
+	 * @function getChildrenByTag
 	 * @param {string} tag 子对象标签
 	 * @return {Array} 对应的子对象数组
 	 */
@@ -2603,7 +2686,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取指定深度的子对象
-	 * @function go2d.DisplayObject#getChildAt
+	 * @function getChildAt
 	 * @param {number} index 子对象深度
 	 * @return {go2d.DisplayObject} 对应的子对象
 	 */
@@ -2612,7 +2695,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取指定子对象的深度
-	 * @function go2d.DisplayObject#getChildIndex
+	 * @function getChildIndex
 	 * @param {go2d.DisplayObject} child 对应的子对象
 	 * @return {number} 子对象深度
 	 */
@@ -2627,7 +2710,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 交换两个子对象的深度
-	 * @function go2d.DisplayObject#swapChildren
+	 * @function swapChildren
 	 * @param {go2d.DisplayObject} child1 要交换的子对象一
 	 * @param {go2d.DisplayObject} child2 要交换的子对象二
 	 * @return {this}
@@ -2642,7 +2725,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 交换两个子对象的深度
-	 * @function go2d.DisplayObject#swapChildrenAt
+	 * @function swapChildrenAt
 	 * @param {number} index1 要交换的子对象深度一
 	 * @param {number} index2 要交换的子对象深度二
 	 * @return {this}
@@ -2661,7 +2744,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 排列子对象
-	 * @function go2d.DisplayObject#sortChildren
+	 * @function sortChildren
 	 * @param {function} compare 用于比较的函数
 	 * @return {this}
 	 */
@@ -2671,7 +2754,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取所有子对象
-	 * @function go2d.DisplayObject#getAllChildren
+	 * @function getAllChildren
 	 * @return {Array} 所有子对象数组
 	 */
 	getAllChildren: function() {
@@ -2679,7 +2762,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除指定的子对象
-	 * @function go2d.DisplayObject#removeChild
+	 * @function removeChild
 	 * @param {go2d.DisplayObject} child 对应的子对象
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
@@ -2695,7 +2778,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除指定深度的子对象
-	 * @function go2d.DisplayObject#removeChildAt
+	 * @function removeChildAt
 	 * @param {number} index 子对象的深度
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
@@ -2717,7 +2800,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除指定名字的子对象
-	 * @function go2d.DisplayObject#removeChildrenByName
+	 * @function removeChildrenByName
 	 * @param {string} name 子对象的名字
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
@@ -2734,7 +2817,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除指定标签的子对象
-	 * @function go2d.DisplayObject#removeChildrenByTag
+	 * @function removeChildrenByTag
 	 * @param {string} tag 子对象的标签
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
@@ -2750,7 +2833,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除所有子对象
-	 * @function go2d.DisplayObject#removeAllChildren
+	 * @function removeAllChildren
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
 	 */
@@ -2770,7 +2853,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 设置遮罩对象
-	 * @function go2d.DisplayObject#setMask
+	 * @function setMask
 	 * @param {go2d.Sprite} mask 遮罩对象
 	 * @return {this}
 	 */
@@ -2795,7 +2878,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取遮罩对象
-	 * @function go2d.DisplayObject#getMask
+	 * @function getMask
 	 * @return {go2d.Sprite}
 	 */
 	getMask: function() {
@@ -2803,7 +2886,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除遮罩对象
-	 * @function go2d.DisplayObject#removeMask
+	 * @function removeMask
 	 * @param {Boolean} cleanup 是否销毁遮罩对象
 	 * @return {this}
 	 */
@@ -2818,7 +2901,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 开始该对象的帧播放
-	 * @function go2d.DisplayObject#play
+	 * @function play
 	 * @return {this}
 	 */
 	play: function() {
@@ -2827,7 +2910,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 暂停该对象的帧播放
-	 * @function go2d.DisplayObject#pause
+	 * @function pause
 	 * @return {this}
 	 */
 	pause: function() {
@@ -2836,7 +2919,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 进入下一帧，该方法应只由引擎本身调用
-	 * @function go2d.DisplayObject#tick
+	 * @function tick
 	 * @return {this}
 	 */
 	tick: function(deltaTime) {
@@ -2846,7 +2929,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 			});
 			/**
 			 * 步进（进入下一帧）事件
-			 * @event go2d.DisplayObject#step
+			 * @event step
 			 * @param {number} deltaTime 两帧时间差
 			 */
 			this.emit('step', deltaTime);
@@ -2855,7 +2938,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 释放对象内存
-	 * @function go2d.DisplayObject#dispose
+	 * @function dispose
 	 */
 	dispose: function() {
 		if (this.parent) {
@@ -2868,8 +2951,10 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 /**
  * 显示对象元素类，所有舞台上的显示对象都基于此类。
  * @author Lanfei
- * @class go2d.Sprite
- * @extends go2d.DisplayObject
+ * @class Sprite
+ * @extends DisplayObject
+ * 
+ * @constructor
  */
 var Sprite = go2d.Sprite = DisplayObject.extend({
 	__init: function() {
@@ -2877,8 +2962,8 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 		/**
 		 * 父对象
-		 * @member go2d.DisplayObject#parent
-		 * @type go2d.DisplayObject
+		 * @property parent
+		 * @type DisplayObject
 		 */
 		this.parent = null;
 
@@ -2886,7 +2971,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 水平坐标
-			 * @member go2d.DisplayObject#x
+			 * @property x
 			 * @type number
 			 * @default 0
 			 */
@@ -2894,7 +2979,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 垂直坐标
-			 * @member go2d.DisplayObject#y
+			 * @property y
 			 * @type number
 			 * @default 0
 			 */
@@ -2902,7 +2987,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 水平方向斜切
-			 * @member go2d.DisplayObject#skewX
+			 * @property skewX
 			 * @type number
 			 * @default 0
 			 */
@@ -2910,7 +2995,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 垂直方向斜切
-			 * @member go2d.DisplayObject#skewY
+			 * @property skewY
 			 * @type number
 			 * @default 0
 			 */
@@ -2918,7 +3003,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 水平方向缩放
-			 * @member go2d.DisplayObject#scaleX
+			 * @property scaleX
 			 * @type number
 			 * @default 1
 			 */
@@ -2926,7 +3011,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 垂直方向缩放
-			 * @member go2d.DisplayObject#scaleY
+			 * @property scaleY
 			 * @type number
 			 * @default 1
 			 */
@@ -2934,7 +3019,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 水平方向锚点偏移比例
-			 * @member go2d.DisplayObject#anchorX
+			 * @property anchorX
 			 * @type number
 			 * @default 0
 			 */
@@ -2942,7 +3027,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 垂直方向锚点偏移比例
-			 * @member go2d.DisplayObject#anchorY
+			 * @property anchorY
 			 * @type number
 			 * @default 0
 			 */
@@ -2950,7 +3035,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 水平方向锚点偏移像素
-			 * @member go2d.DisplayObject#anchorOffsetX
+			 * @property anchorOffsetX
 			 * @type number
 			 * @default 0
 			 */
@@ -2958,7 +3043,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 垂直方向锚点偏移像素
-			 * @member go2d.DisplayObject#anchorOffsetY
+			 * @property anchorOffsetY
 			 * @type number
 			 * @default 0
 			 */
@@ -2966,7 +3051,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 旋转角度
-			 * @member go2d.DisplayObject#rotation
+			 * @property rotation
 			 * @type number
 			 * @default 0
 			 */
@@ -2974,7 +3059,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 是否可见
-			 * @member go2d.DisplayObject#visible
+			 * @property visible
 			 * @type Boolean
 			 * @default true
 			 */
@@ -2982,7 +3067,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 
 			/**
 			 * 混合模式
-			 * @member go2d.DisplayObject#blendMode
+			 * @property blendMode
 			 * @type string
 			 * @default source-over
 			 * @todo 应有一个 BlendMode 类
@@ -3004,7 +3089,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 	},
 	/**
 	 * 获取变化矩阵
-	 * @function go2d.Sprite#getTransform
+	 * @function getTransform
 	 * @return {go2d.Matrix}
 	 */
 	getTransform: function() {
@@ -3018,7 +3103,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 	},
 	/**
 	 * 显示该对象
-	 * @function go2d.Sprite#show
+	 * @function show
 	 * @return {this}
 	 */
 	show: function() {
@@ -3027,7 +3112,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 	},
 	/**
 	 * 隐藏该对象
-	 * @function go2d.Sprite#hide
+	 * @function hide
 	 * @return {this}
 	 */
 	hide: function() {
@@ -3038,8 +3123,10 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 /**
  * 图像显示类，用于显示一张图像。
  * @author Lanfei
- * @class go2d.ImageView
- * @extends go2d.Sprite
+ * @class ImageView
+ * @extends Sprite
+ * 
+ * @constructor
  * @param {object} image 要绘制的图像或画布元素
  */
 var ImageView = go2d.ImageView = Sprite.extend({
@@ -3049,7 +3136,7 @@ var ImageView = go2d.ImageView = Sprite.extend({
 		/**
 		 * 要绘制的图像或画布元素
 		 * @protected
-		 * @member go2d.ImageView#_image
+		 * @property _image
 		 * @type object
 		 */
 		this._image = null;
@@ -3065,7 +3152,7 @@ var ImageView = go2d.ImageView = Sprite.extend({
 	},
 	/**
 	 * 设置要绘制的图像或画布元素
-	 * @function go2d.ImageView#setImage
+	 * @function setImage
 	 * @param {object} image 要绘制的图像或画布元素
 	 * @return {this}
 	 */
@@ -3079,8 +3166,10 @@ var ImageView = go2d.ImageView = Sprite.extend({
 /**
  * 滑动视图类，可以在该视图中显示超过视图大小的显示对象，并可以通过滑动来显示内容视图的不同部分。
  * @author Lanfei
- * @class go2d.ScrollView
- * @extends go2d.Sprite
+ * @class ScrollView
+ * @extends Sprite
+ * 
+ * @constructor
  * @param {Sprite} content 滚动视图的内容对象
  * @待优化重构
  */
@@ -3091,8 +3180,8 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 		/**
 		 * 内容对象
 		 * @protected
-		 * @member go2d.ScrollView#_content
-		 * @type go2d.Sprite
+		 * @property _content
+		 * @type Sprite
 		 */
 		this._content = null;
 		this._scrollPos = {
@@ -3105,7 +3194,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 
 		/**
 		 * 纵向滑动距离
-		 * @member go2d.ScrollView#scrollTop
+		 * @property scrollTop
 		 * @type number
 		 * @default 0
 		 */
@@ -3120,7 +3209,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 
 		/**
 		 * 横向滑动距离
-		 * @member go2d.ScrollView#scrollLeft
+		 * @property scrollLeft
 		 * @type number
 		 * @default 0
 		 */
@@ -3189,7 +3278,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 			if (newPos.top !== scrollPos.top || newPos.left !== scrollPos.left) {
 				/**
 				 * 触摸移动事件
-				 * @event go2d.ScrollView#scroll
+				 * @event scroll
 				 */
 				var event = new Event('scroll', scrollPos, newPos);
 				this.emit('scroll', event);
@@ -3226,7 +3315,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	},
 	/**
 	 * 设置滚动视图的内容对象
-	 * @function go2d.ScrollView#setContent
+	 * @function setContent
 	 * @param {Sprite} content 滚动视图的内容对象
 	 * @return {this}
 	 */
@@ -3239,7 +3328,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	},
 	/**
 	 * 获取滚动视图的内容对象
-	 * @function go2d.ScrollView#getContent
+	 * @function getContent
 	 * @return {Sprite} content 滚动视图的内容对象
 	 */
 	getContent: function() {
@@ -3247,7 +3336,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	},
 	/**
 	 * 移除滚动视图的内容对象
-	 * @function go2d.ScrollView#removeContent
+	 * @function removeContent
 	 * @param {Boolean} cleanup 是否销毁内容对象
 	 * @return {this}
 	 */
@@ -3282,8 +3371,10 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 /**
  * 文本显示类，用于文本排列和显示。
  * @author Lanfei
- * @class go2d.TextField
- * @extends go2d.Sprite
+ * @class TextField
+ * @extends Sprite
+ * 
+ * @constructor
  * @param {string} [text] 要显示的文本
  */
 var TextField = go2d.TextField = Sprite.extend({
@@ -3295,7 +3386,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 是否粗体
-			 * @member go2d.TextField#bold
+			 * @property bold
 			 * @type Boolean
 			 * @default false 
 			 */
@@ -3303,7 +3394,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 是否斜体
-			 * @member go2d.TextField#italic
+			 * @property italic
 			 * @type Boolean
 			 * @default false 
 			 */
@@ -3311,7 +3402,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 字体大小
-			 * @member go2d.TextField#fontSize
+			 * @property fontSize
 			 * @type number
 			 * @default 24 
 			 */
@@ -3319,7 +3410,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 字体颜色或样式
-			 * @member go2d.TextField#color
+			 * @property color
 			 * @type string
 			 * @default black |Object
 			 */
@@ -3327,7 +3418,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 对齐方式
-			 * @member go2d.TextField#textAlign
+			 * @property textAlign
 			 * @type string
 			 * @default left 
 			 */
@@ -3335,7 +3426,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 行高，可为百分比
-			 * @member go2d.TextField#lineHeight
+			 * @property lineHeight
 			 * @type number
 			 * @default 120% |string
 			 */
@@ -3343,7 +3434,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 描边大小
-			 * @member go2d.TextField#strokeSize
+			 * @property strokeSize
 			 * @type number
 			 * @default 0 
 			 */
@@ -3351,7 +3442,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 描边颜色或样式
-			 * @member go2d.TextField#strokeColor
+			 * @property strokeColor
 			 * @type string
 			 * @default null |Object
 			 */
@@ -3359,7 +3450,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 文本字体
-			 * @member go2d.TextField#fontFamily
+			 * @property fontFamily
 			 * @type string
 			 * @default Arial 
 			 */
@@ -3367,7 +3458,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 是否允许在单词内部换行
-			 * @member go2d.TextField#breakWord
+			 * @property breakWord
 			 * @type Boolean
 			 * @default false 
 			 */
@@ -3375,7 +3466,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 是否自动调整宽高
-			 * @member go2d.TextField#autoResize
+			 * @property autoResize
 			 * @type Boolean
 			 * @default false 
 			 */
@@ -3383,7 +3474,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 顶部内边距
-			 * @member go2d.TextField#paddingTop
+			 * @property paddingTop
 			 * @type number
 			 * @default 0 
 			 */
@@ -3391,7 +3482,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 左部内边距
-			 * @member go2d.TextField#paddingLeft
+			 * @property paddingLeft
 			 * @type number
 			 * @default 0 
 			 */
@@ -3399,7 +3490,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 右部内边距
-			 * @member go2d.TextField#paddingRight
+			 * @property paddingRight
 			 * @type number
 			 * @default 0 
 			 */
@@ -3407,7 +3498,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 底部内边距
-			 * @member go2d.TextField#paddingBottom
+			 * @property paddingBottom
 			 * @type number
 			 * @default 0 
 			 */
@@ -3415,7 +3506,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 自动调整宽高时的最大宽度
-			 * @member go2d.TextField#maxWidth
+			 * @property maxWidth
 			 * @type number
 			 * @default 0xffffff 
 			 */
@@ -3423,7 +3514,7 @@ var TextField = go2d.TextField = Sprite.extend({
 			
 			/**
 			 * 自动调整宽高时的最大高度
-			 * @member go2d.TextField#maxHeight
+			 * @property maxHeight
 			 * @type number
 			 * @default 0xffffff 
 			 */
@@ -3447,7 +3538,7 @@ var TextField = go2d.TextField = Sprite.extend({
 
 		/**
 		 * 文字渲染的宽高
-		 * @member go2d.TextField#textRange
+		 * @property textRange
 		 * @type number
 		 */
 		Object.defineProperty(this, 'textRange', {
@@ -3459,7 +3550,7 @@ var TextField = go2d.TextField = Sprite.extend({
 		
 		/**
 		 * 文字渲染的宽度
-		 * @member go2d.TextField#textWidth
+		 * @property textWidth
 		 * @type number
 		 */
 		Object.defineProperty(this, 'textWidth', {
@@ -3471,7 +3562,7 @@ var TextField = go2d.TextField = Sprite.extend({
 		
 		/**
 		 * 文字渲染的高度
-		 * @member go2d.TextField#textHeight
+		 * @property textHeight
 		 * @type number
 		 */
 		Object.defineProperty(this, 'textHeight', {
@@ -3483,7 +3574,7 @@ var TextField = go2d.TextField = Sprite.extend({
 		
 		/**
 		 * 要显示的文字
-		 * @member go2d.TextField#text
+		 * @property text
 		 * @type string
 		 */
 		Object.defineProperty(this, 'text', {
@@ -3631,7 +3722,7 @@ var TextField = go2d.TextField = Sprite.extend({
 	},
 	/**
 	 * 设置要显示的文字
-	 * @function go2d.DisplayObject#setText
+	 * @function setText
 	 * @return {this}
 	 */
 	setText: function(text) {
@@ -3643,8 +3734,10 @@ var TextField = go2d.TextField = Sprite.extend({
 /**
  * 舞台类，最顶层的显示对象，游戏内容的主绘图区。
  * @author Lanfei
- * @class go2d.Stage
- * @extends go2d.DisplayObject
+ * @class Stage
+ * @extends DisplayObject
+ * 
+ * @constructor
  * @param {object} canvas 用于渲染的画布对象
  */
 var Stage = go2d.Stage = DisplayObject.extend({

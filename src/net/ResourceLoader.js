@@ -1,11 +1,16 @@
 /**
  * 资源加载器类，可用于加载和管理游戏资源。
  * @author Lanfei
- * @class go2d.ResourceLoader
- * @extends go2d.EventDispatcher
+ * @class ResourceLoader
+ * @extends EventDispatcher
+ * 
+ * @constructor
  * @param {Object} resources 资源路径数据对象，格式如下：
+ * @param {Object} [options] 配置参数
+ * @param {Object} [options.retryTimes=3] 失败重试次数
+ * @example
  * <pre><code>
- * {
+ * new ResourceLoader({
  *     text: {
  *         name1: url1,
  *         name2: url2
@@ -17,9 +22,7 @@
  *         // ...
  *     }
  *     // ...
- * }
- * @param {Object} [options] 配置参数
- * @param {Object} [options.retryTimes=3] 失败重试次数
+ * });
  * </code></pre>
  */
 var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
@@ -30,7 +33,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		/**
 		 * 缓存的资源对象
 		 * @protected
-		 * @member go2d.ResourceLoader#_cache
+		 * @property _cache
 		 * @type {Object}
 		 */
 		this._cache = {};
@@ -38,7 +41,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		/**
 		 * 资源路径数据对象
 		 * @protected
-		 * @member go2d.ResourceLoader#_resources
+		 * @property _resources
 		 * @type {Object}
 		 */
 		this._resources = resources;
@@ -46,7 +49,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		/**
 		 * 资源总数
 		 * @readonly
-		 * @member go2d.ResourceLoader#total
+		 * @property total
 		 * @type {number}
 		 */
 		this.total = 0;
@@ -54,7 +57,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		/**
 		 * 加载失败资源数量
 		 * @readonly
-		 * @member go2d.ResourceLoader#errorCount
+		 * @property errorCount
 		 * @type {number}
 		 */
 		this.errorCount = 0;
@@ -62,14 +65,14 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		/**
 		 * 加载完成资源数量
 		 * @readonly
-		 * @member go2d.ResourceLoader#loadedCount
+		 * @property loadedCount
 		 * @type {number}
 		 */
 		this.loadedCount = 0;
 
 		/**
 		 * 失败重试次数
-		 * @member go2d.ResourceLoader#retryTimes
+		 * @property retryTimes
 		 * @type {number}
 		 * @default 3
 		 */
@@ -154,7 +157,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	_onLoad: function() {
 		/**
 		 * 加载进度事件
-		 * @event go2d.ResourceLoader#progress
+		 * @event progress
 		 * @param {number} loadedCount 已加载数量
 		 * @param {number} total 总数量
 		 */
@@ -165,7 +168,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		++this.errorCount;
 		/**
 		 * 加载错误事件
-		 * @event go2d.ResourceLoader#error
+		 * @event error
 		 * @param {string} name 加载出错资源名称
 		 */
 		this.emit('error', name);
@@ -175,21 +178,21 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 		if (this.loadedCount === this.total) {
 			/**
 			 * 加载完全事件
-			 * @event go2d.ResourceLoader#complete
+			 * @event complete
 			 */
 			this.emit('complete');
 		}
 		if (this.loadedCount + this.errorCount === this.total) {
 			/**
 			 * 加载完毕事件
-			 * @event go2d.ResourceLoader#finish
+			 * @event finish
 			 */
 			this.emit('finish');
 		}
 	},
 	/**
 	 * 开始加载资源
-	 * @function go2d.ResourceLoader#load
+	 * @function load
 	 * @return {this}
 	 */
 	load: function() {
@@ -205,7 +208,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取资源对象
-	 * @function go2d.ResourceLoader#get
+	 * @function get
 	 * @param {string} type 资源类型
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
@@ -217,7 +220,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取 XML 资源
-	 * @function go2d.ResourceLoader#getXML
+	 * @function getXML
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -226,7 +229,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取 JSON 资源
-	 * @function go2d.ResourceLoader#getJSON
+	 * @function getJSON
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -235,7 +238,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取文本资源
-	 * @function go2d.ResourceLoader#getText
+	 * @function getText
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -244,7 +247,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取图像资源
-	 * @function go2d.ResourceLoader#getImage
+	 * @function getImage
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -253,7 +256,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取音频资源
-	 * @function go2d.ResourceLoader#getAudio
+	 * @function getAudio
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -262,7 +265,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 获取二进制资源
-	 * @function go2d.ResourceLoader#getBinary
+	 * @function getBinary
 	 * @param {string} name 资源名称
 	 * @return {Object} 对应的资源对象
 	 */
@@ -271,7 +274,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除资源
-	 * @function go2d.ResourceLoader#destroy
+	 * @function destroy
 	 * @param {string} [type] 资源类型，为空时移除所有资源
 	 * @param {string} [name] 资源名称，为空时移除所有指定类型资源
 	 * @return {this}
@@ -288,7 +291,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除 XML 资源
-	 * @function go2d.ResourceLoader#destroyXML
+	 * @function destroyXML
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -297,7 +300,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除 JSON 资源
-	 * @function go2d.ResourceLoader#destroyJSON
+	 * @function destroyJSON
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -306,7 +309,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除文本资源
-	 * @function go2d.ResourceLoader#destroyText
+	 * @function destroyText
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -315,7 +318,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除图像资源
-	 * @function go2d.ResourceLoader#destroyImage
+	 * @function destroyImage
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -324,7 +327,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除音频资源
-	 * @function go2d.ResourceLoader#destroyAudio
+	 * @function destroyAudio
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -333,7 +336,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除二进制资源
-	 * @function go2d.ResourceLoader#destroyBinary
+	 * @function destroyBinary
 	 * @param {string} name 资源名称
 	 * @return {this}
 	 */
@@ -342,7 +345,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 移除所有资源
-	 * @function go2d.ResourceLoader#destroyAll
+	 * @function destroyAll
 	 * @return {this}
 	 */
 	destroyAll: function() {
@@ -351,7 +354,7 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	},
 	/**
 	 * 释放加载器内存
-	 * @function go2d.ResourceLoader#dispose
+	 * @function dispose
 	 */
 	dispose: function() {
 		this._resources = null;
@@ -361,7 +364,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * XML 数据
-	 * @constant go2d.ResourceLoader.TYPE_XML
+	 * @static
+	 * @final
+	 * @property TYPE_XML
 	 * @type {string}
 	 * @default xml
 	 */
@@ -369,7 +374,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * JSON 数据
-	 * @constant go2d.ResourceLoader.TYPE_JSON
+	 * @static
+	 * @final
+	 * @property TYPE_JSON
 	 * @type {string}
 	 * @default json
 	 */
@@ -377,7 +384,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * 文本数据
-	 * @constant go2d.ResourceLoader.TYPE_TEXT
+	 * @static
+	 * @final
+	 * @property TYPE_TEXT
 	 * @type {string}
 	 * @default text
 	 */
@@ -385,7 +394,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * 图像
-	 * @constant go2d.ResourceLoader.TYPE_IMAGE
+	 * @static
+	 * @final
+	 * @property TYPE_IMAGE
 	 * @type {string}
 	 * @default image
 	 */
@@ -393,7 +404,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * 音频
-	 * @constant go2d.ResourceLoader.TYPE_AUDIO
+	 * @static
+	 * @final
+	 * @property TYPE_AUDIO
 	 * @type {string}
 	 * @default audio
 	 */
@@ -401,7 +414,9 @@ var ResourceLoader = go2d.ResourceLoader = EventDispatcher.extend({
 	
 	/**
 	 * 二进制数据
-	 * @constant go2d.ResourceLoader.TYPE_BINARY
+	 * @static
+	 * @final
+	 * @property TYPE_BINARY
 	 * @type {string}
 	 * @default binary
 	 */

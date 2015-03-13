@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\math\Matrix.js - Go2d</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Go2d" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.4.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Class.html">Class</a></li>
+                                <li><a href="../classes/Director.html">Director</a></li>
+                                <li><a href="../classes/DisplayObject.html">DisplayObject</a></li>
+                                <li><a href="../classes/Ease.html">Ease</a></li>
+                                <li><a href="../classes/Event.html">Event</a></li>
+                                <li><a href="../classes/EventDispatcher.html">EventDispatcher</a></li>
+                                <li><a href="../classes/go2d.html">go2d</a></li>
+                                <li><a href="../classes/ImageView.html">ImageView</a></li>
+                                <li><a href="../classes/Matrix.html">Matrix</a></li>
+                                <li><a href="../classes/ObjectPool.html">ObjectPool</a></li>
+                                <li><a href="../classes/ResizeEvent.html">ResizeEvent</a></li>
+                                <li><a href="../classes/ResourceLoader.html">ResourceLoader</a></li>
+                                <li><a href="../classes/ScrollView.html">ScrollView</a></li>
+                                <li><a href="../classes/Sprite.html">Sprite</a></li>
+                                <li><a href="../classes/Stage.html">Stage</a></li>
+                                <li><a href="../classes/TextField.html">TextField</a></li>
+                                <li><a href="../classes/TouchEvent.html">TouchEvent</a></li>
+                                <li><a href="../classes/Tween.html">Tween</a></li>
+                                <li><a href="../classes/URLRequest.html">URLRequest</a></li>
+                                <li><a href="../classes/Vector.html">Vector</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/go2d.html">go2d</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src\math\Matrix.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * 变化矩阵类，实现矩阵基本运算，可表达两个二维向量空间之间的仿射变换。
+ * &lt;pre&gt;&lt;code&gt;
+ *             |a  b  0|
+ * (x, y, 1) * |c  d  0| = (ax + cy + tx, bx + dy + ty, 1)
+ *             |tx ty 1|
+ * &lt;/code&gt;&lt;/pre&gt;
+ * @author Lanfei
+ * @class Matrix
+ * @extends Class
+ * 
+ * @constructor
+ * @param {number} a 缩放或旋转时水平方向的参数
+ * @param {number} b 旋转或倾斜时垂直方向的参数
+ * @param {number} c 旋转或倾斜时水平方向的参数
+ * @param {number} d 缩放或旋转时垂直方向的参数
+ * @param {number} tx 水平方向的平移距离
+ * @param {number} ty 垂直方向的平移距离
+ */
+var Matrix = go2d.Matrix = Class.extend({
+	__init: function(a, b, c, d, tx, ty) {
+		this.set.apply(this, arguments);
+	},
+	/**
+	 * 设置矩阵属性值，参数同构造函数
+	 * @function set
+	 * @return {this}
+	 */
+	set: function(a, b, c, d, tx, ty) {
+		if (arguments.length === 6) {
+
+			/**
+			 * 缩放或旋转时水平方向的参数
+			 * @property a
+			 * @type {number}
+			 */
+			this.a = a;
+
+			/**
+			 * 旋转或倾斜时垂直方向的参数
+			 * @property b
+			 * @type {number}
+			 */
+			this.b = b;
+
+			/**
+			 * 旋转或倾斜时水平方向的参数
+			 * @property c
+			 * @type {number}
+			 */
+			this.c = c;
+
+			/**
+			 * 缩放或旋转时垂直方向的参数
+			 * @property d
+			 * @type {number}
+			 */
+			this.d = d;
+
+			/**
+			 * 水平方向的平移距离
+			 * @property tx
+			 * @type {number}
+			 */
+			this.tx = tx;
+
+			/**
+			 * 垂直方向的平移距离
+			 * @property ty
+			 * @type {number}
+			 */
+			this.ty = ty;
+		} else if (a instanceof Matrix) {
+			this.set(a.a, a.b, a.c, a.d, a.tx, a.ty);
+		} else {
+			this.identity();
+		}
+		return this;
+	},
+	/**
+	 * 设置当前矩阵为单位矩阵
+	 * @function identity
+	 * @return {this}
+	 */
+	identity: function() {
+		this.set(1, 0, 0, 1, 0, 0);
+	},
+	/**
+	 * 执行当前矩阵的逆转换
+	 * @function invert
+	 * @return {this}
+	 */
+	invert: function() {
+		var a = this.a,
+			b = this.b,
+			c = this.c,
+			d = this.d,
+			tx = this.tx,
+			ty = this.ty,
+			n = a * d - c * b;
+		this.a = d / n;
+		this.b = -b / n;
+		this.c = -c / n;
+		this.d = a / n;
+		this.tx = (c * ty - d * tx) / n;
+		this.ty = (b * tx - a * ty) / n;
+		return this;
+	},
+	/**
+	 * 前置相乘
+	 * @param {go2d.Matrix} matrix 前置矩阵
+	 * @function prepend
+	 * @return {this}
+	 */
+	prepend: function(a, b, c, d, tx, ty) {
+		if (a instanceof Matrix) {
+			return this.prepend(a.a, a.b, a.c, a.d, a.tx, a.ty);
+		}
+		var a1 = this.a,
+			b1 = this.b,
+			c1 = this.c,
+			d1 = this.d,
+			tx1 = this.tx,
+			ty1 = this.ty;
+		this.a = a * a1 + b * c1;
+		this.b = a * b1 + b * d1;
+		this.c = c * a1 + d * c1;
+		this.d = c * b1 + d * d1;
+		this.tx = tx * a1 + ty * c1 + tx1;
+		this.ty = tx * b1 + ty * d1 + ty1;
+		return this;
+	},
+	/**
+	 * 后置相乘
+	 * @param {go2d.Matrix} matrix 后置矩阵
+	 * @function append
+	 * @return {this}
+	 */
+	append: function(a, b, c, d, tx, ty) {
+		if (a instanceof Matrix) {
+			return this.append(a.a, a.b, a.c, a.d, a.tx, a.ty);
+		}
+		var a1 = this.a,
+			b1 = this.b,
+			c1 = this.c,
+			d1 = this.d,
+			tx1 = this.tx,
+			ty1 = this.ty;
+		this.a = a * a1 + c * b1;
+		this.b = b * a1 + d * b1;
+		this.c = a * c1 + c * d1;
+		this.d = b * c1 + d * d1;
+		this.tx = a * tx1 + c * ty1 + tx;
+		this.ty = b * tx1 + d * ty1 + ty;
+		return this;
+	},
+	/**
+	 * 将变换矩阵乘以向量
+	 * @function multiply
+	 * @param {go2d.Vector} vector 变换前的向量
+	 * @return {go2d.Vector} 变换后的向量
+	 */
+	multiply: function(v) {
+		var x = this.a * v.x + this.c * v.y + this.tx;
+		var y = this.b * v.x + this.d * v.y + this.ty;
+		return new Vector(x, y);
+	},
+	/**
+	 * 缩放
+	 * @function scale
+	 * @param {number} x 水平方向的缩放比例
+	 * @param {number} y 垂直方向的缩放比例
+	 * @return {this}
+	 */
+	scale: function(x, y) {
+		return this.append(x, 0, 0, y === undefined ? x : y, 0, 0);
+	},
+	/**
+	 * 旋转
+	 * @function rotate
+	 * @param {number} angle 旋转的角度（弧度制）
+	 * @return {this}
+	 */
+	rotate: function(angle) {
+		var sin = Math.sin(angle),
+			cos = Math.cos(angle);
+		return this.append(cos, sin, -sin, cos, 0, 0);
+	},
+	/**
+	 * 斜切
+	 * @function skew
+	 * @param {number} x 水平方向的斜切角度（弧度制）
+	 * @param {number} y 垂直方向的斜切角度（弧度制）
+	 * @return {this}
+	 */
+	skew: function(skewX, skewY) {
+		return this.append(1, Math.tan(skewY), Math.tan(skewX), 1, 0, 0);
+	},
+	/**
+	 * 平移
+	 * @function translate
+	 * @param {number} x 水平方向的平移像素
+	 * @param {number} y 垂直方向的平移像素
+	 * @return {this}
+	 */
+	translate: function(x, y) {
+		return this.append(1, 0, 0, 1, x, y);
+	},
+	/**
+	 * 创建当前矩阵的克隆对象
+	 * @function clone
+	 * @return {go2d.Matrix} 当前矩阵的克隆对象
+	 */
+	clone: function() {
+		return new Matrix(this);
+	}
+}, {
+	/**
+	 * 角度制、弧度制换算比例
+	 * @property DEG_TO_RAD
+	 * @type {number}
+	 */
+	DEG_TO_RAD: Math.PI / 180
+});
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

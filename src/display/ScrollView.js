@@ -1,8 +1,10 @@
 /**
  * 滑动视图类，可以在该视图中显示超过视图大小的显示对象，并可以通过滑动来显示内容视图的不同部分。
  * @author Lanfei
- * @class go2d.ScrollView
- * @extends go2d.Sprite
+ * @class ScrollView
+ * @extends Sprite
+ * 
+ * @constructor
  * @param {Sprite} content 滚动视图的内容对象
  * @待优化重构
  */
@@ -13,8 +15,8 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 		/**
 		 * 内容对象
 		 * @protected
-		 * @member go2d.ScrollView#_content
-		 * @type go2d.Sprite
+		 * @property _content
+		 * @type Sprite
 		 */
 		this._content = null;
 		this._scrollPos = {
@@ -27,7 +29,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 
 		/**
 		 * 纵向滑动距离
-		 * @member go2d.ScrollView#scrollTop
+		 * @property scrollTop
 		 * @type number
 		 * @default 0
 		 */
@@ -42,7 +44,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 
 		/**
 		 * 横向滑动距离
-		 * @member go2d.ScrollView#scrollLeft
+		 * @property scrollLeft
 		 * @type number
 		 * @default 0
 		 */
@@ -111,7 +113,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 			if (newPos.top !== scrollPos.top || newPos.left !== scrollPos.left) {
 				/**
 				 * 触摸移动事件
-				 * @event go2d.ScrollView#scroll
+				 * @event scroll
 				 */
 				var event = new Event('scroll', scrollPos, newPos);
 				this.emit('scroll', event);
@@ -148,7 +150,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	},
 	/**
 	 * 设置滚动视图的内容对象
-	 * @function go2d.ScrollView#setContent
+	 * @function setContent
 	 * @param {Sprite} content 滚动视图的内容对象
 	 * @return {this}
 	 */
@@ -161,7 +163,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	},
 	/**
 	 * 获取滚动视图的内容对象
-	 * @function go2d.ScrollView#getContent
+	 * @function getContent
 	 * @return {Sprite} content 滚动视图的内容对象
 	 */
 	getContent: function() {
@@ -169,7 +171,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	},
 	/**
 	 * 移除滚动视图的内容对象
-	 * @function go2d.ScrollView#removeContent
+	 * @function removeContent
 	 * @param {Boolean} cleanup 是否销毁内容对象
 	 * @return {this}
 	 */

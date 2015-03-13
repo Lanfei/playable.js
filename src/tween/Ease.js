@@ -1,14 +1,14 @@
 /**
  * 缓动函数集合，用于实现不同变化速度类型的动画。
  * @author Lanfei
- * @class go2d.Ease
- * @extends go2d.Class
+ * @class Ease
+ * @extends Class
  */
 var Ease = go2d.Ease = Class.extend({}, {
 	/**
 	 * 匀速缓动函数
 	 * @static
-	 * @function go2d.Ease.linear
+	 * @function linear
 	 * @param {number} t 当前时间
 	 * @param {number} b 初始值
 	 * @param {number} c 变化量
@@ -20,24 +20,27 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的二次方缓动函数
-	 * @function go2d.Ease.easeInQuad
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInQuad
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInQuad: function(t, b, c, d) {
 		return c * (t /= d) * t + b;
 	},
 	/**
 	 * 减速的二次方缓动函数
-	 * @function go2d.Ease.easeOutQuad
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutQuad
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutQuad: function(t, b, c, d) {
 		return -c * (t /= d) * (t - 2) + b;
 	},
 	/**
 	 * 先加速后减速的二次方缓动函数
-	 * @function go2d.Ease.easeInOutQuad
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutQuad
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutQuad: function(t, b, c, d) {
 		if ((t /= d / 2) < 1) return c / 2 * t * t + b;
@@ -45,24 +48,27 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的三次方缓动函数
-	 * @function go2d.Ease.easeInCubic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInCubic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInCubic: function(t, b, c, d) {
 		return c * (t /= d) * t * t + b;
 	},
 	/**
 	 * 减速的三次方缓动函数
-	 * @function go2d.Ease.easeOutCubic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutCubic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutCubic: function(t, b, c, d) {
 		return c * ((t = t / d - 1) * t * t + 1) + b;
 	},
 	/**
 	 * 先加速后减速的三次方缓动函数
-	 * @function go2d.Ease.easeInOutCubic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutCubic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutCubic: function(t, b, c, d) {
 		if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
@@ -70,24 +76,27 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的四次方缓动函数
-	 * @function go2d.Ease.easeInQuart
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInQuart
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInQuart: function(t, b, c, d) {
 		return c * (t /= d) * t * t * t + b;
 	},
 	/**
 	 * 减速的四次方缓动函数
-	 * @function go2d.Ease.easeOutQuart
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutQuart
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutQuart: function(t, b, c, d) {
 		return -c * ((t = t / d - 1) * t * t * t - 1) + b;
 	},
 	/**
 	 * 先加速后减速的四次方缓动函数
-	 * @function go2d.Ease.easeInOutQuart
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutQuart
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutQuart: function(t, b, c, d) {
 		if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
@@ -95,24 +104,27 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的五次方缓动函数
-	 * @function go2d.Ease.easeInQuint
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInQuint
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInQuint: function(t, b, c, d) {
 		return c * (t /= d) * t * t * t * t + b;
 	},
 	/**
 	 * 减速的五次方缓动函数
-	 * @function go2d.Ease.easeOutQuint
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutQuint
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutQuint: function(t, b, c, d) {
 		return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
 	},
 	/**
 	 * 先加速后减速的五次方缓动函数
-	 * @function go2d.Ease.easeInOutQuint
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutQuint
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutQuint: function(t, b, c, d) {
 		if ((t /= d / 2) < 1) return c / 2 * t * t * t * t * t + b;
@@ -120,48 +132,54 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的正弦曲线缓动函数
-	 * @function go2d.Ease.easeInSine
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInSine
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInSine: function(t, b, c, d) {
 		return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
 	},
 	/**
 	 * 减速的正弦曲线缓动函数
-	 * @function go2d.Ease.easeOutSine
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutSine
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutSine: function(t, b, c, d) {
 		return c * Math.sin(t / d * (Math.PI / 2)) + b;
 	},
 	/**
 	 * 先加速后减速的正弦曲线缓动函数
-	 * @function go2d.Ease.easeInOutSine
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutSine
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutSine: function(t, b, c, d) {
 		return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
 	},
 	/**
 	 * 加速的指数曲线缓动函数
-	 * @function go2d.Ease.easeInExpo
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInExpo
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInExpo: function(t, b, c, d) {
 		return (t === 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
 	},
 	/**
 	 * 减速的指数曲线缓动函数
-	 * @function go2d.Ease.easeOutExpo
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutExpo
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutExpo: function(t, b, c, d) {
 		return (t === d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
 	},
 	/**
 	 * 先加速后减速的指数曲线缓动函数
-	 * @function go2d.Ease.easeInOutExpo
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutExpo
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutExpo: function(t, b, c, d) {
 		if (t === 0) return b;
@@ -171,24 +189,27 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的圆形曲线缓动函数
-	 * @function go2d.Ease.easeInCirc
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInCirc
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInCirc: function(t, b, c, d) {
 		return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
 	},
 	/**
 	 * 减速的圆形曲线缓动函数
-	 * @function go2d.Ease.easeOutCirc
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutCirc
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutCirc: function(t, b, c, d) {
 		return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
 	},
 	/**
 	 * 先加速后减速的圆形曲线缓动函数
-	 * @function go2d.Ease.easeInOutCirc
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutCirc
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutCirc: function(t, b, c, d) {
 		if ((t /= d / 2) < 1) return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
@@ -196,8 +217,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的指数衰减正弦曲线缓动
-	 * @function go2d.Ease.easeInElastic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInElastic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInElastic: function(t, b, c, d) {
 		var s = 1.70158;
@@ -214,8 +236,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 减速的指数衰减正弦曲线缓动
-	 * @function go2d.Ease.easeOutElastic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutElastic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutElastic: function(t, b, c, d) {
 		var s = 1.70158;
@@ -232,8 +255,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 先加速后减速的指数衰减正弦曲线缓动
-	 * @function go2d.Ease.easeInOutElastic
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutElastic
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutElastic: function(t, b, c, d) {
 		var s = 1.70158;
@@ -251,8 +275,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的超范围三次方缓动
-	 * @function go2d.Ease.easeInBack
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInBack
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInBack: function(t, b, c, d, s) {
 		if (s === undefined) s = 1.70158;
@@ -260,8 +285,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 减速的超范围三次方缓动
-	 * @function go2d.Ease.easeOutBack
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutBack
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutBack: function(t, b, c, d, s) {
 		if (s === undefined) s = 1.70158;
@@ -269,8 +295,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 先加速后减速的超范围三次方缓动
-	 * @function go2d.Ease.easeInOutBack
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutBack
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutBack: function(t, b, c, d, s) {
 		if (s === undefined) s = 1.70158;
@@ -279,16 +306,18 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 加速的指数衰减反弹缓动
-	 * @function go2d.Ease.easeInBounce
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInBounce
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInBounce: function(t, b, c, d) {
 		return c - jQuery.easing.easeOutBounce(d - t, 0, c, d) + b;
 	},
 	/**
 	 * 减速的指数衰减反弹缓动
-	 * @function go2d.Ease.easeOutBounce
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeOutBounce
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeOutBounce: function(t, b, c, d) {
 		if ((t /= d) < (1 / 2.75)) {
@@ -303,8 +332,9 @@ var Ease = go2d.Ease = Class.extend({}, {
 	},
 	/**
 	 * 先加速后减速的指数衰减反弹缓动
-	 * @function go2d.Ease.easeInOutBounce
-	 * @see 参数及返回值同 {@link go2d.Ease.linear}
+	 * @static
+	 * @function easeInOutBounce
+	 * @see 参数及返回值同 {@link linear}
 	 */
 	easeInOutBounce: function(t, b, c, d) {
 		if (t < d / 2) return jQuery.easing.easeInBounce(t * 2, 0, c, d) * 0.5 + b;

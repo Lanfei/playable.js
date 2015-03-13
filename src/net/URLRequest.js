@@ -1,8 +1,10 @@
 /**
  * URL 请求类，用于发起 AJAX 请求，并获取返回数据。
  * @author Lanfei
- * @class go2d.URLRequest
- * @extends go2d.EventDispatcher
+ * @class URLRequest
+ * @extends EventDispatcher
+ *
+ * @constructor
  * @param {number} url 请求地址
  * @param {Object} [options] 配置参数
  * @param {string} [options.type=GET] 请求类型
@@ -17,14 +19,14 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 		/**
 		 * 请求地址
-		 * @member go2d.URLRequest#url
+		 * @property url
 		 * @type {string}
 		 */
 		this.url = url;
 
 		/**
 		 * 请求类型
-		 * @member go2d.URLRequest#type
+		 * @property type
 		 * @type {string}
 		 * @default GET
 		 */
@@ -32,7 +34,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 		/**
 		 * 返回数据格式
-		 * @member go2d.URLRequest#dataType
+		 * @property dataType
 		 * @type {string}
 		 * @default
 		 */
@@ -40,7 +42,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 		/**
 		 * 发送数据类型
-		 * @member go2d.URLRequest#contentType
+		 * @property contentType
 		 * @type {string}
 		 * @default application/x-www-form-urlencoded
 		 */
@@ -48,7 +50,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 		/**
 		 * 返回数据类型
-		 * @member go2d.URLRequest#responseType
+		 * @property responseType
 		 * @type {string}
 		 */
 		this.responseType = options.responseType || '';
@@ -56,14 +58,14 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 		/**
 		 * XMLHttpRequest 对象
 		 * @readonly
-		 * @member go2d.URLRequest#xhr
+		 * @property xhr
 		 * @type {Object}
 		 */
 		this.xhr = new window.XMLHttpRequest();
 	},
 	/**
 	 * 发送请求
-	 * @function go2d.URLRequest#send
+	 * @function send
 	 * @param {string|Object} data 请求数据
 	 * @return {this}
 	 */
@@ -117,7 +119,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 					/**
 					 * 请求成功事件
-					 * @event go2d.URLRequest#success
+					 * @event success
 					 * @param {mixed} response 返回数据
 					 */
 					that.emit('success', response);
@@ -125,7 +127,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 
 					/**
 					 * 请求失败事件
-					 * @event go2d.URLRequest#error
+					 * @event error
 					 * @param {Object} xhr XMLHttpRequest 对象
 					 * @param {string} textStatus 失败状态
 					 */
@@ -138,7 +140,7 @@ var URLRequest = go2d.URLRequest = EventDispatcher.extend({
 	},
 	/**
 	 * 中断请求
-	 * @function go2d.URLRequest#abort
+	 * @function abort
 	 * @return {this}
 	 */
 	abort: function() {

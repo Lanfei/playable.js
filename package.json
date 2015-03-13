@@ -6,11 +6,10 @@
   "description": "A lightweight HTML5 game engine",
   "homepage": "https://github.com/Lanfei/Go2d",
   "dependencies": {
-    "grunt": "~0.4.2",
-    "grunt-jsdoc": "^0.5.8",
+    "grunt": "^0.4.2",
     "grunt-text-replace": "^0.4.0",
     "grunt-contrib-concat": "^0.5.1",
-    "grunt-contrib-uglify": "~0.6.0",
-    "grunt-jsdoc-to-markdown": "^0.4.2"
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-yuidoc": "^0.7.0"
   }
 }

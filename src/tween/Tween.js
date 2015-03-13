@@ -1,8 +1,10 @@
 /**
  * 缓动动画控制类，负责处理显示对象的缓动动画。
  * @author Lanfei
- * @class go2d.Tween
- * @extends go2d.Class
+ * @class Tween
+ * @extends Class
+ *
+ * @constructor
  * @param {go2d.Sprite} target 动画应用对象
  * @param {Object} [options] 配置参数
  * @param {Object} [options.loops=1] 循环次数，为 0 时无限循环
@@ -16,7 +18,7 @@ var Tween = go2d.Tween = Class.extend({
 		/**
 		 * 动画步骤
 		 * @protected
-		 * @member go2d.Tween#_steps
+		 * @property _steps
 		 * @type {Array}
 		 */
 		this._steps = [];
@@ -24,7 +26,7 @@ var Tween = go2d.Tween = Class.extend({
 		/**
 		 * 动画应用对象
 		 * @protected
-		 * @member go2d.Tween#_target
+		 * @property _target
 		 * @type {go2d.Sprite}
 		 */
 		this._target = target;
@@ -32,7 +34,7 @@ var Tween = go2d.Tween = Class.extend({
 		/**
 		 * 循环次数，为 0 时无限循环
 		 * @protected
-		 * @member go2d.Tween#_loops
+		 * @property _loops
 		 * @type {number}
 		 */
 		this._loops = options.loops === undefined ? 1 : options.loops;
@@ -40,7 +42,7 @@ var Tween = go2d.Tween = Class.extend({
 		/**
 		 * 是否已暂停
 		 * @protected
-		 * @member go2d.Tween#_paused
+		 * @property _paused
 		 * @type {Boolean}
 		 */
 		this._paused = false;
@@ -48,7 +50,7 @@ var Tween = go2d.Tween = Class.extend({
 		/**
 		 * 动画步骤数量
 		 * @readonly
-		 * @member go2d.Tween#length
+		 * @property length
 		 * @type {number}
 		 */
 		Object.defineProperty(this, 'length', {
@@ -119,7 +121,7 @@ var Tween = go2d.Tween = Class.extend({
 	},
 	/**
 	 * 等待指定时间后进行下一个动画
-	 * @function go2d.Tween#wait
+	 * @function wait
 	 * @param {number} duration 毫秒数
 	 * @return {this}
 	 */
@@ -131,7 +133,7 @@ var Tween = go2d.Tween = Class.extend({
 	},
 	/**
 	 * 更新属性值后进行下一个动画
-	 * @function go2d.Tween#from
+	 * @function from
 	 * @param {Object} props 要更新的属性集合
 	 * @return {this}
 	 */
@@ -143,10 +145,10 @@ var Tween = go2d.Tween = Class.extend({
 	},
 	/**
 	 * 为指定属性集合设置动画
-	 * @function go2d.Tween#to
+	 * @function to
 	 * @param {Object} props 要动画的属性集合
 	 * @param {number} duration 持续毫秒数
-	 * @param {function} [ease=go2d.Ease.linear] 缓动函数
+	 * @param {function} [ease=linear] 缓动函数
 	 * @return {this}
 	 */
 	to: function(props, duration, ease) {
@@ -159,7 +161,7 @@ var Tween = go2d.Tween = Class.extend({
 	},
 	/**
 	 * 执行回调后进行下一个动画
-	 * @function go2d.Tween#call
+	 * @function call
 	 * @param {function} callback 回调函数
 	 * @return {this}
 	 */

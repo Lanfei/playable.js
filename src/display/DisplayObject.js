@@ -1,8 +1,10 @@
 /**
  * 显示对象基类，实现了显示对象的基本渲染和事件逻辑，显示对象元素类和舞台类都基于此类。
  * @author Lanfei
- * @class go2d.DisplayObject
- * @extends go2d.EventDispatcher
+ * @class DisplayObject
+ * @extends EventDispatcher
+ * 
+ * @constructor
  * @param {object} canvas 用于渲染的画布对象
  */
 var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
@@ -12,7 +14,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 用于渲染的画布对象
 		 * @readonly
-		 * @member go2d.DisplayObject#canvas
+		 * @property canvas
 		 * @type object
 		 */
 		this.canvas = canvas || document.createElement('canvas');
@@ -20,21 +22,21 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 画布的上下文对象
 		 * @readonly
-		 * @member go2d.DisplayObject#context
+		 * @property context
 		 * @type object
 		 */
 		this.context = this.canvas.getContext('2d');
 
 		/**
 		 * 用于标识该对象的名字，该属性在兄弟对象中应该唯一
-		 * @member go2d.DisplayObject#name
+		 * @property name
 		 * @type string
 		 */
 		this.name = '';
 
 		/**
 		 * 用于标识该对象的标签
-		 * @member go2d.DisplayObject#tag
+		 * @property tag
 		 * @type string
 		 */
 		this.tag = '';
@@ -42,14 +44,14 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 该对象所属的舞台对象
 		 * @readonly
-		 * @member go2d.DisplayObject#stage
-		 * @type go2d.Stage
+		 * @property stage
+		 * @type Stage
 		 */
 		this.stage = null;
 
 		/**
 		 * 是否已暂停
-		 * @member go2d.DisplayObject#paused
+		 * @property paused
 		 * @type Boolean
 		 * @default false
 		 */
@@ -57,7 +59,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 		/**
 		 * 是否可点击
-		 * @member go2d.DisplayObject#touchable
+		 * @property touchable
 		 * @type Boolean
 		 * @default true
 		 */
@@ -65,7 +67,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 		/**
 		 * 子节点是否可点击
-		 * @member go2d.DisplayObject#touchChildren
+		 * @property touchChildren
 		 * @type Boolean
 		 * @default true
 		 */
@@ -74,7 +76,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 是否需要重新渲染
 		 * @protected
-		 * @member go2d.DisplayObject#_dirty
+		 * @property _dirty
 		 * @type Boolean
 		 * @default true
 		 */
@@ -83,7 +85,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 触摸标识数组
 		 * @protected
-		 * @member go2d.DisplayObject#_touches
+		 * @property _touches
 		 * @type Array
 		 */
 		this._touches = [];
@@ -91,15 +93,15 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		/**
 		 * 子对象数组
 		 * @protected
-		 * @member go2d.DisplayObject#_children
+		 * @property _children
 		 * @type Array
 		 */
 		this._children = [];
 
 		/**
 		 * 遮罩层
-		 * @member go2d.DisplayObject#mask
-		 * @type go2d.Sprite
+		 * @property mask
+		 * @type Sprite
 		 */
 		this._mask = null;
 
@@ -107,7 +109,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 			/**
 			 * 不透明度
-			 * @member go2d.DisplayObject#opacity
+			 * @property opacity
 			 * @type number
 			 * @default 1
 			 */
@@ -115,7 +117,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 			/**
 			 * 背景颜色或样式
-			 * @member go2d.DisplayObject#background
+			 * @property background
 			 * @type null|string|Object
 			 * @default null
 			 */
@@ -137,7 +139,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 		/**
 		 * 宽度
-		 * @member go2d.DisplayObject#width
+		 * @property width
 		 * @type number
 		 */
 		Object.defineProperty(this, 'width', {
@@ -151,7 +153,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 
 		/**
 		 * 高度
-		 * @member go2d.DisplayObject#height
+		 * @property height
 		 * @type number
 		 */
 		Object.defineProperty(this, 'height', {
@@ -185,7 +187,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 							if (inRect) {
 								/**
 								 * 触摸开始事件
-								 * @event go2d.DisplayObject#touchstart
+								 * @event touchstart
 								 * @param {go2d.TouchEvent} event 触摸事件对象
 								 */
 								emit = true;
@@ -196,7 +198,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 							if (touches[identifier]) {
 								/**
 								 * 触摸移动事件
-								 * @event go2d.DisplayObject#touchmove
+								 * @event touchmove
 								 * @param {go2d.TouchEvent} event 触摸事件对象
 								 */
 								emit = true;
@@ -206,7 +208,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 							if (touches[identifier]) {
 								/**
 								 * 触摸结束事件
-								 * @event go2d.DisplayObject#touchend
+								 * @event touchend
 								 * @param {go2d.TouchEvent} event 触摸事件对象
 								 */
 								emit = true;
@@ -217,7 +219,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 							if (inRect && touches[identifier] !== undefined) {
 								/**
 								 * 触摸点击事件
-								 * @event go2d.DisplayObject#touchtap
+								 * @event touchtap
 								 * @param {go2d.TouchEvent} event 触摸事件对象
 								 */
 								emit = true;
@@ -243,7 +245,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	_onAddedToStage: function(stage) {
 		/**
 		 * 添加到舞台事件
-		 * @event go2d.DisplayObject#addedtostage
+		 * @event addedtostage
 		 * @param {go2d.Stage} stage 舞台对象
 		 */
 		this.stage = stage;
@@ -255,7 +257,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	_onRemovedFromStage: function(stage) {
 		/**
 		 * 移除出舞台事件
-		 * @event go2d.DisplayObject#removedfromstage
+		 * @event removedfromstage
 		 * @param {go2d.Stage} stage 舞台对象
 		 */
 		this.stage = null;
@@ -279,7 +281,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 		});
 		/**
 		 * 宽高变化事件
-		 * @event go2d.DisplayObject#resize
+		 * @event resize
 		 * @param {go2d.ResizeEvent} event 宽高变化事件对象
 		 */
 		this.emit('resize', event);
@@ -291,7 +293,8 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 绘制子对象
-	 * @function go2d.DisplayObject#_draw
+	 * @protected
+	 * @function _draw
 	 * @param {go2d.Sprite} child 要绘制的对象
 	 * @param {string} [blendMode] 混合模式
 	 * @return {this}
@@ -315,7 +318,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 渲染该对象
-	 * @function go2d.DisplayObject#render
+	 * @function render
 	 * @return {this}
 	 */
 	render: function() {
@@ -334,7 +337,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 			}
 			/**
 			 * 开始渲染事件
-			 * @event go2d.DisplayObject#render
+			 * @event render
 			 * @param {go2d.Event} event 事件对象
 			 */
 			this.emit('render', event);
@@ -350,7 +353,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 			}
 			/**
 			 * 绘制完毕事件
-			 * @event go2d.DisplayObject#paint
+			 * @event paint
 			 * @param {object} context 绘制上下文对象
 			 */
 			this.emit('paint', ctx);
@@ -360,7 +363,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 更新对象渲染状态，当该对象需要重新渲染时调用
-	 * @function go2d.DisplayObject#update
+	 * @function update
 	 * @return {this}
 	 */
 	update: function() {
@@ -376,7 +379,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 添加子对象
-	 * @function go2d.DisplayObject#addChild
+	 * @function addChild
 	 * @param {go2d.DisplayObject} child 要添加的子对象
 	 * @return {this}
 	 */
@@ -386,7 +389,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 在指定深度添加子对象
-	 * @function go2d.DisplayObject#addChildAt
+	 * @function addChildAt
 	 * @param {go2d.DisplayObject} child 要添加的子对象
 	 * @param {number} index 深度，数值越小层级越低
 	 * @return {this}
@@ -413,7 +416,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取指定名字的子对象
-	 * @function go2d.DisplayObject#getChildByName
+	 * @function getChildByName
 	 * @param {string} name 子对象名字
 	 * @return {go2d.DisplayObject} 对应的子对象
 	 */
@@ -429,7 +432,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取指定标签的子对象
-	 * @function go2d.DisplayObject#getChildrenByTag
+	 * @function getChildrenByTag
 	 * @param {string} tag 子对象标签
 	 * @return {Array} 对应的子对象数组
 	 */
@@ -444,7 +447,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取指定深度的子对象
-	 * @function go2d.DisplayObject#getChildAt
+	 * @function getChildAt
 	 * @param {number} index 子对象深度
 	 * @return {go2d.DisplayObject} 对应的子对象
 	 */
@@ -453,7 +456,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取指定子对象的深度
-	 * @function go2d.DisplayObject#getChildIndex
+	 * @function getChildIndex
 	 * @param {go2d.DisplayObject} child 对应的子对象
 	 * @return {number} 子对象深度
 	 */
@@ -468,7 +471,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 交换两个子对象的深度
-	 * @function go2d.DisplayObject#swapChildren
+	 * @function swapChildren
 	 * @param {go2d.DisplayObject} child1 要交换的子对象一
 	 * @param {go2d.DisplayObject} child2 要交换的子对象二
 	 * @return {this}
@@ -483,7 +486,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 交换两个子对象的深度
-	 * @function go2d.DisplayObject#swapChildrenAt
+	 * @function swapChildrenAt
 	 * @param {number} index1 要交换的子对象深度一
 	 * @param {number} index2 要交换的子对象深度二
 	 * @return {this}
@@ -502,7 +505,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 排列子对象
-	 * @function go2d.DisplayObject#sortChildren
+	 * @function sortChildren
 	 * @param {function} compare 用于比较的函数
 	 * @return {this}
 	 */
@@ -512,7 +515,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取所有子对象
-	 * @function go2d.DisplayObject#getAllChildren
+	 * @function getAllChildren
 	 * @return {Array} 所有子对象数组
 	 */
 	getAllChildren: function() {
@@ -520,7 +523,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除指定的子对象
-	 * @function go2d.DisplayObject#removeChild
+	 * @function removeChild
 	 * @param {go2d.DisplayObject} child 对应的子对象
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
@@ -536,7 +539,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除指定深度的子对象
-	 * @function go2d.DisplayObject#removeChildAt
+	 * @function removeChildAt
 	 * @param {number} index 子对象的深度
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
@@ -558,7 +561,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除指定名字的子对象
-	 * @function go2d.DisplayObject#removeChildrenByName
+	 * @function removeChildrenByName
 	 * @param {string} name 子对象的名字
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
@@ -575,7 +578,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除指定标签的子对象
-	 * @function go2d.DisplayObject#removeChildrenByTag
+	 * @function removeChildrenByTag
 	 * @param {string} tag 子对象的标签
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
@@ -591,7 +594,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除所有子对象
-	 * @function go2d.DisplayObject#removeAllChildren
+	 * @function removeAllChildren
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
 	 */
@@ -611,7 +614,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 设置遮罩对象
-	 * @function go2d.DisplayObject#setMask
+	 * @function setMask
 	 * @param {go2d.Sprite} mask 遮罩对象
 	 * @return {this}
 	 */
@@ -636,7 +639,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 获取遮罩对象
-	 * @function go2d.DisplayObject#getMask
+	 * @function getMask
 	 * @return {go2d.Sprite}
 	 */
 	getMask: function() {
@@ -644,7 +647,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 移除遮罩对象
-	 * @function go2d.DisplayObject#removeMask
+	 * @function removeMask
 	 * @param {Boolean} cleanup 是否销毁遮罩对象
 	 * @return {this}
 	 */
@@ -659,7 +662,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 开始该对象的帧播放
-	 * @function go2d.DisplayObject#play
+	 * @function play
 	 * @return {this}
 	 */
 	play: function() {
@@ -668,7 +671,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 暂停该对象的帧播放
-	 * @function go2d.DisplayObject#pause
+	 * @function pause
 	 * @return {this}
 	 */
 	pause: function() {
@@ -677,7 +680,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 进入下一帧，该方法应只由引擎本身调用
-	 * @function go2d.DisplayObject#tick
+	 * @function tick
 	 * @return {this}
 	 */
 	tick: function(deltaTime) {
@@ -687,7 +690,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 			});
 			/**
 			 * 步进（进入下一帧）事件
-			 * @event go2d.DisplayObject#step
+			 * @event step
 			 * @param {number} deltaTime 两帧时间差
 			 */
 			this.emit('step', deltaTime);
@@ -696,7 +699,7 @@ var DisplayObject = go2d.DisplayObject = EventDispatcher.extend({
 	},
 	/**
 	 * 释放对象内存
-	 * @function go2d.DisplayObject#dispose
+	 * @function dispose
 	 */
 	dispose: function() {
 		if (this.parent) {

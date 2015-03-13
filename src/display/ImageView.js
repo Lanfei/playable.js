@@ -1,8 +1,10 @@
 /**
  * 图像显示类，用于显示一张图像。
  * @author Lanfei
- * @class go2d.ImageView
- * @extends go2d.Sprite
+ * @class ImageView
+ * @extends Sprite
+ * 
+ * @constructor
  * @param {object} image 要绘制的图像或画布元素
  */
 var ImageView = go2d.ImageView = Sprite.extend({
@@ -12,7 +14,7 @@ var ImageView = go2d.ImageView = Sprite.extend({
 		/**
 		 * 要绘制的图像或画布元素
 		 * @protected
-		 * @member go2d.ImageView#_image
+		 * @property _image
 		 * @type object
 		 */
 		this._image = null;
@@ -28,7 +30,7 @@ var ImageView = go2d.ImageView = Sprite.extend({
 	},
 	/**
 	 * 设置要绘制的图像或画布元素
-	 * @function go2d.ImageView#setImage
+	 * @function setImage
 	 * @param {object} image 要绘制的图像或画布元素
 	 * @return {this}
 	 */
