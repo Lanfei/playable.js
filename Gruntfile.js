@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 		concat: {
 			dist: {
 				src: sourceFiles,
-				dest: 'dist/go2d-debug.js'
+				dest: 'dist/go2d.js'
 			}
 		},
 		uglify: {
@@ -41,14 +41,14 @@ module.exports = function(grunt) {
 					banner: '/*! <%= pkg.name %> <%= pkg.version %> | <%= pkg.description %> */\n'
 				},
 				files: {
-					'dist/go2d.js': 'dist/go2d-debug.js'
+					'dist/go2d.min.js': 'dist/go2d.js'
 				}
 			}
 		},
 		replace: {
 			dist: {
 				overwrite: true,
-				src: ['dist/go2d.js', 'dist/go2d-debug.js'],
+				src: ['dist/go2d.min.js', 'dist/go2d.js'],
 				replacements: [{
 					from: '@VERSION',
 					to: '<%= pkg.version %>'
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
-	grunt.registerTask('build', ['concat', 'uglify', 'replace']);
+	grunt.registerTask('dist', ['concat', 'uglify', 'replace']);
 	grunt.registerTask('doc', ['jsdoc', 'jsdoc2md']);
-	grunt.registerTask('default', ['build', 'doc']);
+	grunt.registerTask('default', ['dist', 'doc']);
 };
