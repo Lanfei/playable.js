@@ -19,7 +19,7 @@ Go2d is a cross-platform 2D game engine written in Javascript. It allows develop
 
 ## Documentation
 
- - API References: http://lanfei.github.io/Go2d/docs/go2d.html
+ - API References: http://lanfei.github.io/Go2d/docs/
  - Tutorial: *Coming soon*
  - Examples: *Coming soon*
 
@@ -48,7 +48,7 @@ Go2d 是一个使用 JavaScript 编写的轻量级跨平台 2D 游戏引擎。�
 
 ## 文档与教程
 
- - API文档： http://lanfei.github.io/Go2d/docs/go2d.html
+ - API文档： http://lanfei.github.io/Go2d/docs/
  - 入门教程：完善中
  - 示例项目：完善中
 
