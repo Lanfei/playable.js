@@ -116,6 +116,38 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		var properties = {
 
 			/**
+			 * 水平方向锚点偏移比例
+			 * @property anchorX
+			 * @type number
+			 * @default 0
+			 */
+			anchorX: 0,
+
+			/**
+			 * 垂直方向锚点偏移比例
+			 * @property anchorY
+			 * @type number
+			 * @default 0
+			 */
+			anchorY: 0,
+
+			/**
+			 * 水平方向锚点偏移像素
+			 * @property anchorOffsetX
+			 * @type number
+			 * @default 0
+			 */
+			anchorOffsetX: 0,
+
+			/**
+			 * 垂直方向锚点偏移像素
+			 * @property anchorOffsetY
+			 * @type number
+			 * @default 0
+			 */
+			anchorOffsetY: 0,
+
+			/**
 			 * 不透明度
 			 * @property opacity
 			 * @type number
@@ -184,13 +216,14 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		if (this.touchChildren) {
 			var children = this._children,
 				identifier = event.identifier,
+				offset = this.getAnchorOffset(),
 				touchPos = new Vector(event.x, event.y);
 			for (var i = children.length - 1; i >= 0; --i) {
 				var child = children[i];
 				if (child.visible && child.touchable) {
 					var emit = false,
 						touches = child._touches,
-						subPos = child.getTransform().invert().multiply(touchPos),
+						subPos = child.getTransform().translate(offset).invert().multiply(touchPos),
 						inRect = subPos.x >= 0 && subPos.y >= 0 && subPos.x <= child.width && subPos.y <= child.height;
 					switch (type) {
 						case 'touchstart':
@@ -320,27 +353,28 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 绘制子对象
 	 * @protected
-	 * @function _draw
+	 * @function _drawChild
 	 * @param {go2d.Sprite} child 要绘制的对象
 	 * @param {string} [blendMode] 混合模式
 	 * @return {this}
 	 */
-	_draw: function(child, blendMode) {
+	_drawChild: function(child, blendMode) {
 		var ctx = this.context,
 			matrix = child.getTransform();
 
-		ctx.save();
+		child.render();
+
 		ctx.globalAlpha = child.opacity;
 		ctx.globalCompositeOperation = blendMode || child.blendMode;
-		child.render();
 
 		if (matrix.a === 1 && matrix.b === 0 && matrix.c === 0 && matrix.d === 1) {
 			ctx.drawImage(child.canvas, matrix.tx, matrix.ty, child.width, child.height);
 		} else {
-			ctx.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
+			ctx.save();
+			ctx.setTransform.apply(ctx, matrix.toArray());
 			ctx.drawImage(child.canvas, 0, 0, child.width, child.height);
+			ctx.restore();
 		}
-		ctx.restore();
 	},
 	/**
 	 * 渲染该对象
@@ -351,14 +385,15 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		if (this._dirty) {
 			var ctx = this.context,
 				children = this._children,
-				event = new Event('render');
-			ctx.setTransform(1, 0, 0, 1, 0, 0);
-			ctx.clearRect(0, 0, this.width, this.height);
+				event = new Event('render'),
+				offset = this.getAnchorOffset();
+			ctx.setTransform(1, 0, 0, 1, offset.x, offset.y);
+			ctx.clearRect(-offset.x, -offset.y, this.width, this.height);
 			ctx.beginPath();
 			if (this.background) {
 				ctx.save();
 				ctx.fillStyle = this.background;
-				ctx.fillRect(0, 0, this.width, this.height);
+				ctx.fillRect(-offset.x, -offset.y, this.width, this.height);
 				ctx.restore();
 			}
 			/**
@@ -370,11 +405,11 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			if (!event.isDefaultPrevented()) {
 				forEach(children, function(child) {
 					if (child.visible && child.opacity) {
-						this._draw(child);
+						this._drawChild(child);
 					}
 				}, this);
 				if (this._mask) {
-					this._draw(this._mask, 'destination-in');
+					this._drawChild(this._mask, 'destination-in');
 				}
 			}
 			this._dirty = false;
@@ -388,7 +423,18 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		return this;
 	},
 	/**
-	 * 更新对象渲染状态，当该对象需要重新渲染时调用
+	 * 获取锚点偏移
+	 * @function getAnchorOffset
+	 * @return {Object} 锚点锚点偏移
+	 */
+	getAnchorOffset: function() {
+		return new Vector(
+			this.anchorOffsetX + this.anchorX * this.width,
+			this.anchorOffsetY + this.anchorY * this.height
+		);
+	},
+	/**
+	 * 更新对象渲染状态，当对象的属性改变将影响其渲染结果时调用
 	 * @function update
 	 * @return {this}
 	 */
@@ -397,6 +443,11 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		this.updateParent();
 		return this;
 	},
+	/**
+	 * 更新父对象渲染状态，某些情况下，对象属性的改变并不影响本身的渲染，而只影响父元素的渲染，此时只需重新渲染父对象即可
+	 * @function update
+	 * @return {this}
+	 */
 	updateParent: function() {
 		if (this.parent) {
 			this.parent.update();

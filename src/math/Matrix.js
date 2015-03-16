@@ -8,7 +8,7 @@
  * @author Lanfei
  * @class Matrix
  * @extends Class
- * 
+ *
  * @constructor
  * @param {number} a 缩放或旋转时水平方向的参数
  * @param {number} b 旋转或倾斜时垂直方向的参数
@@ -204,6 +204,9 @@ var Matrix = go2d.Matrix = Class.extend({
 	 * @return {this}
 	 */
 	translate: function(x, y) {
+		if (x instanceof Vector) {
+			return this.append(1, 0, 0, 1, x.x, x.y);
+		}
 		return this.append(1, 0, 0, 1, x, y);
 	},
 	/**
@@ -213,6 +216,9 @@ var Matrix = go2d.Matrix = Class.extend({
 	 */
 	clone: function() {
 		return new Matrix(this);
+	},
+	toArray: function() {
+		return [this.a, this.b, this.c, this.d, this.tx, this.ty];
 	}
 }, {
 	/**

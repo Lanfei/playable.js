@@ -995,6 +995,46 @@
         {
             "file": "src\\display\\DisplayObject.js",
             "line": 118,
+            "description": "水平方向锚点偏移比例",
+            "itemtype": "property",
+            "name": "anchorX",
+            "type": "number",
+            "default": "0",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 126,
+            "description": "垂直方向锚点偏移比例",
+            "itemtype": "property",
+            "name": "anchorY",
+            "type": "number",
+            "default": "0",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 134,
+            "description": "水平方向锚点偏移像素",
+            "itemtype": "property",
+            "name": "anchorOffsetX",
+            "type": "number",
+            "default": "0",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 142,
+            "description": "垂直方向锚点偏移像素",
+            "itemtype": "property",
+            "name": "anchorOffsetY",
+            "type": "number",
+            "default": "0",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 150,
             "description": "不透明度",
             "itemtype": "property",
             "name": "opacity",
@@ -1004,7 +1044,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 126,
+            "line": 158,
             "description": "背景颜色或样式",
             "itemtype": "property",
             "name": "background",
@@ -1014,7 +1054,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 148,
+            "line": 180,
             "description": "宽度",
             "itemtype": "property",
             "name": "width",
@@ -1023,7 +1063,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 162,
+            "line": 194,
             "description": "高度",
             "itemtype": "property",
             "name": "height",
@@ -1032,7 +1072,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 198,
+            "line": 231,
             "description": "触摸开始事件",
             "itemtype": "event",
             "name": "touchstart",
@@ -1047,7 +1087,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 209,
+            "line": 242,
             "description": "触摸移动事件",
             "itemtype": "event",
             "name": "touchmove",
@@ -1062,7 +1102,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 219,
+            "line": 252,
             "description": "触摸结束事件",
             "itemtype": "event",
             "name": "touchend",
@@ -1077,7 +1117,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 230,
+            "line": 263,
             "description": "触摸点击事件",
             "itemtype": "event",
             "name": "touchtap",
@@ -1092,7 +1132,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 256,
+            "line": 289,
             "description": "添加到舞台事件",
             "itemtype": "event",
             "name": "addedtostage",
@@ -1107,7 +1147,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 268,
+            "line": 301,
             "description": "移除出舞台事件",
             "itemtype": "event",
             "name": "removedfromstage",
@@ -1122,7 +1162,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 292,
+            "line": 325,
             "description": "宽高变化事件",
             "itemtype": "event",
             "name": "resize",
@@ -1137,7 +1177,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 304,
+            "line": 337,
             "description": "进入下一帧，该方法应只由引擎本身调用",
             "itemtype": "method",
             "name": "_tick",
@@ -1149,7 +1189,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 311,
+            "line": 344,
             "description": "步进（进入下一帧）事件",
             "itemtype": "event",
             "name": "step",
@@ -1164,12 +1204,12 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 320,
+            "line": 353,
             "description": "绘制子对象",
             "access": "protected",
             "tagname": "",
             "itemtype": "method",
-            "name": "_draw",
+            "name": "_drawChild",
             "params": [
                 {
                     "name": "child",
@@ -1191,7 +1231,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 345,
+            "line": 379,
             "description": "渲染该对象",
             "itemtype": "method",
             "name": "render",
@@ -1203,7 +1243,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 364,
+            "line": 399,
             "description": "开始渲染事件",
             "itemtype": "event",
             "name": "render",
@@ -1218,7 +1258,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 381,
+            "line": 416,
             "description": "绘制完毕事件",
             "itemtype": "event",
             "name": "paint",
@@ -1233,8 +1273,20 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 390,
-            "description": "更新对象渲染状态，当该对象需要重新渲染时调用",
+            "line": 425,
+            "description": "获取锚点偏移",
+            "itemtype": "method",
+            "name": "getAnchorOffset",
+            "return": {
+                "description": "锚点锚点偏移",
+                "type": "Object"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 436,
+            "description": "更新对象渲染状态，当对象的属性改变将影响其渲染结果时调用",
             "itemtype": "method",
             "name": "update",
             "return": {
@@ -1245,7 +1297,19 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 406,
+            "line": 446,
+            "description": "更新父对象渲染状态，某些情况下，对象属性的改变并不影响本身的渲染，而只影响父元素的渲染，此时只需重新渲染父对象即可",
+            "itemtype": "method",
+            "name": "update",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 457,
             "description": "添加子对象",
             "itemtype": "method",
             "name": "addChild",
@@ -1264,7 +1328,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 416,
+            "line": 467,
             "description": "在指定深度添加子对象",
             "itemtype": "method",
             "name": "addChildAt",
@@ -1288,7 +1352,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 443,
+            "line": 494,
             "description": "获取指定名字的子对象",
             "itemtype": "method",
             "name": "getChildByName",
@@ -1307,7 +1371,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 459,
+            "line": 510,
             "description": "获取指定标签的子对象",
             "itemtype": "method",
             "name": "getChildrenByTag",
@@ -1326,7 +1390,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 474,
+            "line": 525,
             "description": "获取指定深度的子对象",
             "itemtype": "method",
             "name": "getChildAt",
@@ -1345,7 +1409,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 483,
+            "line": 534,
             "description": "获取指定子对象的深度",
             "itemtype": "method",
             "name": "getChildIndex",
@@ -1364,7 +1428,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 498,
+            "line": 549,
             "description": "交换两个子对象的深度",
             "itemtype": "method",
             "name": "swapChildren",
@@ -1388,7 +1452,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 513,
+            "line": 564,
             "description": "交换两个子对象的深度",
             "itemtype": "method",
             "name": "swapChildrenAt",
@@ -1412,7 +1476,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 532,
+            "line": 583,
             "description": "排列子对象",
             "itemtype": "method",
             "name": "sortChildren",
@@ -1431,7 +1495,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 542,
+            "line": 593,
             "description": "获取所有子对象",
             "itemtype": "method",
             "name": "getAllChildren",
@@ -1443,7 +1507,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 550,
+            "line": 601,
             "description": "移除指定的子对象",
             "itemtype": "method",
             "name": "removeChild",
@@ -1467,7 +1531,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 566,
+            "line": 617,
             "description": "移除指定深度的子对象",
             "itemtype": "method",
             "name": "removeChildAt",
@@ -1491,7 +1555,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 588,
+            "line": 639,
             "description": "移除指定名字的子对象",
             "itemtype": "method",
             "name": "removeChildrenByName",
@@ -1515,7 +1579,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 605,
+            "line": 656,
             "description": "移除指定标签的子对象",
             "itemtype": "method",
             "name": "removeChildrenByTag",
@@ -1539,7 +1603,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 621,
+            "line": 672,
             "description": "移除所有子对象",
             "itemtype": "method",
             "name": "removeAllChildren",
@@ -1558,7 +1622,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 641,
+            "line": 692,
             "description": "设置遮罩对象",
             "itemtype": "method",
             "name": "setMask",
@@ -1577,7 +1641,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 666,
+            "line": 717,
             "description": "获取遮罩对象",
             "itemtype": "method",
             "name": "getMask",
@@ -1589,7 +1653,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 674,
+            "line": 725,
             "description": "移除遮罩对象",
             "itemtype": "method",
             "name": "removeMask",
@@ -1608,7 +1672,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 689,
+            "line": 740,
             "description": "开始该对象的帧播放",
             "itemtype": "method",
             "name": "play",
@@ -1620,7 +1684,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 698,
+            "line": 749,
             "description": "暂停该对象的帧播放",
             "itemtype": "method",
             "name": "pause",
@@ -1632,7 +1696,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 707,
+            "line": 758,
             "description": "释放对象内存",
             "itemtype": "method",
             "name": "dispose",
@@ -1829,46 +1893,6 @@
         {
             "file": "src\\display\\Sprite.js",
             "line": 70,
-            "description": "水平方向锚点偏移比例",
-            "itemtype": "property",
-            "name": "anchorX",
-            "type": "number",
-            "default": "0",
-            "class": "Sprite"
-        },
-        {
-            "file": "src\\display\\Sprite.js",
-            "line": 78,
-            "description": "垂直方向锚点偏移比例",
-            "itemtype": "property",
-            "name": "anchorY",
-            "type": "number",
-            "default": "0",
-            "class": "Sprite"
-        },
-        {
-            "file": "src\\display\\Sprite.js",
-            "line": 86,
-            "description": "水平方向锚点偏移像素",
-            "itemtype": "property",
-            "name": "anchorOffsetX",
-            "type": "number",
-            "default": "0",
-            "class": "Sprite"
-        },
-        {
-            "file": "src\\display\\Sprite.js",
-            "line": 94,
-            "description": "垂直方向锚点偏移像素",
-            "itemtype": "property",
-            "name": "anchorOffsetY",
-            "type": "number",
-            "default": "0",
-            "class": "Sprite"
-        },
-        {
-            "file": "src\\display\\Sprite.js",
-            "line": 102,
             "description": "旋转角度",
             "itemtype": "property",
             "name": "rotation",
@@ -1878,7 +1902,7 @@
         },
         {
             "file": "src\\display\\Sprite.js",
-            "line": 110,
+            "line": 78,
             "description": "是否可见",
             "itemtype": "property",
             "name": "visible",
@@ -1888,7 +1912,7 @@
         },
         {
             "file": "src\\display\\Sprite.js",
-            "line": 118,
+            "line": 86,
             "description": "混合模式",
             "itemtype": "property",
             "name": "blendMode",
@@ -1901,19 +1925,19 @@
         },
         {
             "file": "src\\display\\Sprite.js",
-            "line": 140,
-            "description": "获取变化矩阵",
+            "line": 108,
+            "description": "获取变换矩阵",
             "itemtype": "method",
             "name": "getTransform",
             "return": {
-                "description": "",
+                "description": "仿射变换矩阵",
                 "type": "go2d.Matrix"
             },
             "class": "Sprite"
         },
         {
             "file": "src\\display\\Sprite.js",
-            "line": 154,
+            "line": 121,
             "description": "显示该对象",
             "itemtype": "method",
             "name": "show",
@@ -1925,7 +1949,7 @@
         },
         {
             "file": "src\\display\\Sprite.js",
-            "line": 163,
+            "line": 130,
             "description": "隐藏该对象",
             "itemtype": "method",
             "name": "hide",
@@ -2734,7 +2758,7 @@
         },
         {
             "file": "src\\math\\Matrix.js",
-            "line": 209,
+            "line": 212,
             "description": "创建当前矩阵的克隆对象",
             "itemtype": "method",
             "name": "clone",
@@ -2746,7 +2770,7 @@
         },
         {
             "file": "src\\math\\Matrix.js",
-            "line": 218,
+            "line": 224,
             "description": "角度制、弧度制换算比例",
             "itemtype": "property",
             "name": "DEG_TO_RAD",
@@ -4515,103 +4539,111 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:304"
+            "line": " src\\display\\DisplayObject.js:337"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:320"
+            "line": " src\\display\\DisplayObject.js:353"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:345"
+            "line": " src\\display\\DisplayObject.js:379"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:390"
+            "line": " src\\display\\DisplayObject.js:425"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:406"
+            "line": " src\\display\\DisplayObject.js:436"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:416"
+            "line": " src\\display\\DisplayObject.js:446"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:443"
+            "line": " src\\display\\DisplayObject.js:457"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:459"
+            "line": " src\\display\\DisplayObject.js:467"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:474"
+            "line": " src\\display\\DisplayObject.js:494"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:483"
+            "line": " src\\display\\DisplayObject.js:510"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:498"
+            "line": " src\\display\\DisplayObject.js:525"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:513"
+            "line": " src\\display\\DisplayObject.js:534"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:532"
+            "line": " src\\display\\DisplayObject.js:549"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:542"
+            "line": " src\\display\\DisplayObject.js:564"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:550"
+            "line": " src\\display\\DisplayObject.js:583"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:566"
+            "line": " src\\display\\DisplayObject.js:593"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:588"
+            "line": " src\\display\\DisplayObject.js:601"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:605"
+            "line": " src\\display\\DisplayObject.js:617"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:621"
+            "line": " src\\display\\DisplayObject.js:639"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:641"
+            "line": " src\\display\\DisplayObject.js:656"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:666"
+            "line": " src\\display\\DisplayObject.js:672"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:674"
+            "line": " src\\display\\DisplayObject.js:692"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:689"
+            "line": " src\\display\\DisplayObject.js:717"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:698"
+            "line": " src\\display\\DisplayObject.js:725"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:707"
+            "line": " src\\display\\DisplayObject.js:740"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:749"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:758"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4631,15 +4663,15 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\Sprite.js:140"
+            "line": " src\\display\\Sprite.js:108"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\Sprite.js:154"
+            "line": " src\\display\\Sprite.js:121"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\Sprite.js:163"
+            "line": " src\\display\\Sprite.js:130"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4727,7 +4759,7 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\math\\Matrix.js:209"
+            "line": " src\\math\\Matrix.js:212"
         },
         {
             "message": "replacing incorrect tag: function with method",
