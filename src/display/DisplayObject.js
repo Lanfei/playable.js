@@ -371,7 +371,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			ctx.drawImage(child.canvas, matrix.tx, matrix.ty, child.width, child.height);
 		} else {
 			ctx.save();
-			ctx.setTransform.apply(ctx, matrix.toArray());
+			ctx.transform.apply(ctx, matrix.toArray());
 			ctx.drawImage(child.canvas, 0, 0, child.width, child.height);
 			ctx.restore();
 		}

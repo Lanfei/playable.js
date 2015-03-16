@@ -2,7 +2,7 @@
     "project": {
         "name": "Go2d",
         "description": "A lightweight HTML5 game engine",
-        "version": "1.6.1",
+        "version": "1.6.2",
         "url": "https://github.com/Lanfei/Go2d"
     },
     "files": {

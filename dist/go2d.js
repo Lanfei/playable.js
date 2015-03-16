@@ -1,5 +1,5 @@
 /**
- * Go2d 1.6.1
+ * Go2d 1.6.2
  * https://github.com/Lanfei/Go2d
  * (c) 2014 [Lanfei](http://www.clanfei.com/)
  * A lightweight HTML5 game engine
@@ -20,7 +20,7 @@
  * @property {string} version Go2d 版本号
  */
 var go2d = {
-	version: '1.6.1'
+	version: '1.6.2'
 };
 
 /**
@@ -2617,7 +2617,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			ctx.drawImage(child.canvas, matrix.tx, matrix.ty, child.width, child.height);
 		} else {
 			ctx.save();
-			ctx.setTransform.apply(ctx, matrix.toArray());
+			ctx.transform.apply(ctx, matrix.toArray());
 			ctx.drawImage(child.canvas, 0, 0, child.width, child.height);
 			ctx.restore();
 		}
