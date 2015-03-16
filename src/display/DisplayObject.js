@@ -168,8 +168,8 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 				set: function(value) {
 					if (properties[key] !== value) {
 						properties[key] = value;
+						this.update();
 					}
-					this.update();
 				},
 				get: function() {
 					return properties[key];

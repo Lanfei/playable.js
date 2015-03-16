@@ -96,8 +96,10 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 		forEach(properties, function(value, key) {
 			Object.defineProperty(this, key, {
 				set: function(value) {
-					properties[key] = value;
-					this.updateParent();
+					if (properties[key] !== value) {
+						properties[key] = value;
+						this.updateParent();
+					}
 				},
 				get: function() {
 					return properties[key];

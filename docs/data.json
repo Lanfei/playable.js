@@ -2,7 +2,7 @@
     "project": {
         "name": "Go2d",
         "description": "A lightweight HTML5 game engine",
-        "version": "1.6.0",
+        "version": "1.6.1",
         "url": "https://github.com/Lanfei/Go2d"
     },
     "files": {
@@ -1925,7 +1925,7 @@
         },
         {
             "file": "src\\display\\Sprite.js",
-            "line": 108,
+            "line": 110,
             "description": "获取变换矩阵",
             "itemtype": "method",
             "name": "getTransform",
@@ -1937,7 +1937,7 @@
         },
         {
             "file": "src\\display\\Sprite.js",
-            "line": 121,
+            "line": 123,
             "description": "显示该对象",
             "itemtype": "method",
             "name": "show",
@@ -1949,7 +1949,7 @@
         },
         {
             "file": "src\\display\\Sprite.js",
-            "line": 130,
+            "line": 132,
             "description": "隐藏该对象",
             "itemtype": "method",
             "name": "hide",
@@ -4663,15 +4663,15 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\Sprite.js:108"
+            "line": " src\\display\\Sprite.js:110"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\Sprite.js:121"
+            "line": " src\\display\\Sprite.js:123"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\Sprite.js:130"
+            "line": " src\\display\\Sprite.js:132"
         },
         {
             "message": "replacing incorrect tag: function with method",

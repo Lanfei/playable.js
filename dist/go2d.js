@@ -1,5 +1,5 @@
 /**
- * Go2d 1.6.0
+ * Go2d 1.6.1
  * https://github.com/Lanfei/Go2d
  * (c) 2014 [Lanfei](http://www.clanfei.com/)
  * A lightweight HTML5 game engine
@@ -20,7 +20,7 @@
  * @property {string} version Go2d 版本号
  */
 var go2d = {
-	version: '1.6.0'
+	version: '1.6.1'
 };
 
 /**
@@ -2414,8 +2414,8 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 				set: function(value) {
 					if (properties[key] !== value) {
 						properties[key] = value;
+						this.update();
 					}
-					this.update();
 				},
 				get: function() {
 					return properties[key];
@@ -3114,8 +3114,10 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 		forEach(properties, function(value, key) {
 			Object.defineProperty(this, key, {
 				set: function(value) {
-					properties[key] = value;
-					this.updateParent();
+					if (properties[key] !== value) {
+						properties[key] = value;
+						this.updateParent();
+					}
 				},
 				get: function() {
 					return properties[key];
