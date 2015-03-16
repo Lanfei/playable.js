@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="Go2d" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.6.2</em>
+            <em>API Docs for: 1.6.3</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -312,79 +312,90 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		if (!this.touchable) {
 			return;
 		}
-		var type = event.type,
-			propagationStopped = false;
-		if (this.touchChildren) {
+		var emit = false,
+			type = event.type,
+			touches = this._touches,
+			identifier = event.identifier,
+			touchPos = new Vector(event.x, event.y),
+			offsetPos = touchPos.clone().add(this.getAnchor()),
+			inRect = offsetPos.x &gt;= 0 &amp;&amp; offsetPos.y &gt;= 0 &amp;&amp; offsetPos.x &lt;= this.width &amp;&amp; offsetPos.y &lt;= this.height;
+
+		switch (type) {
+			case &#x27;touchstart&#x27;:
+				if (inRect) {
+					/**
+					 * 触摸开始事件
+					 * @event touchstart
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+					touches[identifier] = true;
+				}
+				break;
+			case &#x27;touchmove&#x27;:
+				if (touches[identifier]) {
+					/**
+					 * 触摸移动事件
+					 * @event touchmove
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+				}
+				break;
+			case &#x27;touchend&#x27;:
+				if (touches[identifier]) {
+					/**
+					 * 触摸结束事件
+					 * @event touchend
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+					touches[identifier] = false;
+				}
+				break;
+			case &#x27;touchtap&#x27;:
+				if (inRect &amp;&amp; touches[identifier] !== undefined) {
+					/**
+					 * 触摸点击事件
+					 * @event touchtap
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+				}
+				delete touches[identifier];
+				break;
+		}
+
+		if (emit) {
 			var children = this._children,
-				identifier = event.identifier,
-				offset = this.getAnchorOffset(),
-				touchPos = new Vector(event.x, event.y);
+				propagationStopped = false;
 			for (var i = children.length - 1; i &gt;= 0; --i) {
 				var child = children[i];
 				if (child.visible &amp;&amp; child.touchable) {
-					var emit = false,
-						touches = child._touches,
-						subPos = child.getTransform().translate(offset).invert().multiply(touchPos),
-						inRect = subPos.x &gt;= 0 &amp;&amp; subPos.y &gt;= 0 &amp;&amp; subPos.x &lt;= child.width &amp;&amp; subPos.y &lt;= child.height;
-					switch (type) {
-						case &#x27;touchstart&#x27;:
-							if (inRect) {
-								/**
-								 * 触摸开始事件
-								 * @event touchstart
-								 * @param {go2d.TouchEvent} event 触摸事件对象
-								 */
-								emit = true;
-								touches[identifier] = true;
-							}
-							break;
-						case &#x27;touchmove&#x27;:
-							if (touches[identifier]) {
-								/**
-								 * 触摸移动事件
-								 * @event touchmove
-								 * @param {go2d.TouchEvent} event 触摸事件对象
-								 */
-								emit = true;
-							}
-							break;
-						case &#x27;touchend&#x27;:
-							if (touches[identifier]) {
-								/**
-								 * 触摸结束事件
-								 * @event touchend
-								 * @param {go2d.TouchEvent} event 触摸事件对象
-								 */
-								emit = true;
-								touches[identifier] = false;
-							}
-							break;
-						case &#x27;touchtap&#x27;:
-							if (inRect &amp;&amp; touches[identifier] !== undefined) {
-								/**
-								 * 触摸点击事件
-								 * @event touchtap
-								 * @param {go2d.TouchEvent} event 触摸事件对象
-								 */
-								emit = true;
-							}
-							delete touches[identifier];
-							break;
-					}
-					if (emit) {
-						var subEvent = new TouchEvent(type, subPos.x, subPos.y, event.globalX, event.globalY, identifier);
-						child._onTouch(subEvent);
+					var subLocalPos = child.getTransform().invert().multiply(touchPos),
+						subPos = subLocalPos.clone().subtract(child.getAnchor()),
+						subEvent = new TouchEvent(
+							type,
+							Math.round(subPos.x), Math.round(subPos.y),
+							Math.round(subLocalPos.x), Math.round(subLocalPos.y),
+							event.stageX, event.stageY,
+							event.globalX, event.globalY,
+							identifier
+						);
+					if (child._onTouch(subEvent)) {
 						propagationStopped = subEvent.isPropagationStopped();
 						break;
 					}
 				}
 			}
+			if (propagationStopped) {
+				event.stopPropagation();
+			} else {
+				this.emit(type, event);
+			}
+			return true;
 		}
-		if (propagationStopped) {
-			event.stopPropagation();
-		} else {
-			this.emit(type, event);
-		}
+		return false;
 	},
 	_onAddedToStage: function(stage) {
 		/**
@@ -487,14 +498,14 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			var ctx = this.context,
 				children = this._children,
 				event = new Event(&#x27;render&#x27;),
-				offset = this.getAnchorOffset();
-			ctx.setTransform(1, 0, 0, 1, offset.x, offset.y);
-			ctx.clearRect(-offset.x, -offset.y, this.width, this.height);
+				anchor = this.getAnchor();
+			ctx.setTransform(1, 0, 0, 1, anchor.x, anchor.y);
+			ctx.clearRect(-anchor.x, -anchor.y, this.width, this.height);
 			ctx.beginPath();
 			if (this.background) {
 				ctx.save();
 				ctx.fillStyle = this.background;
-				ctx.fillRect(-offset.x, -offset.y, this.width, this.height);
+				ctx.fillRect(-anchor.x, -anchor.y, this.width, this.height);
 				ctx.restore();
 			}
 			/**
@@ -525,10 +536,10 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	},
 	/**
 	 * 获取锚点偏移
-	 * @function getAnchorOffset
+	 * @function getAnchor
 	 * @return {Object} 锚点锚点偏移
 	 */
-	getAnchorOffset: function() {
+	getAnchor: function() {
 		return new Vector(
 			this.anchorOffsetX + this.anchorX * this.width,
 			this.anchorOffsetY + this.anchorY * this.height

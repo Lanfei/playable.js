@@ -114,7 +114,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 	 */
 	getTransform: function() {
 		var matrix = new Matrix(),
-			anchorOffset = this.getAnchorOffset();
+			anchorOffset = this.getAnchor();
 		matrix.translate(-anchorOffset.x, -anchorOffset.y);
 		matrix.rotate(this.rotation).scale(this.scaleX, this.scaleY).skew(this.skewX, this.skewY);
 		matrix.translate(this.x, this.y);

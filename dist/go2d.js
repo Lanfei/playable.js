@@ -1,5 +1,5 @@
 /**
- * Go2d 1.6.2
+ * Go2d 1.6.3
  * https://github.com/Lanfei/Go2d
  * (c) 2014 [Lanfei](http://www.clanfei.com/)
  * A lightweight HTML5 game engine
@@ -20,7 +20,7 @@
  * @property {string} version Go2d 版本号
  */
 var go2d = {
-	version: '1.6.2'
+	version: '1.6.3'
 };
 
 /**
@@ -732,17 +732,21 @@ var Event = go2d.Event = Class.extend({
  * @author Lanfei
  * @class TouchEvent
  * @extends Event
- * 
+ *
  * @constructor
  * @param {string} type 事件类型
  * @param {number} x 事件水平坐标
  * @param {number} y 事件垂直坐标
- * @param {number} globalX 全局水平坐标
- * @param {number} globalY 全局垂直坐标
+ * @param {number} localX 事件绝对水平坐标（忽略锚点）
+ * @param {number} localY 事件绝对垂直坐标（忽略锚点）
+ * @param {number} stageX 全局水平坐标
+ * @param {number} stageY 全局垂直坐标
+ * @param {number} globalX 全局绝对水平坐标（忽略锚点）
+ * @param {number} globalY 全局绝对垂直坐标（忽略锚点）
  * @param {number} identifier 触摸对象唯一标识，用于多点触摸识别
  */
 var TouchEvent = Event.TouchEvent = Event.extend({
-	__init: function(type, x, y, globalX, globalY, identifier) {
+	__init: function(type, x, y, localX, localY, stageX, stageY, globalX, globalY, identifier) {
 		this._super(type, {
 
 			/**
@@ -760,14 +764,42 @@ var TouchEvent = Event.TouchEvent = Event.extend({
 			y: y,
 
 			/**
+			 * 事件绝对水平坐标（忽略锚点）
+			 * @property localX
+			 * @type number
+			 */
+			localX: localX,
+
+			/**
+			 * 事件绝对垂直坐标（忽略锚点）
+			 * @property localY
+			 * @type number
+			 */
+			localY: localY,
+
+			/**
 			 * 全局水平坐标
+			 * @property stageX
+			 * @type number
+			 */
+			stageX: stageX,
+
+			/**
+			 * 全局垂直坐标
+			 * @property stageY
+			 * @type number
+			 */
+			stageY: stageY,
+
+			/**
+			 * 全局绝对水平坐标（忽略锚点）
 			 * @property globalX
 			 * @type number
 			 */
 			globalX: globalX,
 
 			/**
-			 * 全局垂直坐标
+			 * 全局绝对垂直坐标（忽略锚点）
 			 * @property globalY
 			 * @type number
 			 */
@@ -819,7 +851,6 @@ var TouchEvent = Event.TouchEvent = Event.extend({
 	 */
 	TOUCH_TAP: 'touchtap'
 });
-
 /**
  * 事件类，所有事件对象的基类。
  * @author Lanfei
@@ -2457,79 +2488,90 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		if (!this.touchable) {
 			return;
 		}
-		var type = event.type,
-			propagationStopped = false;
-		if (this.touchChildren) {
+		var emit = false,
+			type = event.type,
+			touches = this._touches,
+			identifier = event.identifier,
+			touchPos = new Vector(event.x, event.y),
+			offsetPos = touchPos.clone().add(this.getAnchor()),
+			inRect = offsetPos.x >= 0 && offsetPos.y >= 0 && offsetPos.x <= this.width && offsetPos.y <= this.height;
+
+		switch (type) {
+			case 'touchstart':
+				if (inRect) {
+					/**
+					 * 触摸开始事件
+					 * @event touchstart
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+					touches[identifier] = true;
+				}
+				break;
+			case 'touchmove':
+				if (touches[identifier]) {
+					/**
+					 * 触摸移动事件
+					 * @event touchmove
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+				}
+				break;
+			case 'touchend':
+				if (touches[identifier]) {
+					/**
+					 * 触摸结束事件
+					 * @event touchend
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+					touches[identifier] = false;
+				}
+				break;
+			case 'touchtap':
+				if (inRect && touches[identifier] !== undefined) {
+					/**
+					 * 触摸点击事件
+					 * @event touchtap
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+				}
+				delete touches[identifier];
+				break;
+		}
+
+		if (emit) {
 			var children = this._children,
-				identifier = event.identifier,
-				offset = this.getAnchorOffset(),
-				touchPos = new Vector(event.x, event.y);
+				propagationStopped = false;
 			for (var i = children.length - 1; i >= 0; --i) {
 				var child = children[i];
 				if (child.visible && child.touchable) {
-					var emit = false,
-						touches = child._touches,
-						subPos = child.getTransform().translate(offset).invert().multiply(touchPos),
-						inRect = subPos.x >= 0 && subPos.y >= 0 && subPos.x <= child.width && subPos.y <= child.height;
-					switch (type) {
-						case 'touchstart':
-							if (inRect) {
-								/**
-								 * 触摸开始事件
-								 * @event touchstart
-								 * @param {go2d.TouchEvent} event 触摸事件对象
-								 */
-								emit = true;
-								touches[identifier] = true;
-							}
-							break;
-						case 'touchmove':
-							if (touches[identifier]) {
-								/**
-								 * 触摸移动事件
-								 * @event touchmove
-								 * @param {go2d.TouchEvent} event 触摸事件对象
-								 */
-								emit = true;
-							}
-							break;
-						case 'touchend':
-							if (touches[identifier]) {
-								/**
-								 * 触摸结束事件
-								 * @event touchend
-								 * @param {go2d.TouchEvent} event 触摸事件对象
-								 */
-								emit = true;
-								touches[identifier] = false;
-							}
-							break;
-						case 'touchtap':
-							if (inRect && touches[identifier] !== undefined) {
-								/**
-								 * 触摸点击事件
-								 * @event touchtap
-								 * @param {go2d.TouchEvent} event 触摸事件对象
-								 */
-								emit = true;
-							}
-							delete touches[identifier];
-							break;
-					}
-					if (emit) {
-						var subEvent = new TouchEvent(type, subPos.x, subPos.y, event.globalX, event.globalY, identifier);
-						child._onTouch(subEvent);
+					var subLocalPos = child.getTransform().invert().multiply(touchPos),
+						subPos = subLocalPos.clone().subtract(child.getAnchor()),
+						subEvent = new TouchEvent(
+							type,
+							Math.round(subPos.x), Math.round(subPos.y),
+							Math.round(subLocalPos.x), Math.round(subLocalPos.y),
+							event.stageX, event.stageY,
+							event.globalX, event.globalY,
+							identifier
+						);
+					if (child._onTouch(subEvent)) {
 						propagationStopped = subEvent.isPropagationStopped();
 						break;
 					}
 				}
 			}
+			if (propagationStopped) {
+				event.stopPropagation();
+			} else {
+				this.emit(type, event);
+			}
+			return true;
 		}
-		if (propagationStopped) {
-			event.stopPropagation();
-		} else {
-			this.emit(type, event);
-		}
+		return false;
 	},
 	_onAddedToStage: function(stage) {
 		/**
@@ -2632,14 +2674,14 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			var ctx = this.context,
 				children = this._children,
 				event = new Event('render'),
-				offset = this.getAnchorOffset();
-			ctx.setTransform(1, 0, 0, 1, offset.x, offset.y);
-			ctx.clearRect(-offset.x, -offset.y, this.width, this.height);
+				anchor = this.getAnchor();
+			ctx.setTransform(1, 0, 0, 1, anchor.x, anchor.y);
+			ctx.clearRect(-anchor.x, -anchor.y, this.width, this.height);
 			ctx.beginPath();
 			if (this.background) {
 				ctx.save();
 				ctx.fillStyle = this.background;
-				ctx.fillRect(-offset.x, -offset.y, this.width, this.height);
+				ctx.fillRect(-anchor.x, -anchor.y, this.width, this.height);
 				ctx.restore();
 			}
 			/**
@@ -2670,10 +2712,10 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	},
 	/**
 	 * 获取锚点偏移
-	 * @function getAnchorOffset
+	 * @function getAnchor
 	 * @return {Object} 锚点锚点偏移
 	 */
-	getAnchorOffset: function() {
+	getAnchor: function() {
 		return new Vector(
 			this.anchorOffsetX + this.anchorX * this.width,
 			this.anchorOffsetY + this.anchorY * this.height
@@ -3132,7 +3174,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 	 */
 	getTransform: function() {
 		var matrix = new Matrix(),
-			anchorOffset = this.getAnchorOffset();
+			anchorOffset = this.getAnchor();
 		matrix.translate(-anchorOffset.x, -anchorOffset.y);
 		matrix.rotate(this.rotation).scale(this.scaleX, this.scaleY).skew(this.skewX, this.skewY);
 		matrix.translate(this.x, this.y);
@@ -3792,13 +3834,16 @@ var Stage = go2d.Stage = DisplayObject.extend({
 			canvas = this.canvas;
 
 		function createTouchEvent(type, event) {
-			var bound = canvas.getBoundingClientRect(),
+			var anchor = that.getAnchor(),
+				bound = canvas.getBoundingClientRect(),
 				scaleX = bound.width / canvas.width,
 				scaleY = bound.height / canvas.height,
-				x = (event.pageX - bound.left) / scaleX,
-				y = (event.pageY - bound.top) / scaleY,
+				localX = (event.pageX - bound.left) / scaleX,
+				localY = (event.pageY - bound.top) / scaleY,
+				x = localX - anchor.x,
+				y = localY - anchor.y,
 				identifier = event.identifier || 0;
-			return new TouchEvent(type, x, y, x, y, identifier);
+			return new TouchEvent(type, x, y, localX, localY, x, y, localX, localY, identifier);
 		}
 
 		function emitTouch(type, event) {

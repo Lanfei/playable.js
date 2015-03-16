@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="Go2d" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.6.2</em>
+            <em>API Docs for: 1.6.3</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -133,6 +133,18 @@
                                 <code>y</code>
                         </li>
                         <li class="arg">
+                                <code>localX</code>
+                        </li>
+                        <li class="arg">
+                                <code>localY</code>
+                        </li>
+                        <li class="arg">
+                                <code>stageX</code>
+                        </li>
+                        <li class="arg">
+                                <code>stageY</code>
+                        </li>
+                        <li class="arg">
                                 <code>globalX</code>
                         </li>
                         <li class="arg">
@@ -203,7 +215,29 @@
         
                         </li>
                         <li class="param">
-                                <code class="param-name">globalX</code>
+                                <code class="param-name">localX</code>
+                                <span class="type">Number</span>
+        
+        
+                            <div class="param-description">
+                                <p>事件绝对水平坐标（忽略锚点）</p>
+        
+                            </div>
+        
+                        </li>
+                        <li class="param">
+                                <code class="param-name">localY</code>
+                                <span class="type">Number</span>
+        
+        
+                            <div class="param-description">
+                                <p>事件绝对垂直坐标（忽略锚点）</p>
+        
+                            </div>
+        
+                        </li>
+                        <li class="param">
+                                <code class="param-name">stageX</code>
                                 <span class="type">Number</span>
         
         
@@ -214,12 +248,34 @@
         
                         </li>
                         <li class="param">
-                                <code class="param-name">globalY</code>
+                                <code class="param-name">stageY</code>
                                 <span class="type">Number</span>
         
         
                             <div class="param-description">
                                 <p>全局垂直坐标</p>
+        
+                            </div>
+        
+                        </li>
+                        <li class="param">
+                                <code class="param-name">globalX</code>
+                                <span class="type">Number</span>
+        
+        
+                            <div class="param-description">
+                                <p>全局绝对水平坐标（忽略锚点）</p>
+        
+                            </div>
+        
+                        </li>
+                        <li class="param">
+                                <code class="param-name">globalY</code>
+                                <span class="type">Number</span>
+        
+        
+                            <div class="param-description">
+                                <p>全局绝对垂直坐标（忽略锚点）</p>
         
                             </div>
         
@@ -300,6 +356,22 @@
                             </li>
                             <li class="index-item property">
                                 <a href="#property_identifier">identifier</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_localX">localX</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_localY">localY</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_stageX">stageX</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_stageY">stageY</a>
 
                             </li>
                             <li class="index-item property">
@@ -575,14 +647,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_TouchEvent.js.html#l33"><code>src\event\TouchEvent.js:33</code></a>
+                            <a href="../files/src_event_TouchEvent.js.html#l65"><code>src\event\TouchEvent.js:65</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>全局水平坐标</p>
+                            <p>全局绝对水平坐标（忽略锚点）</p>
                     
                         </div>
                     
@@ -600,14 +672,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_TouchEvent.js.html#l40"><code>src\event\TouchEvent.js:40</code></a>
+                            <a href="../files/src_event_TouchEvent.js.html#l72"><code>src\event\TouchEvent.js:72</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>全局垂直坐标</p>
+                            <p>全局绝对垂直坐标（忽略锚点）</p>
                     
                         </div>
                     
@@ -625,7 +697,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_TouchEvent.js.html#l47"><code>src\event\TouchEvent.js:47</code></a>
+                            <a href="../files/src_event_TouchEvent.js.html#l79"><code>src\event\TouchEvent.js:79</code></a>
                             </p>
                     
                     
@@ -633,6 +705,106 @@
                     
                         <div class="description">
                             <p>触摸对象唯一标识，用于多点触摸识别</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_localX" class="property item">
+                        <h3 class="name"><code>localX</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_event_TouchEvent.js.html#l37"><code>src\event\TouchEvent.js:37</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>事件绝对水平坐标（忽略锚点）</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_localY" class="property item">
+                        <h3 class="name"><code>localY</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_event_TouchEvent.js.html#l44"><code>src\event\TouchEvent.js:44</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>事件绝对垂直坐标（忽略锚点）</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_stageX" class="property item">
+                        <h3 class="name"><code>stageX</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_event_TouchEvent.js.html#l51"><code>src\event\TouchEvent.js:51</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>全局水平坐标</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_stageY" class="property item">
+                        <h3 class="name"><code>stageY</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_event_TouchEvent.js.html#l58"><code>src\event\TouchEvent.js:58</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>全局垂直坐标</p>
                     
                         </div>
                     
@@ -652,7 +824,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_TouchEvent.js.html#l74"><code>src\event\TouchEvent.js:74</code></a>
+                            <a href="../files/src_event_TouchEvent.js.html#l106"><code>src\event\TouchEvent.js:106</code></a>
                             </p>
                     
                     
@@ -680,7 +852,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_TouchEvent.js.html#l65"><code>src\event\TouchEvent.js:65</code></a>
+                            <a href="../files/src_event_TouchEvent.js.html#l97"><code>src\event\TouchEvent.js:97</code></a>
                             </p>
                     
                     
@@ -708,7 +880,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_TouchEvent.js.html#l56"><code>src\event\TouchEvent.js:56</code></a>
+                            <a href="../files/src_event_TouchEvent.js.html#l88"><code>src\event\TouchEvent.js:88</code></a>
                             </p>
                     
                     
@@ -736,7 +908,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_TouchEvent.js.html#l83"><code>src\event\TouchEvent.js:83</code></a>
+                            <a href="../files/src_event_TouchEvent.js.html#l115"><code>src\event\TouchEvent.js:115</code></a>
                             </p>
                     
                     
@@ -787,7 +959,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_TouchEvent.js.html#l19"><code>src\event\TouchEvent.js:19</code></a>
+                            <a href="../files/src_event_TouchEvent.js.html#l23"><code>src\event\TouchEvent.js:23</code></a>
                             </p>
                     
                     
@@ -812,7 +984,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_TouchEvent.js.html#l26"><code>src\event\TouchEvent.js:26</code></a>
+                            <a href="../files/src_event_TouchEvent.js.html#l30"><code>src\event\TouchEvent.js:30</code></a>
                             </p>
                     
                     

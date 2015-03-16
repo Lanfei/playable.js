@@ -22,13 +22,16 @@ var Stage = go2d.Stage = DisplayObject.extend({
 			canvas = this.canvas;
 
 		function createTouchEvent(type, event) {
-			var bound = canvas.getBoundingClientRect(),
+			var anchor = that.getAnchor(),
+				bound = canvas.getBoundingClientRect(),
 				scaleX = bound.width / canvas.width,
 				scaleY = bound.height / canvas.height,
-				x = (event.pageX - bound.left) / scaleX,
-				y = (event.pageY - bound.top) / scaleY,
+				localX = (event.pageX - bound.left) / scaleX,
+				localY = (event.pageY - bound.top) / scaleY,
+				x = localX - anchor.x,
+				y = localY - anchor.y,
 				identifier = event.identifier || 0;
-			return new TouchEvent(type, x, y, x, y, identifier);
+			return new TouchEvent(type, x, y, localX, localY, x, y, localX, localY, identifier);
 		}
 
 		function emitTouch(type, event) {
