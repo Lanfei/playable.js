@@ -39,10 +39,10 @@ var Stage = go2d.Stage = DisplayObject.extend({
 			if (touches) {
 				touches = Array.prototype.slice.call(touches);
 				forEach(touches, function(event) {
-					that._onTouch.call(that, createTouchEvent(type, event));
+					that.touch(createTouchEvent(type, event));
 				});
 			} else {
-				that._onTouch.call(that, createTouchEvent(type, event));
+				that.touch(createTouchEvent(type, event));
 			}
 		}
 
