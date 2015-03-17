@@ -2684,16 +2684,15 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 触发移除出舞台事件，不建议外部调用
 	 * @function removedFromStage
+	 * @param {go2d.Stage} stage 舞台对象
 	 */
-	removedFromStage: function() {
+	removedFromStage: function(stage) {
 		/**
 		 * 移除出舞台事件
 		 * @event removedfromstage
 		 * @param {go2d.Stage} stage 舞台对象
 		 */
-		var stage = this.stage;
 		this.stage = null;
-		console.log(stage);
 		this.emit('removedfromstage', stage);
 		forEach(this._children, function(child) {
 			child.removedFromStage(stage);
@@ -2937,11 +2936,9 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			if (cleanup) {
 				child.dispose();
 			} else {
-				console.log(child.stage);
 				child.parent = null;
 				if (child.stage) {
-					console.log(2);
-					child.removedFromStage();
+					child.removedFromStage(child.stage);
 				}
 			}
 			this.update();
@@ -2991,7 +2988,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		forEach(this._children, function(child) {
 			child.parent = null;
 			if (child.stage) {
-				child.removedFromStage();
+				child.removedFromStage(child.stage);
 			}
 			if (cleanup) {
 				child.dispose();
