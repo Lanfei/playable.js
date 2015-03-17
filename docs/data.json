@@ -1275,7 +1275,7 @@
                 {
                     "name": "stage",
                     "description": "舞台对象",
-                    "type": "TouchEvent"
+                    "type": "go2d.Stage"
                 }
             ],
             "class": "DisplayObject"
