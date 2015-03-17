@@ -2,7 +2,7 @@
     "project": {
         "name": "Go2d",
         "description": "A lightweight HTML5 game engine",
-        "version": "1.6.3",
+        "version": "1.6.4",
         "url": "https://github.com/Lanfei/Go2d"
     },
     "files": {
@@ -1092,112 +1092,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 225,
-            "description": "触摸开始事件",
-            "itemtype": "event",
-            "name": "touchstart",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "触摸事件对象",
-                    "type": "go2d.TouchEvent"
-                }
-            ],
-            "class": "DisplayObject"
-        },
-        {
-            "file": "src\\display\\DisplayObject.js",
-            "line": 236,
-            "description": "触摸移动事件",
-            "itemtype": "event",
-            "name": "touchmove",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "触摸事件对象",
-                    "type": "go2d.TouchEvent"
-                }
-            ],
-            "class": "DisplayObject"
-        },
-        {
-            "file": "src\\display\\DisplayObject.js",
-            "line": 246,
-            "description": "触摸结束事件",
-            "itemtype": "event",
-            "name": "touchend",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "触摸事件对象",
-                    "type": "go2d.TouchEvent"
-                }
-            ],
-            "class": "DisplayObject"
-        },
-        {
-            "file": "src\\display\\DisplayObject.js",
-            "line": 257,
-            "description": "触摸点击事件",
-            "itemtype": "event",
-            "name": "touchtap",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "触摸事件对象",
-                    "type": "go2d.TouchEvent"
-                }
-            ],
-            "class": "DisplayObject"
-        },
-        {
-            "file": "src\\display\\DisplayObject.js",
-            "line": 300,
-            "description": "添加到舞台事件",
-            "itemtype": "event",
-            "name": "addedtostage",
-            "params": [
-                {
-                    "name": "stage",
-                    "description": "舞台对象",
-                    "type": "go2d.Stage"
-                }
-            ],
-            "class": "DisplayObject"
-        },
-        {
-            "file": "src\\display\\DisplayObject.js",
-            "line": 312,
-            "description": "移除出舞台事件",
-            "itemtype": "event",
-            "name": "removedfromstage",
-            "params": [
-                {
-                    "name": "stage",
-                    "description": "舞台对象",
-                    "type": "go2d.Stage"
-                }
-            ],
-            "class": "DisplayObject"
-        },
-        {
-            "file": "src\\display\\DisplayObject.js",
-            "line": 336,
-            "description": "宽高变化事件",
-            "itemtype": "event",
-            "name": "resize",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "宽高变化事件对象",
-                    "type": "go2d.ResizeEvent"
-                }
-            ],
-            "class": "DisplayObject"
-        },
-        {
-            "file": "src\\display\\DisplayObject.js",
-            "line": 348,
+            "line": 210,
             "description": "进入下一帧，该方法应只由引擎本身调用",
             "itemtype": "method",
             "name": "_tick",
@@ -1209,7 +1104,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 355,
+            "line": 217,
             "description": "步进（进入下一帧）事件",
             "itemtype": "event",
             "name": "step",
@@ -1224,7 +1119,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 364,
+            "line": 226,
             "description": "绘制子对象",
             "access": "protected",
             "tagname": "",
@@ -1251,7 +1146,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 390,
+            "line": 252,
             "description": "渲染该对象",
             "itemtype": "method",
             "name": "render",
@@ -1263,7 +1158,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 410,
+            "line": 272,
             "description": "开始渲染事件",
             "itemtype": "event",
             "name": "render",
@@ -1278,7 +1173,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 427,
+            "line": 289,
             "description": "绘制完毕事件",
             "itemtype": "event",
             "name": "paint",
@@ -1293,7 +1188,178 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 436,
+            "line": 298,
+            "description": "触发触摸事件，不建议外部调用",
+            "itemtype": "method",
+            "name": "touch",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "触摸事件对象",
+                    "type": "TouchEvent"
+                }
+            ],
+            "return": {
+                "description": "是否成功触发事件",
+                "type": "Boolean"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 319,
+            "description": "触摸开始事件",
+            "itemtype": "event",
+            "name": "touchstart",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "触摸事件对象",
+                    "type": "go2d.TouchEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 330,
+            "description": "触摸移动事件",
+            "itemtype": "event",
+            "name": "touchmove",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "触摸事件对象",
+                    "type": "go2d.TouchEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 340,
+            "description": "触摸结束事件",
+            "itemtype": "event",
+            "name": "touchend",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "触摸事件对象",
+                    "type": "go2d.TouchEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 351,
+            "description": "触摸点击事件",
+            "itemtype": "event",
+            "name": "touchtap",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "触摸事件对象",
+                    "type": "go2d.TouchEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 393,
+            "description": "触发添加到舞台事件，不建议外部调用",
+            "itemtype": "method",
+            "name": "addedToStage",
+            "params": [
+                {
+                    "name": "stage",
+                    "description": "舞台对象",
+                    "type": "TouchEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 399,
+            "description": "添加到舞台事件",
+            "itemtype": "event",
+            "name": "addedtostage",
+            "params": [
+                {
+                    "name": "stage",
+                    "description": "舞台对象",
+                    "type": "go2d.Stage"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 410,
+            "description": "触发移除出舞台事件，不建议外部调用",
+            "itemtype": "method",
+            "name": "removedFromStage",
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 415,
+            "description": "移除出舞台事件",
+            "itemtype": "event",
+            "name": "removedfromstage",
+            "params": [
+                {
+                    "name": "stage",
+                    "description": "舞台对象",
+                    "type": "go2d.Stage"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 428,
+            "description": "设置对象大小",
+            "itemtype": "method",
+            "name": "resize",
+            "params": [
+                {
+                    "name": "width",
+                    "description": "宽度",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "高度",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 448,
+            "description": "宽高变化事件",
+            "itemtype": "event",
+            "name": "resize",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "宽高变化事件对象",
+                    "type": "go2d.ResizeEvent"
+                }
+            ],
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 461,
             "description": "获取锚点偏移",
             "itemtype": "method",
             "name": "getAnchor",
@@ -1305,7 +1371,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 447,
+            "line": 472,
             "description": "更新对象渲染状态，当对象的属性改变将影响其渲染结果时调用",
             "itemtype": "method",
             "name": "update",
@@ -1317,7 +1383,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 457,
+            "line": 482,
             "description": "更新父对象渲染状态，某些情况下，对象属性的改变并不影响本身的渲染，而只影响父元素的渲染，此时只需重新渲染父对象即可",
             "itemtype": "method",
             "name": "update",
@@ -1329,7 +1395,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 468,
+            "line": 493,
             "description": "添加子对象",
             "itemtype": "method",
             "name": "addChild",
@@ -1348,7 +1414,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 478,
+            "line": 503,
             "description": "在指定深度添加子对象",
             "itemtype": "method",
             "name": "addChildAt",
@@ -1372,7 +1438,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 505,
+            "line": 530,
             "description": "获取指定名字的子对象",
             "itemtype": "method",
             "name": "getChildByName",
@@ -1391,7 +1457,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 521,
+            "line": 546,
             "description": "获取指定标签的子对象",
             "itemtype": "method",
             "name": "getChildrenByTag",
@@ -1410,7 +1476,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 536,
+            "line": 561,
             "description": "获取指定深度的子对象",
             "itemtype": "method",
             "name": "getChildAt",
@@ -1429,7 +1495,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 545,
+            "line": 570,
             "description": "获取指定子对象的深度",
             "itemtype": "method",
             "name": "getChildIndex",
@@ -1448,7 +1514,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 560,
+            "line": 585,
             "description": "交换两个子对象的深度",
             "itemtype": "method",
             "name": "swapChildren",
@@ -1472,7 +1538,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 575,
+            "line": 600,
             "description": "交换两个子对象的深度",
             "itemtype": "method",
             "name": "swapChildrenAt",
@@ -1496,7 +1562,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 594,
+            "line": 619,
             "description": "排列子对象",
             "itemtype": "method",
             "name": "sortChildren",
@@ -1515,7 +1581,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 604,
+            "line": 629,
             "description": "获取所有子对象",
             "itemtype": "method",
             "name": "getAllChildren",
@@ -1527,7 +1593,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 612,
+            "line": 637,
             "description": "移除指定的子对象",
             "itemtype": "method",
             "name": "removeChild",
@@ -1551,7 +1617,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 628,
+            "line": 653,
             "description": "移除指定深度的子对象",
             "itemtype": "method",
             "name": "removeChildAt",
@@ -1575,7 +1641,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 650,
+            "line": 677,
             "description": "移除指定名字的子对象",
             "itemtype": "method",
             "name": "removeChildrenByName",
@@ -1599,7 +1665,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 667,
+            "line": 694,
             "description": "移除指定标签的子对象",
             "itemtype": "method",
             "name": "removeChildrenByTag",
@@ -1623,7 +1689,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 683,
+            "line": 710,
             "description": "移除所有子对象",
             "itemtype": "method",
             "name": "removeAllChildren",
@@ -1642,7 +1708,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 703,
+            "line": 730,
             "description": "设置遮罩对象",
             "itemtype": "method",
             "name": "setMask",
@@ -1661,7 +1727,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 728,
+            "line": 755,
             "description": "获取遮罩对象",
             "itemtype": "method",
             "name": "getMask",
@@ -1673,7 +1739,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 736,
+            "line": 763,
             "description": "移除遮罩对象",
             "itemtype": "method",
             "name": "removeMask",
@@ -1692,7 +1758,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 751,
+            "line": 778,
             "description": "开始该对象的帧播放",
             "itemtype": "method",
             "name": "play",
@@ -1704,7 +1770,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 760,
+            "line": 787,
             "description": "暂停该对象的帧播放",
             "itemtype": "method",
             "name": "pause",
@@ -1716,7 +1782,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 769,
+            "line": 796,
             "description": "释放对象内存",
             "itemtype": "method",
             "name": "dispose",
@@ -2407,7 +2473,7 @@
         },
         {
             "file": "src\\event\\EventEmitter.js",
-            "line": 103,
+            "line": 100,
             "description": "释放事件派发器内存",
             "itemtype": "method",
             "name": "dispose",
@@ -4595,111 +4661,127 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:348"
+            "line": " src\\display\\DisplayObject.js:210"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:364"
+            "line": " src\\display\\DisplayObject.js:226"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:390"
+            "line": " src\\display\\DisplayObject.js:252"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:436"
+            "line": " src\\display\\DisplayObject.js:298"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:447"
+            "line": " src\\display\\DisplayObject.js:393"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:457"
+            "line": " src\\display\\DisplayObject.js:410"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:468"
+            "line": " src\\display\\DisplayObject.js:428"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:478"
+            "line": " src\\display\\DisplayObject.js:461"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:505"
+            "line": " src\\display\\DisplayObject.js:472"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:521"
+            "line": " src\\display\\DisplayObject.js:482"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:536"
+            "line": " src\\display\\DisplayObject.js:493"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:545"
+            "line": " src\\display\\DisplayObject.js:503"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:560"
+            "line": " src\\display\\DisplayObject.js:530"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:575"
+            "line": " src\\display\\DisplayObject.js:546"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:594"
+            "line": " src\\display\\DisplayObject.js:561"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:604"
+            "line": " src\\display\\DisplayObject.js:570"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:612"
+            "line": " src\\display\\DisplayObject.js:585"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:628"
+            "line": " src\\display\\DisplayObject.js:600"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:650"
+            "line": " src\\display\\DisplayObject.js:619"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:667"
+            "line": " src\\display\\DisplayObject.js:629"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:683"
+            "line": " src\\display\\DisplayObject.js:637"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:703"
+            "line": " src\\display\\DisplayObject.js:653"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:728"
+            "line": " src\\display\\DisplayObject.js:677"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:736"
+            "line": " src\\display\\DisplayObject.js:694"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:751"
+            "line": " src\\display\\DisplayObject.js:710"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:760"
+            "line": " src\\display\\DisplayObject.js:730"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:769"
+            "line": " src\\display\\DisplayObject.js:755"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:763"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:778"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:787"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:796"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4771,7 +4853,7 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventEmitter.js:103"
+            "line": " src\\event\\EventEmitter.js:100"
         },
         {
             "message": "replacing incorrect tag: function with method",

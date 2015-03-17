@@ -184,7 +184,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		 */
 		Object.defineProperty(this, 'width', {
 			set: function(width) {
-				this._onResize(width, this.canvas.height);
+				this.resize(width, this.canvas.height);
 			},
 			get: function() {
 				return this.canvas.width;
@@ -198,7 +198,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		 */
 		Object.defineProperty(this, 'height', {
 			set: function(height) {
-				this._onResize(this.canvas.width, height);
+				this.resize(this.canvas.width, height);
 			},
 			get: function() {
 				return this.canvas.height;
@@ -206,144 +206,6 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		});
 
 		Director.getInstance().on('tick', this._tick, this);
-	},
-	_onTouch: function(event) {
-		if (!this.touchable) {
-			return;
-		}
-		var emit = false,
-			type = event.type,
-			touches = this._touches,
-			identifier = event.identifier,
-			touchPos = new Vector(event.x, event.y),
-			offsetPos = touchPos.clone().add(this.getAnchor()),
-			inRect = offsetPos.x >= 0 && offsetPos.y >= 0 && offsetPos.x <= this.width && offsetPos.y <= this.height;
-
-		switch (type) {
-			case 'touchstart':
-				if (inRect) {
-					/**
-					 * 触摸开始事件
-					 * @event touchstart
-					 * @param {go2d.TouchEvent} event 触摸事件对象
-					 */
-					emit = true;
-					touches[identifier] = true;
-				}
-				break;
-			case 'touchmove':
-				if (touches[identifier]) {
-					/**
-					 * 触摸移动事件
-					 * @event touchmove
-					 * @param {go2d.TouchEvent} event 触摸事件对象
-					 */
-					emit = true;
-				}
-				break;
-			case 'touchend':
-				if (touches[identifier]) {
-					/**
-					 * 触摸结束事件
-					 * @event touchend
-					 * @param {go2d.TouchEvent} event 触摸事件对象
-					 */
-					emit = true;
-					touches[identifier] = false;
-				}
-				break;
-			case 'touchtap':
-				if (inRect && touches[identifier] !== undefined) {
-					/**
-					 * 触摸点击事件
-					 * @event touchtap
-					 * @param {go2d.TouchEvent} event 触摸事件对象
-					 */
-					emit = true;
-				}
-				delete touches[identifier];
-				break;
-		}
-
-		if (emit) {
-			var children = this._children,
-				propagationStopped = false;
-			for (var i = children.length - 1; i >= 0; --i) {
-				var child = children[i];
-				if (child.visible && child.touchable) {
-					var subLocalPos = child.getTransform().invert().multiply(touchPos),
-						subPos = subLocalPos.clone().subtract(child.getAnchor()),
-						subEvent = new TouchEvent(
-							type,
-							Math.round(subPos.x), Math.round(subPos.y),
-							Math.round(subLocalPos.x), Math.round(subLocalPos.y),
-							event.stageX, event.stageY,
-							event.globalX, event.globalY,
-							identifier
-						);
-					if (child._onTouch(subEvent)) {
-						propagationStopped = subEvent.isPropagationStopped();
-						break;
-					}
-				}
-			}
-			if (propagationStopped) {
-				event.stopPropagation();
-			} else {
-				this.emit(type, event);
-			}
-			return true;
-		}
-		return false;
-	},
-	_onAddedToStage: function(stage) {
-		/**
-		 * 添加到舞台事件
-		 * @event addedtostage
-		 * @param {go2d.Stage} stage 舞台对象
-		 */
-		this.stage = stage;
-		this.emit('addedtostage', stage);
-		forEach(this._children, function(child) {
-			child._onAddedToStage(stage);
-		});
-	},
-	_onRemovedFromStage: function(stage) {
-		/**
-		 * 移除出舞台事件
-		 * @event removedfromstage
-		 * @param {go2d.Stage} stage 舞台对象
-		 */
-		this.stage = null;
-		this.emit('removedfromstage', stage);
-		forEach(this._children, function(child) {
-			child._onRemovedFromStage(stage);
-		});
-	},
-	_onResize: function(width, height) {
-		var oldWidth = this.width,
-			oldHeight = this.height;
-		if (width === oldWidth && height === oldHeight) {
-			return;
-		}
-		var event = new ResizeEvent({
-			width: oldWidth,
-			height: oldHeight
-		}, {
-			width: width,
-			height: height
-		});
-		/**
-		 * 宽高变化事件
-		 * @event resize
-		 * @param {go2d.ResizeEvent} event 宽高变化事件对象
-		 */
-		this.emit('resize', event);
-		if (!event.isDefaultPrevented()) {
-			this.canvas.width = width;
-			this.canvas.height = height;
-			this.update();
-		}
 	},
 	/**
 	 * 进入下一帧，该方法应只由引擎本身调用
@@ -434,6 +296,169 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		return this;
 	},
 	/**
+	 * 触发触摸事件，不建议外部调用
+	 * @function touch
+	 * @param  {TouchEvent} event 触摸事件对象
+	 * @return {Boolean} 是否成功触发事件
+	 */
+	touch: function(event) {
+		if (!this.touchable) {
+			return;
+		}
+		var emit = false,
+			type = event.type,
+			touches = this._touches,
+			identifier = event.identifier,
+			touchPos = new Vector(event.x, event.y),
+			offsetPos = touchPos.clone().add(this.getAnchor()),
+			inRect = offsetPos.x >= 0 && offsetPos.y >= 0 && offsetPos.x <= this.width && offsetPos.y <= this.height;
+
+		switch (type) {
+			case 'touchstart':
+				if (inRect) {
+					/**
+					 * 触摸开始事件
+					 * @event touchstart
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+					touches[identifier] = true;
+				}
+				break;
+			case 'touchmove':
+				if (touches[identifier]) {
+					/**
+					 * 触摸移动事件
+					 * @event touchmove
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+				}
+				break;
+			case 'touchend':
+				if (touches[identifier]) {
+					/**
+					 * 触摸结束事件
+					 * @event touchend
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+					touches[identifier] = false;
+				}
+				break;
+			case 'touchtap':
+				if (inRect && touches[identifier] !== undefined) {
+					/**
+					 * 触摸点击事件
+					 * @event touchtap
+					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 */
+					emit = true;
+				}
+				delete touches[identifier];
+				break;
+		}
+
+		if (emit) {
+			var children = this._children,
+				propagationStopped = false;
+			for (var i = children.length - 1; i >= 0; --i) {
+				var child = children[i];
+				if (child.visible && child.touchable) {
+					var subLocalPos = child.getTransform().invert().multiply(touchPos),
+						subPos = subLocalPos.clone().subtract(child.getAnchor()),
+						subEvent = new TouchEvent(
+							type,
+							Math.round(subPos.x), Math.round(subPos.y),
+							Math.round(subLocalPos.x), Math.round(subLocalPos.y),
+							event.stageX, event.stageY,
+							event.globalX, event.globalY,
+							identifier
+						);
+					if (child.touch(subEvent)) {
+						propagationStopped = subEvent.isPropagationStopped();
+						break;
+					}
+				}
+			}
+			if (propagationStopped) {
+				event.stopPropagation();
+			} else {
+				this.emit(type, event);
+			}
+			return true;
+		}
+		return false;
+	},
+	/**
+	 * 触发添加到舞台事件，不建议外部调用
+	 * @function addedToStage
+	 * @param {TouchEvent} stage 舞台对象
+	 */
+	addedToStage: function(stage) {
+		/**
+		 * 添加到舞台事件
+		 * @event addedtostage
+		 * @param {go2d.Stage} stage 舞台对象
+		 */
+		this.stage = stage;
+		this.emit('addedtostage', stage);
+		forEach(this._children, function(child) {
+			child.addedToStage(stage);
+		});
+	},
+	/**
+	 * 触发移除出舞台事件，不建议外部调用
+	 * @function removedFromStage
+	 */
+	removedFromStage: function() {
+		/**
+		 * 移除出舞台事件
+		 * @event removedfromstage
+		 * @param {go2d.Stage} stage 舞台对象
+		 */
+		var stage = this.stage;
+		this.stage = null;
+		console.log(stage);
+		this.emit('removedfromstage', stage);
+		forEach(this._children, function(child) {
+			child.removedFromStage(stage);
+		});
+	},
+	/**
+	 * 设置对象大小
+	 * @function resize
+	 * @param {number} width 宽度
+	 * @param {number} height 高度
+	 * @return {this}
+	 */
+	resize: function(width, height) {
+		var oldWidth = this.width,
+			oldHeight = this.height;
+		if (width === oldWidth && height === oldHeight) {
+			return;
+		}
+		var event = new ResizeEvent({
+			width: oldWidth,
+			height: oldHeight
+		}, {
+			width: width,
+			height: height
+		});
+		/**
+		 * 宽高变化事件
+		 * @event resize
+		 * @param {go2d.ResizeEvent} event 宽高变化事件对象
+		 */
+		this.emit('resize', event);
+		if (!event.isDefaultPrevented()) {
+			this.canvas.width = width;
+			this.canvas.height = height;
+			this.update();
+		}
+		return this;
+	},
+	/**
 	 * 获取锚点偏移
 	 * @function getAnchor
 	 * @return {Object} 锚点锚点偏移
@@ -492,7 +517,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		}
 		child.parent = this;
 		if (this.stage) {
-			child._onAddedToStage(this.stage);
+			child.addedToStage(this.stage);
 		}
 		if (index === undefined || index < 0) {
 			this._children.push(child);
@@ -638,9 +663,11 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			if (cleanup) {
 				child.dispose();
 			} else {
+				console.log(child.stage);
 				child.parent = null;
 				if (child.stage) {
-					child._onRemovedFromStage(child.stage);
+					console.log(2);
+					child.removedFromStage();
 				}
 			}
 			this.update();
@@ -690,7 +717,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		forEach(this._children, function(child) {
 			child.parent = null;
 			if (child.stage) {
-				child._onRemovedFromStage(child.stage);
+				child.removedFromStage();
 			}
 			if (cleanup) {
 				child.dispose();
@@ -719,7 +746,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		}
 		mask.parent = this;
 		if (this.stage) {
-			mask._onAddedToStage(this.stage);
+			mask.addedToStage(this.stage);
 		}
 		this._mask = mask;
 		this.update();
@@ -771,10 +798,11 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	 * @function dispose
 	 */
 	dispose: function() {
+		this.removeAllChildren(true);
+
 		if (this.parent) {
 			this.parent.removeChild(this);
 		}
-		this.removeAllChildren(true);
 
 		Director.getInstance().off('tick', this._tick, this);
 

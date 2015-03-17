@@ -87,9 +87,6 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 		var callbacks = this.__events[name] || [],
 			args = Array.prototype.slice.call(arguments, 1);
 		forEach(callbacks, function(item) {
-			if (item.callback === undefined) {
-				console.log(name, item);
-			}
 			if (item.callback.apply(item.thisArg || this, args) === false) {
 				if (event instanceof Event) {
 					event.preventDefault();
