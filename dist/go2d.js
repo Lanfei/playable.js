@@ -1,5 +1,5 @@
 /**
- * Go2d 1.6.4
+ * Go2d 1.6.5
  * https://github.com/Lanfei/Go2d
  * (c) 2014 [Lanfei](http://www.clanfei.com/)
  * A lightweight HTML5 game engine
@@ -20,7 +20,7 @@
  * @property {string} version Go2d 版本号
  */
 var go2d = {
-	version: '1.6.4'
+	version: '1.6.5'
 };
 
 /**
@@ -115,45 +115,44 @@ var Class = go2d.Class = function() {};
  * @return {function} 新类的构造函数
  */
 Class.extend = function(props, statics) {
-	var prototype = this.prototype;
+	var superProto = this.prototype;
 
-	function Go2dClass() {
-		this._super = prototype;
-		this.constructor = Go2dClass;
+	function Class() {
 		if (isFunction(this.__init)) {
 			return this.__init.apply(this, arguments);
 		}
 	}
 
-	Go2dClass.prototype = Object.create(prototype);
-	Go2dClass.extend = Class.extend;
+	Class.prototype = Object.create(superProto);
+	Class.prototype.constructor = Class;
+	Class.extend = go2d.Class.extend;
 
-	forEach(props, function(value, name) {
-		var desc = Object.getOwnPropertyDescriptor(props, name);
+	forEach(props, function(value, key) {
+		var desc = Object.getOwnPropertyDescriptor(props, key);
 		// Extend Getter/Setter
 		if (desc.get || desc.set) {
-			Object.defineProperty(Go2dClass.prototype, name, desc);
+			Object.defineProperty(Class.prototype, key, desc);
 		} else {
 			if (isFunction(value) && /\bthis\._super\(/.test(value)) {
-				Go2dClass.prototype[name] = (function(name, fn) {
-					return function() {
-						this._super = prototype[name];
-						var ret = fn.apply(this, arguments);
-						this._super = prototype;
-						return ret;
-					};
-				})(name, value);
+				var fn = value;
+				Class.prototype[key] = function() {
+					this._super = superProto[key];
+					var ret = fn.apply(this, arguments);
+					this._super = superProto;
+					return ret;
+				};
 			} else {
-				Go2dClass.prototype[name] = value;
+				Class.prototype[key] = value;
 			}
 		}
 	});
-	forEach(statics, function(value, name) {
-		Go2dClass[name] = value;
-	});
-	return Go2dClass;
-};
 
+	forEach(statics, function(value, key) {
+		Class[key] = value;
+	});
+
+	return Class;
+};
 /**
  * 向量类，实现向量基本运算，可表达一个二维坐标。
  * @author Lanfei
@@ -567,12 +566,14 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 	 * @function on
 	 * @param {string} name 事件名称
 	 * @param {function} callback 回调函数
+	 * @param {Object} [thisArg] 回调执行时 this 关键字所引用的对象
 	 * @return {this}
 	 */
 	/**
 	 * 批量添加事件侦听器
 	 * @function on
 	 * @param {Object} listeners 以事件名称为键名，回调函数为键值的哈希表
+	 * @param {Object} [thisArg] 回调执行时 this 关键字所引用的对象
 	 * @return {this}
 	 */
 	on: function(name, callback, thisArg) {
@@ -595,6 +596,7 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 	 * @function off
 	 * @param {string} name 事件名称
 	 * @param {function} [callback] 回调函数，当该参数为空时将移除该事件的所有回调
+	 * @param {Object} [thisArg] 回调执行时 this 关键字所引用的对象
 	 * @return {this}
 	 */
 	off: function(name, callback, thisArg) {
@@ -3474,7 +3476,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
  * @author Lanfei
  * @class TextField
  * @extends Sprite
- * 
+ *
  * @constructor
  * @param {string} [text] 要显示的文本
  */
@@ -3484,31 +3486,31 @@ var TextField = go2d.TextField = Sprite.extend({
 		this.on('render', this._onRender);
 		options = options || {};
 		var properties = {
-			
+
 			/**
 			 * 是否粗体
 			 * @property bold
 			 * @type Boolean
-			 * @default false 
+			 * @default false
 			 */
 			bold: options.bold || false,
-			
+
 			/**
 			 * 是否斜体
 			 * @property italic
 			 * @type Boolean
-			 * @default false 
+			 * @default false
 			 */
 			italic: options.italic || false,
-			
+
 			/**
 			 * 字体大小
 			 * @property fontSize
 			 * @type number
-			 * @default 24 
+			 * @default 24
 			 */
 			fontSize: options.fontSize || 24,
-			
+
 			/**
 			 * 字体颜色或样式
 			 * @property color
@@ -3516,15 +3518,15 @@ var TextField = go2d.TextField = Sprite.extend({
 			 * @default black |Object
 			 */
 			color: options.color || 'black',
-			
+
 			/**
 			 * 对齐方式
 			 * @property textAlign
 			 * @type string
-			 * @default left 
+			 * @default left
 			 */
 			textAlign: options.textAlign || 'left',
-			
+
 			/**
 			 * 行高，可为百分比
 			 * @property lineHeight
@@ -3532,15 +3534,15 @@ var TextField = go2d.TextField = Sprite.extend({
 			 * @default 120% |string
 			 */
 			lineHeight: options.lineHeight || '120%',
-			
+
 			/**
 			 * 描边大小
 			 * @property strokeSize
 			 * @type number
-			 * @default 0 
+			 * @default 0
 			 */
 			strokeSize: options.strokeSize || 0,
-			
+
 			/**
 			 * 描边颜色或样式
 			 * @property strokeColor
@@ -3548,76 +3550,76 @@ var TextField = go2d.TextField = Sprite.extend({
 			 * @default null |Object
 			 */
 			strokeColor: options.strokeColor || null,
-			
+
 			/**
 			 * 文本字体
 			 * @property fontFamily
 			 * @type string
-			 * @default Arial 
+			 * @default Arial
 			 */
 			fontFamily: options.fontFamily || 'Arial',
-			
+
 			/**
 			 * 是否允许在单词内部换行
 			 * @property breakWord
 			 * @type Boolean
-			 * @default false 
+			 * @default false
 			 */
 			breakWord: options.breakWord || false,
-			
+
 			/**
 			 * 是否自动调整宽高
 			 * @property autoResize
 			 * @type Boolean
-			 * @default false 
+			 * @default false
 			 */
 			autoResize: options.autoResize || false,
-			
+
 			/**
 			 * 顶部内边距
 			 * @property paddingTop
 			 * @type number
-			 * @default 0 
+			 * @default 0
 			 */
 			paddingTop: options.paddingTop || 0,
-			
+
 			/**
 			 * 左部内边距
 			 * @property paddingLeft
 			 * @type number
-			 * @default 0 
+			 * @default 0
 			 */
 			paddingLeft: options.paddingLeft || 0,
-			
+
 			/**
 			 * 右部内边距
 			 * @property paddingRight
 			 * @type number
-			 * @default 0 
+			 * @default 0
 			 */
 			paddingRight: options.paddingRight || 0,
-			
+
 			/**
 			 * 底部内边距
 			 * @property paddingBottom
 			 * @type number
-			 * @default 0 
+			 * @default 0
 			 */
 			paddingBottom: options.paddingBottom || 0,
-			
+
 			/**
 			 * 自动调整宽高时的最大宽度
 			 * @property maxWidth
 			 * @type number
-			 * @default 0xffffff 
+			 * @default 0xffffff
 			 */
 			maxWidth: options.maxWidth || 0xffffff,
-			
+
 			/**
 			 * 自动调整宽高时的最大高度
 			 * @property maxHeight
 			 * @type number
-			 * @default 0xffffff 
+			 * @default 0xffffff
 			 */
 			maxHeight: options.maxHeight || 0xffffff
 		};
@@ -3627,7 +3629,6 @@ var TextField = go2d.TextField = Sprite.extend({
 				set: function(value) {
 					if (properties[key] !== value) {
 						properties[key] = value;
-						this._updateFont();
 						this.update();
 					}
 				},
@@ -3648,7 +3649,7 @@ var TextField = go2d.TextField = Sprite.extend({
 				return this._getTextRange(this._splitLines());
 			}
 		});
-		
+
 		/**
 		 * 文字渲染的宽度
 		 * @property textWidth
@@ -3660,7 +3661,7 @@ var TextField = go2d.TextField = Sprite.extend({
 				return this.textRange.width;
 			}
 		});
-		
+
 		/**
 		 * 文字渲染的高度
 		 * @property textHeight
@@ -3672,7 +3673,7 @@ var TextField = go2d.TextField = Sprite.extend({
 				return this.textRange.height;
 			}
 		});
-		
+
 		/**
 		 * 要显示的文字
 		 * @property text
@@ -3695,16 +3696,19 @@ var TextField = go2d.TextField = Sprite.extend({
 			}
 		});
 		this.text = text;
-		this._updateFont();
 	},
-	_updateFont: function() {
+	_updateContext: function() {
 		var ctx = this.context,
 			italicStr = this.italic ? 'italic' : 'normal',
 			boldStr = this.bold ? 'bold' : 'normal',
 			sizeStr = this.fontSize + 'px';
+
 		ctx.font = italicStr + ' ' + boldStr + ' ' + sizeStr + ' ' + this.fontFamily;
 		ctx.textAlign = this.textAlign;
 		ctx.textBaseline = 'top';
+		ctx.fillStyle = this.color;
+		ctx.lineWidth = this.strokeSize;
+		ctx.strokeStyle = this.strokeColor;
 	},
 	_getLineHeight: function() {
 		var lineHeight = this.lineHeight;
@@ -3762,16 +3766,14 @@ var TextField = go2d.TextField = Sprite.extend({
 		}, this);
 		return newLines;
 	},
-	_onResize: function(width, height) {
-		this._super(width, height);
-		this._updateFont();
-	},
 	_onRender: function() {
 		var lines = this._splitLines();
+		this._updateContext();
 		if (this.autoResize) {
 			var range = this._getTextRange(lines);
 			this.width = Math.min(range.width, this.maxWidth) + this.paddingLeft + this.paddingRight;
 			this.height = Math.min(range.height, this.maxHeight) + this.paddingTop + this.paddingBottom;
+			this._updateContext();
 		}
 		this._drawLines(lines);
 	},
@@ -3811,12 +3813,9 @@ var TextField = go2d.TextField = Sprite.extend({
 		var ctx = this.context;
 		ctx.save();
 		if (this.color) {
-			ctx.fillStyle = this.color;
 			ctx.fillText(text, x, y);
 		}
-		if (this.strokeColor) {
-			ctx.lineWidth = this.strokeSize;
-			ctx.strokeStyle = this.strokeColor;
+		if (this.strokeSize && this.strokeColor) {
 			ctx.strokeText(text, x, y);
 		}
 		ctx.restore();
@@ -3831,7 +3830,6 @@ var TextField = go2d.TextField = Sprite.extend({
 		return this;
 	}
 });
-
 /**
  * 舞台类，最顶层的显示对象，游戏内容的主绘图区。
  * @author Lanfei

@@ -2,7 +2,7 @@
     "project": {
         "name": "Go2d",
         "description": "A lightweight HTML5 game engine",
-        "version": "1.6.4",
+        "version": "1.6.5",
         "url": "https://github.com/Lanfei/Go2d"
     },
     "files": {
@@ -2224,7 +2224,7 @@
         },
         {
             "file": "src\\display\\TextField.js",
-            "line": 169,
+            "line": 168,
             "description": "文字渲染的宽高",
             "itemtype": "property",
             "name": "textRange",
@@ -2233,7 +2233,7 @@
         },
         {
             "file": "src\\display\\TextField.js",
-            "line": 181,
+            "line": 180,
             "description": "文字渲染的宽度",
             "itemtype": "property",
             "name": "textWidth",
@@ -2242,7 +2242,7 @@
         },
         {
             "file": "src\\display\\TextField.js",
-            "line": 193,
+            "line": 192,
             "description": "文字渲染的高度",
             "itemtype": "property",
             "name": "textHeight",
@@ -2251,7 +2251,7 @@
         },
         {
             "file": "src\\display\\TextField.js",
-            "line": 205,
+            "line": 204,
             "description": "要显示的文字",
             "itemtype": "property",
             "name": "text",
@@ -2260,7 +2260,7 @@
         },
         {
             "file": "src\\display\\TextField.js",
-            "line": 353,
+            "line": 350,
             "description": "设置要显示的文字",
             "itemtype": "method",
             "name": "setText",
@@ -2376,6 +2376,12 @@
                     "name": "callback",
                     "description": "回调函数",
                     "type": "Function"
+                },
+                {
+                    "name": "thisArg",
+                    "description": "回调执行时 this 关键字所引用的对象",
+                    "type": "Object",
+                    "optional": true
                 }
             ],
             "return": {
@@ -2386,7 +2392,7 @@
         },
         {
             "file": "src\\event\\EventEmitter.js",
-            "line": 28,
+            "line": 29,
             "description": "批量添加事件侦听器",
             "itemtype": "method",
             "name": "on",
@@ -2395,6 +2401,12 @@
                     "name": "listeners",
                     "description": "以事件名称为键名，回调函数为键值的哈希表",
                     "type": "Object"
+                },
+                {
+                    "name": "thisArg",
+                    "description": "回调执行时 this 关键字所引用的对象",
+                    "type": "Object",
+                    "optional": true
                 }
             ],
             "return": {
@@ -2405,7 +2417,7 @@
         },
         {
             "file": "src\\event\\EventEmitter.js",
-            "line": 49,
+            "line": 51,
             "description": "移除事件侦听器",
             "itemtype": "method",
             "name": "off",
@@ -2420,6 +2432,12 @@
                     "description": "回调函数，当该参数为空时将移除该事件的所有回调",
                     "type": "Function",
                     "optional": true
+                },
+                {
+                    "name": "thisArg",
+                    "description": "回调执行时 this 关键字所引用的对象",
+                    "type": "Object",
+                    "optional": true
                 }
             ],
             "return": {
@@ -2430,7 +2448,7 @@
         },
         {
             "file": "src\\event\\EventEmitter.js",
-            "line": 71,
+            "line": 74,
             "description": "通过事件对象派发事件",
             "itemtype": "method",
             "name": "emit",
@@ -2455,7 +2473,7 @@
         },
         {
             "file": "src\\event\\EventEmitter.js",
-            "line": 78,
+            "line": 81,
             "description": "通过任意事件参数派发事件",
             "itemtype": "method",
             "name": "emit",
@@ -2480,7 +2498,7 @@
         },
         {
             "file": "src\\event\\EventEmitter.js",
-            "line": 100,
+            "line": 103,
             "description": "释放事件派发器内存",
             "itemtype": "method",
             "name": "dispose",
@@ -4820,7 +4838,7 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\TextField.js:353"
+            "line": " src\\display\\TextField.js:350"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4844,23 +4862,23 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventEmitter.js:28"
+            "line": " src\\event\\EventEmitter.js:29"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventEmitter.js:49"
+            "line": " src\\event\\EventEmitter.js:51"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventEmitter.js:71"
+            "line": " src\\event\\EventEmitter.js:74"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventEmitter.js:78"
+            "line": " src\\event\\EventEmitter.js:81"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventEmitter.js:100"
+            "line": " src\\event\\EventEmitter.js:103"
         },
         {
             "message": "replacing incorrect tag: function with method",

@@ -23,12 +23,14 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 	 * @function on
 	 * @param {string} name 事件名称
 	 * @param {function} callback 回调函数
+	 * @param {Object} [thisArg] 回调执行时 this 关键字所引用的对象
 	 * @return {this}
 	 */
 	/**
 	 * 批量添加事件侦听器
 	 * @function on
 	 * @param {Object} listeners 以事件名称为键名，回调函数为键值的哈希表
+	 * @param {Object} [thisArg] 回调执行时 this 关键字所引用的对象
 	 * @return {this}
 	 */
 	on: function(name, callback, thisArg) {
@@ -51,6 +53,7 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 	 * @function off
 	 * @param {string} name 事件名称
 	 * @param {function} [callback] 回调函数，当该参数为空时将移除该事件的所有回调
+	 * @param {Object} [thisArg] 回调执行时 this 关键字所引用的对象
 	 * @return {this}
 	 */
 	off: function(name, callback, thisArg) {
