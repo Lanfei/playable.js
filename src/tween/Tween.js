@@ -71,7 +71,7 @@ var Tween = go2d.Tween = Class.extend({
 			reversing = false,
 			beginProps = {},
 			offsetTime = 0,
-			prevProps;
+			lastProps;
 		this._onStep = function(deltaTime) {
 			if (that._paused) {
 				return;
@@ -85,18 +85,18 @@ var Tween = go2d.Tween = Class.extend({
 			if (callback) {
 				callback();
 			} else {
-				if (prevProps === undefined) {
-					prevProps = {};
+				if (lastProps === undefined) {
+					lastProps = {};
 					forEach(props, function(value, name) {
 						beginProps[name] = beginProps[name] === undefined ? target[name] : beginProps[name];
-						prevProps[name] = target[name];
+						lastProps[name] = target[name];
 					}, target);
 				}
 
 				offsetTime = Math.min(offsetTime + deltaTime, duration);
 				forEach(props, function(value, name) {
 					if (duration > 0) {
-						target[name] = ease(offsetTime, prevProps[name], value - prevProps[name], duration);
+						target[name] = ease(offsetTime, lastProps[name], value - lastProps[name], duration);
 					} else {
 						target[name] = value;
 					}
@@ -104,7 +104,7 @@ var Tween = go2d.Tween = Class.extend({
 			}
 
 			if (offsetTime === duration) {
-				prevProps = undefined;
+				lastProps = undefined;
 				offsetTime = 0;
 				if (++current >= steps.length) {
 					current = 0;

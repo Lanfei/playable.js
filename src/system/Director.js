@@ -27,10 +27,10 @@ var Director = go2d.Director = EventEmitter.extend({
 		/**
 		 * 上一帧时间戳
 		 * @protected
-		 * @property _prevFrame
+		 * @property _lastTime
 		 * @type number
 		 */
-		this._prevFrame = null;
+		this._lastTime = null;
 
 		/**
 		 * 是否已暂停
@@ -106,14 +106,14 @@ var Director = go2d.Director = EventEmitter.extend({
 	_tick: function() {
 		var deltaTime,
 			now = +new Date();
-		if (this._prevFrame > 0) {
-			deltaTime = now - this._prevFrame;
+		if (this._lastTime > 0) {
+			deltaTime = now - this._lastTime;
 			this.fps = Math.round(1000 / deltaTime);
 		} else {
 			deltaTime = 1000 / 60;
 			this.fps = 60;
 		}
-		this._prevFrame = now;
+		this._lastTime = now;
 		this.emit('tick', deltaTime);
 	},
 	/**
@@ -138,7 +138,7 @@ var Director = go2d.Director = EventEmitter.extend({
 	pause: function() {
 		cancelAnimationFrame(this._timer);
 		this._paused = true;
-		this._prevFrame = 0;
+		this._lastTime = 0;
 		return this;
 	}
 }, {

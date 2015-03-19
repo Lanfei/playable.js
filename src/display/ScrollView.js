@@ -56,27 +56,27 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	},
 	_initTouchEvent: function() {
 		var speed,
-			prevTime,
-			prevTouch,
+			lastTime,
+			lastTouch,
 			friction = 0.9;
 		this.on({
 			touchmove: function(e) {
 				var now = +new Date();
-				if (prevTime) {
-					var offsetX = prevTouch.x - e.globalX,
-						offsetY = prevTouch.y - e.globalY,
-						offsetTime = now - prevTime;
+				if (lastTime) {
+					var offsetX = lastTouch.x - e.globalX,
+						offsetY = lastTouch.y - e.globalY,
+						offsetTime = now - lastTime;
 					this.scrollBy(offsetX, offsetY);
 					speed = new Vector(offsetX / offsetTime, offsetY / offsetTime);
 				}
-				prevTime = now;
-				prevTouch = new Vector(e.globalX, e.globalY);
+				lastTime = now;
+				lastTouch = new Vector(e.globalX, e.globalY);
 			},
 			touchend: function() {
-				prevTime = prevTouch = null;
+				lastTime = lastTouch = null;
 			},
 			step: function(deltaTime) {
-				if (speed && !prevTime) {
+				if (speed && !lastTime) {
 					var offsetX = speed.x * deltaTime,
 						offsetY = speed.y * deltaTime;
 					speed.x *= friction;

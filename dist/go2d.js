@@ -1119,10 +1119,10 @@ var Director = go2d.Director = EventEmitter.extend({
 		/**
 		 * 上一帧时间戳
 		 * @protected
-		 * @property _prevFrame
+		 * @property _lastTime
 		 * @type number
 		 */
-		this._prevFrame = null;
+		this._lastTime = null;
 
 		/**
 		 * 是否已暂停
@@ -1198,14 +1198,14 @@ var Director = go2d.Director = EventEmitter.extend({
 	_tick: function() {
 		var deltaTime,
 			now = +new Date();
-		if (this._prevFrame > 0) {
-			deltaTime = now - this._prevFrame;
+		if (this._lastTime > 0) {
+			deltaTime = now - this._lastTime;
 			this.fps = Math.round(1000 / deltaTime);
 		} else {
 			deltaTime = 1000 / 60;
 			this.fps = 60;
 		}
-		this._prevFrame = now;
+		this._lastTime = now;
 		this.emit('tick', deltaTime);
 	},
 	/**
@@ -1230,7 +1230,7 @@ var Director = go2d.Director = EventEmitter.extend({
 	pause: function() {
 		cancelAnimationFrame(this._timer);
 		this._paused = true;
-		this._prevFrame = 0;
+		this._lastTime = 0;
 		return this;
 	}
 }, {
@@ -2248,7 +2248,7 @@ var Tween = go2d.Tween = Class.extend({
 			reversing = false,
 			beginProps = {},
 			offsetTime = 0,
-			prevProps;
+			lastProps;
 		this._onStep = function(deltaTime) {
 			if (that._paused) {
 				return;
@@ -2262,18 +2262,18 @@ var Tween = go2d.Tween = Class.extend({
 			if (callback) {
 				callback();
 			} else {
-				if (prevProps === undefined) {
-					prevProps = {};
+				if (lastProps === undefined) {
+					lastProps = {};
 					forEach(props, function(value, name) {
 						beginProps[name] = beginProps[name] === undefined ? target[name] : beginProps[name];
-						prevProps[name] = target[name];
+						lastProps[name] = target[name];
 					}, target);
 				}
 
 				offsetTime = Math.min(offsetTime + deltaTime, duration);
 				forEach(props, function(value, name) {
 					if (duration > 0) {
-						target[name] = ease(offsetTime, prevProps[name], value - prevProps[name], duration);
+						target[name] = ease(offsetTime, lastProps[name], value - lastProps[name], duration);
 					} else {
 						target[name] = value;
 					}
@@ -2281,7 +2281,7 @@ var Tween = go2d.Tween = Class.extend({
 			}
 
 			if (offsetTime === duration) {
-				prevProps = undefined;
+				lastProps = undefined;
 				offsetTime = 0;
 				if (++current >= steps.length) {
 					current = 0;
@@ -2443,14 +2443,6 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		 * @default true
 		 */
 		this._dirty = true;
-
-		/**
-		 * 上一帧时间戳
-		 * @protected
-		 * @property _prevFrame
-		 * @type number
-		 */
-		this._prevFrame = null;
 
 		/**
 		 * 触摸标识数组
@@ -3419,27 +3411,27 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	},
 	_initTouchEvent: function() {
 		var speed,
-			prevTime,
-			prevTouch,
+			lastTime,
+			lastTouch,
 			friction = 0.9;
 		this.on({
 			touchmove: function(e) {
 				var now = +new Date();
-				if (prevTime) {
-					var offsetX = prevTouch.x - e.globalX,
-						offsetY = prevTouch.y - e.globalY,
-						offsetTime = now - prevTime;
+				if (lastTime) {
+					var offsetX = lastTouch.x - e.globalX,
+						offsetY = lastTouch.y - e.globalY,
+						offsetTime = now - lastTime;
 					this.scrollBy(offsetX, offsetY);
 					speed = new Vector(offsetX / offsetTime, offsetY / offsetTime);
 				}
-				prevTime = now;
-				prevTouch = new Vector(e.globalX, e.globalY);
+				lastTime = now;
+				lastTouch = new Vector(e.globalX, e.globalY);
 			},
 			touchend: function() {
-				prevTime = prevTouch = null;
+				lastTime = lastTouch = null;
 			},
 			step: function(deltaTime) {
-				if (speed && !prevTime) {
+				if (speed && !lastTime) {
 					var offsetX = speed.x * deltaTime,
 						offsetY = speed.y * deltaTime;
 					speed.x *= friction;
