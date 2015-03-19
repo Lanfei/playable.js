@@ -574,13 +574,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	 * @return {number} 子对象深度
 	 */
 	getChildIndex: function(child) {
-		var index = -1;
-		forEach(this._children, function(item, i) {
-			if (item === child) {
-				index = i;
-			}
-		});
-		return index;
+		return this._children.indexOf(child);
 	},
 	/**
 	 * 交换两个子对象的深度
@@ -642,12 +636,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	 * @return {this}
 	 */
 	removeChild: function(child, cleanup) {
-		var children = this._children;
-		for (var i = children.length - 1; i >= 0; --i) {
-			if (children[i] === child) {
-				this.removeChildAt(i, cleanup);
-			}
-		}
+		this.removeChildAt(this.getChildIndex(child), cleanup);
 		return this;
 	},
 	/**
@@ -658,17 +647,19 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	 * @return {this}
 	 */
 	removeChildAt: function(index, cleanup) {
-		var child = this._children.splice(index, 1)[0];
-		if (child) {
-			if (cleanup) {
-				child.dispose();
-			} else {
-				child.parent = null;
-				if (child.stage) {
-					child.removedFromStage(child.stage);
+		if (index >= 0) {
+			var child = this._children.splice(index, 1)[0];
+			if (child) {
+				if (cleanup) {
+					child.dispose();
+				} else {
+					child.parent = null;
+					if (child.stage) {
+						child.removedFromStage(child.stage);
+					}
 				}
+				this.update();
 			}
-			this.update();
 		}
 		return this;
 	},

@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="Go2d" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.6.6</em>
+            <em>API Docs for: 1.6.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -398,6 +398,7 @@ var TextField = go2d.TextField = Sprite.extend({
 	},
 	_onRender: function() {
 		var lines = this._splitLines();
+		this._updateContext();
 		if (this.autoResize) {
 			var range = this._getTextRange(lines);
 			this.width = Math.min(range.width, this.maxWidth) + this.paddingLeft + this.paddingRight;

@@ -2,7 +2,7 @@
     "project": {
         "name": "Go2d",
         "description": "A lightweight HTML5 game engine",
-        "version": "1.6.6",
+        "version": "1.6.7",
         "url": "https://github.com/Lanfei/Go2d"
     },
     "files": {
@@ -1593,7 +1593,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 585,
+            "line": 579,
             "description": "交换两个子对象的深度",
             "itemtype": "method",
             "name": "swapChildren",
@@ -1617,7 +1617,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 600,
+            "line": 594,
             "description": "交换两个子对象的深度",
             "itemtype": "method",
             "name": "swapChildrenAt",
@@ -1641,7 +1641,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 619,
+            "line": 613,
             "description": "排列子对象",
             "itemtype": "method",
             "name": "sortChildren",
@@ -1660,7 +1660,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 629,
+            "line": 623,
             "description": "获取所有子对象",
             "itemtype": "method",
             "name": "getAllChildren",
@@ -1672,7 +1672,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 637,
+            "line": 631,
             "description": "移除指定的子对象",
             "itemtype": "method",
             "name": "removeChild",
@@ -1696,7 +1696,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 653,
+            "line": 642,
             "description": "移除指定深度的子对象",
             "itemtype": "method",
             "name": "removeChildAt",
@@ -1720,7 +1720,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 675,
+            "line": 666,
             "description": "移除指定名字的子对象",
             "itemtype": "method",
             "name": "removeChildrenByName",
@@ -1744,7 +1744,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 692,
+            "line": 683,
             "description": "移除指定标签的子对象",
             "itemtype": "method",
             "name": "removeChildrenByTag",
@@ -1768,7 +1768,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 708,
+            "line": 699,
             "description": "移除所有子对象",
             "itemtype": "method",
             "name": "removeAllChildren",
@@ -1787,7 +1787,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 728,
+            "line": 719,
             "description": "设置遮罩对象",
             "itemtype": "method",
             "name": "setMask",
@@ -1806,7 +1806,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 753,
+            "line": 744,
             "description": "获取遮罩对象",
             "itemtype": "method",
             "name": "getMask",
@@ -1818,7 +1818,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 761,
+            "line": 752,
             "description": "移除遮罩对象",
             "itemtype": "method",
             "name": "removeMask",
@@ -1837,7 +1837,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 776,
+            "line": 767,
             "description": "开始该对象的帧播放",
             "itemtype": "method",
             "name": "play",
@@ -1849,7 +1849,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 785,
+            "line": 776,
             "description": "暂停该对象的帧播放",
             "itemtype": "method",
             "name": "pause",
@@ -1861,7 +1861,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 794,
+            "line": 785,
             "description": "释放对象内存",
             "itemtype": "method",
             "name": "dispose",
@@ -2387,7 +2387,7 @@
         },
         {
             "file": "src\\display\\TextField.js",
-            "line": 350,
+            "line": 351,
             "description": "设置要显示的文字",
             "itemtype": "method",
             "name": "setText",
@@ -4983,51 +4983,55 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:585"
+            "line": " src\\display\\DisplayObject.js:579"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:600"
+            "line": " src\\display\\DisplayObject.js:594"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:619"
+            "line": " src\\display\\DisplayObject.js:613"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:629"
+            "line": " src\\display\\DisplayObject.js:623"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:637"
+            "line": " src\\display\\DisplayObject.js:631"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:653"
+            "line": " src\\display\\DisplayObject.js:642"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:675"
+            "line": " src\\display\\DisplayObject.js:666"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:692"
+            "line": " src\\display\\DisplayObject.js:683"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:708"
+            "line": " src\\display\\DisplayObject.js:699"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:728"
+            "line": " src\\display\\DisplayObject.js:719"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:753"
+            "line": " src\\display\\DisplayObject.js:744"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:761"
+            "line": " src\\display\\DisplayObject.js:752"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:767"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -5036,10 +5040,6 @@
         {
             "message": "replacing incorrect tag: function with method",
             "line": " src\\display\\DisplayObject.js:785"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:794"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -5079,7 +5079,7 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\TextField.js:350"
+            "line": " src\\display\\TextField.js:351"
         },
         {
             "message": "replacing incorrect tag: function with method",
