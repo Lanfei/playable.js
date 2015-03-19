@@ -1,5 +1,5 @@
 /**
- * Go2d 1.6.5
+ * Go2d 1.6.6
  * https://github.com/Lanfei/Go2d
  * (c) 2014 [Lanfei](http://www.clanfei.com/)
  * A lightweight HTML5 game engine
@@ -20,7 +20,7 @@
  * @property {string} version Go2d 版本号
  */
 var go2d = {
-	version: '1.6.5'
+	version: '1.6.6'
 };
 
 /**
@@ -126,6 +126,7 @@ Class.extend = function(props, statics) {
 	}
 
 	Class.prototype = prototype;
+	Class.prototype._super = superProto;
 	Class.prototype.constructor = Class;
 	Class.extend = go2d.Class.extend;
 
@@ -160,7 +161,7 @@ Class.extend = function(props, statics) {
  * @author Lanfei
  * @class Vector
  * @extends Class
- * 
+ *
  * @constructor
  * @param {number} x 向量水平坐标
  * @param {number} y 向量垂直坐标
@@ -211,7 +212,7 @@ var Vector = go2d.Vector = Class.extend({
 	/**
 	 * 向量加法
 	 * @function add
-	 * @param {go2d.Vector} vector 要相加的向量
+	 * @param {Vector} vector 要相加的向量
 	 * @return {this}
 	 */
 	add: function(v) {
@@ -222,7 +223,7 @@ var Vector = go2d.Vector = Class.extend({
 	/**
 	 * 向量减法
 	 * @function subtract
-	 * @param {go2d.Vector} vector 要相减的向量
+	 * @param {Vector} vector 要相减的向量
 	 * @return {this}
 	 */
 	subtract: function(v) {
@@ -233,7 +234,7 @@ var Vector = go2d.Vector = Class.extend({
 	/**
 	 * 向量除法
 	 * @function divide
-	 * @param {go2d.Vector} vector 要除以的向量
+	 * @param {Vector} vector 要除以的向量
 	 * @return {this}
 	 */
 	divide: function(v) {
@@ -244,7 +245,7 @@ var Vector = go2d.Vector = Class.extend({
 	/**
 	 * 向量点乘
 	 * @function dotProduct
-	 * @param {go2d.Vector} vector 要点乘的向量
+	 * @param {Vector} vector 要点乘的向量
 	 * @return {this}
 	 */
 	dotProduct: function(v) {
@@ -259,6 +260,16 @@ var Vector = go2d.Vector = Class.extend({
 		var length = this.length;
 		this.x = this.x / length;
 		this.y = this.y / length;
+		return this;
+	},
+	/**
+	 * 向量反向
+	 * @function negate
+	 * @return {this}
+	 */
+	negate: function() {
+		this.x *= -1;
+		this.y *= -1;
 		return this;
 	},
 	/**
@@ -297,22 +308,38 @@ var Vector = go2d.Vector = Class.extend({
 	/**
 	 * 求与另一个向量之间的距离
 	 * @function distance
-	 * @param {go2d.Vector} vector 要求距离的向量
+	 * @param {Vector} vector 另一个向量
 	 * @return {number} 两向量之间的距离
 	 */
 	distance: function(v) {
 		return Math.sqrt((this.x - v.x) * (this.x - v.x) + (this.y - v.y) * (this.y - v.y));
 	},
 	/**
+	 * 判断两个向量是否相等
+	 * @function equals
+	 * @param {Vector} vector 另一个向量
+	 * @return {Boolean} 是否相等
+	 */
+	equals: function(v) {
+		return this.x === v.x && this.y === v.y;
+	},
+	/**
 	 * 创建当前向量的克隆对象
 	 * @function clone
-	 * @return {go2d.Vector} 当前向量的克隆对象
+	 * @return {Vector} 当前向量的克隆对象
 	 */
 	clone: function() {
 		return new Vector(this);
+	},
+	/**
+	 * 将向量转换为数组
+	 * @function toArray
+	 * @return {Array} 转换后的数组
+	 */
+	toArray: function() {
+		return [this.x, this.y];
 	}
 });
-
 /**
  * 变化矩阵类，实现矩阵基本运算，可表达两个二维向量空间之间的仿射变换。
  * <pre><code>
@@ -423,7 +450,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 前置相乘
-	 * @param {go2d.Matrix} matrix 前置矩阵
+	 * @param {Matrix} matrix 前置矩阵
 	 * @function prepend
 	 * @return {this}
 	 */
@@ -447,7 +474,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 后置相乘
-	 * @param {go2d.Matrix} matrix 后置矩阵
+	 * @param {Matrix} matrix 后置矩阵
 	 * @function append
 	 * @return {this}
 	 */
@@ -472,8 +499,8 @@ var Matrix = go2d.Matrix = Class.extend({
 	/**
 	 * 将变换矩阵乘以向量
 	 * @function multiply
-	 * @param {go2d.Vector} vector 变换前的向量
-	 * @return {go2d.Vector} 变换后的向量
+	 * @param {Vector} vector 变换前的向量
+	 * @return {Vector} 变换后的向量
 	 */
 	multiply: function(v) {
 		var x = this.a * v.x + this.c * v.y + this.tx;
@@ -525,13 +552,30 @@ var Matrix = go2d.Matrix = Class.extend({
 		return this.append(1, 0, 0, 1, x, y);
 	},
 	/**
+	 * 判断两个矩阵是否相等
+	 * @function equals
+	 * @param {Vector} matrix 另一个向量
+	 * @return {Boolean} 是否相等
+	 */
+	equals: function(m) {
+		return m instanceof Matrix &&
+			this.a === m.a && this.b === m.b &&
+			this.c === m.c && this.d === m.d &&
+			this.tx === m.tx && this.ty === m.ty;
+	},
+	/**
 	 * 创建当前矩阵的克隆对象
 	 * @function clone
-	 * @return {go2d.Matrix} 当前矩阵的克隆对象
+	 * @return {Matrix} 当前矩阵的克隆对象
 	 */
 	clone: function() {
 		return new Matrix(this);
 	},
+	/**
+	 * 将矩阵转换为数组
+	 * @function toArray
+	 * @return {Array} 转换后的数组
+	 */
 	toArray: function() {
 		return [this.a, this.b, this.c, this.d, this.tx, this.ty];
 	}
@@ -579,11 +623,12 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 	 * @return {this}
 	 */
 	on: function(name, callback, thisArg) {
-		if (isObject(arguments[0]) === 1) {
+		if (isObject(arguments[0])) {
+			thisArg = arguments[1];
 			forEach(arguments[0], function(callback, name) {
-				this.on(name, callback, arguments[1]);
+				this.on(name, callback, thisArg);
 			}, this);
-		} else {
+		} else if (isFunction(callback)) {
 			name = name.toLowerCase();
 			this.__events[name] = this.__events[name] || [];
 			this.__events[name].push({
@@ -620,7 +665,7 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 	 * 通过事件对象派发事件
 	 * @function emit
 	 * @param {string} name 事件名称
-	 * @param {go2d.Event} [event] 事件对象
+	 * @param {Event} [event] 事件对象
 	 * @return {this}
 	 */
 	/**
@@ -853,7 +898,7 @@ var TouchEvent = Event.TouchEvent = Event.extend({
 	TOUCH_TAP: 'touchtap'
 });
 /**
- * 事件类，所有事件对象的基类。
+ * 宽高变化事件类。
  * @author Lanfei
  * @class ResizeEvent
  * @extends Event
@@ -887,6 +932,45 @@ var ResizeEvent = Event.ResizeEvent = Event.extend({
 			 * @property {number} height 对象新高度
 			 */
 			newSize: newSize
+		});
+	}
+});
+
+/**
+ * 滑动距离变化事件类。
+ * @author Lanfei
+ * @class ScrollEvent
+ * @extends Event
+ * 
+ * @constructor
+ * @param {Object} oldPos 对象原滑动距离
+ * @param {number} oldPos.top 对象原水平方向滑动距离
+ * @param {number} oldPos.left 对象原垂直方向滑动距离
+ * @param {Object} newPos 对象新滑动距离
+ * @param {number} newPos.top 对象新水平方向滑动距离
+ * @param {number} newPos.left 对象新垂直方向滑动距离
+ */
+var ScrollEvent = Event.ScrollEvent = Event.extend({
+	__init: function(oldPos, newPos) {
+		this._super('scroll', {
+
+			/**
+			 * 对象原滑动距离
+			 * @property oldPos
+			 * @type Object
+			 * @property {number} top 对象原水平方向滑动距离
+			 * @property {number} left 对象原垂直方向滑动距离
+			 */
+			oldPos: oldPos,
+
+			/**
+			 * 对象新滑动距离
+			 * @property newPos
+			 * @type Object
+			 * @property {number} top 对象新水平方向滑动距离
+			 * @property {number} left 对象新垂直方向滑动距离
+			 */
+			newPos: newPos
 		});
 	}
 });
@@ -2096,13 +2180,13 @@ var Ease = go2d.Ease = Class.extend({}, {
  * @author Lanfei
  * @class Tween
  * @extends Class
- *
- * @constructor
- * @param {go2d.Sprite} target 动画应用对象
- * @param {Object} [options] 配置参数
- * @param {Object} [options.loops=1] 循环次数，为 0 时无限循环
  * @todo 缓动时间控制应依据全局还是对象？
  * @todo 代码结构有待整理
+ *
+ * @constructor
+ * @param {Sprite} target 动画应用对象
+ * @param {Object} [options] 配置参数
+ * @param {Object} [options.loops=1] 循环次数，为 0 时无限循环
  */
 var Tween = go2d.Tween = Class.extend({
 	__init: function(target, options) {
@@ -2120,7 +2204,7 @@ var Tween = go2d.Tween = Class.extend({
 		 * 动画应用对象
 		 * @protected
 		 * @property _target
-		 * @type {go2d.Sprite}
+		 * @type {Sprite}
 		 */
 		this._target = target;
 
@@ -2505,13 +2589,13 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	 * 绘制子对象
 	 * @protected
 	 * @function _drawChild
-	 * @param {go2d.Sprite} child 要绘制的对象
+	 * @param {Sprite} child 要绘制的对象
 	 * @param {string} [blendMode] 混合模式
 	 * @return {this}
 	 */
 	_drawChild: function(child, blendMode) {
 		var ctx = this.context,
-			matrix = child.getTransform();
+			matrix = this.getChildTransform(child);
 
 		child.render();
 
@@ -2550,7 +2634,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			/**
 			 * 开始渲染事件
 			 * @event render
-			 * @param {go2d.Event} event 事件对象
+			 * @param {Event} event 事件对象
 			 */
 			this.emit('render', event);
 			if (!event.isDefaultPrevented()) {
@@ -2597,7 +2681,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 					/**
 					 * 触摸开始事件
 					 * @event touchstart
-					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 * @param {TouchEvent} event 触摸事件对象
 					 */
 					emit = true;
 					touches[identifier] = true;
@@ -2608,7 +2692,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 					/**
 					 * 触摸移动事件
 					 * @event touchmove
-					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 * @param {TouchEvent} event 触摸事件对象
 					 */
 					emit = true;
 				}
@@ -2618,7 +2702,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 					/**
 					 * 触摸结束事件
 					 * @event touchend
-					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 * @param {TouchEvent} event 触摸事件对象
 					 */
 					emit = true;
 					touches[identifier] = false;
@@ -2629,7 +2713,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 					/**
 					 * 触摸点击事件
 					 * @event touchtap
-					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 * @param {TouchEvent} event 触摸事件对象
 					 */
 					emit = true;
 				}
@@ -2643,7 +2727,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			for (var i = children.length - 1; i >= 0; --i) {
 				var child = children[i];
 				if (child.visible && child.touchable) {
-					var subLocalPos = child.getTransform().invert().multiply(touchPos),
+					var subLocalPos = this.getChildTransform(child).invert().multiply(touchPos),
 						subPos = subLocalPos.clone().subtract(child.getAnchor()),
 						subEvent = new TouchEvent(
 							type,
@@ -2671,13 +2755,13 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 触发添加到舞台事件，不建议外部调用
 	 * @function addedToStage
-	 * @param {go2d.Stage} stage 舞台对象
+	 * @param {Stage} stage 舞台对象
 	 */
 	addedToStage: function(stage) {
 		/**
 		 * 添加到舞台事件
 		 * @event addedtostage
-		 * @param {go2d.Stage} stage 舞台对象
+		 * @param {Stage} stage 舞台对象
 		 */
 		this.stage = stage;
 		this.emit('addedtostage', stage);
@@ -2688,13 +2772,13 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 触发移除出舞台事件，不建议外部调用
 	 * @function removedFromStage
-	 * @param {go2d.Stage} stage 舞台对象
+	 * @param {Stage} stage 舞台对象
 	 */
 	removedFromStage: function(stage) {
 		/**
 		 * 移除出舞台事件
 		 * @event removedfromstage
-		 * @param {go2d.Stage} stage 舞台对象
+		 * @param {Stage} stage 舞台对象
 		 */
 		this.stage = null;
 		this.emit('removedfromstage', stage);
@@ -2715,6 +2799,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		if (width === oldWidth && height === oldHeight) {
 			return;
 		}
+
 		var event = new ResizeEvent({
 			width: oldWidth,
 			height: oldHeight
@@ -2725,7 +2810,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		/**
 		 * 宽高变化事件
 		 * @event resize
-		 * @param {go2d.ResizeEvent} event 宽高变化事件对象
+		 * @param {ResizeEvent} event 宽高变化事件对象
 		 */
 		this.emit('resize', event);
 		if (!event.isDefaultPrevented()) {
@@ -2768,9 +2853,17 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		return this;
 	},
 	/**
+	 * 获取子对象变换矩阵
+	 * @param  {Sprite} child 子对象
+	 * @return {Matrix} 子对象变换矩阵
+	 */
+	getChildTransform: function(child) {
+		return child.getTransform();
+	},
+	/**
 	 * 添加子对象
 	 * @function addChild
-	 * @param {go2d.DisplayObject} child 要添加的子对象
+	 * @param {DisplayObject} child 要添加的子对象
 	 * @return {this}
 	 */
 	addChild: function(child) {
@@ -2780,7 +2873,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 在指定深度添加子对象
 	 * @function addChildAt
-	 * @param {go2d.DisplayObject} child 要添加的子对象
+	 * @param {DisplayObject} child 要添加的子对象
 	 * @param {number} index 深度，数值越小层级越低
 	 * @return {this}
 	 */
@@ -2808,7 +2901,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	 * 获取指定名字的子对象
 	 * @function getChildByName
 	 * @param {string} name 子对象名字
-	 * @return {go2d.DisplayObject} 对应的子对象
+	 * @return {DisplayObject} 对应的子对象
 	 */
 	getChildByName: function(name) {
 		var child;
@@ -2839,7 +2932,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	 * 获取指定深度的子对象
 	 * @function getChildAt
 	 * @param {number} index 子对象深度
-	 * @return {go2d.DisplayObject} 对应的子对象
+	 * @return {DisplayObject} 对应的子对象
 	 */
 	getChildAt: function(index) {
 		return this._children[index];
@@ -2847,7 +2940,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 获取指定子对象的深度
 	 * @function getChildIndex
-	 * @param {go2d.DisplayObject} child 对应的子对象
+	 * @param {DisplayObject} child 对应的子对象
 	 * @return {number} 子对象深度
 	 */
 	getChildIndex: function(child) {
@@ -2862,8 +2955,8 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 交换两个子对象的深度
 	 * @function swapChildren
-	 * @param {go2d.DisplayObject} child1 要交换的子对象一
-	 * @param {go2d.DisplayObject} child2 要交换的子对象二
+	 * @param {DisplayObject} child1 要交换的子对象一
+	 * @param {DisplayObject} child2 要交换的子对象二
 	 * @return {this}
 	 */
 	swapChildren: function(child1, child2) {
@@ -2914,7 +3007,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 移除指定的子对象
 	 * @function removeChild
-	 * @param {go2d.DisplayObject} child 对应的子对象
+	 * @param {DisplayObject} child 对应的子对象
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
 	 */
@@ -3005,7 +3098,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 设置遮罩对象
 	 * @function setMask
-	 * @param {go2d.Sprite} mask 遮罩对象
+	 * @param {Sprite} mask 遮罩对象
 	 * @return {this}
 	 */
 	setMask: function(mask) {
@@ -3030,7 +3123,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 获取遮罩对象
 	 * @function getMask
-	 * @return {go2d.Sprite}
+	 * @return {Sprite}
 	 */
 	getMask: function() {
 		return this._mask;
@@ -3196,7 +3289,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 	/**
 	 * 获取变换矩阵
 	 * @function getTransform
-	 * @return {go2d.Matrix} 仿射变换矩阵
+	 * @return {Matrix} 仿射变换矩阵
 	 */
 	getTransform: function() {
 		var matrix = new Matrix(),
@@ -3273,10 +3366,11 @@ var ImageView = go2d.ImageView = Sprite.extend({
  * @author Lanfei
  * @class ScrollView
  * @extends Sprite
- * 
+ * @todo 嵌套优化
+ * @todo touchcancel
+ *
  * @constructor
  * @param {Sprite} content 滚动视图的内容对象
- * @待优化重构
  */
 var ScrollView = go2d.ScrollView = Sprite.extend({
 	__init: function(content) {
@@ -3289,13 +3383,9 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 		 * @type Sprite
 		 */
 		this._content = null;
-		this._scrollPos = {
-			top: 0,
-			left: 0
-		};
-		this._initTouch();
+		this._scrollPos = new Vector();
+		this._initTouchEvent();
 		this.setContent(content);
-		this.on('render', this._onRender);
 
 		/**
 		 * 纵向滑动距离
@@ -3305,10 +3395,10 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 		 */
 		Object.defineProperty(this, 'scrollTop', {
 			set: function(scrollTop) {
-				this._onScroll(scrollTop, this.scrollLeft);
+				this.scrollTo(this.scrollLeft, scrollTop);
 			},
 			get: function() {
-				return this._scrollPos.top;
+				return this._scrollPos.y;
 			}
 		});
 
@@ -3320,103 +3410,101 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 		 */
 		Object.defineProperty(this, 'scrollLeft', {
 			set: function(scrollLeft) {
-				this._onScroll(this.scrollTop, scrollLeft);
+				this.scrollTo(scrollLeft, this.scrollTop);
 			},
 			get: function() {
-				return this._scrollPos.left;
+				return this._scrollPos.x;
 			}
 		});
 	},
-	_initTouch: function() {
-		var beginPos, beginTouch, prevTouch, prevTime, speed;
+	_initTouchEvent: function() {
+		var speed,
+			prevTime,
+			prevTouch,
+			friction = 0.9;
 		this.on({
-			touchstart: function(e) {
-				beginPos = {
-					top: this.scrollTop,
-					left: this.scrollLeft
-				};
-				prevTime = +new Date();
-				beginTouch = prevTouch = e;
-			},
 			touchmove: function(e) {
-				var offsetTime = +new Date() - prevTime;
-				var scrollTop = this.scrollTop = beginPos.top - e.y + beginTouch.y;
-				var scrollLeft = this.scrollLeft = beginPos.left - e.x + beginTouch.x;
-				speed = {
-					top: (e.y - prevTouch.y) / offsetTime,
-					left: (e.x - prevTouch.x) / offsetTime
-				};
-				prevTime = +new Date();
-				prevTouch = e;
-				if (this.scrollTop !== scrollTop || this.scrollLeft !== scrollLeft) {
-					e.stopPropagation();
+				var now = +new Date();
+				if (prevTime) {
+					var offsetX = prevTouch.x - e.globalX,
+						offsetY = prevTouch.y - e.globalY,
+						offsetTime = now - prevTime;
+					this.scrollBy(offsetX, offsetY);
+					speed = new Vector(offsetX / offsetTime, offsetY / offsetTime);
 				}
+				prevTime = now;
+				prevTouch = new Vector(e.globalX, e.globalY);
 			},
-			touchend: function(e) {
-				beginPos = beginTouch = prevTouch = prevTime = null;
+			touchend: function() {
+				prevTime = prevTouch = null;
 			},
 			step: function(deltaTime) {
-				if (!beginPos && speed) {
-					var friction = 0.9;
-					var minOffset = 1;
-					var prevTop = this.scrollTop;
-					var prevLeft = this.scrollLeft;
-					var offsetTop = (speed.top *= friction) * deltaTime;
-					var offsetLeft = (speed.left *= friction) * deltaTime;
-					this.scrollTop -= offsetTop;
-					this.scrollLeft -= offsetLeft;
-					if (Math.sqrt(offsetTop * offsetTop + offsetLeft * offsetLeft) < minOffset) {
+				if (speed && !prevTime) {
+					var offsetX = speed.x * deltaTime,
+						offsetY = speed.y * deltaTime;
+					speed.x *= friction;
+					speed.y *= friction;
+					this.scrollBy(offsetX, offsetY);
+					if (Math.sqrt(offsetX * offsetX + offsetY * offsetY) < 1) {
 						speed = null;
 					}
 				}
 			}
 		});
 	},
-	_onScroll: function(scrollTop, scrollLeft) {
-		var content = this.getContent(),
-			scrollPos = this._scrollPos;
-		if (content) {
-			var newPos = {
-				top: Math.max(0, Math.min(scrollTop, content.height - this.height)),
-				left: Math.max(0, Math.min(scrollLeft, content.width - this.width))
-			};
-			if (newPos.top !== scrollPos.top || newPos.left !== scrollPos.left) {
-				/**
-				 * 触摸移动事件
-				 * @event scroll
-				 */
-				var event = new Event('scroll', scrollPos, newPos);
-				this.emit('scroll', event);
-				if (!event.isDefaultPrevented()) {
-					this._scrollPos = newPos;
-					this.update();
-				}
-			}
-		}
+	getChildTransform: function(child) {
+		return child.getTransform().translate(this._scrollPos.clone().negate());
 	},
-	_onRender: function() {
-		var ctx = this.context,
-			children = this._children;
-		if (this.background) {
-			ctx.save();
-			ctx.fillStyle = this.background;
-			ctx.fillRect(0, 0, this.width, this.height);
-			ctx.restore();
-		} else {
-			ctx.clearRect(0, 0, this.width, this.height);
+	/**
+	 * 在原有基础上滑动指定距离
+	 * @function scrollBy
+	 * @param {number} x 水平滑动距离
+	 * @param {number} y 垂直滑动距离
+	 * @return {this}
+	 */
+	scrollBy: function(x, y) {
+		return this.scrollTo(this.scrollLeft + x, this.scrollTop + y);
+	},
+	/**
+	 * 设置滑动距离
+	 * @function scrollTo
+	 * @param {number} x 水平滑动距离
+	 * @param {number} y 垂直滑动距离
+	 * @return {this}
+	 */
+	scrollTo: function(x, y) {
+		var content = this.getContent();
+		if (!content) {
+			return;
 		}
-		forEach(children, function(child) {
-			if (child.visible) {
-				var matrix = child.getTransform();
-				child.render();
-				ctx.save();
-				ctx.globalAlpha = child.opacity;
-				ctx.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx - this.scrollLeft, matrix.ty - this.scrollTop);
-				ctx.drawImage(child.canvas, 0, 0, child.width, child.height);
-				ctx.restore();
-			}
-		}, this);
-		return false;
+
+		var oldTop = this._scrollPos.y,
+			oldLeft = this._scrollPos.x,
+			newTop = Math.max(0, Math.min(Math.round(y), content.height - this.height)),
+			newLeft = Math.max(0, Math.min(Math.round(x), content.width - this.width));
+		if (newTop === oldTop && newLeft === oldLeft) {
+			return;
+		}
+
+		/**
+		 * 滑动距离变化事件
+		 * @event scroll
+		 * @param {ScrollEvent} event 滑动距离变化事件对象
+		 */
+		var event = new ScrollEvent({
+			top: oldTop,
+			left: oldLeft
+		}, {
+			top: newTop,
+			left: newLeft
+		});
+		this.emit('scroll', event);
+		if (!event.isDefaultPrevented()) {
+			this._scrollPos.y = newTop;
+			this._scrollPos.x = newLeft;
+			this.update();
+		}
+		return this;
 	},
 	/**
 	 * 设置滚动视图的内容对象
@@ -3427,7 +3515,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	setContent: function(content) {
 		this.removeContent();
 		if (content) {
-			this._children[0] = content;
+			this._super.addChildAt.call(this, content);
 		}
 		return this;
 	},
@@ -3437,7 +3525,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	 * @return {Sprite} content 滚动视图的内容对象
 	 */
 	getContent: function() {
-		return this._children[0];
+		return this.getChildAt(0);
 	},
 	/**
 	 * 移除滚动视图的内容对象
@@ -3446,14 +3534,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	 * @return {this}
 	 */
 	removeContent: function(cleanup) {
-		var content = this.getContent();
-		if (content) {
-			content.parent = null;
-			if (cleanup) {
-				content.dispose();
-			}
-			this._children = [];
-		}
+		this._super.removeAllChildren.call(this, cleanup);
 		return this;
 	},
 	addChildAt: function(child) {
@@ -3472,7 +3553,6 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 		return this;
 	}
 });
-
 /**
  * 文本显示类，用于文本排列和显示。
  * @author Lanfei

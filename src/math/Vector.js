@@ -3,7 +3,7 @@
  * @author Lanfei
  * @class Vector
  * @extends Class
- * 
+ *
  * @constructor
  * @param {number} x 向量水平坐标
  * @param {number} y 向量垂直坐标
@@ -54,7 +54,7 @@ var Vector = go2d.Vector = Class.extend({
 	/**
 	 * 向量加法
 	 * @function add
-	 * @param {go2d.Vector} vector 要相加的向量
+	 * @param {Vector} vector 要相加的向量
 	 * @return {this}
 	 */
 	add: function(v) {
@@ -65,7 +65,7 @@ var Vector = go2d.Vector = Class.extend({
 	/**
 	 * 向量减法
 	 * @function subtract
-	 * @param {go2d.Vector} vector 要相减的向量
+	 * @param {Vector} vector 要相减的向量
 	 * @return {this}
 	 */
 	subtract: function(v) {
@@ -76,7 +76,7 @@ var Vector = go2d.Vector = Class.extend({
 	/**
 	 * 向量除法
 	 * @function divide
-	 * @param {go2d.Vector} vector 要除以的向量
+	 * @param {Vector} vector 要除以的向量
 	 * @return {this}
 	 */
 	divide: function(v) {
@@ -87,7 +87,7 @@ var Vector = go2d.Vector = Class.extend({
 	/**
 	 * 向量点乘
 	 * @function dotProduct
-	 * @param {go2d.Vector} vector 要点乘的向量
+	 * @param {Vector} vector 要点乘的向量
 	 * @return {this}
 	 */
 	dotProduct: function(v) {
@@ -102,6 +102,16 @@ var Vector = go2d.Vector = Class.extend({
 		var length = this.length;
 		this.x = this.x / length;
 		this.y = this.y / length;
+		return this;
+	},
+	/**
+	 * 向量反向
+	 * @function negate
+	 * @return {this}
+	 */
+	negate: function() {
+		this.x *= -1;
+		this.y *= -1;
 		return this;
 	},
 	/**
@@ -140,18 +150,35 @@ var Vector = go2d.Vector = Class.extend({
 	/**
 	 * 求与另一个向量之间的距离
 	 * @function distance
-	 * @param {go2d.Vector} vector 要求距离的向量
+	 * @param {Vector} vector 另一个向量
 	 * @return {number} 两向量之间的距离
 	 */
 	distance: function(v) {
 		return Math.sqrt((this.x - v.x) * (this.x - v.x) + (this.y - v.y) * (this.y - v.y));
 	},
 	/**
+	 * 判断两个向量是否相等
+	 * @function equals
+	 * @param {Vector} vector 另一个向量
+	 * @return {Boolean} 是否相等
+	 */
+	equals: function(v) {
+		return this.x === v.x && this.y === v.y;
+	},
+	/**
 	 * 创建当前向量的克隆对象
 	 * @function clone
-	 * @return {go2d.Vector} 当前向量的克隆对象
+	 * @return {Vector} 当前向量的克隆对象
 	 */
 	clone: function() {
 		return new Vector(this);
+	},
+	/**
+	 * 将向量转换为数组
+	 * @function toArray
+	 * @return {Array} 转换后的数组
+	 */
+	toArray: function() {
+		return [this.x, this.y];
 	}
 });

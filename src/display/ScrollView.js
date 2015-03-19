@@ -3,10 +3,11 @@
  * @author Lanfei
  * @class ScrollView
  * @extends Sprite
- * 
+ * @todo 嵌套优化
+ * @todo touchcancel
+ *
  * @constructor
  * @param {Sprite} content 滚动视图的内容对象
- * @待优化重构
  */
 var ScrollView = go2d.ScrollView = Sprite.extend({
 	__init: function(content) {
@@ -19,13 +20,9 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 		 * @type Sprite
 		 */
 		this._content = null;
-		this._scrollPos = {
-			top: 0,
-			left: 0
-		};
-		this._initTouch();
+		this._scrollPos = new Vector();
+		this._initTouchEvent();
 		this.setContent(content);
-		this.on('render', this._onRender);
 
 		/**
 		 * 纵向滑动距离
@@ -35,10 +32,10 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 		 */
 		Object.defineProperty(this, 'scrollTop', {
 			set: function(scrollTop) {
-				this._onScroll(scrollTop, this.scrollLeft);
+				this.scrollTo(this.scrollLeft, scrollTop);
 			},
 			get: function() {
-				return this._scrollPos.top;
+				return this._scrollPos.y;
 			}
 		});
 
@@ -50,103 +47,101 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 		 */
 		Object.defineProperty(this, 'scrollLeft', {
 			set: function(scrollLeft) {
-				this._onScroll(this.scrollTop, scrollLeft);
+				this.scrollTo(scrollLeft, this.scrollTop);
 			},
 			get: function() {
-				return this._scrollPos.left;
+				return this._scrollPos.x;
 			}
 		});
 	},
-	_initTouch: function() {
-		var beginPos, beginTouch, prevTouch, prevTime, speed;
+	_initTouchEvent: function() {
+		var speed,
+			prevTime,
+			prevTouch,
+			friction = 0.9;
 		this.on({
-			touchstart: function(e) {
-				beginPos = {
-					top: this.scrollTop,
-					left: this.scrollLeft
-				};
-				prevTime = +new Date();
-				beginTouch = prevTouch = e;
-			},
 			touchmove: function(e) {
-				var offsetTime = +new Date() - prevTime;
-				var scrollTop = this.scrollTop = beginPos.top - e.y + beginTouch.y;
-				var scrollLeft = this.scrollLeft = beginPos.left - e.x + beginTouch.x;
-				speed = {
-					top: (e.y - prevTouch.y) / offsetTime,
-					left: (e.x - prevTouch.x) / offsetTime
-				};
-				prevTime = +new Date();
-				prevTouch = e;
-				if (this.scrollTop !== scrollTop || this.scrollLeft !== scrollLeft) {
-					e.stopPropagation();
+				var now = +new Date();
+				if (prevTime) {
+					var offsetX = prevTouch.x - e.globalX,
+						offsetY = prevTouch.y - e.globalY,
+						offsetTime = now - prevTime;
+					this.scrollBy(offsetX, offsetY);
+					speed = new Vector(offsetX / offsetTime, offsetY / offsetTime);
 				}
+				prevTime = now;
+				prevTouch = new Vector(e.globalX, e.globalY);
 			},
-			touchend: function(e) {
-				beginPos = beginTouch = prevTouch = prevTime = null;
+			touchend: function() {
+				prevTime = prevTouch = null;
 			},
 			step: function(deltaTime) {
-				if (!beginPos && speed) {
-					var friction = 0.9;
-					var minOffset = 1;
-					var prevTop = this.scrollTop;
-					var prevLeft = this.scrollLeft;
-					var offsetTop = (speed.top *= friction) * deltaTime;
-					var offsetLeft = (speed.left *= friction) * deltaTime;
-					this.scrollTop -= offsetTop;
-					this.scrollLeft -= offsetLeft;
-					if (Math.sqrt(offsetTop * offsetTop + offsetLeft * offsetLeft) < minOffset) {
+				if (speed && !prevTime) {
+					var offsetX = speed.x * deltaTime,
+						offsetY = speed.y * deltaTime;
+					speed.x *= friction;
+					speed.y *= friction;
+					this.scrollBy(offsetX, offsetY);
+					if (Math.sqrt(offsetX * offsetX + offsetY * offsetY) < 1) {
 						speed = null;
 					}
 				}
 			}
 		});
 	},
-	_onScroll: function(scrollTop, scrollLeft) {
-		var content = this.getContent(),
-			scrollPos = this._scrollPos;
-		if (content) {
-			var newPos = {
-				top: Math.max(0, Math.min(scrollTop, content.height - this.height)),
-				left: Math.max(0, Math.min(scrollLeft, content.width - this.width))
-			};
-			if (newPos.top !== scrollPos.top || newPos.left !== scrollPos.left) {
-				/**
-				 * 触摸移动事件
-				 * @event scroll
-				 */
-				var event = new Event('scroll', scrollPos, newPos);
-				this.emit('scroll', event);
-				if (!event.isDefaultPrevented()) {
-					this._scrollPos = newPos;
-					this.update();
-				}
-			}
-		}
+	getChildTransform: function(child) {
+		return child.getTransform().translate(this._scrollPos.clone().negate());
 	},
-	_onRender: function() {
-		var ctx = this.context,
-			children = this._children;
-		if (this.background) {
-			ctx.save();
-			ctx.fillStyle = this.background;
-			ctx.fillRect(0, 0, this.width, this.height);
-			ctx.restore();
-		} else {
-			ctx.clearRect(0, 0, this.width, this.height);
+	/**
+	 * 在原有基础上滑动指定距离
+	 * @function scrollBy
+	 * @param {number} x 水平滑动距离
+	 * @param {number} y 垂直滑动距离
+	 * @return {this}
+	 */
+	scrollBy: function(x, y) {
+		return this.scrollTo(this.scrollLeft + x, this.scrollTop + y);
+	},
+	/**
+	 * 设置滑动距离
+	 * @function scrollTo
+	 * @param {number} x 水平滑动距离
+	 * @param {number} y 垂直滑动距离
+	 * @return {this}
+	 */
+	scrollTo: function(x, y) {
+		var content = this.getContent();
+		if (!content) {
+			return;
 		}
-		forEach(children, function(child) {
-			if (child.visible) {
-				var matrix = child.getTransform();
-				child.render();
-				ctx.save();
-				ctx.globalAlpha = child.opacity;
-				ctx.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx - this.scrollLeft, matrix.ty - this.scrollTop);
-				ctx.drawImage(child.canvas, 0, 0, child.width, child.height);
-				ctx.restore();
-			}
-		}, this);
-		return false;
+
+		var oldTop = this._scrollPos.y,
+			oldLeft = this._scrollPos.x,
+			newTop = Math.max(0, Math.min(Math.round(y), content.height - this.height)),
+			newLeft = Math.max(0, Math.min(Math.round(x), content.width - this.width));
+		if (newTop === oldTop && newLeft === oldLeft) {
+			return;
+		}
+
+		/**
+		 * 滑动距离变化事件
+		 * @event scroll
+		 * @param {ScrollEvent} event 滑动距离变化事件对象
+		 */
+		var event = new ScrollEvent({
+			top: oldTop,
+			left: oldLeft
+		}, {
+			top: newTop,
+			left: newLeft
+		});
+		this.emit('scroll', event);
+		if (!event.isDefaultPrevented()) {
+			this._scrollPos.y = newTop;
+			this._scrollPos.x = newLeft;
+			this.update();
+		}
+		return this;
 	},
 	/**
 	 * 设置滚动视图的内容对象
@@ -157,7 +152,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	setContent: function(content) {
 		this.removeContent();
 		if (content) {
-			this._children[0] = content;
+			this._super.addChildAt.call(this, content);
 		}
 		return this;
 	},
@@ -167,7 +162,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	 * @return {Sprite} content 滚动视图的内容对象
 	 */
 	getContent: function() {
-		return this._children[0];
+		return this.getChildAt(0);
 	},
 	/**
 	 * 移除滚动视图的内容对象
@@ -176,14 +171,7 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	 * @return {this}
 	 */
 	removeContent: function(cleanup) {
-		var content = this.getContent();
-		if (content) {
-			content.parent = null;
-			if (cleanup) {
-				content.dispose();
-			}
-			this._children = [];
-		}
+		this._super.removeAllChildren.call(this, cleanup);
 		return this;
 	},
 	addChildAt: function(child) {

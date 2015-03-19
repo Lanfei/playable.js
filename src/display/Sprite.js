@@ -110,7 +110,7 @@ var Sprite = go2d.Sprite = DisplayObject.extend({
 	/**
 	 * 获取变换矩阵
 	 * @function getTransform
-	 * @return {go2d.Matrix} 仿射变换矩阵
+	 * @return {Matrix} 仿射变换矩阵
 	 */
 	getTransform: function() {
 		var matrix = new Matrix(),

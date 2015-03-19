@@ -25,6 +25,7 @@ Class.extend = function(props, statics) {
 	}
 
 	Class.prototype = prototype;
+	Class.prototype._super = superProto;
 	Class.prototype.constructor = Class;
 	Class.extend = go2d.Class.extend;
 

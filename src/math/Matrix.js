@@ -108,7 +108,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 前置相乘
-	 * @param {go2d.Matrix} matrix 前置矩阵
+	 * @param {Matrix} matrix 前置矩阵
 	 * @function prepend
 	 * @return {this}
 	 */
@@ -132,7 +132,7 @@ var Matrix = go2d.Matrix = Class.extend({
 	},
 	/**
 	 * 后置相乘
-	 * @param {go2d.Matrix} matrix 后置矩阵
+	 * @param {Matrix} matrix 后置矩阵
 	 * @function append
 	 * @return {this}
 	 */
@@ -157,8 +157,8 @@ var Matrix = go2d.Matrix = Class.extend({
 	/**
 	 * 将变换矩阵乘以向量
 	 * @function multiply
-	 * @param {go2d.Vector} vector 变换前的向量
-	 * @return {go2d.Vector} 变换后的向量
+	 * @param {Vector} vector 变换前的向量
+	 * @return {Vector} 变换后的向量
 	 */
 	multiply: function(v) {
 		var x = this.a * v.x + this.c * v.y + this.tx;
@@ -210,13 +210,30 @@ var Matrix = go2d.Matrix = Class.extend({
 		return this.append(1, 0, 0, 1, x, y);
 	},
 	/**
+	 * 判断两个矩阵是否相等
+	 * @function equals
+	 * @param {Vector} matrix 另一个向量
+	 * @return {Boolean} 是否相等
+	 */
+	equals: function(m) {
+		return m instanceof Matrix &&
+			this.a === m.a && this.b === m.b &&
+			this.c === m.c && this.d === m.d &&
+			this.tx === m.tx && this.ty === m.ty;
+	},
+	/**
 	 * 创建当前矩阵的克隆对象
 	 * @function clone
-	 * @return {go2d.Matrix} 当前矩阵的克隆对象
+	 * @return {Matrix} 当前矩阵的克隆对象
 	 */
 	clone: function() {
 		return new Matrix(this);
 	},
+	/**
+	 * 将矩阵转换为数组
+	 * @function toArray
+	 * @return {Array} 转换后的数组
+	 */
 	toArray: function() {
 		return [this.a, this.b, this.c, this.d, this.tx, this.ty];
 	}

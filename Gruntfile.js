@@ -11,6 +11,7 @@ module.exports = function(grunt) {
 		'src/event/Event.js',
 		'src/event/TouchEvent.js',
 		'src/event/ResizeEvent.js',
+		'src/event/ScrollEvent.js',
 		'src/system/ObjectPool.js',
 		'src/system/Director.js',
 		'src/net/URLRequest.js',

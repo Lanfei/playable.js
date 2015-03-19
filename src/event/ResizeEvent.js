@@ -1,5 +1,5 @@
 /**
- * 事件类，所有事件对象的基类。
+ * 宽高变化事件类。
  * @author Lanfei
  * @class ResizeEvent
  * @extends Event

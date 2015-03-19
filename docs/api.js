@@ -12,6 +12,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ObjectPool",
         "ResizeEvent",
         "ResourceLoader",
+        "ScrollEvent",
         "ScrollView",
         "Sprite",
         "Stage",

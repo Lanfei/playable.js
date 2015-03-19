@@ -34,11 +34,12 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 	 * @return {this}
 	 */
 	on: function(name, callback, thisArg) {
-		if (isObject(arguments[0]) === 1) {
+		if (isObject(arguments[0])) {
+			thisArg = arguments[1];
 			forEach(arguments[0], function(callback, name) {
-				this.on(name, callback, arguments[1]);
+				this.on(name, callback, thisArg);
 			}, this);
-		} else {
+		} else if (isFunction(callback)) {
 			name = name.toLowerCase();
 			this.__events[name] = this.__events[name] || [];
 			this.__events[name].push({
@@ -75,7 +76,7 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 	 * 通过事件对象派发事件
 	 * @function emit
 	 * @param {string} name 事件名称
-	 * @param {go2d.Event} [event] 事件对象
+	 * @param {Event} [event] 事件对象
 	 * @return {this}
 	 */
 	/**

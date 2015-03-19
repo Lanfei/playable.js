@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="Go2d" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.6.5</em>
+            <em>API Docs for: 1.6.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -50,6 +50,7 @@
                                 <li><a href="../classes/ObjectPool.html">ObjectPool</a></li>
                                 <li><a href="../classes/ResizeEvent.html">ResizeEvent</a></li>
                                 <li><a href="../classes/ResourceLoader.html">ResourceLoader</a></li>
+                                <li><a href="../classes/ScrollEvent.html">ScrollEvent</a></li>
                                 <li><a href="../classes/ScrollView.html">ScrollView</a></li>
                                 <li><a href="../classes/Sprite.html">Sprite</a></li>
                                 <li><a href="../classes/Stage.html">Stage</a></li>
@@ -135,11 +136,12 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 	 * @return {this}
 	 */
 	on: function(name, callback, thisArg) {
-		if (isObject(arguments[0]) === 1) {
+		if (isObject(arguments[0])) {
+			thisArg = arguments[1];
 			forEach(arguments[0], function(callback, name) {
-				this.on(name, callback, arguments[1]);
+				this.on(name, callback, thisArg);
 			}, this);
-		} else {
+		} else if (isFunction(callback)) {
 			name = name.toLowerCase();
 			this.__events[name] = this.__events[name] || [];
 			this.__events[name].push({
@@ -176,7 +178,7 @@ var EventEmitter = go2d.EventEmitter = Class.extend({
 	 * 通过事件对象派发事件
 	 * @function emit
 	 * @param {string} name 事件名称
-	 * @param {go2d.Event} [event] 事件对象
+	 * @param {Event} [event] 事件对象
 	 * @return {this}
 	 */
 	/**

@@ -1,6 +1,6 @@
 {
   "name": "Go2d",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "repository": "git@github.com:Lanfei/Go2d.git",
   "author": "Lanfei <CooLanfei@163.com>",
   "description": "A lightweight HTML5 game engine",

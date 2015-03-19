@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="Go2d" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.6.5</em>
+            <em>API Docs for: 1.6.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -50,6 +50,7 @@
                                 <li><a href="../classes/ObjectPool.html">ObjectPool</a></li>
                                 <li><a href="../classes/ResizeEvent.html">ResizeEvent</a></li>
                                 <li><a href="../classes/ResourceLoader.html">ResourceLoader</a></li>
+                                <li><a href="../classes/ScrollEvent.html">ScrollEvent</a></li>
                                 <li><a href="../classes/ScrollView.html">ScrollView</a></li>
                                 <li><a href="../classes/Sprite.html">Sprite</a></li>
                                 <li><a href="../classes/Stage.html">Stage</a></li>
@@ -328,13 +329,13 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	 * 绘制子对象
 	 * @protected
 	 * @function _drawChild
-	 * @param {go2d.Sprite} child 要绘制的对象
+	 * @param {Sprite} child 要绘制的对象
 	 * @param {string} [blendMode] 混合模式
 	 * @return {this}
 	 */
 	_drawChild: function(child, blendMode) {
 		var ctx = this.context,
-			matrix = child.getTransform();
+			matrix = this.getChildTransform(child);
 
 		child.render();
 
@@ -373,7 +374,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			/**
 			 * 开始渲染事件
 			 * @event render
-			 * @param {go2d.Event} event 事件对象
+			 * @param {Event} event 事件对象
 			 */
 			this.emit(&#x27;render&#x27;, event);
 			if (!event.isDefaultPrevented()) {
@@ -420,7 +421,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 					/**
 					 * 触摸开始事件
 					 * @event touchstart
-					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 * @param {TouchEvent} event 触摸事件对象
 					 */
 					emit = true;
 					touches[identifier] = true;
@@ -431,7 +432,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 					/**
 					 * 触摸移动事件
 					 * @event touchmove
-					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 * @param {TouchEvent} event 触摸事件对象
 					 */
 					emit = true;
 				}
@@ -441,7 +442,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 					/**
 					 * 触摸结束事件
 					 * @event touchend
-					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 * @param {TouchEvent} event 触摸事件对象
 					 */
 					emit = true;
 					touches[identifier] = false;
@@ -452,7 +453,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 					/**
 					 * 触摸点击事件
 					 * @event touchtap
-					 * @param {go2d.TouchEvent} event 触摸事件对象
+					 * @param {TouchEvent} event 触摸事件对象
 					 */
 					emit = true;
 				}
@@ -466,7 +467,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 			for (var i = children.length - 1; i &gt;= 0; --i) {
 				var child = children[i];
 				if (child.visible &amp;&amp; child.touchable) {
-					var subLocalPos = child.getTransform().invert().multiply(touchPos),
+					var subLocalPos = this.getChildTransform(child).invert().multiply(touchPos),
 						subPos = subLocalPos.clone().subtract(child.getAnchor()),
 						subEvent = new TouchEvent(
 							type,
@@ -494,13 +495,13 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 触发添加到舞台事件，不建议外部调用
 	 * @function addedToStage
-	 * @param {go2d.Stage} stage 舞台对象
+	 * @param {Stage} stage 舞台对象
 	 */
 	addedToStage: function(stage) {
 		/**
 		 * 添加到舞台事件
 		 * @event addedtostage
-		 * @param {go2d.Stage} stage 舞台对象
+		 * @param {Stage} stage 舞台对象
 		 */
 		this.stage = stage;
 		this.emit(&#x27;addedtostage&#x27;, stage);
@@ -511,13 +512,13 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 触发移除出舞台事件，不建议外部调用
 	 * @function removedFromStage
-	 * @param {go2d.Stage} stage 舞台对象
+	 * @param {Stage} stage 舞台对象
 	 */
 	removedFromStage: function(stage) {
 		/**
 		 * 移除出舞台事件
 		 * @event removedfromstage
-		 * @param {go2d.Stage} stage 舞台对象
+		 * @param {Stage} stage 舞台对象
 		 */
 		this.stage = null;
 		this.emit(&#x27;removedfromstage&#x27;, stage);
@@ -538,6 +539,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		if (width === oldWidth &amp;&amp; height === oldHeight) {
 			return;
 		}
+
 		var event = new ResizeEvent({
 			width: oldWidth,
 			height: oldHeight
@@ -548,7 +550,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		/**
 		 * 宽高变化事件
 		 * @event resize
-		 * @param {go2d.ResizeEvent} event 宽高变化事件对象
+		 * @param {ResizeEvent} event 宽高变化事件对象
 		 */
 		this.emit(&#x27;resize&#x27;, event);
 		if (!event.isDefaultPrevented()) {
@@ -591,9 +593,17 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 		return this;
 	},
 	/**
+	 * 获取子对象变换矩阵
+	 * @param  {Sprite} child 子对象
+	 * @return {Matrix} 子对象变换矩阵
+	 */
+	getChildTransform: function(child) {
+		return child.getTransform();
+	},
+	/**
 	 * 添加子对象
 	 * @function addChild
-	 * @param {go2d.DisplayObject} child 要添加的子对象
+	 * @param {DisplayObject} child 要添加的子对象
 	 * @return {this}
 	 */
 	addChild: function(child) {
@@ -603,7 +613,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 在指定深度添加子对象
 	 * @function addChildAt
-	 * @param {go2d.DisplayObject} child 要添加的子对象
+	 * @param {DisplayObject} child 要添加的子对象
 	 * @param {number} index 深度，数值越小层级越低
 	 * @return {this}
 	 */
@@ -631,7 +641,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	 * 获取指定名字的子对象
 	 * @function getChildByName
 	 * @param {string} name 子对象名字
-	 * @return {go2d.DisplayObject} 对应的子对象
+	 * @return {DisplayObject} 对应的子对象
 	 */
 	getChildByName: function(name) {
 		var child;
@@ -662,7 +672,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	 * 获取指定深度的子对象
 	 * @function getChildAt
 	 * @param {number} index 子对象深度
-	 * @return {go2d.DisplayObject} 对应的子对象
+	 * @return {DisplayObject} 对应的子对象
 	 */
 	getChildAt: function(index) {
 		return this._children[index];
@@ -670,7 +680,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 获取指定子对象的深度
 	 * @function getChildIndex
-	 * @param {go2d.DisplayObject} child 对应的子对象
+	 * @param {DisplayObject} child 对应的子对象
 	 * @return {number} 子对象深度
 	 */
 	getChildIndex: function(child) {
@@ -685,8 +695,8 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 交换两个子对象的深度
 	 * @function swapChildren
-	 * @param {go2d.DisplayObject} child1 要交换的子对象一
-	 * @param {go2d.DisplayObject} child2 要交换的子对象二
+	 * @param {DisplayObject} child1 要交换的子对象一
+	 * @param {DisplayObject} child2 要交换的子对象二
 	 * @return {this}
 	 */
 	swapChildren: function(child1, child2) {
@@ -737,7 +747,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 移除指定的子对象
 	 * @function removeChild
-	 * @param {go2d.DisplayObject} child 对应的子对象
+	 * @param {DisplayObject} child 对应的子对象
 	 * @param {Boolean} cleanup 是否销毁子对象
 	 * @return {this}
 	 */
@@ -828,7 +838,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 设置遮罩对象
 	 * @function setMask
-	 * @param {go2d.Sprite} mask 遮罩对象
+	 * @param {Sprite} mask 遮罩对象
 	 * @return {this}
 	 */
 	setMask: function(mask) {
@@ -853,7 +863,7 @@ var DisplayObject = go2d.DisplayObject = EventEmitter.extend({
 	/**
 	 * 获取遮罩对象
 	 * @function getMask
-	 * @return {go2d.Sprite}
+	 * @return {Sprite}
 	 */
 	getMask: function() {
 		return this._mask;

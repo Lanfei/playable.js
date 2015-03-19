@@ -2,7 +2,7 @@
     "project": {
         "name": "Go2d",
         "description": "A lightweight HTML5 game engine",
-        "version": "1.6.5",
+        "version": "1.6.6",
         "url": "https://github.com/Lanfei/Go2d"
     },
     "files": {
@@ -92,6 +92,15 @@
             "modules": {},
             "classes": {
                 "ResizeEvent": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\event\\ScrollEvent.js": {
+            "name": "src\\event\\ScrollEvent.js",
+            "modules": {},
+            "classes": {
+                "ScrollEvent": 1
             },
             "fors": {},
             "namespaces": {}
@@ -218,6 +227,7 @@
                 "Event": 1,
                 "EventEmitter": 1,
                 "ResizeEvent": 1,
+                "ScrollEvent": 1,
                 "TouchEvent": 1,
                 "Matrix": 1,
                 "Vector": 1,
@@ -314,6 +324,10 @@
             "description": "滑动视图类，可以在该视图中显示超过视图大小的显示对象，并可以通过滑动来显示内容视图的不同部分。",
             "author": "Lanfei",
             "extends": "Sprite",
+            "todo": [
+                "嵌套优化",
+                "touchcancel"
+            ],
             "is_constructor": 1,
             "params": [
                 {
@@ -455,7 +469,7 @@
             "module": "go2d",
             "file": "src\\event\\ResizeEvent.js",
             "line": 1,
-            "description": "事件类，所有事件对象的基类。",
+            "description": "宽高变化事件类。",
             "author": "Lanfei",
             "extends": "Event",
             "is_constructor": 1,
@@ -490,6 +504,58 @@
                         {
                             "name": "height",
                             "description": "对象新高度",
+                            "type": "Number"
+                        }
+                    ]
+                }
+            ]
+        },
+        "ScrollEvent": {
+            "name": "ScrollEvent",
+            "shortname": "ScrollEvent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "go2d",
+            "file": "src\\event\\ScrollEvent.js",
+            "line": 1,
+            "description": "滑动距离变化事件类。",
+            "author": "Lanfei",
+            "extends": "Event",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "oldPos",
+                    "description": "对象原滑动距离",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "top",
+                            "description": "对象原水平方向滑动距离",
+                            "type": "Number"
+                        },
+                        {
+                            "name": "left",
+                            "description": "对象原垂直方向滑动距离",
+                            "type": "Number"
+                        }
+                    ]
+                },
+                {
+                    "name": "newPos",
+                    "description": "对象新滑动距离",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "top",
+                            "description": "对象新水平方向滑动距离",
+                            "type": "Number"
+                        },
+                        {
+                            "name": "left",
+                            "description": "对象新垂直方向滑动距离",
                             "type": "Number"
                         }
                     ]
@@ -810,12 +876,16 @@
             "description": "缓动动画控制类，负责处理显示对象的缓动动画。",
             "author": "Lanfei",
             "extends": "Class",
+            "todo": [
+                "缓动时间控制应依据全局还是对象？",
+                "代码结构有待整理"
+            ],
             "is_constructor": 1,
             "params": [
                 {
                     "name": "target",
                     "description": "动画应用对象",
-                    "type": "go2d.Sprite"
+                    "type": "Sprite"
                 },
                 {
                     "name": "options",
@@ -832,10 +902,6 @@
                         }
                     ]
                 }
-            ],
-            "todo": [
-                "缓动时间控制应依据全局还是对象？",
-                "代码结构有待整理"
             ]
         },
         "go2d": {
@@ -1129,7 +1195,7 @@
                 {
                     "name": "child",
                     "description": "要绘制的对象",
-                    "type": "go2d.Sprite"
+                    "type": "Sprite"
                 },
                 {
                     "name": "blendMode",
@@ -1166,7 +1232,7 @@
                 {
                     "name": "event",
                     "description": "事件对象",
-                    "type": "go2d.Event"
+                    "type": "Event"
                 }
             ],
             "class": "DisplayObject"
@@ -1215,7 +1281,7 @@
                 {
                     "name": "event",
                     "description": "触摸事件对象",
-                    "type": "go2d.TouchEvent"
+                    "type": "TouchEvent"
                 }
             ],
             "class": "DisplayObject"
@@ -1230,7 +1296,7 @@
                 {
                     "name": "event",
                     "description": "触摸事件对象",
-                    "type": "go2d.TouchEvent"
+                    "type": "TouchEvent"
                 }
             ],
             "class": "DisplayObject"
@@ -1245,7 +1311,7 @@
                 {
                     "name": "event",
                     "description": "触摸事件对象",
-                    "type": "go2d.TouchEvent"
+                    "type": "TouchEvent"
                 }
             ],
             "class": "DisplayObject"
@@ -1260,7 +1326,7 @@
                 {
                     "name": "event",
                     "description": "触摸事件对象",
-                    "type": "go2d.TouchEvent"
+                    "type": "TouchEvent"
                 }
             ],
             "class": "DisplayObject"
@@ -1275,7 +1341,7 @@
                 {
                     "name": "stage",
                     "description": "舞台对象",
-                    "type": "go2d.Stage"
+                    "type": "Stage"
                 }
             ],
             "class": "DisplayObject"
@@ -1290,7 +1356,7 @@
                 {
                     "name": "stage",
                     "description": "舞台对象",
-                    "type": "go2d.Stage"
+                    "type": "Stage"
                 }
             ],
             "class": "DisplayObject"
@@ -1305,7 +1371,7 @@
                 {
                     "name": "stage",
                     "description": "舞台对象",
-                    "type": "go2d.Stage"
+                    "type": "Stage"
                 }
             ],
             "class": "DisplayObject"
@@ -1320,7 +1386,7 @@
                 {
                     "name": "stage",
                     "description": "舞台对象",
-                    "type": "go2d.Stage"
+                    "type": "Stage"
                 }
             ],
             "class": "DisplayObject"
@@ -1351,7 +1417,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 447,
+            "line": 448,
             "description": "宽高变化事件",
             "itemtype": "event",
             "name": "resize",
@@ -1359,14 +1425,14 @@
                 {
                     "name": "event",
                     "description": "宽高变化事件对象",
-                    "type": "go2d.ResizeEvent"
+                    "type": "ResizeEvent"
                 }
             ],
             "class": "DisplayObject"
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 460,
+            "line": 461,
             "description": "获取锚点偏移",
             "itemtype": "method",
             "name": "getAnchor",
@@ -1378,7 +1444,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 471,
+            "line": 472,
             "description": "更新对象渲染状态，当对象的属性改变将影响其渲染结果时调用",
             "itemtype": "method",
             "name": "update",
@@ -1390,7 +1456,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 481,
+            "line": 482,
             "description": "更新父对象渲染状态，某些情况下，对象属性的改变并不影响本身的渲染，而只影响父元素的渲染，此时只需重新渲染父对象即可",
             "itemtype": "method",
             "name": "update",
@@ -1402,7 +1468,24 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 492,
+            "line": 493,
+            "description": "获取子对象变换矩阵",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "子对象",
+                    "type": "Sprite"
+                }
+            ],
+            "return": {
+                "description": "子对象变换矩阵",
+                "type": "Matrix"
+            },
+            "class": "DisplayObject"
+        },
+        {
+            "file": "src\\display\\DisplayObject.js",
+            "line": 501,
             "description": "添加子对象",
             "itemtype": "method",
             "name": "addChild",
@@ -1410,7 +1493,7 @@
                 {
                     "name": "child",
                     "description": "要添加的子对象",
-                    "type": "go2d.DisplayObject"
+                    "type": "DisplayObject"
                 }
             ],
             "return": {
@@ -1421,7 +1504,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 502,
+            "line": 511,
             "description": "在指定深度添加子对象",
             "itemtype": "method",
             "name": "addChildAt",
@@ -1429,7 +1512,7 @@
                 {
                     "name": "child",
                     "description": "要添加的子对象",
-                    "type": "go2d.DisplayObject"
+                    "type": "DisplayObject"
                 },
                 {
                     "name": "index",
@@ -1445,7 +1528,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 529,
+            "line": 538,
             "description": "获取指定名字的子对象",
             "itemtype": "method",
             "name": "getChildByName",
@@ -1458,13 +1541,13 @@
             ],
             "return": {
                 "description": "对应的子对象",
-                "type": "go2d.DisplayObject"
+                "type": "DisplayObject"
             },
             "class": "DisplayObject"
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 545,
+            "line": 554,
             "description": "获取指定标签的子对象",
             "itemtype": "method",
             "name": "getChildrenByTag",
@@ -1483,7 +1566,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 560,
+            "line": 569,
             "description": "获取指定深度的子对象",
             "itemtype": "method",
             "name": "getChildAt",
@@ -1496,13 +1579,13 @@
             ],
             "return": {
                 "description": "对应的子对象",
-                "type": "go2d.DisplayObject"
+                "type": "DisplayObject"
             },
             "class": "DisplayObject"
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 569,
+            "line": 578,
             "description": "获取指定子对象的深度",
             "itemtype": "method",
             "name": "getChildIndex",
@@ -1510,7 +1593,7 @@
                 {
                     "name": "child",
                     "description": "对应的子对象",
-                    "type": "go2d.DisplayObject"
+                    "type": "DisplayObject"
                 }
             ],
             "return": {
@@ -1521,7 +1604,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 584,
+            "line": 593,
             "description": "交换两个子对象的深度",
             "itemtype": "method",
             "name": "swapChildren",
@@ -1529,12 +1612,12 @@
                 {
                     "name": "child1",
                     "description": "要交换的子对象一",
-                    "type": "go2d.DisplayObject"
+                    "type": "DisplayObject"
                 },
                 {
                     "name": "child2",
                     "description": "要交换的子对象二",
-                    "type": "go2d.DisplayObject"
+                    "type": "DisplayObject"
                 }
             ],
             "return": {
@@ -1545,7 +1628,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 599,
+            "line": 608,
             "description": "交换两个子对象的深度",
             "itemtype": "method",
             "name": "swapChildrenAt",
@@ -1569,7 +1652,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 618,
+            "line": 627,
             "description": "排列子对象",
             "itemtype": "method",
             "name": "sortChildren",
@@ -1588,7 +1671,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 628,
+            "line": 637,
             "description": "获取所有子对象",
             "itemtype": "method",
             "name": "getAllChildren",
@@ -1600,7 +1683,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 636,
+            "line": 645,
             "description": "移除指定的子对象",
             "itemtype": "method",
             "name": "removeChild",
@@ -1608,7 +1691,7 @@
                 {
                     "name": "child",
                     "description": "对应的子对象",
-                    "type": "go2d.DisplayObject"
+                    "type": "DisplayObject"
                 },
                 {
                     "name": "cleanup",
@@ -1624,7 +1707,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 652,
+            "line": 661,
             "description": "移除指定深度的子对象",
             "itemtype": "method",
             "name": "removeChildAt",
@@ -1648,7 +1731,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 674,
+            "line": 683,
             "description": "移除指定名字的子对象",
             "itemtype": "method",
             "name": "removeChildrenByName",
@@ -1672,7 +1755,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 691,
+            "line": 700,
             "description": "移除指定标签的子对象",
             "itemtype": "method",
             "name": "removeChildrenByTag",
@@ -1696,7 +1779,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 707,
+            "line": 716,
             "description": "移除所有子对象",
             "itemtype": "method",
             "name": "removeAllChildren",
@@ -1715,7 +1798,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 727,
+            "line": 736,
             "description": "设置遮罩对象",
             "itemtype": "method",
             "name": "setMask",
@@ -1723,7 +1806,7 @@
                 {
                     "name": "mask",
                     "description": "遮罩对象",
-                    "type": "go2d.Sprite"
+                    "type": "Sprite"
                 }
             ],
             "return": {
@@ -1734,19 +1817,19 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 752,
+            "line": 761,
             "description": "获取遮罩对象",
             "itemtype": "method",
             "name": "getMask",
             "return": {
                 "description": "",
-                "type": "go2d.Sprite"
+                "type": "Sprite"
             },
             "class": "DisplayObject"
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 760,
+            "line": 769,
             "description": "移除遮罩对象",
             "itemtype": "method",
             "name": "removeMask",
@@ -1765,7 +1848,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 775,
+            "line": 784,
             "description": "开始该对象的帧播放",
             "itemtype": "method",
             "name": "play",
@@ -1777,7 +1860,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 784,
+            "line": 793,
             "description": "暂停该对象的帧播放",
             "itemtype": "method",
             "name": "pause",
@@ -1789,7 +1872,7 @@
         },
         {
             "file": "src\\display\\DisplayObject.js",
-            "line": 793,
+            "line": 802,
             "description": "释放对象内存",
             "itemtype": "method",
             "name": "dispose",
@@ -1827,7 +1910,7 @@
         },
         {
             "file": "src\\display\\ScrollView.js",
-            "line": 15,
+            "line": 16,
             "description": "内容对象",
             "access": "protected",
             "tagname": "",
@@ -1838,7 +1921,7 @@
         },
         {
             "file": "src\\display\\ScrollView.js",
-            "line": 30,
+            "line": 27,
             "description": "纵向滑动距离",
             "itemtype": "property",
             "name": "scrollTop",
@@ -1848,7 +1931,7 @@
         },
         {
             "file": "src\\display\\ScrollView.js",
-            "line": 45,
+            "line": 42,
             "description": "横向滑动距离",
             "itemtype": "property",
             "name": "scrollLeft",
@@ -1858,15 +1941,70 @@
         },
         {
             "file": "src\\display\\ScrollView.js",
-            "line": 114,
-            "description": "触摸移动事件",
-            "itemtype": "event",
-            "name": "scroll",
+            "line": 95,
+            "description": "在原有基础上滑动指定距离",
+            "itemtype": "method",
+            "name": "scrollBy",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "水平滑动距离",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "垂直滑动距离",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
             "class": "ScrollView"
         },
         {
             "file": "src\\display\\ScrollView.js",
-            "line": 151,
+            "line": 105,
+            "description": "设置滑动距离",
+            "itemtype": "method",
+            "name": "scrollTo",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "水平滑动距离",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "垂直滑动距离",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "ScrollView"
+        },
+        {
+            "file": "src\\display\\ScrollView.js",
+            "line": 126,
+            "description": "滑动距离变化事件",
+            "itemtype": "event",
+            "name": "scroll",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "滑动距离变化事件对象",
+                    "type": "ScrollEvent"
+                }
+            ],
+            "class": "ScrollView"
+        },
+        {
+            "file": "src\\display\\ScrollView.js",
+            "line": 146,
             "description": "设置滚动视图的内容对象",
             "itemtype": "method",
             "name": "setContent",
@@ -1885,7 +2023,7 @@
         },
         {
             "file": "src\\display\\ScrollView.js",
-            "line": 164,
+            "line": 159,
             "description": "获取滚动视图的内容对象",
             "itemtype": "method",
             "name": "getContent",
@@ -1897,7 +2035,7 @@
         },
         {
             "file": "src\\display\\ScrollView.js",
-            "line": 172,
+            "line": 167,
             "description": "移除滚动视图的内容对象",
             "itemtype": "method",
             "name": "removeContent",
@@ -2024,7 +2162,7 @@
             "name": "getTransform",
             "return": {
                 "description": "仿射变换矩阵",
-                "type": "go2d.Matrix"
+                "type": "Matrix"
             },
             "class": "Sprite"
         },
@@ -2417,7 +2555,7 @@
         },
         {
             "file": "src\\event\\EventEmitter.js",
-            "line": 51,
+            "line": 52,
             "description": "移除事件侦听器",
             "itemtype": "method",
             "name": "off",
@@ -2448,7 +2586,7 @@
         },
         {
             "file": "src\\event\\EventEmitter.js",
-            "line": 74,
+            "line": 75,
             "description": "通过事件对象派发事件",
             "itemtype": "method",
             "name": "emit",
@@ -2461,7 +2599,7 @@
                 {
                     "name": "event",
                     "description": "事件对象",
-                    "type": "go2d.Event",
+                    "type": "Event",
                     "optional": true
                 }
             ],
@@ -2473,7 +2611,7 @@
         },
         {
             "file": "src\\event\\EventEmitter.js",
-            "line": 81,
+            "line": 82,
             "description": "通过任意事件参数派发事件",
             "itemtype": "method",
             "name": "emit",
@@ -2498,7 +2636,7 @@
         },
         {
             "file": "src\\event\\EventEmitter.js",
-            "line": 103,
+            "line": 104,
             "description": "释放事件派发器内存",
             "itemtype": "method",
             "name": "dispose",
@@ -2532,6 +2670,38 @@
                 {
                     "name": "height",
                     "description": "对象新高度",
+                    "type": "Number"
+                }
+            ]
+        },
+        {
+            "file": "src\\event\\ScrollEvent.js",
+            "line": 19,
+            "description": "对象原滑动距离",
+            "itemtype": "property",
+            "name": "{number} top 对象原水平方向滑动距离",
+            "type": "Object",
+            "class": "ScrollEvent",
+            "subprops": [
+                {
+                    "name": "left",
+                    "description": "对象原垂直方向滑动距离",
+                    "type": "Number"
+                }
+            ]
+        },
+        {
+            "file": "src\\event\\ScrollEvent.js",
+            "line": 28,
+            "description": "对象新滑动距离",
+            "itemtype": "property",
+            "name": "{number} top 对象新水平方向滑动距离",
+            "type": "Object",
+            "class": "ScrollEvent",
+            "subprops": [
+                {
+                    "name": "left",
+                    "description": "对象新垂直方向滑动距离",
                     "type": "Number"
                 }
             ]
@@ -2763,7 +2933,7 @@
                 {
                     "name": "matrix",
                     "description": "前置矩阵",
-                    "type": "go2d.Matrix"
+                    "type": "Matrix"
                 }
             ],
             "itemtype": "method",
@@ -2782,7 +2952,7 @@
                 {
                     "name": "matrix",
                     "description": "后置矩阵",
-                    "type": "go2d.Matrix"
+                    "type": "Matrix"
                 }
             ],
             "itemtype": "method",
@@ -2803,12 +2973,12 @@
                 {
                     "name": "vector",
                     "description": "变换前的向量",
-                    "type": "go2d.Vector"
+                    "type": "Vector"
                 }
             ],
             "return": {
                 "description": "变换后的向量",
-                "type": "go2d.Vector"
+                "type": "Vector"
             },
             "class": "Matrix"
         },
@@ -2906,18 +3076,49 @@
         {
             "file": "src\\math\\Matrix.js",
             "line": 212,
-            "description": "创建当前矩阵的克隆对象",
+            "description": "判断两个矩阵是否相等",
             "itemtype": "method",
-            "name": "clone",
+            "name": "equals",
+            "params": [
+                {
+                    "name": "matrix",
+                    "description": "另一个向量",
+                    "type": "Vector"
+                }
+            ],
             "return": {
-                "description": "当前矩阵的克隆对象",
-                "type": "go2d.Matrix"
+                "description": "是否相等",
+                "type": "Boolean"
             },
             "class": "Matrix"
         },
         {
             "file": "src\\math\\Matrix.js",
             "line": 224,
+            "description": "创建当前矩阵的克隆对象",
+            "itemtype": "method",
+            "name": "clone",
+            "return": {
+                "description": "当前矩阵的克隆对象",
+                "type": "Matrix"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 232,
+            "description": "将矩阵转换为数组",
+            "itemtype": "method",
+            "name": "toArray",
+            "return": {
+                "description": "转换后的数组",
+                "type": "Array"
+            },
+            "class": "Matrix"
+        },
+        {
+            "file": "src\\math\\Matrix.js",
+            "line": 241,
             "description": "角度制、弧度制换算比例",
             "itemtype": "property",
             "name": "DEG_TO_RAD",
@@ -2974,7 +3175,7 @@
                 {
                     "name": "vector",
                     "description": "要相加的向量",
-                    "type": "go2d.Vector"
+                    "type": "Vector"
                 }
             ],
             "return": {
@@ -2993,7 +3194,7 @@
                 {
                     "name": "vector",
                     "description": "要相减的向量",
-                    "type": "go2d.Vector"
+                    "type": "Vector"
                 }
             ],
             "return": {
@@ -3012,7 +3213,7 @@
                 {
                     "name": "vector",
                     "description": "要除以的向量",
-                    "type": "go2d.Vector"
+                    "type": "Vector"
                 }
             ],
             "return": {
@@ -3031,7 +3232,7 @@
                 {
                     "name": "vector",
                     "description": "要点乘的向量",
-                    "type": "go2d.Vector"
+                    "type": "Vector"
                 }
             ],
             "return": {
@@ -3055,6 +3256,18 @@
         {
             "file": "src\\math\\Vector.js",
             "line": 107,
+            "description": "向量反向",
+            "itemtype": "method",
+            "name": "negate",
+            "return": {
+                "description": "",
+                "type": "This"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 117,
             "description": "向量缩放",
             "itemtype": "method",
             "name": "scale",
@@ -3078,7 +3291,7 @@
         },
         {
             "file": "src\\math\\Vector.js",
-            "line": 119,
+            "line": 129,
             "description": "向量缩放",
             "itemtype": "method",
             "name": "rotate",
@@ -3097,7 +3310,7 @@
         },
         {
             "file": "src\\math\\Vector.js",
-            "line": 132,
+            "line": 142,
             "description": "求向量与水平方向的夹角",
             "itemtype": "method",
             "name": "angle",
@@ -3109,15 +3322,15 @@
         },
         {
             "file": "src\\math\\Vector.js",
-            "line": 140,
+            "line": 150,
             "description": "求与另一个向量之间的距离",
             "itemtype": "method",
             "name": "distance",
             "params": [
                 {
                     "name": "vector",
-                    "description": "要求距离的向量",
-                    "type": "go2d.Vector"
+                    "description": "另一个向量",
+                    "type": "Vector"
                 }
             ],
             "return": {
@@ -3128,13 +3341,44 @@
         },
         {
             "file": "src\\math\\Vector.js",
-            "line": 149,
+            "line": 159,
+            "description": "判断两个向量是否相等",
+            "itemtype": "method",
+            "name": "equals",
+            "params": [
+                {
+                    "name": "vector",
+                    "description": "另一个向量",
+                    "type": "Vector"
+                }
+            ],
+            "return": {
+                "description": "是否相等",
+                "type": "Boolean"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 168,
             "description": "创建当前向量的克隆对象",
             "itemtype": "method",
             "name": "clone",
             "return": {
                 "description": "当前向量的克隆对象",
-                "type": "go2d.Vector"
+                "type": "Vector"
+            },
+            "class": "Vector"
+        },
+        {
+            "file": "src\\math\\Vector.js",
+            "line": 176,
+            "description": "将向量转换为数组",
+            "itemtype": "method",
+            "name": "toArray",
+            "return": {
+                "description": "转换后的数组",
+                "type": "Array"
             },
             "class": "Vector"
         },
@@ -4413,7 +4657,7 @@
             "tagname": "",
             "itemtype": "property",
             "name": "_target",
-            "type": "{go2d.Sprite}",
+            "type": "{Sprite}",
             "class": "Tween"
         },
         {
@@ -4714,35 +4958,31 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:460"
+            "line": " src\\display\\DisplayObject.js:461"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:471"
+            "line": " src\\display\\DisplayObject.js:472"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:481"
+            "line": " src\\display\\DisplayObject.js:482"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:492"
+            "line": " src\\display\\DisplayObject.js:501"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:502"
+            "line": " src\\display\\DisplayObject.js:511"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:529"
+            "line": " src\\display\\DisplayObject.js:538"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:545"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:560"
+            "line": " src\\display\\DisplayObject.js:554"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4750,55 +4990,55 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:584"
+            "line": " src\\display\\DisplayObject.js:578"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:599"
+            "line": " src\\display\\DisplayObject.js:593"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:618"
+            "line": " src\\display\\DisplayObject.js:608"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:628"
+            "line": " src\\display\\DisplayObject.js:627"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:636"
+            "line": " src\\display\\DisplayObject.js:637"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:652"
+            "line": " src\\display\\DisplayObject.js:645"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:674"
+            "line": " src\\display\\DisplayObject.js:661"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:691"
+            "line": " src\\display\\DisplayObject.js:683"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:707"
+            "line": " src\\display\\DisplayObject.js:700"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:727"
+            "line": " src\\display\\DisplayObject.js:716"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:752"
+            "line": " src\\display\\DisplayObject.js:736"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:760"
+            "line": " src\\display\\DisplayObject.js:761"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\DisplayObject.js:775"
+            "line": " src\\display\\DisplayObject.js:769"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4810,19 +5050,31 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\DisplayObject.js:802"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
             "line": " src\\display\\ImageView.js:31"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\ScrollView.js:151"
+            "line": " src\\display\\ScrollView.js:95"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\ScrollView.js:164"
+            "line": " src\\display\\ScrollView.js:105"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\display\\ScrollView.js:172"
+            "line": " src\\display\\ScrollView.js:146"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\ScrollView.js:159"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\display\\ScrollView.js:167"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4866,19 +5118,19 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventEmitter.js:51"
+            "line": " src\\event\\EventEmitter.js:52"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventEmitter.js:74"
+            "line": " src\\event\\EventEmitter.js:75"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventEmitter.js:81"
+            "line": " src\\event\\EventEmitter.js:82"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\event\\EventEmitter.js:103"
+            "line": " src\\event\\EventEmitter.js:104"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -4926,6 +5178,14 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:224"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Matrix.js:232"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
             "line": " src\\math\\Vector.js:28"
         },
         {
@@ -4954,19 +5214,31 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\math\\Vector.js:119"
+            "line": " src\\math\\Vector.js:117"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\math\\Vector.js:132"
+            "line": " src\\math\\Vector.js:129"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\math\\Vector.js:140"
+            "line": " src\\math\\Vector.js:142"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src\\math\\Vector.js:149"
+            "line": " src\\math\\Vector.js:150"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:159"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:168"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src\\math\\Vector.js:176"
         },
         {
             "message": "replacing incorrect tag: function with method",
@@ -5227,6 +5499,10 @@
         {
             "message": "unknown tag: ignore",
             "line": " src\\util\\lang.js:1"
+        },
+        {
+            "message": "Missing item type\n获取子对象变换矩阵",
+            "line": " src\\display\\DisplayObject.js:493"
         },
         {
             "message": "Missing item type\n获取类型判断函数",

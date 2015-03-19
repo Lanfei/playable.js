@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ResizeEvent - Go2d</title>
+    <title>ScrollEvent - Go2d</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -96,7 +96,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>ResizeEvent Class</h1>
+<h1>ScrollEvent Class</h1>
 <div class="box meta">
 
         <div class="extends">
@@ -104,7 +104,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_event_ResizeEvent.js.html#l1"><code>src\event\ResizeEvent.js:1</code></a>
+            Defined in: <a href="../files/src_event_ScrollEvent.js.html#l1"><code>src\event\ScrollEvent.js:1</code></a>
         </div>
 
             Module: <a href="../modules/go2d.html">go2d</a>
@@ -113,22 +113,22 @@
 
 
 <div class="box intro">
-    <p>宽高变化事件类。</p>
+    <p>滑动距离变化事件类。</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_ResizeEvent" class="method item">
-            <h3 class="name"><code>ResizeEvent</code></h3>
+        <div id="method_ScrollEvent" class="method item">
+            <h3 class="name"><code>ScrollEvent</code></h3>
         
                 <div class="args">
                     <span class="paren">(</span><ul class="args-list inline commas">
                         <li class="arg">
-                                <code>oldSize</code>
+                                <code>oldPos</code>
                         </li>
                         <li class="arg">
-                                <code>newSize</code>
+                                <code>newPos</code>
                         </li>
                     </ul><span class="paren">)</span>
                 </div>
@@ -143,7 +143,7 @@
             <div class="meta">
                         <p>
                         Defined in
-                <a href="../files/src_event_ResizeEvent.js.html#l1"><code>src\event\ResizeEvent.js:1</code></a>
+                <a href="../files/src_event_ScrollEvent.js.html#l1"><code>src\event\ScrollEvent.js:1</code></a>
                 </p>
         
         
@@ -159,32 +159,32 @@
         
                     <ul class="params-list">
                         <li class="param">
-                                <code class="param-name">oldSize</code>
+                                <code class="param-name">oldPos</code>
                                 <span class="type">Object</span>
         
         
                             <div class="param-description">
-                                <p>对象原宽高</p>
+                                <p>对象原滑动距离</p>
         
                             </div>
         
                                 <ul class="params-list">
                                     <li class="param">
-                                            <code class="param-name">width</code>
+                                            <code class="param-name">top</code>
                                             <span class="type">Number</span>
         
                                         <div class="param-description">
-                                            <p>对象原宽度</p>
+                                            <p>对象原水平方向滑动距离</p>
         
                                         </div>
         
                                     </li>
                                     <li class="param">
-                                            <code class="param-name">height</code>
+                                            <code class="param-name">left</code>
                                             <span class="type">Number</span>
         
                                         <div class="param-description">
-                                            <p>对象原高度</p>
+                                            <p>对象原垂直方向滑动距离</p>
         
                                         </div>
         
@@ -192,32 +192,32 @@
                                 </ul>
                         </li>
                         <li class="param">
-                                <code class="param-name">newSize</code>
+                                <code class="param-name">newPos</code>
                                 <span class="type">Object</span>
         
         
                             <div class="param-description">
-                                <p>对象新宽高</p>
+                                <p>对象新滑动距离</p>
         
                             </div>
         
                                 <ul class="params-list">
                                     <li class="param">
-                                            <code class="param-name">width</code>
+                                            <code class="param-name">top</code>
                                             <span class="type">Number</span>
         
                                         <div class="param-description">
-                                            <p>对象新宽度</p>
+                                            <p>对象新水平方向滑动距离</p>
         
                                         </div>
         
                                     </li>
                                     <li class="param">
-                                            <code class="param-name">height</code>
+                                            <code class="param-name">left</code>
                                             <span class="type">Number</span>
         
                                         <div class="param-description">
-                                            <p>对象新高度</p>
+                                            <p>对象新垂直方向滑动距离</p>
         
                                         </div>
         
@@ -284,11 +284,11 @@
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_{number} width 对象原宽度">{number} width 对象原宽度</a>
+                                <a href="#property_{number} top 对象原水平方向滑动距离">{number} top 对象原水平方向滑动距离</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_{number} width 对象新宽度">{number} width 对象新宽度</a>
+                                <a href="#property_{number} top 对象新水平方向滑动距离">{number} top 对象新水平方向滑动距离</a>
 
                             </li>
                     </ul>
@@ -546,8 +546,8 @@
                     
                     
                     </div>
-                    <div id="property_{number} width 对象原宽度" class="property item">
-                        <h3 class="name"><code>{number} width 对象原宽度</code></h3>
+                    <div id="property_{number} top 对象原水平方向滑动距离" class="property item">
+                        <h3 class="name"><code>{number} top 对象原水平方向滑动距离</code></h3>
                         <span class="type">Object</span>
                     
                     
@@ -557,14 +557,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_ResizeEvent.js.html#l19"><code>src\event\ResizeEvent.js:19</code></a>
+                            <a href="../files/src_event_ScrollEvent.js.html#l19"><code>src\event\ScrollEvent.js:19</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>对象原宽高</p>
+                            <p>对象原滑动距离</p>
                     
                         </div>
                     
@@ -574,19 +574,19 @@
                     
                             <ul class="params-list">
                                 <li class="param">
-                                        <code class="param-name">height</code>
+                                        <code class="param-name">left</code>
                                         <span class="type">Number</span>
                     
                                     <div class="param-description">
-                                        <p>对象原高度</p>
+                                        <p>对象原垂直方向滑动距离</p>
                     
                                     </div>
                     
                                 </li>
                             </ul>
                     </div>
-                    <div id="property_{number} width 对象新宽度" class="property item">
-                        <h3 class="name"><code>{number} width 对象新宽度</code></h3>
+                    <div id="property_{number} top 对象新水平方向滑动距离" class="property item">
+                        <h3 class="name"><code>{number} top 对象新水平方向滑动距离</code></h3>
                         <span class="type">Object</span>
                     
                     
@@ -596,14 +596,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_event_ResizeEvent.js.html#l28"><code>src\event\ResizeEvent.js:28</code></a>
+                            <a href="../files/src_event_ScrollEvent.js.html#l28"><code>src\event\ScrollEvent.js:28</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>对象新宽高</p>
+                            <p>对象新滑动距离</p>
                     
                         </div>
                     
@@ -613,11 +613,11 @@
                     
                             <ul class="params-list">
                                 <li class="param">
-                                        <code class="param-name">height</code>
+                                        <code class="param-name">left</code>
                                         <span class="type">Number</span>
                     
                                     <div class="param-description">
-                                        <p>对象新高度</p>
+                                        <p>对象新垂直方向滑动距离</p>
                     
                                     </div>
                     

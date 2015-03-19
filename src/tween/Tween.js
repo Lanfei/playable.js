@@ -3,13 +3,13 @@
  * @author Lanfei
  * @class Tween
  * @extends Class
- *
- * @constructor
- * @param {go2d.Sprite} target 动画应用对象
- * @param {Object} [options] 配置参数
- * @param {Object} [options.loops=1] 循环次数，为 0 时无限循环
  * @todo 缓动时间控制应依据全局还是对象？
  * @todo 代码结构有待整理
+ *
+ * @constructor
+ * @param {Sprite} target 动画应用对象
+ * @param {Object} [options] 配置参数
+ * @param {Object} [options.loops=1] 循环次数，为 0 时无限循环
  */
 var Tween = go2d.Tween = Class.extend({
 	__init: function(target, options) {
@@ -27,7 +27,7 @@ var Tween = go2d.Tween = Class.extend({
 		 * 动画应用对象
 		 * @protected
 		 * @property _target
-		 * @type {go2d.Sprite}
+		 * @type {Sprite}
 		 */
 		this._target = target;
 
