@@ -156,6 +156,7 @@ var TextField = go2d.TextField = Sprite.extend({
 				set: function(value) {
 					if (properties[key] !== value) {
 						properties[key] = value;
+						this._updateContext();
 						this.update();
 					}
 				},
@@ -295,7 +296,6 @@ var TextField = go2d.TextField = Sprite.extend({
 	},
 	_onRender: function() {
 		var lines = this._splitLines();
-		this._updateContext();
 		if (this.autoResize) {
 			var range = this._getTextRange(lines);
 			this.width = Math.min(range.width, this.maxWidth) + this.paddingLeft + this.paddingRight;

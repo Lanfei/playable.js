@@ -176,17 +176,17 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	},
 	addChildAt: function(child) {
 		this.setContent(child);
-		console.error('NotSupportError: Please use `setConent` instead.');
+		console.info('NotSupport: Please use `setConent` instead.');
 		return this;
 	},
 	removeChildAt: function(index, cleanup) {
 		this.removeContent(cleanup);
-		console.error('NotSupportError: Please use `removeConent` instead.');
+		console.info('NotSupport: Please use `removeConent` instead.');
 		return this;
 	},
 	removeAllChildren: function(cleanup) {
 		this.removeContent(cleanup);
-		console.error('NotSupportError: Please use `removeConent` instead.');
+		console.info('NotSupport: Please use `removeConent` instead.');
 		return this;
 	}
 });

@@ -3539,17 +3539,17 @@ var ScrollView = go2d.ScrollView = Sprite.extend({
 	},
 	addChildAt: function(child) {
 		this.setContent(child);
-		console.error('NotSupportError: Please use `setConent` instead.');
+		console.info('NotSupport: Please use `setConent` instead.');
 		return this;
 	},
 	removeChildAt: function(index, cleanup) {
 		this.removeContent(cleanup);
-		console.error('NotSupportError: Please use `removeConent` instead.');
+		console.info('NotSupport: Please use `removeConent` instead.');
 		return this;
 	},
 	removeAllChildren: function(cleanup) {
 		this.removeContent(cleanup);
-		console.error('NotSupportError: Please use `removeConent` instead.');
+		console.info('NotSupport: Please use `removeConent` instead.');
 		return this;
 	}
 });
@@ -3711,6 +3711,7 @@ var TextField = go2d.TextField = Sprite.extend({
 				set: function(value) {
 					if (properties[key] !== value) {
 						properties[key] = value;
+						this._updateContext();
 						this.update();
 					}
 				},
@@ -3850,7 +3851,6 @@ var TextField = go2d.TextField = Sprite.extend({
 	},
 	_onRender: function() {
 		var lines = this._splitLines();
-		this._updateContext();
 		if (this.autoResize) {
 			var range = this._getTextRange(lines);
 			this.width = Math.min(range.width, this.maxWidth) + this.paddingLeft + this.paddingRight;

@@ -2362,7 +2362,7 @@
         },
         {
             "file": "src\\display\\TextField.js",
-            "line": 168,
+            "line": 169,
             "description": "文字渲染的宽高",
             "itemtype": "property",
             "name": "textRange",
@@ -2371,7 +2371,7 @@
         },
         {
             "file": "src\\display\\TextField.js",
-            "line": 180,
+            "line": 181,
             "description": "文字渲染的宽度",
             "itemtype": "property",
             "name": "textWidth",
@@ -2380,7 +2380,7 @@
         },
         {
             "file": "src\\display\\TextField.js",
-            "line": 192,
+            "line": 193,
             "description": "文字渲染的高度",
             "itemtype": "property",
             "name": "textHeight",
@@ -2389,7 +2389,7 @@
         },
         {
             "file": "src\\display\\TextField.js",
-            "line": 204,
+            "line": 205,
             "description": "要显示的文字",
             "itemtype": "property",
             "name": "text",
