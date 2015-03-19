@@ -115,7 +115,9 @@ var Class = go2d.Class = function() {};
  * @return {function} 新类的构造函数
  */
 Class.extend = function(props, statics) {
-	var superProto = this.prototype;
+	var fnTest = /\bthis\._super\(/,
+		superProto = this.prototype,
+		prototype = Object.create(superProto);
 
 	function Class() {
 		if (isFunction(this.__init)) {
@@ -123,7 +125,7 @@ Class.extend = function(props, statics) {
 		}
 	}
 
-	Class.prototype = Object.create(superProto);
+	Class.prototype = prototype;
 	Class.prototype.constructor = Class;
 	Class.extend = go2d.Class.extend;
 
@@ -131,18 +133,18 @@ Class.extend = function(props, statics) {
 		var desc = Object.getOwnPropertyDescriptor(props, key);
 		// Extend Getter/Setter
 		if (desc.get || desc.set) {
-			Object.defineProperty(Class.prototype, key, desc);
+			Object.defineProperty(prototype, key, desc);
 		} else {
-			if (isFunction(value) && /\bthis\._super\(/.test(value)) {
+			if (isFunction(value) && fnTest.test(value)) {
 				var fn = value;
-				Class.prototype[key] = function() {
+				prototype[key] = function() {
 					this._super = superProto[key];
 					var ret = fn.apply(this, arguments);
 					this._super = superProto;
 					return ret;
 				};
 			} else {
-				Class.prototype[key] = value;
+				prototype[key] = value;
 			}
 		}
 	});
