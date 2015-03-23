@@ -110,7 +110,7 @@ var Director = go2d.Director = EventEmitter.extend({
 			deltaTime = now - this._lastTime;
 			this.fps = Math.round(1000 / deltaTime);
 		} else {
-			deltaTime = 1000 / 60;
+			deltaTime = Math.round(1000 / 60);
 			this.fps = 60;
 		}
 		this._lastTime = now;

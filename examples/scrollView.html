@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ScrollView</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Don't Touch White Tile - The Dress</title>
+
+</head>
+<body>
+	<canvas id="stage"></canvas>
+	<script src="../dist/go2d.js"></script>
+	<script>
+	var stage = new go2d.Stage('stage');
+	stage.name = 'stage';
+	stage.width = 360;
+	stage.height = 360;
+
+	var content = new go2d.TextField('This is a scroll view.\nThis is a scroll view.');
+	content.fontSize = 60;
+	content.maxWidth = 300;
+	content.autoResize = true;
+
+	var scrollView = new go2d.ScrollView(content);
+	scrollView.width = 200;
+	scrollView.height = 200;
+	scrollView.background = '#0099ff';
+	stage.addChild(scrollView);
+
+	</script>
+</body>
+</html>
