@@ -252,6 +252,8 @@ export default class TextView extends DisplayObject {
 		let y = 0;
 		let width = this.width;
 		let height = this.height;
+		let anchorX = this.anchorX;
+		let anchorY = this.anchorY;
 		let ctx = this.$context;
 		let lines = this.$lines;
 		let color = this.$color;
@@ -259,20 +261,24 @@ export default class TextView extends DisplayObject {
 		let textAlign = this.$textAlign;
 		let verticalAlign = this.$verticalAlign;
 		let lineHeight = this.$lineHeight;
-		let pixelRatio = this.$pixelRatio;
 		let strokeSize = this.$strokeSize;
 		let strokeColor = this.$strokeColor;
+		let pixelRatio = this.$pixelRatio;
 		super.$render();
 		this.$updateContext();
 		if (textAlign === 'center') {
-			x = width * pixelRatio / 2;
+			x = width * pixelRatio / 2 - anchorX * pixelRatio;
 		} else if (textAlign === 'right') {
-			x = width * pixelRatio;
+			x = width * pixelRatio - anchorX * pixelRatio;
+		} else {
+			x = -anchorX * pixelRatio;
 		}
 		if (verticalAlign === 'middle') {
-			y = (height - fontSize * lineHeight * lines.length) * pixelRatio / 2;
+			y = (height - fontSize * lineHeight * lines.length) * pixelRatio / 2 - anchorY * pixelRatio;
 		} else if (verticalAlign === 'bottom') {
-			y = (height - fontSize * lineHeight * lines.length) * pixelRatio;
+			y = (height - fontSize * lineHeight * lines.length) * pixelRatio - anchorY * pixelRatio;
+		} else {
+			y = -anchorY * pixelRatio;
 		}
 		for (let line of lines) {
 			if (color) {

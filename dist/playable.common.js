@@ -1204,6 +1204,7 @@ var DisplayObject = /** @class */ (function (_super) {
     };
     return DisplayObject;
 }(EventEmitter));
+//# sourceMappingURL=DisplayObject.js.map
 
 var Media = /** @class */ (function (_super) {
     __extends(Media, _super);
@@ -1845,8 +1846,9 @@ var ImageView = /** @class */ (function (_super) {
         var image = this.$image;
         var ctx = this.$context;
         var canvas = this.$canvas;
-        var anchorX = this.$anchorX;
-        var anchorY = this.$anchorY;
+        var pixelRatio = this.$pixelRatio;
+        var anchorX = this.$anchorX * pixelRatio;
+        var anchorY = this.$anchorY * pixelRatio;
         ctx.drawImage(image.element, -anchorX, -anchorY, canvas.width, canvas.height);
     };
     return ImageView;
@@ -2129,6 +2131,8 @@ var TextView = /** @class */ (function (_super) {
         var y = 0;
         var width = this.width;
         var height = this.height;
+        var anchorX = this.anchorX;
+        var anchorY = this.anchorY;
         var ctx = this.$context;
         var lines = this.$lines;
         var color = this.$color;
@@ -2136,22 +2140,28 @@ var TextView = /** @class */ (function (_super) {
         var textAlign = this.$textAlign;
         var verticalAlign = this.$verticalAlign;
         var lineHeight = this.$lineHeight;
-        var pixelRatio = this.$pixelRatio;
         var strokeSize = this.$strokeSize;
         var strokeColor = this.$strokeColor;
+        var pixelRatio = this.$pixelRatio;
         _super.prototype.$render.call(this);
         this.$updateContext();
         if (textAlign === 'center') {
-            x = width * pixelRatio / 2;
+            x = width * pixelRatio / 2 - anchorX * pixelRatio;
         }
         else if (textAlign === 'right') {
-            x = width * pixelRatio;
+            x = width * pixelRatio - anchorX * pixelRatio;
+        }
+        else {
+            x = -anchorX * pixelRatio;
         }
         if (verticalAlign === 'middle') {
-            y = (height - fontSize * lineHeight * lines.length) * pixelRatio / 2;
+            y = (height - fontSize * lineHeight * lines.length) * pixelRatio / 2 - anchorY * pixelRatio;
         }
         else if (verticalAlign === 'bottom') {
-            y = (height - fontSize * lineHeight * lines.length) * pixelRatio;
+            y = (height - fontSize * lineHeight * lines.length) * pixelRatio - anchorY * pixelRatio;
+        }
+        else {
+            y = -anchorY * pixelRatio;
         }
         for (var _i = 0, lines_2 = lines; _i < lines_2.length; _i++) {
             var line = lines_2[_i];
@@ -2168,7 +2178,6 @@ var TextView = /** @class */ (function (_super) {
     TextView.boundaryRe = /\b/;
     return TextView;
 }(DisplayObject));
-//# sourceMappingURL=TextView.js.map
 
 var Ease = /** @class */ (function () {
     function Ease() {
