@@ -1066,17 +1066,17 @@ var DisplayObject = /** @class */ (function (_super) {
         var matrix = this.$getTransform();
         var localPos = Vector.create(event.targetX, event.targetY).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
         var outside = localPos.x < -this.anchorX || localPos.x > this.width - this.anchorX || localPos.y < -this.anchorY || localPos.y > this.height - this.anchorY;
-        if ((type === TouchEvent.TOUCH_START || type === TouchEvent.TOUCH_TAP) && outside) {
+        if (type === TouchEvent.TOUCH_START && outside) {
             return false;
         }
         if (type === TouchEvent.TOUCH_START) {
             this.$touches[identifier] = true;
         }
+        else if (type === TouchEvent.TOUCH_TAP) {
+            this.$touches[identifier] = false;
+        }
         else if (!this.$touches[identifier]) {
             return false;
-        }
-        else if (type === TouchEvent.TOUCH_END || type === TouchEvent.TOUCH_CANCEL) {
-            this.$touches[identifier] = false;
         }
         var children = this.$children;
         event.targetX = localPos.x;
@@ -1087,7 +1087,7 @@ var DisplayObject = /** @class */ (function (_super) {
                 break;
             }
         }
-        if (!event.propagationStopped) {
+        if (!event.propagationStopped && !(type === TouchEvent.TOUCH_TAP && outside)) {
             event.target = event.target || this;
             event.currentTarget = this;
             event.localX = localPos.x;
@@ -1204,7 +1204,6 @@ var DisplayObject = /** @class */ (function (_super) {
     };
     return DisplayObject;
 }(EventEmitter));
-//# sourceMappingURL=DisplayObject.js.map
 
 var Media = /** @class */ (function (_super) {
     __extends(Media, _super);
@@ -1517,6 +1516,7 @@ var ResourceManager = /** @class */ (function (_super) {
     ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
     return ResourceManager;
 }(EventEmitter));
+//# sourceMappingURL=ResourceManager.js.map
 
 var Stage = /** @class */ (function (_super) {
     __extends(Stage, _super);
@@ -1636,21 +1636,42 @@ var Stage = /** @class */ (function (_super) {
     Stage.prototype.$addTouchEventListeners = function () {
         var _this = this;
         var canvas = this.$stageCanvas;
-        canvas.addEventListener('touchstart', function (event) {
-            _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
-            event.preventDefault();
-        });
-        canvas.addEventListener('touchmove', function (event) {
-            _this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
-            event.preventDefault();
-        }, { passive: false });
-        canvas.addEventListener('touchend', function (event) {
-            _this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
-            _this.$dispatchTouches(TouchEvent.TOUCH_END, event);
-        });
-        canvas.addEventListener('touchcancel', function (event) {
-            _this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
-        });
+        if (canvas.ontouchstart !== undefined) {
+            canvas.addEventListener('touchstart', function (event) {
+                _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
+                event.preventDefault();
+            });
+            canvas.addEventListener('touchmove', function (event) {
+                _this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
+                event.preventDefault();
+            }, { passive: false });
+            canvas.addEventListener('touchend', function (event) {
+                _this.$dispatchTouches(TouchEvent.TOUCH_END, event);
+                _this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
+            });
+            canvas.addEventListener('touchcancel', function (event) {
+                _this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
+            });
+        }
+        else {
+            var touching_1 = false;
+            canvas.addEventListener('mousedown', function (event) {
+                _this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event);
+                touching_1 = true;
+            });
+            canvas.addEventListener('mousemove', function (event) {
+                if (touching_1) {
+                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event);
+                }
+            });
+            canvas.addEventListener('mouseup', function (event) {
+                _this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event);
+                touching_1 = false;
+            });
+            canvas.addEventListener('click', function (event) {
+                _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event);
+            });
+        }
     };
     Stage.prototype.$dispatchTouches = function (type, event) {
         var touches = event['changedTouches'];

@@ -411,15 +411,15 @@ export default class DisplayObject extends EventEmitter {
 		let matrix = this.$getTransform();
 		let localPos = Vector.create(event.targetX, event.targetY).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
 		let outside = localPos.x < -this.anchorX || localPos.x > this.width - this.anchorX || localPos.y < -this.anchorY || localPos.y > this.height - this.anchorY;
-		if ((type === TouchEvent.TOUCH_START || type === TouchEvent.TOUCH_TAP) && outside) {
+		if (type === TouchEvent.TOUCH_START && outside) {
 			return false;
 		}
 		if (type === TouchEvent.TOUCH_START) {
 			this.$touches[identifier] = true;
+		} else if (type === TouchEvent.TOUCH_TAP) {
+			this.$touches[identifier] = false;
 		} else if (!this.$touches[identifier]) {
 			return false;
-		} else if (type === TouchEvent.TOUCH_END || type === TouchEvent.TOUCH_CANCEL) {
-			this.$touches[identifier] = false;
 		}
 		let children = this.$children;
 		event.targetX = localPos.x;
@@ -430,7 +430,7 @@ export default class DisplayObject extends EventEmitter {
 				break;
 			}
 		}
-		if (!event.propagationStopped) {
+		if (!event.propagationStopped && !(type === TouchEvent.TOUCH_TAP && outside)) {
 			event.target = event.target || this;
 			event.currentTarget = this;
 			event.localX = localPos.x;

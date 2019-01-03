@@ -124,21 +124,41 @@ export default class Stage extends DisplayObject {
 
 	protected $addTouchEventListeners(): void {
 		let canvas = this.$stageCanvas;
-		canvas.addEventListener('touchstart', event => {
-			this.$dispatchTouches(TouchEvent.TOUCH_START, event);
-			event.preventDefault();
-		});
-		canvas.addEventListener('touchmove', event => {
-			this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
-			event.preventDefault();
-		}, {passive: false});
-		canvas.addEventListener('touchend', event => {
-			this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
-			this.$dispatchTouches(TouchEvent.TOUCH_END, event);
-		});
-		canvas.addEventListener('touchcancel', event => {
-			this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
-		});
+		if (canvas.ontouchstart !== undefined) {
+			canvas.addEventListener('touchstart', event => {
+				this.$dispatchTouches(TouchEvent.TOUCH_START, event);
+				event.preventDefault();
+			});
+			canvas.addEventListener('touchmove', event => {
+				this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
+				event.preventDefault();
+			}, {passive: false});
+			canvas.addEventListener('touchend', event => {
+				this.$dispatchTouches(TouchEvent.TOUCH_END, event);
+				this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
+			});
+			canvas.addEventListener('touchcancel', event => {
+				this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
+			});
+		} else {
+			let touching = false;
+			canvas.addEventListener('mousedown', event => {
+				this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event);
+				touching = true;
+			});
+			canvas.addEventListener('mousemove', event => {
+				if (touching) {
+					this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event);
+				}
+			});
+			canvas.addEventListener('mouseup', event => {
+				this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event);
+				touching = false;
+			});
+			canvas.addEventListener('click', event => {
+				this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event);
+			});
+		}
 	}
 
 	protected $dispatchTouches(type: string, event: Event): void {
