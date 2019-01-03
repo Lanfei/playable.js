@@ -1,4 +1,4 @@
-import Media from "./Media";
+import Media from './Media';
 export default class Image extends Media {
     protected $element: HTMLImageElement;
     constructor();

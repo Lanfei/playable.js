@@ -1,6 +1,6 @@
-import EventEmitter from "../event/EventEmitter";
-import Stage from "../display/Stage";
-import DisplayObject from "../display/DisplayObject";
+import EventEmitter from '../event/EventEmitter';
+import Stage from '../display/Stage';
+import DisplayObject from '../display/DisplayObject';
 export default class Ticker extends EventEmitter {
     private $stage;
     private $paused;

@@ -1,4 +1,4 @@
-import Vector from "./Vector";
+import Vector from './Vector';
 export default class Rectangle {
     x: number;
     y: number;

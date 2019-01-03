@@ -1,5 +1,5 @@
-import Event from "../event/Event";
-import EventEmitter from "../event/EventEmitter";
+import Event from '../event/Event';
+import EventEmitter from '../event/EventEmitter';
 export default class Media extends EventEmitter {
     protected $element: HTMLImageElement | HTMLAudioElement;
     protected $boundOnLoad: () => void;

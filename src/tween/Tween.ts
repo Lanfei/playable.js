@@ -11,7 +11,7 @@ export default class Tween extends EventEmitter {
 	protected $paused: boolean = true;
 	protected $stepIndex: number = 0;
 	protected $stepPosition: number = 0;
-	protected $steps: Array<Step> = [];
+	protected $steps: Array<TweenStep> = [];
 	protected $stepProps: Array<Object> = [];
 	protected $shouldSaveProps: boolean = true;
 	protected $boundOnEnterFrame: () => void;
@@ -203,7 +203,7 @@ export default class Tween extends EventEmitter {
 
 }
 
-interface Step {
+export interface TweenStep {
 	type: string,
 	props?: Object,
 	duration?: number,

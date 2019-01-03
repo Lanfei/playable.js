@@ -1,12 +1,12 @@
-import EventEmitter from "../event/EventEmitter";
-import DisplayObject from "../display/DisplayObject";
+import EventEmitter from '../event/EventEmitter';
+import DisplayObject from '../display/DisplayObject';
 export default class Tween extends EventEmitter {
     loop: boolean;
     protected $target: DisplayObject;
     protected $paused: boolean;
     protected $stepIndex: number;
     protected $stepPosition: number;
-    protected $steps: Array<Step>;
+    protected $steps: Array<TweenStep>;
     protected $stepProps: Array<Object>;
     protected $shouldSaveProps: boolean;
     protected $boundOnEnterFrame: () => void;
@@ -31,11 +31,10 @@ export default class Tween extends EventEmitter {
     static removeTweens(target: DisplayObject): void;
     static removeAllTweens(): void;
 }
-interface Step {
+export interface TweenStep {
     type: string;
     props?: Object;
     duration?: number;
     ease?: Function;
     callback?: Function;
 }
-export {};

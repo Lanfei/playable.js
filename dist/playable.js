@@ -125,11 +125,11 @@ var playable = (function (exports) {
         Ticker.prototype.$start = function () {
             var _this = this;
             window.requestAnimationFrame =
-                window["requestAnimationFrame"] ||
-                    window["webkitRequestAnimationFrame"] ||
-                    window["mozRequestAnimationFrame"] ||
-                    window["oRequestAnimationFrame"] ||
-                    window["msRequestAnimationFrame"] ||
+                window['requestAnimationFrame'] ||
+                    window['webkitRequestAnimationFrame'] ||
+                    window['mozRequestAnimationFrame'] ||
+                    window['oRequestAnimationFrame'] ||
+                    window['msRequestAnimationFrame'] ||
                     function (callback) {
                         return setTimeout(callback, 1000 / 60);
                     };
@@ -239,53 +239,6 @@ var playable = (function (exports) {
         return Ticker;
     }(EventEmitter));
     //# sourceMappingURL=Ticker.js.map
-
-    var TouchEvent = /** @class */ (function (_super) {
-        __extends(TouchEvent, _super);
-        function TouchEvent(type) {
-            var _this = _super.call(this, type) || this;
-            _this.$init(type);
-            return _this;
-        }
-        TouchEvent.prototype.$init = function (type) {
-            this.type = type;
-            this.targetX = 0;
-            this.targetY = 0;
-            this.stageX = 0;
-            this.stageY = 0;
-            this.identifier = 0;
-            this.target = null;
-            this.currentTarget = null;
-            this.propagationStopped = false;
-            return this;
-        };
-        TouchEvent.prototype.stopPropagation = function () {
-            this.propagationStopped = true;
-        };
-        TouchEvent.prototype.release = function () {
-            TouchEvent.recycle(this);
-        };
-        TouchEvent.create = function (type) {
-            var pool = this.$pool;
-            if (pool.length > 0) {
-                return pool.pop().$init(type);
-            }
-            else {
-                return new TouchEvent(type);
-            }
-        };
-        TouchEvent.recycle = function (displayObject) {
-            this.$pool.push(displayObject);
-        };
-        TouchEvent.TOUCH_START = 'touchStart';
-        TouchEvent.TOUCH_MOVE = 'touchMove';
-        TouchEvent.TOUCH_END = 'touchEnd';
-        TouchEvent.TOUCH_CANCEL = 'touchCancel';
-        TouchEvent.TOUCH_TAP = 'touchTap';
-        TouchEvent.$pool = [];
-        return TouchEvent;
-    }(Event));
-    //# sourceMappingURL=TouchEvent.js.map
 
     var Vector = /** @class */ (function () {
         function Vector(x, y) {
@@ -403,6 +356,152 @@ var playable = (function (exports) {
         return Vector;
     }());
     //# sourceMappingURL=Vector.js.map
+
+    var Rectangle = /** @class */ (function () {
+        function Rectangle(x, y, width, height) {
+            this.set(x, y, width, height);
+        }
+        Rectangle.prototype.set = function (x, y, width, height) {
+            this.x = x || 0;
+            this.y = y || 0;
+            this.width = width || 0;
+            this.height = height || 0;
+            return this;
+        };
+        Object.defineProperty(Rectangle.prototype, "top", {
+            get: function () {
+                return this.y;
+            },
+            set: function (top) {
+                this.height += this.y - top;
+                this.y = top;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Rectangle.prototype, "bottom", {
+            get: function () {
+                return this.y + this.height;
+            },
+            set: function (bottom) {
+                this.height = bottom - this.y;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Rectangle.prototype, "left", {
+            get: function () {
+                return this.x;
+            },
+            set: function (left) {
+                this.width += this.x - left;
+                this.x = left;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Rectangle.prototype, "right", {
+            get: function () {
+                return this.x + this.width;
+            },
+            set: function (right) {
+                this.width = right - this.x;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Rectangle.prototype, "topLeft", {
+            get: function () {
+                return Vector.create(this.left, this.top);
+            },
+            set: function (v) {
+                this.top = v.y;
+                this.left = v.x;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Rectangle.prototype, "bottomRight", {
+            get: function () {
+                return Vector.create(this.right, this.bottom);
+            },
+            set: function (v) {
+                this.bottom = v.y;
+                this.right = v.x;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Rectangle.prototype.contains = function (x, y) {
+            return x >= this.x && x <= this.x + this.width &&
+                y <= this.y && y <= this.y + this.height;
+        };
+        Rectangle.prototype.release = function () {
+            Rectangle.recycle(this);
+        };
+        Rectangle.create = function (x, y, width, height) {
+            var pool = this.$pool;
+            if (pool.length > 0) {
+                return pool.pop().set(x, y, width, height);
+            }
+            else {
+                return new Rectangle(x, y, width, height);
+            }
+        };
+        Rectangle.recycle = function (r) {
+            this.$pool.push(r);
+        };
+        Rectangle.$pool = [];
+        return Rectangle;
+    }());
+    //# sourceMappingURL=Rectangle.js.map
+
+    var TouchEvent = /** @class */ (function (_super) {
+        __extends(TouchEvent, _super);
+        function TouchEvent(type) {
+            var _this = _super.call(this, type) || this;
+            _this.$init(type);
+            return _this;
+        }
+        TouchEvent.prototype.$init = function (type) {
+            this.type = type;
+            this.targetX = 0;
+            this.targetY = 0;
+            this.stageX = 0;
+            this.stageY = 0;
+            this.identifier = 0;
+            this.target = null;
+            this.currentTarget = null;
+            this.propagationStopped = false;
+            return this;
+        };
+        TouchEvent.prototype.stopPropagation = function () {
+            this.propagationStopped = true;
+        };
+        TouchEvent.prototype.release = function () {
+            TouchEvent.recycle(this);
+        };
+        TouchEvent.create = function (type) {
+            var pool = this.$pool;
+            if (pool.length > 0) {
+                return pool.pop().$init(type);
+            }
+            else {
+                return new TouchEvent(type);
+            }
+        };
+        TouchEvent.recycle = function (displayObject) {
+            this.$pool.push(displayObject);
+        };
+        TouchEvent.TOUCH_START = 'touchStart';
+        TouchEvent.TOUCH_MOVE = 'touchMove';
+        TouchEvent.TOUCH_END = 'touchEnd';
+        TouchEvent.TOUCH_CANCEL = 'touchCancel';
+        TouchEvent.TOUCH_TAP = 'touchTap';
+        TouchEvent.$pool = [];
+        return TouchEvent;
+    }(Event));
+    //# sourceMappingURL=TouchEvent.js.map
 
     var Matrix = /** @class */ (function () {
         function Matrix(a, b, c, d, tx, ty) {
@@ -532,105 +631,6 @@ var playable = (function (exports) {
         return Matrix;
     }());
     //# sourceMappingURL=Matrix.js.map
-
-    var Rectangle = /** @class */ (function () {
-        function Rectangle(x, y, width, height) {
-            this.set(x, y, width, height);
-        }
-        Rectangle.prototype.set = function (x, y, width, height) {
-            this.x = x || 0;
-            this.y = y || 0;
-            this.width = width || 0;
-            this.height = height || 0;
-            return this;
-        };
-        Object.defineProperty(Rectangle.prototype, "top", {
-            get: function () {
-                return this.y;
-            },
-            set: function (top) {
-                this.height += this.y - top;
-                this.y = top;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Rectangle.prototype, "bottom", {
-            get: function () {
-                return this.y + this.height;
-            },
-            set: function (bottom) {
-                this.height = bottom - this.y;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Rectangle.prototype, "left", {
-            get: function () {
-                return this.x;
-            },
-            set: function (left) {
-                this.width += this.x - left;
-                this.x = left;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Rectangle.prototype, "right", {
-            get: function () {
-                return this.x + this.width;
-            },
-            set: function (right) {
-                this.width = right - this.x;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Rectangle.prototype, "topLeft", {
-            get: function () {
-                return Vector.create(this.left, this.top);
-            },
-            set: function (v) {
-                this.top = v.y;
-                this.left = v.x;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Rectangle.prototype, "bottomRight", {
-            get: function () {
-                return Vector.create(this.right, this.bottom);
-            },
-            set: function (v) {
-                this.bottom = v.y;
-                this.right = v.x;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Rectangle.prototype.contains = function (x, y) {
-            return x >= this.x && x <= this.x + this.width &&
-                y <= this.y && y <= this.y + this.height;
-        };
-        Rectangle.prototype.release = function () {
-            Rectangle.recycle(this);
-        };
-        Rectangle.create = function (x, y, width, height) {
-            var pool = this.$pool;
-            if (pool.length > 0) {
-                return pool.pop().set(x, y, width, height);
-            }
-            else {
-                return new Rectangle(x, y, width, height);
-            }
-        };
-        Rectangle.recycle = function (r) {
-            this.$pool.push(r);
-        };
-        Rectangle.$pool = [];
-        return Rectangle;
-    }());
-    //# sourceMappingURL=Rectangle.js.map
 
     var DisplayObject = /** @class */ (function (_super) {
         __extends(DisplayObject, _super);
@@ -1369,6 +1369,7 @@ var playable = (function (exports) {
         };
         return Sound;
     }(Media));
+    //# sourceMappingURL=Sound.js.map
 
     var SoundEffect = /** @class */ (function (_super) {
         __extends(SoundEffect, _super);
@@ -1511,27 +1512,62 @@ var playable = (function (exports) {
         __extends(Stage, _super);
         function Stage(canvas) {
             var _this = _super.call(this) || this;
+            _this.$scaleMode = Stage.SHOW_ALL;
             _this.$stageCanvas = canvas || document.createElement('canvas');
             _this.$stageContext = _this.$stageCanvas.getContext('2d');
-            _this.$initStageSize();
-            _this.$addTouchEventListeners();
             _this.$ticker = new Ticker(_this);
-            _this.$ticker.setTimeout(function () {
-                _this.emit(Event.ADDED_TO_STAGE, _this);
-            });
-            _this.on(Event.ENTER_FRAME, _this.$render);
+            _this.fullscreen = true;
+            _this.$initEvents();
             if (!canvas) {
                 document.body.appendChild(_this.$stageCanvas);
             }
             return _this;
         }
+        Stage.prototype.$initEvents = function () {
+            var _this = this;
+            var resizeTimer;
+            var ticker = this.$ticker;
+            this.$addTouchEventListeners();
+            this.on(Event.ENTER_FRAME, this.$render);
+            ticker.setTimeout(function () {
+                _this.emit(Event.ADDED_TO_STAGE, _this);
+            });
+            window.addEventListener('resize', function () {
+                ticker.clearTimeout(resizeTimer);
+                resizeTimer = ticker.setTimeout(function () {
+                    _this.fullscreen = _this.fullscreen;
+                }, 100);
+            });
+        };
+        Object.defineProperty(Stage.prototype, "x", {
+            get: function () {
+                return 0;
+            },
+            set: function (x) {
+                this.$x = 0;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Stage.prototype, "y", {
+            get: function () {
+                return 0;
+            },
+            set: function (y) {
+                this.$y = 0;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(Stage.prototype, "stageWidth", {
             get: function () {
                 return this.$stageCanvas.width / this.$pixelRatio;
             },
             set: function (width) {
+                this.$fullscreen = false;
                 this.$stageCanvas.width = width * this.$pixelRatio;
                 this.$stageCanvas.style.width = width + 'px';
+                this.$markDirty();
             },
             enumerable: true,
             configurable: true
@@ -1541,8 +1577,38 @@ var playable = (function (exports) {
                 return this.$stageCanvas.height / this.$pixelRatio;
             },
             set: function (height) {
+                this.$fullscreen = false;
                 this.$stageCanvas.height = height * this.$pixelRatio;
                 this.$stageCanvas.style.height = height + 'px';
+                this.$markDirty();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Stage.prototype, "fullscreen", {
+            get: function () {
+                return this.$fullscreen;
+            },
+            set: function (fullscreen) {
+                if (fullscreen) {
+                    this.stageWidth = window.innerWidth;
+                    this.stageHeight = window.innerHeight;
+                    this.$stageCanvas.style.top = '0';
+                    this.$stageCanvas.style.left = '0';
+                    this.$stageCanvas.style.position = 'absolute';
+                }
+                this.$fullscreen = fullscreen;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Stage.prototype, "scaleMode", {
+            get: function () {
+                return this.$scaleMode;
+            },
+            set: function (scaleMode) {
+                this.$scaleMode = scaleMode;
+                this.$markDirty();
             },
             enumerable: true,
             configurable: true
@@ -1556,10 +1622,6 @@ var playable = (function (exports) {
         });
         Stage.prototype.createResourceManager = function (list, options) {
             return new ResourceManager(this.$ticker, list, options);
-        };
-        Stage.prototype.$initStageSize = function () {
-            this.stageWidth = window.innerWidth;
-            this.stageHeight = window.innerHeight;
         };
         Stage.prototype.$addTouchEventListeners = function () {
             var _this = this;
@@ -1587,30 +1649,125 @@ var playable = (function (exports) {
         };
         Stage.prototype.$dispatchTouchEvent = function (type, touch) {
             var event = TouchEvent.create(type);
-            var bounds = this.$stageCanvas.getBoundingClientRect();
-            event.targetX = event.stageX = touch.pageX - bounds.left - this.$anchorX;
-            event.targetY = event.stageY = touch.pageY - bounds.top - this.$anchorY;
+            var width = this.$canvas.width;
+            var height = this.$canvas.height;
+            var pixelRatio = this.$pixelRatio;
+            var bounds = this.getRenderBounds();
+            var stageBounds = this.$stageCanvas.getBoundingClientRect();
+            var x = (touch.pageX - stageBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+            var y = (touch.pageY - stageBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+            event.targetX = event.stageX = x;
+            event.targetY = event.stageY = y;
             event.identifier = touch instanceof Touch ? touch.identifier : 0;
             this.$emitTouchEvent(event);
             event.release();
         };
+        Stage.prototype.getRenderBounds = function () {
+            var bounds = this.$renderBounds = this.$renderBounds || Rectangle.create();
+            if (!this.$dirty) {
+                return bounds;
+            }
+            var x = 0;
+            var y = 0;
+            var canvas = this.$canvas;
+            var stageCanvas = this.$stageCanvas;
+            var scaleMode = this.scaleMode;
+            var width = canvas.width;
+            var height = canvas.height;
+            var stageWidth = stageCanvas.width;
+            var stageHeight = stageCanvas.height;
+            var aspectRatio = width / height;
+            var stageAspectRatio = stageWidth / stageHeight;
+            if (scaleMode === Stage.NO_SCALE) ;
+            else if (scaleMode === Stage.NO_BORDER) {
+                if (aspectRatio < stageAspectRatio) {
+                    width = stageWidth;
+                    height = width / aspectRatio;
+                }
+                else {
+                    height = stageHeight;
+                    width = height * aspectRatio;
+                }
+                x = (stageWidth - width) / 2;
+                y = (stageHeight - height) / 2;
+            }
+            else if (scaleMode === Stage.SHOW_ALL) {
+                if (aspectRatio > stageAspectRatio) {
+                    width = stageWidth;
+                    height = width / aspectRatio;
+                }
+                else {
+                    height = stageHeight;
+                    width = height * aspectRatio;
+                }
+            }
+            else if (scaleMode === Stage.EXACT_FIT) {
+                width = stageWidth;
+                height = stageHeight;
+            }
+            else if (scaleMode === Stage.FIXED_WIDTH) {
+                width = stageWidth;
+                height = width / aspectRatio;
+            }
+            else if (scaleMode === Stage.FIXED_HEIGHT) {
+                height = stageHeight;
+                width = height * aspectRatio;
+            }
+            else if (scaleMode === Stage.FIXED_WIDE) {
+                if (stageWidth > stageHeight) {
+                    width = stageWidth;
+                    height = width / aspectRatio;
+                }
+                else {
+                    height = stageHeight;
+                    width = height * aspectRatio;
+                }
+            }
+            else if (scaleMode === Stage.FIXED_NARROW) {
+                if (stageWidth < stageHeight) {
+                    width = stageWidth;
+                    height = width / aspectRatio;
+                }
+                else {
+                    height = stageHeight;
+                    width = height * aspectRatio;
+                }
+            }
+            if (width < stageWidth) {
+                x = (stageWidth - width) / 2;
+            }
+            if (height < stageHeight) {
+                y = (stageHeight - height) / 2;
+            }
+            bounds.x = x;
+            bounds.y = y;
+            bounds.width = width;
+            bounds.height = height;
+            return bounds;
+        };
         Stage.prototype.$render = function () {
+            var bounds = this.getRenderBounds();
             if (this.$dirty) {
                 _super.prototype.$render.call(this);
-                var pixelRatio = this.$pixelRatio;
-                var x = this.$x * pixelRatio;
-                var y = this.$y * pixelRatio;
-                var width = this.$width * pixelRatio;
-                var height = this.$height * pixelRatio;
                 var canvas = this.$canvas;
-                var context = this.$stageContext;
-                context.clearRect(x, y, width, height);
-                context.drawImage(canvas, x, y);
+                var ctx = this.$stageContext;
+                var stageCanvas = this.$stageCanvas;
+                var stageWidth = stageCanvas.width;
+                var stageHeight = stageCanvas.height;
+                ctx.clearRect(0, 0, stageWidth, stageHeight);
+                ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
             }
         };
+        Stage.NO_SCALE = 'noScale';
+        Stage.NO_BORDER = 'noBorder';
+        Stage.SHOW_ALL = 'showAll';
+        Stage.EXACT_FIT = 'exactFit';
+        Stage.FIXED_WIDE = 'fixedWide';
+        Stage.FIXED_NARROW = 'fixedNarrow';
+        Stage.FIXED_WIDTH = 'fixedWidth';
+        Stage.FIXED_HEIGHT = 'fixedHeight';
         return Stage;
     }(DisplayObject));
-    //# sourceMappingURL=Stage.js.map
 
     var ImageView = /** @class */ (function (_super) {
         __extends(ImageView, _super);

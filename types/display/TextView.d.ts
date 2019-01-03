@@ -1,5 +1,5 @@
-import DisplayObject from "./DisplayObject";
-import Rectangle from "../geom/Rectangle";
+import Rectangle from '../geom/Rectangle';
+import DisplayObject from './DisplayObject';
 export default class TextView extends DisplayObject {
     private static wordRe;
     private static boundaryRe;
@@ -42,7 +42,7 @@ declare type FontStyle = 'normal' | 'italic' | 'oblique';
 declare type FontWeight = 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 declare type TextAlign = 'left' | 'right' | 'center';
 declare type VerticalAlign = 'top' | 'middle' | 'bottom';
-interface TextViewOption {
+export interface TextViewOption {
     color?: string;
     fontSize?: number;
     fontWeight?: FontWeight;

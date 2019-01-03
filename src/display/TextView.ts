@@ -292,7 +292,7 @@ type FontWeight = 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 4
 type TextAlign = 'left' | 'right' | 'center';
 type VerticalAlign = 'top' | 'middle' | 'bottom';
 
-interface TextViewOption {
+export interface TextViewOption {
 	color?: string;
 	fontSize?: number;
 	fontWeight?: FontWeight;
