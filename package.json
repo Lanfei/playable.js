@@ -1,0 +1,40 @@
+{
+  "name": "playable.js",
+  "version": "1.0.0",
+  "author": "Jealous",
+  "description": "A lightweight HTML5 game engine.",
+  "main": "dist/playable.common.js",
+  "typings": "types/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c",
+    "build:types": "tsc",
+    "watch": "rollup -c -w",
+    "watch:types": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lanfei/playable.js.git"
+  },
+  "keywords": [
+    "html5",
+    "playable",
+    "game-engine",
+    "canvas"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lanfei/playable.js/issues"
+  },
+  "homepage": "https://github.com/Lanfei/playable.js#readme",
+  "dependencies": {
+    "events": "^3.0.0"
+  },
+  "devDependencies": {
+    "rollup": "^1.0.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-typescript": "^1.0.0",
+    "tslib": "^1.9.3",
+    "typescript": "^3.2.2"
+  }
+}
