@@ -1,5 +1,5 @@
-import DisplayObject from "./DisplayObject";
-import Rectangle from "../geom/Rectangle";
+import Rectangle from '../geom/Rectangle';
+import DisplayObject from './DisplayObject';
 
 export default class TextView extends DisplayObject {
 

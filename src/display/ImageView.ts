@@ -1,5 +1,5 @@
-import DisplayObject from "./DisplayObject";
-import Image from "../media/Image";
+import Image from '../media/Image';
+import DisplayObject from './DisplayObject';
 
 export default class ImageView extends DisplayObject {
 

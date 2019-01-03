@@ -1,5 +1,5 @@
-import Sound from "./Sound";
-import Ticker from "../core/Ticker";
+import Sound from './Sound';
+import Ticker from '../core/Ticker';
 
 export default class SoundEffect extends Sound {
 

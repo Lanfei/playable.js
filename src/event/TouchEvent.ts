@@ -1,5 +1,5 @@
 import Event from './Event';
-import DisplayObject from "../display/DisplayObject";
+import DisplayObject from '../display/DisplayObject';
 
 export default class TouchEvent extends Event {
 

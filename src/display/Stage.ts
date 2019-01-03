@@ -1,8 +1,8 @@
-import Ticker from "../core/Ticker";
-import Event from "../event/Event";
-import TouchEvent from "../event/TouchEvent";
-import DisplayObject from "./DisplayObject";
-import ResourceManager, {ResourceInfo, ResourceManagerOption} from "../net/ResourceManager";
+import Ticker from '../core/Ticker';
+import Event from '../event/Event';
+import TouchEvent from '../event/TouchEvent';
+import DisplayObject from './DisplayObject';
+import ResourceManager, {ResourceInfo, ResourceManagerOption} from '../net/ResourceManager';
 
 export default class Stage extends DisplayObject {
 

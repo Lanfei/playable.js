@@ -1,7 +1,7 @@
-import Ease from "./Ease";
-import Event from "../event/Event";
-import EventEmitter from "../event/EventEmitter";
-import DisplayObject from "../display/DisplayObject";
+import Ease from './Ease';
+import Event from '../event/Event';
+import EventEmitter from '../event/EventEmitter';
+import DisplayObject from '../display/DisplayObject';
 
 export default class Tween extends EventEmitter {
 

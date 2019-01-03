@@ -1,11 +1,11 @@
-import Stage from "./Stage";
+import Stage from './Stage';
+import Ticker from '../core/Ticker';
 import Matrix from '../geom/Matrix';
-import Vector from "../geom/Vector";
-import Rectangle from "../geom/Rectangle";
-import Event from "../event/Event";
-import TouchEvent from "../event/TouchEvent";
-import EventEmitter from "../event/EventEmitter";
-import Ticker from "../core/Ticker";
+import Vector from '../geom/Vector';
+import Rectangle from '../geom/Rectangle';
+import Event from '../event/Event';
+import TouchEvent from '../event/TouchEvent';
+import EventEmitter from '../event/EventEmitter';
 
 export default class DisplayObject extends EventEmitter {
 

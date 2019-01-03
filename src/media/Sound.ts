@@ -1,6 +1,6 @@
-import Media from "./Media";
+import Media from './Media';
 import Event from '../event/Event';
-import Ticker from "../core/Ticker";
+import Ticker from '../core/Ticker';
 
 export default class Sound extends Media {
 

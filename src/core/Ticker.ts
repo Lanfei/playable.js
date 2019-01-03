@@ -1,7 +1,7 @@
-import Event from "../event/Event";
-import EventEmitter from "../event/EventEmitter";
-import Stage from "../display/Stage";
-import DisplayObject from "../display/DisplayObject";
+import Event from '../event/Event';
+import EventEmitter from '../event/EventEmitter';
+import Stage from '../display/Stage';
+import DisplayObject from '../display/DisplayObject';
 
 export default class Ticker extends EventEmitter {
 
@@ -31,11 +31,11 @@ export default class Ticker extends EventEmitter {
 
 	private $start(): this {
 		window.requestAnimationFrame =
-			window["requestAnimationFrame"] ||
-			window["webkitRequestAnimationFrame"] ||
-			window["mozRequestAnimationFrame"] ||
-			window["oRequestAnimationFrame"] ||
-			window["msRequestAnimationFrame"] ||
+			window['requestAnimationFrame'] ||
+			window['webkitRequestAnimationFrame'] ||
+			window['mozRequestAnimationFrame'] ||
+			window['oRequestAnimationFrame'] ||
+			window['msRequestAnimationFrame'] ||
 			function (callback) {
 				return setTimeout(callback, 1000 / 60);
 			};

@@ -1,10 +1,10 @@
-import Ticker from "../core/Ticker";
+import Ticker from '../core/Ticker';
+import Media from '../media/Media';
 import Image from '../media/Image';
 import Sound from '../media/Sound';
+import SoundEffect from '../media/SoundEffect';
 import Event from '../event/Event';
-import EventEmitter from "../event/EventEmitter";
-import SoundEffect from "../media/SoundEffect";
-import Media from "../media/Media";
+import EventEmitter from '../event/EventEmitter';
 
 export default class ResourceManager extends EventEmitter {
 
