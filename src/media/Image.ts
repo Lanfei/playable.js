@@ -1,11 +1,12 @@
 import Media from './Media';
+import Ticker from '../core/Ticker';
 
 export default class Image extends Media {
 
 	protected $element: HTMLImageElement;
 
-	public constructor() {
-		super();
+	public constructor(ticker: Ticker) {
+		super(ticker);
 		let image = document.createElement('img');
 		image.crossOrigin = '*';
 		image.addEventListener('load', this.$boundOnLoad);

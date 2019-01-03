@@ -1208,8 +1208,9 @@ var DisplayObject = /** @class */ (function (_super) {
 
 var Media = /** @class */ (function (_super) {
     __extends(Media, _super);
-    function Media() {
+    function Media(ticker) {
         var _this = _super.call(this) || this;
+        _this.$ticker = ticker;
         _this.$boundOnLoad = _this.$onLoad.bind(_this);
         _this.$boundOnError = _this.$onError.bind(_this);
         return _this;
@@ -1224,6 +1225,9 @@ var Media = /** @class */ (function (_super) {
     Object.defineProperty(Media.prototype, "url", {
         set: function (url) {
             this.$element.src = url;
+            if (url.indexOf('data:') === 0) {
+                this.$ticker.setTimeout(this.$boundOnLoad);
+            }
         },
         enumerable: true,
         configurable: true
@@ -1242,8 +1246,8 @@ var Media = /** @class */ (function (_super) {
 
 var Image = /** @class */ (function (_super) {
     __extends(Image, _super);
-    function Image() {
-        var _this = _super.call(this) || this;
+    function Image(ticker) {
+        var _this = _super.call(this, ticker) || this;
         var image = document.createElement('img');
         image.crossOrigin = '*';
         image.addEventListener('load', _this.$boundOnLoad);
@@ -1273,11 +1277,12 @@ var Image = /** @class */ (function (_super) {
     });
     return Image;
 }(Media));
+//# sourceMappingURL=Image.js.map
 
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
     function Sound(ticker) {
-        var _this = _super.call(this) || this;
+        var _this = _super.call(this, ticker) || this;
         _this.$loops = 1;
         _this.$startTime = 0;
         _this.$paused = false;
@@ -1298,6 +1303,9 @@ var Sound = /** @class */ (function (_super) {
             this.$paused = true;
             this.$element.src = url;
             this.$element.load();
+            if (url.indexOf('data:') === 0) {
+                this.$ticker.setTimeout(this.$boundOnLoad);
+            }
         },
         enumerable: true,
         configurable: true
@@ -1455,6 +1463,7 @@ var ResourceManager = /** @class */ (function (_super) {
             else {
                 ++_this.$errorCount;
                 --_this.$loadingCount;
+                resources[name] = resource;
                 if (_this.$loadedCount + _this.$errorCount === _this.$total) {
                     _this.emit(Event.COMPLETE);
                 }
@@ -1466,7 +1475,7 @@ var ResourceManager = /** @class */ (function (_super) {
             resource.off(Event.ERROR, errorCallback);
         };
         if (type === ResourceManager.TYPE_IMAGE) {
-            resource = new Image();
+            resource = new Image(ticker);
             resource.on(Event.LOAD, loadedCallback);
             resource.on(Event.ERROR, errorCallback);
             resource.url = url;
@@ -1508,7 +1517,6 @@ var ResourceManager = /** @class */ (function (_super) {
     ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
     return ResourceManager;
 }(EventEmitter));
-//# sourceMappingURL=ResourceManager.js.map
 
 var Stage = /** @class */ (function (_super) {
     __extends(Stage, _super);
@@ -1630,6 +1638,7 @@ var Stage = /** @class */ (function (_super) {
         var canvas = this.$stageCanvas;
         canvas.addEventListener('touchstart', function (event) {
             _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
+            event.preventDefault();
         });
         canvas.addEventListener('touchmove', function (event) {
             _this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);

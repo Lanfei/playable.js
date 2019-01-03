@@ -1,7 +1,5 @@
 import Media from './Media';
-import Ticker from '../core/Ticker';
 export default class Sound extends Media {
-    protected $ticker: Ticker;
     protected $loops: number;
     protected $startTime: number;
     protected $paused: boolean;

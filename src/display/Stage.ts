@@ -126,6 +126,7 @@ export default class Stage extends DisplayObject {
 		let canvas = this.$stageCanvas;
 		canvas.addEventListener('touchstart', event => {
 			this.$dispatchTouches(TouchEvent.TOUCH_START, event);
+			event.preventDefault();
 		});
 		canvas.addEventListener('touchmove', event => {
 			this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);

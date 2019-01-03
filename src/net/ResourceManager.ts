@@ -80,6 +80,7 @@ export default class ResourceManager extends EventEmitter {
 			} else {
 				++this.$errorCount;
 				--this.$loadingCount;
+				resources[name] = resource;
 				if (this.$loadedCount + this.$errorCount === this.$total) {
 					this.emit(Event.COMPLETE);
 				} else {
@@ -90,7 +91,7 @@ export default class ResourceManager extends EventEmitter {
 			resource.off(Event.ERROR, errorCallback);
 		};
 		if (type === ResourceManager.TYPE_IMAGE) {
-			resource = new Image();
+			resource = new Image(ticker);
 			resource.on(Event.LOAD, loadedCallback);
 			resource.on(Event.ERROR, errorCallback);
 			resource.url = url;

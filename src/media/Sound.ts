@@ -1,10 +1,8 @@
 import Media from './Media';
 import Event from '../event/Event';
-import Ticker from '../core/Ticker';
 
 export default class Sound extends Media {
 
-	protected $ticker: Ticker;
 	protected $loops: number = 1;
 	protected $startTime: number = 0;
 	protected $paused: boolean = false;
@@ -12,7 +10,7 @@ export default class Sound extends Media {
 	protected $boundOnTouch: () => void;
 
 	public constructor(ticker) {
-		super();
+		super(ticker);
 		let audio = document.createElement('audio');
 		audio.crossOrigin = '*';
 		audio.addEventListener('canplaythrough', this.$boundOnLoad);
@@ -29,6 +27,9 @@ export default class Sound extends Media {
 		this.$paused = true;
 		this.$element.src = url;
 		this.$element.load();
+		if (url.indexOf('data:') === 0) {
+			this.$ticker.setTimeout(this.$boundOnLoad);
+		}
 	}
 
 	public get volume(): number {
