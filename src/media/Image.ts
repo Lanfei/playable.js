@@ -7,6 +7,7 @@ export default class Image extends Media {
 	public constructor() {
 		super();
 		let image = document.createElement('img');
+		image.crossOrigin = '*';
 		image.addEventListener('load', this.$boundOnLoad);
 		image.addEventListener('error', this.$boundOnError);
 		this.$element = image;

@@ -14,6 +14,7 @@ export default class Sound extends Media {
 	public constructor(ticker) {
 		super();
 		let audio = document.createElement('audio');
+		audio.crossOrigin = '*';
 		audio.addEventListener('canplaythrough', this.$boundOnLoad);
 		audio.addEventListener('error', this.$boundOnError);
 		audio.addEventListener('ended', this.$onEnded.bind(this));

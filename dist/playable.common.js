@@ -1245,6 +1245,7 @@ var Image = /** @class */ (function (_super) {
     function Image() {
         var _this = _super.call(this) || this;
         var image = document.createElement('img');
+        image.crossOrigin = '*';
         image.addEventListener('load', _this.$boundOnLoad);
         image.addEventListener('error', _this.$boundOnError);
         _this.$element = image;
@@ -1272,7 +1273,6 @@ var Image = /** @class */ (function (_super) {
     });
     return Image;
 }(Media));
-//# sourceMappingURL=Image.js.map
 
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
@@ -1282,6 +1282,7 @@ var Sound = /** @class */ (function (_super) {
         _this.$startTime = 0;
         _this.$paused = false;
         var audio = document.createElement('audio');
+        audio.crossOrigin = '*';
         audio.addEventListener('canplaythrough', _this.$boundOnLoad);
         audio.addEventListener('error', _this.$boundOnError);
         audio.addEventListener('ended', _this.$onEnded.bind(_this));
@@ -1769,6 +1770,7 @@ var Stage = /** @class */ (function (_super) {
     Stage.FIXED_HEIGHT = 'fixedHeight';
     return Stage;
 }(DisplayObject));
+//# sourceMappingURL=Stage.js.map
 
 var ImageView = /** @class */ (function (_super) {
     __extends(ImageView, _super);
