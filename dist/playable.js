@@ -1670,6 +1670,9 @@ var playable = (function (exports) {
                 canvas.addEventListener('click', function (event) {
                     _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event);
                 });
+                window.addEventListener('mouseout', function (event) {
+                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, event);
+                });
             }
         };
         Stage.prototype.$dispatchTouches = function (type, event) {

@@ -154,6 +154,9 @@ export default class Stage extends DisplayObject {
 			canvas.addEventListener('click', event => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event);
 			});
+			window.addEventListener('mouseout', event => {
+				this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, event);
+			});
 		}
 	}
 
