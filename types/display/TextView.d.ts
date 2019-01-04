@@ -16,6 +16,9 @@ export default class TextView extends DisplayObject {
     protected $fontFamily: string;
     protected $multiline: boolean;
     protected $breakWord: boolean;
+    protected $autoFitSize: boolean;
+    protected $minFontSize: number;
+    protected $explicitSize: number;
     protected $lines: Array<string>;
     constructor(text?: string, options?: TextViewOption);
     text: string;
@@ -31,6 +34,7 @@ export default class TextView extends DisplayObject {
     fontFamily: string;
     multiline: boolean;
     breakWord: boolean;
+    autoFitSize: boolean;
     protected $updateContext(): void;
     protected $divideUnits(): Array<string>;
     protected $divideLines(): void;

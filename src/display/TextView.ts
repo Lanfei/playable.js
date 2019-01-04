@@ -19,6 +19,9 @@ export default class TextView extends DisplayObject {
 	protected $fontFamily: string = 'Helvetica';
 	protected $multiline: boolean = false;
 	protected $breakWord: boolean = false;
+	protected $autoFitSize: boolean = false;
+	protected $minFontSize: number = 0;
+	protected $explicitSize: number = 0;
 	protected $lines: Array<string> = [];
 
 	public constructor(text?: string, options: TextViewOption = {}) {
@@ -156,12 +159,22 @@ export default class TextView extends DisplayObject {
 		this.$resizeCanvas();
 	}
 
+	public get autoFitSize(): boolean {
+		return this.$autoFitSize;
+	}
+
+	public set autoFitSize(autoFitSize: boolean) {
+		this.$autoFitSize = autoFitSize;
+		this.$resizeCanvas();
+	}
+
 	protected $updateContext(): void {
 		let ctx = this.$context;
-		let fontStyle = this.fontStyle;
-		let fontWeight = this.fontWeight;
+		let fontStyle = this.$fontStyle;
+		let fontWeight = this.$fontWeight;
 		let pixelRatio = this.$pixelRatio;
-		let sizeStr = this.fontSize * pixelRatio + 'px';
+		let fontSize = this.$explicitSize || this.$fontSize;
+		let sizeStr = fontSize * pixelRatio + 'px';
 		ctx.font = fontStyle + ' ' + fontWeight + ' ' + sizeStr + ' ' + this.fontFamily;
 		ctx.textAlign = this.textAlign;
 		ctx.textBaseline = 'top';
@@ -225,7 +238,22 @@ export default class TextView extends DisplayObject {
 	}
 
 	protected $resizeCanvas(): void {
+		let width = this.$width;
+		let height = this.$height;
 		this.$divideLines();
+		if (this.$autoFitSize && (width || height)) {
+			let minFontSize = this.$minFontSize || 1;
+			this.$explicitSize = this.$fontSize;
+			while (this.$explicitSize > minFontSize) {
+				let bounds = this.$getContentBounds();
+				if ((width && bounds.width > width) || (height && bounds.height > height)) {
+					--this.$explicitSize;
+				} else {
+					break;
+				}
+				bounds.release();
+			}
+		}
 		super.$resizeCanvas();
 	}
 
@@ -233,9 +261,9 @@ export default class TextView extends DisplayObject {
 		let ctx = this.$context;
 		let bounds = super.$getContentBounds();
 		let lines = this.$lines;
-		let fontSize = this.$fontSize;
 		let lineHeight = this.$lineHeight;
 		let pixelRatio = this.$pixelRatio;
+		let fontSize = this.$explicitSize || this.$fontSize;
 		this.$updateContext();
 		for (let line of lines) {
 			bounds.width = Math.max(bounds.width, ctx.measureText(line).width / pixelRatio);
@@ -257,13 +285,13 @@ export default class TextView extends DisplayObject {
 		let ctx = this.$context;
 		let lines = this.$lines;
 		let color = this.$color;
-		let fontSize = this.$fontSize;
 		let textAlign = this.$textAlign;
 		let verticalAlign = this.$verticalAlign;
 		let lineHeight = this.$lineHeight;
 		let strokeSize = this.$strokeSize;
 		let strokeColor = this.$strokeColor;
 		let pixelRatio = this.$pixelRatio;
+		let fontSize = this.$explicitSize || this.$fontSize;
 		super.$render();
 		this.$updateContext();
 		if (textAlign === 'center') {

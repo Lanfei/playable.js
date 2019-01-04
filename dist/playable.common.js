@@ -1295,6 +1295,7 @@ var DisplayObject = /** @class */ (function (_super) {
     };
     return DisplayObject;
 }(EventEmitter));
+//# sourceMappingURL=DisplayObject.js.map
 
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
@@ -1938,6 +1939,9 @@ var TextView = /** @class */ (function (_super) {
         _this.$fontFamily = 'Helvetica';
         _this.$multiline = false;
         _this.$breakWord = false;
+        _this.$autoFitSize = false;
+        _this.$minFontSize = 0;
+        _this.$explicitSize = 0;
         _this.$lines = [];
         _this.$text = text || _this.$text;
         _this.$color = options.color || _this.$color;
@@ -2098,12 +2102,24 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TextView.prototype, "autoFitSize", {
+        get: function () {
+            return this.$autoFitSize;
+        },
+        set: function (autoFitSize) {
+            this.$autoFitSize = autoFitSize;
+            this.$resizeCanvas();
+        },
+        enumerable: true,
+        configurable: true
+    });
     TextView.prototype.$updateContext = function () {
         var ctx = this.$context;
-        var fontStyle = this.fontStyle;
-        var fontWeight = this.fontWeight;
+        var fontStyle = this.$fontStyle;
+        var fontWeight = this.$fontWeight;
         var pixelRatio = this.$pixelRatio;
-        var sizeStr = this.fontSize * pixelRatio + 'px';
+        var fontSize = this.$explicitSize || this.$fontSize;
+        var sizeStr = fontSize * pixelRatio + 'px';
         ctx.font = fontStyle + ' ' + fontWeight + ' ' + sizeStr + ' ' + this.fontFamily;
         ctx.textAlign = this.textAlign;
         ctx.textBaseline = 'top';
@@ -2170,16 +2186,32 @@ var TextView = /** @class */ (function (_super) {
         lines.push(line);
     };
     TextView.prototype.$resizeCanvas = function () {
+        var width = this.$width;
+        var height = this.$height;
         this.$divideLines();
+        if (this.$autoFitSize && (width || height)) {
+            var minFontSize = this.$minFontSize || 1;
+            this.$explicitSize = this.$fontSize;
+            while (this.$explicitSize > minFontSize) {
+                var bounds = this.$getContentBounds();
+                if ((width && bounds.width > width) || (height && bounds.height > height)) {
+                    --this.$explicitSize;
+                }
+                else {
+                    break;
+                }
+                bounds.release();
+            }
+        }
         _super.prototype.$resizeCanvas.call(this);
     };
     TextView.prototype.$getContentBounds = function () {
         var ctx = this.$context;
         var bounds = _super.prototype.$getContentBounds.call(this);
         var lines = this.$lines;
-        var fontSize = this.$fontSize;
         var lineHeight = this.$lineHeight;
         var pixelRatio = this.$pixelRatio;
+        var fontSize = this.$explicitSize || this.$fontSize;
         this.$updateContext();
         for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
             var line = lines_1[_i];
@@ -2201,13 +2233,13 @@ var TextView = /** @class */ (function (_super) {
         var ctx = this.$context;
         var lines = this.$lines;
         var color = this.$color;
-        var fontSize = this.$fontSize;
         var textAlign = this.$textAlign;
         var verticalAlign = this.$verticalAlign;
         var lineHeight = this.$lineHeight;
         var strokeSize = this.$strokeSize;
         var strokeColor = this.$strokeColor;
         var pixelRatio = this.$pixelRatio;
+        var fontSize = this.$explicitSize || this.$fontSize;
         _super.prototype.$render.call(this);
         this.$updateContext();
         if (textAlign === 'center') {
@@ -2243,7 +2275,6 @@ var TextView = /** @class */ (function (_super) {
     TextView.boundaryRe = /\b/;
     return TextView;
 }(DisplayObject));
-//# sourceMappingURL=TextView.js.map
 
 var Ease = /** @class */ (function () {
     function Ease() {
