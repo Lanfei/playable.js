@@ -120,6 +120,10 @@ export default class ResourceManager extends EventEmitter {
 		timer = ticker.setTimeout(errorCallback, this.timeout);
 	}
 
+	public has(name: string): boolean {
+		return !!this.$resources[name];
+	}
+
 	public get(name: string): Media {
 		let resource = this.$resources[name];
 		if (!resource) {
