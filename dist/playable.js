@@ -1137,10 +1137,11 @@ var playable = (function (exports) {
             return bounds;
         };
         DisplayObject.prototype.$emitTouchEvent = function (event) {
-            if (!this.touchable) {
+            if (!this.visible || !this.touchable) {
                 return false;
             }
             var type = event.type;
+            var touches = this.$touches;
             var identifier = event.identifier;
             var matrix = this.$getTransform();
             var localPos = Vector.create(event.targetX, event.targetY).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
@@ -1149,13 +1150,13 @@ var playable = (function (exports) {
                 return false;
             }
             if (type === TouchEvent.TOUCH_START) {
-                this.$touches[identifier] = true;
+                touches[identifier] = true;
+            }
+            else if (!touches[identifier]) {
+                return false;
             }
             else if (type === TouchEvent.TOUCH_TAP) {
-                this.$touches[identifier] = false;
-            }
-            else if (!this.$touches[identifier]) {
-                return false;
+                touches[identifier] = false;
             }
             var children = this.$children;
             event.targetX = localPos.x;

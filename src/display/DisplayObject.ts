@@ -404,10 +404,11 @@ export default class DisplayObject extends EventEmitter {
 	}
 
 	protected $emitTouchEvent(event: TouchEvent): boolean {
-		if (!this.touchable) {
+		if (!this.visible || !this.touchable) {
 			return false;
 		}
 		let type = event.type;
+		let touches = this.$touches;
 		let identifier = event.identifier;
 		let matrix = this.$getTransform();
 		let localPos = Vector.create(event.targetX, event.targetY).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
@@ -416,11 +417,11 @@ export default class DisplayObject extends EventEmitter {
 			return false;
 		}
 		if (type === TouchEvent.TOUCH_START) {
-			this.$touches[identifier] = true;
-		} else if (type === TouchEvent.TOUCH_TAP) {
-			this.$touches[identifier] = false;
-		} else if (!this.$touches[identifier]) {
+			touches[identifier] = true;
+		} else if (!touches[identifier]) {
 			return false;
+		} else if (type === TouchEvent.TOUCH_TAP) {
+			touches[identifier] = false;
 		}
 		let children = this.$children;
 		event.targetX = localPos.x;
