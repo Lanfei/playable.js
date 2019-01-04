@@ -1213,6 +1213,7 @@ var playable = (function (exports) {
             ctx.setTransform(1, 0, 0, 1, anchorX, anchorY);
             ctx.clearRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
             ctx.beginPath();
+            ctx.save();
             if (background) {
                 if (background instanceof Image) {
                     ctx.drawImage(background.element, -anchorX, -anchorY, canvasWidth, canvasHeight);
@@ -1230,6 +1231,7 @@ var playable = (function (exports) {
                     this.$drawChild(child);
                 }
             }
+            ctx.restore();
             this.$dirty = false;
         };
         DisplayObject.prototype.on = function (event, listener) {
@@ -1291,7 +1293,6 @@ var playable = (function (exports) {
         };
         return DisplayObject;
     }(EventEmitter));
-    //# sourceMappingURL=DisplayObject.js.map
 
     var Sound = /** @class */ (function (_super) {
         __extends(Sound, _super);
@@ -1863,6 +1864,7 @@ var playable = (function (exports) {
         Stage.FIXED_HEIGHT = 'fixedHeight';
         return Stage;
     }(DisplayObject));
+    //# sourceMappingURL=Stage.js.map
 
     var ImageView = /** @class */ (function (_super) {
         __extends(ImageView, _super);

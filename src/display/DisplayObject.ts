@@ -482,6 +482,7 @@ export default class DisplayObject extends EventEmitter {
 		ctx.setTransform(1, 0, 0, 1, anchorX, anchorY);
 		ctx.clearRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
 		ctx.beginPath();
+		ctx.save();
 
 		if (background) {
 			if (background instanceof Image) {
@@ -493,12 +494,13 @@ export default class DisplayObject extends EventEmitter {
 				ctx.restore();
 			}
 		}
-
 		for (let child of children) {
 			if (child.visible && child.alpha) {
 				this.$drawChild(child);
 			}
 		}
+
+		ctx.restore();
 		this.$dirty = false;
 	}
 

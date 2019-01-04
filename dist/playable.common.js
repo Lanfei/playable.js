@@ -1214,6 +1214,7 @@ var DisplayObject = /** @class */ (function (_super) {
         ctx.setTransform(1, 0, 0, 1, anchorX, anchorY);
         ctx.clearRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
         ctx.beginPath();
+        ctx.save();
         if (background) {
             if (background instanceof Image) {
                 ctx.drawImage(background.element, -anchorX, -anchorY, canvasWidth, canvasHeight);
@@ -1231,6 +1232,7 @@ var DisplayObject = /** @class */ (function (_super) {
                 this.$drawChild(child);
             }
         }
+        ctx.restore();
         this.$dirty = false;
     };
     DisplayObject.prototype.on = function (event, listener) {
@@ -1292,7 +1294,6 @@ var DisplayObject = /** @class */ (function (_super) {
     };
     return DisplayObject;
 }(EventEmitter));
-//# sourceMappingURL=DisplayObject.js.map
 
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
@@ -1864,6 +1865,7 @@ var Stage = /** @class */ (function (_super) {
     Stage.FIXED_HEIGHT = 'fixedHeight';
     return Stage;
 }(DisplayObject));
+//# sourceMappingURL=Stage.js.map
 
 var ImageView = /** @class */ (function (_super) {
     __extends(ImageView, _super);
