@@ -978,6 +978,81 @@ var Layer = /** @class */ (function (_super) {
         this.$resizeCanvas();
         return this;
     };
+    Layer.prototype.replaceChild = function (oldChild, newChild) {
+        var index = this.getChildIndex(oldChild);
+        if (index >= 0) {
+            this.$children[index] = newChild;
+            oldChild.emit(Event.REMOVED, this);
+            this.$stage && oldChild.emit(Event.REMOVED_FROM_STAGE, this.$stage);
+        }
+        return this;
+    };
+    Layer.prototype.getChildByName = function (name) {
+        var children = this.$children;
+        for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
+            var child = children_1[_i];
+            if (child.name === name) {
+                return child;
+            }
+        }
+        return null;
+    };
+    Layer.prototype.getChildrenByTag = function (tag) {
+        var result = [];
+        var children = this.$children;
+        for (var _i = 0, children_2 = children; _i < children_2.length; _i++) {
+            var child = children_2[_i];
+            if (child.tag === tag) {
+                result.push(child);
+            }
+        }
+        return result;
+    };
+    Layer.prototype.getChildAt = function (index) {
+        return this.$children[index] || null;
+    };
+    Layer.prototype.getChildIndex = function (child) {
+        return this.$children.indexOf(child);
+    };
+    Layer.prototype.swapChildren = function (child1, child2) {
+        var index1 = this.getChildIndex(child1);
+        var index2 = this.getChildIndex(child2);
+        if (index1 >= 0 && index2 >= 0) {
+            this.swapChildrenAt(index1, index2);
+        }
+        return this;
+    };
+    Layer.prototype.swapChildrenAt = function (index1, index2) {
+        if (index1 !== index2) {
+            var child1 = this.$children[index1];
+            var child2 = this.$children[index2];
+            if (child1 && child2) {
+                this.$children[index1] = child2;
+                this.$children[index2] = child1;
+                this.$markDirty();
+            }
+        }
+        return this;
+    };
+    Layer.prototype.setChildIndex = function (child, index) {
+        var children = this.$children;
+        var oldIndex = this.getChildIndex(child);
+        if (oldIndex >= 0 && index > oldIndex) {
+            for (var i = oldIndex + 1; i <= index; ++i) {
+                children[i - 1] = children[i];
+            }
+            children[index] = child;
+            this.$markDirty();
+        }
+        else if (oldIndex >= 0 && index < oldIndex) {
+            for (var i = oldIndex - 1; i >= index; --i) {
+                children[i + 1] = children[i];
+            }
+            children[index] = child;
+            this.$markDirty();
+        }
+        return this;
+    };
     Layer.prototype.removeChild = function (child) {
         var index = this.$children.indexOf(child);
         return this.removeChildAt(index);
@@ -1014,8 +1089,8 @@ var Layer = /** @class */ (function (_super) {
     };
     Layer.prototype.removeAllChildren = function () {
         var children = this.$children;
-        for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
-            var child = children_1[_i];
+        for (var _i = 0, children_3 = children; _i < children_3.length; _i++) {
+            var child = children_3[_i];
             child.emit(Event.REMOVED, this);
             this.$stage && child.emit(Event.REMOVED_FROM_STAGE);
         }
@@ -1023,50 +1098,9 @@ var Layer = /** @class */ (function (_super) {
         this.$resizeCanvas();
         return this;
     };
-    Layer.prototype.getChildByName = function (name) {
-        var children = this.$children;
-        for (var _i = 0, children_2 = children; _i < children_2.length; _i++) {
-            var child = children_2[_i];
-            if (child.name === name) {
-                return child;
-            }
-        }
-        return null;
-    };
-    Layer.prototype.getChildrenByTag = function (tag) {
-        var result = [];
-        var children = this.$children;
-        for (var _i = 0, children_3 = children; _i < children_3.length; _i++) {
-            var child = children_3[_i];
-            if (child.tag === tag) {
-                result.push(child);
-            }
-        }
-        return result;
-    };
-    Layer.prototype.getChildAt = function (index) {
-        return this.$children[index] || null;
-    };
-    Layer.prototype.getChildIndex = function (child) {
-        return this.$children.indexOf(child);
-    };
-    Layer.prototype.swapChildren = function (child1, child2) {
-        var index1 = this.getChildIndex(child1);
-        var index2 = this.getChildIndex(child2);
-        if (index1 >= 0 && index2 >= 0) {
-            this.swapChildrenAt(index1, index2);
-        }
-        return this;
-    };
-    Layer.prototype.swapChildrenAt = function (index1, index2) {
-        if (index1 !== index2) {
-            var child1 = this.$children[index1];
-            var child2 = this.$children[index2];
-            if (child1 && child2) {
-                this.$children[index1] = child2;
-                this.$children[index2] = child1;
-                this.$markDirty();
-            }
+    Layer.prototype.removeSelf = function () {
+        if (this.$parent) {
+            this.$parent.removeChild(this);
         }
         return this;
     };

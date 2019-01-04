@@ -243,6 +243,86 @@ export default class Layer extends EventEmitter {
 		return this;
 	}
 
+	public replaceChild(oldChild: Layer, newChild: Layer): this {
+		let index = this.getChildIndex(oldChild);
+		if (index >= 0) {
+			this.$children[index] = newChild;
+			oldChild.emit(Event.REMOVED, this);
+			this.$stage && oldChild.emit(Event.REMOVED_FROM_STAGE, this.$stage);
+		}
+		return this;
+	}
+
+	public getChildByName(name): Layer {
+		let children = this.$children;
+		for (let child of children) {
+			if (child.name === name) {
+				return child;
+			}
+		}
+		return null;
+	}
+
+	public getChildrenByTag(tag): Array<Layer> {
+		let result = [];
+		let children = this.$children;
+		for (let child of children) {
+			if (child.tag === tag) {
+				result.push(child);
+			}
+		}
+		return result;
+	}
+
+	public getChildAt(index): Layer {
+		return this.$children[index] || null;
+	}
+
+	public getChildIndex(child): number {
+		return this.$children.indexOf(child);
+	}
+
+	public swapChildren(child1, child2): this {
+		let index1 = this.getChildIndex(child1);
+		let index2 = this.getChildIndex(child2);
+		if (index1 >= 0 && index2 >= 0) {
+			this.swapChildrenAt(index1, index2);
+		}
+		return this;
+	}
+
+	public swapChildrenAt(index1, index2) {
+		if (index1 !== index2) {
+			let child1 = this.$children[index1];
+			let child2 = this.$children[index2];
+			if (child1 && child2) {
+				this.$children[index1] = child2;
+				this.$children[index2] = child1;
+				this.$markDirty();
+			}
+		}
+		return this;
+	}
+
+	public setChildIndex(child: Layer, index: number): this {
+		let children = this.$children;
+		let oldIndex = this.getChildIndex(child);
+		if (oldIndex >= 0 && index > oldIndex) {
+			for (let i = oldIndex + 1; i <= index; ++i) {
+				children[i - 1] = children[i];
+			}
+			children[index] = child;
+			this.$markDirty();
+		} else if (oldIndex >= 0 && index < oldIndex) {
+			for (let i = oldIndex - 1; i >= index; --i) {
+				children[i + 1] = children[i];
+			}
+			children[index] = child;
+			this.$markDirty();
+		}
+		return this;
+	}
+
 	public removeChild(child: Layer): this {
 		let index = this.$children.indexOf(child);
 		return this.removeChildAt(index);
@@ -292,53 +372,9 @@ export default class Layer extends EventEmitter {
 		return this;
 	}
 
-	getChildByName(name): Layer {
-		let children = this.$children;
-		for (let child of children) {
-			if (child.name === name) {
-				return child;
-			}
-		}
-		return null;
-	}
-
-	public getChildrenByTag(tag): Array<Layer> {
-		let result = [];
-		let children = this.$children;
-		for (let child of children) {
-			if (child.tag === tag) {
-				result.push(child);
-			}
-		}
-		return result;
-	}
-
-	public getChildAt(index): Layer {
-		return this.$children[index] || null;
-	}
-
-	public getChildIndex(child): number {
-		return this.$children.indexOf(child);
-	}
-
-	public swapChildren(child1, child2): this {
-		let index1 = this.getChildIndex(child1);
-		let index2 = this.getChildIndex(child2);
-		if (index1 >= 0 && index2 >= 0) {
-			this.swapChildrenAt(index1, index2);
-		}
-		return this;
-	}
-
-	public swapChildrenAt(index1, index2) {
-		if (index1 !== index2) {
-			let child1 = this.$children[index1];
-			let child2 = this.$children[index2];
-			if (child1 && child2) {
-				this.$children[index1] = child2;
-				this.$children[index2] = child1;
-				this.$markDirty();
-			}
+	public removeSelf(): this {
+		if (this.$parent) {
+			this.$parent.removeChild(this);
 		}
 		return this;
 	}
