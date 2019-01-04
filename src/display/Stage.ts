@@ -17,22 +17,33 @@ export default class Stage extends DisplayObject {
 	public static FIXED_HEIGHT: string = 'fixedHeight';
 
 	protected $scaleMode: string;
-	protected $fullscreen: boolean;
+	protected $viewportWidth: number;
+	protected $viewportHeight: number;
 	protected $renderBounds: Rectangle;
 	protected readonly $ticker: Ticker;
-	protected readonly $stageCanvas: HTMLCanvasElement;
-	protected readonly $stageContext: CanvasRenderingContext2D;
+	protected readonly $viewportCanvas: HTMLCanvasElement;
+	protected readonly $viewportContext: CanvasRenderingContext2D;
+	protected readonly $boundOnWindowResize: () => void;
 
 	public constructor(canvas?: HTMLCanvasElement) {
 		super();
 		this.$scaleMode = Stage.SHOW_ALL;
-		this.$stageCanvas = canvas || document.createElement('canvas');
-		this.$stageContext = this.$stageCanvas.getContext('2d');
 		this.$ticker = new Ticker(this);
-		this.fullscreen = true;
+		this.$viewportCanvas = canvas || document.createElement('canvas');
+		this.$viewportContext = this.$viewportCanvas.getContext('2d');
+		this.$boundOnWindowResize = this.$onWindowResize.bind(this);
 		this.$initEvents();
+
+		this.width = 640;
+		this.height = 1136;
+		this.viewportWidth = 0;
+		this.viewportHeight = 0;
+
 		if (!canvas) {
-			document.body.appendChild(this.$stageCanvas);
+			this.$viewportCanvas.style.top = '0';
+			this.$viewportCanvas.style.left = '0';
+			this.$viewportCanvas.style.position = 'fixed';
+			document.body.appendChild(this.$viewportCanvas);
 		}
 	}
 
@@ -46,9 +57,7 @@ export default class Stage extends DisplayObject {
 		});
 		window.addEventListener('resize', () => {
 			ticker.clearTimeout(resizeTimer);
-			resizeTimer = ticker.setTimeout(() => {
-				this.fullscreen = this.fullscreen;
-			}, 100);
+			resizeTimer = ticker.setTimeout(this.$boundOnWindowResize, 100);
 		});
 	}
 
@@ -68,41 +77,28 @@ export default class Stage extends DisplayObject {
 		this.$y = 0;
 	}
 
-	public get stageWidth(): number {
-		return this.$stageCanvas.width / this.$pixelRatio;
+	public get viewportWidth(): number {
+		return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / this.$pixelRatio;
 	}
 
-	public set stageWidth(width: number) {
-		this.$fullscreen = false;
-		this.$stageCanvas.width = width * this.$pixelRatio;
-		this.$stageCanvas.style.width = width + 'px';
-		this.$markDirty();
+	public set viewportWidth(width: number) {
+		this.$viewportWidth = width;
+		width = width || window.innerWidth;
+		this.$viewportCanvas.width = width * this.$pixelRatio;
+		this.$viewportCanvas.style.width = width + 'px';
+		this.$resizeCanvas();
 	}
 
-	public get stageHeight(): number {
-		return this.$stageCanvas.height / this.$pixelRatio;
+	public get viewportHeight(): number {
+		return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / this.$pixelRatio;
 	}
 
-	public set stageHeight(height: number) {
-		this.$fullscreen = false;
-		this.$stageCanvas.height = height * this.$pixelRatio;
-		this.$stageCanvas.style.height = height + 'px';
-		this.$markDirty();
-	}
-
-	public get fullscreen(): boolean {
-		return this.$fullscreen;
-	}
-
-	public set fullscreen(fullscreen: boolean) {
-		if (fullscreen) {
-			this.stageWidth = window.innerWidth;
-			this.stageHeight = window.innerHeight;
-			this.$stageCanvas.style.top = '0';
-			this.$stageCanvas.style.left = '0';
-			this.$stageCanvas.style.position = 'absolute';
-		}
-		this.$fullscreen = fullscreen;
+	public set viewportHeight(height: number) {
+		this.$viewportHeight = height;
+		height = height || window.innerHeight;
+		this.$viewportCanvas.height = height * this.$pixelRatio;
+		this.$viewportCanvas.style.height = height + 'px';
+		this.$resizeCanvas();
 	}
 
 	public get scaleMode(): string {
@@ -111,7 +107,7 @@ export default class Stage extends DisplayObject {
 
 	public set scaleMode(scaleMode: string) {
 		this.$scaleMode = scaleMode;
-		this.$markDirty();
+		this.$resizeCanvas();
 	}
 
 	public get ticker(): Ticker {
@@ -123,7 +119,7 @@ export default class Stage extends DisplayObject {
 	}
 
 	protected $addTouchEventListeners(): void {
-		let canvas = this.$stageCanvas;
+		let canvas = this.$viewportCanvas;
 		if (canvas.ontouchstart !== undefined) {
 			canvas.addEventListener('touchstart', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_START, event);
@@ -176,10 +172,10 @@ export default class Stage extends DisplayObject {
 		let width = this.$canvas.width;
 		let height = this.$canvas.height;
 		let pixelRatio = this.$pixelRatio;
-		let bounds = this.getRenderBounds();
-		let stageBounds = this.$stageCanvas.getBoundingClientRect();
-		let x = (touch.pageX - stageBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
-		let y = (touch.pageY - stageBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+		let bounds = this.$renderBounds;
+		let viewportBounds = this.$viewportCanvas.getBoundingClientRect();
+		let x = (touch.pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+		let y = (touch.pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
 		event.targetX = event.stageX = x;
 		event.targetY = event.stageY = y;
 		event.identifier = touch instanceof Touch ? touch.identifier : 0;
@@ -187,92 +183,104 @@ export default class Stage extends DisplayObject {
 		event.release();
 	}
 
-	protected getRenderBounds(): Rectangle {
-		let bounds = this.$renderBounds = this.$renderBounds || Rectangle.create();
-		if (!this.$dirty) {
-			return bounds;
-		}
+	protected $calculateRenderBounds(): void {
 		let x = 0;
 		let y = 0;
 		let canvas = this.$canvas;
-		let stageCanvas = this.$stageCanvas;
-		let scaleMode = this.scaleMode;
 		let width = canvas.width;
 		let height = canvas.height;
-		let stageWidth = stageCanvas.width;
-		let stageHeight = stageCanvas.height;
+		let scaleMode = this.scaleMode;
 		let aspectRatio = width / height;
-		let stageAspectRatio = stageWidth / stageHeight;
+		let viewportCanvas = this.$viewportCanvas;
+		let viewportWidth = viewportCanvas.width;
+		let viewportHeight = viewportCanvas.height;
+		let viewportAspectRatio = viewportWidth / viewportHeight;
+		let bounds = this.$renderBounds || Rectangle.create();
 		if (scaleMode === Stage.NO_SCALE) {
 		} else if (scaleMode === Stage.NO_BORDER) {
-			if (aspectRatio < stageAspectRatio) {
-				width = stageWidth;
+			if (aspectRatio < viewportAspectRatio) {
+				width = viewportWidth;
 				height = width / aspectRatio;
 			} else {
-				height = stageHeight;
+				height = viewportHeight;
 				width = height * aspectRatio;
 			}
-			x = (stageWidth - width) / 2;
-			y = (stageHeight - height) / 2;
+			x = (viewportWidth - width) / 2;
+			y = (viewportHeight - height) / 2;
 		} else if (scaleMode === Stage.SHOW_ALL) {
-			if (aspectRatio > stageAspectRatio) {
-				width = stageWidth;
+			if (aspectRatio > viewportAspectRatio) {
+				width = viewportWidth;
 				height = width / aspectRatio;
 			} else {
-				height = stageHeight;
+				height = viewportHeight;
 				width = height * aspectRatio;
 			}
 		} else if (scaleMode === Stage.EXACT_FIT) {
-			width = stageWidth;
-			height = stageHeight;
+			width = viewportWidth;
+			height = viewportHeight;
 		} else if (scaleMode === Stage.FIXED_WIDTH) {
-			width = stageWidth;
+			width = viewportWidth;
 			height = width / aspectRatio;
 		} else if (scaleMode === Stage.FIXED_HEIGHT) {
-			height = stageHeight;
+			height = viewportHeight;
 			width = height * aspectRatio;
 		} else if (scaleMode === Stage.FIXED_WIDE) {
-			if (stageWidth > stageHeight) {
-				width = stageWidth;
+			if (viewportWidth > viewportHeight) {
+				width = viewportWidth;
 				height = width / aspectRatio;
 			} else {
-				height = stageHeight;
+				height = viewportHeight;
 				width = height * aspectRatio;
 			}
 		} else if (scaleMode === Stage.FIXED_NARROW) {
-			if (stageWidth < stageHeight) {
-				width = stageWidth;
+			if (viewportWidth < viewportHeight) {
+				width = viewportWidth;
 				height = width / aspectRatio;
 			} else {
-				height = stageHeight;
+				height = viewportHeight;
 				width = height * aspectRatio;
 			}
 		}
-		if (width < stageWidth) {
-			x = (stageWidth - width) / 2;
+		if (width < viewportWidth) {
+			x = (viewportWidth - width) / 2;
 		}
-		if (height < stageHeight) {
-			y = (stageHeight - height) / 2;
+		if (height < viewportHeight) {
+			y = (viewportHeight - height) / 2;
 		}
 		bounds.x = x;
 		bounds.y = y;
 		bounds.width = width;
 		bounds.height = height;
-		return bounds;
+		this.$renderBounds = bounds;
+	}
+
+	protected $resizeCanvas() {
+		super.$resizeCanvas();
+		this.$calculateRenderBounds();
 	}
 
 	protected $render(): void {
-		let bounds = this.getRenderBounds();
-		if (this.$dirty) {
-			super.$render();
-			let canvas = this.$canvas;
-			let ctx = this.$stageContext;
-			let stageCanvas = this.$stageCanvas;
-			let stageWidth = stageCanvas.width;
-			let stageHeight = stageCanvas.height;
-			ctx.clearRect(0, 0, stageWidth, stageHeight);
-			ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
+		if (!this.$dirty) {
+			return;
 		}
+		super.$render();
+		let canvas = this.$canvas;
+		let ctx = this.$viewportContext;
+		let bounds = this.$renderBounds;
+		let viewportCanvas = this.$viewportCanvas;
+		let viewportWidth = viewportCanvas.width;
+		let viewportHeight = viewportCanvas.height;
+		ctx.clearRect(0, 0, viewportWidth, viewportHeight);
+		ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
+	}
+
+	protected $onWindowResize(): void {
+		let viewportWidth = this.$viewportWidth;
+		let viewportHeight = this.$viewportHeight;
+		this.viewportWidth = viewportWidth;
+		this.viewportHeight = viewportHeight;
+		this.$viewportWidth = viewportWidth;
+		this.$viewportHeight = viewportHeight;
 	}
 
 }

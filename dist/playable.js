@@ -1525,19 +1525,27 @@ var playable = (function (exports) {
         ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
         return ResourceManager;
     }(EventEmitter));
+    //# sourceMappingURL=ResourceManager.js.map
 
     var Stage = /** @class */ (function (_super) {
         __extends(Stage, _super);
         function Stage(canvas) {
             var _this = _super.call(this) || this;
             _this.$scaleMode = Stage.SHOW_ALL;
-            _this.$stageCanvas = canvas || document.createElement('canvas');
-            _this.$stageContext = _this.$stageCanvas.getContext('2d');
             _this.$ticker = new Ticker(_this);
-            _this.fullscreen = true;
+            _this.$viewportCanvas = canvas || document.createElement('canvas');
+            _this.$viewportContext = _this.$viewportCanvas.getContext('2d');
+            _this.$boundOnWindowResize = _this.$onWindowResize.bind(_this);
             _this.$initEvents();
+            _this.width = 640;
+            _this.height = 1136;
+            _this.viewportWidth = 0;
+            _this.viewportHeight = 0;
             if (!canvas) {
-                document.body.appendChild(_this.$stageCanvas);
+                _this.$viewportCanvas.style.top = '0';
+                _this.$viewportCanvas.style.left = '0';
+                _this.$viewportCanvas.style.position = 'fixed';
+                document.body.appendChild(_this.$viewportCanvas);
             }
             return _this;
         }
@@ -1552,9 +1560,7 @@ var playable = (function (exports) {
             });
             window.addEventListener('resize', function () {
                 ticker.clearTimeout(resizeTimer);
-                resizeTimer = ticker.setTimeout(function () {
-                    _this.fullscreen = _this.fullscreen;
-                }, 100);
+                resizeTimer = ticker.setTimeout(_this.$boundOnWindowResize, 100);
             });
         };
         Object.defineProperty(Stage.prototype, "x", {
@@ -1577,45 +1583,30 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Stage.prototype, "stageWidth", {
+        Object.defineProperty(Stage.prototype, "viewportWidth", {
             get: function () {
-                return this.$stageCanvas.width / this.$pixelRatio;
+                return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / this.$pixelRatio;
             },
             set: function (width) {
-                this.$fullscreen = false;
-                this.$stageCanvas.width = width * this.$pixelRatio;
-                this.$stageCanvas.style.width = width + 'px';
-                this.$markDirty();
+                this.$viewportWidth = width;
+                width = width || window.innerWidth;
+                this.$viewportCanvas.width = width * this.$pixelRatio;
+                this.$viewportCanvas.style.width = width + 'px';
+                this.$resizeCanvas();
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Stage.prototype, "stageHeight", {
+        Object.defineProperty(Stage.prototype, "viewportHeight", {
             get: function () {
-                return this.$stageCanvas.height / this.$pixelRatio;
+                return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / this.$pixelRatio;
             },
             set: function (height) {
-                this.$fullscreen = false;
-                this.$stageCanvas.height = height * this.$pixelRatio;
-                this.$stageCanvas.style.height = height + 'px';
-                this.$markDirty();
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Stage.prototype, "fullscreen", {
-            get: function () {
-                return this.$fullscreen;
-            },
-            set: function (fullscreen) {
-                if (fullscreen) {
-                    this.stageWidth = window.innerWidth;
-                    this.stageHeight = window.innerHeight;
-                    this.$stageCanvas.style.top = '0';
-                    this.$stageCanvas.style.left = '0';
-                    this.$stageCanvas.style.position = 'absolute';
-                }
-                this.$fullscreen = fullscreen;
+                this.$viewportHeight = height;
+                height = height || window.innerHeight;
+                this.$viewportCanvas.height = height * this.$pixelRatio;
+                this.$viewportCanvas.style.height = height + 'px';
+                this.$resizeCanvas();
             },
             enumerable: true,
             configurable: true
@@ -1626,7 +1617,7 @@ var playable = (function (exports) {
             },
             set: function (scaleMode) {
                 this.$scaleMode = scaleMode;
-                this.$markDirty();
+                this.$resizeCanvas();
             },
             enumerable: true,
             configurable: true
@@ -1643,7 +1634,7 @@ var playable = (function (exports) {
         };
         Stage.prototype.$addTouchEventListeners = function () {
             var _this = this;
-            var canvas = this.$stageCanvas;
+            var canvas = this.$viewportCanvas;
             if (canvas.ontouchstart !== undefined) {
                 canvas.addEventListener('touchstart', function (event) {
                     _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
@@ -1695,111 +1686,121 @@ var playable = (function (exports) {
             var width = this.$canvas.width;
             var height = this.$canvas.height;
             var pixelRatio = this.$pixelRatio;
-            var bounds = this.getRenderBounds();
-            var stageBounds = this.$stageCanvas.getBoundingClientRect();
-            var x = (touch.pageX - stageBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
-            var y = (touch.pageY - stageBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+            var bounds = this.$renderBounds;
+            var viewportBounds = this.$viewportCanvas.getBoundingClientRect();
+            var x = (touch.pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+            var y = (touch.pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
             event.targetX = event.stageX = x;
             event.targetY = event.stageY = y;
             event.identifier = touch instanceof Touch ? touch.identifier : 0;
             this.$emitTouchEvent(event);
             event.release();
         };
-        Stage.prototype.getRenderBounds = function () {
-            var bounds = this.$renderBounds = this.$renderBounds || Rectangle.create();
-            if (!this.$dirty) {
-                return bounds;
-            }
+        Stage.prototype.$calculateRenderBounds = function () {
             var x = 0;
             var y = 0;
             var canvas = this.$canvas;
-            var stageCanvas = this.$stageCanvas;
-            var scaleMode = this.scaleMode;
             var width = canvas.width;
             var height = canvas.height;
-            var stageWidth = stageCanvas.width;
-            var stageHeight = stageCanvas.height;
+            var scaleMode = this.scaleMode;
             var aspectRatio = width / height;
-            var stageAspectRatio = stageWidth / stageHeight;
+            var viewportCanvas = this.$viewportCanvas;
+            var viewportWidth = viewportCanvas.width;
+            var viewportHeight = viewportCanvas.height;
+            var viewportAspectRatio = viewportWidth / viewportHeight;
+            var bounds = this.$renderBounds || Rectangle.create();
             if (scaleMode === Stage.NO_SCALE) ;
             else if (scaleMode === Stage.NO_BORDER) {
-                if (aspectRatio < stageAspectRatio) {
-                    width = stageWidth;
+                if (aspectRatio < viewportAspectRatio) {
+                    width = viewportWidth;
                     height = width / aspectRatio;
                 }
                 else {
-                    height = stageHeight;
+                    height = viewportHeight;
                     width = height * aspectRatio;
                 }
-                x = (stageWidth - width) / 2;
-                y = (stageHeight - height) / 2;
+                x = (viewportWidth - width) / 2;
+                y = (viewportHeight - height) / 2;
             }
             else if (scaleMode === Stage.SHOW_ALL) {
-                if (aspectRatio > stageAspectRatio) {
-                    width = stageWidth;
+                if (aspectRatio > viewportAspectRatio) {
+                    width = viewportWidth;
                     height = width / aspectRatio;
                 }
                 else {
-                    height = stageHeight;
+                    height = viewportHeight;
                     width = height * aspectRatio;
                 }
             }
             else if (scaleMode === Stage.EXACT_FIT) {
-                width = stageWidth;
-                height = stageHeight;
+                width = viewportWidth;
+                height = viewportHeight;
             }
             else if (scaleMode === Stage.FIXED_WIDTH) {
-                width = stageWidth;
+                width = viewportWidth;
                 height = width / aspectRatio;
             }
             else if (scaleMode === Stage.FIXED_HEIGHT) {
-                height = stageHeight;
+                height = viewportHeight;
                 width = height * aspectRatio;
             }
             else if (scaleMode === Stage.FIXED_WIDE) {
-                if (stageWidth > stageHeight) {
-                    width = stageWidth;
+                if (viewportWidth > viewportHeight) {
+                    width = viewportWidth;
                     height = width / aspectRatio;
                 }
                 else {
-                    height = stageHeight;
+                    height = viewportHeight;
                     width = height * aspectRatio;
                 }
             }
             else if (scaleMode === Stage.FIXED_NARROW) {
-                if (stageWidth < stageHeight) {
-                    width = stageWidth;
+                if (viewportWidth < viewportHeight) {
+                    width = viewportWidth;
                     height = width / aspectRatio;
                 }
                 else {
-                    height = stageHeight;
+                    height = viewportHeight;
                     width = height * aspectRatio;
                 }
             }
-            if (width < stageWidth) {
-                x = (stageWidth - width) / 2;
+            if (width < viewportWidth) {
+                x = (viewportWidth - width) / 2;
             }
-            if (height < stageHeight) {
-                y = (stageHeight - height) / 2;
+            if (height < viewportHeight) {
+                y = (viewportHeight - height) / 2;
             }
             bounds.x = x;
             bounds.y = y;
             bounds.width = width;
             bounds.height = height;
-            return bounds;
+            this.$renderBounds = bounds;
+        };
+        Stage.prototype.$resizeCanvas = function () {
+            _super.prototype.$resizeCanvas.call(this);
+            this.$calculateRenderBounds();
         };
         Stage.prototype.$render = function () {
-            var bounds = this.getRenderBounds();
-            if (this.$dirty) {
-                _super.prototype.$render.call(this);
-                var canvas = this.$canvas;
-                var ctx = this.$stageContext;
-                var stageCanvas = this.$stageCanvas;
-                var stageWidth = stageCanvas.width;
-                var stageHeight = stageCanvas.height;
-                ctx.clearRect(0, 0, stageWidth, stageHeight);
-                ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
+            if (!this.$dirty) {
+                return;
             }
+            _super.prototype.$render.call(this);
+            var canvas = this.$canvas;
+            var ctx = this.$viewportContext;
+            var bounds = this.$renderBounds;
+            var viewportCanvas = this.$viewportCanvas;
+            var viewportWidth = viewportCanvas.width;
+            var viewportHeight = viewportCanvas.height;
+            ctx.clearRect(0, 0, viewportWidth, viewportHeight);
+            ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
+        };
+        Stage.prototype.$onWindowResize = function () {
+            var viewportWidth = this.$viewportWidth;
+            var viewportHeight = this.$viewportHeight;
+            this.viewportWidth = viewportWidth;
+            this.viewportHeight = viewportHeight;
+            this.$viewportWidth = viewportWidth;
+            this.$viewportHeight = viewportHeight;
         };
         Stage.NO_SCALE = 'noScale';
         Stage.NO_BORDER = 'noBorder';
@@ -1811,7 +1812,6 @@ var playable = (function (exports) {
         Stage.FIXED_HEIGHT = 'fixedHeight';
         return Stage;
     }(DisplayObject));
-    //# sourceMappingURL=Stage.js.map
 
     var ImageView = /** @class */ (function (_super) {
         __extends(ImageView, _super);
