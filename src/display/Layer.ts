@@ -382,6 +382,7 @@ export default class Layer extends EventEmitter {
 		bounds.bottom = maxY;
 		bounds.left = minX;
 		bounds.right = maxX;
+		matrix.release();
 		topLeft.release();
 		topRight.release();
 		bottomLeft.release();

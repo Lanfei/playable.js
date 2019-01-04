@@ -1,10 +1,10 @@
+import Layer from './Layer';
 import Image from '../media/Image';
 import Ticker from '../core/Ticker';
 import Event from '../event/Event';
 import Rectangle from '../geom/Rectangle';
-import DisplayObject from './DisplayObject';
 import ResourceManager, { ResourceInfo, ResourceManagerOption } from '../net/ResourceManager';
-export default class Stage extends DisplayObject {
+export default class Stage extends Layer {
     static NO_SCALE: string;
     static NO_BORDER: string;
     static SHOW_ALL: string;

@@ -51,7 +51,6 @@ var Event = /** @class */ (function () {
     Event.SOUND_COMPLETE = 'soundComplete';
     return Event;
 }());
-//# sourceMappingURL=Event.js.map
 
 var EventEmitter = /** @class */ (function () {
     function EventEmitter() {
@@ -101,7 +100,6 @@ var EventEmitter = /** @class */ (function () {
     };
     return EventEmitter;
 }());
-//# sourceMappingURL=EventEmitter.js.map
 
 var Ticker = /** @class */ (function (_super) {
     __extends(Ticker, _super);
@@ -239,7 +237,6 @@ var Ticker = /** @class */ (function (_super) {
     };
     return Ticker;
 }(EventEmitter));
-//# sourceMappingURL=Ticker.js.map
 
 var Media = /** @class */ (function (_super) {
     __extends(Media, _super);
@@ -277,7 +274,6 @@ var Media = /** @class */ (function (_super) {
     };
     return Media;
 }(EventEmitter));
-//# sourceMappingURL=Media.js.map
 
 var Image = /** @class */ (function (_super) {
     __extends(Image, _super);
@@ -319,7 +315,6 @@ var Image = /** @class */ (function (_super) {
     });
     return Image;
 }(Media));
-//# sourceMappingURL=Image.js.map
 
 var Vector = /** @class */ (function () {
     function Vector(x, y) {
@@ -436,7 +431,6 @@ var Vector = /** @class */ (function () {
     Vector.$pool = [];
     return Vector;
 }());
-//# sourceMappingURL=Vector.js.map
 
 var Matrix = /** @class */ (function () {
     function Matrix(a, b, c, d, tx, ty) {
@@ -565,7 +559,6 @@ var Matrix = /** @class */ (function () {
     Matrix.$pool = [];
     return Matrix;
 }());
-//# sourceMappingURL=Matrix.js.map
 
 var Rectangle = /** @class */ (function () {
     function Rectangle(x, y, width, height) {
@@ -664,7 +657,6 @@ var Rectangle = /** @class */ (function () {
     Rectangle.$pool = [];
     return Rectangle;
 }());
-//# sourceMappingURL=Rectangle.js.map
 
 var TouchEvent = /** @class */ (function (_super) {
     __extends(TouchEvent, _super);
@@ -1116,6 +1108,7 @@ var Layer = /** @class */ (function (_super) {
         bounds.bottom = maxY;
         bounds.left = minX;
         bounds.right = maxX;
+        matrix.release();
         topLeft.release();
         topRight.release();
         bottomLeft.release();
@@ -1294,7 +1287,6 @@ var Layer = /** @class */ (function (_super) {
     };
     return Layer;
 }(EventEmitter));
-//# sourceMappingURL=Layer.js.map
 
 var ImageView = /** @class */ (function (_super) {
     __extends(ImageView, _super);
@@ -1346,7 +1338,6 @@ var ImageView = /** @class */ (function (_super) {
     };
     return ImageView;
 }(Layer));
-//# sourceMappingURL=ImageView.js.map
 
 var TextView = /** @class */ (function (_super) {
     __extends(TextView, _super);
@@ -1702,7 +1693,6 @@ var TextView = /** @class */ (function (_super) {
     TextView.boundaryRe = /\b/;
     return TextView;
 }(Layer));
-//# sourceMappingURL=TextView.js.map
 
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
@@ -1811,7 +1801,6 @@ var Sound = /** @class */ (function (_super) {
     };
     return Sound;
 }(Media));
-//# sourceMappingURL=Sound.js.map
 
 var SoundEffect = /** @class */ (function (_super) {
     __extends(SoundEffect, _super);
@@ -1820,7 +1809,6 @@ var SoundEffect = /** @class */ (function (_super) {
     }
     return SoundEffect;
 }(Sound));
-//# sourceMappingURL=SoundEffect.js.map
 
 var ResourceManager = /** @class */ (function (_super) {
     __extends(ResourceManager, _super);
@@ -1952,7 +1940,6 @@ var ResourceManager = /** @class */ (function (_super) {
     ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
     return ResourceManager;
 }(EventEmitter));
-//# sourceMappingURL=ResourceManager.js.map
 
 var Stage = /** @class */ (function (_super) {
     __extends(Stage, _super);
@@ -2265,7 +2252,6 @@ var Stage = /** @class */ (function (_super) {
     Stage.FIXED_HEIGHT = 'fixedHeight';
     return Stage;
 }(Layer));
-//# sourceMappingURL=Stage.js.map
 
 var Ease = /** @class */ (function () {
     function Ease() {
@@ -2449,7 +2435,6 @@ var Ease = /** @class */ (function () {
     };
     return Ease;
 }());
-//# sourceMappingURL=Ease.js.map
 
 var Tween = /** @class */ (function (_super) {
     __extends(Tween, _super);
@@ -2642,9 +2627,6 @@ var Tween = /** @class */ (function (_super) {
     Tween.$tweens = [];
     return Tween;
 }(EventEmitter));
-//# sourceMappingURL=Tween.js.map
-
-//# sourceMappingURL=index.js.map
 
 exports.Ticker = Ticker;
 exports.Layer = Layer;

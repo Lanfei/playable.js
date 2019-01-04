@@ -1,11 +1,13 @@
 import Event from './Event';
-import DisplayObject from '../display/DisplayObject';
+import Layer from '../display/Layer';
 export default class TouchEvent extends Event {
     static TOUCH_START: string;
     static TOUCH_MOVE: string;
     static TOUCH_END: string;
     static TOUCH_CANCEL: string;
     static TOUCH_TAP: string;
+    target: Layer;
+    currentTarget: Layer;
     targetX: number;
     targetY: number;
     localX: number;
@@ -13,8 +15,6 @@ export default class TouchEvent extends Event {
     stageX: number;
     stageY: number;
     identifier: number;
-    target: DisplayObject;
-    currentTarget: DisplayObject;
     propagationStopped: boolean;
     constructor(type: string);
     protected $init(type: string): this;
@@ -22,5 +22,5 @@ export default class TouchEvent extends Event {
     release(): void;
     private static $pool;
     static create(type: string): TouchEvent;
-    static recycle(displayObject: TouchEvent): void;
+    static recycle(e: TouchEvent): void;
 }

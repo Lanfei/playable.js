@@ -1,6 +1,6 @@
-import EventEmitter from '../event/EventEmitter';
+import Layer from '../display/Layer';
 import Stage from '../display/Stage';
-import DisplayObject from '../display/DisplayObject';
+import EventEmitter from '../event/EventEmitter';
 export default class Ticker extends EventEmitter {
     private $stage;
     private $paused;
@@ -19,8 +19,8 @@ export default class Ticker extends EventEmitter {
     clearTimeout(handle: number): void;
     setInterval(handler: Function, timeout: number): number;
     clearInterval(handle: number): void;
-    registerEnterFrameCallback(displayObject: DisplayObject): this;
-    unregisterEnterFrameCallback(displayObject: DisplayObject): this;
+    registerEnterFrameCallback(layer: Layer): this;
+    unregisterEnterFrameCallback(layer: Layer): this;
     private $tick;
     private $checkTimers;
 }

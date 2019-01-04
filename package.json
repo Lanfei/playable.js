@@ -1,16 +1,16 @@
 {
   "name": "playable.js",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "author": "Jealous",
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.common.js",
   "typings": "types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c",
-    "build:types": "tsc",
-    "watch": "rollup -c -w",
-    "watch:types": "tsc -w"
+    "build": "rimraf dist && rollup -c",
+    "build:types": "rimraf types && tsc",
+    "watch": "rimraf dist && rollup -c -w",
+    "watch:types": "rimraf types && tsc -w"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "events": "^3.0.0"
   },
   "devDependencies": {
+    "rimraf": "^2.6.3",
     "rollup": "^1.0.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-typescript": "^1.0.0",
