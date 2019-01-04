@@ -1,7 +1,7 @@
+import Layer from './Layer';
 import Image from '../media/Image';
-import DisplayObject from './DisplayObject';
 
-export default class ImageView extends DisplayObject {
+export default class ImageView extends Layer {
 
 	protected $image: Image;
 	private readonly $boundOnImageLoad: () => void;

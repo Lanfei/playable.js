@@ -1,6 +1,6 @@
-import DisplayObject from './DisplayObject';
+import Layer from './Layer';
 
-export default class ScrollView extends DisplayObject {
+export default class ScrollView extends Layer {
 
 	protected $scrollX: number = 0;
 	protected $scrollY: number = 0;

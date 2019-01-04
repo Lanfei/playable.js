@@ -1,5 +1,5 @@
 import Event from './Event';
-import DisplayObject from '../display/DisplayObject';
+import Layer from '../display/Layer';
 
 export default class TouchEvent extends Event {
 
@@ -9,6 +9,8 @@ export default class TouchEvent extends Event {
 	public static TOUCH_CANCEL: string = 'touchCancel';
 	public static TOUCH_TAP: string = 'touchTap';
 
+	public target: Layer;
+	public currentTarget: Layer;
 	public targetX: number;
 	public targetY: number;
 	public localX: number;
@@ -16,8 +18,6 @@ export default class TouchEvent extends Event {
 	public stageX: number;
 	public stageY: number;
 	public identifier: number;
-	public target: DisplayObject;
-	public currentTarget: DisplayObject;
 	public propagationStopped: boolean;
 
 	public constructor(type: string) {
@@ -57,8 +57,8 @@ export default class TouchEvent extends Event {
 		}
 	}
 
-	public static recycle(displayObject: TouchEvent) {
-		this.$pool.push(displayObject);
+	public static recycle(e: TouchEvent) {
+		this.$pool.push(e);
 	}
 
 }

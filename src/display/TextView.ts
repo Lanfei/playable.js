@@ -1,7 +1,7 @@
+import Layer from './Layer';
 import Rectangle from '../geom/Rectangle';
-import DisplayObject from './DisplayObject';
 
-export default class TextView extends DisplayObject {
+export default class TextView extends Layer {
 
 	private static wordRe: RegExp = /\w+/;
 	private static boundaryRe: RegExp = /\b/;

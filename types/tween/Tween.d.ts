@@ -1,8 +1,8 @@
+import Layer from '../display/Layer';
 import EventEmitter from '../event/EventEmitter';
-import DisplayObject from '../display/DisplayObject';
 export default class Tween extends EventEmitter {
     loop: boolean;
-    protected $target: DisplayObject;
+    protected $target: Layer;
     protected $paused: boolean;
     protected $stepIndex: number;
     protected $stepPosition: number;
@@ -23,12 +23,12 @@ export default class Tween extends EventEmitter {
     protected $easeProps(stepIndex: number, props: Object, position: number, duration: number, ease: Function): void;
     protected $setProps(props: Object): void;
     private static $tweens;
-    static get(target: DisplayObject, option?: {
+    static get(target: Layer, option?: {
         loop?: boolean;
     }): Tween;
-    static pauseTweens(target: DisplayObject): void;
-    static resumeTweens(target: DisplayObject): void;
-    static removeTweens(target: DisplayObject): void;
+    static pauseTweens(target: Layer): void;
+    static resumeTweens(target: Layer): void;
+    static removeTweens(target: Layer): void;
     static removeAllTweens(): void;
 }
 export interface TweenStep {

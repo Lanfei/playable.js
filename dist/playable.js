@@ -189,16 +189,16 @@ var playable = (function (exports) {
         Ticker.prototype.clearInterval = function (handle) {
             delete this.$timers[handle];
         };
-        Ticker.prototype.registerEnterFrameCallback = function (displayObject) {
+        Ticker.prototype.registerEnterFrameCallback = function (layer) {
             var list = this.$enterFrameCallbackList;
-            if (list.indexOf(displayObject) < 0) {
-                list.push(displayObject);
+            if (list.indexOf(layer) < 0) {
+                list.push(layer);
             }
             return this;
         };
-        Ticker.prototype.unregisterEnterFrameCallback = function (displayObject) {
+        Ticker.prototype.unregisterEnterFrameCallback = function (layer) {
             var list = this.$enterFrameCallbackList;
-            var index = list.indexOf(displayObject);
+            var index = list.indexOf(layer);
             if (index >= 0) {
                 list.splice(index, 1);
             }
@@ -212,8 +212,8 @@ var playable = (function (exports) {
             var deltaTime = now - this.$lastTimestamp;
             var enterFrameCallbackList = this.$enterFrameCallbackList;
             for (var _i = 0, enterFrameCallbackList_1 = enterFrameCallbackList; _i < enterFrameCallbackList_1.length; _i++) {
-                var displayObject = enterFrameCallbackList_1[_i];
-                displayObject.emit(Event.ENTER_FRAME, deltaTime);
+                var layer = enterFrameCallbackList_1[_i];
+                layer.emit(Event.ENTER_FRAME, deltaTime);
             }
             this.emit(Event.TICK, deltaTime);
             this.$lastTimestamp = Date.now();
@@ -699,8 +699,8 @@ var playable = (function (exports) {
                 return new TouchEvent(type);
             }
         };
-        TouchEvent.recycle = function (displayObject) {
-            this.$pool.push(displayObject);
+        TouchEvent.recycle = function (e) {
+            this.$pool.push(e);
         };
         TouchEvent.TOUCH_START = 'touchStart';
         TouchEvent.TOUCH_MOVE = 'touchMove';
@@ -710,11 +710,10 @@ var playable = (function (exports) {
         TouchEvent.$pool = [];
         return TouchEvent;
     }(Event));
-    //# sourceMappingURL=TouchEvent.js.map
 
-    var DisplayObject = /** @class */ (function (_super) {
-        __extends(DisplayObject, _super);
-        function DisplayObject() {
+    var Layer = /** @class */ (function (_super) {
+        __extends(Layer, _super);
+        function Layer() {
             var _this = _super.call(this) || this;
             _this.name = '';
             _this.tag = '';
@@ -747,7 +746,7 @@ var playable = (function (exports) {
             _this.on(Event.REMOVED_FROM_STAGE, _this.$onRemovedFromStage);
             return _this;
         }
-        Object.defineProperty(DisplayObject.prototype, "width", {
+        Object.defineProperty(Layer.prototype, "width", {
             get: function () {
                 return this.$width ? this.$width : this.$canvas.width / this.$pixelRatio;
             },
@@ -760,7 +759,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "height", {
+        Object.defineProperty(Layer.prototype, "height", {
             get: function () {
                 return this.$height ? this.$height : this.$canvas.height / this.$pixelRatio;
             },
@@ -773,7 +772,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "x", {
+        Object.defineProperty(Layer.prototype, "x", {
             get: function () {
                 return this.$x;
             },
@@ -786,7 +785,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "y", {
+        Object.defineProperty(Layer.prototype, "y", {
             get: function () {
                 return this.$y;
             },
@@ -799,7 +798,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "anchorX", {
+        Object.defineProperty(Layer.prototype, "anchorX", {
             get: function () {
                 return this.$anchorX;
             },
@@ -812,7 +811,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "anchorY", {
+        Object.defineProperty(Layer.prototype, "anchorY", {
             get: function () {
                 return this.$anchorY;
             },
@@ -825,7 +824,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "skewX", {
+        Object.defineProperty(Layer.prototype, "skewX", {
             get: function () {
                 return this.$skewX;
             },
@@ -838,7 +837,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "skewY", {
+        Object.defineProperty(Layer.prototype, "skewY", {
             get: function () {
                 return this.$skewY;
             },
@@ -851,7 +850,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "scaleX", {
+        Object.defineProperty(Layer.prototype, "scaleX", {
             get: function () {
                 return this.$scaleX;
             },
@@ -864,7 +863,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "scaleY", {
+        Object.defineProperty(Layer.prototype, "scaleY", {
             get: function () {
                 return this.$scaleY;
             },
@@ -877,7 +876,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "rotation", {
+        Object.defineProperty(Layer.prototype, "rotation", {
             get: function () {
                 return this.$rotation;
             },
@@ -890,7 +889,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "alpha", {
+        Object.defineProperty(Layer.prototype, "alpha", {
             get: function () {
                 return this.$alpha;
             },
@@ -903,7 +902,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "background", {
+        Object.defineProperty(Layer.prototype, "background", {
             get: function () {
                 return this.$background;
             },
@@ -916,7 +915,7 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "visible", {
+        Object.defineProperty(Layer.prototype, "visible", {
             get: function () {
                 return this.$visible;
             },
@@ -929,52 +928,52 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "dirty", {
+        Object.defineProperty(Layer.prototype, "dirty", {
             get: function () {
                 return this.$dirty;
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "stage", {
+        Object.defineProperty(Layer.prototype, "stage", {
             get: function () {
                 return this.$stage;
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "parent", {
+        Object.defineProperty(Layer.prototype, "parent", {
             get: function () {
                 return this.$parent;
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "children", {
+        Object.defineProperty(Layer.prototype, "children", {
             get: function () {
                 return this.$children;
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "ticker", {
+        Object.defineProperty(Layer.prototype, "ticker", {
             get: function () {
                 return this.$stage ? this.$stage.ticker : null;
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(DisplayObject.prototype, "canvas", {
+        Object.defineProperty(Layer.prototype, "canvas", {
             get: function () {
                 return this.$canvas;
             },
             enumerable: true,
             configurable: true
         });
-        DisplayObject.prototype.addChild = function (child) {
+        Layer.prototype.addChild = function (child) {
             return this.addChildAt(child, this.$children.length);
         };
-        DisplayObject.prototype.addChildAt = function (child, index) {
+        Layer.prototype.addChildAt = function (child, index) {
             if (child.$parent) {
                 child.$parent.removeChild(child);
             }
@@ -986,11 +985,11 @@ var playable = (function (exports) {
             this.$resizeCanvas();
             return this;
         };
-        DisplayObject.prototype.removeChild = function (child) {
+        Layer.prototype.removeChild = function (child) {
             var index = this.$children.indexOf(child);
             return this.removeChildAt(index);
         };
-        DisplayObject.prototype.removeChildAt = function (index) {
+        Layer.prototype.removeChildAt = function (index) {
             if (index >= 0) {
                 var child = this.$children.splice(index, 1)[0];
                 child.emit(Event.REMOVED, this);
@@ -999,7 +998,7 @@ var playable = (function (exports) {
             }
             return this;
         };
-        DisplayObject.prototype.removeChildrenByName = function (name) {
+        Layer.prototype.removeChildrenByName = function (name) {
             var children = this.$children;
             for (var i = 0, l = children.length; i < l; ++i) {
                 var child = children[i];
@@ -1010,7 +1009,7 @@ var playable = (function (exports) {
             }
             return this;
         };
-        DisplayObject.prototype.removeChildrenByTag = function (tag) {
+        Layer.prototype.removeChildrenByTag = function (tag) {
             var children = this.$children;
             for (var i = children.length - 1; i >= 0; --i) {
                 var child = children[i];
@@ -1020,7 +1019,7 @@ var playable = (function (exports) {
             }
             return this;
         };
-        DisplayObject.prototype.removeAllChildren = function () {
+        Layer.prototype.removeAllChildren = function () {
             var children = this.$children;
             for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
                 var child = children_1[_i];
@@ -1031,7 +1030,7 @@ var playable = (function (exports) {
             this.$resizeCanvas();
             return this;
         };
-        DisplayObject.prototype.getChildByName = function (name) {
+        Layer.prototype.getChildByName = function (name) {
             var children = this.$children;
             for (var _i = 0, children_2 = children; _i < children_2.length; _i++) {
                 var child = children_2[_i];
@@ -1041,7 +1040,7 @@ var playable = (function (exports) {
             }
             return null;
         };
-        DisplayObject.prototype.getChildrenByTag = function (tag) {
+        Layer.prototype.getChildrenByTag = function (tag) {
             var result = [];
             var children = this.$children;
             for (var _i = 0, children_3 = children; _i < children_3.length; _i++) {
@@ -1052,13 +1051,13 @@ var playable = (function (exports) {
             }
             return result;
         };
-        DisplayObject.prototype.getChildAt = function (index) {
+        Layer.prototype.getChildAt = function (index) {
             return this.$children[index] || null;
         };
-        DisplayObject.prototype.getChildIndex = function (child) {
+        Layer.prototype.getChildIndex = function (child) {
             return this.$children.indexOf(child);
         };
-        DisplayObject.prototype.swapChildren = function (child1, child2) {
+        Layer.prototype.swapChildren = function (child1, child2) {
             var index1 = this.getChildIndex(child1);
             var index2 = this.getChildIndex(child2);
             if (index1 >= 0 && index2 >= 0) {
@@ -1066,7 +1065,7 @@ var playable = (function (exports) {
             }
             return this;
         };
-        DisplayObject.prototype.swapChildrenAt = function (index1, index2) {
+        Layer.prototype.swapChildrenAt = function (index1, index2) {
             if (index1 !== index2) {
                 var child1 = this.$children[index1];
                 var child2 = this.$children[index2];
@@ -1078,14 +1077,14 @@ var playable = (function (exports) {
             }
             return this;
         };
-        DisplayObject.prototype.$getTransform = function () {
+        Layer.prototype.$getTransform = function () {
             var matrix = Matrix.create();
             matrix.translate(-this.$anchorX, -this.$anchorY);
             matrix.rotate(this.rotation * Math.PI / 180).scale(this.scaleX, this.scaleY).skew(this.skewX, this.skewY);
             matrix.translate(this.x, this.y);
             return matrix;
         };
-        DisplayObject.prototype.$resizeCanvas = function () {
+        Layer.prototype.$resizeCanvas = function () {
             if (this.$width && this.$height) {
                 this.$canvas.width = this.$width * this.$pixelRatio;
                 this.$canvas.height = this.$height * this.$pixelRatio;
@@ -1101,7 +1100,7 @@ var playable = (function (exports) {
             }
             this.$dirty = true;
         };
-        DisplayObject.prototype.$getChildBounds = function (child) {
+        Layer.prototype.$getChildBounds = function (child) {
             var bounds = Rectangle.create();
             var matrix = child.$getTransform();
             var topLeft = Vector.create(0, 0).transform(matrix);
@@ -1122,7 +1121,7 @@ var playable = (function (exports) {
             bottomRight.release();
             return bounds;
         };
-        DisplayObject.prototype.$getContentBounds = function () {
+        Layer.prototype.$getContentBounds = function () {
             var children = this.$children;
             var bounds = Rectangle.create();
             for (var _i = 0, children_4 = children; _i < children_4.length; _i++) {
@@ -1136,7 +1135,7 @@ var playable = (function (exports) {
             }
             return bounds;
         };
-        DisplayObject.prototype.$emitTouchEvent = function (event) {
+        Layer.prototype.$emitTouchEvent = function (event) {
             if (!this.visible || !this.touchable) {
                 return false;
             }
@@ -1178,7 +1177,7 @@ var playable = (function (exports) {
             localPos.release();
             return true;
         };
-        DisplayObject.prototype.$drawChild = function (child) {
+        Layer.prototype.$drawChild = function (child) {
             if (!child.width || !child.height) {
                 return;
             }
@@ -1198,7 +1197,7 @@ var playable = (function (exports) {
             }
             matrix.release();
         };
-        DisplayObject.prototype.$render = function () {
+        Layer.prototype.$render = function () {
             if (!this.$dirty) {
                 return;
             }
@@ -1235,7 +1234,7 @@ var playable = (function (exports) {
             ctx.restore();
             this.$dirty = false;
         };
-        DisplayObject.prototype.on = function (event, listener) {
+        Layer.prototype.on = function (event, listener) {
             _super.prototype.on.call(this, event, listener);
             if (event === Event.ENTER_FRAME && this.$stage) {
                 this.$stage.ticker.registerEnterFrameCallback(this);
@@ -1248,20 +1247,20 @@ var playable = (function (exports) {
             }
             return this;
         };
-        DisplayObject.prototype.off = function (event, listener) {
+        Layer.prototype.off = function (event, listener) {
             _super.prototype.off.call(this, event, listener);
             if (this.$stage && event === Event.ENTER_FRAME && !this.hasEventListener(Event.ENTER_FRAME)) {
                 this.$stage.ticker.unregisterEnterFrameCallback(this);
             }
             return this;
         };
-        DisplayObject.prototype.$onAdded = function (parent) {
+        Layer.prototype.$onAdded = function (parent) {
             this.$parent = parent;
         };
-        DisplayObject.prototype.$onRemoved = function () {
+        Layer.prototype.$onRemoved = function () {
             this.$parent = null;
         };
-        DisplayObject.prototype.$onAddedToStage = function (stage) {
+        Layer.prototype.$onAddedToStage = function (stage) {
             var children = this.$children;
             if (this.hasEventListener(Event.ENTER_FRAME)) {
                 stage.ticker.registerEnterFrameCallback(this);
@@ -1272,7 +1271,7 @@ var playable = (function (exports) {
                 child.emit(Event.ADDED_TO_STAGE, stage);
             }
         };
-        DisplayObject.prototype.$onRemovedFromStage = function (stage) {
+        Layer.prototype.$onRemovedFromStage = function (stage) {
             var children = this.$children;
             if (this.hasEventListener(Event.ENTER_FRAME)) {
                 stage.ticker.unregisterEnterFrameCallback(this);
@@ -1283,17 +1282,18 @@ var playable = (function (exports) {
                 child.emit(Event.ADDED_TO_STAGE);
             }
         };
-        DisplayObject.prototype.$markDirty = function () {
+        Layer.prototype.$markDirty = function () {
             this.$dirty = true;
             this.$markParentDirty();
         };
-        DisplayObject.prototype.$markParentDirty = function () {
+        Layer.prototype.$markParentDirty = function () {
             if (this.$parent) {
                 this.$parent.$markDirty();
             }
         };
-        return DisplayObject;
+        return Layer;
     }(EventEmitter));
+    //# sourceMappingURL=Layer.js.map
 
     var ImageView = /** @class */ (function (_super) {
         __extends(ImageView, _super);
@@ -1344,7 +1344,7 @@ var playable = (function (exports) {
             ctx.drawImage(image.element, -anchorX, -anchorY, canvas.width, canvas.height);
         };
         return ImageView;
-    }(DisplayObject));
+    }(Layer));
     //# sourceMappingURL=ImageView.js.map
 
     var TextView = /** @class */ (function (_super) {
@@ -1700,7 +1700,7 @@ var playable = (function (exports) {
         TextView.wordRe = /\w+/;
         TextView.boundaryRe = /\b/;
         return TextView;
-    }(DisplayObject));
+    }(Layer));
     //# sourceMappingURL=TextView.js.map
 
     var Sound = /** @class */ (function (_super) {
@@ -2263,7 +2263,7 @@ var playable = (function (exports) {
         Stage.FIXED_WIDTH = 'fixedWidth';
         Stage.FIXED_HEIGHT = 'fixedHeight';
         return Stage;
-    }(DisplayObject));
+    }(Layer));
     //# sourceMappingURL=Stage.js.map
 
     var Ease = /** @class */ (function () {
@@ -2646,7 +2646,7 @@ var playable = (function (exports) {
     //# sourceMappingURL=index.js.map
 
     exports.Ticker = Ticker;
-    exports.DisplayObject = DisplayObject;
+    exports.Layer = Layer;
     exports.ImageView = ImageView;
     exports.TextView = TextView;
     exports.Stage = Stage;

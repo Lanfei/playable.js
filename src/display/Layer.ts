@@ -8,7 +8,7 @@ import Event from '../event/Event';
 import TouchEvent from '../event/TouchEvent';
 import EventEmitter from '../event/EventEmitter';
 
-export default class DisplayObject extends EventEmitter {
+export default class Layer extends EventEmitter {
 
 	public name: string = '';
 	public tag: string = '';
@@ -30,9 +30,9 @@ export default class DisplayObject extends EventEmitter {
 	protected $background: Image | string = null;
 	protected $dirty: boolean = true;
 	protected $stage: Stage = null;
-	protected $parent: DisplayObject = null;
+	protected $parent: Layer = null;
 	protected readonly $pixelRatio: number;
-	protected readonly $children: Array<DisplayObject> = [];
+	protected readonly $children: Array<Layer> = [];
 	protected readonly $touches: Array<boolean> = [];
 	protected readonly $canvas: HTMLCanvasElement;
 	protected readonly $context: CanvasRenderingContext2D;
@@ -210,11 +210,11 @@ export default class DisplayObject extends EventEmitter {
 		return this.$stage;
 	}
 
-	public get parent(): DisplayObject {
+	public get parent(): Layer {
 		return this.$parent;
 	}
 
-	public get children(): Array<DisplayObject> {
+	public get children(): Array<Layer> {
 		return this.$children;
 	}
 
@@ -226,11 +226,11 @@ export default class DisplayObject extends EventEmitter {
 		return this.$canvas;
 	}
 
-	public addChild(child: DisplayObject): this {
+	public addChild(child: Layer): this {
 		return this.addChildAt(child, this.$children.length);
 	}
 
-	public addChildAt(child: DisplayObject, index: number): this {
+	public addChildAt(child: Layer, index: number): this {
 		if (child.$parent) {
 			child.$parent.removeChild(child);
 		}
@@ -243,7 +243,7 @@ export default class DisplayObject extends EventEmitter {
 		return this;
 	}
 
-	public removeChild(child: DisplayObject): this {
+	public removeChild(child: Layer): this {
 		let index = this.$children.indexOf(child);
 		return this.removeChildAt(index);
 	}
@@ -292,7 +292,7 @@ export default class DisplayObject extends EventEmitter {
 		return this;
 	}
 
-	getChildByName(name): DisplayObject {
+	getChildByName(name): Layer {
 		let children = this.$children;
 		for (let child of children) {
 			if (child.name === name) {
@@ -302,7 +302,7 @@ export default class DisplayObject extends EventEmitter {
 		return null;
 	}
 
-	public getChildrenByTag(tag): Array<DisplayObject> {
+	public getChildrenByTag(tag): Array<Layer> {
 		let result = [];
 		let children = this.$children;
 		for (let child of children) {
@@ -313,7 +313,7 @@ export default class DisplayObject extends EventEmitter {
 		return result;
 	}
 
-	public getChildAt(index): DisplayObject {
+	public getChildAt(index): Layer {
 		return this.$children[index] || null;
 	}
 
@@ -367,7 +367,7 @@ export default class DisplayObject extends EventEmitter {
 		this.$dirty = true;
 	}
 
-	protected $getChildBounds(child: DisplayObject): Rectangle {
+	protected $getChildBounds(child: Layer): Rectangle {
 		let bounds = Rectangle.create();
 		let matrix = child.$getTransform();
 		let topLeft = Vector.create(0, 0).transform(matrix);
@@ -444,7 +444,7 @@ export default class DisplayObject extends EventEmitter {
 		return true;
 	}
 
-	protected $drawChild(child: DisplayObject): void {
+	protected $drawChild(child: Layer): void {
 		if (!child.width || !child.height) {
 			return;
 		}
@@ -525,7 +525,7 @@ export default class DisplayObject extends EventEmitter {
 		return this;
 	}
 
-	protected $onAdded(parent: DisplayObject): void {
+	protected $onAdded(parent: Layer): void {
 		this.$parent = parent;
 	}
 

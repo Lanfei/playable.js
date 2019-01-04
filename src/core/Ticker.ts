@@ -1,7 +1,7 @@
+import Layer from '../display/Layer';
+import Stage from '../display/Stage';
 import Event from '../event/Event';
 import EventEmitter from '../event/EventEmitter';
-import Stage from '../display/Stage';
-import DisplayObject from '../display/DisplayObject';
 
 export default class Ticker extends EventEmitter {
 
@@ -12,7 +12,7 @@ export default class Ticker extends EventEmitter {
 	private $lastTimestamp: number;
 	private readonly $timers: Object;
 	private readonly $boundTick: () => void;
-	private readonly $enterFrameCallbackList: Array<DisplayObject>;
+	private readonly $enterFrameCallbackList: Array<Layer>;
 
 	public constructor(stage: Stage) {
 		super();
@@ -96,17 +96,17 @@ export default class Ticker extends EventEmitter {
 		delete this.$timers[handle];
 	}
 
-	public registerEnterFrameCallback(displayObject: DisplayObject): this {
+	public registerEnterFrameCallback(layer: Layer): this {
 		let list = this.$enterFrameCallbackList;
-		if (list.indexOf(displayObject) < 0) {
-			list.push(displayObject);
+		if (list.indexOf(layer) < 0) {
+			list.push(layer);
 		}
 		return this;
 	}
 
-	public unregisterEnterFrameCallback(displayObject: DisplayObject): this {
+	public unregisterEnterFrameCallback(layer: Layer): this {
 		let list = this.$enterFrameCallbackList;
-		let index = list.indexOf(displayObject);
+		let index = list.indexOf(layer);
 		if (index >= 0) {
 			list.splice(index, 1);
 		}
@@ -120,8 +120,8 @@ export default class Ticker extends EventEmitter {
 		let now = Date.now();
 		let deltaTime = now - this.$lastTimestamp;
 		let enterFrameCallbackList = this.$enterFrameCallbackList;
-		for (let displayObject of enterFrameCallbackList) {
-			displayObject.emit(Event.ENTER_FRAME, deltaTime);
+		for (let layer of enterFrameCallbackList) {
+			layer.emit(Event.ENTER_FRAME, deltaTime);
 		}
 		this.emit(Event.TICK, deltaTime);
 		this.$lastTimestamp = Date.now();

@@ -1,13 +1,13 @@
 import Ease from './Ease';
+import Layer from '../display/Layer';
 import Event from '../event/Event';
 import EventEmitter from '../event/EventEmitter';
-import DisplayObject from '../display/DisplayObject';
 
 export default class Tween extends EventEmitter {
 
 	public loop: boolean = false;
 
-	protected $target: DisplayObject = null;
+	protected $target: Layer = null;
 	protected $paused: boolean = true;
 	protected $stepIndex: number = 0;
 	protected $stepPosition: number = 0;
@@ -16,7 +16,7 @@ export default class Tween extends EventEmitter {
 	protected $shouldSaveProps: boolean = true;
 	protected $boundOnEnterFrame: () => void;
 
-	private constructor(target: DisplayObject, option?: { loop?: boolean }) {
+	private constructor(target: Layer, option?: { loop?: boolean }) {
 		super();
 		this.$target = target;
 		this.loop = option ? option.loop : false;
@@ -159,13 +159,13 @@ export default class Tween extends EventEmitter {
 
 	private static $tweens: Array<Tween> = [];
 
-	public static get(target: DisplayObject, option?: { loop?: boolean }): Tween {
+	public static get(target: Layer, option?: { loop?: boolean }): Tween {
 		let tween = new Tween(target, option);
 		Tween.$tweens.push(tween);
 		return tween;
 	}
 
-	public static pauseTweens(target: DisplayObject): void {
+	public static pauseTweens(target: Layer): void {
 		let tweens = this.$tweens;
 		for (let tween of tweens) {
 			if (tween.$target === target) {
@@ -174,7 +174,7 @@ export default class Tween extends EventEmitter {
 		}
 	}
 
-	public static resumeTweens(target: DisplayObject): void {
+	public static resumeTweens(target: Layer): void {
 		let tweens = this.$tweens;
 		for (let tween of tweens) {
 			if (tween.$target === target) {
@@ -183,7 +183,7 @@ export default class Tween extends EventEmitter {
 		}
 	}
 
-	public static removeTweens(target: DisplayObject): void {
+	public static removeTweens(target: Layer): void {
 		let tweens = this.$tweens;
 		for (let i = tweens.length - 1; i >= 0; --i) {
 			let tween = tweens[i];
