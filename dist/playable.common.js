@@ -1399,6 +1399,7 @@ var ResourceManager = /** @class */ (function (_super) {
         _this.$loadingCount = 0;
         _this.$ticker = ticker;
         _this.threads = options && options.threads || 2;
+        _this.timeout = options && options.timeout || 10000;
         _this.retryTimes = options && options.retryTimes || 3;
         _this.$list = list.concat();
         _this.$total = list.length;
@@ -1435,21 +1436,25 @@ var ResourceManager = /** @class */ (function (_super) {
     };
     ResourceManager.prototype.$load = function (info, attempts) {
         var _this = this;
+        var timer;
         var resource;
         var name = info.name;
         var type = info.type;
         var url = info.url;
+        var total = this.$total;
         var ticker = this.$ticker;
         var resources = this.$resources;
         var retryTimes = this.retryTimes;
         var loadedCallback = function () {
-            ++_this.$loadedCount;
+            var errorCount = _this.$errorCount;
+            var loadedCount = ++_this.$loadedCount;
             --_this.$loadingCount;
             resources[name] = resource;
+            ticker.clearTimeout(timer);
             resource.off(Event.LOAD, loadedCallback);
             resource.off(Event.ERROR, errorCallback);
-            _this.emit(Event.PROGRESS, _this.$loadedCount / _this.$total);
-            if (_this.$loadedCount + _this.$errorCount === _this.$total) {
+            _this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
+            if (loadedCount + errorCount === total) {
                 _this.emit(Event.COMPLETE);
             }
             else {
@@ -1461,16 +1466,19 @@ var ResourceManager = /** @class */ (function (_super) {
                 _this.$load(info, attempts + 1);
             }
             else {
-                ++_this.$errorCount;
                 --_this.$loadingCount;
+                var loadedCount = _this.$loadedCount;
+                var errorCount = ++_this.$errorCount;
                 resources[name] = resource;
-                if (_this.$loadedCount + _this.$errorCount === _this.$total) {
+                _this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
+                if (loadedCount + errorCount === total) {
                     _this.emit(Event.COMPLETE);
                 }
                 else {
                     _this.$checkPendingTasks();
                 }
             }
+            ticker.clearTimeout(timer);
             resource.off(Event.LOAD, loadedCallback);
             resource.off(Event.ERROR, errorCallback);
         };
@@ -1495,6 +1503,7 @@ var ResourceManager = /** @class */ (function (_super) {
         else {
             throw new Error('Unsupported resource type: ' + type);
         }
+        timer = ticker.setTimeout(errorCallback, this.timeout);
     };
     ResourceManager.prototype.get = function (name) {
         var resource = this.$resources[name];
@@ -1517,7 +1526,6 @@ var ResourceManager = /** @class */ (function (_super) {
     ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
     return ResourceManager;
 }(EventEmitter));
-//# sourceMappingURL=ResourceManager.js.map
 
 var Stage = /** @class */ (function (_super) {
     __extends(Stage, _super);
@@ -1681,6 +1689,9 @@ var Stage = /** @class */ (function (_super) {
         }
     };
     Stage.prototype.$dispatchTouchEvent = function (type, touch) {
+        if (this.$ticker.paused) {
+            return;
+        }
         var event = TouchEvent.create(type);
         var width = this.$canvas.width;
         var height = this.$canvas.height;
@@ -2178,6 +2189,7 @@ var TextView = /** @class */ (function (_super) {
     TextView.boundaryRe = /\b/;
     return TextView;
 }(DisplayObject));
+//# sourceMappingURL=TextView.js.map
 
 var Ease = /** @class */ (function () {
     function Ease() {

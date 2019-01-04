@@ -13,6 +13,7 @@ export default class ResourceManager extends EventEmitter {
 	public static TYPE_SOUND_EFFECT: string = 'soundEffect';
 
 	public threads: number;
+	public timeout: number;
 	public retryTimes: number;
 
 	private $errorCount: number = 0;
@@ -27,6 +28,7 @@ export default class ResourceManager extends EventEmitter {
 		super();
 		this.$ticker = ticker;
 		this.threads = options && options.threads || 2;
+		this.timeout = options && options.timeout || 10000;
 		this.retryTimes = options && options.retryTimes || 3;
 		this.$list = list.concat();
 		this.$total = list.length;
@@ -54,21 +56,25 @@ export default class ResourceManager extends EventEmitter {
 	}
 
 	private $load(info: ResourceInfo, attempts: number): void {
+		let timer;
 		let resource;
 		let name = info.name;
 		let type = info.type;
 		let url = info.url;
+		let total = this.$total;
 		let ticker = this.$ticker;
 		let resources = this.$resources;
 		let retryTimes = this.retryTimes;
 		let loadedCallback = () => {
-			++this.$loadedCount;
+			let errorCount = this.$errorCount;
+			let loadedCount = ++this.$loadedCount;
 			--this.$loadingCount;
 			resources[name] = resource;
+			ticker.clearTimeout(timer);
 			resource.off(Event.LOAD, loadedCallback);
 			resource.off(Event.ERROR, errorCallback);
-			this.emit(Event.PROGRESS, this.$loadedCount / this.$total);
-			if (this.$loadedCount + this.$errorCount === this.$total) {
+			this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
+			if (loadedCount + errorCount === total) {
 				this.emit(Event.COMPLETE);
 			} else {
 				this.$checkPendingTasks();
@@ -78,15 +84,18 @@ export default class ResourceManager extends EventEmitter {
 			if (attempts < retryTimes) {
 				this.$load(info, attempts + 1);
 			} else {
-				++this.$errorCount;
 				--this.$loadingCount;
+				let loadedCount = this.$loadedCount;
+				let errorCount = ++this.$errorCount;
 				resources[name] = resource;
-				if (this.$loadedCount + this.$errorCount === this.$total) {
+				this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
+				if (loadedCount + errorCount === total) {
 					this.emit(Event.COMPLETE);
 				} else {
 					this.$checkPendingTasks();
 				}
 			}
+			ticker.clearTimeout(timer);
 			resource.off(Event.LOAD, loadedCallback);
 			resource.off(Event.ERROR, errorCallback);
 		};
@@ -108,6 +117,7 @@ export default class ResourceManager extends EventEmitter {
 		} else {
 			throw new Error('Unsupported resource type: ' + type);
 		}
+		timer = ticker.setTimeout(errorCallback, this.timeout);
 	}
 
 	public get(name: string): Media {
@@ -140,5 +150,6 @@ export interface ResourceInfo {
 
 export interface ResourceManagerOption {
 	threads?: number,
+	timeout?: number,
 	retryTimes?: number
 }

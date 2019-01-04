@@ -169,6 +169,9 @@ export default class Stage extends DisplayObject {
 	}
 
 	protected $dispatchTouchEvent(type: string, touch: Touch | MouseEvent): void {
+		if (this.$ticker.paused) {
+			return;
+		}
 		let event = TouchEvent.create(type);
 		let width = this.$canvas.width;
 		let height = this.$canvas.height;

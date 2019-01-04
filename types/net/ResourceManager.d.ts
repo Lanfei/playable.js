@@ -9,6 +9,7 @@ export default class ResourceManager extends EventEmitter {
     static TYPE_SOUND: string;
     static TYPE_SOUND_EFFECT: string;
     threads: number;
+    timeout: number;
     retryTimes: number;
     private $errorCount;
     private $loadedCount;
@@ -35,5 +36,6 @@ export interface ResourceInfo {
 }
 export interface ResourceManagerOption {
     threads?: number;
+    timeout?: number;
     retryTimes?: number;
 }
