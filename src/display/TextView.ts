@@ -321,10 +321,10 @@ export default class TextView extends DisplayObject {
 
 }
 
-type FontStyle = 'normal' | 'italic' | 'oblique';
-type FontWeight = 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-type TextAlign = 'left' | 'right' | 'center';
-type VerticalAlign = 'top' | 'middle' | 'bottom';
+export type FontStyle = 'normal' | 'italic' | 'oblique';
+export type FontWeight = 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+export type TextAlign = 'left' | 'right' | 'center';
+export type VerticalAlign = 'top' | 'middle' | 'bottom';
 
 export interface TextViewOption {
 	color?: string;

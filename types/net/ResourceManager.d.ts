@@ -1,8 +1,4 @@
 import Ticker from '../core/Ticker';
-import Media from '../media/Media';
-import Image from '../media/Image';
-import Sound from '../media/Sound';
-import SoundEffect from '../media/SoundEffect';
 import EventEmitter from '../event/EventEmitter';
 export default class ResourceManager extends EventEmitter {
     static TYPE_IMAGE: string;
@@ -25,10 +21,7 @@ export default class ResourceManager extends EventEmitter {
     private $checkPendingTasks;
     private $load;
     has(name: string): boolean;
-    get(name: string): Media;
-    getImage(name: string): Image;
-    getSound(name: string): Sound;
-    getSoundEffect(name: string): SoundEffect;
+    get<Media>(name: string): Media;
 }
 export interface ResourceInfo {
     name: string;

@@ -17,6 +17,7 @@ export default class ScrollView extends DisplayObject {
 		if (!this.dirty) {
 			return;
 		}
+		super.$render();
 	}
 
 }

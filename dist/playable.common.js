@@ -103,86 +103,6 @@ var EventEmitter = /** @class */ (function () {
 }());
 //# sourceMappingURL=EventEmitter.js.map
 
-var Media = /** @class */ (function (_super) {
-    __extends(Media, _super);
-    function Media(ticker) {
-        var _this = _super.call(this) || this;
-        _this.$ticker = ticker;
-        _this.$boundOnLoad = _this.$onLoad.bind(_this);
-        _this.$boundOnError = _this.$onError.bind(_this);
-        return _this;
-    }
-    Object.defineProperty(Media.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Media.prototype, "url", {
-        set: function (url) {
-            this.$element.src = url;
-            if (url.indexOf('data:') === 0) {
-                this.$ticker.setTimeout(this.$boundOnLoad);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Media.prototype.$onLoad = function () {
-        this.emit('load');
-        this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
-    };
-    Media.prototype.$onError = function (e) {
-        this.emit('error', e);
-        this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
-    };
-    return Media;
-}(EventEmitter));
-//# sourceMappingURL=Media.js.map
-
-var Image = /** @class */ (function (_super) {
-    __extends(Image, _super);
-    function Image(ticker) {
-        var _this = _super.call(this, ticker) || this;
-        var image = document.createElement('img');
-        image.crossOrigin = '*';
-        image.addEventListener('load', _this.$boundOnLoad);
-        image.addEventListener('error', _this.$boundOnError);
-        _this.$element = image;
-        return _this;
-    }
-    Object.defineProperty(Image.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "width", {
-        get: function () {
-            return this.$element.width;
-        },
-        set: function (width) {
-            this.$element.width = width;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "height", {
-        get: function () {
-            return this.$element.height;
-        },
-        set: function (height) {
-            this.$element.height = height;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Image;
-}(Media));
-//# sourceMappingURL=Image.js.map
-
 var Ticker = /** @class */ (function (_super) {
     __extends(Ticker, _super);
     function Ticker(stage) {
@@ -321,6 +241,86 @@ var Ticker = /** @class */ (function (_super) {
 }(EventEmitter));
 //# sourceMappingURL=Ticker.js.map
 
+var Media = /** @class */ (function (_super) {
+    __extends(Media, _super);
+    function Media(ticker) {
+        var _this = _super.call(this) || this;
+        _this.$ticker = ticker;
+        _this.$boundOnLoad = _this.$onLoad.bind(_this);
+        _this.$boundOnError = _this.$onError.bind(_this);
+        return _this;
+    }
+    Object.defineProperty(Media.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Media.prototype, "url", {
+        set: function (url) {
+            this.$element.src = url;
+            if (url.indexOf('data:') === 0) {
+                this.$ticker.setTimeout(this.$boundOnLoad);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Media.prototype.$onLoad = function () {
+        this.emit('load');
+        this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
+    };
+    Media.prototype.$onError = function (e) {
+        this.emit('error', e);
+        this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
+    };
+    return Media;
+}(EventEmitter));
+//# sourceMappingURL=Media.js.map
+
+var Image = /** @class */ (function (_super) {
+    __extends(Image, _super);
+    function Image(ticker) {
+        var _this = _super.call(this, ticker) || this;
+        var image = document.createElement('img');
+        image.crossOrigin = '*';
+        image.addEventListener('load', _this.$boundOnLoad);
+        image.addEventListener('error', _this.$boundOnError);
+        _this.$element = image;
+        return _this;
+    }
+    Object.defineProperty(Image.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Image.prototype, "width", {
+        get: function () {
+            return this.$element.width;
+        },
+        set: function (width) {
+            this.$element.width = width;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Image.prototype, "height", {
+        get: function () {
+            return this.$element.height;
+        },
+        set: function (height) {
+            this.$element.height = height;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Image;
+}(Media));
+//# sourceMappingURL=Image.js.map
+
 var Vector = /** @class */ (function () {
     function Vector(x, y) {
         this.set(x, y);
@@ -437,6 +437,135 @@ var Vector = /** @class */ (function () {
     return Vector;
 }());
 //# sourceMappingURL=Vector.js.map
+
+var Matrix = /** @class */ (function () {
+    function Matrix(a, b, c, d, tx, ty) {
+        if (arguments.length > 0) {
+            this.set(a, b, c, d, tx, ty);
+        }
+        else {
+            this.identity();
+        }
+    }
+    Matrix.prototype.set = function (a, b, c, d, tx, ty) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
+        this.tx = tx;
+        this.ty = ty;
+        return this;
+    };
+    Matrix.prototype.identity = function () {
+        return this.set(1, 0, 0, 1, 0, 0);
+    };
+    Matrix.prototype.invert = function () {
+        var a = this.a;
+        var b = this.b;
+        var c = this.c;
+        var d = this.d;
+        var tx = this.tx;
+        var ty = this.ty;
+        var n = a * d - c * b;
+        this.a = d / n;
+        this.b = -b / n;
+        this.c = -c / n;
+        this.d = a / n;
+        this.tx = (c * ty - d * tx) / n;
+        this.ty = (b * tx - a * ty) / n;
+        return this;
+    };
+    Matrix.prototype.prepend = function (a, b, c, d, tx, ty) {
+        if (a instanceof Matrix) {
+            return this.append(a.a, a.b, a.c, a.d, a.tx, a.ty);
+        }
+        var a1 = this.a;
+        var b1 = this.b;
+        var c1 = this.c;
+        var d1 = this.d;
+        var tx1 = this.tx;
+        var ty1 = this.ty;
+        this.a = a * a1 + b * c1;
+        this.b = a * b1 + b * d1;
+        this.c = c * a1 + d * c1;
+        this.d = c * b1 + d * d1;
+        this.tx = tx * a1 + ty * c1 + tx1;
+        this.ty = tx * b1 + ty * d1 + ty1;
+        return this;
+    };
+    Matrix.prototype.append = function (a, b, c, d, tx, ty) {
+        if (a instanceof Matrix) {
+            return this.append(a.a, a.b, a.c, a.d, a.tx, a.ty);
+        }
+        var a1 = this.a;
+        var b1 = this.b;
+        var c1 = this.c;
+        var d1 = this.d;
+        var tx1 = this.tx;
+        var ty1 = this.ty;
+        this.a = a * a1 + c * b1;
+        this.b = b * a1 + d * b1;
+        this.c = a * c1 + c * d1;
+        this.d = b * c1 + d * d1;
+        this.tx = a * tx1 + c * ty1 + tx;
+        this.ty = b * tx1 + d * ty1 + ty;
+        return this;
+    };
+    Matrix.prototype.multiply = function (v) {
+        var x = this.a * v.x + this.c * v.y + this.tx;
+        var y = this.b * v.x + this.d * v.y + this.ty;
+        return Vector.create(x, y);
+    };
+    Matrix.prototype.scale = function (x, y) {
+        return this.append(x, 0, 0, y === undefined ? x : y, 0, 0);
+    };
+    Matrix.prototype.rotate = function (angle) {
+        var sin = Math.sin(angle);
+        var cos = Math.cos(angle);
+        return this.append(cos, sin, -sin, cos, 0, 0);
+    };
+    Matrix.prototype.skew = function (skewX, skewY) {
+        return this.append(1, Math.tan(skewY), Math.tan(skewX), 1, 0, 0);
+    };
+    Matrix.prototype.translate = function (x, y) {
+        if (x instanceof Vector) {
+            return this.append(1, 0, 0, 1, x.x, x.y);
+        }
+        return this.append(1, 0, 0, 1, x, y);
+    };
+    Matrix.prototype.equals = function (m) {
+        return m instanceof Matrix &&
+            this.a === m.a && this.b === m.b &&
+            this.c === m.c && this.d === m.d &&
+            this.tx === m.tx && this.ty === m.ty;
+    };
+    Matrix.prototype.release = function () {
+        Matrix.recycle(this);
+    };
+    Matrix.create = function (a, b, c, d, tx, ty) {
+        var m;
+        var pool = this.$pool;
+        if (pool.length > 0) {
+            m = pool.pop();
+        }
+        else {
+            m = new Matrix();
+        }
+        if (arguments.length) {
+            m.set(a, b, c, d, tx, ty);
+        }
+        else {
+            m.identity();
+        }
+        return m;
+    };
+    Matrix.recycle = function (m) {
+        this.$pool.push(m);
+    };
+    Matrix.$pool = [];
+    return Matrix;
+}());
+//# sourceMappingURL=Matrix.js.map
 
 var Rectangle = /** @class */ (function () {
     function Rectangle(x, y, width, height) {
@@ -583,135 +712,6 @@ var TouchEvent = /** @class */ (function (_super) {
     return TouchEvent;
 }(Event));
 //# sourceMappingURL=TouchEvent.js.map
-
-var Matrix = /** @class */ (function () {
-    function Matrix(a, b, c, d, tx, ty) {
-        if (arguments.length > 0) {
-            this.set(a, b, c, d, tx, ty);
-        }
-        else {
-            this.identity();
-        }
-    }
-    Matrix.prototype.set = function (a, b, c, d, tx, ty) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
-        this.tx = tx;
-        this.ty = ty;
-        return this;
-    };
-    Matrix.prototype.identity = function () {
-        return this.set(1, 0, 0, 1, 0, 0);
-    };
-    Matrix.prototype.invert = function () {
-        var a = this.a;
-        var b = this.b;
-        var c = this.c;
-        var d = this.d;
-        var tx = this.tx;
-        var ty = this.ty;
-        var n = a * d - c * b;
-        this.a = d / n;
-        this.b = -b / n;
-        this.c = -c / n;
-        this.d = a / n;
-        this.tx = (c * ty - d * tx) / n;
-        this.ty = (b * tx - a * ty) / n;
-        return this;
-    };
-    Matrix.prototype.prepend = function (a, b, c, d, tx, ty) {
-        if (a instanceof Matrix) {
-            return this.append(a.a, a.b, a.c, a.d, a.tx, a.ty);
-        }
-        var a1 = this.a;
-        var b1 = this.b;
-        var c1 = this.c;
-        var d1 = this.d;
-        var tx1 = this.tx;
-        var ty1 = this.ty;
-        this.a = a * a1 + b * c1;
-        this.b = a * b1 + b * d1;
-        this.c = c * a1 + d * c1;
-        this.d = c * b1 + d * d1;
-        this.tx = tx * a1 + ty * c1 + tx1;
-        this.ty = tx * b1 + ty * d1 + ty1;
-        return this;
-    };
-    Matrix.prototype.append = function (a, b, c, d, tx, ty) {
-        if (a instanceof Matrix) {
-            return this.append(a.a, a.b, a.c, a.d, a.tx, a.ty);
-        }
-        var a1 = this.a;
-        var b1 = this.b;
-        var c1 = this.c;
-        var d1 = this.d;
-        var tx1 = this.tx;
-        var ty1 = this.ty;
-        this.a = a * a1 + c * b1;
-        this.b = b * a1 + d * b1;
-        this.c = a * c1 + c * d1;
-        this.d = b * c1 + d * d1;
-        this.tx = a * tx1 + c * ty1 + tx;
-        this.ty = b * tx1 + d * ty1 + ty;
-        return this;
-    };
-    Matrix.prototype.multiply = function (v) {
-        var x = this.a * v.x + this.c * v.y + this.tx;
-        var y = this.b * v.x + this.d * v.y + this.ty;
-        return Vector.create(x, y);
-    };
-    Matrix.prototype.scale = function (x, y) {
-        return this.append(x, 0, 0, y === undefined ? x : y, 0, 0);
-    };
-    Matrix.prototype.rotate = function (angle) {
-        var sin = Math.sin(angle);
-        var cos = Math.cos(angle);
-        return this.append(cos, sin, -sin, cos, 0, 0);
-    };
-    Matrix.prototype.skew = function (skewX, skewY) {
-        return this.append(1, Math.tan(skewY), Math.tan(skewX), 1, 0, 0);
-    };
-    Matrix.prototype.translate = function (x, y) {
-        if (x instanceof Vector) {
-            return this.append(1, 0, 0, 1, x.x, x.y);
-        }
-        return this.append(1, 0, 0, 1, x, y);
-    };
-    Matrix.prototype.equals = function (m) {
-        return m instanceof Matrix &&
-            this.a === m.a && this.b === m.b &&
-            this.c === m.c && this.d === m.d &&
-            this.tx === m.tx && this.ty === m.ty;
-    };
-    Matrix.prototype.release = function () {
-        Matrix.recycle(this);
-    };
-    Matrix.create = function (a, b, c, d, tx, ty) {
-        var m;
-        var pool = this.$pool;
-        if (pool.length > 0) {
-            m = pool.pop();
-        }
-        else {
-            m = new Matrix();
-        }
-        if (arguments.length) {
-            m.set(a, b, c, d, tx, ty);
-        }
-        else {
-            m.identity();
-        }
-        return m;
-    };
-    Matrix.recycle = function (m) {
-        this.$pool.push(m);
-    };
-    Matrix.$pool = [];
-    return Matrix;
-}());
-//# sourceMappingURL=Matrix.js.map
 
 var DisplayObject = /** @class */ (function (_super) {
     __extends(DisplayObject, _super);
@@ -1295,579 +1295,6 @@ var DisplayObject = /** @class */ (function (_super) {
     };
     return DisplayObject;
 }(EventEmitter));
-//# sourceMappingURL=DisplayObject.js.map
-
-var Sound = /** @class */ (function (_super) {
-    __extends(Sound, _super);
-    function Sound(ticker) {
-        var _this = _super.call(this, ticker) || this;
-        _this.$loops = 1;
-        _this.$startTime = 0;
-        _this.$paused = false;
-        var audio = document.createElement('audio');
-        audio.crossOrigin = '*';
-        audio.addEventListener('canplaythrough', _this.$boundOnLoad);
-        audio.addEventListener('error', _this.$boundOnError);
-        audio.addEventListener('ended', _this.$onEnded.bind(_this));
-        _this.$element = audio;
-        _this.$ticker = ticker;
-        _this.$boundOnTouch = _this.$onTouch.bind(_this);
-        ticker.on(Event.TICKER_PAUSE, _this.$onTickerPause.bind(_this));
-        ticker.on(Event.TICKER_RESUME, _this.$onTickerResume.bind(_this));
-        return _this;
-    }
-    Object.defineProperty(Sound.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Sound.prototype, "url", {
-        set: function (url) {
-            this.$paused = true;
-            this.$element.src = url;
-            this.$element.load();
-            if (url.indexOf('data:') === 0) {
-                this.$ticker.setTimeout(this.$boundOnLoad);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Sound.prototype, "volume", {
-        get: function () {
-            return this.$element.volume;
-        },
-        set: function (volume) {
-            this.$element.volume = volume;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Sound.prototype.$checkOnTouch = function () {
-        document.addEventListener('click', this.$boundOnTouch);
-        document.addEventListener('touchend', this.$boundOnTouch);
-    };
-    Sound.prototype.$checkStatus = function () {
-        this.$element.play()["catch"]();
-        if (this.$paused) {
-            this.$element.pause();
-        }
-    };
-    Sound.prototype.$onTouch = function () {
-        this.$checkStatus();
-        document.removeEventListener('click', this.$boundOnTouch);
-        document.removeEventListener('touchend', this.$boundOnTouch);
-    };
-    Sound.prototype.$onEnded = function () {
-        if (this.$loops === 1) {
-            this.stop();
-            this.emit(Event.SOUND_COMPLETE);
-        }
-        else if (this.$loops === 0) {
-            this.play(this.$startTime, 0);
-        }
-        else {
-            this.play(this.$startTime, this.$loops - 1);
-        }
-    };
-    Sound.prototype.$onTickerPause = function () {
-        if (!this.$paused) {
-            this.$element.pause();
-        }
-    };
-    Sound.prototype.$onTickerResume = function () {
-        if (!this.$paused) {
-            this.$checkStatus();
-        }
-    };
-    Sound.prototype.play = function (startTime, loops) {
-        if (startTime === void 0) { startTime = 0; }
-        if (loops === void 0) { loops = 1; }
-        this.$loops = loops;
-        this.$startTime = startTime;
-        this.$element.currentTime = startTime;
-        this.$paused = false;
-        this.$checkStatus();
-        return this;
-    };
-    Sound.prototype.stop = function () {
-        this.$paused = true;
-        this.$element.pause();
-        return this;
-    };
-    Sound.prototype.$onLoad = function () {
-        _super.prototype.$onLoad.call(this);
-        this.$element.play()
-            .then(this.$checkStatus.bind(this))["catch"](this.$checkOnTouch.bind(this));
-    };
-    return Sound;
-}(Media));
-//# sourceMappingURL=Sound.js.map
-
-var SoundEffect = /** @class */ (function (_super) {
-    __extends(SoundEffect, _super);
-    function SoundEffect(ticker) {
-        return _super.call(this, ticker) || this;
-    }
-    return SoundEffect;
-}(Sound));
-//# sourceMappingURL=SoundEffect.js.map
-
-var ResourceManager = /** @class */ (function (_super) {
-    __extends(ResourceManager, _super);
-    function ResourceManager(ticker, list, options) {
-        var _this = _super.call(this) || this;
-        _this.$errorCount = 0;
-        _this.$loadedCount = 0;
-        _this.$loadingCount = 0;
-        _this.$ticker = ticker;
-        _this.threads = options && options.threads || 2;
-        _this.timeout = options && options.timeout || 10000;
-        _this.retryTimes = options && options.retryTimes || 3;
-        _this.$list = list.concat();
-        _this.$total = list.length;
-        _this.$resources = {};
-        _this.$checkPendingTasks();
-        return _this;
-    }
-    Object.defineProperty(ResourceManager.prototype, "total", {
-        get: function () {
-            return this.$total;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ResourceManager.prototype, "errorCount", {
-        get: function () {
-            return this.$errorCount;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ResourceManager.prototype, "loadedCount", {
-        get: function () {
-            return this.$loadedCount;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ResourceManager.prototype.$checkPendingTasks = function () {
-        if (this.$loadingCount < this.threads && this.$list.length > 0) {
-            ++this.$loadingCount;
-            this.$load(this.$list.shift(), 1);
-        }
-    };
-    ResourceManager.prototype.$load = function (info, attempts) {
-        var _this = this;
-        var timer;
-        var resource;
-        var name = info.name;
-        var type = info.type;
-        var url = info.url;
-        var total = this.$total;
-        var ticker = this.$ticker;
-        var resources = this.$resources;
-        var retryTimes = this.retryTimes;
-        var loadedCallback = function () {
-            var errorCount = _this.$errorCount;
-            var loadedCount = ++_this.$loadedCount;
-            --_this.$loadingCount;
-            resources[name] = resource;
-            ticker.clearTimeout(timer);
-            resource.off(Event.LOAD, loadedCallback);
-            resource.off(Event.ERROR, errorCallback);
-            _this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
-            if (loadedCount + errorCount === total) {
-                _this.emit(Event.COMPLETE);
-            }
-            else {
-                _this.$checkPendingTasks();
-            }
-        };
-        var errorCallback = function () {
-            if (attempts < retryTimes) {
-                _this.$load(info, attempts + 1);
-            }
-            else {
-                --_this.$loadingCount;
-                var loadedCount = _this.$loadedCount;
-                var errorCount = ++_this.$errorCount;
-                resources[name] = resource;
-                _this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
-                if (loadedCount + errorCount === total) {
-                    _this.emit(Event.COMPLETE);
-                }
-                else {
-                    _this.$checkPendingTasks();
-                }
-            }
-            ticker.clearTimeout(timer);
-            resource.off(Event.LOAD, loadedCallback);
-            resource.off(Event.ERROR, errorCallback);
-        };
-        if (type === ResourceManager.TYPE_IMAGE) {
-            resource = new Image(ticker);
-            resource.on(Event.LOAD, loadedCallback);
-            resource.on(Event.ERROR, errorCallback);
-            resource.url = url;
-        }
-        else if (type === ResourceManager.TYPE_SOUND) {
-            resource = new Sound(ticker);
-            resource.on(Event.LOAD, loadedCallback);
-            resource.on(Event.ERROR, errorCallback);
-            resource.url = url;
-        }
-        else if (type === ResourceManager.TYPE_SOUND_EFFECT) {
-            resource = new SoundEffect(ticker);
-            resource.on(Event.LOAD, loadedCallback);
-            resource.on(Event.ERROR, errorCallback);
-            resource.url = url;
-        }
-        else {
-            throw new Error('Unsupported resource type: ' + type);
-        }
-        timer = ticker.setTimeout(errorCallback, this.timeout);
-    };
-    ResourceManager.prototype.has = function (name) {
-        return !!this.$resources[name];
-    };
-    ResourceManager.prototype.get = function (name) {
-        var resource = this.$resources[name];
-        if (!resource) {
-            throw new Error('Resource not exists');
-        }
-        return resource;
-    };
-    ResourceManager.prototype.getImage = function (name) {
-        return this.get(name);
-    };
-    ResourceManager.prototype.getSound = function (name) {
-        return this.get(name);
-    };
-    ResourceManager.prototype.getSoundEffect = function (name) {
-        return this.get(name);
-    };
-    ResourceManager.TYPE_IMAGE = 'image';
-    ResourceManager.TYPE_SOUND = 'sound';
-    ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
-    return ResourceManager;
-}(EventEmitter));
-//# sourceMappingURL=ResourceManager.js.map
-
-var Stage = /** @class */ (function (_super) {
-    __extends(Stage, _super);
-    function Stage(canvas) {
-        var _this = _super.call(this) || this;
-        _this.$scaleMode = Stage.SHOW_ALL;
-        _this.$ticker = new Ticker(_this);
-        _this.$viewportCanvas = canvas || document.createElement('canvas');
-        _this.$viewportContext = _this.$viewportCanvas.getContext('2d');
-        _this.$boundOnWindowResize = _this.$onWindowResize.bind(_this);
-        _this.$initEvents();
-        _this.width = 640;
-        _this.height = 1136;
-        _this.viewportWidth = 0;
-        _this.viewportHeight = 0;
-        if (!canvas) {
-            _this.$viewportCanvas.style.top = '0';
-            _this.$viewportCanvas.style.left = '0';
-            _this.$viewportCanvas.style.position = 'fixed';
-            document.body.appendChild(_this.$viewportCanvas);
-        }
-        return _this;
-    }
-    Stage.prototype.$initEvents = function () {
-        var _this = this;
-        var resizeTimer;
-        var ticker = this.$ticker;
-        this.$addTouchEventListeners();
-        this.on(Event.ENTER_FRAME, this.$render);
-        ticker.setTimeout(function () {
-            _this.emit(Event.ADDED_TO_STAGE, _this);
-        });
-        window.addEventListener('resize', function () {
-            ticker.clearTimeout(resizeTimer);
-            resizeTimer = ticker.setTimeout(_this.$boundOnWindowResize, 100);
-        });
-    };
-    Object.defineProperty(Stage.prototype, "x", {
-        get: function () {
-            return 0;
-        },
-        set: function (x) {
-            this.$x = 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "y", {
-        get: function () {
-            return 0;
-        },
-        set: function (y) {
-            this.$y = 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "scaleMode", {
-        get: function () {
-            return this.$scaleMode;
-        },
-        set: function (scaleMode) {
-            this.$scaleMode = scaleMode;
-            this.$resizeCanvas();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "viewportWidth", {
-        get: function () {
-            return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / this.$pixelRatio;
-        },
-        set: function (width) {
-            this.$viewportWidth = width;
-            width = width || window.innerWidth;
-            this.$viewportCanvas.width = width * this.$pixelRatio;
-            this.$viewportCanvas.style.width = width + 'px';
-            this.$resizeCanvas();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "viewportHeight", {
-        get: function () {
-            return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / this.$pixelRatio;
-        },
-        set: function (height) {
-            this.$viewportHeight = height;
-            height = height || window.innerHeight;
-            this.$viewportCanvas.height = height * this.$pixelRatio;
-            this.$viewportCanvas.style.height = height + 'px';
-            this.$resizeCanvas();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "viewportBackground", {
-        get: function () {
-            return this.$viewportBackground;
-        },
-        set: function (viewportBackground) {
-            this.$viewportBackground = viewportBackground;
-            this.$markDirty();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "ticker", {
-        get: function () {
-            return this.$ticker;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Stage.prototype.createResourceManager = function (list, options) {
-        return new ResourceManager(this.$ticker, list, options);
-    };
-    Stage.prototype.$addTouchEventListeners = function () {
-        var _this = this;
-        var canvas = this.$viewportCanvas;
-        if (canvas.ontouchstart !== undefined) {
-            canvas.addEventListener('touchstart', function (event) {
-                _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
-                event.preventDefault();
-            });
-            canvas.addEventListener('touchmove', function (event) {
-                _this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
-                event.preventDefault();
-            }, { passive: false });
-            canvas.addEventListener('touchend', function (event) {
-                _this.$dispatchTouches(TouchEvent.TOUCH_END, event);
-                _this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
-            });
-            canvas.addEventListener('touchcancel', function (event) {
-                _this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
-            });
-        }
-        else {
-            var touching_1 = false;
-            canvas.addEventListener('mousedown', function (event) {
-                _this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event);
-                touching_1 = true;
-            });
-            canvas.addEventListener('mousemove', function (event) {
-                if (touching_1) {
-                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event);
-                }
-            });
-            canvas.addEventListener('mouseup', function (event) {
-                _this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event);
-                touching_1 = false;
-            });
-            canvas.addEventListener('click', function (event) {
-                _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event);
-            });
-            window.addEventListener('mouseout', function (event) {
-                _this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, event);
-            });
-        }
-    };
-    Stage.prototype.$dispatchTouches = function (type, event) {
-        var touches = event['changedTouches'];
-        for (var i = 0, l = touches.length; i < l; ++i) {
-            this.$dispatchTouchEvent(type, touches[i]);
-        }
-    };
-    Stage.prototype.$dispatchTouchEvent = function (type, touch) {
-        if (this.$ticker.paused) {
-            return;
-        }
-        var event = TouchEvent.create(type);
-        var width = this.$canvas.width;
-        var height = this.$canvas.height;
-        var pixelRatio = this.$pixelRatio;
-        var bounds = this.$renderBounds;
-        var viewportBounds = this.$viewportCanvas.getBoundingClientRect();
-        var x = (touch.pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
-        var y = (touch.pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
-        event.targetX = event.stageX = x;
-        event.targetY = event.stageY = y;
-        event.identifier = touch instanceof Touch ? touch.identifier : 0;
-        this.$emitTouchEvent(event);
-        event.release();
-    };
-    Stage.prototype.$calculateRenderBounds = function () {
-        var x = 0;
-        var y = 0;
-        var canvas = this.$canvas;
-        var width = canvas.width;
-        var height = canvas.height;
-        var scaleMode = this.scaleMode;
-        var aspectRatio = width / height;
-        var viewportCanvas = this.$viewportCanvas;
-        var viewportWidth = viewportCanvas.width;
-        var viewportHeight = viewportCanvas.height;
-        var viewportAspectRatio = viewportWidth / viewportHeight;
-        var bounds = this.$renderBounds || Rectangle.create();
-        if (scaleMode === Stage.NO_SCALE) ;
-        else if (scaleMode === Stage.NO_BORDER) {
-            if (aspectRatio < viewportAspectRatio) {
-                width = viewportWidth;
-                height = width / aspectRatio;
-            }
-            else {
-                height = viewportHeight;
-                width = height * aspectRatio;
-            }
-            x = (viewportWidth - width) / 2;
-            y = (viewportHeight - height) / 2;
-        }
-        else if (scaleMode === Stage.SHOW_ALL) {
-            if (aspectRatio > viewportAspectRatio) {
-                width = viewportWidth;
-                height = width / aspectRatio;
-            }
-            else {
-                height = viewportHeight;
-                width = height * aspectRatio;
-            }
-        }
-        else if (scaleMode === Stage.EXACT_FIT) {
-            width = viewportWidth;
-            height = viewportHeight;
-        }
-        else if (scaleMode === Stage.FIXED_WIDTH) {
-            width = viewportWidth;
-            height = width / aspectRatio;
-        }
-        else if (scaleMode === Stage.FIXED_HEIGHT) {
-            height = viewportHeight;
-            width = height * aspectRatio;
-        }
-        else if (scaleMode === Stage.FIXED_WIDE) {
-            if (viewportWidth > viewportHeight) {
-                width = viewportWidth;
-                height = width / aspectRatio;
-            }
-            else {
-                height = viewportHeight;
-                width = height * aspectRatio;
-            }
-        }
-        else if (scaleMode === Stage.FIXED_NARROW) {
-            if (viewportWidth < viewportHeight) {
-                width = viewportWidth;
-                height = width / aspectRatio;
-            }
-            else {
-                height = viewportHeight;
-                width = height * aspectRatio;
-            }
-        }
-        if (width < viewportWidth) {
-            x = (viewportWidth - width) / 2;
-        }
-        if (height < viewportHeight) {
-            y = (viewportHeight - height) / 2;
-        }
-        bounds.x = x;
-        bounds.y = y;
-        bounds.width = width;
-        bounds.height = height;
-        this.$renderBounds = bounds;
-    };
-    Stage.prototype.$resizeCanvas = function () {
-        _super.prototype.$resizeCanvas.call(this);
-        this.$calculateRenderBounds();
-    };
-    Stage.prototype.$render = function () {
-        if (!this.$dirty) {
-            return;
-        }
-        _super.prototype.$render.call(this);
-        var canvas = this.$canvas;
-        var ctx = this.$viewportContext;
-        var bounds = this.$renderBounds;
-        var viewportCanvas = this.$viewportCanvas;
-        var viewportWidth = viewportCanvas.width;
-        var viewportHeight = viewportCanvas.height;
-        var viewportBackground = this.viewportBackground;
-        ctx.clearRect(0, 0, viewportWidth, viewportHeight);
-        if (viewportBackground) {
-            if (viewportBackground instanceof Image) {
-                ctx.drawImage(viewportBackground.element, 0, 0, viewportWidth, viewportHeight);
-            }
-            else {
-                ctx.save();
-                ctx.fillStyle = this.$background;
-                ctx.fillRect(0, 0, viewportWidth, viewportHeight);
-                ctx.restore();
-            }
-        }
-        ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
-    };
-    Stage.prototype.$onWindowResize = function () {
-        var viewportWidth = this.$viewportWidth;
-        var viewportHeight = this.$viewportHeight;
-        this.viewportWidth = viewportWidth;
-        this.viewportHeight = viewportHeight;
-        this.$viewportWidth = viewportWidth;
-        this.$viewportHeight = viewportHeight;
-    };
-    Stage.NO_SCALE = 'noScale';
-    Stage.NO_BORDER = 'noBorder';
-    Stage.SHOW_ALL = 'showAll';
-    Stage.EXACT_FIT = 'exactFit';
-    Stage.FIXED_WIDE = 'fixedWide';
-    Stage.FIXED_NARROW = 'fixedNarrow';
-    Stage.FIXED_WIDTH = 'fixedWidth';
-    Stage.FIXED_HEIGHT = 'fixedHeight';
-    return Stage;
-}(DisplayObject));
-//# sourceMappingURL=Stage.js.map
 
 var ImageView = /** @class */ (function (_super) {
     __extends(ImageView, _super);
@@ -2275,6 +1702,570 @@ var TextView = /** @class */ (function (_super) {
     TextView.boundaryRe = /\b/;
     return TextView;
 }(DisplayObject));
+//# sourceMappingURL=TextView.js.map
+
+var Sound = /** @class */ (function (_super) {
+    __extends(Sound, _super);
+    function Sound(ticker) {
+        var _this = _super.call(this, ticker) || this;
+        _this.$loops = 1;
+        _this.$startTime = 0;
+        _this.$paused = false;
+        var audio = document.createElement('audio');
+        audio.crossOrigin = '*';
+        audio.addEventListener('canplaythrough', _this.$boundOnLoad);
+        audio.addEventListener('error', _this.$boundOnError);
+        audio.addEventListener('ended', _this.$onEnded.bind(_this));
+        _this.$element = audio;
+        _this.$ticker = ticker;
+        _this.$boundOnTouch = _this.$onTouch.bind(_this);
+        ticker.on(Event.TICKER_PAUSE, _this.$onTickerPause.bind(_this));
+        ticker.on(Event.TICKER_RESUME, _this.$onTickerResume.bind(_this));
+        return _this;
+    }
+    Object.defineProperty(Sound.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Sound.prototype, "url", {
+        set: function (url) {
+            this.$paused = true;
+            this.$element.src = url;
+            this.$element.load();
+            if (url.indexOf('data:') === 0) {
+                this.$ticker.setTimeout(this.$boundOnLoad);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Sound.prototype, "volume", {
+        get: function () {
+            return this.$element.volume;
+        },
+        set: function (volume) {
+            this.$element.volume = volume;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Sound.prototype.$checkOnTouch = function () {
+        document.addEventListener('click', this.$boundOnTouch);
+        document.addEventListener('touchend', this.$boundOnTouch);
+    };
+    Sound.prototype.$checkStatus = function () {
+        this.$element.play()["catch"]();
+        if (this.$paused) {
+            this.$element.pause();
+        }
+    };
+    Sound.prototype.$onTouch = function () {
+        this.$checkStatus();
+        document.removeEventListener('click', this.$boundOnTouch);
+        document.removeEventListener('touchend', this.$boundOnTouch);
+    };
+    Sound.prototype.$onEnded = function () {
+        if (this.$loops === 1) {
+            this.stop();
+            this.emit(Event.SOUND_COMPLETE);
+        }
+        else if (this.$loops === 0) {
+            this.play(this.$startTime, 0);
+        }
+        else {
+            this.play(this.$startTime, this.$loops - 1);
+        }
+    };
+    Sound.prototype.$onTickerPause = function () {
+        if (!this.$paused) {
+            this.$element.pause();
+        }
+    };
+    Sound.prototype.$onTickerResume = function () {
+        if (!this.$paused) {
+            this.$checkStatus();
+        }
+    };
+    Sound.prototype.play = function (startTime, loops) {
+        if (startTime === void 0) { startTime = 0; }
+        if (loops === void 0) { loops = 1; }
+        this.$loops = loops;
+        this.$startTime = startTime;
+        this.$element.currentTime = startTime;
+        this.$paused = false;
+        this.$checkStatus();
+        return this;
+    };
+    Sound.prototype.stop = function () {
+        this.$paused = true;
+        this.$element.pause();
+        return this;
+    };
+    Sound.prototype.$onLoad = function () {
+        _super.prototype.$onLoad.call(this);
+        this.$element.play()
+            .then(this.$checkStatus.bind(this))["catch"](this.$checkOnTouch.bind(this));
+    };
+    return Sound;
+}(Media));
+//# sourceMappingURL=Sound.js.map
+
+var SoundEffect = /** @class */ (function (_super) {
+    __extends(SoundEffect, _super);
+    function SoundEffect(ticker) {
+        return _super.call(this, ticker) || this;
+    }
+    return SoundEffect;
+}(Sound));
+//# sourceMappingURL=SoundEffect.js.map
+
+var ResourceManager = /** @class */ (function (_super) {
+    __extends(ResourceManager, _super);
+    function ResourceManager(ticker, list, options) {
+        var _this = _super.call(this) || this;
+        _this.$errorCount = 0;
+        _this.$loadedCount = 0;
+        _this.$loadingCount = 0;
+        _this.$ticker = ticker;
+        _this.threads = options && options.threads || 2;
+        _this.timeout = options && options.timeout || 10000;
+        _this.retryTimes = options && options.retryTimes || 3;
+        _this.$list = list.concat();
+        _this.$total = list.length;
+        _this.$resources = {};
+        _this.$checkPendingTasks();
+        return _this;
+    }
+    Object.defineProperty(ResourceManager.prototype, "total", {
+        get: function () {
+            return this.$total;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ResourceManager.prototype, "errorCount", {
+        get: function () {
+            return this.$errorCount;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ResourceManager.prototype, "loadedCount", {
+        get: function () {
+            return this.$loadedCount;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ResourceManager.prototype.$checkPendingTasks = function () {
+        if (this.$loadingCount < this.threads && this.$list.length > 0) {
+            ++this.$loadingCount;
+            this.$load(this.$list.shift(), 1);
+        }
+    };
+    ResourceManager.prototype.$load = function (info, attempts) {
+        var _this = this;
+        var timer;
+        var resource;
+        var name = info.name;
+        var type = info.type;
+        var url = info.url;
+        var total = this.$total;
+        var ticker = this.$ticker;
+        var resources = this.$resources;
+        var retryTimes = this.retryTimes;
+        var loadedCallback = function () {
+            var errorCount = _this.$errorCount;
+            var loadedCount = ++_this.$loadedCount;
+            --_this.$loadingCount;
+            resources[name] = resource;
+            ticker.clearTimeout(timer);
+            resource.off(Event.LOAD, loadedCallback);
+            resource.off(Event.ERROR, errorCallback);
+            _this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
+            if (loadedCount + errorCount === total) {
+                _this.emit(Event.COMPLETE);
+            }
+            else {
+                _this.$checkPendingTasks();
+            }
+        };
+        var errorCallback = function () {
+            if (attempts < retryTimes) {
+                _this.$load(info, attempts + 1);
+            }
+            else {
+                --_this.$loadingCount;
+                var loadedCount = _this.$loadedCount;
+                var errorCount = ++_this.$errorCount;
+                resources[name] = resource;
+                _this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
+                if (loadedCount + errorCount === total) {
+                    _this.emit(Event.COMPLETE);
+                }
+                else {
+                    _this.$checkPendingTasks();
+                }
+            }
+            ticker.clearTimeout(timer);
+            resource.off(Event.LOAD, loadedCallback);
+            resource.off(Event.ERROR, errorCallback);
+        };
+        if (type === ResourceManager.TYPE_IMAGE) {
+            resource = new Image(ticker);
+            resource.on(Event.LOAD, loadedCallback);
+            resource.on(Event.ERROR, errorCallback);
+            resource.url = url;
+        }
+        else if (type === ResourceManager.TYPE_SOUND) {
+            resource = new Sound(ticker);
+            resource.on(Event.LOAD, loadedCallback);
+            resource.on(Event.ERROR, errorCallback);
+            resource.url = url;
+        }
+        else if (type === ResourceManager.TYPE_SOUND_EFFECT) {
+            resource = new SoundEffect(ticker);
+            resource.on(Event.LOAD, loadedCallback);
+            resource.on(Event.ERROR, errorCallback);
+            resource.url = url;
+        }
+        else {
+            throw new Error('Unsupported resource type: ' + type);
+        }
+        timer = ticker.setTimeout(errorCallback, this.timeout);
+    };
+    ResourceManager.prototype.has = function (name) {
+        return !!this.$resources[name];
+    };
+    ResourceManager.prototype.get = function (name) {
+        var resource = this.$resources[name];
+        if (!resource) {
+            throw new Error('Resource not exists');
+        }
+        return resource;
+    };
+    ResourceManager.TYPE_IMAGE = 'image';
+    ResourceManager.TYPE_SOUND = 'sound';
+    ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
+    return ResourceManager;
+}(EventEmitter));
+//# sourceMappingURL=ResourceManager.js.map
+
+var Stage = /** @class */ (function (_super) {
+    __extends(Stage, _super);
+    function Stage(canvas) {
+        var _this = _super.call(this) || this;
+        _this.$scaleMode = Stage.SHOW_ALL;
+        _this.$ticker = new Ticker(_this);
+        _this.$viewportCanvas = canvas || document.createElement('canvas');
+        _this.$viewportContext = _this.$viewportCanvas.getContext('2d');
+        _this.$boundOnWindowResize = _this.$onWindowResize.bind(_this);
+        _this.$initEvents();
+        _this.width = 640;
+        _this.height = 1136;
+        _this.viewportWidth = 0;
+        _this.viewportHeight = 0;
+        if (!canvas) {
+            _this.$viewportCanvas.style.top = '0';
+            _this.$viewportCanvas.style.left = '0';
+            _this.$viewportCanvas.style.position = 'fixed';
+            document.body.appendChild(_this.$viewportCanvas);
+        }
+        return _this;
+    }
+    Stage.prototype.$initEvents = function () {
+        var _this = this;
+        var resizeTimer;
+        var ticker = this.$ticker;
+        this.$addTouchEventListeners();
+        this.on(Event.ENTER_FRAME, this.$render);
+        ticker.setTimeout(function () {
+            _this.emit(Event.ADDED_TO_STAGE, _this);
+        });
+        window.addEventListener('resize', function () {
+            ticker.clearTimeout(resizeTimer);
+            resizeTimer = ticker.setTimeout(_this.$boundOnWindowResize, 100);
+        });
+    };
+    Object.defineProperty(Stage.prototype, "x", {
+        get: function () {
+            return 0;
+        },
+        set: function (x) {
+            this.$x = 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "y", {
+        get: function () {
+            return 0;
+        },
+        set: function (y) {
+            this.$y = 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "scaleMode", {
+        get: function () {
+            return this.$scaleMode;
+        },
+        set: function (scaleMode) {
+            this.$scaleMode = scaleMode;
+            this.$resizeCanvas();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "viewportWidth", {
+        get: function () {
+            return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / this.$pixelRatio;
+        },
+        set: function (width) {
+            this.$viewportWidth = width;
+            width = width || window.innerWidth;
+            this.$viewportCanvas.width = width * this.$pixelRatio;
+            this.$viewportCanvas.style.width = width + 'px';
+            this.$resizeCanvas();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "viewportHeight", {
+        get: function () {
+            return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / this.$pixelRatio;
+        },
+        set: function (height) {
+            this.$viewportHeight = height;
+            height = height || window.innerHeight;
+            this.$viewportCanvas.height = height * this.$pixelRatio;
+            this.$viewportCanvas.style.height = height + 'px';
+            this.$resizeCanvas();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "viewportBackground", {
+        get: function () {
+            return this.$viewportBackground;
+        },
+        set: function (viewportBackground) {
+            this.$viewportBackground = viewportBackground;
+            this.$markDirty();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "ticker", {
+        get: function () {
+            return this.$ticker;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Stage.prototype.createResourceManager = function (list, options) {
+        return new ResourceManager(this.$ticker, list, options);
+    };
+    Stage.prototype.$addTouchEventListeners = function () {
+        var _this = this;
+        var canvas = this.$viewportCanvas;
+        if (canvas.ontouchstart !== undefined) {
+            canvas.addEventListener('touchstart', function (event) {
+                _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
+                event.preventDefault();
+            });
+            canvas.addEventListener('touchmove', function (event) {
+                _this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
+                event.preventDefault();
+            }, { passive: false });
+            canvas.addEventListener('touchend', function (event) {
+                _this.$dispatchTouches(TouchEvent.TOUCH_END, event);
+                _this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
+            });
+            canvas.addEventListener('touchcancel', function (event) {
+                _this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
+            });
+        }
+        else {
+            var touching_1 = false;
+            canvas.addEventListener('mousedown', function (event) {
+                _this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event);
+                touching_1 = true;
+            });
+            canvas.addEventListener('mousemove', function (event) {
+                if (touching_1) {
+                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event);
+                }
+            });
+            canvas.addEventListener('mouseup', function (event) {
+                _this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event);
+                touching_1 = false;
+            });
+            canvas.addEventListener('click', function (event) {
+                _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event);
+            });
+            window.addEventListener('mouseout', function (event) {
+                _this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, event);
+            });
+        }
+    };
+    Stage.prototype.$dispatchTouches = function (type, event) {
+        var touches = event['changedTouches'];
+        for (var i = 0, l = touches.length; i < l; ++i) {
+            this.$dispatchTouchEvent(type, touches[i]);
+        }
+    };
+    Stage.prototype.$dispatchTouchEvent = function (type, touch) {
+        if (this.$ticker.paused) {
+            return;
+        }
+        var event = TouchEvent.create(type);
+        var width = this.$canvas.width;
+        var height = this.$canvas.height;
+        var pixelRatio = this.$pixelRatio;
+        var bounds = this.$renderBounds;
+        var viewportBounds = this.$viewportCanvas.getBoundingClientRect();
+        var x = (touch.pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+        var y = (touch.pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+        event.targetX = event.stageX = x;
+        event.targetY = event.stageY = y;
+        event.identifier = touch instanceof Touch ? touch.identifier : 0;
+        this.$emitTouchEvent(event);
+        event.release();
+    };
+    Stage.prototype.$calculateRenderBounds = function () {
+        var x = 0;
+        var y = 0;
+        var canvas = this.$canvas;
+        var width = canvas.width;
+        var height = canvas.height;
+        var scaleMode = this.scaleMode;
+        var aspectRatio = width / height;
+        var viewportCanvas = this.$viewportCanvas;
+        var viewportWidth = viewportCanvas.width;
+        var viewportHeight = viewportCanvas.height;
+        var viewportAspectRatio = viewportWidth / viewportHeight;
+        var bounds = this.$renderBounds || Rectangle.create();
+        if (scaleMode === Stage.NO_SCALE) ;
+        else if (scaleMode === Stage.NO_BORDER) {
+            if (aspectRatio < viewportAspectRatio) {
+                width = viewportWidth;
+                height = width / aspectRatio;
+            }
+            else {
+                height = viewportHeight;
+                width = height * aspectRatio;
+            }
+            x = (viewportWidth - width) / 2;
+            y = (viewportHeight - height) / 2;
+        }
+        else if (scaleMode === Stage.SHOW_ALL) {
+            if (aspectRatio > viewportAspectRatio) {
+                width = viewportWidth;
+                height = width / aspectRatio;
+            }
+            else {
+                height = viewportHeight;
+                width = height * aspectRatio;
+            }
+        }
+        else if (scaleMode === Stage.EXACT_FIT) {
+            width = viewportWidth;
+            height = viewportHeight;
+        }
+        else if (scaleMode === Stage.FIXED_WIDTH) {
+            width = viewportWidth;
+            height = width / aspectRatio;
+        }
+        else if (scaleMode === Stage.FIXED_HEIGHT) {
+            height = viewportHeight;
+            width = height * aspectRatio;
+        }
+        else if (scaleMode === Stage.FIXED_WIDE) {
+            if (viewportWidth > viewportHeight) {
+                width = viewportWidth;
+                height = width / aspectRatio;
+            }
+            else {
+                height = viewportHeight;
+                width = height * aspectRatio;
+            }
+        }
+        else if (scaleMode === Stage.FIXED_NARROW) {
+            if (viewportWidth < viewportHeight) {
+                width = viewportWidth;
+                height = width / aspectRatio;
+            }
+            else {
+                height = viewportHeight;
+                width = height * aspectRatio;
+            }
+        }
+        if (width < viewportWidth) {
+            x = (viewportWidth - width) / 2;
+        }
+        if (height < viewportHeight) {
+            y = (viewportHeight - height) / 2;
+        }
+        bounds.x = x;
+        bounds.y = y;
+        bounds.width = width;
+        bounds.height = height;
+        this.$renderBounds = bounds;
+    };
+    Stage.prototype.$resizeCanvas = function () {
+        _super.prototype.$resizeCanvas.call(this);
+        this.$calculateRenderBounds();
+    };
+    Stage.prototype.$render = function () {
+        if (!this.$dirty) {
+            return;
+        }
+        _super.prototype.$render.call(this);
+        var canvas = this.$canvas;
+        var ctx = this.$viewportContext;
+        var bounds = this.$renderBounds;
+        var viewportCanvas = this.$viewportCanvas;
+        var viewportWidth = viewportCanvas.width;
+        var viewportHeight = viewportCanvas.height;
+        var viewportBackground = this.viewportBackground;
+        ctx.clearRect(0, 0, viewportWidth, viewportHeight);
+        if (viewportBackground) {
+            if (viewportBackground instanceof Image) {
+                ctx.drawImage(viewportBackground.element, 0, 0, viewportWidth, viewportHeight);
+            }
+            else {
+                ctx.save();
+                ctx.fillStyle = this.$background;
+                ctx.fillRect(0, 0, viewportWidth, viewportHeight);
+                ctx.restore();
+            }
+        }
+        ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
+    };
+    Stage.prototype.$onWindowResize = function () {
+        var viewportWidth = this.$viewportWidth;
+        var viewportHeight = this.$viewportHeight;
+        this.viewportWidth = viewportWidth;
+        this.viewportHeight = viewportHeight;
+        this.$viewportWidth = viewportWidth;
+        this.$viewportHeight = viewportHeight;
+    };
+    Stage.NO_SCALE = 'noScale';
+    Stage.NO_BORDER = 'noBorder';
+    Stage.SHOW_ALL = 'showAll';
+    Stage.EXACT_FIT = 'exactFit';
+    Stage.FIXED_WIDE = 'fixedWide';
+    Stage.FIXED_NARROW = 'fixedNarrow';
+    Stage.FIXED_WIDTH = 'fixedWidth';
+    Stage.FIXED_HEIGHT = 'fixedHeight';
+    return Stage;
+}(DisplayObject));
+//# sourceMappingURL=Stage.js.map
 
 var Ease = /** @class */ (function () {
     function Ease() {
@@ -2655,15 +2646,21 @@ var Tween = /** @class */ (function (_super) {
 
 //# sourceMappingURL=index.js.map
 
-exports.Matrix = Matrix;
-exports.Rectangle = Rectangle;
-exports.Vector = Vector;
-exports.Stage = Stage;
+exports.Ticker = Ticker;
+exports.DisplayObject = DisplayObject;
 exports.ImageView = ImageView;
 exports.TextView = TextView;
-exports.DisplayObject = DisplayObject;
+exports.Stage = Stage;
 exports.Event = Event;
 exports.TouchEvent = TouchEvent;
-exports.Tween = Tween;
+exports.EventEmitter = EventEmitter;
+exports.Matrix = Matrix;
+exports.Vector = Vector;
+exports.Rectangle = Rectangle;
+exports.Media = Media;
+exports.Image = Image;
+exports.Sound = Sound;
+exports.SoundEffect = SoundEffect;
 exports.Ease = Ease;
+exports.Tween = Tween;
 exports.ResourceManager = ResourceManager;

@@ -1,5 +1,4 @@
 import Ticker from '../core/Ticker';
-import Media from '../media/Media';
 import Image from '../media/Image';
 import Sound from '../media/Sound';
 import SoundEffect from '../media/SoundEffect';
@@ -124,24 +123,12 @@ export default class ResourceManager extends EventEmitter {
 		return !!this.$resources[name];
 	}
 
-	public get(name: string): Media {
+	public get<Media>(name: string): Media {
 		let resource = this.$resources[name];
 		if (!resource) {
 			throw new Error('Resource not exists');
 		}
 		return resource;
-	}
-
-	public getImage(name: string): Image {
-		return <Image>this.get(name);
-	}
-
-	public getSound(name: string): Sound {
-		return <Sound>this.get(name);
-	}
-
-	public getSoundEffect(name: string): SoundEffect {
-		return <SoundEffect>this.get(name);
 	}
 
 }
