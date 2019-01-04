@@ -24,6 +24,7 @@ export default class ResourceManager extends EventEmitter {
     readonly loadedCount: number;
     private $checkPendingTasks;
     private $load;
+    has(name: string): boolean;
     get(name: string): Media;
     getImage(name: string): Image;
     getSound(name: string): Sound;

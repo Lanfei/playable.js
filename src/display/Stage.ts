@@ -1,3 +1,4 @@
+import Image from '../media/Image';
 import Ticker from '../core/Ticker';
 import Event from '../event/Event';
 import Rectangle from '../geom/Rectangle';
@@ -20,6 +21,7 @@ export default class Stage extends DisplayObject {
 	protected $viewportWidth: number;
 	protected $viewportHeight: number;
 	protected $renderBounds: Rectangle;
+	protected $viewportBackground: Image | string;
 	protected readonly $ticker: Ticker;
 	protected readonly $viewportCanvas: HTMLCanvasElement;
 	protected readonly $viewportContext: CanvasRenderingContext2D;
@@ -77,6 +79,15 @@ export default class Stage extends DisplayObject {
 		this.$y = 0;
 	}
 
+	public get scaleMode(): string {
+		return this.$scaleMode;
+	}
+
+	public set scaleMode(scaleMode: string) {
+		this.$scaleMode = scaleMode;
+		this.$resizeCanvas();
+	}
+
 	public get viewportWidth(): number {
 		return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / this.$pixelRatio;
 	}
@@ -101,13 +112,13 @@ export default class Stage extends DisplayObject {
 		this.$resizeCanvas();
 	}
 
-	public get scaleMode(): string {
-		return this.$scaleMode;
+	public get viewportBackground(): Image | string {
+		return this.$viewportBackground;
 	}
 
-	public set scaleMode(scaleMode: string) {
-		this.$scaleMode = scaleMode;
-		this.$resizeCanvas();
+	public set viewportBackground(viewportBackground: Image | string) {
+		this.$viewportBackground = viewportBackground;
+		this.$markDirty();
 	}
 
 	public get ticker(): Ticker {
@@ -273,7 +284,20 @@ export default class Stage extends DisplayObject {
 		let viewportCanvas = this.$viewportCanvas;
 		let viewportWidth = viewportCanvas.width;
 		let viewportHeight = viewportCanvas.height;
+		let viewportBackground = this.viewportBackground;
 		ctx.clearRect(0, 0, viewportWidth, viewportHeight);
+
+		if (viewportBackground) {
+			if (viewportBackground instanceof Image) {
+				ctx.drawImage(viewportBackground.element, 0, 0, viewportWidth, viewportHeight);
+			} else {
+				ctx.save();
+				ctx.fillStyle = <string>this.$background;
+				ctx.fillRect(0, 0, viewportWidth, viewportHeight);
+				ctx.restore();
+			}
+		}
+
 		ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
 	}
 

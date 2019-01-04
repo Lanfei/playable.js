@@ -1,3 +1,4 @@
+import Image from '../media/Image';
 import Ticker from '../core/Ticker';
 import Event from '../event/Event';
 import Rectangle from '../geom/Rectangle';
@@ -16,6 +17,7 @@ export default class Stage extends DisplayObject {
     protected $viewportWidth: number;
     protected $viewportHeight: number;
     protected $renderBounds: Rectangle;
+    protected $viewportBackground: Image | string;
     protected readonly $ticker: Ticker;
     protected readonly $viewportCanvas: HTMLCanvasElement;
     protected readonly $viewportContext: CanvasRenderingContext2D;
@@ -24,9 +26,10 @@ export default class Stage extends DisplayObject {
     protected $initEvents(): void;
     x: number;
     y: number;
+    scaleMode: string;
     viewportWidth: number;
     viewportHeight: number;
-    scaleMode: string;
+    viewportBackground: Image | string;
     readonly ticker: Ticker;
     createResourceManager(list: Array<ResourceInfo>, options?: ResourceManagerOption): ResourceManager;
     protected $addTouchEventListeners(): void;

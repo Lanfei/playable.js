@@ -14,6 +14,10 @@ export default class Image extends Media {
 		this.$element = image;
 	}
 
+	public get element(): HTMLImageElement {
+		return this.$element;
+	}
+
 	public get width(): number {
 		return this.$element.width;
 	}

@@ -51,7 +51,7 @@ export default class ImageView extends DisplayObject {
 		let pixelRatio = this.$pixelRatio;
 		let anchorX = this.$anchorX * pixelRatio;
 		let anchorY = this.$anchorY * pixelRatio;
-		ctx.drawImage(<HTMLImageElement>image.element, -anchorX, -anchorY, canvas.width, canvas.height);
+		ctx.drawImage(image.element, -anchorX, -anchorY, canvas.width, canvas.height);
 	}
 
 }

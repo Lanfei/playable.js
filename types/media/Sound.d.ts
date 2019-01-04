@@ -6,6 +6,7 @@ export default class Sound extends Media {
     protected $element: HTMLAudioElement;
     protected $boundOnTouch: () => void;
     constructor(ticker: any);
+    readonly element: HTMLAudioElement;
     url: string;
     volume: number;
     protected $checkOnTouch(): void;

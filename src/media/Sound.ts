@@ -23,6 +23,10 @@ export default class Sound extends Media {
 		ticker.on(Event.TICKER_RESUME, this.$onTickerResume.bind(this));
 	}
 
+	public get element(): HTMLAudioElement {
+		return this.$element;
+	}
+
 	public set url(url: string) {
 		this.$paused = true;
 		this.$element.src = url;

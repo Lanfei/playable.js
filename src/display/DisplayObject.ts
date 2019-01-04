@@ -1,4 +1,5 @@
 import Stage from './Stage';
+import Image from '../media/Image';
 import Ticker from '../core/Ticker';
 import Matrix from '../geom/Matrix';
 import Vector from '../geom/Vector';
@@ -26,7 +27,7 @@ export default class DisplayObject extends EventEmitter {
 	protected $rotation: number = 0;
 	protected $alpha: number = 1;
 	protected $visible: boolean = true;
-	protected $background: string = null;
+	protected $background: Image | string = null;
 	protected $dirty: boolean = true;
 	protected $stage: Stage = null;
 	protected $parent: DisplayObject = null;
@@ -179,11 +180,11 @@ export default class DisplayObject extends EventEmitter {
 		}
 	}
 
-	public get background(): string {
+	public get background(): Image | string {
 		return this.$background;
 	}
 
-	public set background(background: string) {
+	public set background(background: Image | string) {
 		if (this.$background !== background) {
 			this.$background = background;
 			this.$markDirty();
@@ -473,17 +474,24 @@ export default class DisplayObject extends EventEmitter {
 		let canvas = this.$canvas;
 		let children = this.$children;
 		let pixelRatio = this.$pixelRatio;
+		let background = this.$background;
 		let anchorX = this.$anchorX * pixelRatio;
 		let anchorY = this.$anchorY * pixelRatio;
+		let canvasWidth = canvas.width;
+		let canvasHeight = canvas.height;
 		ctx.setTransform(1, 0, 0, 1, anchorX, anchorY);
-		ctx.clearRect(-anchorX, -anchorY, canvas.width, canvas.height);
+		ctx.clearRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
 		ctx.beginPath();
 
-		if (this.$background) {
-			ctx.save();
-			ctx.fillStyle = this.$background;
-			ctx.fillRect(-anchorX, -anchorY, canvas.width, canvas.height);
-			ctx.restore();
+		if (background) {
+			if (background instanceof Image) {
+				ctx.drawImage(background.element, -anchorX, -anchorY, canvasWidth, canvasHeight);
+			} else {
+				ctx.save();
+				ctx.fillStyle = <string>this.$background;
+				ctx.fillRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
+				ctx.restore();
+			}
 		}
 
 		for (let child of children) {

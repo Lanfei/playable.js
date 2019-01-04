@@ -1,4 +1,5 @@
 import Stage from './Stage';
+import Image from '../media/Image';
 import Ticker from '../core/Ticker';
 import Matrix from '../geom/Matrix';
 import Rectangle from '../geom/Rectangle';
@@ -21,7 +22,7 @@ export default class DisplayObject extends EventEmitter {
     protected $rotation: number;
     protected $alpha: number;
     protected $visible: boolean;
-    protected $background: string;
+    protected $background: Image | string;
     protected $dirty: boolean;
     protected $stage: Stage;
     protected $parent: DisplayObject;
@@ -43,7 +44,7 @@ export default class DisplayObject extends EventEmitter {
     scaleY: number;
     rotation: number;
     alpha: number;
-    background: string;
+    background: Image | string;
     visible: boolean;
     readonly dirty: boolean;
     readonly stage: Stage;

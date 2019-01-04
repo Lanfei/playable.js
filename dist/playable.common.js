@@ -103,6 +103,86 @@ var EventEmitter = /** @class */ (function () {
 }());
 //# sourceMappingURL=EventEmitter.js.map
 
+var Media = /** @class */ (function (_super) {
+    __extends(Media, _super);
+    function Media(ticker) {
+        var _this = _super.call(this) || this;
+        _this.$ticker = ticker;
+        _this.$boundOnLoad = _this.$onLoad.bind(_this);
+        _this.$boundOnError = _this.$onError.bind(_this);
+        return _this;
+    }
+    Object.defineProperty(Media.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Media.prototype, "url", {
+        set: function (url) {
+            this.$element.src = url;
+            if (url.indexOf('data:') === 0) {
+                this.$ticker.setTimeout(this.$boundOnLoad);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Media.prototype.$onLoad = function () {
+        this.emit('load');
+        this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
+    };
+    Media.prototype.$onError = function (e) {
+        this.emit('error', e);
+        this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
+    };
+    return Media;
+}(EventEmitter));
+//# sourceMappingURL=Media.js.map
+
+var Image = /** @class */ (function (_super) {
+    __extends(Image, _super);
+    function Image(ticker) {
+        var _this = _super.call(this, ticker) || this;
+        var image = document.createElement('img');
+        image.crossOrigin = '*';
+        image.addEventListener('load', _this.$boundOnLoad);
+        image.addEventListener('error', _this.$boundOnError);
+        _this.$element = image;
+        return _this;
+    }
+    Object.defineProperty(Image.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Image.prototype, "width", {
+        get: function () {
+            return this.$element.width;
+        },
+        set: function (width) {
+            this.$element.width = width;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Image.prototype, "height", {
+        get: function () {
+            return this.$element.height;
+        },
+        set: function (height) {
+            this.$element.height = height;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Image;
+}(Media));
+//# sourceMappingURL=Image.js.map
+
 var Ticker = /** @class */ (function (_super) {
     __extends(Ticker, _super);
     function Ticker(stage) {
@@ -1126,16 +1206,24 @@ var DisplayObject = /** @class */ (function (_super) {
         var canvas = this.$canvas;
         var children = this.$children;
         var pixelRatio = this.$pixelRatio;
+        var background = this.$background;
         var anchorX = this.$anchorX * pixelRatio;
         var anchorY = this.$anchorY * pixelRatio;
+        var canvasWidth = canvas.width;
+        var canvasHeight = canvas.height;
         ctx.setTransform(1, 0, 0, 1, anchorX, anchorY);
-        ctx.clearRect(-anchorX, -anchorY, canvas.width, canvas.height);
+        ctx.clearRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
         ctx.beginPath();
-        if (this.$background) {
-            ctx.save();
-            ctx.fillStyle = this.$background;
-            ctx.fillRect(-anchorX, -anchorY, canvas.width, canvas.height);
-            ctx.restore();
+        if (background) {
+            if (background instanceof Image) {
+                ctx.drawImage(background.element, -anchorX, -anchorY, canvasWidth, canvasHeight);
+            }
+            else {
+                ctx.save();
+                ctx.fillStyle = this.$background;
+                ctx.fillRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
+                ctx.restore();
+            }
         }
         for (var _i = 0, children_5 = children; _i < children_5.length; _i++) {
             var child = children_5[_i];
@@ -1206,79 +1294,6 @@ var DisplayObject = /** @class */ (function (_super) {
 }(EventEmitter));
 //# sourceMappingURL=DisplayObject.js.map
 
-var Media = /** @class */ (function (_super) {
-    __extends(Media, _super);
-    function Media(ticker) {
-        var _this = _super.call(this) || this;
-        _this.$ticker = ticker;
-        _this.$boundOnLoad = _this.$onLoad.bind(_this);
-        _this.$boundOnError = _this.$onError.bind(_this);
-        return _this;
-    }
-    Object.defineProperty(Media.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Media.prototype, "url", {
-        set: function (url) {
-            this.$element.src = url;
-            if (url.indexOf('data:') === 0) {
-                this.$ticker.setTimeout(this.$boundOnLoad);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Media.prototype.$onLoad = function () {
-        this.emit('load');
-        this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
-    };
-    Media.prototype.$onError = function (e) {
-        this.emit('error', e);
-        this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
-    };
-    return Media;
-}(EventEmitter));
-//# sourceMappingURL=Media.js.map
-
-var Image = /** @class */ (function (_super) {
-    __extends(Image, _super);
-    function Image(ticker) {
-        var _this = _super.call(this, ticker) || this;
-        var image = document.createElement('img');
-        image.crossOrigin = '*';
-        image.addEventListener('load', _this.$boundOnLoad);
-        image.addEventListener('error', _this.$boundOnError);
-        _this.$element = image;
-        return _this;
-    }
-    Object.defineProperty(Image.prototype, "width", {
-        get: function () {
-            return this.$element.width;
-        },
-        set: function (width) {
-            this.$element.width = width;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "height", {
-        get: function () {
-            return this.$element.height;
-        },
-        set: function (height) {
-            this.$element.height = height;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Image;
-}(Media));
-//# sourceMappingURL=Image.js.map
-
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
     function Sound(ticker) {
@@ -1298,6 +1313,13 @@ var Sound = /** @class */ (function (_super) {
         ticker.on(Event.TICKER_RESUME, _this.$onTickerResume.bind(_this));
         return _this;
     }
+    Object.defineProperty(Sound.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Sound.prototype, "url", {
         set: function (url) {
             this.$paused = true;
@@ -1505,6 +1527,9 @@ var ResourceManager = /** @class */ (function (_super) {
         }
         timer = ticker.setTimeout(errorCallback, this.timeout);
     };
+    ResourceManager.prototype.has = function (name) {
+        return !!this.$resources[name];
+    };
     ResourceManager.prototype.get = function (name) {
         var resource = this.$resources[name];
         if (!resource) {
@@ -1584,6 +1609,17 @@ var Stage = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Stage.prototype, "scaleMode", {
+        get: function () {
+            return this.$scaleMode;
+        },
+        set: function (scaleMode) {
+            this.$scaleMode = scaleMode;
+            this.$resizeCanvas();
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Stage.prototype, "viewportWidth", {
         get: function () {
             return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / this.$pixelRatio;
@@ -1612,13 +1648,13 @@ var Stage = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Stage.prototype, "scaleMode", {
+    Object.defineProperty(Stage.prototype, "viewportBackground", {
         get: function () {
-            return this.$scaleMode;
+            return this.$viewportBackground;
         },
-        set: function (scaleMode) {
-            this.$scaleMode = scaleMode;
-            this.$resizeCanvas();
+        set: function (viewportBackground) {
+            this.$viewportBackground = viewportBackground;
+            this.$markDirty();
         },
         enumerable: true,
         configurable: true
@@ -1795,7 +1831,19 @@ var Stage = /** @class */ (function (_super) {
         var viewportCanvas = this.$viewportCanvas;
         var viewportWidth = viewportCanvas.width;
         var viewportHeight = viewportCanvas.height;
+        var viewportBackground = this.viewportBackground;
         ctx.clearRect(0, 0, viewportWidth, viewportHeight);
+        if (viewportBackground) {
+            if (viewportBackground instanceof Image) {
+                ctx.drawImage(viewportBackground.element, 0, 0, viewportWidth, viewportHeight);
+            }
+            else {
+                ctx.save();
+                ctx.fillStyle = this.$background;
+                ctx.fillRect(0, 0, viewportWidth, viewportHeight);
+                ctx.restore();
+            }
+        }
         ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
     };
     Stage.prototype.$onWindowResize = function () {
