@@ -280,7 +280,7 @@ export default class Layer extends EventEmitter {
 		return this;
 	}
 
-	public getChildByName(name): Layer {
+	public getChildByName(name: string): Layer {
 		let children = this.$children;
 		for (let child of children) {
 			if (child.name === name) {
@@ -290,7 +290,7 @@ export default class Layer extends EventEmitter {
 		return null;
 	}
 
-	public getChildrenByTag(tag): Array<Layer> {
+	public getChildrenByTag(tag: string): Array<Layer> {
 		let result = [];
 		let children = this.$children;
 		for (let child of children) {
@@ -301,15 +301,19 @@ export default class Layer extends EventEmitter {
 		return result;
 	}
 
-	public getChildAt(index): Layer {
+	public getChildAt(index: number): Layer {
 		return this.$children[index] || null;
 	}
 
-	public getChildIndex(child): number {
+	public getChildIndex(child: Layer): number {
 		return this.$children.indexOf(child);
 	}
 
-	public swapChildren(child1, child2): this {
+	public hasChild(child: Layer): boolean {
+		return this.getChildIndex(child) >= 0;
+	}
+
+	public swapChildren(child1: Layer, child2: Layer): this {
 		let index1 = this.getChildIndex(child1);
 		let index2 = this.getChildIndex(child2);
 		if (index1 >= 0 && index2 >= 0) {
@@ -318,7 +322,7 @@ export default class Layer extends EventEmitter {
 		return this;
 	}
 
-	public swapChildrenAt(index1, index2) {
+	public swapChildrenAt(index1: number, index2: number): this {
 		if (index1 !== index2) {
 			let child1 = this.$children[index1];
 			let child2 = this.$children[index2];
@@ -377,7 +381,7 @@ export default class Layer extends EventEmitter {
 		return this;
 	}
 
-	public removeChildrenByTag(tag): this {
+	public removeChildrenByTag(tag: string): this {
 		let children = this.$children;
 		for (let i = children.length - 1; i >= 0; --i) {
 			let child = children[i];
@@ -414,7 +418,7 @@ export default class Layer extends EventEmitter {
 		return matrix;
 	}
 
-	protected $resizeCanvas() {
+	protected $resizeCanvas(): void {
 		let width = this.$width;
 		let height = this.$height;
 		let canvas = this.$canvas;
@@ -437,9 +441,9 @@ export default class Layer extends EventEmitter {
 		this.$dirty = true;
 	}
 
-	protected $getChildBounds(child: Layer): Rectangle {
+	protected $getBounds(): Rectangle {
 		let bounds = Rectangle.create();
-		let matrix = child.$getTransform();
+		let matrix = this.$getTransform();
 		let topLeft = Vector.create(0, 0).transform(matrix);
 		let topRight = Vector.create(this.width, 0).transform(matrix);
 		let bottomLeft = Vector.create(0, this.height).transform(matrix);
@@ -464,7 +468,7 @@ export default class Layer extends EventEmitter {
 		let children = this.$children;
 		let bounds = Rectangle.create();
 		for (let child of children) {
-			let childBounds = this.$getChildBounds(child);
+			let childBounds = child.$getBounds();
 			bounds.top = Math.min(bounds.top ? bounds.top : Infinity, childBounds.top);
 			bounds.bottom = Math.max(bounds.bottom ? bounds.bottom : -Infinity, childBounds.bottom);
 			bounds.left = Math.min(bounds.left ? bounds.left : Infinity, childBounds.left);
@@ -515,7 +519,7 @@ export default class Layer extends EventEmitter {
 		return true;
 	}
 
-	protected $getPattern(image, fillMode): CanvasPattern {
+	protected $getPattern(image: Image, fillMode: BackgroundFillMode): CanvasPattern {
 		if (image && fillMode && fillMode !== 'scale' && fillMode !== 'no-repeat') {
 			return this.$context.createPattern(image.element, fillMode);
 		} else {

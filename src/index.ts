@@ -1,5 +1,6 @@
 import Ticker from './core/Ticker';
 import Layer from './display/Layer';
+import ScrollView from './display/ScrollView';
 import ImageView from './display/ImageView';
 import TextView from './display/TextView';
 import Stage from './display/Stage';
@@ -20,6 +21,7 @@ import ResourceManager from './net/ResourceManager';
 export {
 	Ticker,
 	Layer,
+	ScrollView,
 	ImageView,
 	TextView,
 	Stage,

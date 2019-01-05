@@ -1,7 +1,18 @@
+import {uglify} from "rollup-plugin-uglify";
 import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript';
 
 module.exports = [{
+	input: 'src/index.ts',
+	output: {
+		file: 'dist/playable.common.js',
+		format: 'cjs'
+	},
+	plugins: [
+		commonjs(),
+		typescript({tsconfig: false})
+	]
+}, {
 	input: 'src/index.ts',
 	output: {
 		name: 'playable',
@@ -15,10 +26,12 @@ module.exports = [{
 }, {
 	input: 'src/index.ts',
 	output: {
-		file: 'dist/playable.common.js',
-		format: 'cjs'
+		name: 'playable',
+		file: 'dist/playable.min.js',
+		format: 'iife'
 	},
 	plugins: [
+		uglify(),
 		commonjs(),
 		typescript({tsconfig: false})
 	]

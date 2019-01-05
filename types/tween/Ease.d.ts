@@ -24,9 +24,9 @@ export default class Ease {
     static easeInElastic(t: number, b: number, c: number, d: number): number;
     static easeOutElastic(t: number, b: number, c: number, d: number): number;
     static easeInOutElastic(t: number, b: number, c: number, d: number): number;
-    static easeInBack(t: any, b: number, c: number, d: number, s: number): number;
-    static easeOutBack(t: any, b: number, c: number, d: number, s: number): number;
-    static easeInOutBack(t: any, b: number, c: number, d: number, s: number): number;
+    static easeInBack(t: number, b: number, c: number, d: number, s: number): number;
+    static easeOutBack(t: number, b: number, c: number, d: number, s: number): number;
+    static easeInOutBack(t: number, b: number, c: number, d: number, s: number): number;
     static easeInBounce(t: number, b: number, c: number, d: number): number;
     static easeOutBounce(t: number, b: number, c: number, d: number): number;
     static easeInOutBounce(t: number, b: number, c: number, d: number): number;

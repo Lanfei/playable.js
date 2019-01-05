@@ -51,6 +51,7 @@ var playable = (function (exports) {
         Event.SOUND_COMPLETE = 'soundComplete';
         return Event;
     }());
+    //# sourceMappingURL=Event.js.map
 
     var EventEmitter = /** @class */ (function () {
         function EventEmitter() {
@@ -100,6 +101,7 @@ var playable = (function (exports) {
         };
         return EventEmitter;
     }());
+    //# sourceMappingURL=EventEmitter.js.map
 
     var Ticker = /** @class */ (function (_super) {
         __extends(Ticker, _super);
@@ -237,6 +239,7 @@ var playable = (function (exports) {
         };
         return Ticker;
     }(EventEmitter));
+    //# sourceMappingURL=Ticker.js.map
 
     var Vector = /** @class */ (function () {
         function Vector(x, y) {
@@ -353,6 +356,7 @@ var playable = (function (exports) {
         Vector.$pool = [];
         return Vector;
     }());
+    //# sourceMappingURL=Vector.js.map
 
     var Matrix = /** @class */ (function () {
         function Matrix(a, b, c, d, tx, ty) {
@@ -481,6 +485,7 @@ var playable = (function (exports) {
         Matrix.$pool = [];
         return Matrix;
     }());
+    //# sourceMappingURL=Matrix.js.map
 
     var Rectangle = /** @class */ (function () {
         function Rectangle(x, y, width, height) {
@@ -579,6 +584,7 @@ var playable = (function (exports) {
         Rectangle.$pool = [];
         return Rectangle;
     }());
+    //# sourceMappingURL=Rectangle.js.map
 
     var TouchEvent = /** @class */ (function (_super) {
         __extends(TouchEvent, _super);
@@ -625,6 +631,7 @@ var playable = (function (exports) {
         TouchEvent.$pool = [];
         return TouchEvent;
     }(Event));
+    //# sourceMappingURL=TouchEvent.js.map
 
     var Layer = /** @class */ (function (_super) {
         __extends(Layer, _super);
@@ -966,6 +973,9 @@ var playable = (function (exports) {
         Layer.prototype.getChildIndex = function (child) {
             return this.$children.indexOf(child);
         };
+        Layer.prototype.hasChild = function (child) {
+            return this.getChildIndex(child) >= 0;
+        };
         Layer.prototype.swapChildren = function (child1, child2) {
             var index1 = this.getChildIndex(child1);
             var index2 = this.getChildIndex(child2);
@@ -1086,9 +1096,9 @@ var playable = (function (exports) {
             }
             this.$dirty = true;
         };
-        Layer.prototype.$getChildBounds = function (child) {
+        Layer.prototype.$getBounds = function () {
             var bounds = Rectangle.create();
-            var matrix = child.$getTransform();
+            var matrix = this.$getTransform();
             var topLeft = Vector.create(0, 0).transform(matrix);
             var topRight = Vector.create(this.width, 0).transform(matrix);
             var bottomLeft = Vector.create(0, this.height).transform(matrix);
@@ -1113,7 +1123,7 @@ var playable = (function (exports) {
             var bounds = Rectangle.create();
             for (var _i = 0, children_4 = children; _i < children_4.length; _i++) {
                 var child = children_4[_i];
-                var childBounds = this.$getChildBounds(child);
+                var childBounds = child.$getBounds();
                 bounds.top = Math.min(bounds.top ? bounds.top : Infinity, childBounds.top);
                 bounds.bottom = Math.max(bounds.bottom ? bounds.bottom : -Infinity, childBounds.bottom);
                 bounds.left = Math.min(bounds.left ? bounds.left : Infinity, childBounds.left);
@@ -1311,6 +1321,26 @@ var playable = (function (exports) {
         return Layer;
     }(EventEmitter));
 
+    var ScrollView = /** @class */ (function (_super) {
+        __extends(ScrollView, _super);
+        function ScrollView() {
+            var _this = _super.call(this) || this;
+            _this.$scrollX = 0;
+            _this.$scrollY = 0;
+            _this.$scrollCanvas = document.createElement('canvas');
+            _this.$scrollContext = _this.$scrollCanvas.getContext('2d');
+            return _this;
+        }
+        ScrollView.prototype.$render = function () {
+            if (!this.dirty) {
+                return;
+            }
+            _super.prototype.$render.call(this);
+        };
+        return ScrollView;
+    }(Layer));
+    //# sourceMappingURL=ScrollView.js.map
+
     var ImageView = /** @class */ (function (_super) {
         __extends(ImageView, _super);
         function ImageView(image, width, height) {
@@ -1361,6 +1391,7 @@ var playable = (function (exports) {
         };
         return ImageView;
     }(Layer));
+    //# sourceMappingURL=ImageView.js.map
 
     var TextView = /** @class */ (function (_super) {
         __extends(TextView, _super);
@@ -1717,6 +1748,7 @@ var playable = (function (exports) {
         TextView.boundaryRe = /\b/;
         return TextView;
     }(Layer));
+    //# sourceMappingURL=TextView.js.map
 
     var Media = /** @class */ (function (_super) {
         __extends(Media, _super);
@@ -1751,6 +1783,7 @@ var playable = (function (exports) {
         };
         return Media;
     }(EventEmitter));
+    //# sourceMappingURL=Media.js.map
 
     var Image = /** @class */ (function (_super) {
         __extends(Image, _super);
@@ -1792,6 +1825,7 @@ var playable = (function (exports) {
         });
         return Image;
     }(Media));
+    //# sourceMappingURL=Image.js.map
 
     var Sound = /** @class */ (function (_super) {
         __extends(Sound, _super);
@@ -1900,6 +1934,7 @@ var playable = (function (exports) {
         };
         return Sound;
     }(Media));
+    //# sourceMappingURL=Sound.js.map
 
     var SoundEffect = /** @class */ (function (_super) {
         __extends(SoundEffect, _super);
@@ -1908,6 +1943,7 @@ var playable = (function (exports) {
         }
         return SoundEffect;
     }(Sound));
+    //# sourceMappingURL=SoundEffect.js.map
 
     var ResourceManager = /** @class */ (function (_super) {
         __extends(ResourceManager, _super);
@@ -2039,6 +2075,7 @@ var playable = (function (exports) {
         ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
         return ResourceManager;
     }(EventEmitter));
+    //# sourceMappingURL=ResourceManager.js.map
 
     var Stage = /** @class */ (function (_super) {
         __extends(Stage, _super);
@@ -2383,6 +2420,7 @@ var playable = (function (exports) {
         Stage.FIXED_HEIGHT = 'fixedHeight';
         return Stage;
     }(Layer));
+    //# sourceMappingURL=Stage.js.map
 
     var Ease = /** @class */ (function () {
         function Ease() {
@@ -2566,6 +2604,7 @@ var playable = (function (exports) {
         };
         return Ease;
     }());
+    //# sourceMappingURL=Ease.js.map
 
     var Tween = /** @class */ (function (_super) {
         __extends(Tween, _super);
@@ -2758,9 +2797,13 @@ var playable = (function (exports) {
         Tween.$tweens = [];
         return Tween;
     }(EventEmitter));
+    //# sourceMappingURL=Tween.js.map
+
+    //# sourceMappingURL=index.js.map
 
     exports.Ticker = Ticker;
     exports.Layer = Layer;
+    exports.ScrollView = ScrollView;
     exports.ImageView = ImageView;
     exports.TextView = TextView;
     exports.Stage = Stage;

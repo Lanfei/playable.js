@@ -1,5 +1,6 @@
 import Media from './Media';
 import Event from '../event/Event';
+import Ticker from '../core/Ticker';
 
 export default class Sound extends Media {
 
@@ -9,7 +10,7 @@ export default class Sound extends Media {
 	protected $element: HTMLAudioElement;
 	protected $boundOnTouch: () => void;
 
-	public constructor(ticker) {
+	public constructor(ticker: Ticker) {
 		super(ticker);
 		let audio = document.createElement('audio');
 		audio.crossOrigin = '*';

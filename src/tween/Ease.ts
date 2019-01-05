@@ -138,17 +138,17 @@ export default class Ease {
 		return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * 0.5 + c + b;
 	}
 
-	public static easeInBack(t, b: number, c: number, d: number, s: number): number {
+	public static easeInBack(t: number, b: number, c: number, d: number, s: number): number {
 		if (s === undefined) s = 1.70158;
 		return c * (t /= d) * t * ((s + 1) * t - s) + b;
 	}
 
-	public static easeOutBack(t, b: number, c: number, d: number, s: number): number {
+	public static easeOutBack(t: number, b: number, c: number, d: number, s: number): number {
 		if (s === undefined) s = 1.70158;
 		return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
 	}
 
-	public static easeInOutBack(t, b: number, c: number, d: number, s: number): number {
+	public static easeInOutBack(t: number, b: number, c: number, d: number, s: number): number {
 		if (s === undefined) s = 1.70158;
 		if ((t /= d / 2) < 1) return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
 		return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;

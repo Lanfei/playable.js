@@ -42,4 +42,5 @@ export default class EventEmitter {
 		this.$events = {};
 		return this;
 	}
+
 }

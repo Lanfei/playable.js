@@ -1,5 +1,6 @@
 import Ticker from './core/Ticker';
 import Layer from './display/Layer';
+import ScrollView from './display/ScrollView';
 import ImageView from './display/ImageView';
 import TextView from './display/TextView';
 import Stage from './display/Stage';
@@ -16,4 +17,4 @@ import SoundEffect from './media/SoundEffect';
 import Ease from './tween/Ease';
 import Tween from './tween/Tween';
 import ResourceManager from './net/ResourceManager';
-export { Ticker, Layer, ImageView, TextView, Stage, Event, TouchEvent, EventEmitter, Matrix, Vector, Rectangle, Media, Image, Sound, SoundEffect, Ease, Tween, ResourceManager };
+export { Ticker, Layer, ScrollView, ImageView, TextView, Stage, Event, TouchEvent, EventEmitter, Matrix, Vector, Rectangle, Media, Image, Sound, SoundEffect, Ease, Tween, ResourceManager };

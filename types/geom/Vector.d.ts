@@ -16,7 +16,7 @@ export default class Vector {
     normalize(): this;
     negate(): this;
     scale(x: number, y?: number): this;
-    rotate(angle: any): this;
+    rotate(angle: number): this;
     angle(): number;
     distance(v: Vector): number;
     equals(v: Vector): boolean;

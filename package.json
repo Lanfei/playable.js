@@ -1,6 +1,6 @@
 {
   "name": "playable.js",
-  "version": "1.7.5",
+  "version": "1.7.6",
   "author": "Jealous",
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.common.js",
@@ -35,6 +35,7 @@
     "rollup": "^1.0.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-typescript": "^1.0.0",
+    "rollup-plugin-uglify": "^6.0.0",
     "tslib": "^1.9.3",
     "typescript": "^3.2.2"
   }

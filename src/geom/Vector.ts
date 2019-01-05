@@ -87,7 +87,7 @@ export default class Vector {
 		return this;
 	}
 
-	public rotate(angle): this {
+	public rotate(angle: number): this {
 		let x = this.x;
 		let y = this.y;
 		this.x = x * Math.cos(angle) - y * Math.sin(angle);
