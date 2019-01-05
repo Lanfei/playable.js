@@ -133,16 +133,16 @@ export default class Ticker extends EventEmitter {
 	}
 
 	private $tick(): void {
-		let now = Date.now();
-		let deltaTime = now - this.$lastTimestamp || 1000 / 60;
+		let lastTimestamp = this.$lastTimestamp;
+		let deltaTime = lastTimestamp ? Date.now() - this.$lastTimestamp : 1000 / 60;
 		let enterFrameCallbackList = this.$enterFrameCallbackList;
 		for (let layer of enterFrameCallbackList) {
 			layer.emit(Event.ENTER_FRAME, deltaTime);
 		}
 		this.$fps = Math.round(1000 / deltaTime);
 		this.emit(Event.TICK, deltaTime);
-		this.$lastTimestamp = now;
 		this.$checkTimers(deltaTime);
+		this.$lastTimestamp = Date.now();
 		this.$tickHandle = requestAnimationFrame(this.$boundTick);
 	}
 

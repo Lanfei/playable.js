@@ -230,8 +230,8 @@ var playable = (function (exports) {
             return this;
         };
         Ticker.prototype.$tick = function () {
-            var now = Date.now();
-            var deltaTime = now - this.$lastTimestamp || 1000 / 60;
+            var lastTimestamp = this.$lastTimestamp;
+            var deltaTime = lastTimestamp ? Date.now() - this.$lastTimestamp : 1000 / 60;
             var enterFrameCallbackList = this.$enterFrameCallbackList;
             for (var _i = 0, enterFrameCallbackList_1 = enterFrameCallbackList; _i < enterFrameCallbackList_1.length; _i++) {
                 var layer = enterFrameCallbackList_1[_i];
@@ -239,8 +239,8 @@ var playable = (function (exports) {
             }
             this.$fps = Math.round(1000 / deltaTime);
             this.emit(Event.TICK, deltaTime);
-            this.$lastTimestamp = now;
             this.$checkTimers(deltaTime);
+            this.$lastTimestamp = Date.now();
             this.$tickHandle = requestAnimationFrame(this.$boundTick);
         };
         Ticker.prototype.$checkTimers = function (dt) {
