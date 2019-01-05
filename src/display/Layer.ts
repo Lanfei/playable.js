@@ -561,8 +561,12 @@ export default class Layer extends EventEmitter {
 			return 0;
 		}
 		if (!child.$dirty) {
+			let minX = -this.$anchorX;
+			let maxX = this.$width + minX;
+			let minY = -this.$anchorY;
+			let maxY = this.$height + minY;
 			let bounds = this.$getChildBounds(child);
-			if (bounds.left > this.$width || bounds.right < 0 || bounds.top > this.$height || bounds.bottom < 0) {
+			if (bounds.left > maxX || bounds.right < minX || bounds.top > maxY || bounds.bottom < minY) {
 				bounds.release();
 				return 0;
 			}
@@ -606,9 +610,9 @@ export default class Layer extends EventEmitter {
 
 		ctx.globalAlpha = 1;
 		ctx.resetTransform();
-		ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
 		ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 		this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode);
+		ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
 		for (let child of children) {
 			if (child.visible && child.alpha) {
 				drawCalls += this.$drawChild(child);

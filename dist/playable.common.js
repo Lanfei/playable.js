@@ -1234,8 +1234,12 @@ var Layer = /** @class */ (function (_super) {
             return 0;
         }
         if (!child.$dirty) {
+            var minX = -this.$anchorX;
+            var maxX = this.$width + minX;
+            var minY = -this.$anchorY;
+            var maxY = this.$height + minY;
             var bounds = this.$getChildBounds(child);
-            if (bounds.left > this.$width || bounds.right < 0 || bounds.top > this.$height || bounds.bottom < 0) {
+            if (bounds.left > maxX || bounds.right < minX || bounds.top > maxY || bounds.bottom < minY) {
                 bounds.release();
                 return 0;
             }
@@ -1278,9 +1282,9 @@ var Layer = /** @class */ (function (_super) {
         var pixelRatio = Layer.pixelRatio;
         ctx.globalAlpha = 1;
         ctx.resetTransform();
-        ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode);
+        ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
         for (var _i = 0, children_5 = children; _i < children_5.length; _i++) {
             var child = children_5[_i];
             if (child.visible && child.alpha) {
