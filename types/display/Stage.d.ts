@@ -1,4 +1,4 @@
-import Layer from './Layer';
+import Layer, { BackgroundFillMode } from './Layer';
 import Image from '../media/Image';
 import Ticker from '../core/Ticker';
 import Event from '../event/Event';
@@ -17,7 +17,10 @@ export default class Stage extends Layer {
     protected $viewportWidth: number;
     protected $viewportHeight: number;
     protected $renderBounds: Rectangle;
-    protected $viewportBackground: Image | string;
+    protected $viewportBackgroundColor: string;
+    protected $viewportBackgroundImage: Image;
+    protected $viewportBackgroundPattern: CanvasPattern;
+    protected $viewportBackgroundFillMode: BackgroundFillMode;
     protected readonly $ticker: Ticker;
     protected readonly $viewportCanvas: HTMLCanvasElement;
     protected readonly $viewportContext: CanvasRenderingContext2D;
@@ -29,7 +32,9 @@ export default class Stage extends Layer {
     scaleMode: string;
     viewportWidth: number;
     viewportHeight: number;
-    viewportBackground: Image | string;
+    viewportBackgroundColor: string;
+    viewportBackgroundImage: Image;
+    viewportBackgroundFillMode: BackgroundFillMode;
     readonly ticker: Ticker;
     createResourceManager(list: Array<ResourceInfo>, options?: ResourceManagerOption): ResourceManager;
     protected $addTouchEventListeners(): void;

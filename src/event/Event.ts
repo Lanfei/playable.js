@@ -8,6 +8,7 @@ export default class Event {
 	public static readonly TICK: string = 'tick';
 	public static readonly TICKER_PAUSE: string = 'tickerPause';
 	public static readonly TICKER_RESUME: string = 'tickerResume';
+	public static readonly VIEWPORT_RESIZE: string = 'viewportResize';
 	public static readonly PROGRESS: string = 'progress';
 	public static readonly COMPLETE: string = 'complete';
 	public static readonly LOAD: string = 'load';

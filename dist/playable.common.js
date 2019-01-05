@@ -44,6 +44,7 @@ var Event = /** @class */ (function () {
     Event.TICK = 'tick';
     Event.TICKER_PAUSE = 'tickerPause';
     Event.TICKER_RESUME = 'tickerResume';
+    Event.VIEWPORT_RESIZE = 'viewportResize';
     Event.PROGRESS = 'progress';
     Event.COMPLETE = 'complete';
     Event.LOAD = 'load';
@@ -51,7 +52,6 @@ var Event = /** @class */ (function () {
     Event.SOUND_COMPLETE = 'soundComplete';
     return Event;
 }());
-//# sourceMappingURL=Event.js.map
 
 var EventEmitter = /** @class */ (function () {
     function EventEmitter() {
@@ -101,7 +101,6 @@ var EventEmitter = /** @class */ (function () {
     };
     return EventEmitter;
 }());
-//# sourceMappingURL=EventEmitter.js.map
 
 var Ticker = /** @class */ (function (_super) {
     __extends(Ticker, _super);
@@ -239,84 +238,6 @@ var Ticker = /** @class */ (function (_super) {
     };
     return Ticker;
 }(EventEmitter));
-//# sourceMappingURL=Ticker.js.map
-
-var Media = /** @class */ (function (_super) {
-    __extends(Media, _super);
-    function Media(ticker) {
-        var _this = _super.call(this) || this;
-        _this.$ticker = ticker;
-        _this.$boundOnLoad = _this.$onLoad.bind(_this);
-        _this.$boundOnError = _this.$onError.bind(_this);
-        return _this;
-    }
-    Object.defineProperty(Media.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Media.prototype, "url", {
-        set: function (url) {
-            this.$element.src = url;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Media.prototype.$onLoad = function () {
-        this.emit('load');
-        this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
-    };
-    Media.prototype.$onError = function (e) {
-        this.emit('error', e);
-        this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
-    };
-    return Media;
-}(EventEmitter));
-//# sourceMappingURL=Media.js.map
-
-var Image = /** @class */ (function (_super) {
-    __extends(Image, _super);
-    function Image(ticker) {
-        var _this = _super.call(this, ticker) || this;
-        var image = document.createElement('img');
-        image.crossOrigin = '*';
-        image.addEventListener('load', _this.$boundOnLoad);
-        image.addEventListener('error', _this.$boundOnError);
-        _this.$element = image;
-        return _this;
-    }
-    Object.defineProperty(Image.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "width", {
-        get: function () {
-            return this.$element.width;
-        },
-        set: function (width) {
-            this.$element.width = width;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "height", {
-        get: function () {
-            return this.$element.height;
-        },
-        set: function (height) {
-            this.$element.height = height;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return Image;
-}(Media));
-//# sourceMappingURL=Image.js.map
 
 var Vector = /** @class */ (function () {
     function Vector(x, y) {
@@ -433,7 +354,6 @@ var Vector = /** @class */ (function () {
     Vector.$pool = [];
     return Vector;
 }());
-//# sourceMappingURL=Vector.js.map
 
 var Matrix = /** @class */ (function () {
     function Matrix(a, b, c, d, tx, ty) {
@@ -562,7 +482,6 @@ var Matrix = /** @class */ (function () {
     Matrix.$pool = [];
     return Matrix;
 }());
-//# sourceMappingURL=Matrix.js.map
 
 var Rectangle = /** @class */ (function () {
     function Rectangle(x, y, width, height) {
@@ -661,7 +580,6 @@ var Rectangle = /** @class */ (function () {
     Rectangle.$pool = [];
     return Rectangle;
 }());
-//# sourceMappingURL=Rectangle.js.map
 
 var TouchEvent = /** @class */ (function (_super) {
     __extends(TouchEvent, _super);
@@ -708,7 +626,6 @@ var TouchEvent = /** @class */ (function (_super) {
     TouchEvent.$pool = [];
     return TouchEvent;
 }(Event));
-//# sourceMappingURL=TouchEvent.js.map
 
 var Layer = /** @class */ (function (_super) {
     __extends(Layer, _super);
@@ -730,7 +647,10 @@ var Layer = /** @class */ (function (_super) {
         _this.$rotation = 0;
         _this.$alpha = 1;
         _this.$visible = true;
-        _this.$background = null;
+        _this.$backgroundColor = null;
+        _this.$backgroundImage = null;
+        _this.$backgroundPattern = null;
+        _this.$backgroundFillMode = 'scale';
         _this.$dirty = true;
         _this.$stage = null;
         _this.$parent = null;
@@ -900,13 +820,41 @@ var Layer = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Layer.prototype, "background", {
+    Object.defineProperty(Layer.prototype, "backgroundColor", {
         get: function () {
-            return this.$background;
+            return this.$backgroundColor;
         },
-        set: function (background) {
-            if (this.$background !== background) {
-                this.$background = background;
+        set: function (backgroundColor) {
+            if (this.$backgroundColor !== backgroundColor) {
+                this.$backgroundColor = backgroundColor;
+                this.$markDirty();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Layer.prototype, "backgroundImage", {
+        get: function () {
+            return this.$backgroundImage;
+        },
+        set: function (backgroundImage) {
+            if (this.$backgroundImage !== backgroundImage) {
+                this.$backgroundImage = backgroundImage;
+                this.$backgroundPattern = this.$getPattern(this.$backgroundImage, this.$backgroundFillMode);
+                this.$markDirty();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Layer.prototype, "backgroundFillMode", {
+        get: function () {
+            return this.$backgroundFillMode;
+        },
+        set: function (backgroundFillMode) {
+            if (this.$backgroundFillMode !== backgroundFillMode) {
+                this.$backgroundFillMode = backgroundFillMode || 'scale';
+                this.$backgroundPattern = this.$getPattern(this.$backgroundImage, this.$backgroundFillMode);
                 this.$markDirty();
             }
         },
@@ -1217,6 +1165,42 @@ var Layer = /** @class */ (function (_super) {
         localPos.release();
         return true;
     };
+    Layer.prototype.$getPattern = function (image, fillMode) {
+        if (image && fillMode && fillMode !== 'scale' && fillMode !== 'no-repeat') {
+            return this.$context.createPattern(image.element, fillMode);
+        }
+        else {
+            return null;
+        }
+    };
+    Layer.prototype.$drawBackground = function (color, image, pattern, fillMode, context) {
+        var ctx = context || this.$context;
+        var canvas = ctx.canvas;
+        var width = canvas.width;
+        var height = canvas.height;
+        var pixelRatio = Layer.pixelRatio;
+        if (color) {
+            ctx.save();
+            ctx.fillStyle = color;
+            ctx.fillRect(0, 0, width, height);
+            ctx.restore();
+        }
+        if (image) {
+            if (fillMode === 'scale') {
+                ctx.drawImage(image.element, 0, 0, width, height);
+            }
+            else if (fillMode === 'no-repeat') {
+                ctx.drawImage(image.element, 0, 0, image.width * pixelRatio, image.height * pixelRatio);
+            }
+            else if (pattern) {
+                ctx.save();
+                ctx.scale(pixelRatio, pixelRatio);
+                ctx.fillStyle = pattern;
+                ctx.fillRect(0, 0, width, height);
+                ctx.restore();
+            }
+        }
+    };
     Layer.prototype.$drawChild = function (child) {
         if (!child.width || !child.height) {
             return;
@@ -1244,27 +1228,20 @@ var Layer = /** @class */ (function (_super) {
         var ctx = this.$context;
         var canvas = this.$canvas;
         var children = this.$children;
-        var background = this.$background;
+        var backgroundColor = this.$backgroundColor;
+        var backgroundImage = this.$backgroundImage;
+        var backgroundPattern = this.$backgroundPattern;
+        var backgroundFillMode = this.$backgroundFillMode;
         var pixelRatio = Layer.pixelRatio;
         var anchorX = this.$anchorX * pixelRatio;
         var anchorY = this.$anchorY * pixelRatio;
         var canvasWidth = canvas.width;
         var canvasHeight = canvas.height;
-        ctx.setTransform(1, 0, 0, 1, anchorX, anchorY);
-        ctx.clearRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
-        ctx.beginPath();
+        ctx.resetTransform();
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode);
+        ctx.translate(anchorX, anchorY);
         ctx.save();
-        if (background) {
-            if (background instanceof Image) {
-                ctx.drawImage(background.element, -anchorX, -anchorY, canvasWidth, canvasHeight);
-            }
-            else {
-                ctx.save();
-                ctx.fillStyle = this.$background;
-                ctx.fillRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
-                ctx.restore();
-            }
-        }
         for (var _i = 0, children_5 = children; _i < children_5.length; _i++) {
             var child = children_5[_i];
             if (child.visible && child.alpha) {
@@ -1334,7 +1311,6 @@ var Layer = /** @class */ (function (_super) {
     Layer.pixelRatio = window.devicePixelRatio || 1;
     return Layer;
 }(EventEmitter));
-//# sourceMappingURL=Layer.js.map
 
 var ImageView = /** @class */ (function (_super) {
     __extends(ImageView, _super);
@@ -1386,7 +1362,6 @@ var ImageView = /** @class */ (function (_super) {
     };
     return ImageView;
 }(Layer));
-//# sourceMappingURL=ImageView.js.map
 
 var TextView = /** @class */ (function (_super) {
     __extends(TextView, _super);
@@ -1744,6 +1719,81 @@ var TextView = /** @class */ (function (_super) {
     return TextView;
 }(Layer));
 
+var Media = /** @class */ (function (_super) {
+    __extends(Media, _super);
+    function Media(ticker) {
+        var _this = _super.call(this) || this;
+        _this.$ticker = ticker;
+        _this.$boundOnLoad = _this.$onLoad.bind(_this);
+        _this.$boundOnError = _this.$onError.bind(_this);
+        return _this;
+    }
+    Object.defineProperty(Media.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Media.prototype, "url", {
+        set: function (url) {
+            this.$element.src = url;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Media.prototype.$onLoad = function () {
+        this.emit('load');
+        this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
+    };
+    Media.prototype.$onError = function (e) {
+        this.emit('error', e);
+        this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
+    };
+    return Media;
+}(EventEmitter));
+
+var Image = /** @class */ (function (_super) {
+    __extends(Image, _super);
+    function Image(ticker) {
+        var _this = _super.call(this, ticker) || this;
+        var image = document.createElement('img');
+        image.crossOrigin = '*';
+        image.addEventListener('load', _this.$boundOnLoad);
+        image.addEventListener('error', _this.$boundOnError);
+        _this.$element = image;
+        return _this;
+    }
+    Object.defineProperty(Image.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Image.prototype, "width", {
+        get: function () {
+            return this.$element.width;
+        },
+        set: function (width) {
+            this.$element.width = width;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Image.prototype, "height", {
+        get: function () {
+            return this.$element.height;
+        },
+        set: function (height) {
+            this.$element.height = height;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Image;
+}(Media));
+
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
     function Sound(ticker) {
@@ -1851,7 +1901,6 @@ var Sound = /** @class */ (function (_super) {
     };
     return Sound;
 }(Media));
-//# sourceMappingURL=Sound.js.map
 
 var SoundEffect = /** @class */ (function (_super) {
     __extends(SoundEffect, _super);
@@ -1860,7 +1909,6 @@ var SoundEffect = /** @class */ (function (_super) {
     }
     return SoundEffect;
 }(Sound));
-//# sourceMappingURL=SoundEffect.js.map
 
 var ResourceManager = /** @class */ (function (_super) {
     __extends(ResourceManager, _super);
@@ -1992,12 +2040,12 @@ var ResourceManager = /** @class */ (function (_super) {
     ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
     return ResourceManager;
 }(EventEmitter));
-//# sourceMappingURL=ResourceManager.js.map
 
 var Stage = /** @class */ (function (_super) {
     __extends(Stage, _super);
     function Stage(canvas) {
         var _this = _super.call(this) || this;
+        _this.$viewportBackgroundFillMode = 'scale';
         _this.$scaleMode = Stage.SHOW_ALL;
         _this.$ticker = new Ticker(_this);
         _this.$viewportCanvas = canvas || document.createElement('canvas');
@@ -2055,8 +2103,10 @@ var Stage = /** @class */ (function (_super) {
             return this.$scaleMode;
         },
         set: function (scaleMode) {
-            this.$scaleMode = scaleMode;
-            this.$resizeCanvas();
+            if (this.scaleMode !== scaleMode) {
+                this.$scaleMode = scaleMode;
+                this.$resizeCanvas();
+            }
         },
         enumerable: true,
         configurable: true
@@ -2066,11 +2116,14 @@ var Stage = /** @class */ (function (_super) {
             return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / Layer.pixelRatio;
         },
         set: function (width) {
-            this.$viewportWidth = width;
-            width = width || window.innerWidth;
-            this.$viewportCanvas.width = width * Layer.pixelRatio;
-            this.$viewportCanvas.style.width = width + 'px';
-            this.$resizeCanvas();
+            if (this.$viewportWidth !== width) {
+                this.$viewportWidth = width;
+                width = width || window.innerWidth;
+                this.$viewportCanvas.width = width * Layer.pixelRatio;
+                this.$viewportCanvas.style.width = width + 'px';
+                this.$resizeCanvas();
+                this.emit(Event.VIEWPORT_RESIZE);
+            }
         },
         enumerable: true,
         configurable: true
@@ -2080,22 +2133,55 @@ var Stage = /** @class */ (function (_super) {
             return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / Layer.pixelRatio;
         },
         set: function (height) {
-            this.$viewportHeight = height;
-            height = height || window.innerHeight;
-            this.$viewportCanvas.height = height * Layer.pixelRatio;
-            this.$viewportCanvas.style.height = height + 'px';
-            this.$resizeCanvas();
+            if (this.$viewportHeight !== height) {
+                this.$viewportHeight = height;
+                height = height || window.innerHeight;
+                this.$viewportCanvas.height = height * Layer.pixelRatio;
+                this.$viewportCanvas.style.height = height + 'px';
+                this.$resizeCanvas();
+                this.emit(Event.VIEWPORT_RESIZE);
+            }
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Stage.prototype, "viewportBackground", {
+    Object.defineProperty(Stage.prototype, "viewportBackgroundColor", {
         get: function () {
-            return this.$viewportBackground;
+            return this.$viewportBackgroundColor;
         },
-        set: function (viewportBackground) {
-            this.$viewportBackground = viewportBackground;
-            this.$markDirty();
+        set: function (viewportBackgroundColor) {
+            if (this.$viewportBackgroundColor !== viewportBackgroundColor) {
+                this.$viewportBackgroundColor = viewportBackgroundColor;
+                this.$markDirty();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "viewportBackgroundImage", {
+        get: function () {
+            return this.$viewportBackgroundImage;
+        },
+        set: function (viewportBackgroundImage) {
+            if (this.$viewportBackgroundImage !== viewportBackgroundImage) {
+                this.$viewportBackgroundImage = viewportBackgroundImage;
+                this.$viewportBackgroundPattern = this.$getPattern(this.$viewportBackgroundImage, this.$viewportBackgroundFillMode);
+                this.$markDirty();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "viewportBackgroundFillMode", {
+        get: function () {
+            return this.$viewportBackgroundFillMode;
+        },
+        set: function (viewportBackgroundFillMode) {
+            if (this.$viewportBackgroundFillMode !== viewportBackgroundFillMode) {
+                this.$viewportBackgroundFillMode = viewportBackgroundFillMode || 'scale';
+                this.$viewportBackgroundPattern = this.$getPattern(this.$viewportBackgroundImage, this.$viewportBackgroundFillMode);
+                this.$markDirty();
+            }
         },
         enumerable: true,
         configurable: true
@@ -2272,19 +2358,12 @@ var Stage = /** @class */ (function (_super) {
         var viewportCanvas = this.$viewportCanvas;
         var viewportWidth = viewportCanvas.width;
         var viewportHeight = viewportCanvas.height;
-        var viewportBackground = this.viewportBackground;
+        var backgroundColor = this.$viewportBackgroundColor;
+        var backgroundImage = this.$viewportBackgroundImage;
+        var backgroundPattern = this.$viewportBackgroundPattern;
+        var backgroundFillMode = this.$viewportBackgroundFillMode;
         ctx.clearRect(0, 0, viewportWidth, viewportHeight);
-        if (viewportBackground) {
-            if (viewportBackground instanceof Image) {
-                ctx.drawImage(viewportBackground.element, 0, 0, viewportWidth, viewportHeight);
-            }
-            else {
-                ctx.save();
-                ctx.fillStyle = this.$background;
-                ctx.fillRect(0, 0, viewportWidth, viewportHeight);
-                ctx.restore();
-            }
-        }
+        this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode, ctx);
         ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
     };
     Stage.prototype.$onWindowResize = function () {
@@ -2305,7 +2384,6 @@ var Stage = /** @class */ (function (_super) {
     Stage.FIXED_HEIGHT = 'fixedHeight';
     return Stage;
 }(Layer));
-//# sourceMappingURL=Stage.js.map
 
 var Ease = /** @class */ (function () {
     function Ease() {
@@ -2489,7 +2567,6 @@ var Ease = /** @class */ (function () {
     };
     return Ease;
 }());
-//# sourceMappingURL=Ease.js.map
 
 var Tween = /** @class */ (function (_super) {
     __extends(Tween, _super);
@@ -2682,9 +2759,6 @@ var Tween = /** @class */ (function (_super) {
     Tween.$tweens = [];
     return Tween;
 }(EventEmitter));
-//# sourceMappingURL=Tween.js.map
-
-//# sourceMappingURL=index.js.map
 
 exports.Ticker = Ticker;
 exports.Layer = Layer;

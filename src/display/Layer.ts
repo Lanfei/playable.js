@@ -29,7 +29,10 @@ export default class Layer extends EventEmitter {
 	protected $rotation: number = 0;
 	protected $alpha: number = 1;
 	protected $visible: boolean = true;
-	protected $background: Image | string = null;
+	protected $backgroundColor: string = null;
+	protected $backgroundImage: Image = null;
+	protected $backgroundPattern: CanvasPattern = null;
+	protected $backgroundFillMode: BackgroundFillMode = 'scale';
 	protected $dirty: boolean = true;
 	protected $stage: Stage = null;
 	protected $parent: Layer = null;
@@ -180,13 +183,37 @@ export default class Layer extends EventEmitter {
 		}
 	}
 
-	public get background(): Image | string {
-		return this.$background;
+	public get backgroundColor(): string {
+		return this.$backgroundColor;
 	}
 
-	public set background(background: Image | string) {
-		if (this.$background !== background) {
-			this.$background = background;
+	public set backgroundColor(backgroundColor: string) {
+		if (this.$backgroundColor !== backgroundColor) {
+			this.$backgroundColor = backgroundColor;
+			this.$markDirty();
+		}
+	}
+
+	public get backgroundImage(): Image {
+		return this.$backgroundImage;
+	}
+
+	public set backgroundImage(backgroundImage: Image) {
+		if (this.$backgroundImage !== backgroundImage) {
+			this.$backgroundImage = backgroundImage;
+			this.$backgroundPattern = this.$getPattern(this.$backgroundImage, this.$backgroundFillMode);
+			this.$markDirty();
+		}
+	}
+
+	public get backgroundFillMode(): BackgroundFillMode {
+		return this.$backgroundFillMode;
+	}
+
+	public set backgroundFillMode(backgroundFillMode: BackgroundFillMode) {
+		if (this.$backgroundFillMode !== backgroundFillMode) {
+			this.$backgroundFillMode = backgroundFillMode || 'scale';
+			this.$backgroundPattern = this.$getPattern(this.$backgroundImage, this.$backgroundFillMode);
 			this.$markDirty();
 		}
 	}
@@ -488,6 +515,41 @@ export default class Layer extends EventEmitter {
 		return true;
 	}
 
+	protected $getPattern(image, fillMode): CanvasPattern {
+		if (image && fillMode && fillMode !== 'scale' && fillMode !== 'no-repeat') {
+			return this.$context.createPattern(image.element, fillMode);
+		} else {
+			return null;
+		}
+	}
+
+	protected $drawBackground(color: string, image: Image, pattern: CanvasPattern, fillMode: BackgroundFillMode, context?: CanvasRenderingContext2D): void {
+		let ctx = context || this.$context;
+		let canvas = ctx.canvas;
+		let width = canvas.width;
+		let height = canvas.height;
+		let pixelRatio = Layer.pixelRatio;
+		if (color) {
+			ctx.save();
+			ctx.fillStyle = color;
+			ctx.fillRect(0, 0, width, height);
+			ctx.restore();
+		}
+		if (image) {
+			if (fillMode === 'scale') {
+				ctx.drawImage(image.element, 0, 0, width, height);
+			} else if (fillMode === 'no-repeat') {
+				ctx.drawImage(image.element, 0, 0, image.width * pixelRatio, image.height * pixelRatio);
+			} else if (pattern) {
+				ctx.save();
+				ctx.scale(pixelRatio, pixelRatio);
+				ctx.fillStyle = pattern;
+				ctx.fillRect(0, 0, width, height);
+				ctx.restore();
+			}
+		}
+	}
+
 	protected $drawChild(child: Layer): void {
 		if (!child.width || !child.height) {
 			return;
@@ -518,27 +580,22 @@ export default class Layer extends EventEmitter {
 		let ctx = this.$context;
 		let canvas = this.$canvas;
 		let children = this.$children;
-		let background = this.$background;
+		let backgroundColor = this.$backgroundColor;
+		let backgroundImage = this.$backgroundImage;
+		let backgroundPattern = this.$backgroundPattern;
+		let backgroundFillMode = this.$backgroundFillMode;
 		let pixelRatio = Layer.pixelRatio;
 		let anchorX = this.$anchorX * pixelRatio;
 		let anchorY = this.$anchorY * pixelRatio;
 		let canvasWidth = canvas.width;
 		let canvasHeight = canvas.height;
-		ctx.setTransform(1, 0, 0, 1, anchorX, anchorY);
-		ctx.clearRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
-		ctx.beginPath();
+
+		ctx.resetTransform();
+		ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+		this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode);
+		ctx.translate(anchorX, anchorY);
 		ctx.save();
 
-		if (background) {
-			if (background instanceof Image) {
-				ctx.drawImage(background.element, -anchorX, -anchorY, canvasWidth, canvasHeight);
-			} else {
-				ctx.save();
-				ctx.fillStyle = <string>this.$background;
-				ctx.fillRect(-anchorX, -anchorY, canvasWidth, canvasHeight);
-				ctx.restore();
-			}
-		}
 		for (let child of children) {
 			if (child.visible && child.alpha) {
 				this.$drawChild(child);
@@ -611,3 +668,5 @@ export default class Layer extends EventEmitter {
 	}
 
 }
+
+export type BackgroundFillMode = 'scale' | 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat';

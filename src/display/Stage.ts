@@ -1,9 +1,9 @@
-import Layer from './Layer';
+import Layer, {BackgroundFillMode} from './Layer';
 import Image from '../media/Image';
 import Ticker from '../core/Ticker';
 import Event from '../event/Event';
-import Rectangle from '../geom/Rectangle';
 import TouchEvent from '../event/TouchEvent';
+import Rectangle from '../geom/Rectangle';
 import ResourceManager, {ResourceInfo, ResourceManagerOption} from '../net/ResourceManager';
 
 export default class Stage extends Layer {
@@ -21,7 +21,10 @@ export default class Stage extends Layer {
 	protected $viewportWidth: number;
 	protected $viewportHeight: number;
 	protected $renderBounds: Rectangle;
-	protected $viewportBackground: Image | string;
+	protected $viewportBackgroundColor: string;
+	protected $viewportBackgroundImage: Image;
+	protected $viewportBackgroundPattern: CanvasPattern;
+	protected $viewportBackgroundFillMode: BackgroundFillMode = 'scale';
 	protected readonly $ticker: Ticker;
 	protected readonly $viewportCanvas: HTMLCanvasElement;
 	protected readonly $viewportContext: CanvasRenderingContext2D;
@@ -84,8 +87,10 @@ export default class Stage extends Layer {
 	}
 
 	public set scaleMode(scaleMode: string) {
-		this.$scaleMode = scaleMode;
-		this.$resizeCanvas();
+		if (this.scaleMode !== scaleMode) {
+			this.$scaleMode = scaleMode;
+			this.$resizeCanvas();
+		}
 	}
 
 	public get viewportWidth(): number {
@@ -93,11 +98,14 @@ export default class Stage extends Layer {
 	}
 
 	public set viewportWidth(width: number) {
-		this.$viewportWidth = width;
-		width = width || window.innerWidth;
-		this.$viewportCanvas.width = width * Layer.pixelRatio;
-		this.$viewportCanvas.style.width = width + 'px';
-		this.$resizeCanvas();
+		if (this.$viewportWidth !== width) {
+			this.$viewportWidth = width;
+			width = width || window.innerWidth;
+			this.$viewportCanvas.width = width * Layer.pixelRatio;
+			this.$viewportCanvas.style.width = width + 'px';
+			this.$resizeCanvas();
+			this.emit(Event.VIEWPORT_RESIZE);
+		}
 	}
 
 	public get viewportHeight(): number {
@@ -105,20 +113,49 @@ export default class Stage extends Layer {
 	}
 
 	public set viewportHeight(height: number) {
-		this.$viewportHeight = height;
-		height = height || window.innerHeight;
-		this.$viewportCanvas.height = height * Layer.pixelRatio;
-		this.$viewportCanvas.style.height = height + 'px';
-		this.$resizeCanvas();
+		if (this.$viewportHeight !== height) {
+			this.$viewportHeight = height;
+			height = height || window.innerHeight;
+			this.$viewportCanvas.height = height * Layer.pixelRatio;
+			this.$viewportCanvas.style.height = height + 'px';
+			this.$resizeCanvas();
+			this.emit(Event.VIEWPORT_RESIZE);
+		}
 	}
 
-	public get viewportBackground(): Image | string {
-		return this.$viewportBackground;
+	public get viewportBackgroundColor(): string {
+		return this.$viewportBackgroundColor;
 	}
 
-	public set viewportBackground(viewportBackground: Image | string) {
-		this.$viewportBackground = viewportBackground;
-		this.$markDirty();
+	public set viewportBackgroundColor(viewportBackgroundColor: string) {
+		if (this.$viewportBackgroundColor !== viewportBackgroundColor) {
+			this.$viewportBackgroundColor = viewportBackgroundColor;
+			this.$markDirty();
+		}
+	}
+
+	public get viewportBackgroundImage(): Image {
+		return this.$viewportBackgroundImage;
+	}
+
+	public set viewportBackgroundImage(viewportBackgroundImage: Image) {
+		if (this.$viewportBackgroundImage !== viewportBackgroundImage) {
+			this.$viewportBackgroundImage = viewportBackgroundImage;
+			this.$viewportBackgroundPattern = this.$getPattern(this.$viewportBackgroundImage, this.$viewportBackgroundFillMode);
+			this.$markDirty();
+		}
+	}
+
+	public get viewportBackgroundFillMode(): BackgroundFillMode {
+		return this.$viewportBackgroundFillMode;
+	}
+
+	public set viewportBackgroundFillMode(viewportBackgroundFillMode: BackgroundFillMode) {
+		if (this.$viewportBackgroundFillMode !== viewportBackgroundFillMode) {
+			this.$viewportBackgroundFillMode = viewportBackgroundFillMode || 'scale';
+			this.$viewportBackgroundPattern = this.$getPattern(this.$viewportBackgroundImage, this.$viewportBackgroundFillMode);
+			this.$markDirty();
+		}
 	}
 
 	public get ticker(): Ticker {
@@ -284,20 +321,12 @@ export default class Stage extends Layer {
 		let viewportCanvas = this.$viewportCanvas;
 		let viewportWidth = viewportCanvas.width;
 		let viewportHeight = viewportCanvas.height;
-		let viewportBackground = this.viewportBackground;
+		let backgroundColor = this.$viewportBackgroundColor;
+		let backgroundImage = this.$viewportBackgroundImage;
+		let backgroundPattern = this.$viewportBackgroundPattern;
+		let backgroundFillMode = this.$viewportBackgroundFillMode;
 		ctx.clearRect(0, 0, viewportWidth, viewportHeight);
-
-		if (viewportBackground) {
-			if (viewportBackground instanceof Image) {
-				ctx.drawImage(viewportBackground.element, 0, 0, viewportWidth, viewportHeight);
-			} else {
-				ctx.save();
-				ctx.fillStyle = <string>this.$background;
-				ctx.fillRect(0, 0, viewportWidth, viewportHeight);
-				ctx.restore();
-			}
-		}
-
+		this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode, ctx);
 		ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
 	}
 

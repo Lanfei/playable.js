@@ -23,7 +23,10 @@ export default class Layer extends EventEmitter {
     protected $rotation: number;
     protected $alpha: number;
     protected $visible: boolean;
-    protected $background: Image | string;
+    protected $backgroundColor: string;
+    protected $backgroundImage: Image;
+    protected $backgroundPattern: CanvasPattern;
+    protected $backgroundFillMode: BackgroundFillMode;
     protected $dirty: boolean;
     protected $stage: Stage;
     protected $parent: Layer;
@@ -44,7 +47,9 @@ export default class Layer extends EventEmitter {
     scaleY: number;
     rotation: number;
     alpha: number;
-    background: Image | string;
+    backgroundColor: string;
+    backgroundImage: Image;
+    backgroundFillMode: BackgroundFillMode;
     visible: boolean;
     readonly dirty: boolean;
     readonly stage: Stage;
@@ -73,6 +78,8 @@ export default class Layer extends EventEmitter {
     protected $getChildBounds(child: Layer): Rectangle;
     protected $getContentBounds(): Rectangle;
     protected $emitTouchEvent(event: TouchEvent): boolean;
+    protected $getPattern(image: any, fillMode: any): CanvasPattern;
+    protected $drawBackground(color: string, image: Image, pattern: CanvasPattern, fillMode: BackgroundFillMode, context?: CanvasRenderingContext2D): void;
     protected $drawChild(child: Layer): void;
     protected $render(): void;
     on(event: string, listener: (...args: any[]) => void): this;
@@ -84,3 +91,4 @@ export default class Layer extends EventEmitter {
     protected $markDirty(): void;
     protected $markParentDirty(): void;
 }
+export declare type BackgroundFillMode = 'scale' | 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat';

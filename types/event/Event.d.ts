@@ -7,6 +7,7 @@ export default class Event {
     static readonly TICK: string;
     static readonly TICKER_PAUSE: string;
     static readonly TICKER_RESUME: string;
+    static readonly VIEWPORT_RESIZE: string;
     static readonly PROGRESS: string;
     static readonly COMPLETE: string;
     static readonly LOAD: string;
