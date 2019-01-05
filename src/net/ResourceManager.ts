@@ -7,9 +7,9 @@ import EventEmitter from '../event/EventEmitter';
 
 export default class ResourceManager extends EventEmitter {
 
-	public static TYPE_IMAGE: string = 'image';
-	public static TYPE_SOUND: string = 'sound';
-	public static TYPE_SOUND_EFFECT: string = 'soundEffect';
+	public static readonly TYPE_IMAGE: string = 'image';
+	public static readonly TYPE_SOUND: string = 'sound';
+	public static readonly TYPE_SOUND_EFFECT: string = 'soundEffect';
 
 	public threads: number;
 	public timeout: number;

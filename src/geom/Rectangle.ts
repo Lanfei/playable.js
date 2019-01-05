@@ -80,7 +80,7 @@ export default class Rectangle {
 		Rectangle.recycle(this);
 	}
 
-	private static $pool: Array<Rectangle> = [];
+	private static readonly $pool: Array<Rectangle> = [];
 
 	public static create(x?: number, y?: number, width?: number, height?: number): Rectangle {
 		let pool = this.$pool;

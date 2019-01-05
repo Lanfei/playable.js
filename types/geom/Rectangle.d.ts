@@ -14,7 +14,7 @@ export default class Rectangle {
     bottomRight: Vector;
     contains(x: number, y: number): boolean;
     release(): void;
-    private static $pool;
+    private static readonly $pool;
     static create(x?: number, y?: number, width?: number, height?: number): Rectangle;
     static recycle(r: Rectangle): void;
 }

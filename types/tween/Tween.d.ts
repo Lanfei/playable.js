@@ -22,7 +22,7 @@ export default class Tween extends EventEmitter {
     protected $saveOriginalProps(stepIndex: number, props: Object): void;
     protected $easeProps(stepIndex: number, props: Object, position: number, duration: number, ease: Function): void;
     protected $setProps(props: Object): void;
-    private static $tweens;
+    private static readonly $tweens;
     static get(target: Layer, option?: {
         loop?: boolean;
     }): Tween;

@@ -120,7 +120,7 @@ export default class Vector {
 		return this;
 	}
 
-	private static $pool: Array<Vector> = [];
+	private static readonly $pool: Array<Vector> = [];
 
 	public static create(x?: number, y?: number): Vector {
 		let pool = this.$pool;

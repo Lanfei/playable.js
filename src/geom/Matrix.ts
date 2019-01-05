@@ -126,7 +126,7 @@ export default class Matrix {
 		Matrix.recycle(this);
 	}
 
-	private static $pool: Array<Matrix> = [];
+	private static readonly $pool: Array<Matrix> = [];
 
 	public static create(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number): Matrix {
 		let m;

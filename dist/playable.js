@@ -256,9 +256,6 @@ var playable = (function (exports) {
         Object.defineProperty(Media.prototype, "url", {
             set: function (url) {
                 this.$element.src = url;
-                if (url.indexOf('data:') === 0) {
-                    this.$ticker.setTimeout(this.$boundOnLoad);
-                }
             },
             enumerable: true,
             configurable: true
@@ -1328,8 +1325,8 @@ var playable = (function (exports) {
             if (image) {
                 _this.$width = width || image.width;
                 _this.$height = height || image.height;
-                _this.image = image;
                 _this.$boundOnImageLoad = _this.$onImageLoad.bind(_this);
+                _this.image = image;
             }
             return _this;
         }
@@ -1379,7 +1376,7 @@ var playable = (function (exports) {
             var _this = _super.call(this) || this;
             _this.$text = '';
             _this.$color = 'black';
-            _this.$fontSize = 16;
+            _this.$fontSize = TextView.defaultFontSize;
             _this.$fontStyle = 'normal';
             _this.$fontWeight = 'normal';
             _this.$textAlign = 'left';
@@ -1722,6 +1719,7 @@ var playable = (function (exports) {
                 y += fontSize * lineHeight * pixelRatio;
             }
         };
+        TextView.defaultFontSize = 16;
         TextView.wordRe = /\w+/;
         TextView.boundaryRe = /\b/;
         return TextView;

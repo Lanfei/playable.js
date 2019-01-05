@@ -3,12 +3,13 @@ import Rectangle from '../geom/Rectangle';
 
 export default class TextView extends Layer {
 
-	private static wordRe: RegExp = /\w+/;
-	private static boundaryRe: RegExp = /\b/;
+	public static defaultFontSize = 16;
+	private static readonly wordRe: RegExp = /\w+/;
+	private static readonly boundaryRe: RegExp = /\b/;
 
 	protected $text: string = '';
 	protected $color: string = 'black';
-	protected $fontSize: number = 16;
+	protected $fontSize: number = TextView.defaultFontSize;
 	protected $fontStyle: FontStyle = 'normal';
 	protected $fontWeight: FontWeight = 'normal';
 	protected $textAlign: TextAlign = 'left';

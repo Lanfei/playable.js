@@ -1,8 +1,9 @@
 import Layer from './Layer';
 import Rectangle from '../geom/Rectangle';
 export default class TextView extends Layer {
-    private static wordRe;
-    private static boundaryRe;
+    static defaultFontSize: number;
+    private static readonly wordRe;
+    private static readonly boundaryRe;
     protected $text: string;
     protected $color: string;
     protected $fontSize: number;

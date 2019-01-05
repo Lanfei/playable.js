@@ -1,9 +1,9 @@
 import Ticker from '../core/Ticker';
 import EventEmitter from '../event/EventEmitter';
 export default class ResourceManager extends EventEmitter {
-    static TYPE_IMAGE: string;
-    static TYPE_SOUND: string;
-    static TYPE_SOUND_EFFECT: string;
+    static readonly TYPE_IMAGE: string;
+    static readonly TYPE_SOUND: string;
+    static readonly TYPE_SOUND_EFFECT: string;
     threads: number;
     timeout: number;
     retryTimes: number;

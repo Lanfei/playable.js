@@ -157,7 +157,7 @@ export default class Tween extends EventEmitter {
 		}
 	}
 
-	private static $tweens: Array<Tween> = [];
+	private static readonly $tweens: Array<Tween> = [];
 
 	public static get(target: Layer, option?: { loop?: boolean }): Tween {
 		let tween = new Tween(target, option);

@@ -8,14 +8,14 @@ import ResourceManager, {ResourceInfo, ResourceManagerOption} from '../net/Resou
 
 export default class Stage extends Layer {
 
-	public static NO_SCALE: string = 'noScale';
-	public static NO_BORDER: string = 'noBorder';
-	public static SHOW_ALL: string = 'showAll';
-	public static EXACT_FIT: string = 'exactFit';
-	public static FIXED_WIDE: string = 'fixedWide';
-	public static FIXED_NARROW: string = 'fixedNarrow';
-	public static FIXED_WIDTH: string = 'fixedWidth';
-	public static FIXED_HEIGHT: string = 'fixedHeight';
+	public static readonly NO_SCALE: string = 'noScale';
+	public static readonly NO_BORDER: string = 'noBorder';
+	public static readonly SHOW_ALL: string = 'showAll';
+	public static readonly EXACT_FIT: string = 'exactFit';
+	public static readonly FIXED_WIDE: string = 'fixedWide';
+	public static readonly FIXED_NARROW: string = 'fixedNarrow';
+	public static readonly FIXED_WIDTH: string = 'fixedWidth';
+	public static readonly FIXED_HEIGHT: string = 'fixedHeight';
 
 	protected $scaleMode: string;
 	protected $viewportWidth: number;

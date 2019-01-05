@@ -13,8 +13,8 @@ export default class ImageView extends Layer {
 		if (image) {
 			this.$width = width || image.width;
 			this.$height = height || image.height;
-			this.image = image;
 			this.$boundOnImageLoad = this.$onImageLoad.bind(this);
+			this.image = image;
 		}
 	}
 

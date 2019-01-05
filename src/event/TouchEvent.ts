@@ -3,11 +3,11 @@ import Layer from '../display/Layer';
 
 export default class TouchEvent extends Event {
 
-	public static TOUCH_START: string = 'touchStart';
-	public static TOUCH_MOVE: string = 'touchMove';
-	public static TOUCH_END: string = 'touchEnd';
-	public static TOUCH_CANCEL: string = 'touchCancel';
-	public static TOUCH_TAP: string = 'touchTap';
+	public static readonly TOUCH_START: string = 'touchStart';
+	public static readonly TOUCH_MOVE: string = 'touchMove';
+	public static readonly TOUCH_END: string = 'touchEnd';
+	public static readonly TOUCH_CANCEL: string = 'touchCancel';
+	public static readonly TOUCH_TAP: string = 'touchTap';
 
 	public target: Layer;
 	public currentTarget: Layer;
@@ -46,7 +46,7 @@ export default class TouchEvent extends Event {
 		TouchEvent.recycle(this);
 	}
 
-	private static $pool: Array<TouchEvent> = [];
+	private static readonly $pool: Array<TouchEvent> = [];
 
 	public static create(type: string): TouchEvent {
 		let pool = this.$pool;

@@ -22,7 +22,7 @@ export default class Vector {
     equals(v: Vector): boolean;
     transform(m: Matrix): Vector;
     release(): this;
-    private static $pool;
+    private static readonly $pool;
     static create(x?: number, y?: number): Vector;
     static recycle(v: Vector): void;
 }

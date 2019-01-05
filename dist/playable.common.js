@@ -257,9 +257,6 @@ var Media = /** @class */ (function (_super) {
     Object.defineProperty(Media.prototype, "url", {
         set: function (url) {
             this.$element.src = url;
-            if (url.indexOf('data:') === 0) {
-                this.$ticker.setTimeout(this.$boundOnLoad);
-            }
         },
         enumerable: true,
         configurable: true
@@ -1329,8 +1326,8 @@ var ImageView = /** @class */ (function (_super) {
         if (image) {
             _this.$width = width || image.width;
             _this.$height = height || image.height;
-            _this.image = image;
             _this.$boundOnImageLoad = _this.$onImageLoad.bind(_this);
+            _this.image = image;
         }
         return _this;
     }
@@ -1380,7 +1377,7 @@ var TextView = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.$text = '';
         _this.$color = 'black';
-        _this.$fontSize = 16;
+        _this.$fontSize = TextView.defaultFontSize;
         _this.$fontStyle = 'normal';
         _this.$fontWeight = 'normal';
         _this.$textAlign = 'left';
@@ -1723,6 +1720,7 @@ var TextView = /** @class */ (function (_super) {
             y += fontSize * lineHeight * pixelRatio;
         }
     };
+    TextView.defaultFontSize = 16;
     TextView.wordRe = /\w+/;
     TextView.boundaryRe = /\b/;
     return TextView;

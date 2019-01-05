@@ -23,9 +23,6 @@ export default class Media extends EventEmitter {
 
 	public set url(url: string) {
 		this.$element.src = url;
-		if (url.indexOf('data:') === 0) {
-			this.$ticker.setTimeout(this.$boundOnLoad);
-		}
 	}
 
 	protected $onLoad(): void {

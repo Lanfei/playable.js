@@ -20,7 +20,7 @@ export default class Matrix {
     translate(x: number, y: number): this;
     equals(m: Matrix): boolean;
     release(): void;
-    private static $pool;
+    private static readonly $pool;
     static create(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number): Matrix;
     static recycle(m: Matrix): void;
 }
