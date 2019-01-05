@@ -410,14 +410,6 @@ export default class Layer extends EventEmitter {
 		return this;
 	}
 
-	protected $getTransform(): Matrix {
-		let matrix = Matrix.create();
-		matrix.translate(-this.$anchorX, -this.$anchorY);
-		matrix.rotate(this.rotation * Math.PI / 180).scale(this.scaleX, this.scaleY).skew(this.skewX, this.skewY);
-		matrix.translate(this.x, this.y);
-		return matrix;
-	}
-
 	protected $resizeCanvas(): void {
 		let width = this.$width;
 		let height = this.$height;
@@ -441,13 +433,27 @@ export default class Layer extends EventEmitter {
 		this.$dirty = true;
 	}
 
-	protected $getBounds(): Rectangle {
+	protected $getTransform(): Matrix {
+		let matrix = Matrix.create();
+		matrix.translate(-this.$anchorX, -this.$anchorY);
+		matrix.rotate(this.rotation * Math.PI / 180).scale(this.scaleX, this.scaleY).skew(this.skewX, this.skewY);
+		matrix.translate(this.x, this.y);
+		return matrix;
+	}
+
+	protected $getChildTransform(child: Layer): Matrix {
+		return child.$getTransform();
+	}
+
+	protected $getChildBounds(child: Layer): Rectangle {
+		let width = child.width;
+		let height = child.height;
 		let bounds = Rectangle.create();
-		let matrix = this.$getTransform();
+		let matrix = this.$getChildTransform(child);
 		let topLeft = Vector.create(0, 0).transform(matrix);
-		let topRight = Vector.create(this.width, 0).transform(matrix);
-		let bottomLeft = Vector.create(0, this.height).transform(matrix);
-		let bottomRight = Vector.create(this.width, this.height).transform(matrix);
+		let topRight = Vector.create(width, 0).transform(matrix);
+		let bottomLeft = Vector.create(0, height).transform(matrix);
+		let bottomRight = Vector.create(width, height).transform(matrix);
 		let minX = Math.min(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
 		let maxX = Math.max(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
 		let minY = Math.min(topLeft.y, topRight.y, bottomLeft.y, bottomRight.y);
@@ -468,7 +474,7 @@ export default class Layer extends EventEmitter {
 		let children = this.$children;
 		let bounds = Rectangle.create();
 		for (let child of children) {
-			let childBounds = child.$getBounds();
+			let childBounds = this.$getChildBounds(child);
 			bounds.top = Math.min(bounds.top ? bounds.top : Infinity, childBounds.top);
 			bounds.bottom = Math.max(bounds.bottom ? bounds.bottom : -Infinity, childBounds.bottom);
 			bounds.left = Math.min(bounds.left ? bounds.left : Infinity, childBounds.left);
@@ -534,10 +540,8 @@ export default class Layer extends EventEmitter {
 		let height = canvas.height;
 		let pixelRatio = Layer.pixelRatio;
 		if (color) {
-			ctx.save();
 			ctx.fillStyle = color;
 			ctx.fillRect(0, 0, width, height);
-			ctx.restore();
 		}
 		if (image) {
 			if (fillMode === 'scale') {
@@ -545,29 +549,33 @@ export default class Layer extends EventEmitter {
 			} else if (fillMode === 'no-repeat') {
 				ctx.drawImage(image.element, 0, 0, image.width * pixelRatio, image.height * pixelRatio);
 			} else if (pattern) {
-				ctx.save();
-				ctx.scale(pixelRatio, pixelRatio);
+				pixelRatio !== 1 && ctx.scale(pixelRatio, pixelRatio);
 				ctx.fillStyle = pattern;
 				ctx.fillRect(0, 0, width, height);
-				ctx.restore();
 			}
 		}
 	}
 
-	protected $drawChild(child: Layer): void {
+	protected $drawChild(child: Layer): number {
 		if (!child.width || !child.height) {
-			return;
+			return 0;
+		}
+		if (!child.$dirty) {
+			let bounds = this.$getChildBounds(child);
+			if (bounds.left > this.$width || bounds.right < 0 || bounds.top > this.$height || bounds.bottom < 0) {
+				bounds.release();
+				return 0;
+			}
+			bounds.release();
 		}
 		let ctx = this.$context;
+		let childCanvas = child.$canvas;
 		let pixelRatio = Layer.pixelRatio;
-		let matrix = child.$getTransform().scale(pixelRatio);
-
-		child.$render();
-
+		let matrix = this.$getChildTransform(child).scale(pixelRatio);
+		let drawCalls = child.$render();
 		ctx.globalAlpha = child.alpha;
-
-		if (matrix.a === 1 && matrix.b === 0 && matrix.c === 0 && matrix.d === 1) {
-			ctx.drawImage(child.$canvas, matrix.tx, matrix.ty, child.width, child.height);
+		if (matrix.a === pixelRatio && matrix.b === 0 && matrix.c === 0 && matrix.d === pixelRatio) {
+			ctx.drawImage(child.$canvas, matrix.tx, matrix.ty, childCanvas.width, childCanvas.height);
 		} else {
 			ctx.save();
 			ctx.transform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
@@ -575,39 +583,39 @@ export default class Layer extends EventEmitter {
 			ctx.restore();
 		}
 		matrix.release();
+		return drawCalls + 1;
 	}
 
-	protected $render(): void {
+	protected $render(): number {
 		if (!this.$dirty) {
-			return;
+			return 0;
 		}
+		let drawCalls = 0;
 		let ctx = this.$context;
 		let canvas = this.$canvas;
+		let anchorX = this.$anchorX;
+		let anchorY = this.$anchorY;
 		let children = this.$children;
+		let canvasWidth = canvas.width;
+		let canvasHeight = canvas.height;
 		let backgroundColor = this.$backgroundColor;
 		let backgroundImage = this.$backgroundImage;
 		let backgroundPattern = this.$backgroundPattern;
 		let backgroundFillMode = this.$backgroundFillMode;
 		let pixelRatio = Layer.pixelRatio;
-		let anchorX = this.$anchorX * pixelRatio;
-		let anchorY = this.$anchorY * pixelRatio;
-		let canvasWidth = canvas.width;
-		let canvasHeight = canvas.height;
 
+		ctx.globalAlpha = 1;
 		ctx.resetTransform();
+		ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
 		ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 		this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode);
-		ctx.translate(anchorX, anchorY);
-		ctx.save();
-
 		for (let child of children) {
 			if (child.visible && child.alpha) {
-				this.$drawChild(child);
+				drawCalls += this.$drawChild(child);
 			}
 		}
-
-		ctx.restore();
 		this.$dirty = false;
+		return drawCalls;
 	}
 
 	public on(event: string, listener: (...args: any[]) => void): this {

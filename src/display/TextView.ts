@@ -3,7 +3,7 @@ import Rectangle from '../geom/Rectangle';
 
 export default class TextView extends Layer {
 
-	public static defaultFontSize = 16;
+	public static defaultFontSize = 30;
 	private static readonly wordRe: RegExp = /\w+/;
 	private static readonly boundaryRe: RegExp = /\b/;
 
@@ -14,7 +14,7 @@ export default class TextView extends Layer {
 	protected $fontWeight: FontWeight = 'normal';
 	protected $textAlign: TextAlign = 'left';
 	protected $verticalAlign: VerticalAlign = 'top';
-	protected $lineHeight: number = 1;
+	protected $lineHeight: number = 1.2;
 	protected $strokeSize: number = 0;
 	protected $strokeColor: string = null;
 	protected $fontFamily: string = 'Helvetica';
@@ -217,9 +217,9 @@ export default class TextView extends Layer {
 		}
 		let line = '';
 		let ctx = this.$context;
-		let width = this.$width;
 		let lines = this.$lines = [];
 		let units = this.$divideUnits();
+		let width = this.$width * Layer.pixelRatio;
 		this.$updateContext();
 		for (let unit of units) {
 			if (unit === '\n') {
@@ -273,9 +273,9 @@ export default class TextView extends Layer {
 		return bounds;
 	}
 
-	protected $render(): void {
+	protected $render(): number {
 		if (!this.$dirty) {
-			return;
+			return 0;
 		}
 		let x = 0;
 		let y = 0;
@@ -293,7 +293,7 @@ export default class TextView extends Layer {
 		let strokeColor = this.$strokeColor;
 		let pixelRatio = Layer.pixelRatio;
 		let fontSize = this.$explicitSize || this.$fontSize;
-		super.$render();
+		let drawCalls = super.$render();
 		this.$updateContext();
 		if (textAlign === 'center') {
 			x = width * pixelRatio / 2 - anchorX * pixelRatio;
@@ -318,6 +318,7 @@ export default class TextView extends Layer {
 			}
 			y += fontSize * lineHeight * pixelRatio;
 		}
+		return drawCalls;
 	}
 
 }

@@ -17,6 +17,7 @@ export default class Stage extends Layer {
 	public static readonly FIXED_WIDTH: string = 'fixedWidth';
 	public static readonly FIXED_HEIGHT: string = 'fixedHeight';
 
+	protected $drawCalls: number;
 	protected $scaleMode: string;
 	protected $viewportWidth: number;
 	protected $viewportHeight: number;
@@ -28,7 +29,7 @@ export default class Stage extends Layer {
 	protected readonly $ticker: Ticker;
 	protected readonly $viewportCanvas: HTMLCanvasElement;
 	protected readonly $viewportContext: CanvasRenderingContext2D;
-	protected readonly $boundOnWindowResize: () => void;
+	protected readonly $boundResizeViewportCanvas: () => void;
 
 	public constructor(canvas?: HTMLCanvasElement) {
 		super();
@@ -36,7 +37,7 @@ export default class Stage extends Layer {
 		this.$ticker = new Ticker(this);
 		this.$viewportCanvas = canvas || document.createElement('canvas');
 		this.$viewportContext = this.$viewportCanvas.getContext('2d');
-		this.$boundOnWindowResize = this.$onWindowResize.bind(this);
+		this.$boundResizeViewportCanvas = this.$resizeViewportCanvas.bind(this);
 		this.$initEvents();
 
 		this.width = 640;
@@ -62,7 +63,7 @@ export default class Stage extends Layer {
 		});
 		window.addEventListener('resize', () => {
 			ticker.clearTimeout(resizeTimer);
-			resizeTimer = ticker.setTimeout(this.$boundOnWindowResize, 100);
+			resizeTimer = ticker.setTimeout(this.$boundResizeViewportCanvas, 100);
 		});
 	}
 
@@ -100,11 +101,7 @@ export default class Stage extends Layer {
 	public set viewportWidth(width: number) {
 		if (this.$viewportWidth !== width) {
 			this.$viewportWidth = width;
-			width = width || window.innerWidth;
-			this.$viewportCanvas.width = width * Layer.pixelRatio;
-			this.$viewportCanvas.style.width = width + 'px';
-			this.$resizeCanvas();
-			this.emit(Event.VIEWPORT_RESIZE);
+			this.$resizeViewportCanvas();
 		}
 	}
 
@@ -115,11 +112,7 @@ export default class Stage extends Layer {
 	public set viewportHeight(height: number) {
 		if (this.$viewportHeight !== height) {
 			this.$viewportHeight = height;
-			height = height || window.innerHeight;
-			this.$viewportCanvas.height = height * Layer.pixelRatio;
-			this.$viewportCanvas.style.height = height + 'px';
-			this.$resizeCanvas();
-			this.emit(Event.VIEWPORT_RESIZE);
+			this.$resizeViewportCanvas();
 		}
 	}
 
@@ -156,6 +149,14 @@ export default class Stage extends Layer {
 			this.$viewportBackgroundPattern = this.$getPattern(this.$viewportBackgroundImage, this.$viewportBackgroundFillMode);
 			this.$markDirty();
 		}
+	}
+
+	public get drawCalls(): number {
+		return this.$drawCalls;
+	}
+
+	public get fps(): number {
+		return this.$ticker.fps;
 	}
 
 	public get ticker(): Ticker {
@@ -305,16 +306,28 @@ export default class Stage extends Layer {
 		this.$renderBounds = bounds;
 	}
 
-	protected $resizeCanvas() {
+	protected $resizeCanvas(): void {
 		super.$resizeCanvas();
 		this.$calculateRenderBounds();
 	}
 
-	protected $render(): void {
+	protected $resizeViewportCanvas(): void {
+		let viewportWidth = this.$viewportWidth || window.innerWidth;
+		let viewportHeight = this.$viewportHeight || window.innerHeight;
+		this.$viewportCanvas.width = viewportWidth * Layer.pixelRatio;
+		this.$viewportCanvas.style.width = viewportWidth + 'px';
+		this.$viewportCanvas.height = viewportHeight * Layer.pixelRatio;
+		this.$viewportCanvas.style.height = viewportHeight + 'px';
+		this.$calculateRenderBounds();
+		this.$markDirty();
+		this.emit(Event.VIEWPORT_RESIZE);
+	}
+
+	protected $render(): number {
 		if (!this.$dirty) {
-			return;
+			return 0;
 		}
-		super.$render();
+		let drawCalls = super.$render();
 		let canvas = this.$canvas;
 		let ctx = this.$viewportContext;
 		let bounds = this.$renderBounds;
@@ -328,15 +341,8 @@ export default class Stage extends Layer {
 		ctx.clearRect(0, 0, viewportWidth, viewportHeight);
 		this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode, ctx);
 		ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
-	}
-
-	protected $onWindowResize(): void {
-		let viewportWidth = this.$viewportWidth;
-		let viewportHeight = this.$viewportHeight;
-		this.viewportWidth = viewportWidth;
-		this.viewportHeight = viewportHeight;
-		this.$viewportWidth = viewportWidth;
-		this.$viewportHeight = viewportHeight;
+		this.$drawCalls = ++drawCalls;
+		return drawCalls;
 	}
 
 }

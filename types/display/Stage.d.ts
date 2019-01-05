@@ -13,6 +13,7 @@ export default class Stage extends Layer {
     static readonly FIXED_NARROW: string;
     static readonly FIXED_WIDTH: string;
     static readonly FIXED_HEIGHT: string;
+    protected $drawCalls: number;
     protected $scaleMode: string;
     protected $viewportWidth: number;
     protected $viewportHeight: number;
@@ -24,7 +25,7 @@ export default class Stage extends Layer {
     protected readonly $ticker: Ticker;
     protected readonly $viewportCanvas: HTMLCanvasElement;
     protected readonly $viewportContext: CanvasRenderingContext2D;
-    protected readonly $boundOnWindowResize: () => void;
+    protected readonly $boundResizeViewportCanvas: () => void;
     constructor(canvas?: HTMLCanvasElement);
     protected $initEvents(): void;
     x: number;
@@ -35,6 +36,8 @@ export default class Stage extends Layer {
     viewportBackgroundColor: string;
     viewportBackgroundImage: Image;
     viewportBackgroundFillMode: BackgroundFillMode;
+    readonly drawCalls: number;
+    readonly fps: number;
     readonly ticker: Ticker;
     createResourceManager(list: Array<ResourceInfo>, options?: ResourceManagerOption): ResourceManager;
     protected $addTouchEventListeners(): void;
@@ -42,6 +45,6 @@ export default class Stage extends Layer {
     protected $dispatchTouchEvent(type: string, touch: Touch | MouseEvent): void;
     protected $calculateRenderBounds(): void;
     protected $resizeCanvas(): void;
-    protected $render(): void;
-    protected $onWindowResize(): void;
+    protected $resizeViewportCanvas(): void;
+    protected $render(): number;
 }

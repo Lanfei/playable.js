@@ -40,18 +40,19 @@ export default class ImageView extends Layer {
 		image.off('load', this.$boundOnImageLoad);
 	}
 
-	protected $render(): void {
+	protected $render(): number {
 		if (!this.$dirty) {
 			return;
 		}
-		super.$render();
 		let image = this.$image;
 		let ctx = this.$context;
 		let canvas = this.$canvas;
+		let anchorX = this.$anchorX;
+		let anchorY = this.$anchorY;
+		let drawCalls = super.$render();
 		let pixelRatio = Layer.pixelRatio;
-		let anchorX = this.$anchorX * pixelRatio;
-		let anchorY = this.$anchorY * pixelRatio;
-		ctx.drawImage(image.element, -anchorX, -anchorY, canvas.width, canvas.height);
+		ctx.drawImage(image.element, -anchorX * pixelRatio, -anchorY * pixelRatio, canvas.width, canvas.height);
+		return drawCalls;
 	}
 
 }

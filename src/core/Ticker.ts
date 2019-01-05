@@ -5,11 +5,14 @@ import EventEmitter from '../event/EventEmitter';
 
 export default class Ticker extends EventEmitter {
 
-	private $stage: Stage;
-	private $paused: boolean;
-	private $shouldResume: boolean;
-	private $timerIndex: number;
-	private $lastTimestamp: number;
+	protected $fps: number = 0;
+
+	private $stage: Stage = null;
+	private $paused: boolean = false;
+	private $shouldResume: boolean = false;
+	private $timerIndex: number = 0;
+	private $lastTimestamp: number = 0;
+	private $tickHandle: number = null;
 	private readonly $timers: Object;
 	private readonly $boundTick: () => void;
 	private readonly $enterFrameCallbackList: Array<Layer>;
@@ -17,12 +20,14 @@ export default class Ticker extends EventEmitter {
 	public constructor(stage: Stage) {
 		super();
 		this.$stage = stage;
-		this.$timerIndex = 0;
 		this.$timers = [];
-		this.$shouldResume = false;
 		this.$boundTick = this.$tick.bind(this);
 		this.$enterFrameCallbackList = [stage];
 		this.$start();
+	}
+
+	public get fps(): number {
+		return this.$fps;
 	}
 
 	public get paused(): boolean {
@@ -30,25 +35,33 @@ export default class Ticker extends EventEmitter {
 	}
 
 	private $start(): this {
-		window.requestAnimationFrame =
-			window['requestAnimationFrame'] ||
-			window['webkitRequestAnimationFrame'] ||
-			window['mozRequestAnimationFrame'] ||
-			window['oRequestAnimationFrame'] ||
-			window['msRequestAnimationFrame'] ||
-			function (callback) {
-				return setTimeout(callback, 1000 / 60);
-			};
+		let prefixes = ['', 'o', 'ms', 'moz', 'webkit'];
 
-		let prefixes = ['', 'ms', 'moz', 'webkit'];
 		for (let prefix of prefixes) {
-			let hidden = prefix ? prefix + 'Hidden' : 'hidden';
-			if (document[hidden] === undefined) {
+			let requestKey = prefix ? prefix + 'RequestAnimationFrame' : 'requestAnimationFrame';
+			let cancelKey = prefix ? prefix + 'CancelAnimationFrame' : 'cancelAnimationFrame';
+			let cancelRequestKey = prefix ? prefix + 'CancelRequestAnimationFrame' : 'cancelRequestAnimationFrame';
+			window.requestAnimationFrame = window.requestAnimationFrame || window[requestKey];
+			window.cancelAnimationFrame = window.cancelAnimationFrame || window[cancelKey];
+			window.cancelAnimationFrame = window.cancelAnimationFrame || window[cancelRequestKey];
+		}
+		if (!window.requestAnimationFrame) {
+			window.requestAnimationFrame = function (callback) {
+				return window.setTimeout(callback, 1000 / 60);
+			};
+			window.cancelAnimationFrame = function (handle) {
+				window.clearTimeout(handle);
+			}
+		}
+
+		for (let prefix of prefixes) {
+			let hiddenKey = prefix ? prefix + 'Hidden' : 'hidden';
+			if (document[hiddenKey] === undefined) {
 				break;
 			}
 			document.addEventListener(prefix + 'visibilitychange', () => {
 				let paused = this.$paused;
-				let hidden = document[prefix + 'hidden'];
+				let hidden = document[hiddenKey];
 				if (hidden && !paused) {
 					this.pause();
 					this.$shouldResume = true;
@@ -59,20 +72,26 @@ export default class Ticker extends EventEmitter {
 			});
 		}
 
-		return this.resume();
+		this.$tick();
+		return this;
 	}
 
 	public pause(): this {
-		this.$paused = true;
-		this.emit(Event.TICKER_PAUSE);
+		if (!this.$paused) {
+			this.$paused = true;
+			this.$lastTimestamp = 0;
+			this.emit(Event.TICKER_PAUSE);
+			cancelAnimationFrame(this.$tickHandle);
+		}
 		return this;
 	}
 
 	public resume(): this {
-		this.$paused = false;
-		this.$lastTimestamp = Date.now();
-		this.emit(Event.TICKER_RESUME);
-		requestAnimationFrame(this.$boundTick);
+		if (this.$paused) {
+			this.$paused = false;
+			this.$tick();
+			this.emit(Event.TICKER_RESUME);
+		}
 		return this;
 	}
 
@@ -114,19 +133,17 @@ export default class Ticker extends EventEmitter {
 	}
 
 	private $tick(): void {
-		if (this.$paused) {
-			return;
-		}
 		let now = Date.now();
-		let deltaTime = now - this.$lastTimestamp;
+		let deltaTime = now - this.$lastTimestamp || 1000 / 60;
 		let enterFrameCallbackList = this.$enterFrameCallbackList;
 		for (let layer of enterFrameCallbackList) {
 			layer.emit(Event.ENTER_FRAME, deltaTime);
 		}
+		this.$fps = Math.round(1000 / deltaTime);
 		this.emit(Event.TICK, deltaTime);
-		this.$lastTimestamp = Date.now();
+		this.$lastTimestamp = now;
 		this.$checkTimers(deltaTime);
-		requestAnimationFrame(this.$boundTick);
+		this.$tickHandle = requestAnimationFrame(this.$boundTick);
 	}
 
 	private $checkTimers(dt: number): void {

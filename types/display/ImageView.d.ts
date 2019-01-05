@@ -7,5 +7,5 @@ export default class ImageView extends Layer {
     constructor(image: Image, width: number, height: number);
     image: Image;
     protected $onImageLoad(): void;
-    protected $render(): void;
+    protected $render(): number;
 }
