@@ -51,6 +51,7 @@ var Event = /** @class */ (function () {
     Event.SOUND_COMPLETE = 'soundComplete';
     return Event;
 }());
+//# sourceMappingURL=Event.js.map
 
 var EventEmitter = /** @class */ (function () {
     function EventEmitter() {
@@ -100,6 +101,7 @@ var EventEmitter = /** @class */ (function () {
     };
     return EventEmitter;
 }());
+//# sourceMappingURL=EventEmitter.js.map
 
 var Ticker = /** @class */ (function (_super) {
     __extends(Ticker, _super);
@@ -237,6 +239,7 @@ var Ticker = /** @class */ (function (_super) {
     };
     return Ticker;
 }(EventEmitter));
+//# sourceMappingURL=Ticker.js.map
 
 var Media = /** @class */ (function (_super) {
     __extends(Media, _super);
@@ -271,6 +274,7 @@ var Media = /** @class */ (function (_super) {
     };
     return Media;
 }(EventEmitter));
+//# sourceMappingURL=Media.js.map
 
 var Image = /** @class */ (function (_super) {
     __extends(Image, _super);
@@ -312,6 +316,7 @@ var Image = /** @class */ (function (_super) {
     });
     return Image;
 }(Media));
+//# sourceMappingURL=Image.js.map
 
 var Vector = /** @class */ (function () {
     function Vector(x, y) {
@@ -428,6 +433,7 @@ var Vector = /** @class */ (function () {
     Vector.$pool = [];
     return Vector;
 }());
+//# sourceMappingURL=Vector.js.map
 
 var Matrix = /** @class */ (function () {
     function Matrix(a, b, c, d, tx, ty) {
@@ -556,6 +562,7 @@ var Matrix = /** @class */ (function () {
     Matrix.$pool = [];
     return Matrix;
 }());
+//# sourceMappingURL=Matrix.js.map
 
 var Rectangle = /** @class */ (function () {
     function Rectangle(x, y, width, height) {
@@ -654,6 +661,7 @@ var Rectangle = /** @class */ (function () {
     Rectangle.$pool = [];
     return Rectangle;
 }());
+//# sourceMappingURL=Rectangle.js.map
 
 var TouchEvent = /** @class */ (function (_super) {
     __extends(TouchEvent, _super);
@@ -700,6 +708,7 @@ var TouchEvent = /** @class */ (function (_super) {
     TouchEvent.$pool = [];
     return TouchEvent;
 }(Event));
+//# sourceMappingURL=TouchEvent.js.map
 
 var Layer = /** @class */ (function (_super) {
     __extends(Layer, _super);
@@ -727,7 +736,6 @@ var Layer = /** @class */ (function (_super) {
         _this.$parent = null;
         _this.$children = [];
         _this.$touches = [];
-        _this.$pixelRatio = window.devicePixelRatio || 1;
         _this.$canvas = document.createElement('canvas');
         _this.$context = _this.$canvas.getContext('2d');
         _this.on(Event.ADDED, _this.$onAdded);
@@ -738,7 +746,7 @@ var Layer = /** @class */ (function (_super) {
     }
     Object.defineProperty(Layer.prototype, "width", {
         get: function () {
-            return this.$width ? this.$width : this.$canvas.width / this.$pixelRatio;
+            return this.$width ? this.$width : this.$canvas.width / Layer.pixelRatio;
         },
         set: function (width) {
             if (this.$width !== width) {
@@ -751,7 +759,7 @@ var Layer = /** @class */ (function (_super) {
     });
     Object.defineProperty(Layer.prototype, "height", {
         get: function () {
-            return this.$height ? this.$height : this.$canvas.height / this.$pixelRatio;
+            return this.$height ? this.$height : this.$canvas.height / Layer.pixelRatio;
         },
         set: function (height) {
             if (this.$height !== height) {
@@ -1109,18 +1117,25 @@ var Layer = /** @class */ (function (_super) {
         return matrix;
     };
     Layer.prototype.$resizeCanvas = function () {
-        if (this.$width && this.$height) {
-            this.$canvas.width = this.$width * this.$pixelRatio;
-            this.$canvas.height = this.$height * this.$pixelRatio;
+        var width = this.$width;
+        var height = this.$height;
+        var canvas = this.$canvas;
+        var parent = this.$parent;
+        var anchorX = this.$anchorX;
+        var anchorY = this.$anchorY;
+        var pixelRatio = Layer.pixelRatio;
+        if (width && height) {
+            canvas.width = width * pixelRatio;
+            canvas.height = height * pixelRatio;
         }
         else {
             var bounds = this.$getContentBounds();
-            this.$canvas.width = (this.$width || bounds.right + this.anchorX) * this.$pixelRatio;
-            this.$canvas.height = (this.$height || bounds.bottom + this.anchorY) * this.$pixelRatio;
+            canvas.width = (width || bounds.right + anchorX) * pixelRatio;
+            canvas.height = (height || bounds.bottom + anchorY) * pixelRatio;
             bounds.release();
         }
-        if (this.$parent) {
-            this.$parent.$resizeCanvas();
+        if (parent) {
+            parent.$resizeCanvas();
         }
         this.$dirty = true;
     };
@@ -1207,7 +1222,7 @@ var Layer = /** @class */ (function (_super) {
             return;
         }
         var ctx = this.$context;
-        var pixelRatio = this.$pixelRatio;
+        var pixelRatio = Layer.pixelRatio;
         var matrix = child.$getTransform().scale(pixelRatio);
         child.$render();
         ctx.globalAlpha = child.alpha;
@@ -1229,8 +1244,8 @@ var Layer = /** @class */ (function (_super) {
         var ctx = this.$context;
         var canvas = this.$canvas;
         var children = this.$children;
-        var pixelRatio = this.$pixelRatio;
         var background = this.$background;
+        var pixelRatio = Layer.pixelRatio;
         var anchorX = this.$anchorX * pixelRatio;
         var anchorY = this.$anchorY * pixelRatio;
         var canvasWidth = canvas.width;
@@ -1316,8 +1331,10 @@ var Layer = /** @class */ (function (_super) {
             this.$parent.$markDirty();
         }
     };
+    Layer.pixelRatio = window.devicePixelRatio || 1;
     return Layer;
 }(EventEmitter));
+//# sourceMappingURL=Layer.js.map
 
 var ImageView = /** @class */ (function (_super) {
     __extends(ImageView, _super);
@@ -1362,13 +1379,14 @@ var ImageView = /** @class */ (function (_super) {
         var image = this.$image;
         var ctx = this.$context;
         var canvas = this.$canvas;
-        var pixelRatio = this.$pixelRatio;
+        var pixelRatio = Layer.pixelRatio;
         var anchorX = this.$anchorX * pixelRatio;
         var anchorY = this.$anchorY * pixelRatio;
         ctx.drawImage(image.element, -anchorX, -anchorY, canvas.width, canvas.height);
     };
     return ImageView;
 }(Layer));
+//# sourceMappingURL=ImageView.js.map
 
 var TextView = /** @class */ (function (_super) {
     __extends(TextView, _super);
@@ -1566,7 +1584,7 @@ var TextView = /** @class */ (function (_super) {
         var ctx = this.$context;
         var fontStyle = this.$fontStyle;
         var fontWeight = this.$fontWeight;
-        var pixelRatio = this.$pixelRatio;
+        var pixelRatio = Layer.pixelRatio;
         var fontSize = this.$explicitSize || this.$fontSize;
         var sizeStr = fontSize * pixelRatio + 'px';
         ctx.font = fontStyle + ' ' + fontWeight + ' ' + sizeStr + ' ' + this.fontFamily;
@@ -1659,7 +1677,7 @@ var TextView = /** @class */ (function (_super) {
         var bounds = _super.prototype.$getContentBounds.call(this);
         var lines = this.$lines;
         var lineHeight = this.$lineHeight;
-        var pixelRatio = this.$pixelRatio;
+        var pixelRatio = Layer.pixelRatio;
         var fontSize = this.$explicitSize || this.$fontSize;
         this.$updateContext();
         for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
@@ -1687,7 +1705,7 @@ var TextView = /** @class */ (function (_super) {
         var lineHeight = this.$lineHeight;
         var strokeSize = this.$strokeSize;
         var strokeColor = this.$strokeColor;
-        var pixelRatio = this.$pixelRatio;
+        var pixelRatio = Layer.pixelRatio;
         var fontSize = this.$explicitSize || this.$fontSize;
         _super.prototype.$render.call(this);
         this.$updateContext();
@@ -1833,6 +1851,7 @@ var Sound = /** @class */ (function (_super) {
     };
     return Sound;
 }(Media));
+//# sourceMappingURL=Sound.js.map
 
 var SoundEffect = /** @class */ (function (_super) {
     __extends(SoundEffect, _super);
@@ -1841,6 +1860,7 @@ var SoundEffect = /** @class */ (function (_super) {
     }
     return SoundEffect;
 }(Sound));
+//# sourceMappingURL=SoundEffect.js.map
 
 var ResourceManager = /** @class */ (function (_super) {
     __extends(ResourceManager, _super);
@@ -1972,6 +1992,7 @@ var ResourceManager = /** @class */ (function (_super) {
     ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
     return ResourceManager;
 }(EventEmitter));
+//# sourceMappingURL=ResourceManager.js.map
 
 var Stage = /** @class */ (function (_super) {
     __extends(Stage, _super);
@@ -2042,12 +2063,12 @@ var Stage = /** @class */ (function (_super) {
     });
     Object.defineProperty(Stage.prototype, "viewportWidth", {
         get: function () {
-            return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / this.$pixelRatio;
+            return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / Layer.pixelRatio;
         },
         set: function (width) {
             this.$viewportWidth = width;
             width = width || window.innerWidth;
-            this.$viewportCanvas.width = width * this.$pixelRatio;
+            this.$viewportCanvas.width = width * Layer.pixelRatio;
             this.$viewportCanvas.style.width = width + 'px';
             this.$resizeCanvas();
         },
@@ -2056,12 +2077,12 @@ var Stage = /** @class */ (function (_super) {
     });
     Object.defineProperty(Stage.prototype, "viewportHeight", {
         get: function () {
-            return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / this.$pixelRatio;
+            return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / Layer.pixelRatio;
         },
         set: function (height) {
             this.$viewportHeight = height;
             height = height || window.innerHeight;
-            this.$viewportCanvas.height = height * this.$pixelRatio;
+            this.$viewportCanvas.height = height * Layer.pixelRatio;
             this.$viewportCanvas.style.height = height + 'px';
             this.$resizeCanvas();
         },
@@ -2145,8 +2166,8 @@ var Stage = /** @class */ (function (_super) {
         var event = TouchEvent.create(type);
         var width = this.$canvas.width;
         var height = this.$canvas.height;
-        var pixelRatio = this.$pixelRatio;
         var bounds = this.$renderBounds;
+        var pixelRatio = Layer.pixelRatio;
         var viewportBounds = this.$viewportCanvas.getBoundingClientRect();
         var x = (touch.pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
         var y = (touch.pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
@@ -2284,6 +2305,7 @@ var Stage = /** @class */ (function (_super) {
     Stage.FIXED_HEIGHT = 'fixedHeight';
     return Stage;
 }(Layer));
+//# sourceMappingURL=Stage.js.map
 
 var Ease = /** @class */ (function () {
     function Ease() {
@@ -2467,6 +2489,7 @@ var Ease = /** @class */ (function () {
     };
     return Ease;
 }());
+//# sourceMappingURL=Ease.js.map
 
 var Tween = /** @class */ (function (_super) {
     __extends(Tween, _super);
@@ -2659,6 +2682,9 @@ var Tween = /** @class */ (function (_super) {
     Tween.$tweens = [];
     return Tween;
 }(EventEmitter));
+//# sourceMappingURL=Tween.js.map
+
+//# sourceMappingURL=index.js.map
 
 exports.Ticker = Ticker;
 exports.Layer = Layer;

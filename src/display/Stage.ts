@@ -89,25 +89,25 @@ export default class Stage extends Layer {
 	}
 
 	public get viewportWidth(): number {
-		return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / this.$pixelRatio;
+		return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / Layer.pixelRatio;
 	}
 
 	public set viewportWidth(width: number) {
 		this.$viewportWidth = width;
 		width = width || window.innerWidth;
-		this.$viewportCanvas.width = width * this.$pixelRatio;
+		this.$viewportCanvas.width = width * Layer.pixelRatio;
 		this.$viewportCanvas.style.width = width + 'px';
 		this.$resizeCanvas();
 	}
 
 	public get viewportHeight(): number {
-		return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / this.$pixelRatio;
+		return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / Layer.pixelRatio;
 	}
 
 	public set viewportHeight(height: number) {
 		this.$viewportHeight = height;
 		height = height || window.innerHeight;
-		this.$viewportCanvas.height = height * this.$pixelRatio;
+		this.$viewportCanvas.height = height * Layer.pixelRatio;
 		this.$viewportCanvas.style.height = height + 'px';
 		this.$resizeCanvas();
 	}
@@ -185,8 +185,8 @@ export default class Stage extends Layer {
 		let event = TouchEvent.create(type);
 		let width = this.$canvas.width;
 		let height = this.$canvas.height;
-		let pixelRatio = this.$pixelRatio;
 		let bounds = this.$renderBounds;
+		let pixelRatio = Layer.pixelRatio;
 		let viewportBounds = this.$viewportCanvas.getBoundingClientRect();
 		let x = (touch.pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
 		let y = (touch.pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;

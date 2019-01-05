@@ -173,7 +173,7 @@ export default class TextView extends Layer {
 		let ctx = this.$context;
 		let fontStyle = this.$fontStyle;
 		let fontWeight = this.$fontWeight;
-		let pixelRatio = this.$pixelRatio;
+		let pixelRatio = Layer.pixelRatio;
 		let fontSize = this.$explicitSize || this.$fontSize;
 		let sizeStr = fontSize * pixelRatio + 'px';
 		ctx.font = fontStyle + ' ' + fontWeight + ' ' + sizeStr + ' ' + this.fontFamily;
@@ -263,7 +263,7 @@ export default class TextView extends Layer {
 		let bounds = super.$getContentBounds();
 		let lines = this.$lines;
 		let lineHeight = this.$lineHeight;
-		let pixelRatio = this.$pixelRatio;
+		let pixelRatio = Layer.pixelRatio;
 		let fontSize = this.$explicitSize || this.$fontSize;
 		this.$updateContext();
 		for (let line of lines) {
@@ -291,7 +291,7 @@ export default class TextView extends Layer {
 		let lineHeight = this.$lineHeight;
 		let strokeSize = this.$strokeSize;
 		let strokeColor = this.$strokeColor;
-		let pixelRatio = this.$pixelRatio;
+		let pixelRatio = Layer.pixelRatio;
 		let fontSize = this.$explicitSize || this.$fontSize;
 		super.$render();
 		this.$updateContext();

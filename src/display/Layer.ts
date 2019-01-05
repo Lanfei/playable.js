@@ -10,6 +10,8 @@ import EventEmitter from '../event/EventEmitter';
 
 export default class Layer extends EventEmitter {
 
+	public static pixelRatio: number = window.devicePixelRatio || 1;
+
 	public name: string = '';
 	public tag: string = '';
 	public touchable: boolean = true;
@@ -31,7 +33,6 @@ export default class Layer extends EventEmitter {
 	protected $dirty: boolean = true;
 	protected $stage: Stage = null;
 	protected $parent: Layer = null;
-	protected readonly $pixelRatio: number;
 	protected readonly $children: Array<Layer> = [];
 	protected readonly $touches: Array<boolean> = [];
 	protected readonly $canvas: HTMLCanvasElement;
@@ -39,7 +40,6 @@ export default class Layer extends EventEmitter {
 
 	public constructor() {
 		super();
-		this.$pixelRatio = window.devicePixelRatio || 1;
 		this.$canvas = document.createElement('canvas');
 		this.$context = this.$canvas.getContext('2d');
 		this.on(Event.ADDED, this.$onAdded);
@@ -49,7 +49,7 @@ export default class Layer extends EventEmitter {
 	}
 
 	public get width(): number {
-		return this.$width ? this.$width : this.$canvas.width / this.$pixelRatio;
+		return this.$width ? this.$width : this.$canvas.width / Layer.pixelRatio;
 	}
 
 	public set width(width: number) {
@@ -60,7 +60,7 @@ export default class Layer extends EventEmitter {
 	}
 
 	public get height(): number {
-		return this.$height ? this.$height : this.$canvas.height / this.$pixelRatio;
+		return this.$height ? this.$height : this.$canvas.height / Layer.pixelRatio;
 	}
 
 	public set height(height: number) {
@@ -388,17 +388,24 @@ export default class Layer extends EventEmitter {
 	}
 
 	protected $resizeCanvas() {
-		if (this.$width && this.$height) {
-			this.$canvas.width = this.$width * this.$pixelRatio;
-			this.$canvas.height = this.$height * this.$pixelRatio;
+		let width = this.$width;
+		let height = this.$height;
+		let canvas = this.$canvas;
+		let parent = this.$parent;
+		let anchorX = this.$anchorX;
+		let anchorY = this.$anchorY;
+		let pixelRatio = Layer.pixelRatio;
+		if (width && height) {
+			canvas.width = width * pixelRatio;
+			canvas.height = height * pixelRatio;
 		} else {
 			let bounds = this.$getContentBounds();
-			this.$canvas.width = (this.$width || bounds.right + this.anchorX) * this.$pixelRatio;
-			this.$canvas.height = (this.$height || bounds.bottom + this.anchorY) * this.$pixelRatio;
+			canvas.width = (width || bounds.right + anchorX) * pixelRatio;
+			canvas.height = (height || bounds.bottom + anchorY) * pixelRatio;
 			bounds.release();
 		}
-		if (this.$parent) {
-			this.$parent.$resizeCanvas();
+		if (parent) {
+			parent.$resizeCanvas();
 		}
 		this.$dirty = true;
 	}
@@ -486,7 +493,7 @@ export default class Layer extends EventEmitter {
 			return;
 		}
 		let ctx = this.$context;
-		let pixelRatio = this.$pixelRatio;
+		let pixelRatio = Layer.pixelRatio;
 		let matrix = child.$getTransform().scale(pixelRatio);
 
 		child.$render();
@@ -511,8 +518,8 @@ export default class Layer extends EventEmitter {
 		let ctx = this.$context;
 		let canvas = this.$canvas;
 		let children = this.$children;
-		let pixelRatio = this.$pixelRatio;
 		let background = this.$background;
+		let pixelRatio = Layer.pixelRatio;
 		let anchorX = this.$anchorX * pixelRatio;
 		let anchorY = this.$anchorY * pixelRatio;
 		let canvasWidth = canvas.width;

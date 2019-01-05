@@ -6,6 +6,7 @@ import Rectangle from '../geom/Rectangle';
 import TouchEvent from '../event/TouchEvent';
 import EventEmitter from '../event/EventEmitter';
 export default class Layer extends EventEmitter {
+    static pixelRatio: number;
     name: string;
     tag: string;
     touchable: boolean;
@@ -26,7 +27,6 @@ export default class Layer extends EventEmitter {
     protected $dirty: boolean;
     protected $stage: Stage;
     protected $parent: Layer;
-    protected readonly $pixelRatio: number;
     protected readonly $children: Array<Layer>;
     protected readonly $touches: Array<boolean>;
     protected readonly $canvas: HTMLCanvasElement;

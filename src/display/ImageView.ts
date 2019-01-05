@@ -48,7 +48,7 @@ export default class ImageView extends Layer {
 		let image = this.$image;
 		let ctx = this.$context;
 		let canvas = this.$canvas;
-		let pixelRatio = this.$pixelRatio;
+		let pixelRatio = Layer.pixelRatio;
 		let anchorX = this.$anchorX * pixelRatio;
 		let anchorY = this.$anchorY * pixelRatio;
 		ctx.drawImage(image.element, -anchorX, -anchorY, canvas.width, canvas.height);
