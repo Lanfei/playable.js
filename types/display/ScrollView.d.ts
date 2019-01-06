@@ -1,3 +1,4 @@
+import Stage from './Stage';
 import Layer from './Layer';
 import Tween from '../tween/Tween';
 import Matrix from '../geom/Matrix';
@@ -21,4 +22,5 @@ export default class ScrollView extends Layer {
     protected $onTouchStart(e: TouchEvent): void;
     protected $onTouchMove(e: TouchEvent): void;
     protected $onTouchEnd(): void;
+    protected $onRemovedFromStage(stage: Stage): void;
 }

@@ -1,3 +1,4 @@
+import Stage from './Stage';
 import Layer from './Layer';
 import Ease from '../tween/Ease';
 import Tween from '../tween/Tween';
@@ -59,8 +60,8 @@ export default class ScrollView extends Layer {
 	protected $resizeCanvas(): void {
 		super.$resizeCanvas();
 		let bounds = this.$getContentBounds();
-		this.$scrollWidth = this.$scrollX + bounds.right;
-		this.$scrollHeight = this.$scrollY + bounds.bottom;
+		this.$scrollWidth = this.$scrollX + bounds.right + this.$anchorX;
+		this.$scrollHeight = this.$scrollY + bounds.bottom + this.$anchorY;
 	}
 
 	protected $onTouchStart(e: TouchEvent): void {
@@ -108,12 +109,21 @@ export default class ScrollView extends Layer {
 		}
 		let velocityX = sumVelocityX / numVelocities;
 		let velocityY = sumVelocityY / numVelocities;
-		if (velocityX > 0.05 || velocityY > 0.05) {
-			let duration = Math.max(Math.abs(velocityX), Math.abs(velocityY), 1) * 1000;
+		let absVelocityX = Math.abs(velocityX);
+		let absVelocityY = Math.abs(velocityY);
+		if (absVelocityX > 0.01 || absVelocityY > 0.01) {
+			let duration = Math.max(absVelocityX, absVelocityY, 1) * 1000;
 			this.$inertiaTween = Tween.get(this).to({
-				scrollX: scrollX - velocityX * (Math.abs(velocityX) + 1) * 200,
-				scrollY: scrollY - velocityY * (Math.abs(velocityY) + 1) * 200
+				scrollX: scrollX - velocityX * (absVelocityX + 1) * 200,
+				scrollY: scrollY - velocityY * (absVelocityY + 1) * 200
 			}, duration, Ease.easeOutQuart).play();
+		}
+	}
+
+	protected $onRemovedFromStage(stage: Stage): void {
+		super.$onRemovedFromStage(stage);
+		if (this.$inertiaTween) {
+			this.$inertiaTween.pause();
 		}
 	}
 

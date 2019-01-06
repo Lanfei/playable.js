@@ -102,7 +102,7 @@ export default class Layer extends EventEmitter {
 	public set anchorX(anchorX: number) {
 		if (this.$anchorX !== anchorX) {
 			this.$anchorX = anchorX;
-			this.$markDirty();
+			this.$resizeCanvas();
 		}
 	}
 
@@ -113,7 +113,7 @@ export default class Layer extends EventEmitter {
 	public set anchorY(anchorY: number) {
 		if (this.$anchorY !== anchorY) {
 			this.$anchorY = anchorY;
-			this.$markDirty();
+			this.$resizeCanvas();
 		}
 	}
 
