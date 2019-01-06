@@ -42,7 +42,7 @@ export default class ImageView extends Layer {
 
 	protected $render(): number {
 		if (!this.$dirty) {
-			return;
+			return 0;
 		}
 		let image = this.$image;
 		let ctx = this.$context;
