@@ -51,7 +51,6 @@ var playable = (function (exports) {
         Event.SOUND_COMPLETE = 'soundComplete';
         return Event;
     }());
-    //# sourceMappingURL=Event.js.map
 
     var EventEmitter = /** @class */ (function () {
         function EventEmitter() {
@@ -101,7 +100,6 @@ var playable = (function (exports) {
         };
         return EventEmitter;
     }());
-    //# sourceMappingURL=EventEmitter.js.map
 
     var Ticker = /** @class */ (function (_super) {
         __extends(Ticker, _super);
@@ -232,8 +230,9 @@ var playable = (function (exports) {
             return this;
         };
         Ticker.prototype.$tick = function () {
+            var now = Date.now();
             var lastTimestamp = this.$lastTimestamp;
-            var deltaTime = lastTimestamp ? Date.now() - this.$lastTimestamp : 1000 / 60;
+            var deltaTime = lastTimestamp ? now - this.$lastTimestamp : 1000 / 60;
             var enterFrameCallbackList = this.$enterFrameCallbackList;
             for (var _i = 0, enterFrameCallbackList_1 = enterFrameCallbackList; _i < enterFrameCallbackList_1.length; _i++) {
                 var layer = enterFrameCallbackList_1[_i];
@@ -242,7 +241,7 @@ var playable = (function (exports) {
             this.$fps = Math.round(1000 / deltaTime);
             this.emit(Event.TICK, deltaTime);
             this.$checkTimers(deltaTime);
-            this.$lastTimestamp = Date.now();
+            this.$lastTimestamp = now;
             this.$tickHandle = requestAnimationFrame(this.$boundTick);
         };
         Ticker.prototype.$checkTimers = function (dt) {
@@ -263,7 +262,6 @@ var playable = (function (exports) {
         };
         return Ticker;
     }(EventEmitter));
-    //# sourceMappingURL=Ticker.js.map
 
     var Vector = /** @class */ (function () {
         function Vector(x, y) {
@@ -380,7 +378,6 @@ var playable = (function (exports) {
         Vector.$pool = [];
         return Vector;
     }());
-    //# sourceMappingURL=Vector.js.map
 
     var Matrix = /** @class */ (function () {
         function Matrix(a, b, c, d, tx, ty) {
@@ -509,7 +506,6 @@ var playable = (function (exports) {
         Matrix.$pool = [];
         return Matrix;
     }());
-    //# sourceMappingURL=Matrix.js.map
 
     var Rectangle = /** @class */ (function () {
         function Rectangle(x, y, width, height) {
@@ -608,7 +604,6 @@ var playable = (function (exports) {
         Rectangle.$pool = [];
         return Rectangle;
     }());
-    //# sourceMappingURL=Rectangle.js.map
 
     var TouchEvent = /** @class */ (function (_super) {
         __extends(TouchEvent, _super);
@@ -655,7 +650,6 @@ var playable = (function (exports) {
         TouchEvent.$pool = [];
         return TouchEvent;
     }(Event));
-    //# sourceMappingURL=TouchEvent.js.map
 
     var Layer = /** @class */ (function (_super) {
         __extends(Layer, _super);
@@ -1263,8 +1257,8 @@ var playable = (function (exports) {
                 ctx.globalAlpha = child.alpha;
             }
             if (matrix.b === 0 && matrix.c === 0) {
-                var tx = matrix.tx + 0.5 | 0;
-                var ty = matrix.ty + 0.5 | 0;
+                var tx = (matrix.tx + 0.5) | 0;
+                var ty = (matrix.ty + 0.5) | 0;
                 width = (width * matrix.a) + 0.5 | 0;
                 height = (height * matrix.d) + 0.5 | 0;
                 ctx.drawImage(canvas, tx, ty, width, height);
@@ -1372,7 +1366,6 @@ var playable = (function (exports) {
         Layer.pixelRatio = window.devicePixelRatio || 1;
         return Layer;
     }(EventEmitter));
-    //# sourceMappingURL=Layer.js.map
 
     var Ease = /** @class */ (function () {
         function Ease() {
@@ -1556,7 +1549,6 @@ var playable = (function (exports) {
         };
         return Ease;
     }());
-    //# sourceMappingURL=Ease.js.map
 
     var Tween = /** @class */ (function (_super) {
         __extends(Tween, _super);
@@ -1747,7 +1739,6 @@ var playable = (function (exports) {
         Tween.$tweens = [];
         return Tween;
     }(EventEmitter));
-    //# sourceMappingURL=Tween.js.map
 
     var ScrollView = /** @class */ (function (_super) {
         __extends(ScrollView, _super);
@@ -1870,7 +1861,6 @@ var playable = (function (exports) {
         };
         return ScrollView;
     }(Layer));
-    //# sourceMappingURL=ScrollView.js.map
 
     var ImageView = /** @class */ (function (_super) {
         __extends(ImageView, _super);
@@ -1923,7 +1913,6 @@ var playable = (function (exports) {
         };
         return ImageView;
     }(Layer));
-    //# sourceMappingURL=ImageView.js.map
 
     var TextView = /** @class */ (function (_super) {
         __extends(TextView, _super);
@@ -2276,12 +2265,11 @@ var playable = (function (exports) {
             }
             return drawCalls;
         };
-        TextView.defaultFontSize = 30;
+        TextView.defaultFontSize = 16;
         TextView.wordRe = /\w+/;
         TextView.boundaryRe = /\b/;
         return TextView;
     }(Layer));
-    //# sourceMappingURL=TextView.js.map
 
     var Media = /** @class */ (function (_super) {
         __extends(Media, _super);
@@ -2316,7 +2304,6 @@ var playable = (function (exports) {
         };
         return Media;
     }(EventEmitter));
-    //# sourceMappingURL=Media.js.map
 
     var Image = /** @class */ (function (_super) {
         __extends(Image, _super);
@@ -2358,7 +2345,6 @@ var playable = (function (exports) {
         });
         return Image;
     }(Media));
-    //# sourceMappingURL=Image.js.map
 
     var Sound = /** @class */ (function (_super) {
         __extends(Sound, _super);
@@ -2467,7 +2453,6 @@ var playable = (function (exports) {
         };
         return Sound;
     }(Media));
-    //# sourceMappingURL=Sound.js.map
 
     var SoundEffect = /** @class */ (function (_super) {
         __extends(SoundEffect, _super);
@@ -2476,7 +2461,6 @@ var playable = (function (exports) {
         }
         return SoundEffect;
     }(Sound));
-    //# sourceMappingURL=SoundEffect.js.map
 
     var ResourceManager = /** @class */ (function (_super) {
         __extends(ResourceManager, _super);
@@ -2608,7 +2592,6 @@ var playable = (function (exports) {
         ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
         return ResourceManager;
     }(EventEmitter));
-    //# sourceMappingURL=ResourceManager.js.map
 
     var Stage = /** @class */ (function (_super) {
         __extends(Stage, _super);
@@ -2621,8 +2604,8 @@ var playable = (function (exports) {
             _this.$viewportContext = _this.$viewportCanvas.getContext('2d');
             _this.$boundResizeViewportCanvas = _this.$resizeViewportCanvas.bind(_this);
             _this.$initEvents();
-            _this.width = 640;
-            _this.height = 1136;
+            _this.width = 320;
+            _this.height = 568;
             _this.viewportWidth = 0;
             _this.viewportHeight = 0;
             if (!canvas) {
@@ -2926,15 +2909,16 @@ var playable = (function (exports) {
             var viewportWidth = this.$viewportWidth || window.innerWidth;
             var viewportHeight = this.$viewportHeight || window.innerHeight;
             this.$viewportCanvas.width = viewportWidth * Layer.pixelRatio;
-            this.$viewportCanvas.style.width = viewportWidth + 'px';
             this.$viewportCanvas.height = viewportHeight * Layer.pixelRatio;
-            this.$viewportCanvas.style.height = viewportHeight + 'px';
+            this.$viewportCanvas.style.transformOrigin = '0 0';
+            this.$viewportCanvas.style.transform = "scale(" + 1 / Layer.pixelRatio + ")";
             this.$calculateRenderBounds();
             this.$markDirty();
             this.emit(Event.VIEWPORT_RESIZE);
         };
         Stage.prototype.$render = function () {
             if (!this.$dirty) {
+                this.$drawCalls = 0;
                 return 0;
             }
             var drawCalls = _super.prototype.$render.call(this);
@@ -2950,7 +2934,7 @@ var playable = (function (exports) {
             var backgroundFillMode = this.$viewportBackgroundFillMode;
             ctx.clearRect(0, 0, viewportWidth, viewportHeight);
             this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode, ctx);
-            ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
+            ctx.drawImage(canvas, (bounds.x + 0.5) | 0, (bounds.y + 0.5) | 0, (bounds.width + 0.5) | 0, (bounds.height + 0.5) | 0);
             this.$drawCalls = ++drawCalls;
             return drawCalls;
         };
@@ -2964,8 +2948,6 @@ var playable = (function (exports) {
         Stage.FIXED_HEIGHT = 'fixedHeight';
         return Stage;
     }(Layer));
-
-    //# sourceMappingURL=index.js.map
 
     exports.Ticker = Ticker;
     exports.Layer = Layer;

@@ -3,7 +3,7 @@ import Rectangle from '../geom/Rectangle';
 
 export default class TextView extends Layer {
 
-	public static defaultFontSize = 30;
+	public static defaultFontSize = 16;
 	private static readonly wordRe: RegExp = /\w+/;
 	private static readonly boundaryRe: RegExp = /\b/;
 

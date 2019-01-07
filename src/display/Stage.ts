@@ -40,8 +40,8 @@ export default class Stage extends Layer {
 		this.$boundResizeViewportCanvas = this.$resizeViewportCanvas.bind(this);
 		this.$initEvents();
 
-		this.width = 640;
-		this.height = 1136;
+		this.width = 320;
+		this.height = 568;
 		this.viewportWidth = 0;
 		this.viewportHeight = 0;
 
@@ -315,9 +315,9 @@ export default class Stage extends Layer {
 		let viewportWidth = this.$viewportWidth || window.innerWidth;
 		let viewportHeight = this.$viewportHeight || window.innerHeight;
 		this.$viewportCanvas.width = viewportWidth * Layer.pixelRatio;
-		this.$viewportCanvas.style.width = viewportWidth + 'px';
 		this.$viewportCanvas.height = viewportHeight * Layer.pixelRatio;
-		this.$viewportCanvas.style.height = viewportHeight + 'px';
+		this.$viewportCanvas.style.transformOrigin = '0 0';
+		this.$viewportCanvas.style.transform = `scale(${1 / Layer.pixelRatio})`;
 		this.$calculateRenderBounds();
 		this.$markDirty();
 		this.emit(Event.VIEWPORT_RESIZE);
@@ -325,6 +325,7 @@ export default class Stage extends Layer {
 
 	protected $render(): number {
 		if (!this.$dirty) {
+			this.$drawCalls = 0;
 			return 0;
 		}
 		let drawCalls = super.$render();
@@ -340,7 +341,7 @@ export default class Stage extends Layer {
 		let backgroundFillMode = this.$viewportBackgroundFillMode;
 		ctx.clearRect(0, 0, viewportWidth, viewportHeight);
 		this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode, ctx);
-		ctx.drawImage(canvas, bounds.x, bounds.y, bounds.width, bounds.height);
+		ctx.drawImage(canvas, (bounds.x + 0.5) | 0, (bounds.y + 0.5) | 0, (bounds.width + 0.5) | 0, (bounds.height + 0.5) | 0);
 		this.$drawCalls = ++drawCalls;
 		return drawCalls;
 	}

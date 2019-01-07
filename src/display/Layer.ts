@@ -584,8 +584,8 @@ export default class Layer extends EventEmitter {
 			ctx.globalAlpha = child.alpha;
 		}
 		if (matrix.b === 0 && matrix.c === 0) {
-			let tx = matrix.tx + 0.5 | 0;
-			let ty = matrix.ty + 0.5 | 0;
+			let tx = (matrix.tx + 0.5) | 0;
+			let ty = (matrix.ty + 0.5) | 0;
 			width = (width * matrix.a) + 0.5 | 0;
 			height = (height * matrix.d) + 0.5 | 0;
 			ctx.drawImage(canvas, tx, ty, width, height);
