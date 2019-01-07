@@ -533,6 +533,23 @@ export default class Layer extends EventEmitter {
 		}
 	}
 
+	protected $isChildVisible(child: Layer): boolean {
+		if (!child.visible || !child.alpha || !child.width || !child.height) {
+			return false;
+		}
+		let minX = -this.$anchorX;
+		let maxX = this.width + minX;
+		let minY = -this.$anchorY;
+		let maxY = this.height + minY;
+		let bounds = this.$getChildBounds(child);
+		if (bounds.left > maxX || bounds.right < minX || bounds.top > maxY || bounds.bottom < minY) {
+			bounds.release();
+			return false;
+		}
+		bounds.release();
+		return true;
+	}
+
 	protected $drawBackground(color: string, image: Image, pattern: CanvasPattern, fillMode: BackgroundFillMode, context?: CanvasRenderingContext2D): void {
 		let ctx = context || this.$context;
 		let canvas = ctx.canvas;
@@ -557,21 +574,6 @@ export default class Layer extends EventEmitter {
 	}
 
 	protected $drawChild(child: Layer): number {
-		if (!child.width || !child.height) {
-			return 0;
-		}
-		if (!child.$dirty) {
-			let minX = -this.$anchorX;
-			let maxX = this.$width + minX;
-			let minY = -this.$anchorY;
-			let maxY = this.$height + minY;
-			let bounds = this.$getChildBounds(child);
-			if (bounds.left > maxX || bounds.right < minX || bounds.top > maxY || bounds.bottom < minY) {
-				bounds.release();
-				return 0;
-			}
-			bounds.release();
-		}
 		let ctx = this.$context;
 		let canvas = child.$canvas;
 		let width = child.width;
@@ -626,7 +628,7 @@ export default class Layer extends EventEmitter {
 		this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode);
 		ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
 		for (let child of children) {
-			if (child.visible && child.alpha) {
+			if (this.$isChildVisible(child)) {
 				drawCalls += this.$drawChild(child);
 			}
 		}

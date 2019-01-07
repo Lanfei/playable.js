@@ -81,6 +81,7 @@ export default class Layer extends EventEmitter {
     protected $getContentBounds(): Rectangle;
     protected $emitTouchEvent(event: TouchEvent): boolean;
     protected $getPattern(image: Image, fillMode: BackgroundFillMode): CanvasPattern;
+    protected $isChildVisible(child: Layer): boolean;
     protected $drawBackground(color: string, image: Image, pattern: CanvasPattern, fillMode: BackgroundFillMode, context?: CanvasRenderingContext2D): void;
     protected $drawChild(child: Layer): number;
     protected $render(): number;
