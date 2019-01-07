@@ -573,18 +573,30 @@ export default class Layer extends EventEmitter {
 			bounds.release();
 		}
 		let ctx = this.$context;
-		let childCanvas = child.$canvas;
+		let canvas = child.$canvas;
+		let width = child.width;
+		let height = child.height;
 		let pixelRatio = Layer.pixelRatio;
 		let matrix = this.$getChildTransform(child).scale(pixelRatio);
 		let drawCalls = child.$render();
-		ctx.globalAlpha = child.alpha;
-		if (matrix.a === pixelRatio && matrix.b === 0 && matrix.c === 0 && matrix.d === pixelRatio) {
-			ctx.drawImage(child.$canvas, matrix.tx, matrix.ty, childCanvas.width, childCanvas.height);
+		let globalAlpha = ctx.globalAlpha;
+		if (globalAlpha !== child.alpha) {
+			ctx.globalAlpha = child.alpha;
+		}
+		if (matrix.b === 0 && matrix.c === 0) {
+			let tx = matrix.tx + 0.5 | 0;
+			let ty = matrix.ty + 0.5 | 0;
+			width = (width * matrix.a) + 0.5 | 0;
+			height = (height * matrix.d) + 0.5 | 0;
+			ctx.drawImage(canvas, tx, ty, width, height);
 		} else {
 			ctx.save();
 			ctx.transform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
-			ctx.drawImage(child.$canvas, 0, 0, child.width, child.height);
+			ctx.drawImage(canvas, 0, 0, width, height);
 			ctx.restore();
+		}
+		if (globalAlpha !== undefined) {
+			ctx.globalAlpha = globalAlpha;
 		}
 		matrix.release();
 		return drawCalls + 1;
@@ -597,11 +609,11 @@ export default class Layer extends EventEmitter {
 		let drawCalls = 0;
 		let ctx = this.$context;
 		let canvas = this.$canvas;
-		let anchorX = this.$anchorX;
-		let anchorY = this.$anchorY;
 		let children = this.$children;
 		let canvasWidth = canvas.width;
 		let canvasHeight = canvas.height;
+		let anchorX = (this.$anchorX + 0.5) | 0;
+		let anchorY = (this.$anchorY + 0.5) | 0;
 		let backgroundColor = this.$backgroundColor;
 		let backgroundImage = this.$backgroundImage;
 		let backgroundPattern = this.$backgroundPattern;

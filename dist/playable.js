@@ -51,6 +51,7 @@ var playable = (function (exports) {
         Event.SOUND_COMPLETE = 'soundComplete';
         return Event;
     }());
+    //# sourceMappingURL=Event.js.map
 
     var EventEmitter = /** @class */ (function () {
         function EventEmitter() {
@@ -100,6 +101,7 @@ var playable = (function (exports) {
         };
         return EventEmitter;
     }());
+    //# sourceMappingURL=EventEmitter.js.map
 
     var Ticker = /** @class */ (function (_super) {
         __extends(Ticker, _super);
@@ -261,6 +263,7 @@ var playable = (function (exports) {
         };
         return Ticker;
     }(EventEmitter));
+    //# sourceMappingURL=Ticker.js.map
 
     var Vector = /** @class */ (function () {
         function Vector(x, y) {
@@ -377,6 +380,7 @@ var playable = (function (exports) {
         Vector.$pool = [];
         return Vector;
     }());
+    //# sourceMappingURL=Vector.js.map
 
     var Matrix = /** @class */ (function () {
         function Matrix(a, b, c, d, tx, ty) {
@@ -505,6 +509,7 @@ var playable = (function (exports) {
         Matrix.$pool = [];
         return Matrix;
     }());
+    //# sourceMappingURL=Matrix.js.map
 
     var Rectangle = /** @class */ (function () {
         function Rectangle(x, y, width, height) {
@@ -603,6 +608,7 @@ var playable = (function (exports) {
         Rectangle.$pool = [];
         return Rectangle;
     }());
+    //# sourceMappingURL=Rectangle.js.map
 
     var TouchEvent = /** @class */ (function (_super) {
         __extends(TouchEvent, _super);
@@ -649,6 +655,7 @@ var playable = (function (exports) {
         TouchEvent.$pool = [];
         return TouchEvent;
     }(Event));
+    //# sourceMappingURL=TouchEvent.js.map
 
     var Layer = /** @class */ (function (_super) {
         __extends(Layer, _super);
@@ -1245,19 +1252,31 @@ var playable = (function (exports) {
                 bounds.release();
             }
             var ctx = this.$context;
-            var childCanvas = child.$canvas;
+            var canvas = child.$canvas;
+            var width = child.width;
+            var height = child.height;
             var pixelRatio = Layer.pixelRatio;
             var matrix = this.$getChildTransform(child).scale(pixelRatio);
             var drawCalls = child.$render();
-            ctx.globalAlpha = child.alpha;
-            if (matrix.a === pixelRatio && matrix.b === 0 && matrix.c === 0 && matrix.d === pixelRatio) {
-                ctx.drawImage(child.$canvas, matrix.tx, matrix.ty, childCanvas.width, childCanvas.height);
+            var globalAlpha = ctx.globalAlpha;
+            if (globalAlpha !== child.alpha) {
+                ctx.globalAlpha = child.alpha;
+            }
+            if (matrix.b === 0 && matrix.c === 0) {
+                var tx = matrix.tx + 0.5 | 0;
+                var ty = matrix.ty + 0.5 | 0;
+                width = (width * matrix.a) + 0.5 | 0;
+                height = (height * matrix.d) + 0.5 | 0;
+                ctx.drawImage(canvas, tx, ty, width, height);
             }
             else {
                 ctx.save();
                 ctx.transform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
-                ctx.drawImage(child.$canvas, 0, 0, child.width, child.height);
+                ctx.drawImage(canvas, 0, 0, width, height);
                 ctx.restore();
+            }
+            if (globalAlpha !== undefined) {
+                ctx.globalAlpha = globalAlpha;
             }
             matrix.release();
             return drawCalls + 1;
@@ -1269,11 +1288,11 @@ var playable = (function (exports) {
             var drawCalls = 0;
             var ctx = this.$context;
             var canvas = this.$canvas;
-            var anchorX = this.$anchorX;
-            var anchorY = this.$anchorY;
             var children = this.$children;
             var canvasWidth = canvas.width;
             var canvasHeight = canvas.height;
+            var anchorX = (this.$anchorX + 0.5) | 0;
+            var anchorY = (this.$anchorY + 0.5) | 0;
             var backgroundColor = this.$backgroundColor;
             var backgroundImage = this.$backgroundImage;
             var backgroundPattern = this.$backgroundPattern;
@@ -1353,6 +1372,7 @@ var playable = (function (exports) {
         Layer.pixelRatio = window.devicePixelRatio || 1;
         return Layer;
     }(EventEmitter));
+    //# sourceMappingURL=Layer.js.map
 
     var Ease = /** @class */ (function () {
         function Ease() {
@@ -1536,6 +1556,7 @@ var playable = (function (exports) {
         };
         return Ease;
     }());
+    //# sourceMappingURL=Ease.js.map
 
     var Tween = /** @class */ (function (_super) {
         __extends(Tween, _super);
@@ -1726,6 +1747,7 @@ var playable = (function (exports) {
         Tween.$tweens = [];
         return Tween;
     }(EventEmitter));
+    //# sourceMappingURL=Tween.js.map
 
     var ScrollView = /** @class */ (function (_super) {
         __extends(ScrollView, _super);
@@ -1848,6 +1870,7 @@ var playable = (function (exports) {
         };
         return ScrollView;
     }(Layer));
+    //# sourceMappingURL=ScrollView.js.map
 
     var ImageView = /** @class */ (function (_super) {
         __extends(ImageView, _super);
@@ -1900,6 +1923,7 @@ var playable = (function (exports) {
         };
         return ImageView;
     }(Layer));
+    //# sourceMappingURL=ImageView.js.map
 
     var TextView = /** @class */ (function (_super) {
         __extends(TextView, _super);
@@ -2257,6 +2281,7 @@ var playable = (function (exports) {
         TextView.boundaryRe = /\b/;
         return TextView;
     }(Layer));
+    //# sourceMappingURL=TextView.js.map
 
     var Media = /** @class */ (function (_super) {
         __extends(Media, _super);
@@ -2291,6 +2316,7 @@ var playable = (function (exports) {
         };
         return Media;
     }(EventEmitter));
+    //# sourceMappingURL=Media.js.map
 
     var Image = /** @class */ (function (_super) {
         __extends(Image, _super);
@@ -2332,6 +2358,7 @@ var playable = (function (exports) {
         });
         return Image;
     }(Media));
+    //# sourceMappingURL=Image.js.map
 
     var Sound = /** @class */ (function (_super) {
         __extends(Sound, _super);
@@ -2440,6 +2467,7 @@ var playable = (function (exports) {
         };
         return Sound;
     }(Media));
+    //# sourceMappingURL=Sound.js.map
 
     var SoundEffect = /** @class */ (function (_super) {
         __extends(SoundEffect, _super);
@@ -2448,6 +2476,7 @@ var playable = (function (exports) {
         }
         return SoundEffect;
     }(Sound));
+    //# sourceMappingURL=SoundEffect.js.map
 
     var ResourceManager = /** @class */ (function (_super) {
         __extends(ResourceManager, _super);
@@ -2579,6 +2608,7 @@ var playable = (function (exports) {
         ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
         return ResourceManager;
     }(EventEmitter));
+    //# sourceMappingURL=ResourceManager.js.map
 
     var Stage = /** @class */ (function (_super) {
         __extends(Stage, _super);
@@ -2934,6 +2964,8 @@ var playable = (function (exports) {
         Stage.FIXED_HEIGHT = 'fixedHeight';
         return Stage;
     }(Layer));
+
+    //# sourceMappingURL=index.js.map
 
     exports.Ticker = Ticker;
     exports.Layer = Layer;
