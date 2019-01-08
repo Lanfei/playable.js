@@ -1,8 +1,8 @@
 import Layer, { BackgroundFillMode } from './Layer';
 import Image from '../media/Image';
 import Ticker from '../core/Ticker';
-import Event from '../event/Event';
 import Rectangle from '../geom/Rectangle';
+import Event from '../event/Event';
 import ResourceManager, { ResourceInfo, ResourceManagerOption } from '../net/ResourceManager';
 export default class Stage extends Layer {
     static readonly NO_SCALE: string;

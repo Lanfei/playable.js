@@ -20,8 +20,8 @@ export default class ScrollView extends Layer {
 
 	public constructor() {
 		super();
-		this.width = 400;
-		this.height = 400;
+		this.width = 200;
+		this.height = 200;
 		this.on(TouchEvent.TOUCH_START, this.$onTouchStart);
 		this.on(TouchEvent.TOUCH_MOVE, this.$onTouchMove);
 		this.on(TouchEvent.TOUCH_END, this.$onTouchEnd);

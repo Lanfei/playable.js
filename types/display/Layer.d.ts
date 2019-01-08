@@ -2,6 +2,7 @@ import Stage from './Stage';
 import Image from '../media/Image';
 import Ticker from '../core/Ticker';
 import Matrix from '../geom/Matrix';
+import Vector from '../geom/Vector';
 import Rectangle from '../geom/Rectangle';
 import TouchEvent from '../event/TouchEvent';
 import EventEmitter from '../event/EventEmitter';
@@ -79,8 +80,9 @@ export default class Layer extends EventEmitter {
     protected $getChildTransform(child: Layer): Matrix;
     protected $getChildBounds(child: Layer): Rectangle;
     protected $getContentBounds(): Rectangle;
-    protected $emitTouchEvent(event: TouchEvent): boolean;
+    protected $emitTouchEvent(event: TouchEvent, inside: boolean): boolean;
     protected $getPattern(image: Image, fillMode: BackgroundFillMode): CanvasPattern;
+    protected $localHitTest(vector: Vector): boolean;
     protected $isChildVisible(child: Layer): boolean;
     protected $drawBackground(color: string, image: Image, pattern: CanvasPattern, fillMode: BackgroundFillMode, context?: CanvasRenderingContext2D): void;
     protected $drawChild(child: Layer): number;

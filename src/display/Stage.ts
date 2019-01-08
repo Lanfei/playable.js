@@ -1,9 +1,10 @@
 import Layer, {BackgroundFillMode} from './Layer';
 import Image from '../media/Image';
 import Ticker from '../core/Ticker';
+import Vector from '../geom/Vector';
+import Rectangle from '../geom/Rectangle';
 import Event from '../event/Event';
 import TouchEvent from '../event/TouchEvent';
-import Rectangle from '../geom/Rectangle';
 import ResourceManager, {ResourceInfo, ResourceManagerOption} from '../net/ResourceManager';
 
 export default class Stage extends Layer {
@@ -217,7 +218,7 @@ export default class Stage extends Layer {
 	}
 
 	protected $dispatchTouchEvent(type: string, touch: Touch | MouseEvent): void {
-		if (this.$ticker.paused) {
+		if (this.$ticker.paused || !this.$visible || !this.touchable) {
 			return;
 		}
 		let event = TouchEvent.create(type);
@@ -228,11 +229,20 @@ export default class Stage extends Layer {
 		let viewportBounds = this.$viewportCanvas.getBoundingClientRect();
 		let x = (touch.pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
 		let y = (touch.pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
-		event.targetX = event.stageX = x;
-		event.targetY = event.stageY = y;
-		event.identifier = touch instanceof Touch ? touch.identifier : 0;
-		this.$emitTouchEvent(event);
+		let matrix = this.$getTransform();
+		let localPos = Vector.create(x, y).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
+		let inside = this.$localHitTest(localPos);
+		if (inside || type !== TouchEvent.TOUCH_START) {
+			event.localX = localPos.x;
+			event.localY = localPos.y;
+			event.targetX = event.stageX = x;
+			event.targetY = event.stageY = y;
+			event.identifier = touch instanceof Touch ? touch.identifier : 0;
+			this.$emitTouchEvent(event, inside);
+		}
 		event.release();
+		matrix.release();
+		localPos.release();
 	}
 
 	protected $calculateRenderBounds(): void {

@@ -1162,46 +1162,47 @@ var playable = (function (exports) {
             }
             return bounds;
         };
-        Layer.prototype.$emitTouchEvent = function (event) {
-            if (!this.visible || !this.touchable) {
-                return false;
-            }
+        Layer.prototype.$emitTouchEvent = function (event, inside) {
             var type = event.type;
+            var localX = event.localX;
+            var localY = event.localY;
             var touches = this.$touches;
             var identifier = event.identifier;
-            var matrix = this.$getTransform();
-            var localPos = Vector.create(event.targetX, event.targetY).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
-            var outside = localPos.x < -this.anchorX || localPos.x > this.width - this.anchorX || localPos.y < -this.anchorY || localPos.y > this.height - this.anchorY;
-            if (type === TouchEvent.TOUCH_START && outside) {
-                return false;
-            }
             if (type === TouchEvent.TOUCH_START) {
                 touches[identifier] = true;
             }
             else if (!touches[identifier]) {
                 return false;
             }
-            else if (type === TouchEvent.TOUCH_TAP) {
+            else if (type === TouchEvent.TOUCH_TAP || type === TouchEvent.TOUCH_CANCEL) {
                 touches[identifier] = false;
             }
             var children = this.$children;
-            event.targetX = localPos.x;
-            event.targetY = localPos.y;
             for (var i = children.length - 1; i >= 0; --i) {
                 var child = children[i];
-                if (child.$emitTouchEvent(event)) {
-                    break;
+                if (!child.$visible || !child.touchable) {
+                    continue;
+                }
+                var matrix = this.$getChildTransform(child);
+                var localPos = Vector.create(localX, localY).transform(matrix.invert()).subtract(child.$anchorX, child.$anchorY);
+                var inside_1 = child.$localHitTest(localPos);
+                localPos.release();
+                matrix.release();
+                if (inside_1 || type !== TouchEvent.TOUCH_START) {
+                    event.target = child;
+                    event.localX = event.targetX = localPos.x;
+                    event.localY = event.targetY = localPos.y;
+                    if (child.$emitTouchEvent(event, inside_1)) {
+                        break;
+                    }
                 }
             }
-            if (!event.propagationStopped && !(type === TouchEvent.TOUCH_TAP && outside)) {
-                event.target = event.target || this;
+            if (!event.propagationStopped && !(type === TouchEvent.TOUCH_TAP && !inside)) {
+                event.localX = localX;
+                event.localY = localY;
                 event.currentTarget = this;
-                event.localX = localPos.x;
-                event.localY = localPos.y;
                 this.emit(event.type, event);
             }
-            matrix.release();
-            localPos.release();
             return true;
         };
         Layer.prototype.$getPattern = function (image, fillMode) {
@@ -1211,6 +1212,9 @@ var playable = (function (exports) {
             else {
                 return null;
             }
+        };
+        Layer.prototype.$localHitTest = function (vector) {
+            return vector.x >= -this.anchorX && vector.x <= this.width - this.anchorX && vector.y >= -this.anchorY && vector.y <= this.height - this.anchorY;
         };
         Layer.prototype.$isChildVisible = function (child) {
             if (!child.visible || !child.alpha || !child.width || !child.height) {
@@ -1764,8 +1768,8 @@ var playable = (function (exports) {
             _this.$velocitiesX = [];
             _this.$velocitiesY = [];
             _this.$inertiaTween = null;
-            _this.width = 400;
-            _this.height = 400;
+            _this.width = 200;
+            _this.height = 200;
             _this.on(TouchEvent.TOUCH_START, _this.$onTouchStart);
             _this.on(TouchEvent.TOUCH_MOVE, _this.$onTouchMove);
             _this.on(TouchEvent.TOUCH_END, _this.$onTouchEnd);
@@ -2822,7 +2826,7 @@ var playable = (function (exports) {
             }
         };
         Stage.prototype.$dispatchTouchEvent = function (type, touch) {
-            if (this.$ticker.paused) {
+            if (this.$ticker.paused || !this.$visible || !this.touchable) {
                 return;
             }
             var event = TouchEvent.create(type);
@@ -2833,11 +2837,20 @@ var playable = (function (exports) {
             var viewportBounds = this.$viewportCanvas.getBoundingClientRect();
             var x = (touch.pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
             var y = (touch.pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
-            event.targetX = event.stageX = x;
-            event.targetY = event.stageY = y;
-            event.identifier = touch instanceof Touch ? touch.identifier : 0;
-            this.$emitTouchEvent(event);
+            var matrix = this.$getTransform();
+            var localPos = Vector.create(x, y).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
+            var inside = this.$localHitTest(localPos);
+            if (inside || type !== TouchEvent.TOUCH_START) {
+                event.localX = localPos.x;
+                event.localY = localPos.y;
+                event.targetX = event.stageX = x;
+                event.targetY = event.stageY = y;
+                event.identifier = touch instanceof Touch ? touch.identifier : 0;
+                this.$emitTouchEvent(event, inside);
+            }
             event.release();
+            matrix.release();
+            localPos.release();
         };
         Stage.prototype.$calculateRenderBounds = function () {
             var x = 0;

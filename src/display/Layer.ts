@@ -484,44 +484,45 @@ export default class Layer extends EventEmitter {
 		return bounds;
 	}
 
-	protected $emitTouchEvent(event: TouchEvent): boolean {
-		if (!this.visible || !this.touchable) {
-			return false;
-		}
+	protected $emitTouchEvent(event: TouchEvent, inside: boolean): boolean {
 		let type = event.type;
+		let localX = event.localX;
+		let localY = event.localY;
 		let touches = this.$touches;
 		let identifier = event.identifier;
-		let matrix = this.$getTransform();
-		let localPos = Vector.create(event.targetX, event.targetY).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
-		let outside = localPos.x < -this.anchorX || localPos.x > this.width - this.anchorX || localPos.y < -this.anchorY || localPos.y > this.height - this.anchorY;
-		if (type === TouchEvent.TOUCH_START && outside) {
-			return false;
-		}
 		if (type === TouchEvent.TOUCH_START) {
 			touches[identifier] = true;
 		} else if (!touches[identifier]) {
 			return false;
-		} else if (type === TouchEvent.TOUCH_TAP) {
+		} else if (type === TouchEvent.TOUCH_TAP || type === TouchEvent.TOUCH_CANCEL) {
 			touches[identifier] = false;
 		}
 		let children = this.$children;
-		event.targetX = localPos.x;
-		event.targetY = localPos.y;
 		for (let i = children.length - 1; i >= 0; --i) {
 			let child = children[i];
-			if (child.$emitTouchEvent(event)) {
-				break;
+			if (!child.$visible || !child.touchable) {
+				continue;
+			}
+			let matrix = this.$getChildTransform(child);
+			let localPos = Vector.create(localX, localY).transform(matrix.invert()).subtract(child.$anchorX, child.$anchorY);
+			let inside = child.$localHitTest(localPos);
+			localPos.release();
+			matrix.release();
+			if (inside || type !== TouchEvent.TOUCH_START) {
+				event.target = child;
+				event.localX = event.targetX = localPos.x;
+				event.localY = event.targetY = localPos.y;
+				if (child.$emitTouchEvent(event, inside)) {
+					break;
+				}
 			}
 		}
-		if (!event.propagationStopped && !(type === TouchEvent.TOUCH_TAP && outside)) {
-			event.target = event.target || this;
+		if (!event.propagationStopped && !(type === TouchEvent.TOUCH_TAP && !inside)) {
+			event.localX = localX;
+			event.localY = localY;
 			event.currentTarget = this;
-			event.localX = localPos.x;
-			event.localY = localPos.y;
 			this.emit(event.type, event);
 		}
-		matrix.release();
-		localPos.release();
 		return true;
 	}
 
@@ -531,6 +532,10 @@ export default class Layer extends EventEmitter {
 		} else {
 			return null;
 		}
+	}
+
+	protected $localHitTest(vector: Vector): boolean {
+		return vector.x >= -this.anchorX && vector.x <= this.width - this.anchorX && vector.y >= -this.anchorY && vector.y <= this.height - this.anchorY;
 	}
 
 	protected $isChildVisible(child: Layer): boolean {
