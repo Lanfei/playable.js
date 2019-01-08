@@ -15,7 +15,7 @@ export default class TouchEvent extends Event {
     stageX: number;
     stageY: number;
     identifier: number;
-    propagationStopped: boolean;
+    cancelBubble: boolean;
     constructor(type: string);
     protected $init(type: string): this;
     stopPropagation(): void;

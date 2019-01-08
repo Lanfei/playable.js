@@ -18,7 +18,7 @@ export default class TouchEvent extends Event {
 	public stageX: number;
 	public stageY: number;
 	public identifier: number;
-	public propagationStopped: boolean;
+	public cancelBubble: boolean;
 
 	public constructor(type: string) {
 		super(type);
@@ -34,12 +34,12 @@ export default class TouchEvent extends Event {
 		this.identifier = 0;
 		this.target = null;
 		this.currentTarget = null;
-		this.propagationStopped = false;
+		this.cancelBubble = false;
 		return this;
 	}
 
 	public stopPropagation() {
-		this.propagationStopped = true;
+		this.cancelBubble = true;
 	}
 
 	public release(): void {

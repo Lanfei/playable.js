@@ -51,7 +51,6 @@ var playable = (function (exports) {
         Event.SOUND_COMPLETE = 'soundComplete';
         return Event;
     }());
-    //# sourceMappingURL=Event.js.map
 
     var EventEmitter = /** @class */ (function () {
         function EventEmitter() {
@@ -627,11 +626,11 @@ var playable = (function (exports) {
             this.identifier = 0;
             this.target = null;
             this.currentTarget = null;
-            this.propagationStopped = false;
+            this.cancelBubble = false;
             return this;
         };
         TouchEvent.prototype.stopPropagation = function () {
-            this.propagationStopped = true;
+            this.cancelBubble = true;
         };
         TouchEvent.prototype.release = function () {
             TouchEvent.recycle(this);
@@ -1197,7 +1196,7 @@ var playable = (function (exports) {
                     }
                 }
             }
-            if (!event.propagationStopped && !(type === TouchEvent.TOUCH_TAP && !inside)) {
+            if (!event.cancelBubble && !(type === TouchEvent.TOUCH_TAP && !inside)) {
                 event.localX = localX;
                 event.localY = localY;
                 event.currentTarget = this;
@@ -1378,6 +1377,7 @@ var playable = (function (exports) {
         Layer.pixelRatio = window.devicePixelRatio || 1;
         return Layer;
     }(EventEmitter));
+    //# sourceMappingURL=Layer.js.map
 
     var Ease = /** @class */ (function () {
         function Ease() {
@@ -1758,13 +1758,14 @@ var playable = (function (exports) {
         __extends(ScrollView, _super);
         function ScrollView() {
             var _this = _super.call(this) || this;
-            _this.$scrollX = 0;
-            _this.$scrollY = 0;
+            _this.$scrollTop = 0;
+            _this.$scrollLeft = 0;
             _this.$scrollWidth = 0;
             _this.$scrollHeight = 0;
-            _this.$touchingX = 0;
-            _this.$touchingY = 0;
-            _this.$touchingTime = 0;
+            _this.$touchingX = null;
+            _this.$touchingY = null;
+            _this.$touchingTime = null;
+            _this.$touchingIdentifer = null;
             _this.$velocitiesX = [];
             _this.$velocitiesY = [];
             _this.$inertiaTween = null;
@@ -1773,30 +1774,31 @@ var playable = (function (exports) {
             _this.on(TouchEvent.TOUCH_START, _this.$onTouchStart);
             _this.on(TouchEvent.TOUCH_MOVE, _this.$onTouchMove);
             _this.on(TouchEvent.TOUCH_END, _this.$onTouchEnd);
+            _this.on(TouchEvent.TOUCH_CANCEL, _this.$onTouchCancel);
             return _this;
         }
-        Object.defineProperty(ScrollView.prototype, "scrollX", {
+        Object.defineProperty(ScrollView.prototype, "scrollTop", {
             get: function () {
-                return this.$scrollX;
+                return this.$scrollTop;
             },
-            set: function (scrollX) {
+            set: function (scrollTop) {
                 var bounds = this.$getContentBounds();
-                var maxScrollX = this.$scrollWidth - this.width;
-                this.$scrollX = Math.max(0, Math.min(scrollX, maxScrollX));
+                var maxScrollTop = this.$scrollHeight - this.$height;
+                this.$scrollTop = Math.max(0, Math.min(scrollTop, maxScrollTop));
                 this.$markDirty();
                 bounds.release();
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(ScrollView.prototype, "scrollY", {
+        Object.defineProperty(ScrollView.prototype, "scrollLeft", {
             get: function () {
-                return this.$scrollY;
+                return this.$scrollLeft;
             },
-            set: function (scrollY) {
+            set: function (scrollLeft) {
                 var bounds = this.$getContentBounds();
-                var maxScrollY = this.$scrollHeight - this.$height;
-                this.$scrollY = Math.max(0, Math.min(scrollY, maxScrollY));
+                var maxScrollLeft = this.$scrollWidth - this.width;
+                this.$scrollLeft = Math.max(0, Math.min(scrollLeft, maxScrollLeft));
                 this.$markDirty();
                 bounds.release();
             },
@@ -1805,49 +1807,71 @@ var playable = (function (exports) {
         });
         ScrollView.prototype.$getChildTransform = function (child) {
             var matrix = _super.prototype.$getChildTransform.call(this, child);
-            matrix.translate(-this.$scrollX, -this.$scrollY);
+            matrix.translate(-this.$scrollLeft, -this.$scrollTop);
             return matrix;
         };
         ScrollView.prototype.$resizeCanvas = function () {
             _super.prototype.$resizeCanvas.call(this);
             var bounds = this.$getContentBounds();
-            this.$scrollWidth = this.$scrollX + bounds.right + this.$anchorX;
-            this.$scrollHeight = this.$scrollY + bounds.bottom + this.$anchorY;
+            this.$scrollWidth = this.$scrollLeft + bounds.right + this.$anchorX;
+            this.$scrollHeight = this.$scrollTop + bounds.bottom + this.$anchorY;
         };
         ScrollView.prototype.$onTouchStart = function (e) {
             this.$touchingX = e.localX;
             this.$touchingY = e.localY;
             this.$velocitiesX.length = 0;
             this.$velocitiesY.length = 0;
+            this.$touchingTime = Date.now();
+            this.$touchingIdentifer = e.identifier;
             if (this.$inertiaTween) {
                 this.$inertiaTween.pause();
                 this.$inertiaTween = null;
             }
         };
         ScrollView.prototype.$onTouchMove = function (e) {
+            if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
+                return;
+            }
             var now = Date.now();
+            var scrollTop = this.scrollTop;
+            var scrollLeft = this.scrollLeft;
             var dt = now - this.$touchingTime;
             var velocitiesX = this.$velocitiesX;
             var velocitiesY = this.$velocitiesY;
             var offsetX = e.localX - this.$touchingX;
             var offsetY = e.localY - this.$touchingY;
+            var scrollingView = ScrollView.scrollingView || this;
             velocitiesX.push(offsetX / dt);
             velocitiesY.push(offsetY / dt);
             if (velocitiesX.length > 5) {
                 velocitiesX.shift();
                 velocitiesY.shift();
             }
-            this.scrollX -= offsetX;
-            this.scrollY -= offsetY;
             this.$touchingX = e.localX;
             this.$touchingY = e.localY;
-            this.$touchingTime = now;
+            if (scrollingView === this) {
+                this.$touchingTime = now;
+                this.scrollTop -= offsetY;
+                this.scrollLeft -= offsetX;
+                if (this.$scrollLeft !== scrollLeft || this.$scrollTop !== scrollTop) {
+                    ScrollView.scrollingView = this;
+                }
+            }
         };
-        ScrollView.prototype.$onTouchEnd = function () {
-            var scrollX = this.$scrollX;
-            var scrollY = this.$scrollY;
+        ScrollView.prototype.$onTouchEnd = function (e) {
+            if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
+                return;
+            }
+            if (ScrollView.scrollingView === this) {
+                ScrollView.scrollingView = null;
+            }
+            else {
+                return;
+            }
             var sumVelocityX = 0;
             var sumVelocityY = 0;
+            var scrollTop = this.$scrollTop;
+            var scrollLeft = this.$scrollLeft;
             var velocitiesX = this.$velocitiesX;
             var velocitiesY = this.$velocitiesY;
             var numVelocities = velocitiesX.length;
@@ -1862,10 +1886,17 @@ var playable = (function (exports) {
             if (absVelocityX > 0.01 || absVelocityY > 0.01) {
                 var duration = Math.max(absVelocityX, absVelocityY, 1) * 1000;
                 this.$inertiaTween = Tween.get(this).to({
-                    scrollX: scrollX - velocityX * (absVelocityX + 1) * 200,
-                    scrollY: scrollY - velocityY * (absVelocityY + 1) * 200
+                    scrollTop: scrollTop - velocityY * (absVelocityY + 1) * 200,
+                    scrollLeft: scrollLeft - velocityX * (absVelocityX + 1) * 200
                 }, duration, Ease.easeOutQuart).play();
             }
+            this.$touchingIdentifer = null;
+        };
+        ScrollView.prototype.$onTouchCancel = function (e) {
+            if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
+                return;
+            }
+            this.$touchingIdentifer = null;
         };
         ScrollView.prototype.$onRemovedFromStage = function (stage) {
             _super.prototype.$onRemovedFromStage.call(this, stage);

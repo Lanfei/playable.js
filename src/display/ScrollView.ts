@@ -7,13 +7,16 @@ import TouchEvent from '../event/TouchEvent';
 
 export default class ScrollView extends Layer {
 
-	protected $scrollX: number = 0;
-	protected $scrollY: number = 0;
+	protected static scrollingView: ScrollView;
+
+	protected $scrollTop: number = 0;
+	protected $scrollLeft: number = 0;
 	protected $scrollWidth: number = 0;
 	protected $scrollHeight: number = 0;
-	protected $touchingX: number = 0;
-	protected $touchingY: number = 0;
-	protected $touchingTime: number = 0;
+	protected $touchingX: number = null;
+	protected $touchingY: number = null;
+	protected $touchingTime: number = null;
+	protected $touchingIdentifer: number = null;
 	protected $velocitiesX: Array<number> = [];
 	protected $velocitiesY: Array<number> = [];
 	protected $inertiaTween: Tween = null;
@@ -25,43 +28,44 @@ export default class ScrollView extends Layer {
 		this.on(TouchEvent.TOUCH_START, this.$onTouchStart);
 		this.on(TouchEvent.TOUCH_MOVE, this.$onTouchMove);
 		this.on(TouchEvent.TOUCH_END, this.$onTouchEnd);
+		this.on(TouchEvent.TOUCH_CANCEL, this.$onTouchCancel);
 	}
 
-	public get scrollX(): number {
-		return this.$scrollX;
+	public get scrollTop(): number {
+		return this.$scrollTop;
 	}
 
-	public set scrollX(scrollX: number) {
+	public set scrollTop(scrollTop: number) {
 		let bounds = this.$getContentBounds();
-		let maxScrollX = this.$scrollWidth - this.width;
-		this.$scrollX = Math.max(0, Math.min(scrollX, maxScrollX));
+		let maxScrollTop = this.$scrollHeight - this.$height;
+		this.$scrollTop = Math.max(0, Math.min(scrollTop, maxScrollTop));
 		this.$markDirty();
 		bounds.release();
 	}
 
-	public get scrollY(): number {
-		return this.$scrollY;
+	public get scrollLeft(): number {
+		return this.$scrollLeft;
 	}
 
-	public set scrollY(scrollY: number) {
+	public set scrollLeft(scrollLeft: number) {
 		let bounds = this.$getContentBounds();
-		let maxScrollY = this.$scrollHeight - this.$height;
-		this.$scrollY = Math.max(0, Math.min(scrollY, maxScrollY));
+		let maxScrollLeft = this.$scrollWidth - this.width;
+		this.$scrollLeft = Math.max(0, Math.min(scrollLeft, maxScrollLeft));
 		this.$markDirty();
 		bounds.release();
 	}
 
 	protected $getChildTransform(child: Layer): Matrix {
 		let matrix = super.$getChildTransform(child);
-		matrix.translate(-this.$scrollX, -this.$scrollY);
+		matrix.translate(-this.$scrollLeft, -this.$scrollTop);
 		return matrix;
 	}
 
 	protected $resizeCanvas(): void {
 		super.$resizeCanvas();
 		let bounds = this.$getContentBounds();
-		this.$scrollWidth = this.$scrollX + bounds.right + this.$anchorX;
-		this.$scrollHeight = this.$scrollY + bounds.bottom + this.$anchorY;
+		this.$scrollWidth = this.$scrollLeft + bounds.right + this.$anchorX;
+		this.$scrollHeight = this.$scrollTop + bounds.bottom + this.$anchorY;
 	}
 
 	protected $onTouchStart(e: TouchEvent): void {
@@ -69,6 +73,8 @@ export default class ScrollView extends Layer {
 		this.$touchingY = e.localY;
 		this.$velocitiesX.length = 0;
 		this.$velocitiesY.length = 0;
+		this.$touchingTime = Date.now();
+		this.$touchingIdentifer = e.identifier;
 		if (this.$inertiaTween) {
 			this.$inertiaTween.pause();
 			this.$inertiaTween = null;
@@ -76,30 +82,49 @@ export default class ScrollView extends Layer {
 	}
 
 	protected $onTouchMove(e: TouchEvent): void {
+		if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
+			return;
+		}
 		let now = Date.now();
+		let scrollTop = this.scrollTop;
+		let scrollLeft = this.scrollLeft;
 		let dt = now - this.$touchingTime;
 		let velocitiesX = this.$velocitiesX;
 		let velocitiesY = this.$velocitiesY;
 		let offsetX = e.localX - this.$touchingX;
 		let offsetY = e.localY - this.$touchingY;
+		let scrollingView = ScrollView.scrollingView || this;
 		velocitiesX.push(offsetX / dt);
 		velocitiesY.push(offsetY / dt);
 		if (velocitiesX.length > 5) {
 			velocitiesX.shift();
 			velocitiesY.shift();
 		}
-		this.scrollX -= offsetX;
-		this.scrollY -= offsetY;
 		this.$touchingX = e.localX;
 		this.$touchingY = e.localY;
-		this.$touchingTime = now;
+		if (scrollingView === this) {
+			this.$touchingTime = now;
+			this.scrollTop -= offsetY;
+			this.scrollLeft -= offsetX;
+			if (this.$scrollLeft !== scrollLeft || this.$scrollTop !== scrollTop) {
+				ScrollView.scrollingView = this;
+			}
+		}
 	}
 
-	protected $onTouchEnd(): void {
-		let scrollX = this.$scrollX;
-		let scrollY = this.$scrollY;
+	protected $onTouchEnd(e: TouchEvent): void {
+		if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
+			return;
+		}
+		if (ScrollView.scrollingView === this) {
+			ScrollView.scrollingView = null;
+		} else {
+			return;
+		}
 		let sumVelocityX = 0;
 		let sumVelocityY = 0;
+		let scrollTop = this.$scrollTop;
+		let scrollLeft = this.$scrollLeft;
 		let velocitiesX = this.$velocitiesX;
 		let velocitiesY = this.$velocitiesY;
 		let numVelocities = velocitiesX.length;
@@ -114,10 +139,18 @@ export default class ScrollView extends Layer {
 		if (absVelocityX > 0.01 || absVelocityY > 0.01) {
 			let duration = Math.max(absVelocityX, absVelocityY, 1) * 1000;
 			this.$inertiaTween = Tween.get(this).to({
-				scrollX: scrollX - velocityX * (absVelocityX + 1) * 200,
-				scrollY: scrollY - velocityY * (absVelocityY + 1) * 200
+				scrollTop: scrollTop - velocityY * (absVelocityY + 1) * 200,
+				scrollLeft: scrollLeft - velocityX * (absVelocityX + 1) * 200
 			}, duration, Ease.easeOutQuart).play();
 		}
+		this.$touchingIdentifer = null;
+	}
+
+	protected $onTouchCancel(e: TouchEvent): void {
+		if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
+			return;
+		}
+		this.$touchingIdentifer = null;
 	}
 
 	protected $onRemovedFromStage(stage: Stage): void {

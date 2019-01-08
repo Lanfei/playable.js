@@ -517,7 +517,7 @@ export default class Layer extends EventEmitter {
 				}
 			}
 		}
-		if (!event.propagationStopped && !(type === TouchEvent.TOUCH_TAP && !inside)) {
+		if (!event.cancelBubble && !(type === TouchEvent.TOUCH_TAP && !inside)) {
 			event.localX = localX;
 			event.localY = localY;
 			event.currentTarget = this;
