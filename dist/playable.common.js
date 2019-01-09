@@ -1766,8 +1766,8 @@ var ScrollView = /** @class */ (function (_super) {
         _this.$scrollHeight = 0;
         _this.$touchingX = null;
         _this.$touchingY = null;
+        _this.$touchingId = null;
         _this.$touchingTime = null;
-        _this.$touchingIdentifer = null;
         _this.$velocitiesX = [];
         _this.$velocitiesY = [];
         _this.$inertiaTween = null;
@@ -1824,14 +1824,14 @@ var ScrollView = /** @class */ (function (_super) {
         this.$velocitiesX.length = 0;
         this.$velocitiesY.length = 0;
         this.$touchingTime = Date.now();
-        this.$touchingIdentifer = e.identifier;
+        this.$touchingId = e.identifier;
         if (this.$inertiaTween) {
             this.$inertiaTween.pause();
             this.$inertiaTween = null;
         }
     };
     ScrollView.prototype.$onTouchMove = function (e) {
-        if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
+        if (e.identifier !== this.$touchingId) {
             return;
         }
         var now = Date.now();
@@ -1861,7 +1861,7 @@ var ScrollView = /** @class */ (function (_super) {
         }
     };
     ScrollView.prototype.$onTouchEnd = function (e) {
-        if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
+        if (e.identifier !== this.$touchingId) {
             return;
         }
         if (ScrollView.scrollingView === this) {
@@ -1892,13 +1892,12 @@ var ScrollView = /** @class */ (function (_super) {
                 scrollLeft: scrollLeft - velocityX * (absVelocityX + 1) * 200
             }, duration, Ease.easeOutQuart).play();
         }
-        this.$touchingIdentifer = null;
+        this.$touchingId = null;
     };
     ScrollView.prototype.$onTouchCancel = function (e) {
-        if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
-            return;
+        if (e.identifier === this.$touchingId) {
+            this.$touchingId = null;
         }
-        this.$touchingIdentifer = null;
     };
     ScrollView.prototype.$onRemovedFromStage = function (stage) {
         _super.prototype.$onRemovedFromStage.call(this, stage);
@@ -1908,7 +1907,6 @@ var ScrollView = /** @class */ (function (_super) {
     };
     return ScrollView;
 }(Layer));
-//# sourceMappingURL=ScrollView.js.map
 
 var ImageView = /** @class */ (function (_super) {
     __extends(ImageView, _super);
@@ -2051,6 +2049,7 @@ var ImageView = /** @class */ (function (_super) {
     };
     return ImageView;
 }(Layer));
+//# sourceMappingURL=ImageView.js.map
 
 var TextView = /** @class */ (function (_super) {
     __extends(TextView, _super);

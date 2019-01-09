@@ -15,8 +15,8 @@ export default class ScrollView extends Layer {
 	protected $scrollHeight: number = 0;
 	protected $touchingX: number = null;
 	protected $touchingY: number = null;
+	protected $touchingId: number = null;
 	protected $touchingTime: number = null;
-	protected $touchingIdentifer: number = null;
 	protected $velocitiesX: Array<number> = [];
 	protected $velocitiesY: Array<number> = [];
 	protected $inertiaTween: Tween = null;
@@ -74,7 +74,7 @@ export default class ScrollView extends Layer {
 		this.$velocitiesX.length = 0;
 		this.$velocitiesY.length = 0;
 		this.$touchingTime = Date.now();
-		this.$touchingIdentifer = e.identifier;
+		this.$touchingId = e.identifier;
 		if (this.$inertiaTween) {
 			this.$inertiaTween.pause();
 			this.$inertiaTween = null;
@@ -82,7 +82,7 @@ export default class ScrollView extends Layer {
 	}
 
 	protected $onTouchMove(e: TouchEvent): void {
-		if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
+		if (e.identifier !== this.$touchingId) {
 			return;
 		}
 		let now = Date.now();
@@ -113,7 +113,7 @@ export default class ScrollView extends Layer {
 	}
 
 	protected $onTouchEnd(e: TouchEvent): void {
-		if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
+		if (e.identifier !== this.$touchingId) {
 			return;
 		}
 		if (ScrollView.scrollingView === this) {
@@ -143,14 +143,13 @@ export default class ScrollView extends Layer {
 				scrollLeft: scrollLeft - velocityX * (absVelocityX + 1) * 200
 			}, duration, Ease.easeOutQuart).play();
 		}
-		this.$touchingIdentifer = null;
+		this.$touchingId = null;
 	}
 
 	protected $onTouchCancel(e: TouchEvent): void {
-		if (this.$touchingIdentifer !== null && e.identifier !== this.$touchingIdentifer) {
-			return;
+		if (e.identifier === this.$touchingId) {
+			this.$touchingId = null;
 		}
-		this.$touchingIdentifer = null;
 	}
 
 	protected $onRemovedFromStage(stage: Stage): void {

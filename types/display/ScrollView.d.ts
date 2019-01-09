@@ -11,8 +11,8 @@ export default class ScrollView extends Layer {
     protected $scrollHeight: number;
     protected $touchingX: number;
     protected $touchingY: number;
+    protected $touchingId: number;
     protected $touchingTime: number;
-    protected $touchingIdentifer: number;
     protected $velocitiesX: Array<number>;
     protected $velocitiesY: Array<number>;
     protected $inertiaTween: Tween;
