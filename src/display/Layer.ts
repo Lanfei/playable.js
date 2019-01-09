@@ -560,7 +560,7 @@ export default class Layer extends EventEmitter {
 		let canvas = ctx.canvas;
 		let width = canvas.width;
 		let height = canvas.height;
-		let pixelRatio = Layer.pixelRatio;
+		let scale = Layer.pixelRatio / (image ? image.pixelRatio : 1);
 		if (color) {
 			ctx.fillStyle = color;
 			ctx.fillRect(0, 0, width, height);
@@ -569,9 +569,9 @@ export default class Layer extends EventEmitter {
 			if (fillMode === 'scale') {
 				ctx.drawImage(image.element, 0, 0, width, height);
 			} else if (fillMode === 'no-repeat') {
-				ctx.drawImage(image.element, 0, 0, image.width * pixelRatio, image.height * pixelRatio);
+				ctx.drawImage(image.element, 0, 0, image.width * scale, image.height * scale);
 			} else if (pattern) {
-				pixelRatio !== 1 && ctx.scale(pixelRatio, pixelRatio);
+				scale !== 1 && ctx.scale(scale, scale);
 				ctx.fillStyle = pattern;
 				ctx.fillRect(0, 0, width, height);
 			}

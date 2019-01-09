@@ -79,8 +79,9 @@ export default class ImageView extends Layer {
 	protected $drawImage(sourceX: number, sourceY: number, sourceW: number, sourceH: number, targetX: number, targetY: number, targetW: number, targetH: number): void {
 		let image = this.$image;
 		let ctx = this.$context;
+		let pixelRatio = image.pixelRatio;
 		if (sourceW > 0 && sourceH > 0 && targetW > 0 && targetH > 0) {
-			ctx.drawImage(image.element, sourceX, sourceY, sourceW, sourceH, targetX, targetY, targetW, targetH);
+			ctx.drawImage(image.element, sourceX * pixelRatio, sourceY * pixelRatio, sourceW * pixelRatio, sourceH * pixelRatio, targetX, targetY, targetW, targetH);
 		}
 	}
 
@@ -121,8 +122,8 @@ export default class ImageView extends Layer {
 			let targetY0 = -anchorY * pixelRatio;
 			let targetW0 = sourceW0 * pixelRatio;
 			let targetH0 = sourceH0 * pixelRatio;
-			let targetX1 = targetX0 + sourceW0 * pixelRatio;
-			let targetY1 = targetY0 + sourceH1 * pixelRatio;
+			let targetX1 = targetX0 + targetW0;
+			let targetY1 = targetY0 + targetH0;
 			let targetW1 = width - (sourceW0 + sourceW2) * pixelRatio;
 			let targetH1 = height - (sourceH0 + sourceH2) * pixelRatio;
 			let targetX2 = targetX1 + targetW1;

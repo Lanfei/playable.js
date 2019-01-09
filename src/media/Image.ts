@@ -3,6 +3,9 @@ import Ticker from '../core/Ticker';
 
 export default class Image extends Media {
 
+	public static defaultPixelRatio: number = 1;
+
+	public pixelRatio: number = Image.defaultPixelRatio;
 	protected $element: HTMLImageElement;
 
 	public constructor(ticker: Ticker) {

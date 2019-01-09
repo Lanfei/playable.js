@@ -1238,7 +1238,7 @@ var Layer = /** @class */ (function (_super) {
         var canvas = ctx.canvas;
         var width = canvas.width;
         var height = canvas.height;
-        var pixelRatio = Layer.pixelRatio;
+        var scale = Layer.pixelRatio / (image ? image.pixelRatio : 1);
         if (color) {
             ctx.fillStyle = color;
             ctx.fillRect(0, 0, width, height);
@@ -1248,10 +1248,10 @@ var Layer = /** @class */ (function (_super) {
                 ctx.drawImage(image.element, 0, 0, width, height);
             }
             else if (fillMode === 'no-repeat') {
-                ctx.drawImage(image.element, 0, 0, image.width * pixelRatio, image.height * pixelRatio);
+                ctx.drawImage(image.element, 0, 0, image.width * scale, image.height * scale);
             }
             else if (pattern) {
-                pixelRatio !== 1 && ctx.scale(pixelRatio, pixelRatio);
+                scale !== 1 && ctx.scale(scale, scale);
                 ctx.fillStyle = pattern;
                 ctx.fillRect(0, 0, width, height);
             }
@@ -1907,6 +1907,7 @@ var ScrollView = /** @class */ (function (_super) {
     };
     return ScrollView;
 }(Layer));
+//# sourceMappingURL=ScrollView.js.map
 
 var ImageView = /** @class */ (function (_super) {
     __extends(ImageView, _super);
@@ -1983,8 +1984,9 @@ var ImageView = /** @class */ (function (_super) {
     ImageView.prototype.$drawImage = function (sourceX, sourceY, sourceW, sourceH, targetX, targetY, targetW, targetH) {
         var image = this.$image;
         var ctx = this.$context;
+        var pixelRatio = image.pixelRatio;
         if (sourceW > 0 && sourceH > 0 && targetW > 0 && targetH > 0) {
-            ctx.drawImage(image.element, sourceX, sourceY, sourceW, sourceH, targetX, targetY, targetW, targetH);
+            ctx.drawImage(image.element, sourceX * pixelRatio, sourceY * pixelRatio, sourceW * pixelRatio, sourceH * pixelRatio, targetX, targetY, targetW, targetH);
         }
     };
     ImageView.prototype.$render = function () {
@@ -2024,8 +2026,8 @@ var ImageView = /** @class */ (function (_super) {
             var targetY0 = -anchorY * pixelRatio;
             var targetW0 = sourceW0 * pixelRatio;
             var targetH0 = sourceH0 * pixelRatio;
-            var targetX1 = targetX0 + sourceW0 * pixelRatio;
-            var targetY1 = targetY0 + sourceH1 * pixelRatio;
+            var targetX1 = targetX0 + targetW0;
+            var targetY1 = targetY0 + targetH0;
             var targetW1 = width - (sourceW0 + sourceW2) * pixelRatio;
             var targetH1 = height - (sourceH0 + sourceH2) * pixelRatio;
             var targetX2 = targetX1 + targetW1;
@@ -2049,7 +2051,6 @@ var ImageView = /** @class */ (function (_super) {
     };
     return ImageView;
 }(Layer));
-//# sourceMappingURL=ImageView.js.map
 
 var TextView = /** @class */ (function (_super) {
     __extends(TextView, _super);
@@ -2382,10 +2383,10 @@ var TextView = /** @class */ (function (_super) {
             x = -anchorX * pixelRatio;
         }
         if (verticalAlign === 'middle') {
-            y = (height - fontSize * lineHeight * lines.length) * pixelRatio / 2 - anchorY * pixelRatio;
+            y = (height - fontSize * lineHeight * (lines.length - 1) - fontSize) * pixelRatio / 2 - anchorY * pixelRatio;
         }
         else if (verticalAlign === 'bottom') {
-            y = (height - fontSize * lineHeight * lines.length) * pixelRatio - anchorY * pixelRatio;
+            y = (height - fontSize * lineHeight * (lines.length - 1) - fontSize) * pixelRatio - anchorY * pixelRatio;
         }
         else {
             y = -anchorY * pixelRatio;
@@ -2448,6 +2449,7 @@ var Image = /** @class */ (function (_super) {
     __extends(Image, _super);
     function Image(ticker) {
         var _this = _super.call(this, ticker) || this;
+        _this.pixelRatio = Image.defaultPixelRatio;
         var image = document.createElement('img');
         image.crossOrigin = '*';
         image.addEventListener('load', _this.$boundOnLoad);
@@ -2482,6 +2484,7 @@ var Image = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Image.defaultPixelRatio = 1;
     return Image;
 }(Media));
 //# sourceMappingURL=Image.js.map

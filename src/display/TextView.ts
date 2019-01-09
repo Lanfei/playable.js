@@ -303,9 +303,9 @@ export default class TextView extends Layer {
 			x = -anchorX * pixelRatio;
 		}
 		if (verticalAlign === 'middle') {
-			y = (height - fontSize * lineHeight * lines.length) * pixelRatio / 2 - anchorY * pixelRatio;
+			y = (height - fontSize * lineHeight * (lines.length - 1) - fontSize) * pixelRatio / 2 - anchorY * pixelRatio;
 		} else if (verticalAlign === 'bottom') {
-			y = (height - fontSize * lineHeight * lines.length) * pixelRatio - anchorY * pixelRatio;
+			y = (height - fontSize * lineHeight * (lines.length - 1) - fontSize) * pixelRatio - anchorY * pixelRatio;
 		} else {
 			y = -anchorY * pixelRatio;
 		}
