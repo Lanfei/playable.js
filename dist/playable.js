@@ -51,6 +51,7 @@ var playable = (function (exports) {
         Event.SOUND_COMPLETE = 'soundComplete';
         return Event;
     }());
+    //# sourceMappingURL=Event.js.map
 
     var EventEmitter = /** @class */ (function () {
         function EventEmitter() {
@@ -1936,6 +1937,39 @@ var playable = (function (exports) {
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(ImageView.prototype, "smoothing", {
+            get: function () {
+                return this.$smoothing;
+            },
+            set: function (smoothing) {
+                this.$smoothing = smoothing;
+                this.$resizeCanvas();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ImageView.prototype, "clipRect", {
+            get: function () {
+                return this.$clipRect;
+            },
+            set: function (clipRect) {
+                this.$clipRect = clipRect;
+                this.$markDirty();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(ImageView.prototype, "scale9Grid", {
+            get: function () {
+                return this.$scale9Grid;
+            },
+            set: function (scale9Grid) {
+                this.$scale9Grid = scale9Grid;
+                this.$markDirty();
+            },
+            enumerable: true,
+            configurable: true
+        });
         ImageView.prototype.$onImageLoad = function () {
             var image = this.$image;
             this.$width = this.$width || image.width;
@@ -1943,23 +1977,79 @@ var playable = (function (exports) {
             this.$resizeCanvas();
             image.off('load', this.$boundOnImageLoad);
         };
+        ImageView.prototype.$resizeCanvas = function () {
+            _super.prototype.$resizeCanvas.call(this);
+            this.$context.imageSmoothingEnabled = this.$smoothing;
+        };
+        ImageView.prototype.$drawImage = function (sourceX, sourceY, sourceW, sourceH, targetX, targetY, targetW, targetH) {
+            var image = this.$image;
+            var ctx = this.$context;
+            if (sourceW > 0 && sourceH > 0 && targetW > 0 && targetH > 0) {
+                ctx.drawImage(image.element, sourceX, sourceY, sourceW, sourceH, targetX, targetY, targetW, targetH);
+            }
+        };
         ImageView.prototype.$render = function () {
             if (!this.$dirty) {
                 return 0;
             }
             var image = this.$image;
-            var ctx = this.$context;
             var canvas = this.$canvas;
             var anchorX = this.$anchorX;
             var anchorY = this.$anchorY;
+            var clipRect = this.$clipRect;
+            var scale9Grid = this.$scale9Grid;
             var drawCalls = _super.prototype.$render.call(this);
             var pixelRatio = Layer.pixelRatio;
-            ctx.drawImage(image.element, -anchorX * pixelRatio, -anchorY * pixelRatio, canvas.width, canvas.height);
+            var x = -anchorX * pixelRatio;
+            var y = -anchorY * pixelRatio;
+            var width = canvas.width;
+            var height = canvas.height;
+            var clipX = clipRect ? clipRect.x : 0;
+            var clipY = clipRect ? clipRect.y : 0;
+            var clipWidth = clipRect ? clipRect.width : image.width;
+            var clipHeight = clipRect ? clipRect.height : image.height;
+            if (scale9Grid) {
+                var sourceX0 = clipX;
+                var sourceY0 = clipY;
+                var sourceW0 = scale9Grid.x;
+                var sourceH0 = scale9Grid.y;
+                var sourceX1 = sourceX0 + sourceW0;
+                var sourceY1 = sourceY0 + sourceH0;
+                var sourceW1 = scale9Grid.width;
+                var sourceH1 = scale9Grid.height;
+                var sourceX2 = sourceX1 + sourceW1;
+                var sourceY2 = sourceY1 + sourceH1;
+                var sourceW2 = clipWidth - sourceW0 - sourceW1;
+                var sourceH2 = clipHeight - sourceH0 - sourceH1;
+                var targetX0 = -anchorX * pixelRatio;
+                var targetY0 = -anchorY * pixelRatio;
+                var targetW0 = sourceW0 * pixelRatio;
+                var targetH0 = sourceH0 * pixelRatio;
+                var targetX1 = targetX0 + sourceW0 * pixelRatio;
+                var targetY1 = targetY0 + sourceH1 * pixelRatio;
+                var targetW1 = width - (sourceW0 + sourceW2) * pixelRatio;
+                var targetH1 = height - (sourceH0 + sourceH2) * pixelRatio;
+                var targetX2 = targetX1 + targetW1;
+                var targetY2 = targetY1 + targetH1;
+                var targetW2 = width - targetW0 - targetW1;
+                var targetH2 = height - targetH0 - targetH1;
+                this.$drawImage(sourceX0, sourceY0, sourceW0, sourceH0, targetX0, targetY0, targetW0, targetH0);
+                this.$drawImage(sourceX1, sourceY0, sourceW1, sourceH0, targetX1, targetY0, targetW1, targetH0);
+                this.$drawImage(sourceX2, sourceY0, sourceW2, sourceH0, targetX2, targetY0, targetW2, targetH0);
+                this.$drawImage(sourceX0, sourceY1, sourceW0, sourceH1, targetX0, targetY1, targetW0, targetH1);
+                this.$drawImage(sourceX1, sourceY1, sourceW1, sourceH1, targetX1, targetY1, targetW1, targetH1);
+                this.$drawImage(sourceX2, sourceY1, sourceW2, sourceH1, targetX2, targetY1, targetW2, targetH1);
+                this.$drawImage(sourceX0, sourceY2, sourceW0, sourceH2, targetX0, targetY2, targetW0, targetH2);
+                this.$drawImage(sourceX1, sourceY2, sourceW1, sourceH2, targetX1, targetY2, targetW1, targetH2);
+                this.$drawImage(sourceX2, sourceY2, sourceW2, sourceH2, targetX2, targetY2, targetW2, targetH2);
+            }
+            else {
+                this.$drawImage(clipX, clipY, clipWidth, clipHeight, x, y, width, height);
+            }
             return drawCalls;
         };
         return ImageView;
     }(Layer));
-    //# sourceMappingURL=ImageView.js.map
 
     var TextView = /** @class */ (function (_super) {
         __extends(TextView, _super);
