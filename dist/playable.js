@@ -2535,6 +2535,125 @@ var playable = (function (exports) {
     }(ImageView));
     //# sourceMappingURL=MovieClip.js.map
 
+    var Request = /** @class */ (function (_super) {
+        __extends(Request, _super);
+        function Request(url, options) {
+            var _this = _super.call(this) || this;
+            _this.$xhr = new XMLHttpRequest();
+            var method;
+            var headers;
+            var data;
+            var responseType;
+            var xhr = _this.$xhr;
+            if (url instanceof Object) {
+                options = url;
+                url = options.url;
+            }
+            if (options) {
+                url = options.url || url;
+                method = options.method;
+                headers = options.headers;
+                data = options.data;
+                responseType = options.responseType;
+            }
+            if (data instanceof Object) {
+                var contentType = Request.$getContentType(headers);
+                if (method.toLowerCase() === 'get') {
+                    var qs = Request.$getQueryString(data);
+                    url += url.indexOf('?') < 0 ? '?' + qs : '&' + qs;
+                }
+                else if (contentType === 'application/x-www-form-urlencoded') {
+                    data = Request.$getQueryString(data);
+                }
+                else if (contentType === 'text/json') {
+                    data = JSON.stringify(data);
+                }
+            }
+            xhr.open(method || 'get', url);
+            xhr.responseType = responseType;
+            if (headers) {
+                Object.keys(headers).forEach(function (key) {
+                    xhr.setRequestHeader(key, headers[key]);
+                });
+            }
+            xhr.addEventListener('progress', _this.$onProgress.bind(_this));
+            xhr.addEventListener('readystatechange', _this.$onReadyStateChange.bind(_this));
+            xhr.send(data);
+            return _this;
+        }
+        Object.defineProperty(Request.prototype, "status", {
+            get: function () {
+                return this.$xhr.status;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Request.prototype, "response", {
+            get: function () {
+                return this.$xhr.response;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Request.prototype, "responseHeaders", {
+            get: function () {
+                var headers = {};
+                var str = this.$xhr.getAllResponseHeaders();
+                var arr = str.split('\n');
+                for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
+                    var header = arr_1[_i];
+                    var index = header.indexOf(':');
+                    var key = header.slice(0, index).trim();
+                    var value = header.slice(index + 1).trim();
+                    if (headers[key]) {
+                        if (!Array.isArray(headers[key])) {
+                            headers[key] = [headers[key]];
+                        }
+                        headers[key].push(value);
+                    }
+                    else if (key) {
+                        headers[key] = value;
+                    }
+                }
+                return headers;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Request.prototype.abort = function () {
+            this.$xhr.abort();
+        };
+        Request.prototype.$onProgress = function (e) {
+            if (e.lengthComputable) {
+                this.emit(Event.PROGRESS, e.loaded / e.total);
+            }
+        };
+        Request.prototype.$onReadyStateChange = function (e) {
+            var xhr = this.$xhr;
+            if (xhr.readyState === 4) {
+                if (xhr.status >= 400 || xhr.status === 0) {
+                    this.emit(Event.ERROR, e);
+                }
+                else {
+                    this.emit(Event.COMPLETE);
+                }
+            }
+        };
+        Request.$getContentType = function (headers) {
+            for (var key in headers) {
+                if (key.toLowerCase() === 'content-type') {
+                    return headers[key].toLowerCase();
+                }
+            }
+            return null;
+        };
+        Request.$getQueryString = function (data) {
+            return Object.keys(data).map(function (key) { return key + '=' + data[key]; }).join('&');
+        };
+        return Request;
+    }(EventEmitter));
+    //# sourceMappingURL=Request.js.map
+
     var Media = /** @class */ (function (_super) {
         __extends(Media, _super);
         function Media(stage) {
@@ -2787,13 +2906,19 @@ var playable = (function (exports) {
             var ticker = stage.ticker;
             var resources = this.$resources;
             var retryTimes = this.retryTimes;
-            var loadedCallback = function () {
+            var successCallback = function () {
                 var errorCount = _this.$errorCount;
                 var loadedCount = ++_this.$loadedCount;
                 --_this.$loadingCount;
-                resources[name] = resource;
                 ticker.clearTimeout(timer);
-                resource.off(Event.LOAD, loadedCallback);
+                if (resource instanceof Request) {
+                    resources[name] = resource.response;
+                }
+                else if (resource instanceof Media) {
+                    resources[name] = resource;
+                }
+                resource.off(Event.COMPLETE, successCallback);
+                resource.off(Event.LOAD, successCallback);
                 resource.off(Event.ERROR, errorCallback);
                 _this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
                 if (loadedCount + errorCount === total) {
@@ -2811,7 +2936,12 @@ var playable = (function (exports) {
                     --_this.$loadingCount;
                     var loadedCount = _this.$loadedCount;
                     var errorCount = ++_this.$errorCount;
-                    resources[name] = resource;
+                    if (resource instanceof Request) {
+                        resources[name] = resource.response;
+                    }
+                    else if (resource instanceof Media) {
+                        resources[name] = resource;
+                    }
                     _this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
                     if (loadedCount + errorCount === total) {
                         _this.emit(Event.COMPLETE);
@@ -2821,24 +2951,40 @@ var playable = (function (exports) {
                     }
                 }
                 ticker.clearTimeout(timer);
-                resource.off(Event.LOAD, loadedCallback);
+                resource.off(Event.COMPLETE, successCallback);
+                resource.off(Event.LOAD, successCallback);
                 resource.off(Event.ERROR, errorCallback);
             };
-            if (type === ResourceManager.TYPE_IMAGE) {
+            if (type === ResourceManager.TYPE_TEXT) {
+                resource = new Request(url, { responseType: 'text' });
+                resource.on(Event.COMPLETE, successCallback);
+                resource.on(Event.ERROR, errorCallback);
+            }
+            else if (type === ResourceManager.TYPE_JSON) {
+                resource = new Request(url, { responseType: 'json' });
+                resource.on(Event.COMPLETE, successCallback);
+                resource.on(Event.ERROR, errorCallback);
+            }
+            else if (type === ResourceManager.TYPE_BINARY) {
+                resource = new Request(url, { responseType: 'arraybuffer' });
+                resource.on(Event.COMPLETE, successCallback);
+                resource.on(Event.ERROR, errorCallback);
+            }
+            else if (type === ResourceManager.TYPE_IMAGE) {
                 resource = new Image(stage);
-                resource.on(Event.LOAD, loadedCallback);
+                resource.on(Event.LOAD, successCallback);
                 resource.on(Event.ERROR, errorCallback);
                 resource.url = url;
             }
             else if (type === ResourceManager.TYPE_SOUND) {
                 resource = new Sound(stage);
-                resource.on(Event.LOAD, loadedCallback);
+                resource.on(Event.LOAD, successCallback);
                 resource.on(Event.ERROR, errorCallback);
                 resource.url = url;
             }
             else if (type === ResourceManager.TYPE_SOUND_EFFECT) {
                 resource = new SoundEffect(stage);
-                resource.on(Event.LOAD, loadedCallback);
+                resource.on(Event.LOAD, successCallback);
                 resource.on(Event.ERROR, errorCallback);
                 resource.url = url;
             }
@@ -2851,18 +2997,16 @@ var playable = (function (exports) {
             return !!this.$resources[name];
         };
         ResourceManager.prototype.get = function (name) {
-            var resource = this.$resources[name];
-            if (!resource) {
-                throw new Error('Resource not exists');
-            }
-            return resource;
+            return this.$resources[name];
         };
+        ResourceManager.TYPE_TEXT = 'text';
+        ResourceManager.TYPE_JSON = 'json';
+        ResourceManager.TYPE_BINARY = 'binary';
         ResourceManager.TYPE_IMAGE = 'image';
         ResourceManager.TYPE_SOUND = 'sound';
         ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
         return ResourceManager;
     }(EventEmitter));
-    //# sourceMappingURL=ResourceManager.js.map
 
     var Stage = /** @class */ (function (_super) {
         __extends(Stage, _super);
@@ -3229,124 +3373,6 @@ var playable = (function (exports) {
         return Stage;
     }(Layer));
     //# sourceMappingURL=Stage.js.map
-
-    var Request = /** @class */ (function (_super) {
-        __extends(Request, _super);
-        function Request(url, options) {
-            var _this = _super.call(this) || this;
-            _this.$xhr = new XMLHttpRequest();
-            var method;
-            var headers;
-            var data;
-            var responseType;
-            var xhr = _this.$xhr;
-            if (url instanceof Object) {
-                options = url;
-                url = options.url;
-            }
-            if (options) {
-                url = options.url || url;
-                method = options.method;
-                headers = options.headers;
-                data = options.data;
-                responseType = options.responseType;
-            }
-            if (data instanceof Object) {
-                var contentType = Request.$getContentType(headers);
-                if (method.toLowerCase() === 'get') {
-                    var qs = Request.$getQueryString(data);
-                    url += url.indexOf('?') < 0 ? '?' + qs : '&' + qs;
-                }
-                else if (contentType === 'application/x-www-form-urlencoded') {
-                    data = Request.$getQueryString(data);
-                }
-                else if (contentType === 'text/json') {
-                    data = JSON.stringify(data);
-                }
-            }
-            xhr.open(method || 'get', url);
-            xhr.responseType = responseType;
-            if (headers) {
-                Object.keys(headers).forEach(function (key) {
-                    xhr.setRequestHeader(key, headers[key]);
-                });
-            }
-            xhr.addEventListener('progress', _this.$onProgress.bind(_this));
-            xhr.addEventListener('readystatechange', _this.$onReadyStateChange.bind(_this));
-            xhr.send(data);
-            return _this;
-        }
-        Object.defineProperty(Request.prototype, "status", {
-            get: function () {
-                return this.$xhr.status;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Request.prototype, "response", {
-            get: function () {
-                return this.$xhr.response;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Request.prototype, "responseHeaders", {
-            get: function () {
-                var headers = {};
-                var str = this.$xhr.getAllResponseHeaders();
-                var arr = str.split('\n');
-                for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
-                    var header = arr_1[_i];
-                    var index = header.indexOf(':');
-                    var key = header.slice(0, index).trim();
-                    var value = header.slice(index + 1).trim();
-                    if (headers[key]) {
-                        if (!Array.isArray(headers[key])) {
-                            headers[key] = [headers[key]];
-                        }
-                        headers[key].push(value);
-                    }
-                    else if (key) {
-                        headers[key] = value;
-                    }
-                }
-                return headers;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Request.prototype.abort = function () {
-            this.$xhr.abort();
-        };
-        Request.prototype.$onProgress = function (e) {
-            if (e.lengthComputable) {
-                this.emit(Event.PROGRESS, e.loaded / e.total);
-            }
-        };
-        Request.prototype.$onReadyStateChange = function (e) {
-            var xhr = this.$xhr;
-            if (xhr.readyState === 4) {
-                if (xhr.status >= 400 || xhr.status === 0) {
-                    this.emit(Event.ERROR, e);
-                }
-                else {
-                    this.emit(Event.COMPLETE);
-                }
-            }
-        };
-        Request.$getContentType = function (headers) {
-            for (var key in headers) {
-                if (key.toLowerCase() === 'content-type') {
-                    return headers[key].toLowerCase();
-                }
-            }
-            return null;
-        };
-        Request.$getQueryString = function (data) {
-            return Object.keys(data).map(function (key) { return key + '=' + data[key]; }).join('&');
-        };
-        return Request;
-    }(EventEmitter));
 
     //# sourceMappingURL=index.js.map
 

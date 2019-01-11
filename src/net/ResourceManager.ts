@@ -1,3 +1,5 @@
+import Request from './Request';
+import Media from '../media/Media';
 import Image from '../media/Image';
 import Sound from '../media/Sound';
 import SoundEffect from '../media/SoundEffect';
@@ -7,6 +9,9 @@ import EventEmitter from '../event/EventEmitter';
 
 export default class ResourceManager extends EventEmitter {
 
+	public static readonly TYPE_TEXT: string = 'text';
+	public static readonly TYPE_JSON: string = 'json';
+	public static readonly TYPE_BINARY: string = 'binary';
 	public static readonly TYPE_IMAGE: string = 'image';
 	public static readonly TYPE_SOUND: string = 'sound';
 	public static readonly TYPE_SOUND_EFFECT: string = 'soundEffect';
@@ -65,13 +70,18 @@ export default class ResourceManager extends EventEmitter {
 		let ticker = stage.ticker;
 		let resources = this.$resources;
 		let retryTimes = this.retryTimes;
-		let loadedCallback = () => {
+		let successCallback = () => {
 			let errorCount = this.$errorCount;
 			let loadedCount = ++this.$loadedCount;
 			--this.$loadingCount;
-			resources[name] = resource;
 			ticker.clearTimeout(timer);
-			resource.off(Event.LOAD, loadedCallback);
+			if (resource instanceof Request) {
+				resources[name] = resource.response;
+			} else if (resource instanceof Media) {
+				resources[name] = resource;
+			}
+			resource.off(Event.COMPLETE, successCallback);
+			resource.off(Event.LOAD, successCallback);
 			resource.off(Event.ERROR, errorCallback);
 			this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
 			if (loadedCount + errorCount === total) {
@@ -87,7 +97,11 @@ export default class ResourceManager extends EventEmitter {
 				--this.$loadingCount;
 				let loadedCount = this.$loadedCount;
 				let errorCount = ++this.$errorCount;
-				resources[name] = resource;
+				if (resource instanceof Request) {
+					resources[name] = resource.response;
+				} else if (resource instanceof Media) {
+					resources[name] = resource;
+				}
 				this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
 				if (loadedCount + errorCount === total) {
 					this.emit(Event.COMPLETE);
@@ -96,22 +110,35 @@ export default class ResourceManager extends EventEmitter {
 				}
 			}
 			ticker.clearTimeout(timer);
-			resource.off(Event.LOAD, loadedCallback);
+			resource.off(Event.COMPLETE, successCallback);
+			resource.off(Event.LOAD, successCallback);
 			resource.off(Event.ERROR, errorCallback);
 		};
-		if (type === ResourceManager.TYPE_IMAGE) {
+		if (type === ResourceManager.TYPE_TEXT) {
+			resource = new Request(url, {responseType: 'text'});
+			resource.on(Event.COMPLETE, successCallback);
+			resource.on(Event.ERROR, errorCallback);
+		} else if (type === ResourceManager.TYPE_JSON) {
+			resource = new Request(url, {responseType: 'json'});
+			resource.on(Event.COMPLETE, successCallback);
+			resource.on(Event.ERROR, errorCallback);
+		} else if (type === ResourceManager.TYPE_BINARY) {
+			resource = new Request(url, {responseType: 'arraybuffer'});
+			resource.on(Event.COMPLETE, successCallback);
+			resource.on(Event.ERROR, errorCallback);
+		} else if (type === ResourceManager.TYPE_IMAGE) {
 			resource = new Image(stage);
-			resource.on(Event.LOAD, loadedCallback);
+			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
 			resource.url = url;
 		} else if (type === ResourceManager.TYPE_SOUND) {
 			resource = new Sound(stage);
-			resource.on(Event.LOAD, loadedCallback);
+			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
 			resource.url = url;
 		} else if (type === ResourceManager.TYPE_SOUND_EFFECT) {
 			resource = new SoundEffect(stage);
-			resource.on(Event.LOAD, loadedCallback);
+			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
 			resource.url = url;
 		} else {
@@ -125,11 +152,7 @@ export default class ResourceManager extends EventEmitter {
 	}
 
 	public get<Media>(name: string): Media {
-		let resource = this.$resources[name];
-		if (!resource) {
-			throw new Error('Resource not exists');
-		}
-		return resource;
+		return this.$resources[name];
 	}
 
 }

@@ -1,6 +1,9 @@
 import Stage from '../display/Stage';
 import EventEmitter from '../event/EventEmitter';
 export default class ResourceManager extends EventEmitter {
+    static readonly TYPE_TEXT: string;
+    static readonly TYPE_JSON: string;
+    static readonly TYPE_BINARY: string;
     static readonly TYPE_IMAGE: string;
     static readonly TYPE_SOUND: string;
     static readonly TYPE_SOUND_EFFECT: string;
