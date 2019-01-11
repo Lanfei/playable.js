@@ -1,6 +1,6 @@
 import Media from './Media';
 import Event from '../event/Event';
-import Ticker from '../core/Ticker';
+import Stage from '../display/Stage';
 
 export default class Sound extends Media {
 
@@ -10,18 +10,17 @@ export default class Sound extends Media {
 	protected $element: HTMLAudioElement;
 	protected $boundOnTouch: () => void;
 
-	public constructor(ticker: Ticker) {
-		super(ticker);
+	public constructor(stage: Stage) {
+		super(stage);
 		let audio = document.createElement('audio');
 		audio.crossOrigin = '*';
 		audio.addEventListener('canplaythrough', this.$boundOnLoad);
 		audio.addEventListener('error', this.$boundOnError);
 		audio.addEventListener('ended', this.$onEnded.bind(this));
 		this.$element = audio;
-		this.$ticker = ticker;
 		this.$boundOnTouch = this.$onTouch.bind(this);
-		ticker.on(Event.TICKER_PAUSE, this.$onTickerPause.bind(this));
-		ticker.on(Event.TICKER_RESUME, this.$onTickerResume.bind(this));
+		stage.ticker.on(Event.TICKER_PAUSE, this.$onTickerPause.bind(this));
+		stage.ticker.on(Event.TICKER_RESUME, this.$onTickerResume.bind(this));
 	}
 
 	public get element(): HTMLAudioElement {
@@ -33,7 +32,7 @@ export default class Sound extends Media {
 		this.$element.src = url;
 		this.$element.load();
 		if (url.indexOf('data:') === 0) {
-			this.$ticker.setTimeout(this.$boundOnLoad);
+			this.$stage.ticker.setTimeout(this.$boundOnLoad);
 		}
 	}
 

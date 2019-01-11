@@ -1,4 +1,4 @@
-import Ticker from '../core/Ticker';
+import Stage from '../display/Stage';
 import Event from '../event/Event';
 import EventEmitter from '../event/EventEmitter';
 
@@ -6,13 +6,13 @@ export default class Media extends EventEmitter {
 
 	protected $element: HTMLImageElement | HTMLAudioElement;
 
-	protected $ticker: Ticker;
+	protected $stage: Stage;
 	protected $boundOnLoad: () => void;
 	protected $boundOnError: (e: Event) => void;
 
-	public constructor(ticker: Ticker) {
+	public constructor(stage: Stage) {
 		super();
-		this.$ticker = ticker;
+		this.$stage = stage;
 		this.$boundOnLoad = this.$onLoad.bind(this);
 		this.$boundOnError = this.$onError.bind(this);
 	}

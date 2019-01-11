@@ -1,12 +1,12 @@
 import Media from './Media';
-import Ticker from '../core/Ticker';
+import Stage from '../display/Stage';
 export default class Sound extends Media {
     protected $loops: number;
     protected $startTime: number;
     protected $paused: boolean;
     protected $element: HTMLAudioElement;
     protected $boundOnTouch: () => void;
-    constructor(ticker: Ticker);
+    constructor(stage: Stage);
     readonly element: HTMLAudioElement;
     url: string;
     volume: number;

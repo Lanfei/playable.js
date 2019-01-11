@@ -24,6 +24,7 @@ export default class Layer extends EventEmitter {
     protected $rotation: number;
     protected $alpha: number;
     protected $visible: boolean;
+    protected $smoothing: boolean;
     protected $backgroundColor: string;
     protected $backgroundImage: Image;
     protected $backgroundPattern: CanvasPattern;
@@ -52,6 +53,7 @@ export default class Layer extends EventEmitter {
     backgroundImage: Image;
     backgroundFillMode: BackgroundFillMode;
     visible: boolean;
+    smoothing: boolean;
     readonly dirty: boolean;
     readonly stage: Stage;
     readonly parent: Layer;

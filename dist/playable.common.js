@@ -679,6 +679,7 @@ var Layer = /** @class */ (function (_super) {
         _this.$rotation = 0;
         _this.$alpha = 1;
         _this.$visible = true;
+        _this.$smoothing = true;
         _this.$backgroundColor = null;
         _this.$backgroundImage = null;
         _this.$backgroundPattern = null;
@@ -906,6 +907,17 @@ var Layer = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Layer.prototype, "smoothing", {
+        get: function () {
+            return this.$smoothing;
+        },
+        set: function (smoothing) {
+            this.$smoothing = smoothing;
+            this.$resizeCanvas();
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Layer.prototype, "dirty", {
         get: function () {
             return this.$dirty;
@@ -1099,6 +1111,8 @@ var Layer = /** @class */ (function (_super) {
         var parent = this.$parent;
         var anchorX = this.$anchorX;
         var anchorY = this.$anchorY;
+        var context = this.$context;
+        var smoothing = this.$smoothing;
         var pixelRatio = Layer.pixelRatio;
         if (width && height) {
             canvas.width = width * pixelRatio;
@@ -1109,6 +1123,9 @@ var Layer = /** @class */ (function (_super) {
             canvas.width = (width || bounds.right + anchorX) * pixelRatio;
             canvas.height = (height || bounds.bottom + anchorY) * pixelRatio;
             bounds.release();
+        }
+        if (context.imageSmoothingEnabled !== smoothing) {
+            context.imageSmoothingEnabled = smoothing;
         }
         if (parent) {
             parent.$resizeCanvas();
@@ -1379,7 +1396,6 @@ var Layer = /** @class */ (function (_super) {
     Layer.pixelRatio = window.devicePixelRatio || 1;
     return Layer;
 }(EventEmitter));
-//# sourceMappingURL=Layer.js.map
 
 var Ease = /** @class */ (function () {
     function Ease() {
@@ -1914,8 +1930,8 @@ var ImageView = /** @class */ (function (_super) {
     function ImageView(image, width, height) {
         var _this = _super.call(this) || this;
         if (image) {
-            _this.$width = width || image.width;
-            _this.$height = height || image.height;
+            _this.$width = width;
+            _this.$height = height;
             _this.$boundOnImageLoad = _this.$onImageLoad.bind(_this);
             _this.image = image;
         }
@@ -1927,23 +1943,12 @@ var ImageView = /** @class */ (function (_super) {
         },
         set: function (image) {
             this.$image = image;
-            this.$width = this.$width || image.width;
-            this.$height = this.$height || image.height;
-            this.$resizeCanvas();
-            if (!this.$width && !this.$height) {
+            if (image.width && image.height) {
+                this.$resizeCanvas();
+            }
+            else if (!this.$width || !this.$height) {
                 image.on('load', this.$boundOnImageLoad);
             }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ImageView.prototype, "smoothing", {
-        get: function () {
-            return this.$smoothing;
-        },
-        set: function (smoothing) {
-            this.$smoothing = smoothing;
-            this.$resizeCanvas();
         },
         enumerable: true,
         configurable: true
@@ -1971,15 +1976,24 @@ var ImageView = /** @class */ (function (_super) {
         configurable: true
     });
     ImageView.prototype.$onImageLoad = function () {
-        var image = this.$image;
-        this.$width = this.$width || image.width;
-        this.$height = this.$height || image.height;
         this.$resizeCanvas();
-        image.off('load', this.$boundOnImageLoad);
+        this.$image.off('load', this.$boundOnImageLoad);
     };
-    ImageView.prototype.$resizeCanvas = function () {
-        _super.prototype.$resizeCanvas.call(this);
-        this.$context.imageSmoothingEnabled = this.$smoothing;
+    ImageView.prototype.$getContentBounds = function () {
+        var image = this.$image;
+        var clipRect = this.$clipRect;
+        var bounds = _super.prototype.$getContentBounds.call(this);
+        bounds.x = Math.min(bounds.left, -this.$anchorX);
+        bounds.y = Math.min(bounds.top, -this.$anchorY);
+        if (clipRect) {
+            bounds.width = Math.max(bounds.width, clipRect.width);
+            bounds.height = Math.max(bounds.height, clipRect.height);
+        }
+        else {
+            bounds.width = Math.max(bounds.width, image.width);
+            bounds.height = Math.max(bounds.height, image.height);
+        }
+        return bounds;
     };
     ImageView.prototype.$drawImage = function (sourceX, sourceY, sourceW, sourceH, targetX, targetY, targetW, targetH) {
         var image = this.$image;
@@ -2051,6 +2065,7 @@ var ImageView = /** @class */ (function (_super) {
     };
     return ImageView;
 }(Layer));
+//# sourceMappingURL=ImageView.js.map
 
 var TextView = /** @class */ (function (_super) {
     __extends(TextView, _super);
@@ -2410,11 +2425,106 @@ var TextView = /** @class */ (function (_super) {
 }(Layer));
 //# sourceMappingURL=TextView.js.map
 
+var MovieClip = /** @class */ (function (_super) {
+    __extends(MovieClip, _super);
+    function MovieClip(image, frames, interval) {
+        if (interval === void 0) { interval = 30; }
+        var _this = _super.call(this, image) || this;
+        _this.$paused = true;
+        _this.$currentFrame = 0;
+        _this.$frames = null;
+        _this.$interval = 30;
+        _this.$frames = frames;
+        _this.$interval = interval || _this.$interval;
+        _this.$boundNextFrame = _this.nextFrame.bind(_this);
+        _this.play();
+        return _this;
+    }
+    Object.defineProperty(MovieClip.prototype, "paused", {
+        get: function () {
+            return this.$paused;
+        },
+        set: function (paused) {
+            this.$paused = paused;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MovieClip.prototype, "currentFrame", {
+        get: function () {
+            return this.$currentFrame;
+        },
+        set: function (currentFrame) {
+            this.$currentFrame = currentFrame;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MovieClip.prototype, "totalFrames", {
+        get: function () {
+            return this.$frames.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MovieClip.prototype.play = function () {
+        this.off(Event.ADDED_TO_STAGE, this.play);
+        return this.gotoAndPlay(this.$currentFrame);
+    };
+    MovieClip.prototype.pause = function () {
+        var ticker = this.ticker;
+        this.$paused = true;
+        if (ticker) {
+            ticker.clearTimeout(this.$timer);
+        }
+        return this;
+    };
+    MovieClip.prototype.nextFrame = function () {
+        return this.gotoAndPlay(this.$currentFrame + 1);
+    };
+    MovieClip.prototype.gotoAndPlay = function (frame) {
+        this.$paused = false;
+        this.$gotoFrame(frame);
+        var ticker = this.ticker;
+        var frameData = this.$frames[this.$currentFrame];
+        if (ticker) {
+            ticker.clearTimeout(this.$timer);
+            this.$timer = ticker.setTimeout(this.$boundNextFrame, frameData.interval || this.$interval);
+        }
+        else {
+            this.on(Event.ADDED_TO_STAGE, this.play);
+        }
+        return this;
+    };
+    MovieClip.prototype.gotoAndStop = function (frame) {
+        this.$paused = true;
+        this.$gotoFrame(frame);
+        return this;
+    };
+    MovieClip.prototype.$gotoFrame = function (frame) {
+        var totalFrames = this.$frames.length;
+        if (frame < 0 || frame >= totalFrames) {
+            frame = (frame + totalFrames) % totalFrames;
+        }
+        if (frame < 0) {
+            frame = 0;
+        }
+        var frameData = this.$frames[frame];
+        this.$currentFrame = frame;
+        this.clipRect = frameData.clip;
+        if (this.stage && frameData.callback) {
+            frameData.callback.call(this);
+        }
+    };
+    return MovieClip;
+}(ImageView));
+//# sourceMappingURL=MovieClip.js.map
+
 var Media = /** @class */ (function (_super) {
     __extends(Media, _super);
-    function Media(ticker) {
+    function Media(stage) {
         var _this = _super.call(this) || this;
-        _this.$ticker = ticker;
+        _this.$stage = stage;
         _this.$boundOnLoad = _this.$onLoad.bind(_this);
         _this.$boundOnError = _this.$onError.bind(_this);
         return _this;
@@ -2447,8 +2557,8 @@ var Media = /** @class */ (function (_super) {
 
 var Image = /** @class */ (function (_super) {
     __extends(Image, _super);
-    function Image(ticker) {
-        var _this = _super.call(this, ticker) || this;
+    function Image(stage) {
+        var _this = _super.call(this, stage) || this;
         _this.pixelRatio = Image.defaultPixelRatio;
         var image = document.createElement('img');
         image.crossOrigin = '*';
@@ -2491,8 +2601,8 @@ var Image = /** @class */ (function (_super) {
 
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
-    function Sound(ticker) {
-        var _this = _super.call(this, ticker) || this;
+    function Sound(stage) {
+        var _this = _super.call(this, stage) || this;
         _this.$loops = 1;
         _this.$startTime = 0;
         _this.$paused = false;
@@ -2502,10 +2612,9 @@ var Sound = /** @class */ (function (_super) {
         audio.addEventListener('error', _this.$boundOnError);
         audio.addEventListener('ended', _this.$onEnded.bind(_this));
         _this.$element = audio;
-        _this.$ticker = ticker;
         _this.$boundOnTouch = _this.$onTouch.bind(_this);
-        ticker.on(Event.TICKER_PAUSE, _this.$onTickerPause.bind(_this));
-        ticker.on(Event.TICKER_RESUME, _this.$onTickerResume.bind(_this));
+        stage.ticker.on(Event.TICKER_PAUSE, _this.$onTickerPause.bind(_this));
+        stage.ticker.on(Event.TICKER_RESUME, _this.$onTickerResume.bind(_this));
         return _this;
     }
     Object.defineProperty(Sound.prototype, "element", {
@@ -2521,7 +2630,7 @@ var Sound = /** @class */ (function (_super) {
             this.$element.src = url;
             this.$element.load();
             if (url.indexOf('data:') === 0) {
-                this.$ticker.setTimeout(this.$boundOnLoad);
+                this.$stage.ticker.setTimeout(this.$boundOnLoad);
             }
         },
         enumerable: true,
@@ -2600,8 +2709,8 @@ var Sound = /** @class */ (function (_super) {
 
 var SoundEffect = /** @class */ (function (_super) {
     __extends(SoundEffect, _super);
-    function SoundEffect(ticker) {
-        return _super.call(this, ticker) || this;
+    function SoundEffect(stage) {
+        return _super.call(this, stage) || this;
     }
     return SoundEffect;
 }(Sound));
@@ -2609,12 +2718,12 @@ var SoundEffect = /** @class */ (function (_super) {
 
 var ResourceManager = /** @class */ (function (_super) {
     __extends(ResourceManager, _super);
-    function ResourceManager(ticker, list, options) {
+    function ResourceManager(stage, list, options) {
         var _this = _super.call(this) || this;
         _this.$errorCount = 0;
         _this.$loadedCount = 0;
         _this.$loadingCount = 0;
-        _this.$ticker = ticker;
+        _this.$stage = stage;
         _this.threads = options && options.threads || 2;
         _this.timeout = options && options.timeout || 10000;
         _this.retryTimes = options && options.retryTimes || 3;
@@ -2659,7 +2768,8 @@ var ResourceManager = /** @class */ (function (_super) {
         var type = info.type;
         var url = info.url;
         var total = this.$total;
-        var ticker = this.$ticker;
+        var stage = this.$stage;
+        var ticker = stage.ticker;
         var resources = this.$resources;
         var retryTimes = this.retryTimes;
         var loadedCallback = function () {
@@ -2700,19 +2810,19 @@ var ResourceManager = /** @class */ (function (_super) {
             resource.off(Event.ERROR, errorCallback);
         };
         if (type === ResourceManager.TYPE_IMAGE) {
-            resource = new Image(ticker);
+            resource = new Image(stage);
             resource.on(Event.LOAD, loadedCallback);
             resource.on(Event.ERROR, errorCallback);
             resource.url = url;
         }
         else if (type === ResourceManager.TYPE_SOUND) {
-            resource = new Sound(ticker);
+            resource = new Sound(stage);
             resource.on(Event.LOAD, loadedCallback);
             resource.on(Event.ERROR, errorCallback);
             resource.url = url;
         }
         else if (type === ResourceManager.TYPE_SOUND_EFFECT) {
-            resource = new SoundEffect(ticker);
+            resource = new SoundEffect(stage);
             resource.on(Event.LOAD, loadedCallback);
             resource.on(Event.ERROR, errorCallback);
             resource.url = url;
@@ -2898,7 +3008,7 @@ var Stage = /** @class */ (function (_super) {
         configurable: true
     });
     Stage.prototype.createResourceManager = function (list, options) {
-        return new ResourceManager(this.$ticker, list, options);
+        return new ResourceManager(this, list, options);
     };
     Stage.prototype.$addTouchEventListeners = function () {
         var _this = this;
@@ -3112,6 +3222,7 @@ exports.Layer = Layer;
 exports.ScrollView = ScrollView;
 exports.ImageView = ImageView;
 exports.TextView = TextView;
+exports.MovieClip = MovieClip;
 exports.Stage = Stage;
 exports.Event = Event;
 exports.TouchEvent = TouchEvent;

@@ -1,4 +1,4 @@
-import Ticker from '../core/Ticker';
+import Stage from '../display/Stage';
 import EventEmitter from '../event/EventEmitter';
 export default class ResourceManager extends EventEmitter {
     static readonly TYPE_IMAGE: string;
@@ -12,9 +12,9 @@ export default class ResourceManager extends EventEmitter {
     private $loadingCount;
     private $list;
     private readonly $total;
-    private readonly $ticker;
+    private readonly $stage;
     private readonly $resources;
-    constructor(ticker: Ticker, list: Array<ResourceInfo>, options?: ResourceManagerOption);
+    constructor(stage: Stage, list: Array<ResourceInfo>, options?: ResourceManagerOption);
     readonly total: number;
     readonly errorCount: number;
     readonly loadedCount: number;

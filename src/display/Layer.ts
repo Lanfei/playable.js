@@ -29,6 +29,7 @@ export default class Layer extends EventEmitter {
 	protected $rotation: number = 0;
 	protected $alpha: number = 1;
 	protected $visible: boolean = true;
+	protected $smoothing: boolean = true;
 	protected $backgroundColor: string = null;
 	protected $backgroundImage: Image = null;
 	protected $backgroundPattern: CanvasPattern = null;
@@ -229,6 +230,15 @@ export default class Layer extends EventEmitter {
 		}
 	}
 
+	public get smoothing(): boolean {
+		return this.$smoothing;
+	}
+
+	public set smoothing(smoothing: boolean) {
+		this.$smoothing = smoothing;
+		this.$resizeCanvas();
+	}
+
 	public get dirty(): boolean {
 		return this.$dirty;
 	}
@@ -417,6 +427,8 @@ export default class Layer extends EventEmitter {
 		let parent = this.$parent;
 		let anchorX = this.$anchorX;
 		let anchorY = this.$anchorY;
+		let context = this.$context;
+		let smoothing = this.$smoothing;
 		let pixelRatio = Layer.pixelRatio;
 		if (width && height) {
 			canvas.width = width * pixelRatio;
@@ -426,6 +438,9 @@ export default class Layer extends EventEmitter {
 			canvas.width = (width || bounds.right + anchorX) * pixelRatio;
 			canvas.height = (height || bounds.bottom + anchorY) * pixelRatio;
 			bounds.release();
+		}
+		if (context.imageSmoothingEnabled !== smoothing) {
+			context.imageSmoothingEnabled = smoothing;
 		}
 		if (parent) {
 			parent.$resizeCanvas();

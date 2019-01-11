@@ -165,7 +165,7 @@ export default class Stage extends Layer {
 	}
 
 	public createResourceManager(list: Array<ResourceInfo>, options?: ResourceManagerOption): ResourceManager {
-		return new ResourceManager(this.$ticker, list, options);
+		return new ResourceManager(this, list, options);
 	}
 
 	protected $addTouchEventListeners(): void {

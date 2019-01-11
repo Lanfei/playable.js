@@ -1,5 +1,5 @@
 import Media from './Media';
-import Ticker from '../core/Ticker';
+import Stage from '../display/Stage';
 
 export default class Image extends Media {
 
@@ -8,8 +8,8 @@ export default class Image extends Media {
 	public pixelRatio: number = Image.defaultPixelRatio;
 	protected $element: HTMLImageElement;
 
-	public constructor(ticker: Ticker) {
-		super(ticker);
+	public constructor(stage: Stage) {
+		super(stage);
 		let image = document.createElement('img');
 		image.crossOrigin = '*';
 		image.addEventListener('load', this.$boundOnLoad);

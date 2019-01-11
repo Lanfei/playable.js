@@ -5,7 +5,6 @@ import Rectangle from '../geom/Rectangle';
 export default class ImageView extends Layer {
 
 	protected $image: Image;
-	protected $smoothing: boolean;
 	protected $clipRect: Rectangle;
 	protected $scale9Grid: Rectangle;
 	private readonly $boundOnImageLoad: () => void;
@@ -15,8 +14,8 @@ export default class ImageView extends Layer {
 	public constructor(image?: Image, width?: number, height?: number) {
 		super();
 		if (image) {
-			this.$width = width || image.width;
-			this.$height = height || image.height;
+			this.$width = width;
+			this.$height = height;
 			this.$boundOnImageLoad = this.$onImageLoad.bind(this);
 			this.image = image;
 		}
@@ -28,21 +27,11 @@ export default class ImageView extends Layer {
 
 	public set image(image: Image) {
 		this.$image = image;
-		this.$width = this.$width || image.width;
-		this.$height = this.$height || image.height;
-		this.$resizeCanvas();
-		if (!this.$width && !this.$height) {
+		if (image.width && image.height) {
+			this.$resizeCanvas();
+		} else if (!this.$width || !this.$height) {
 			image.on('load', this.$boundOnImageLoad);
 		}
-	}
-
-	public get smoothing(): boolean {
-		return this.$smoothing;
-	}
-
-	public set smoothing(smoothing: boolean) {
-		this.$smoothing = smoothing;
-		this.$resizeCanvas();
 	}
 
 	public get clipRect(): Rectangle {
@@ -64,16 +53,24 @@ export default class ImageView extends Layer {
 	}
 
 	protected $onImageLoad() {
-		let image = this.$image;
-		this.$width = this.$width || image.width;
-		this.$height = this.$height || image.height;
 		this.$resizeCanvas();
-		image.off('load', this.$boundOnImageLoad);
+		this.$image.off('load', this.$boundOnImageLoad);
 	}
 
-	protected $resizeCanvas(): void {
-		super.$resizeCanvas();
-		this.$context.imageSmoothingEnabled = this.$smoothing;
+	protected $getContentBounds(): Rectangle {
+		let image = this.$image;
+		let clipRect = this.$clipRect;
+		let bounds = super.$getContentBounds();
+		bounds.x = Math.min(bounds.left, -this.$anchorX);
+		bounds.y = Math.min(bounds.top, -this.$anchorY);
+		if (clipRect) {
+			bounds.width = Math.max(bounds.width, clipRect.width);
+			bounds.height = Math.max(bounds.height, clipRect.height);
+		} else {
+			bounds.width = Math.max(bounds.width, image.width);
+			bounds.height = Math.max(bounds.height, image.height);
+		}
+		return bounds;
 	}
 
 	protected $drawImage(sourceX: number, sourceY: number, sourceW: number, sourceH: number, targetX: number, targetY: number, targetW: number, targetH: number): void {

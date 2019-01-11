@@ -1,10 +1,10 @@
 import Sound from './Sound';
-import Ticker from '../core/Ticker';
+import Stage from '../display/Stage';
 
 export default class SoundEffect extends Sound {
 
-	public constructor(ticker: Ticker) {
-		super(ticker);
+	public constructor(stage: Stage) {
+		super(stage);
 	}
 
 }

@@ -1,7 +1,7 @@
-import Ticker from '../core/Ticker';
 import Image from '../media/Image';
 import Sound from '../media/Sound';
 import SoundEffect from '../media/SoundEffect';
+import Stage from '../display/Stage';
 import Event from '../event/Event';
 import EventEmitter from '../event/EventEmitter';
 
@@ -20,12 +20,12 @@ export default class ResourceManager extends EventEmitter {
 	private $loadingCount: number = 0;
 	private $list: Array<ResourceInfo>;
 	private readonly $total: number;
-	private readonly $ticker: Ticker;
+	private readonly $stage: Stage;
 	private readonly $resources: Object;
 
-	public constructor(ticker: Ticker, list: Array<ResourceInfo>, options?: ResourceManagerOption) {
+	public constructor(stage: Stage, list: Array<ResourceInfo>, options?: ResourceManagerOption) {
 		super();
-		this.$ticker = ticker;
+		this.$stage = stage;
 		this.threads = options && options.threads || 2;
 		this.timeout = options && options.timeout || 10000;
 		this.retryTimes = options && options.retryTimes || 3;
@@ -61,7 +61,8 @@ export default class ResourceManager extends EventEmitter {
 		let type = info.type;
 		let url = info.url;
 		let total = this.$total;
-		let ticker = this.$ticker;
+		let stage = this.$stage;
+		let ticker = stage.ticker;
 		let resources = this.$resources;
 		let retryTimes = this.retryTimes;
 		let loadedCallback = () => {
@@ -99,17 +100,17 @@ export default class ResourceManager extends EventEmitter {
 			resource.off(Event.ERROR, errorCallback);
 		};
 		if (type === ResourceManager.TYPE_IMAGE) {
-			resource = new Image(ticker);
+			resource = new Image(stage);
 			resource.on(Event.LOAD, loadedCallback);
 			resource.on(Event.ERROR, errorCallback);
 			resource.url = url;
 		} else if (type === ResourceManager.TYPE_SOUND) {
-			resource = new Sound(ticker);
+			resource = new Sound(stage);
 			resource.on(Event.LOAD, loadedCallback);
 			resource.on(Event.ERROR, errorCallback);
 			resource.url = url;
 		} else if (type === ResourceManager.TYPE_SOUND_EFFECT) {
-			resource = new SoundEffect(ticker);
+			resource = new SoundEffect(stage);
 			resource.on(Event.LOAD, loadedCallback);
 			resource.on(Event.ERROR, errorCallback);
 			resource.url = url;
