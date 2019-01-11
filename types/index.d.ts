@@ -17,5 +17,6 @@ import Sound from './media/Sound';
 import SoundEffect from './media/SoundEffect';
 import Ease from './tween/Ease';
 import Tween from './tween/Tween';
+import Request from './net/Request';
 import ResourceManager from './net/ResourceManager';
-export { Ticker, Layer, ScrollView, ImageView, TextView, MovieClip, Stage, Event, TouchEvent, EventEmitter, Matrix, Vector, Rectangle, Media, Image, Sound, SoundEffect, Ease, Tween, ResourceManager };
+export { Ticker, Layer, ScrollView, ImageView, TextView, MovieClip, Stage, Event, TouchEvent, EventEmitter, Matrix, Vector, Rectangle, Media, Image, Sound, SoundEffect, Ease, Tween, Request, ResourceManager };

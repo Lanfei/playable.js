@@ -17,6 +17,7 @@ import Sound from './media/Sound';
 import SoundEffect from './media/SoundEffect';
 import Ease from './tween/Ease';
 import Tween from './tween/Tween';
+import Request from './net/Request';
 import ResourceManager from './net/ResourceManager';
 
 export {
@@ -39,5 +40,6 @@ export {
 	SoundEffect,
 	Ease,
 	Tween,
+	Request,
 	ResourceManager
 };

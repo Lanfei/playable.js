@@ -8,10 +8,10 @@ export default class Event {
     static readonly TICKER_PAUSE: string;
     static readonly TICKER_RESUME: string;
     static readonly VIEWPORT_RESIZE: string;
-    static readonly PROGRESS: string;
-    static readonly COMPLETE: string;
     static readonly LOAD: string;
     static readonly ERROR: string;
+    static readonly PROGRESS: string;
+    static readonly COMPLETE: string;
     static readonly SOUND_COMPLETE: string;
     type: string;
     constructor(type: string);

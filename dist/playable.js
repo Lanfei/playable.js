@@ -44,10 +44,10 @@ var playable = (function (exports) {
         Event.TICKER_PAUSE = 'tickerPause';
         Event.TICKER_RESUME = 'tickerResume';
         Event.VIEWPORT_RESIZE = 'viewportResize';
-        Event.PROGRESS = 'progress';
-        Event.COMPLETE = 'complete';
         Event.LOAD = 'load';
         Event.ERROR = 'error';
+        Event.PROGRESS = 'progress';
+        Event.COMPLETE = 'complete';
         Event.SOUND_COMPLETE = 'soundComplete';
         return Event;
     }());
@@ -2533,6 +2533,7 @@ var playable = (function (exports) {
         };
         return MovieClip;
     }(ImageView));
+    //# sourceMappingURL=MovieClip.js.map
 
     var Media = /** @class */ (function (_super) {
         __extends(Media, _super);
@@ -3229,6 +3230,124 @@ var playable = (function (exports) {
     }(Layer));
     //# sourceMappingURL=Stage.js.map
 
+    var Request = /** @class */ (function (_super) {
+        __extends(Request, _super);
+        function Request(url, options) {
+            var _this = _super.call(this) || this;
+            _this.$xhr = new XMLHttpRequest();
+            var method;
+            var headers;
+            var data;
+            var responseType;
+            var xhr = _this.$xhr;
+            if (url instanceof Object) {
+                options = url;
+                url = options.url;
+            }
+            if (options) {
+                url = options.url || url;
+                method = options.method;
+                headers = options.headers;
+                data = options.data;
+                responseType = options.responseType;
+            }
+            if (data instanceof Object) {
+                var contentType = Request.$getContentType(headers);
+                if (method.toLowerCase() === 'get') {
+                    var qs = Request.$getQueryString(data);
+                    url += url.indexOf('?') < 0 ? '?' + qs : '&' + qs;
+                }
+                else if (contentType === 'application/x-www-form-urlencoded') {
+                    data = Request.$getQueryString(data);
+                }
+                else if (contentType === 'text/json') {
+                    data = JSON.stringify(data);
+                }
+            }
+            xhr.open(method || 'get', url);
+            xhr.responseType = responseType;
+            if (headers) {
+                Object.keys(headers).forEach(function (key) {
+                    xhr.setRequestHeader(key, headers[key]);
+                });
+            }
+            xhr.addEventListener('progress', _this.$onProgress.bind(_this));
+            xhr.addEventListener('readystatechange', _this.$onReadyStateChange.bind(_this));
+            xhr.send(data);
+            return _this;
+        }
+        Object.defineProperty(Request.prototype, "status", {
+            get: function () {
+                return this.$xhr.status;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Request.prototype, "response", {
+            get: function () {
+                return this.$xhr.response;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Request.prototype, "responseHeaders", {
+            get: function () {
+                var headers = {};
+                var str = this.$xhr.getAllResponseHeaders();
+                var arr = str.split('\n');
+                for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
+                    var header = arr_1[_i];
+                    var index = header.indexOf(':');
+                    var key = header.slice(0, index).trim();
+                    var value = header.slice(index + 1).trim();
+                    if (headers[key]) {
+                        if (!Array.isArray(headers[key])) {
+                            headers[key] = [headers[key]];
+                        }
+                        headers[key].push(value);
+                    }
+                    else if (key) {
+                        headers[key] = value;
+                    }
+                }
+                return headers;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Request.prototype.abort = function () {
+            this.$xhr.abort();
+        };
+        Request.prototype.$onProgress = function (e) {
+            if (e.lengthComputable) {
+                this.emit(Event.PROGRESS, e.loaded / e.total);
+            }
+        };
+        Request.prototype.$onReadyStateChange = function (e) {
+            var xhr = this.$xhr;
+            if (xhr.readyState === 4) {
+                if (xhr.status >= 400 || xhr.status === 0) {
+                    this.emit(Event.ERROR, e);
+                }
+                else {
+                    this.emit(Event.COMPLETE);
+                }
+            }
+        };
+        Request.$getContentType = function (headers) {
+            for (var key in headers) {
+                if (key.toLowerCase() === 'content-type') {
+                    return headers[key].toLowerCase();
+                }
+            }
+            return null;
+        };
+        Request.$getQueryString = function (data) {
+            return Object.keys(data).map(function (key) { return key + '=' + data[key]; }).join('&');
+        };
+        return Request;
+    }(EventEmitter));
+
     //# sourceMappingURL=index.js.map
 
     exports.Ticker = Ticker;
@@ -3250,6 +3369,7 @@ var playable = (function (exports) {
     exports.SoundEffect = SoundEffect;
     exports.Ease = Ease;
     exports.Tween = Tween;
+    exports.Request = Request;
     exports.ResourceManager = ResourceManager;
 
     return exports;
