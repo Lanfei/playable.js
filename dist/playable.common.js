@@ -1396,6 +1396,7 @@ var Layer = /** @class */ (function (_super) {
     Layer.pixelRatio = window.devicePixelRatio || 1;
     return Layer;
 }(EventEmitter));
+//# sourceMappingURL=Layer.js.map
 
 var Ease = /** @class */ (function () {
     function Ease() {
@@ -2427,19 +2428,28 @@ var TextView = /** @class */ (function (_super) {
 
 var MovieClip = /** @class */ (function (_super) {
     __extends(MovieClip, _super);
-    function MovieClip(image, frames, interval) {
-        if (interval === void 0) { interval = 30; }
+    function MovieClip(image, frames) {
         var _this = _super.call(this, image) || this;
+        _this.$loop = true;
         _this.$paused = true;
         _this.$currentFrame = 0;
         _this.$frames = null;
         _this.$interval = 30;
         _this.$frames = frames;
-        _this.$interval = interval || _this.$interval;
         _this.$boundNextFrame = _this.nextFrame.bind(_this);
         _this.play();
         return _this;
     }
+    Object.defineProperty(MovieClip.prototype, "loop", {
+        get: function () {
+            return this.$loop;
+        },
+        set: function (loop) {
+            this.$loop = loop;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(MovieClip.prototype, "paused", {
         get: function () {
             return this.$paused;
@@ -2477,6 +2487,7 @@ var MovieClip = /** @class */ (function (_super) {
         if (ticker) {
             ticker.clearTimeout(this.$timer);
         }
+        this.off(Event.ADDED_TO_STAGE, this.play);
         return this;
     };
     MovieClip.prototype.nextFrame = function () {
@@ -2485,11 +2496,16 @@ var MovieClip = /** @class */ (function (_super) {
     MovieClip.prototype.gotoAndPlay = function (frame) {
         this.$paused = false;
         this.$gotoFrame(frame);
+        var loop = this.$loop;
         var ticker = this.ticker;
-        var frameData = this.$frames[this.$currentFrame];
+        var frames = this.$frames;
+        var totalFrames = frames.length;
+        var frameData = frames[this.$currentFrame];
         if (ticker) {
             ticker.clearTimeout(this.$timer);
-            this.$timer = ticker.setTimeout(this.$boundNextFrame, frameData.interval || this.$interval);
+            if (frame < totalFrames - 1 || loop) {
+                this.$timer = ticker.setTimeout(this.$boundNextFrame, frameData.interval || this.$interval);
+            }
         }
         else {
             this.on(Event.ADDED_TO_STAGE, this.play);
@@ -2518,7 +2534,6 @@ var MovieClip = /** @class */ (function (_super) {
     };
     return MovieClip;
 }(ImageView));
-//# sourceMappingURL=MovieClip.js.map
 
 var Media = /** @class */ (function (_super) {
     __extends(Media, _super);

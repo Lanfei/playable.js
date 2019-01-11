@@ -5,6 +5,7 @@ import Rectangle from '../geom/Rectangle';
 
 export default class MovieClip extends ImageView {
 
+	protected $loop: boolean = true;
 	protected $paused: boolean = true;
 	protected $currentFrame: number = 0;
 	protected $frames: Array<MovieClipFrameData> = null;
@@ -12,12 +13,19 @@ export default class MovieClip extends ImageView {
 	protected $timer: number;
 	protected $boundNextFrame: Function;
 
-	public constructor(image: Image, frames: Array<MovieClipFrameData>, interval: number = 30) {
+	public constructor(image: Image, frames: Array<MovieClipFrameData>) {
 		super(image);
 		this.$frames = frames;
-		this.$interval = interval || this.$interval;
 		this.$boundNextFrame = this.nextFrame.bind(this);
 		this.play();
+	}
+
+	public get loop(): boolean {
+		return this.$loop;
+	}
+
+	public set loop(loop: boolean) {
+		this.$loop = loop;
 	}
 
 	public get paused(): boolean {
@@ -51,6 +59,7 @@ export default class MovieClip extends ImageView {
 		if (ticker) {
 			ticker.clearTimeout(this.$timer);
 		}
+		this.off(Event.ADDED_TO_STAGE, this.play);
 		return this;
 	}
 
@@ -61,11 +70,16 @@ export default class MovieClip extends ImageView {
 	public gotoAndPlay(frame: number): this {
 		this.$paused = false;
 		this.$gotoFrame(frame);
+		let loop = this.$loop;
 		let ticker = this.ticker;
-		let frameData = this.$frames[this.$currentFrame];
+		let frames = this.$frames;
+		let totalFrames = frames.length;
+		let frameData = frames[this.$currentFrame];
 		if (ticker) {
 			ticker.clearTimeout(this.$timer);
-			this.$timer = ticker.setTimeout(this.$boundNextFrame, frameData.interval || this.$interval);
+			if (frame < totalFrames - 1 || loop) {
+				this.$timer = ticker.setTimeout(this.$boundNextFrame, frameData.interval || this.$interval);
+			}
 		} else {
 			this.on(Event.ADDED_TO_STAGE, this.play);
 		}
