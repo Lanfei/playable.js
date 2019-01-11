@@ -1,6 +1,6 @@
 {
   "name": "playable.js",
-  "version": "1.11.1",
+  "version": "1.11.2",
   "author": "Jealous",
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.common.js",
@@ -27,9 +27,6 @@
     "url": "https://github.com/Lanfei/playable.js/issues"
   },
   "homepage": "https://github.com/Lanfei/playable.js#readme",
-  "dependencies": {
-    "events": "^3.0.0"
-  },
   "devDependencies": {
     "rimraf": "^2.6.3",
     "rollup": "^1.1.0",
