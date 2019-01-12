@@ -32,7 +32,7 @@ export default class Request extends EventEmitter {
 				url += url.indexOf('?') < 0 ? '?' + qs : '&' + qs;
 			} else if (contentType === 'application/x-www-form-urlencoded') {
 				data = Request.$getQueryString(data);
-			} else if (contentType === 'text/json') {
+			} else if (contentType === 'application/json') {
 				data = JSON.stringify(data);
 			}
 		}

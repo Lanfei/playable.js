@@ -1,5 +1,8 @@
-var playable = (function (exports) {
-    'use strict';
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    (global = global || self, factory(global.playable = {}));
+}(this, function (exports) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -51,7 +54,6 @@ var playable = (function (exports) {
         Event.SOUND_COMPLETE = 'soundComplete';
         return Event;
     }());
-    //# sourceMappingURL=Event.js.map
 
     var EventEmitter = /** @class */ (function () {
         function EventEmitter() {
@@ -101,7 +103,6 @@ var playable = (function (exports) {
         };
         return EventEmitter;
     }());
-    //# sourceMappingURL=EventEmitter.js.map
 
     var Ticker = /** @class */ (function (_super) {
         __extends(Ticker, _super);
@@ -264,7 +265,6 @@ var playable = (function (exports) {
         };
         return Ticker;
     }(EventEmitter));
-    //# sourceMappingURL=Ticker.js.map
 
     var Vector = /** @class */ (function () {
         function Vector(x, y) {
@@ -381,7 +381,6 @@ var playable = (function (exports) {
         Vector.$pool = [];
         return Vector;
     }());
-    //# sourceMappingURL=Vector.js.map
 
     var Matrix = /** @class */ (function () {
         function Matrix(a, b, c, d, tx, ty) {
@@ -510,7 +509,6 @@ var playable = (function (exports) {
         Matrix.$pool = [];
         return Matrix;
     }());
-    //# sourceMappingURL=Matrix.js.map
 
     var Rectangle = /** @class */ (function () {
         function Rectangle(x, y, width, height) {
@@ -609,7 +607,6 @@ var playable = (function (exports) {
         Rectangle.$pool = [];
         return Rectangle;
     }());
-    //# sourceMappingURL=Rectangle.js.map
 
     var TouchEvent = /** @class */ (function (_super) {
         __extends(TouchEvent, _super);
@@ -656,7 +653,6 @@ var playable = (function (exports) {
         TouchEvent.$pool = [];
         return TouchEvent;
     }(Event));
-    //# sourceMappingURL=TouchEvent.js.map
 
     var Layer = /** @class */ (function (_super) {
         __extends(Layer, _super);
@@ -1395,7 +1391,6 @@ var playable = (function (exports) {
         Layer.pixelRatio = window.devicePixelRatio || 1;
         return Layer;
     }(EventEmitter));
-    //# sourceMappingURL=Layer.js.map
 
     var Ease = /** @class */ (function () {
         function Ease() {
@@ -1579,7 +1574,6 @@ var playable = (function (exports) {
         };
         return Ease;
     }());
-    //# sourceMappingURL=Ease.js.map
 
     var Tween = /** @class */ (function (_super) {
         __extends(Tween, _super);
@@ -1770,7 +1764,6 @@ var playable = (function (exports) {
         Tween.$tweens = [];
         return Tween;
     }(EventEmitter));
-    //# sourceMappingURL=Tween.js.map
 
     var ScrollView = /** @class */ (function (_super) {
         __extends(ScrollView, _super);
@@ -1923,7 +1916,6 @@ var playable = (function (exports) {
         };
         return ScrollView;
     }(Layer));
-    //# sourceMappingURL=ScrollView.js.map
 
     var ImageView = /** @class */ (function (_super) {
         __extends(ImageView, _super);
@@ -2065,7 +2057,6 @@ var playable = (function (exports) {
         };
         return ImageView;
     }(Layer));
-    //# sourceMappingURL=ImageView.js.map
 
     var TextView = /** @class */ (function (_super) {
         __extends(TextView, _super);
@@ -2423,7 +2414,6 @@ var playable = (function (exports) {
         TextView.boundaryRe = /\b/;
         return TextView;
     }(Layer));
-    //# sourceMappingURL=TextView.js.map
 
     var MovieClip = /** @class */ (function (_super) {
         __extends(MovieClip, _super);
@@ -2533,7 +2523,6 @@ var playable = (function (exports) {
         };
         return MovieClip;
     }(ImageView));
-    //# sourceMappingURL=MovieClip.js.map
 
     var Request = /** @class */ (function (_super) {
         __extends(Request, _super);
@@ -2565,7 +2554,7 @@ var playable = (function (exports) {
                 else if (contentType === 'application/x-www-form-urlencoded') {
                     data = Request.$getQueryString(data);
                 }
-                else if (contentType === 'text/json') {
+                else if (contentType === 'application/json') {
                     data = JSON.stringify(data);
                 }
             }
@@ -2652,7 +2641,6 @@ var playable = (function (exports) {
         };
         return Request;
     }(EventEmitter));
-    //# sourceMappingURL=Request.js.map
 
     var Media = /** @class */ (function (_super) {
         __extends(Media, _super);
@@ -2687,7 +2675,6 @@ var playable = (function (exports) {
         };
         return Media;
     }(EventEmitter));
-    //# sourceMappingURL=Media.js.map
 
     var Image = /** @class */ (function (_super) {
         __extends(Image, _super);
@@ -2731,7 +2718,6 @@ var playable = (function (exports) {
         Image.defaultPixelRatio = 1;
         return Image;
     }(Media));
-    //# sourceMappingURL=Image.js.map
 
     var Sound = /** @class */ (function (_super) {
         __extends(Sound, _super);
@@ -2839,7 +2825,6 @@ var playable = (function (exports) {
         };
         return Sound;
     }(Media));
-    //# sourceMappingURL=Sound.js.map
 
     var SoundEffect = /** @class */ (function (_super) {
         __extends(SoundEffect, _super);
@@ -2848,7 +2833,6 @@ var playable = (function (exports) {
         }
         return SoundEffect;
     }(Sound));
-    //# sourceMappingURL=SoundEffect.js.map
 
     var ResourceManager = /** @class */ (function (_super) {
         __extends(ResourceManager, _super);
@@ -3372,9 +3356,6 @@ var playable = (function (exports) {
         Stage.FIXED_HEIGHT = 'fixedHeight';
         return Stage;
     }(Layer));
-    //# sourceMappingURL=Stage.js.map
-
-    //# sourceMappingURL=index.js.map
 
     exports.Ticker = Ticker;
     exports.Layer = Layer;
@@ -3398,6 +3379,6 @@ var playable = (function (exports) {
     exports.Request = Request;
     exports.ResourceManager = ResourceManager;
 
-    return exports;
+    Object.defineProperty(exports, '__esModule', { value: true });
 
-}({}));
+}));

@@ -1,16 +1,15 @@
 {
   "name": "playable.js",
-  "version": "1.11.2",
+  "version": "1.11.3",
   "author": "Jealous",
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.common.js",
   "typings": "types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf dist && rollup -c",
-    "build:types": "rimraf types && tsc",
+    "build": "rimraf dist && rollup -c && tsc && npm run uglify",
     "watch": "rimraf dist && rollup -c -w",
-    "watch:types": "rimraf types && tsc -w"
+    "uglify": "uglifyjs dist/playable.js -o dist/playable.min.js -c --source-map"
   },
   "repository": {
     "type": "git",
@@ -32,8 +31,8 @@
     "rollup": "^1.1.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-typescript": "^1.0.0",
-    "rollup-plugin-uglify": "^6.0.1",
     "tslib": "^1.9.3",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.2",
+    "uglify-js": "^3.4.9"
   }
 }
