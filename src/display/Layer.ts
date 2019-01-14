@@ -617,7 +617,7 @@ export default class Layer extends EventEmitter {
 			ctx.drawImage(canvas, 0, 0, width, height);
 			ctx.restore();
 		}
-		if (globalAlpha !== undefined) {
+		if (globalAlpha !== child.alpha) {
 			ctx.globalAlpha = globalAlpha;
 		}
 		matrix.release();
