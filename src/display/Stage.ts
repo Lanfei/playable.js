@@ -173,12 +173,11 @@ export default class Stage extends Layer {
 		if (canvas.ontouchstart !== undefined) {
 			canvas.addEventListener('touchstart', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_START, event);
-				event.preventDefault();
 			});
 			canvas.addEventListener('touchmove', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
 				event.preventDefault();
-			}, {passive: false});
+			});
 			canvas.addEventListener('touchend', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_END, event);
 				this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
@@ -189,23 +188,23 @@ export default class Stage extends Layer {
 		} else {
 			let touching = false;
 			canvas.addEventListener('mousedown', event => {
-				this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event);
+				this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
 				touching = true;
 			});
 			canvas.addEventListener('mousemove', event => {
 				if (touching) {
-					this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event);
+					this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
 				}
 			});
 			canvas.addEventListener('mouseup', event => {
-				this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event);
+				this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
 				touching = false;
 			});
 			canvas.addEventListener('click', event => {
-				this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event);
+				this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
 			});
 			window.addEventListener('mouseout', event => {
-				this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, event);
+				this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, event.pageX, event.pageY, 0);
 			});
 		}
 	}
@@ -213,11 +212,12 @@ export default class Stage extends Layer {
 	protected $dispatchTouches(type: string, event: Event): void {
 		let touches = event['changedTouches'];
 		for (let i = 0, l = touches.length; i < l; ++i) {
-			this.$dispatchTouchEvent(type, touches[i]);
+			let touch = touches[i];
+			this.$dispatchTouchEvent(type, touch.pageX, touch.pageY, touch.identifier);
 		}
 	}
 
-	protected $dispatchTouchEvent(type: string, touch: Touch | MouseEvent): void {
+	protected $dispatchTouchEvent(type: string, pageX: number, pageY: number, identifier: number): void {
 		if (this.$ticker.paused || !this.$visible || !this.touchable) {
 			return;
 		}
@@ -227,8 +227,8 @@ export default class Stage extends Layer {
 		let bounds = this.$renderBounds;
 		let pixelRatio = Layer.pixelRatio;
 		let viewportBounds = this.$viewportCanvas.getBoundingClientRect();
-		let x = (touch.pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
-		let y = (touch.pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+		let x = (pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+		let y = (pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
 		let matrix = this.$getTransform();
 		let localPos = Vector.create(x, y).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
 		let inside = this.$localHitTest(localPos);
@@ -237,7 +237,7 @@ export default class Stage extends Layer {
 			event.localY = localPos.y;
 			event.targetX = event.stageX = x;
 			event.targetY = event.stageY = y;
-			event.identifier = touch instanceof Touch ? touch.identifier : 0;
+			event.identifier = identifier;
 			this.$emitTouchEvent(event, inside);
 		}
 		event.release();

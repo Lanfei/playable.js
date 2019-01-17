@@ -42,7 +42,7 @@ export default class Stage extends Layer {
     createResourceManager(list: Array<ResourceInfo>, options?: ResourceManagerOption): ResourceManager;
     protected $addTouchEventListeners(): void;
     protected $dispatchTouches(type: string, event: Event): void;
-    protected $dispatchTouchEvent(type: string, touch: Touch | MouseEvent): void;
+    protected $dispatchTouchEvent(type: string, pageX: number, pageY: number, identifier: number): void;
     protected $calculateRenderBounds(): void;
     protected $resizeCanvas(): void;
     protected $resizeViewportCanvas(): void;

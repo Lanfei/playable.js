@@ -38,8 +38,11 @@ export default class ScrollView extends Layer {
 	public set scrollTop(scrollTop: number) {
 		let bounds = this.$getContentBounds();
 		let maxScrollTop = this.$scrollHeight - this.$height;
-		this.$scrollTop = Math.max(0, Math.min(scrollTop, maxScrollTop));
-		this.$markDirty();
+		scrollTop = Math.max(0, Math.min(scrollTop, maxScrollTop));
+		if (scrollTop !== this.$scrollTop) {
+			this.$scrollTop = scrollTop;
+			this.$markDirty();
+		}
 		bounds.release();
 	}
 
@@ -50,8 +53,11 @@ export default class ScrollView extends Layer {
 	public set scrollLeft(scrollLeft: number) {
 		let bounds = this.$getContentBounds();
 		let maxScrollLeft = this.$scrollWidth - this.width;
-		this.$scrollLeft = Math.max(0, Math.min(scrollLeft, maxScrollLeft));
-		this.$markDirty();
+		scrollLeft = Math.max(0, Math.min(scrollLeft, maxScrollLeft));
+		if (scrollLeft !== this.$scrollLeft) {
+			this.$scrollLeft = scrollLeft;
+			this.$markDirty();
+		}
 		bounds.release();
 	}
 
@@ -66,6 +72,8 @@ export default class ScrollView extends Layer {
 		let bounds = this.$getContentBounds();
 		this.$scrollWidth = this.$scrollLeft + bounds.right + this.$anchorX;
 		this.$scrollHeight = this.$scrollTop + bounds.bottom + this.$anchorY;
+		this.scrollTop = this.$scrollTop;
+		this.scrollLeft = this.$scrollLeft;
 	}
 
 	protected $onTouchStart(e: TouchEvent): void {

@@ -32,8 +32,9 @@ export default class Layer extends EventEmitter {
     protected $dirty: boolean;
     protected $stage: Stage;
     protected $parent: Layer;
-    protected readonly $children: Array<Layer>;
-    protected readonly $touches: Array<boolean>;
+    protected $children: Array<Layer>;
+    protected $shouldEmitTap: boolean;
+    protected $touches: Array<boolean>;
     protected readonly $canvas: HTMLCanvasElement;
     protected readonly $context: CanvasRenderingContext2D;
     constructor();

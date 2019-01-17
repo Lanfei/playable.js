@@ -37,8 +37,9 @@ export default class Layer extends EventEmitter {
 	protected $dirty: boolean = true;
 	protected $stage: Stage = null;
 	protected $parent: Layer = null;
-	protected readonly $children: Array<Layer> = [];
-	protected readonly $touches: Array<boolean> = [];
+	protected $children: Array<Layer> = [];
+	protected $shouldEmitTap: boolean = true;
+	protected $touches: Array<boolean> = [];
 	protected readonly $canvas: HTMLCanvasElement;
 	protected readonly $context: CanvasRenderingContext2D;
 
@@ -486,16 +487,23 @@ export default class Layer extends EventEmitter {
 	}
 
 	protected $getContentBounds(): Rectangle {
+		let bounds;
 		let children = this.$children;
-		let bounds = Rectangle.create();
 		for (let child of children) {
-			let childBounds = this.$getChildBounds(child);
-			bounds.top = Math.min(bounds.top ? bounds.top : Infinity, childBounds.top);
-			bounds.bottom = Math.max(bounds.bottom ? bounds.bottom : -Infinity, childBounds.bottom);
-			bounds.left = Math.min(bounds.left ? bounds.left : Infinity, childBounds.left);
-			bounds.right = Math.max(bounds.right ? bounds.right : -Infinity, childBounds.right);
-			childBounds.release();
+			if (child.$visible) {
+				let childBounds = this.$getChildBounds(child);
+				if (bounds) {
+					bounds.top = Math.min(bounds.top, childBounds.top);
+					bounds.bottom = Math.max(bounds.bottom, childBounds.bottom);
+					bounds.left = Math.min(bounds.left, childBounds.left);
+					bounds.right = Math.max(bounds.right, childBounds.right);
+					childBounds.release();
+				} else {
+					bounds = childBounds;
+				}
+			}
 		}
+		bounds = bounds || Rectangle.create();
 		return bounds;
 	}
 
@@ -506,11 +514,15 @@ export default class Layer extends EventEmitter {
 		let touches = this.$touches;
 		let identifier = event.identifier;
 		if (type === TouchEvent.TOUCH_START) {
+			this.$shouldEmitTap = true;
 			touches[identifier] = true;
 		} else if (!touches[identifier]) {
 			return false;
 		} else if (type === TouchEvent.TOUCH_TAP || type === TouchEvent.TOUCH_CANCEL) {
 			touches[identifier] = false;
+		}
+		if (type === TouchEvent.TOUCH_MOVE) {
+			this.$shouldEmitTap = false;
 		}
 		let children = this.$children;
 		for (let i = children.length - 1; i >= 0; --i) {
@@ -532,7 +544,10 @@ export default class Layer extends EventEmitter {
 				}
 			}
 		}
-		if (!event.cancelBubble && !(type === TouchEvent.TOUCH_TAP && !inside)) {
+		if (type === TouchEvent.TOUCH_TAP && (!inside || !this.$shouldEmitTap)) {
+			return true;
+		}
+		if (!event.cancelBubble) {
 			event.localX = localX;
 			event.localY = localY;
 			event.currentTarget = this;

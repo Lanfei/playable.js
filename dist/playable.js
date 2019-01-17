@@ -683,6 +683,7 @@
             _this.$stage = null;
             _this.$parent = null;
             _this.$children = [];
+            _this.$shouldEmitTap = true;
             _this.$touches = [];
             _this.$canvas = document.createElement('canvas');
             _this.$context = _this.$canvas.getContext('2d');
@@ -1162,17 +1163,25 @@
             return bounds;
         };
         Layer.prototype.$getContentBounds = function () {
+            var bounds;
             var children = this.$children;
-            var bounds = Rectangle.create();
             for (var _i = 0, children_4 = children; _i < children_4.length; _i++) {
                 var child = children_4[_i];
-                var childBounds = this.$getChildBounds(child);
-                bounds.top = Math.min(bounds.top ? bounds.top : Infinity, childBounds.top);
-                bounds.bottom = Math.max(bounds.bottom ? bounds.bottom : -Infinity, childBounds.bottom);
-                bounds.left = Math.min(bounds.left ? bounds.left : Infinity, childBounds.left);
-                bounds.right = Math.max(bounds.right ? bounds.right : -Infinity, childBounds.right);
-                childBounds.release();
+                if (child.$visible) {
+                    var childBounds = this.$getChildBounds(child);
+                    if (bounds) {
+                        bounds.top = Math.min(bounds.top, childBounds.top);
+                        bounds.bottom = Math.max(bounds.bottom, childBounds.bottom);
+                        bounds.left = Math.min(bounds.left, childBounds.left);
+                        bounds.right = Math.max(bounds.right, childBounds.right);
+                        childBounds.release();
+                    }
+                    else {
+                        bounds = childBounds;
+                    }
+                }
             }
+            bounds = bounds || Rectangle.create();
             return bounds;
         };
         Layer.prototype.$emitTouchEvent = function (event, inside) {
@@ -1182,6 +1191,7 @@
             var touches = this.$touches;
             var identifier = event.identifier;
             if (type === TouchEvent.TOUCH_START) {
+                this.$shouldEmitTap = true;
                 touches[identifier] = true;
             }
             else if (!touches[identifier]) {
@@ -1189,6 +1199,9 @@
             }
             else if (type === TouchEvent.TOUCH_TAP || type === TouchEvent.TOUCH_CANCEL) {
                 touches[identifier] = false;
+            }
+            if (type === TouchEvent.TOUCH_MOVE) {
+                this.$shouldEmitTap = false;
             }
             var children = this.$children;
             for (var i = children.length - 1; i >= 0; --i) {
@@ -1210,7 +1223,10 @@
                     }
                 }
             }
-            if (!event.cancelBubble && !(type === TouchEvent.TOUCH_TAP && !inside)) {
+            if (type === TouchEvent.TOUCH_TAP && (!inside || !this.$shouldEmitTap)) {
+                return true;
+            }
+            if (!event.cancelBubble) {
                 event.localX = localX;
                 event.localY = localY;
                 event.currentTarget = this;
@@ -1294,7 +1310,7 @@
                 ctx.drawImage(canvas, 0, 0, width, height);
                 ctx.restore();
             }
-            if (globalAlpha !== undefined) {
+            if (globalAlpha !== child.alpha) {
                 ctx.globalAlpha = globalAlpha;
             }
             matrix.release();
@@ -1795,8 +1811,11 @@
             set: function (scrollTop) {
                 var bounds = this.$getContentBounds();
                 var maxScrollTop = this.$scrollHeight - this.$height;
-                this.$scrollTop = Math.max(0, Math.min(scrollTop, maxScrollTop));
-                this.$markDirty();
+                scrollTop = Math.max(0, Math.min(scrollTop, maxScrollTop));
+                if (scrollTop !== this.$scrollTop) {
+                    this.$scrollTop = scrollTop;
+                    this.$markDirty();
+                }
                 bounds.release();
             },
             enumerable: true,
@@ -1809,8 +1828,11 @@
             set: function (scrollLeft) {
                 var bounds = this.$getContentBounds();
                 var maxScrollLeft = this.$scrollWidth - this.width;
-                this.$scrollLeft = Math.max(0, Math.min(scrollLeft, maxScrollLeft));
-                this.$markDirty();
+                scrollLeft = Math.max(0, Math.min(scrollLeft, maxScrollLeft));
+                if (scrollLeft !== this.$scrollLeft) {
+                    this.$scrollLeft = scrollLeft;
+                    this.$markDirty();
+                }
                 bounds.release();
             },
             enumerable: true,
@@ -1826,6 +1848,8 @@
             var bounds = this.$getContentBounds();
             this.$scrollWidth = this.$scrollLeft + bounds.right + this.$anchorX;
             this.$scrollHeight = this.$scrollTop + bounds.bottom + this.$anchorY;
+            this.scrollTop = this.$scrollTop;
+            this.scrollLeft = this.$scrollLeft;
         };
         ScrollView.prototype.$onTouchStart = function (e) {
             this.$touchingX = e.localX;
@@ -3159,12 +3183,11 @@
             if (canvas.ontouchstart !== undefined) {
                 canvas.addEventListener('touchstart', function (event) {
                     _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
-                    event.preventDefault();
                 });
                 canvas.addEventListener('touchmove', function (event) {
                     _this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
                     event.preventDefault();
-                }, { passive: false });
+                });
                 canvas.addEventListener('touchend', function (event) {
                     _this.$dispatchTouches(TouchEvent.TOUCH_END, event);
                     _this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
@@ -3176,33 +3199,34 @@
             else {
                 var touching_1 = false;
                 canvas.addEventListener('mousedown', function (event) {
-                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event);
+                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
                     touching_1 = true;
                 });
                 canvas.addEventListener('mousemove', function (event) {
                     if (touching_1) {
-                        _this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event);
+                        _this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
                     }
                 });
                 canvas.addEventListener('mouseup', function (event) {
-                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event);
+                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
                     touching_1 = false;
                 });
                 canvas.addEventListener('click', function (event) {
-                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event);
+                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
                 });
                 window.addEventListener('mouseout', function (event) {
-                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, event);
+                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, event.pageX, event.pageY, 0);
                 });
             }
         };
         Stage.prototype.$dispatchTouches = function (type, event) {
             var touches = event['changedTouches'];
             for (var i = 0, l = touches.length; i < l; ++i) {
-                this.$dispatchTouchEvent(type, touches[i]);
+                var touch = touches[i];
+                this.$dispatchTouchEvent(type, touch.pageX, touch.pageY, touch.identifier);
             }
         };
-        Stage.prototype.$dispatchTouchEvent = function (type, touch) {
+        Stage.prototype.$dispatchTouchEvent = function (type, pageX, pageY, identifier) {
             if (this.$ticker.paused || !this.$visible || !this.touchable) {
                 return;
             }
@@ -3212,8 +3236,8 @@
             var bounds = this.$renderBounds;
             var pixelRatio = Layer.pixelRatio;
             var viewportBounds = this.$viewportCanvas.getBoundingClientRect();
-            var x = (touch.pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
-            var y = (touch.pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+            var x = (pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+            var y = (pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
             var matrix = this.$getTransform();
             var localPos = Vector.create(x, y).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
             var inside = this.$localHitTest(localPos);
@@ -3222,7 +3246,7 @@
                 event.localY = localPos.y;
                 event.targetX = event.stageX = x;
                 event.targetY = event.stageY = y;
-                event.identifier = touch instanceof Touch ? touch.identifier : 0;
+                event.identifier = identifier;
                 this.$emitTouchEvent(event, inside);
             }
             event.release();
