@@ -5,6 +5,11 @@
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.common.js",
   "types": "types/index.d.ts",
+  "files": [
+    "src",
+    "dist/*.js",
+    "types/**/*.d.ts"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "typedoc --theme markdown --out docs",
