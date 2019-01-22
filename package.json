@@ -1,6 +1,6 @@
 {
   "name": "playable.js",
-  "version": "1.11.5",
+  "version": "1.11.6",
   "author": "Jealous",
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.common.js",
@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "typedoc --theme markdown --out docs",
+    "docs": "typedoc --mode file --out docs",
     "clean": "rimraf dist types/*/",
     "build": "npm run clean && rollup -c && npm run uglify && tsc -b types/tsconfig.json",
     "watch": "npm run clean && rollup -c -w",
@@ -40,7 +40,6 @@
     "rollup-plugin-typescript": "^1.0.0",
     "tslib": "^1.9.3",
     "typedoc": "^0.14.2",
-    "typedoc-plugin-markdown": "^1.1.22",
     "typescript": "^3.2.2",
     "uglify-js": "^3.4.9"
   }
