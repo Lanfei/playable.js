@@ -1,10 +1,11 @@
 import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript';
+import pkg from './package.json';
 
 module.exports = [{
 	input: 'src/index.ts',
 	output: {
-		file: 'dist/playable.common.js',
+		file: pkg.main,
 		format: 'cjs'
 	},
 	plugins: [
@@ -14,8 +15,18 @@ module.exports = [{
 }, {
 	input: 'src/index.ts',
 	output: {
+		file: pkg.module,
+		format: 'esm'
+	},
+	plugins: [
+		commonjs(),
+		typescript({tsconfig: false})
+	]
+}, {
+	input: 'src/index.ts',
+	output: {
 		name: 'playable',
-		file: 'dist/playable.js',
+		file: pkg.browser,
 		format: 'umd'
 	},
 	plugins: [

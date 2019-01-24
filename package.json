@@ -1,9 +1,11 @@
 {
   "name": "playable.js",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "author": "Jealous",
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.common.js",
+  "module": "dist/playable.esm.js",
+  "browser": "dist/playable.js",
   "types": "types/index.d.ts",
   "files": [
     "src",
