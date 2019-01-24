@@ -1,4 +1,4 @@
-# playable.js [![Build Status][build-image]][build-url] [![Version][version-image]][version-url] [![License][license-image]][license-url]
+# playable.js · [![Build Status][build-image]][build-url] [![Version][version-image]][version-url] [![License][license-image]][license-url]
 
 A lightweight HTML5 game engine.
 
