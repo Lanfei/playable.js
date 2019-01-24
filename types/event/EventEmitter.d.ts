@@ -1,4 +1,4 @@
-export default class EventEmitter {
+export declare class EventEmitter {
     protected $events: Object;
     on(event: string, listener: (...args: any[]) => void): this;
     off(event: string, listener?: (...args: any[]) => void): this;

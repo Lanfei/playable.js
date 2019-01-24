@@ -1098,11 +1098,24 @@ var Layer = /** @class */ (function (_super) {
         }
         return this;
     };
+    Layer.prototype.$markDirty = function (sizeDirty) {
+        this.$dirty = true;
+        if (sizeDirty) {
+            this.$resizeParentCanvas();
+        }
+        else {
+            this.$markParentDirty();
+        }
+    };
+    Layer.prototype.$markParentDirty = function () {
+        if (this.$parent) {
+            this.$parent.$markDirty();
+        }
+    };
     Layer.prototype.$resizeCanvas = function () {
         var width = this.$width;
         var height = this.$height;
         var canvas = this.$canvas;
-        var parent = this.$parent;
         var anchorX = this.$anchorX;
         var anchorY = this.$anchorY;
         var context = this.$context;
@@ -1121,10 +1134,12 @@ var Layer = /** @class */ (function (_super) {
         if (context.imageSmoothingEnabled !== smoothing) {
             context.imageSmoothingEnabled = smoothing;
         }
-        if (parent) {
-            parent.$resizeCanvas();
+        this.$markDirty(true);
+    };
+    Layer.prototype.$resizeParentCanvas = function () {
+        if (this.$parent) {
+            this.$parent.$resizeCanvas();
         }
-        this.$dirty = true;
     };
     Layer.prototype.$getTransform = function () {
         var matrix = Matrix.create();
@@ -1232,9 +1247,9 @@ var Layer = /** @class */ (function (_super) {
         }
         return true;
     };
-    Layer.prototype.$getPattern = function (image, fillMode) {
-        if (image && fillMode && fillMode !== 'scale' && fillMode !== 'no-repeat') {
-            return this.$context.createPattern(image.element, fillMode);
+    Layer.prototype.$getPattern = function (texture, fillMode) {
+        if (texture && fillMode && fillMode !== 'scale' && fillMode !== 'no-repeat') {
+            return this.$context.createPattern(texture.element, fillMode);
         }
         else {
             return null;
@@ -1259,22 +1274,22 @@ var Layer = /** @class */ (function (_super) {
         bounds.release();
         return true;
     };
-    Layer.prototype.$drawBackground = function (color, image, pattern, fillMode, context) {
+    Layer.prototype.$drawBackground = function (color, texture, pattern, fillMode, context) {
         var ctx = context || this.$context;
         var canvas = ctx.canvas;
         var width = canvas.width;
         var height = canvas.height;
-        var scale = Layer.pixelRatio / (image ? image.pixelRatio : 1);
+        var scale = Layer.pixelRatio / (texture ? texture.pixelRatio : 1);
         if (color) {
             ctx.fillStyle = color;
             ctx.fillRect(0, 0, width, height);
         }
-        if (image) {
+        if (texture) {
             if (fillMode === 'scale') {
-                ctx.drawImage(image.element, 0, 0, width, height);
+                ctx.drawImage(texture.element, 0, 0, width, height);
             }
             else if (fillMode === 'no-repeat') {
-                ctx.drawImage(image.element, 0, 0, image.width * scale, image.height * scale);
+                ctx.drawImage(texture.element, 0, 0, texture.width * scale, texture.height * scale);
             }
             else if (pattern) {
                 scale !== 1 && ctx.scale(scale, scale);
@@ -1391,15 +1406,6 @@ var Layer = /** @class */ (function (_super) {
         for (var _i = 0, children_7 = children; _i < children_7.length; _i++) {
             var child = children_7[_i];
             child.emit(Event.ADDED_TO_STAGE);
-        }
-    };
-    Layer.prototype.$markDirty = function () {
-        this.$dirty = true;
-        this.$markParentDirty();
-    };
-    Layer.prototype.$markParentDirty = function () {
-        if (this.$parent) {
-            this.$parent.$markDirty();
         }
     };
     Layer.pixelRatio = window.devicePixelRatio || 1;
@@ -1779,9 +1785,9 @@ var Tween = /** @class */ (function (_super) {
     return Tween;
 }(EventEmitter));
 
-var ScrollView = /** @class */ (function (_super) {
-    __extends(ScrollView, _super);
-    function ScrollView() {
+var Scroller = /** @class */ (function (_super) {
+    __extends(Scroller, _super);
+    function Scroller() {
         var _this = _super.call(this) || this;
         _this.$scrollTop = 0;
         _this.$scrollLeft = 0;
@@ -1802,7 +1808,7 @@ var ScrollView = /** @class */ (function (_super) {
         _this.on(TouchEvent.TOUCH_CANCEL, _this.$onTouchCancel);
         return _this;
     }
-    Object.defineProperty(ScrollView.prototype, "scrollTop", {
+    Object.defineProperty(Scroller.prototype, "scrollTop", {
         get: function () {
             return this.$scrollTop;
         },
@@ -1819,7 +1825,7 @@ var ScrollView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ScrollView.prototype, "scrollLeft", {
+    Object.defineProperty(Scroller.prototype, "scrollLeft", {
         get: function () {
             return this.$scrollLeft;
         },
@@ -1836,12 +1842,12 @@ var ScrollView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    ScrollView.prototype.$getChildTransform = function (child) {
+    Scroller.prototype.$getChildTransform = function (child) {
         var matrix = _super.prototype.$getChildTransform.call(this, child);
         matrix.translate(-this.$scrollLeft, -this.$scrollTop);
         return matrix;
     };
-    ScrollView.prototype.$resizeCanvas = function () {
+    Scroller.prototype.$resizeCanvas = function () {
         _super.prototype.$resizeCanvas.call(this);
         var bounds = this.$getContentBounds();
         this.$scrollWidth = this.$scrollLeft + bounds.right + this.$anchorX;
@@ -1849,7 +1855,7 @@ var ScrollView = /** @class */ (function (_super) {
         this.scrollTop = this.$scrollTop;
         this.scrollLeft = this.$scrollLeft;
     };
-    ScrollView.prototype.$onTouchStart = function (e) {
+    Scroller.prototype.$onTouchStart = function (e) {
         this.$touchingX = e.localX;
         this.$touchingY = e.localY;
         this.$velocitiesX.length = 0;
@@ -1861,7 +1867,7 @@ var ScrollView = /** @class */ (function (_super) {
             this.$inertiaTween = null;
         }
     };
-    ScrollView.prototype.$onTouchMove = function (e) {
+    Scroller.prototype.$onTouchMove = function (e) {
         if (e.identifier !== this.$touchingId) {
             return;
         }
@@ -1873,7 +1879,7 @@ var ScrollView = /** @class */ (function (_super) {
         var velocitiesY = this.$velocitiesY;
         var offsetX = e.localX - this.$touchingX;
         var offsetY = e.localY - this.$touchingY;
-        var scrollingView = ScrollView.scrollingView || this;
+        var scrollingView = Scroller.scrollingView || this;
         velocitiesX.push(offsetX / dt);
         velocitiesY.push(offsetY / dt);
         if (velocitiesX.length > 5) {
@@ -1887,16 +1893,16 @@ var ScrollView = /** @class */ (function (_super) {
             this.scrollTop -= offsetY;
             this.scrollLeft -= offsetX;
             if (this.$scrollLeft !== scrollLeft || this.$scrollTop !== scrollTop) {
-                ScrollView.scrollingView = this;
+                Scroller.scrollingView = this;
             }
         }
     };
-    ScrollView.prototype.$onTouchEnd = function (e) {
+    Scroller.prototype.$onTouchEnd = function (e) {
         if (e.identifier !== this.$touchingId) {
             return;
         }
-        if (ScrollView.scrollingView === this) {
-            ScrollView.scrollingView = null;
+        if (Scroller.scrollingView === this) {
+            Scroller.scrollingView = null;
         }
         else {
             return;
@@ -1925,49 +1931,49 @@ var ScrollView = /** @class */ (function (_super) {
         }
         this.$touchingId = null;
     };
-    ScrollView.prototype.$onTouchCancel = function (e) {
+    Scroller.prototype.$onTouchCancel = function (e) {
         if (e.identifier === this.$touchingId) {
             this.$touchingId = null;
         }
     };
-    ScrollView.prototype.$onRemovedFromStage = function (stage) {
+    Scroller.prototype.$onRemovedFromStage = function (stage) {
         _super.prototype.$onRemovedFromStage.call(this, stage);
         if (this.$inertiaTween) {
             this.$inertiaTween.pause();
         }
     };
-    return ScrollView;
+    return Scroller;
 }(Layer));
 
-var ImageView = /** @class */ (function (_super) {
-    __extends(ImageView, _super);
-    function ImageView(image, width, height) {
+var Image = /** @class */ (function (_super) {
+    __extends(Image, _super);
+    function Image(texture, width, height) {
         var _this = _super.call(this) || this;
-        if (image) {
+        if (texture) {
             _this.$width = width;
             _this.$height = height;
-            _this.$boundOnImageLoad = _this.$onImageLoad.bind(_this);
-            _this.image = image;
+            _this.$boundOnTextureLoad = _this.$onTextureLoad.bind(_this);
+            _this.texture = texture;
         }
         return _this;
     }
-    Object.defineProperty(ImageView.prototype, "image", {
+    Object.defineProperty(Image.prototype, "texture", {
         get: function () {
-            return this.$image;
+            return this.$texture;
         },
-        set: function (image) {
-            this.$image = image;
-            if (image.width && image.height) {
+        set: function (texture) {
+            this.$texture = texture;
+            if (texture.width && texture.height) {
                 this.$resizeCanvas();
             }
             else if (!this.$width || !this.$height) {
-                image.on('load', this.$boundOnImageLoad);
+                texture.on('load', this.$boundOnTextureLoad);
             }
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ImageView.prototype, "clipRect", {
+    Object.defineProperty(Image.prototype, "clipRect", {
         get: function () {
             return this.$clipRect;
         },
@@ -1978,7 +1984,7 @@ var ImageView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ImageView.prototype, "scale9Grid", {
+    Object.defineProperty(Image.prototype, "scale9Grid", {
         get: function () {
             return this.$scale9Grid;
         },
@@ -1989,12 +1995,12 @@ var ImageView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    ImageView.prototype.$onImageLoad = function () {
+    Image.prototype.$onTextureLoad = function () {
         this.$resizeCanvas();
-        this.$image.off('load', this.$boundOnImageLoad);
+        this.$texture.off('load', this.$boundOnTextureLoad);
     };
-    ImageView.prototype.$getContentBounds = function () {
-        var image = this.$image;
+    Image.prototype.$getContentBounds = function () {
+        var texture = this.$texture;
         var clipRect = this.$clipRect;
         var bounds = _super.prototype.$getContentBounds.call(this);
         bounds.x = Math.min(bounds.left, -this.$anchorX);
@@ -2004,25 +2010,25 @@ var ImageView = /** @class */ (function (_super) {
             bounds.height = Math.max(bounds.height, clipRect.height);
         }
         else {
-            bounds.width = Math.max(bounds.width, image.width);
-            bounds.height = Math.max(bounds.height, image.height);
+            bounds.width = Math.max(bounds.width, texture.width);
+            bounds.height = Math.max(bounds.height, texture.height);
         }
         return bounds;
     };
-    ImageView.prototype.$drawImage = function (sourceX, sourceY, sourceW, sourceH, targetX, targetY, targetW, targetH) {
-        var image = this.$image;
+    Image.prototype.$drawTexture = function (sourceX, sourceY, sourceW, sourceH, targetX, targetY, targetW, targetH) {
         var ctx = this.$context;
-        var pixelRatio = image.pixelRatio;
+        var texture = this.$texture;
+        var pixelRatio = texture.pixelRatio;
         if (sourceW > 0 && sourceH > 0 && targetW > 0 && targetH > 0) {
-            ctx.drawImage(image.element, sourceX * pixelRatio, sourceY * pixelRatio, sourceW * pixelRatio, sourceH * pixelRatio, targetX, targetY, targetW, targetH);
+            ctx.drawImage(texture.element, sourceX * pixelRatio, sourceY * pixelRatio, sourceW * pixelRatio, sourceH * pixelRatio, targetX, targetY, targetW, targetH);
         }
     };
-    ImageView.prototype.$render = function () {
+    Image.prototype.$render = function () {
         if (!this.$dirty) {
             return 0;
         }
-        var image = this.$image;
         var canvas = this.$canvas;
+        var texture = this.$texture;
         var anchorX = this.$anchorX;
         var anchorY = this.$anchorY;
         var clipRect = this.$clipRect;
@@ -2035,8 +2041,8 @@ var ImageView = /** @class */ (function (_super) {
         var height = canvas.height;
         var clipX = clipRect ? clipRect.x : 0;
         var clipY = clipRect ? clipRect.y : 0;
-        var clipWidth = clipRect ? clipRect.width : image.width;
-        var clipHeight = clipRect ? clipRect.height : image.height;
+        var clipWidth = clipRect ? clipRect.width : texture.width;
+        var clipHeight = clipRect ? clipRect.height : texture.height;
         if (scale9Grid) {
             var sourceX0 = clipX;
             var sourceY0 = clipY;
@@ -2062,32 +2068,32 @@ var ImageView = /** @class */ (function (_super) {
             var targetY2 = targetY1 + targetH1;
             var targetW2 = width - targetW0 - targetW1;
             var targetH2 = height - targetH0 - targetH1;
-            this.$drawImage(sourceX0, sourceY0, sourceW0, sourceH0, targetX0, targetY0, targetW0, targetH0);
-            this.$drawImage(sourceX1, sourceY0, sourceW1, sourceH0, targetX1, targetY0, targetW1, targetH0);
-            this.$drawImage(sourceX2, sourceY0, sourceW2, sourceH0, targetX2, targetY0, targetW2, targetH0);
-            this.$drawImage(sourceX0, sourceY1, sourceW0, sourceH1, targetX0, targetY1, targetW0, targetH1);
-            this.$drawImage(sourceX1, sourceY1, sourceW1, sourceH1, targetX1, targetY1, targetW1, targetH1);
-            this.$drawImage(sourceX2, sourceY1, sourceW2, sourceH1, targetX2, targetY1, targetW2, targetH1);
-            this.$drawImage(sourceX0, sourceY2, sourceW0, sourceH2, targetX0, targetY2, targetW0, targetH2);
-            this.$drawImage(sourceX1, sourceY2, sourceW1, sourceH2, targetX1, targetY2, targetW1, targetH2);
-            this.$drawImage(sourceX2, sourceY2, sourceW2, sourceH2, targetX2, targetY2, targetW2, targetH2);
+            this.$drawTexture(sourceX0, sourceY0, sourceW0, sourceH0, targetX0, targetY0, targetW0, targetH0);
+            this.$drawTexture(sourceX1, sourceY0, sourceW1, sourceH0, targetX1, targetY0, targetW1, targetH0);
+            this.$drawTexture(sourceX2, sourceY0, sourceW2, sourceH0, targetX2, targetY0, targetW2, targetH0);
+            this.$drawTexture(sourceX0, sourceY1, sourceW0, sourceH1, targetX0, targetY1, targetW0, targetH1);
+            this.$drawTexture(sourceX1, sourceY1, sourceW1, sourceH1, targetX1, targetY1, targetW1, targetH1);
+            this.$drawTexture(sourceX2, sourceY1, sourceW2, sourceH1, targetX2, targetY1, targetW2, targetH1);
+            this.$drawTexture(sourceX0, sourceY2, sourceW0, sourceH2, targetX0, targetY2, targetW0, targetH2);
+            this.$drawTexture(sourceX1, sourceY2, sourceW1, sourceH2, targetX1, targetY2, targetW1, targetH2);
+            this.$drawTexture(sourceX2, sourceY2, sourceW2, sourceH2, targetX2, targetY2, targetW2, targetH2);
         }
         else {
-            this.$drawImage(clipX, clipY, clipWidth, clipHeight, x, y, width, height);
+            this.$drawTexture(clipX, clipY, clipWidth, clipHeight, x, y, width, height);
         }
         return drawCalls;
     };
-    return ImageView;
+    return Image;
 }(Layer));
 
-var TextView = /** @class */ (function (_super) {
-    __extends(TextView, _super);
-    function TextView(text, options) {
+var Text = /** @class */ (function (_super) {
+    __extends(Text, _super);
+    function Text(text, options) {
         if (options === void 0) { options = {}; }
         var _this = _super.call(this) || this;
         _this.$text = '';
         _this.$color = 'black';
-        _this.$fontSize = TextView.defaultFontSize;
+        _this.$fontSize = Text.defaultFontSize;
         _this.$fontStyle = 'normal';
         _this.$fontWeight = 'normal';
         _this.$textAlign = 'left';
@@ -2115,10 +2121,12 @@ var TextView = /** @class */ (function (_super) {
         _this.$fontFamily = options.fontFamily || _this.$fontFamily;
         _this.$multiline = options.multiline || _this.$multiline;
         _this.$breakWord = options.breakWord || _this.$breakWord;
+        _this.$autoFitSize = options.autoFitSize || _this.autoFitSize;
+        _this.$minFontSize = options.minFontSize || _this.minFontSize;
         _this.$resizeCanvas();
         return _this;
     }
-    Object.defineProperty(TextView.prototype, "text", {
+    Object.defineProperty(Text.prototype, "text", {
         get: function () {
             return this.$text;
         },
@@ -2129,7 +2137,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "color", {
+    Object.defineProperty(Text.prototype, "color", {
         get: function () {
             return this.$color;
         },
@@ -2140,7 +2148,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "fontSize", {
+    Object.defineProperty(Text.prototype, "fontSize", {
         get: function () {
             return this.$fontSize;
         },
@@ -2151,7 +2159,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "fontStyle", {
+    Object.defineProperty(Text.prototype, "fontStyle", {
         get: function () {
             return this.$fontStyle;
         },
@@ -2162,7 +2170,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "fontWeight", {
+    Object.defineProperty(Text.prototype, "fontWeight", {
         get: function () {
             return this.$fontWeight;
         },
@@ -2173,7 +2181,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "textAlign", {
+    Object.defineProperty(Text.prototype, "textAlign", {
         get: function () {
             return this.$textAlign;
         },
@@ -2184,7 +2192,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "verticalAlign", {
+    Object.defineProperty(Text.prototype, "verticalAlign", {
         get: function () {
             return this.$verticalAlign;
         },
@@ -2195,7 +2203,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "lineHeight", {
+    Object.defineProperty(Text.prototype, "lineHeight", {
         get: function () {
             return this.$lineHeight;
         },
@@ -2206,7 +2214,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "strokeSize", {
+    Object.defineProperty(Text.prototype, "strokeSize", {
         get: function () {
             return this.$strokeSize;
         },
@@ -2217,7 +2225,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "strokeColor", {
+    Object.defineProperty(Text.prototype, "strokeColor", {
         get: function () {
             return this.$strokeColor;
         },
@@ -2228,7 +2236,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "fontFamily", {
+    Object.defineProperty(Text.prototype, "fontFamily", {
         get: function () {
             return this.$fontFamily;
         },
@@ -2239,7 +2247,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "multiline", {
+    Object.defineProperty(Text.prototype, "multiline", {
         get: function () {
             return this.$multiline;
         },
@@ -2250,7 +2258,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "breakWord", {
+    Object.defineProperty(Text.prototype, "breakWord", {
         get: function () {
             return this.$breakWord;
         },
@@ -2261,7 +2269,7 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TextView.prototype, "autoFitSize", {
+    Object.defineProperty(Text.prototype, "autoFitSize", {
         get: function () {
             return this.$autoFitSize;
         },
@@ -2272,26 +2280,37 @@ var TextView = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    TextView.prototype.$updateContext = function () {
+    Object.defineProperty(Text.prototype, "minFontSize", {
+        get: function () {
+            return this.$minFontSize;
+        },
+        set: function (minFontSize) {
+            this.$minFontSize = minFontSize;
+            this.$resizeCanvas();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Text.prototype.$updateContext = function () {
         var ctx = this.$context;
         var fontStyle = this.$fontStyle;
         var fontWeight = this.$fontWeight;
         var pixelRatio = Layer.pixelRatio;
         var fontSize = this.$explicitSize || this.$fontSize;
         var sizeStr = fontSize * pixelRatio + 'px';
-        ctx.font = fontStyle + ' ' + fontWeight + ' ' + sizeStr + ' ' + this.fontFamily;
-        ctx.textAlign = this.textAlign;
+        ctx.font = fontStyle + ' ' + fontWeight + ' ' + sizeStr + ' ' + this.$fontFamily;
+        ctx.textAlign = this.$textAlign;
         ctx.textBaseline = 'top';
-        ctx.fillStyle = this.color;
-        ctx.lineWidth = this.strokeSize * pixelRatio;
-        ctx.strokeStyle = this.strokeColor;
+        ctx.fillStyle = this.$color;
+        ctx.lineWidth = this.$strokeSize * pixelRatio;
+        ctx.strokeStyle = this.$strokeColor;
     };
-    TextView.prototype.$divideUnits = function () {
+    Text.prototype.$divideUnits = function () {
         var units;
         var text = this.$text;
         var breakWord = this.$breakWord;
-        var wordRe = TextView.wordRe;
-        var boundaryRe = TextView.boundaryRe;
+        var wordRe = Text.wordRe;
+        var boundaryRe = Text.boundaryRe;
         if (breakWord) {
             units = text.split('');
         }
@@ -2310,7 +2329,7 @@ var TextView = /** @class */ (function (_super) {
         }
         return units;
     };
-    TextView.prototype.$divideLines = function () {
+    Text.prototype.$divideLines = function () {
         var text = this.$text;
         if (!this.$multiline) {
             this.$lines = [text];
@@ -2344,7 +2363,7 @@ var TextView = /** @class */ (function (_super) {
         }
         lines.push(line);
     };
-    TextView.prototype.$resizeCanvas = function () {
+    Text.prototype.$resizeCanvas = function () {
         var width = this.$width;
         var height = this.$height;
         this.$divideLines();
@@ -2364,7 +2383,7 @@ var TextView = /** @class */ (function (_super) {
         }
         _super.prototype.$resizeCanvas.call(this);
     };
-    TextView.prototype.$getContentBounds = function () {
+    Text.prototype.$getContentBounds = function () {
         var ctx = this.$context;
         var bounds = _super.prototype.$getContentBounds.call(this);
         var lines = this.$lines;
@@ -2379,7 +2398,7 @@ var TextView = /** @class */ (function (_super) {
         bounds.height = Math.max(bounds.height, fontSize * lineHeight * lines.length);
         return bounds;
     };
-    TextView.prototype.$render = function () {
+    Text.prototype.$render = function () {
         if (!this.$dirty) {
             return 0;
         }
@@ -2431,16 +2450,230 @@ var TextView = /** @class */ (function (_super) {
         }
         return drawCalls;
     };
-    TextView.defaultFontSize = 16;
-    TextView.wordRe = /\w+/;
-    TextView.boundaryRe = /\b/;
-    return TextView;
+    Text.defaultFontSize = 16;
+    Text.wordRe = /\w+/;
+    Text.boundaryRe = /\b/;
+    return Text;
 }(Layer));
+
+var Input = /** @class */ (function (_super) {
+    __extends(Input, _super);
+    function Input(value, options) {
+        if (options === void 0) { options = {}; }
+        var _this = _super.call(this, '', options) || this;
+        _this.$value = '';
+        _this.$type = 'text';
+        _this.$maxLength = 0xffffff;
+        _this.$placeholder = '';
+        _this.$placeholderColor = '#888';
+        _this.$explicitColor = 'black';
+        _this.$value = value;
+        _this.$type = options.type || _this.$type;
+        _this.$maxLength = options.maxLength || _this.$maxLength;
+        _this.$placeholder = options.placeholder || _this.$placeholder;
+        _this.$placeholderColor = options.placeholderColor || _this.$placeholderColor;
+        _this.$boundFocus = _this.focus.bind(_this);
+        _this.$updateText();
+        _this.on(TouchEvent.TOUCH_TAP, _this.$onTouchTap);
+        return _this;
+    }
+    Object.defineProperty(Input.prototype, "text", {
+        set: function (text) {
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input.prototype, "value", {
+        get: function () {
+            return this.$value;
+        },
+        set: function (value) {
+            this.$value = value;
+            this.$updateText();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input.prototype, "type", {
+        get: function () {
+            return this.$type;
+        },
+        set: function (type) {
+            this.$type = type;
+            this.$updateText();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input.prototype, "color", {
+        get: function () {
+            return this.$explicitColor;
+        },
+        set: function (color) {
+            this.$explicitColor = color;
+            if (this.$value) {
+                this.$color = color;
+            }
+            else {
+                this.$color = this.$placeholderColor;
+            }
+            this.$markDirty();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input.prototype, "maxLength", {
+        get: function () {
+            return this.$maxLength;
+        },
+        set: function (maxLength) {
+            this.$maxLength = maxLength;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input.prototype, "placeholder", {
+        get: function () {
+            return this.$placeholder;
+        },
+        set: function (placeholder) {
+            this.$placeholder = placeholder;
+            this.$updateText();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Input.prototype.selectAll = function () {
+        var element = this.$updateElement();
+        this.focus();
+        element.selectionStart = 0;
+        element.selectionEnd = this.$value.length;
+        return this;
+    };
+    Input.prototype.focus = function () {
+        var element = this.$updateElement();
+        element.style.display = 'block';
+        element.value = this.$value;
+        element.focus();
+        Input.$focusedInput = this;
+        return this;
+    };
+    Input.prototype.blur = function () {
+        var element = this.$updateElement();
+        element.style.display = 'none';
+        element.blur();
+        if (Input.$focusedInput === this) {
+            this.value = element.value;
+            Input.$focusedInput = null;
+        }
+        return this;
+    };
+    Input.prototype.$updateText = function () {
+        var text;
+        var type = this.$type;
+        var value = this.$value;
+        if (type === 'password') {
+            text = '';
+            for (var i = 0, l = value.length; i < l; ++i) {
+                text += '•';
+            }
+        }
+        else {
+            text = value;
+        }
+        if (text) {
+            this.$text = text;
+        }
+        else {
+            this.$text = this.$placeholder;
+        }
+        this.color = this.$explicitColor;
+        this.$resizeCanvas();
+    };
+    Input.prototype.$updateElement = function () {
+        var tagName = this.$multiline && this.$type === 'text' ? 'textarea' : 'input';
+        var element = Input.$getElement(tagName);
+        var isInput = tagName === 'input';
+        if (isInput) {
+            // @ts-ignore
+            element.type = this.$type;
+        }
+        element.maxLength = this.$maxLength;
+        element.placeholder = this.$placeholder;
+        element.style.left = '0';
+        element.style.bottom = '0';
+        element.style.margin = '0';
+        element.style.width = '100%';
+        element.style.height = (isInput ? this.$fontSize * this.$lineHeight + 24 : this.height) + 'px';
+        element.style.minHeight = isInput ? '0' : (this.$fontSize * this.$lineHeight) * 5 + 12 + 'px';
+        element.style.maxHeight = '50%';
+        element.style.padding = '6px';
+        element.style.border = 'none';
+        element.style.resize = 'none';
+        element.style.outline = 'none';
+        element.style.position = 'fixed';
+        element.style.boxSizing = 'border-box';
+        element.style.color = this.$explicitColor;
+        element.style.fontSize = this.$fontSize + 'px';
+        element.style.fontStyle = this.$fontStyle;
+        element.style.fontFamily = this.$fontFamily;
+        element.style.textAlign = this.$textAlign;
+        element.style.lineHeight = this.$lineHeight + '';
+        element.style.fontWeight = this.$fontWeight + '';
+        element.style.wordBreak = this.$breakWord ? 'break-all' : 'normal';
+        element.style.backgroundColor = this.$backgroundColor;
+        element.style.webkitTapHighlightColor = 'transparent';
+        element.style.boxShadow = '0 0 8px #aaa';
+        return element;
+    };
+    Input.prototype.$markDirty = function (sizeDirty) {
+        _super.prototype.$markDirty.call(this, sizeDirty);
+        if (Input.$focusedInput) {
+            this.$updateElement();
+        }
+    };
+    Input.prototype.$onTouchTap = function () {
+        setTimeout(this.$boundFocus, 100);
+    };
+    Input.$getElement = function (tagName) {
+        var element;
+        if (tagName === 'input') {
+            element = this.$inputElement;
+        }
+        else if (tagName === 'textarea') {
+            element = this.$textAreaElement;
+        }
+        if (!element) {
+            element = document.createElement(tagName);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.addEventListener('input', function () {
+                Input.$focusedInput.value = element.value;
+            });
+            element.addEventListener('blur', function () {
+                Input.$focusedInput.blur();
+            });
+            if (tagName === 'input') {
+                element.addEventListener('keydown', function (e) {
+                    if (e.keyCode === 13) {
+                        Input.$focusedInput.blur();
+                    }
+                });
+                this.$inputElement = element;
+            }
+            else if (tagName === 'textarea') {
+                this.$textAreaElement = element;
+            }
+        }
+        return element;
+    };
+    return Input;
+}(Text));
 
 var MovieClip = /** @class */ (function (_super) {
     __extends(MovieClip, _super);
-    function MovieClip(image, frames) {
-        var _this = _super.call(this, image) || this;
+    function MovieClip(texture, frames) {
+        var _this = _super.call(this, texture) || this;
         _this.$loop = true;
         _this.$paused = true;
         _this.$currentFrame = 0;
@@ -2544,7 +2777,7 @@ var MovieClip = /** @class */ (function (_super) {
         }
     };
     return MovieClip;
-}(ImageView));
+}(Image));
 
 var Request = /** @class */ (function (_super) {
     __extends(Request, _super);
@@ -2698,49 +2931,6 @@ var Media = /** @class */ (function (_super) {
     return Media;
 }(EventEmitter));
 
-var Image = /** @class */ (function (_super) {
-    __extends(Image, _super);
-    function Image(stage) {
-        var _this = _super.call(this, stage) || this;
-        _this.pixelRatio = Image.defaultPixelRatio;
-        var image = document.createElement('img');
-        image.crossOrigin = '*';
-        image.addEventListener('load', _this.$boundOnLoad);
-        image.addEventListener('error', _this.$boundOnError);
-        _this.$element = image;
-        return _this;
-    }
-    Object.defineProperty(Image.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "width", {
-        get: function () {
-            return this.$element.width;
-        },
-        set: function (width) {
-            this.$element.width = width;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "height", {
-        get: function () {
-            return this.$element.height;
-        },
-        set: function (height) {
-            this.$element.height = height;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Image.defaultPixelRatio = 1;
-    return Image;
-}(Media));
-
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
     function Sound(stage) {
@@ -2848,13 +3038,48 @@ var Sound = /** @class */ (function (_super) {
     return Sound;
 }(Media));
 
-var SoundEffect = /** @class */ (function (_super) {
-    __extends(SoundEffect, _super);
-    function SoundEffect(stage) {
-        return _super.call(this, stage) || this;
+var Texture = /** @class */ (function (_super) {
+    __extends(Texture, _super);
+    function Texture(stage) {
+        var _this = _super.call(this, stage) || this;
+        _this.pixelRatio = Texture.defaultPixelRatio;
+        var image = document.createElement('img');
+        image.crossOrigin = '*';
+        image.addEventListener('load', _this.$boundOnLoad);
+        image.addEventListener('error', _this.$boundOnError);
+        _this.$element = image;
+        return _this;
     }
-    return SoundEffect;
-}(Sound));
+    Object.defineProperty(Texture.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Texture.prototype, "width", {
+        get: function () {
+            return this.$element.width;
+        },
+        set: function (width) {
+            this.$element.width = width;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Texture.prototype, "height", {
+        get: function () {
+            return this.$element.height;
+        },
+        set: function (height) {
+            this.$element.height = height;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Texture.defaultPixelRatio = 1;
+    return Texture;
+}(Media));
 
 var ResourceManager = /** @class */ (function (_super) {
     __extends(ResourceManager, _super);
@@ -2976,20 +3201,14 @@ var ResourceManager = /** @class */ (function (_super) {
             resource.on(Event.COMPLETE, successCallback);
             resource.on(Event.ERROR, errorCallback);
         }
-        else if (type === ResourceManager.TYPE_IMAGE) {
-            resource = new Image(stage);
+        else if (type === ResourceManager.TYPE_TEXTURE) {
+            resource = new Texture(stage);
             resource.on(Event.LOAD, successCallback);
             resource.on(Event.ERROR, errorCallback);
             resource.url = url;
         }
         else if (type === ResourceManager.TYPE_SOUND) {
             resource = new Sound(stage);
-            resource.on(Event.LOAD, successCallback);
-            resource.on(Event.ERROR, errorCallback);
-            resource.url = url;
-        }
-        else if (type === ResourceManager.TYPE_SOUND_EFFECT) {
-            resource = new SoundEffect(stage);
             resource.on(Event.LOAD, successCallback);
             resource.on(Event.ERROR, errorCallback);
             resource.url = url;
@@ -3008,9 +3227,8 @@ var ResourceManager = /** @class */ (function (_super) {
     ResourceManager.TYPE_TEXT = 'text';
     ResourceManager.TYPE_JSON = 'json';
     ResourceManager.TYPE_BINARY = 'binary';
-    ResourceManager.TYPE_IMAGE = 'image';
+    ResourceManager.TYPE_TEXTURE = 'texture';
     ResourceManager.TYPE_SOUND = 'sound';
-    ResourceManager.TYPE_SOUND_EFFECT = 'soundEffect';
     return ResourceManager;
 }(EventEmitter));
 
@@ -3044,9 +3262,10 @@ var Stage = /** @class */ (function (_super) {
         this.$addTouchEventListeners();
         this.on(Event.ENTER_FRAME, this.$render);
         ticker.setTimeout(function () {
+            _this.$resizeViewportCanvas();
             _this.emit(Event.ADDED_TO_STAGE, _this);
-        });
-        window.addEventListener('resize', function () {
+        }, 100);
+        window.addEventListener('orientationchange', function () {
             ticker.clearTimeout(resizeTimer);
             resizeTimer = ticker.setTimeout(_this.$boundResizeViewportCanvas, 100);
         });
@@ -3234,8 +3453,8 @@ var Stage = /** @class */ (function (_super) {
         var bounds = this.$renderBounds;
         var pixelRatio = Layer.pixelRatio;
         var viewportBounds = this.$viewportCanvas.getBoundingClientRect();
-        var x = (pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
-        var y = (pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+        var x = (pageX - window.scrollX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+        var y = (pageY - window.scrollY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
         var matrix = this.$getTransform();
         var localPos = Vector.create(x, y).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
         var inside = this.$localHitTest(localPos);
@@ -3336,15 +3555,21 @@ var Stage = /** @class */ (function (_super) {
         this.$calculateRenderBounds();
     };
     Stage.prototype.$resizeViewportCanvas = function () {
+        var canvas = this.$viewportCanvas;
+        var pixelRatio = Layer.pixelRatio;
         var viewportWidth = this.$viewportWidth || window.innerWidth;
         var viewportHeight = this.$viewportHeight || window.innerHeight;
-        this.$viewportCanvas.width = viewportWidth * Layer.pixelRatio;
-        this.$viewportCanvas.height = viewportHeight * Layer.pixelRatio;
-        this.$viewportCanvas.style.transformOrigin = '0 0';
-        this.$viewportCanvas.style.transform = "scale(" + 1 / Layer.pixelRatio + ")";
-        this.$calculateRenderBounds();
-        this.$markDirty();
-        this.emit(Event.VIEWPORT_RESIZE);
+        var canvasWidth = viewportWidth * pixelRatio;
+        var canvasHeight = viewportHeight * pixelRatio;
+        if (canvas.width !== canvasWidth || canvasHeight !== canvasHeight) {
+            this.$viewportCanvas.width = canvasWidth;
+            this.$viewportCanvas.height = canvasHeight;
+            this.$viewportCanvas.style.transformOrigin = '0 0';
+            this.$viewportCanvas.style.transform = "scale(" + 1 / pixelRatio + ")";
+            this.$calculateRenderBounds();
+            this.$markDirty();
+            this.emit(Event.VIEWPORT_RESIZE);
+        }
     };
     Stage.prototype.$render = function () {
         if (!this.$dirty) {
@@ -3381,9 +3606,10 @@ var Stage = /** @class */ (function (_super) {
 
 exports.Ticker = Ticker;
 exports.Layer = Layer;
-exports.ScrollView = ScrollView;
-exports.ImageView = ImageView;
-exports.TextView = TextView;
+exports.Scroller = Scroller;
+exports.Image = Image;
+exports.Text = Text;
+exports.Input = Input;
 exports.MovieClip = MovieClip;
 exports.Stage = Stage;
 exports.Event = Event;
@@ -3393,9 +3619,8 @@ exports.Matrix = Matrix;
 exports.Vector = Vector;
 exports.Rectangle = Rectangle;
 exports.Media = Media;
-exports.Image = Image;
+exports.Texture = Texture;
 exports.Sound = Sound;
-exports.SoundEffect = SoundEffect;
 exports.Ease = Ease;
 exports.Tween = Tween;
 exports.Request = Request;

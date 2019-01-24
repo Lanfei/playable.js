@@ -1,6 +1,6 @@
-import Layer from '../display/Layer';
-import EventEmitter from '../event/EventEmitter';
-export default class Tween extends EventEmitter {
+import { Layer } from '../display/Layer';
+import { EventEmitter } from '../event/EventEmitter';
+export declare class Tween extends EventEmitter {
     loop: boolean;
     protected $target: Layer;
     protected $paused: boolean;

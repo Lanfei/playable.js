@@ -1,12 +1,11 @@
-import Stage from '../display/Stage';
-import EventEmitter from '../event/EventEmitter';
-export default class ResourceManager extends EventEmitter {
+import { Stage } from '../display/Stage';
+import { EventEmitter } from '../event/EventEmitter';
+export declare class ResourceManager extends EventEmitter {
     static readonly TYPE_TEXT: string;
     static readonly TYPE_JSON: string;
     static readonly TYPE_BINARY: string;
-    static readonly TYPE_IMAGE: string;
+    static readonly TYPE_TEXTURE: string;
     static readonly TYPE_SOUND: string;
-    static readonly TYPE_SOUND_EFFECT: string;
     threads: number;
     timeout: number;
     retryTimes: number;

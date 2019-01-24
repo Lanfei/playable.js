@@ -1,13 +1,13 @@
-import Stage from './Stage';
-import Layer from './Layer';
-import Ease from '../tween/Ease';
-import Tween from '../tween/Tween';
-import Matrix from '../geom/Matrix';
-import TouchEvent from '../event/TouchEvent';
+import {Stage} from './Stage';
+import {Layer} from './Layer';
+import {Ease} from '../tween/Ease';
+import {Tween} from '../tween/Tween';
+import {Matrix} from '../geom/Matrix';
+import {TouchEvent} from '../event/TouchEvent';
 
-export default class ScrollView extends Layer {
+export class Scroller extends Layer {
 
-	protected static scrollingView: ScrollView;
+	protected static scrollingView: Scroller;
 
 	protected $scrollTop: number = 0;
 	protected $scrollLeft: number = 0;
@@ -101,7 +101,7 @@ export default class ScrollView extends Layer {
 		let velocitiesY = this.$velocitiesY;
 		let offsetX = e.localX - this.$touchingX;
 		let offsetY = e.localY - this.$touchingY;
-		let scrollingView = ScrollView.scrollingView || this;
+		let scrollingView = Scroller.scrollingView || this;
 		velocitiesX.push(offsetX / dt);
 		velocitiesY.push(offsetY / dt);
 		if (velocitiesX.length > 5) {
@@ -115,7 +115,7 @@ export default class ScrollView extends Layer {
 			this.scrollTop -= offsetY;
 			this.scrollLeft -= offsetX;
 			if (this.$scrollLeft !== scrollLeft || this.$scrollTop !== scrollTop) {
-				ScrollView.scrollingView = this;
+				Scroller.scrollingView = this;
 			}
 		}
 	}
@@ -124,8 +124,8 @@ export default class ScrollView extends Layer {
 		if (e.identifier !== this.$touchingId) {
 			return;
 		}
-		if (ScrollView.scrollingView === this) {
-			ScrollView.scrollingView = null;
+		if (Scroller.scrollingView === this) {
+			Scroller.scrollingView = null;
 		} else {
 			return;
 		}

@@ -1,5 +1,5 @@
-import Vector from './Vector';
-export default class Matrix {
+import { Vector } from './Vector';
+export declare class Matrix {
     a: number;
     b: number;
     c: number;

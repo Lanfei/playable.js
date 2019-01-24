@@ -1,6 +1,6 @@
-import Vector from './Vector';
+import {Vector} from './Vector';
 
-export default class Rectangle {
+export class Rectangle {
 
 	public x: number;
 	public y: number;

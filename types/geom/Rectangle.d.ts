@@ -1,5 +1,5 @@
-import Vector from './Vector';
-export default class Rectangle {
+import { Vector } from './Vector';
+export declare class Rectangle {
     x: number;
     y: number;
     width: number;

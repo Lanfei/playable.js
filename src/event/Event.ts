@@ -1,4 +1,4 @@
-export default class Event {
+export class Event {
 
 	public static readonly ADDED: string = 'added';
 	public static readonly REMOVED: string = 'removed';

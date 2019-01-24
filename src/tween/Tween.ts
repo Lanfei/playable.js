@@ -1,9 +1,9 @@
-import Ease from './Ease';
-import Layer from '../display/Layer';
-import Event from '../event/Event';
-import EventEmitter from '../event/EventEmitter';
+import {Ease} from './Ease';
+import {Layer} from '../display/Layer';
+import {Event} from '../event/Event';
+import {EventEmitter} from '../event/EventEmitter';
 
-export default class Tween extends EventEmitter {
+export class Tween extends EventEmitter {
 
 	public loop: boolean = false;
 

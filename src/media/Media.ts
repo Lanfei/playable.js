@@ -1,8 +1,8 @@
-import Stage from '../display/Stage';
-import Event from '../event/Event';
-import EventEmitter from '../event/EventEmitter';
+import {Stage} from '../display/Stage';
+import {Event} from '../event/Event';
+import {EventEmitter} from '../event/EventEmitter';
 
-export default class Media extends EventEmitter {
+export class Media extends EventEmitter {
 
 	protected $element: HTMLImageElement | HTMLAudioElement;
 

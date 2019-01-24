@@ -1,14 +1,14 @@
-import Stage from './Stage';
-import Image from '../media/Image';
-import Ticker from '../core/Ticker';
-import Matrix from '../geom/Matrix';
-import Vector from '../geom/Vector';
-import Rectangle from '../geom/Rectangle';
-import Event from '../event/Event';
-import TouchEvent from '../event/TouchEvent';
-import EventEmitter from '../event/EventEmitter';
+import {Stage} from './Stage';
+import {Ticker} from '../system/Ticker';
+import {Matrix} from '../geom/Matrix';
+import {Vector} from '../geom/Vector';
+import {Rectangle} from '../geom/Rectangle';
+import {Texture} from '../media/Texture';
+import {Event} from '../event/Event';
+import {TouchEvent} from '../event/TouchEvent';
+import {EventEmitter} from '../event/EventEmitter';
 
-export default class Layer extends EventEmitter {
+export class Layer extends EventEmitter {
 
 	public static pixelRatio: number = window.devicePixelRatio || 1;
 
@@ -31,7 +31,7 @@ export default class Layer extends EventEmitter {
 	protected $visible: boolean = true;
 	protected $smoothing: boolean = true;
 	protected $backgroundColor: string = null;
-	protected $backgroundImage: Image = null;
+	protected $backgroundImage: Texture = null;
 	protected $backgroundPattern: CanvasPattern = null;
 	protected $backgroundFillMode: BackgroundFillMode = 'scale';
 	protected $dirty: boolean = true;
@@ -196,11 +196,11 @@ export default class Layer extends EventEmitter {
 		}
 	}
 
-	public get backgroundImage(): Image {
+	public get backgroundImage(): Texture {
 		return this.$backgroundImage;
 	}
 
-	public set backgroundImage(backgroundImage: Image) {
+	public set backgroundImage(backgroundImage: Texture) {
 		if (this.$backgroundImage !== backgroundImage) {
 			this.$backgroundImage = backgroundImage;
 			this.$backgroundPattern = this.$getPattern(this.$backgroundImage, this.$backgroundFillMode);
@@ -421,11 +421,25 @@ export default class Layer extends EventEmitter {
 		return this;
 	}
 
+	protected $markDirty(sizeDirty?: boolean): void {
+		this.$dirty = true;
+		if (sizeDirty) {
+			this.$resizeParentCanvas();
+		} else {
+			this.$markParentDirty();
+		}
+	}
+
+	protected $markParentDirty(): void {
+		if (this.$parent) {
+			this.$parent.$markDirty();
+		}
+	}
+
 	protected $resizeCanvas(): void {
 		let width = this.$width;
 		let height = this.$height;
 		let canvas = this.$canvas;
-		let parent = this.$parent;
 		let anchorX = this.$anchorX;
 		let anchorY = this.$anchorY;
 		let context = this.$context;
@@ -443,10 +457,13 @@ export default class Layer extends EventEmitter {
 		if (context.imageSmoothingEnabled !== smoothing) {
 			context.imageSmoothingEnabled = smoothing;
 		}
-		if (parent) {
-			parent.$resizeCanvas();
+		this.$markDirty(true);
+	}
+
+	protected $resizeParentCanvas(): void {
+		if (this.$parent) {
+			this.$parent.$resizeCanvas();
 		}
-		this.$dirty = true;
 	}
 
 	protected $getTransform(): Matrix {
@@ -556,9 +573,9 @@ export default class Layer extends EventEmitter {
 		return true;
 	}
 
-	protected $getPattern(image: Image, fillMode: BackgroundFillMode): CanvasPattern {
-		if (image && fillMode && fillMode !== 'scale' && fillMode !== 'no-repeat') {
-			return this.$context.createPattern(image.element, fillMode);
+	protected $getPattern(texture: Texture, fillMode: BackgroundFillMode): CanvasPattern {
+		if (texture && fillMode && fillMode !== 'scale' && fillMode !== 'no-repeat') {
+			return this.$context.createPattern(texture.element, fillMode);
 		} else {
 			return null;
 		}
@@ -585,21 +602,21 @@ export default class Layer extends EventEmitter {
 		return true;
 	}
 
-	protected $drawBackground(color: string, image: Image, pattern: CanvasPattern, fillMode: BackgroundFillMode, context?: CanvasRenderingContext2D): void {
+	protected $drawBackground(color: string, texture: Texture, pattern: CanvasPattern, fillMode: BackgroundFillMode, context?: CanvasRenderingContext2D): void {
 		let ctx = context || this.$context;
 		let canvas = ctx.canvas;
 		let width = canvas.width;
 		let height = canvas.height;
-		let scale = Layer.pixelRatio / (image ? image.pixelRatio : 1);
+		let scale = Layer.pixelRatio / (texture ? texture.pixelRatio : 1);
 		if (color) {
 			ctx.fillStyle = color;
 			ctx.fillRect(0, 0, width, height);
 		}
-		if (image) {
+		if (texture) {
 			if (fillMode === 'scale') {
-				ctx.drawImage(image.element, 0, 0, width, height);
+				ctx.drawImage(texture.element, 0, 0, width, height);
 			} else if (fillMode === 'no-repeat') {
-				ctx.drawImage(image.element, 0, 0, image.width * scale, image.height * scale);
+				ctx.drawImage(texture.element, 0, 0, texture.width * scale, texture.height * scale);
 			} else if (pattern) {
 				scale !== 1 && ctx.scale(scale, scale);
 				ctx.fillStyle = pattern;
@@ -718,17 +735,6 @@ export default class Layer extends EventEmitter {
 		this.$stage = null;
 		for (let child of children) {
 			child.emit(Event.ADDED_TO_STAGE);
-		}
-	}
-
-	protected $markDirty(): void {
-		this.$dirty = true;
-		this.$markParentDirty();
-	}
-
-	protected $markParentDirty(): void {
-		if (this.$parent) {
-			this.$parent.$markDirty();
 		}
 	}
 

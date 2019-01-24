@@ -1,9 +1,9 @@
-import ImageView from './ImageView';
-import Image from '../media/Image';
-import Event from '../event/Event';
-import Rectangle from '../geom/Rectangle';
+import {Image} from './Image';
+import {Event} from '../event/Event';
+import {Texture} from '../media/Texture';
+import {Rectangle} from '../geom/Rectangle';
 
-export default class MovieClip extends ImageView {
+export class MovieClip extends Image {
 
 	protected $loop: boolean = true;
 	protected $paused: boolean = true;
@@ -13,8 +13,8 @@ export default class MovieClip extends ImageView {
 	protected $timer: number;
 	protected $boundNextFrame: Function;
 
-	public constructor(image: Image, frames: Array<MovieClipFrameData>) {
-		super(image);
+	public constructor(texture: Texture, frames: Array<MovieClipFrameData>) {
+		super(texture);
 		this.$frames = frames;
 		this.$boundNextFrame = this.nextFrame.bind(this);
 		this.play();

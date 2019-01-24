@@ -1,4 +1,4 @@
-export default class Ease {
+export class Ease {
 	public static linear(t: number, b: number, c: number, d: number): number {
 		return c * t / d + b;
 	}

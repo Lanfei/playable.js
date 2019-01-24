@@ -1,20 +1,18 @@
-import Request from './Request';
-import Media from '../media/Media';
-import Image from '../media/Image';
-import Sound from '../media/Sound';
-import SoundEffect from '../media/SoundEffect';
-import Stage from '../display/Stage';
-import Event from '../event/Event';
-import EventEmitter from '../event/EventEmitter';
+import {Request} from './Request';
+import {Media} from '../media/Media';
+import {Sound} from '../media/Sound';
+import {Texture} from '../media/Texture';
+import {Stage} from '../display/Stage';
+import {Event} from '../event/Event';
+import {EventEmitter} from '../event/EventEmitter';
 
-export default class ResourceManager extends EventEmitter {
+export class ResourceManager extends EventEmitter {
 
 	public static readonly TYPE_TEXT: string = 'text';
 	public static readonly TYPE_JSON: string = 'json';
 	public static readonly TYPE_BINARY: string = 'binary';
-	public static readonly TYPE_IMAGE: string = 'image';
+	public static readonly TYPE_TEXTURE: string = 'texture';
 	public static readonly TYPE_SOUND: string = 'sound';
-	public static readonly TYPE_SOUND_EFFECT: string = 'soundEffect';
 
 	public threads: number;
 	public timeout: number;
@@ -126,18 +124,13 @@ export default class ResourceManager extends EventEmitter {
 			resource = new Request(url, {responseType: 'arraybuffer'});
 			resource.on(Event.COMPLETE, successCallback);
 			resource.on(Event.ERROR, errorCallback);
-		} else if (type === ResourceManager.TYPE_IMAGE) {
-			resource = new Image(stage);
+		} else if (type === ResourceManager.TYPE_TEXTURE) {
+			resource = new Texture(stage);
 			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
 			resource.url = url;
 		} else if (type === ResourceManager.TYPE_SOUND) {
 			resource = new Sound(stage);
-			resource.on(Event.LOAD, successCallback);
-			resource.on(Event.ERROR, errorCallback);
-			resource.url = url;
-		} else if (type === ResourceManager.TYPE_SOUND_EFFECT) {
-			resource = new SoundEffect(stage);
 			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
 			resource.url = url;

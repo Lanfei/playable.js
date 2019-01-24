@@ -1,6 +1,6 @@
-import Media from './Media';
-import Stage from '../display/Stage';
-export default class Sound extends Media {
+import { Media } from './Media';
+import { Stage } from '../display/Stage';
+export declare class Sound extends Media {
     protected $loops: number;
     protected $startTime: number;
     protected $paused: boolean;

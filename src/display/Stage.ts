@@ -1,13 +1,13 @@
-import Layer, {BackgroundFillMode} from './Layer';
-import Image from '../media/Image';
-import Ticker from '../core/Ticker';
-import Vector from '../geom/Vector';
-import Rectangle from '../geom/Rectangle';
-import Event from '../event/Event';
-import TouchEvent from '../event/TouchEvent';
-import ResourceManager, {ResourceInfo, ResourceManagerOption} from '../net/ResourceManager';
+import {Layer, BackgroundFillMode} from './Layer';
+import {Ticker} from '../system/Ticker';
+import {Vector} from '../geom/Vector';
+import {Rectangle} from '../geom/Rectangle';
+import {Texture} from '../media/Texture';
+import {Event} from '../event/Event';
+import {TouchEvent} from '../event/TouchEvent';
+import {ResourceManager, ResourceInfo, ResourceManagerOption} from '../net/ResourceManager';
 
-export default class Stage extends Layer {
+export class Stage extends Layer {
 
 	public static readonly NO_SCALE: string = 'noScale';
 	public static readonly NO_BORDER: string = 'noBorder';
@@ -24,7 +24,7 @@ export default class Stage extends Layer {
 	protected $viewportHeight: number;
 	protected $renderBounds: Rectangle;
 	protected $viewportBackgroundColor: string;
-	protected $viewportBackgroundImage: Image;
+	protected $viewportBackgroundImage: Texture;
 	protected $viewportBackgroundPattern: CanvasPattern;
 	protected $viewportBackgroundFillMode: BackgroundFillMode = 'scale';
 	protected readonly $ticker: Ticker;
@@ -60,9 +60,10 @@ export default class Stage extends Layer {
 		this.$addTouchEventListeners();
 		this.on(Event.ENTER_FRAME, this.$render);
 		ticker.setTimeout(() => {
+			this.$resizeViewportCanvas();
 			this.emit(Event.ADDED_TO_STAGE, this);
-		});
-		window.addEventListener('resize', () => {
+		}, 100);
+		window.addEventListener('orientationchange', () => {
 			ticker.clearTimeout(resizeTimer);
 			resizeTimer = ticker.setTimeout(this.$boundResizeViewportCanvas, 100);
 		});
@@ -128,11 +129,11 @@ export default class Stage extends Layer {
 		}
 	}
 
-	public get viewportBackgroundImage(): Image {
+	public get viewportBackgroundImage(): Texture {
 		return this.$viewportBackgroundImage;
 	}
 
-	public set viewportBackgroundImage(viewportBackgroundImage: Image) {
+	public set viewportBackgroundImage(viewportBackgroundImage: Texture) {
 		if (this.$viewportBackgroundImage !== viewportBackgroundImage) {
 			this.$viewportBackgroundImage = viewportBackgroundImage;
 			this.$viewportBackgroundPattern = this.$getPattern(this.$viewportBackgroundImage, this.$viewportBackgroundFillMode);
@@ -227,8 +228,8 @@ export default class Stage extends Layer {
 		let bounds = this.$renderBounds;
 		let pixelRatio = Layer.pixelRatio;
 		let viewportBounds = this.$viewportCanvas.getBoundingClientRect();
-		let x = (pageX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
-		let y = (pageY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+		let x = (pageX - window.scrollX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+		let y = (pageY - window.scrollY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
 		let matrix = this.$getTransform();
 		let localPos = Vector.create(x, y).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
 		let inside = this.$localHitTest(localPos);
@@ -322,15 +323,21 @@ export default class Stage extends Layer {
 	}
 
 	protected $resizeViewportCanvas(): void {
+		let canvas = this.$viewportCanvas;
+		let pixelRatio = Layer.pixelRatio;
 		let viewportWidth = this.$viewportWidth || window.innerWidth;
 		let viewportHeight = this.$viewportHeight || window.innerHeight;
-		this.$viewportCanvas.width = viewportWidth * Layer.pixelRatio;
-		this.$viewportCanvas.height = viewportHeight * Layer.pixelRatio;
-		this.$viewportCanvas.style.transformOrigin = '0 0';
-		this.$viewportCanvas.style.transform = `scale(${1 / Layer.pixelRatio})`;
-		this.$calculateRenderBounds();
-		this.$markDirty();
-		this.emit(Event.VIEWPORT_RESIZE);
+		let canvasWidth = viewportWidth * pixelRatio;
+		let canvasHeight = viewportHeight * pixelRatio;
+		if (canvas.width !== canvasWidth || canvasHeight !== canvasHeight) {
+			this.$viewportCanvas.width = canvasWidth;
+			this.$viewportCanvas.height = canvasHeight;
+			this.$viewportCanvas.style.transformOrigin = '0 0';
+			this.$viewportCanvas.style.transform = `scale(${1 / pixelRatio})`;
+			this.$calculateRenderBounds();
+			this.$markDirty();
+			this.emit(Event.VIEWPORT_RESIZE);
+		}
 	}
 
 	protected $render(): number {

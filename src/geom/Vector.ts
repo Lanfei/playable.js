@@ -1,6 +1,6 @@
-import Matrix from './Matrix';
+import {Matrix} from './Matrix';
 
-export default class Vector {
+export class Vector {
 
 	public x: number;
 	public y: number;

@@ -26,8 +26,8 @@ You can browse the source of the NPM package at [cdn.jsdelivr.net/npm/playable.j
 
 ```js
 let stage = new playable.Stage();
-let textView = new playable.TextView('Hello playable.js');
-stage.addChild(textView);
+let text = new playable.Text('Hello playable.js');
+stage.addChild(text);
 ```
 
 ## Documentation

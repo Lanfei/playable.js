@@ -1,10 +1,10 @@
-import Layer, { BackgroundFillMode } from './Layer';
-import Image from '../media/Image';
-import Ticker from '../core/Ticker';
-import Rectangle from '../geom/Rectangle';
-import Event from '../event/Event';
-import ResourceManager, { ResourceInfo, ResourceManagerOption } from '../net/ResourceManager';
-export default class Stage extends Layer {
+import { Layer, BackgroundFillMode } from './Layer';
+import { Ticker } from '../system/Ticker';
+import { Rectangle } from '../geom/Rectangle';
+import { Texture } from '../media/Texture';
+import { Event } from '../event/Event';
+import { ResourceManager, ResourceInfo, ResourceManagerOption } from '../net/ResourceManager';
+export declare class Stage extends Layer {
     static readonly NO_SCALE: string;
     static readonly NO_BORDER: string;
     static readonly SHOW_ALL: string;
@@ -19,7 +19,7 @@ export default class Stage extends Layer {
     protected $viewportHeight: number;
     protected $renderBounds: Rectangle;
     protected $viewportBackgroundColor: string;
-    protected $viewportBackgroundImage: Image;
+    protected $viewportBackgroundImage: Texture;
     protected $viewportBackgroundPattern: CanvasPattern;
     protected $viewportBackgroundFillMode: BackgroundFillMode;
     protected readonly $ticker: Ticker;
@@ -34,7 +34,7 @@ export default class Stage extends Layer {
     viewportWidth: number;
     viewportHeight: number;
     viewportBackgroundColor: string;
-    viewportBackgroundImage: Image;
+    viewportBackgroundImage: Texture;
     viewportBackgroundFillMode: BackgroundFillMode;
     readonly drawCalls: number;
     readonly fps: number;

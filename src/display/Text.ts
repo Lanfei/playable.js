@@ -1,7 +1,7 @@
-import Layer from './Layer';
-import Rectangle from '../geom/Rectangle';
+import {Layer} from './Layer';
+import {Rectangle} from '../geom/Rectangle';
 
-export default class TextView extends Layer {
+export class Text extends Layer {
 
 	public static defaultFontSize = 16;
 	private static readonly wordRe: RegExp = /\w+/;
@@ -9,7 +9,7 @@ export default class TextView extends Layer {
 
 	protected $text: string = '';
 	protected $color: string = 'black';
-	protected $fontSize: number = TextView.defaultFontSize;
+	protected $fontSize: number = Text.defaultFontSize;
 	protected $fontStyle: FontStyle = 'normal';
 	protected $fontWeight: FontWeight = 'normal';
 	protected $textAlign: TextAlign = 'left';
@@ -25,7 +25,7 @@ export default class TextView extends Layer {
 	protected $explicitSize: number = 0;
 	protected $lines: Array<string> = [];
 
-	public constructor(text?: string, options: TextViewOption = {}) {
+	public constructor(text?: string, options: TextOption = {}) {
 		super();
 		this.$text = text || this.$text;
 		this.$color = options.color || this.$color;
@@ -40,6 +40,8 @@ export default class TextView extends Layer {
 		this.$fontFamily = options.fontFamily || this.$fontFamily;
 		this.$multiline = options.multiline || this.$multiline;
 		this.$breakWord = options.breakWord || this.$breakWord;
+		this.$autoFitSize = options.autoFitSize || this.autoFitSize;
+		this.$minFontSize = options.minFontSize || this.minFontSize;
 		this.$resizeCanvas();
 	}
 
@@ -169,6 +171,15 @@ export default class TextView extends Layer {
 		this.$resizeCanvas();
 	}
 
+	public get minFontSize(): number {
+		return this.$minFontSize;
+	}
+
+	public set minFontSize(minFontSize: number) {
+		this.$minFontSize = minFontSize;
+		this.$resizeCanvas();
+	}
+
 	protected $updateContext(): void {
 		let ctx = this.$context;
 		let fontStyle = this.$fontStyle;
@@ -176,20 +187,20 @@ export default class TextView extends Layer {
 		let pixelRatio = Layer.pixelRatio;
 		let fontSize = this.$explicitSize || this.$fontSize;
 		let sizeStr = fontSize * pixelRatio + 'px';
-		ctx.font = fontStyle + ' ' + fontWeight + ' ' + sizeStr + ' ' + this.fontFamily;
-		ctx.textAlign = this.textAlign;
+		ctx.font = fontStyle + ' ' + fontWeight + ' ' + sizeStr + ' ' + this.$fontFamily;
+		ctx.textAlign = this.$textAlign;
 		ctx.textBaseline = 'top';
-		ctx.fillStyle = this.color;
-		ctx.lineWidth = this.strokeSize * pixelRatio;
-		ctx.strokeStyle = this.strokeColor;
+		ctx.fillStyle = this.$color;
+		ctx.lineWidth = this.$strokeSize * pixelRatio;
+		ctx.strokeStyle = this.$strokeColor;
 	}
 
 	protected $divideUnits(): Array<string> {
 		let units;
 		let text = this.$text;
 		let breakWord = this.$breakWord;
-		let wordRe = TextView.wordRe;
-		let boundaryRe = TextView.boundaryRe;
+		let wordRe = Text.wordRe;
+		let boundaryRe = Text.boundaryRe;
 		if (breakWord) {
 			units = text.split('');
 		} else {
@@ -328,7 +339,7 @@ export type FontWeight = 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 
 export type TextAlign = 'left' | 'right' | 'center';
 export type VerticalAlign = 'top' | 'middle' | 'bottom';
 
-export interface TextViewOption {
+export interface TextOption {
 	color?: string;
 	fontSize?: number;
 	fontWeight?: FontWeight;
@@ -341,4 +352,6 @@ export interface TextViewOption {
 	fontFamily?: string;
 	multiline?: boolean;
 	breakWord?: boolean;
+	autoFitSize?: boolean;
+	minFontSize?: number;
 }

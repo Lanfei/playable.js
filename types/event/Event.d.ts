@@ -1,4 +1,4 @@
-export default class Event {
+export declare class Event {
     static readonly ADDED: string;
     static readonly REMOVED: string;
     static readonly ADDED_TO_STAGE: string;

@@ -1,12 +1,12 @@
-import Stage from './Stage';
-import Image from '../media/Image';
-import Ticker from '../core/Ticker';
-import Matrix from '../geom/Matrix';
-import Vector from '../geom/Vector';
-import Rectangle from '../geom/Rectangle';
-import TouchEvent from '../event/TouchEvent';
-import EventEmitter from '../event/EventEmitter';
-export default class Layer extends EventEmitter {
+import { Stage } from './Stage';
+import { Ticker } from '../system/Ticker';
+import { Matrix } from '../geom/Matrix';
+import { Vector } from '../geom/Vector';
+import { Rectangle } from '../geom/Rectangle';
+import { Texture } from '../media/Texture';
+import { TouchEvent } from '../event/TouchEvent';
+import { EventEmitter } from '../event/EventEmitter';
+export declare class Layer extends EventEmitter {
     static pixelRatio: number;
     name: string;
     tag: string;
@@ -26,7 +26,7 @@ export default class Layer extends EventEmitter {
     protected $visible: boolean;
     protected $smoothing: boolean;
     protected $backgroundColor: string;
-    protected $backgroundImage: Image;
+    protected $backgroundImage: Texture;
     protected $backgroundPattern: CanvasPattern;
     protected $backgroundFillMode: BackgroundFillMode;
     protected $dirty: boolean;
@@ -51,7 +51,7 @@ export default class Layer extends EventEmitter {
     rotation: number;
     alpha: number;
     backgroundColor: string;
-    backgroundImage: Image;
+    backgroundImage: Texture;
     backgroundFillMode: BackgroundFillMode;
     visible: boolean;
     smoothing: boolean;
@@ -78,16 +78,19 @@ export default class Layer extends EventEmitter {
     removeChildrenByTag(tag: string): this;
     removeAllChildren(): this;
     removeSelf(): this;
+    protected $markDirty(sizeDirty?: boolean): void;
+    protected $markParentDirty(): void;
     protected $resizeCanvas(): void;
+    protected $resizeParentCanvas(): void;
     protected $getTransform(): Matrix;
     protected $getChildTransform(child: Layer): Matrix;
     protected $getChildBounds(child: Layer): Rectangle;
     protected $getContentBounds(): Rectangle;
     protected $emitTouchEvent(event: TouchEvent, inside: boolean): boolean;
-    protected $getPattern(image: Image, fillMode: BackgroundFillMode): CanvasPattern;
+    protected $getPattern(texture: Texture, fillMode: BackgroundFillMode): CanvasPattern;
     protected $localHitTest(vector: Vector): boolean;
     protected $isChildVisible(child: Layer): boolean;
-    protected $drawBackground(color: string, image: Image, pattern: CanvasPattern, fillMode: BackgroundFillMode, context?: CanvasRenderingContext2D): void;
+    protected $drawBackground(color: string, texture: Texture, pattern: CanvasPattern, fillMode: BackgroundFillMode, context?: CanvasRenderingContext2D): void;
     protected $drawChild(child: Layer): number;
     protected $render(): number;
     on(event: string, listener: (...args: any[]) => void): this;
@@ -96,7 +99,5 @@ export default class Layer extends EventEmitter {
     protected $onRemoved(): void;
     protected $onAddedToStage(stage: Stage): void;
     protected $onRemovedFromStage(stage: Stage): void;
-    protected $markDirty(): void;
-    protected $markParentDirty(): void;
 }
 export declare type BackgroundFillMode = 'scale' | 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat';

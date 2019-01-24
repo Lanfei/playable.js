@@ -1,4 +1,4 @@
-export default class Ease {
+export declare class Ease {
     static linear(t: number, b: number, c: number, d: number): number;
     static easeInQuad(t: number, b: number, c: number, d: number): number;
     static easeOutQuad(t: number, b: number, c: number, d: number): number;

@@ -1,6 +1,6 @@
-import Event from '../event/Event';
-import EventEmitter from '../event/EventEmitter';
-export default class Request extends EventEmitter {
+import { Event } from '../event/Event';
+import { EventEmitter } from '../event/EventEmitter';
+export declare class Request extends EventEmitter {
     protected $xhr: XMLHttpRequest;
     constructor(options: RequestOption);
     constructor(url: string, options?: RequestOption);

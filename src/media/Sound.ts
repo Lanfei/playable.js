@@ -1,8 +1,8 @@
-import Media from './Media';
-import Event from '../event/Event';
-import Stage from '../display/Stage';
+import {Media} from './Media';
+import {Event} from '../event/Event';
+import {Stage} from '../display/Stage';
 
-export default class Sound extends Media {
+export class Sound extends Media {
 
 	protected $loops: number = 1;
 	protected $startTime: number = 0;

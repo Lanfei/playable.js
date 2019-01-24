@@ -1,11 +1,11 @@
-import Media from './Media';
-import Stage from '../display/Stage';
+import {Media} from './Media';
+import {Stage} from '../display/Stage';
 
-export default class Image extends Media {
+export class Texture extends Media {
 
 	public static defaultPixelRatio: number = 1;
 
-	public pixelRatio: number = Image.defaultPixelRatio;
+	public pixelRatio: number = Texture.defaultPixelRatio;
 	protected $element: HTMLImageElement;
 
 	public constructor(stage: Stage) {

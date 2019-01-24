@@ -1,7 +1,7 @@
-import Layer from '../display/Layer';
-import Stage from '../display/Stage';
-import EventEmitter from '../event/EventEmitter';
-export default class Ticker extends EventEmitter {
+import { Layer } from '../display/Layer';
+import { Stage } from '../display/Stage';
+import { EventEmitter } from '../event/EventEmitter';
+export declare class Ticker extends EventEmitter {
     protected $fps: number;
     private $stage;
     private $paused;

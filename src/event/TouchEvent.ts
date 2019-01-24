@@ -1,7 +1,7 @@
-import Event from './Event';
-import Layer from '../display/Layer';
+import {Event} from './Event';
+import {Layer} from '../display/Layer';
 
-export default class TouchEvent extends Event {
+export class TouchEvent extends Event {
 
 	public static readonly TOUCH_START: string = 'touchStart';
 	public static readonly TOUCH_MOVE: string = 'touchMove';

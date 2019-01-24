@@ -1,7 +1,7 @@
-import ImageView from './ImageView';
-import Image from '../media/Image';
-import Rectangle from '../geom/Rectangle';
-export default class MovieClip extends ImageView {
+import { Image } from './Image';
+import { Texture } from '../media/Texture';
+import { Rectangle } from '../geom/Rectangle';
+export declare class MovieClip extends Image {
     protected $loop: boolean;
     protected $paused: boolean;
     protected $currentFrame: number;
@@ -9,7 +9,7 @@ export default class MovieClip extends ImageView {
     protected $interval: number;
     protected $timer: number;
     protected $boundNextFrame: Function;
-    constructor(image: Image, frames: Array<MovieClipFrameData>);
+    constructor(texture: Texture, frames: Array<MovieClipFrameData>);
     loop: boolean;
     paused: boolean;
     currentFrame: number;
