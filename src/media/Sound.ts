@@ -102,9 +102,14 @@ export class Sound extends Media {
 
 	protected $onLoad(): void {
 		super.$onLoad();
-		this.$element.play()
-			.then(this.$checkStatus.bind(this))
-			.catch(this.$checkOnTouch.bind(this));
+		let promise = this.$element.play();
+		if (promise) {
+			promise
+				.then(this.$checkStatus.bind(this))
+				.catch(this.$checkOnTouch.bind(this));
+		} else {
+			this.$checkOnTouch();
+		}
 	}
 
 }

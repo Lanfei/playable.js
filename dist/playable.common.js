@@ -3032,8 +3032,14 @@ var Sound = /** @class */ (function (_super) {
     };
     Sound.prototype.$onLoad = function () {
         _super.prototype.$onLoad.call(this);
-        this.$element.play()
-            .then(this.$checkStatus.bind(this))["catch"](this.$checkOnTouch.bind(this));
+        var promise = this.$element.play();
+        if (promise) {
+            promise
+                .then(this.$checkStatus.bind(this))["catch"](this.$checkOnTouch.bind(this));
+        }
+        else {
+            this.$checkOnTouch();
+        }
     };
     return Sound;
 }(Media));

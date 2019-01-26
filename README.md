@@ -7,7 +7,7 @@ A lightweight HTML5 game engine.
 ### Webpack/Browserify
 
 ```bash
-$ npm install playable.js
+npm install playable.js
 ```
 
 ### Direct `<script>` Include
