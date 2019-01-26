@@ -2985,7 +2985,10 @@
             document.addEventListener('touchend', this.$boundOnTouch);
         };
         Sound.prototype.$checkStatus = function () {
-            this.$element.play()["catch"]();
+            var promise = this.$element.play();
+            if (promise) {
+                promise["catch"]();
+            }
             if (this.$paused) {
                 this.$element.pause();
             }

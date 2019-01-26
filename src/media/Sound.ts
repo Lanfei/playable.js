@@ -50,7 +50,10 @@ export class Sound extends Media {
 	}
 
 	protected $checkStatus(): void {
-		this.$element.play().catch();
+		let promise = this.$element.play();
+		if (promise) {
+			promise.catch();
+		}
 		if (this.$paused) {
 			this.$element.pause();
 		}
