@@ -187,24 +187,24 @@ export class Stage extends Layer {
 			});
 		} else {
 			let touching = false;
-			document.addEventListener('mousedown', event => {
+			window.addEventListener('mousedown', event => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
 				touching = true;
 			});
-			document.addEventListener('mousemove', event => {
+			window.addEventListener('mousemove', event => {
 				if (touching) {
 					this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
 				}
 			});
-			document.addEventListener('mouseup', event => {
+			window.addEventListener('mouseup', event => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
 				touching = false;
 			});
-			document.addEventListener('click', event => {
+			window.addEventListener('click', event => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
 			});
-			window.addEventListener('mouseout', event => {
-				this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, event.pageX, event.pageY, 0);
+			window.addEventListener('blur', () => {
+				this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, 0, 0, 0);
 			});
 		}
 	}

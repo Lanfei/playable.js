@@ -3425,24 +3425,24 @@
             }
             else {
                 var touching_1 = false;
-                document.addEventListener('mousedown', function (event) {
+                window.addEventListener('mousedown', function (event) {
                     _this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
                     touching_1 = true;
                 });
-                document.addEventListener('mousemove', function (event) {
+                window.addEventListener('mousemove', function (event) {
                     if (touching_1) {
                         _this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
                     }
                 });
-                document.addEventListener('mouseup', function (event) {
+                window.addEventListener('mouseup', function (event) {
                     _this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
                     touching_1 = false;
                 });
-                document.addEventListener('click', function (event) {
+                window.addEventListener('click', function (event) {
                     _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
                 });
-                window.addEventListener('mouseout', function (event) {
-                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, event.pageX, event.pageY, 0);
+                window.addEventListener('blur', function () {
+                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, 0, 0, 0);
                 });
             }
         };
