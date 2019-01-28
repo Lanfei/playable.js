@@ -170,38 +170,37 @@ export class Stage extends Layer {
 	}
 
 	protected $addTouchEventListeners(): void {
-		let canvas = this.$viewportCanvas;
-		if (canvas.ontouchstart !== undefined) {
-			canvas.addEventListener('touchstart', event => {
+		if (document.ontouchstart !== undefined) {
+			document.addEventListener('touchstart', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_START, event);
 			});
-			canvas.addEventListener('touchmove', event => {
+			document.addEventListener('touchmove', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
 				event.preventDefault();
 			});
-			canvas.addEventListener('touchend', event => {
+			document.addEventListener('touchend', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_END, event);
 				this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
 			});
-			canvas.addEventListener('touchcancel', event => {
+			document.addEventListener('touchcancel', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
 			});
 		} else {
 			let touching = false;
-			canvas.addEventListener('mousedown', event => {
+			document.addEventListener('mousedown', event => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
 				touching = true;
 			});
-			canvas.addEventListener('mousemove', event => {
+			document.addEventListener('mousemove', event => {
 				if (touching) {
 					this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
 				}
 			});
-			canvas.addEventListener('mouseup', event => {
+			document.addEventListener('mouseup', event => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
 				touching = false;
 			});
-			canvas.addEventListener('click', event => {
+			document.addEventListener('click', event => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
 			});
 			window.addEventListener('mouseout', event => {
@@ -223,13 +222,15 @@ export class Stage extends Layer {
 			return;
 		}
 		let event = TouchEvent.create(type);
+		let scrollX = window.scrollX || 0;
+		let scrollY = window.scrollY || 0;
 		let width = this.$canvas.width;
 		let height = this.$canvas.height;
 		let bounds = this.$renderBounds;
 		let pixelRatio = Layer.pixelRatio;
 		let viewportBounds = this.$viewportCanvas.getBoundingClientRect();
-		let x = (pageX - window.scrollX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
-		let y = (pageY - window.scrollY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+		let x = (pageX - scrollX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+		let y = (pageY - scrollY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
 		let matrix = this.$getTransform();
 		let localPos = Vector.create(x, y).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
 		let inside = this.$localHitTest(localPos);

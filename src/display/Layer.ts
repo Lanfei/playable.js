@@ -675,7 +675,7 @@ export class Layer extends EventEmitter {
 		let pixelRatio = Layer.pixelRatio;
 
 		ctx.globalAlpha = 1;
-		ctx.resetTransform();
+		ctx.setTransform(1, 0, 0, 1, 0, 0);
 		ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 		this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode);
 		ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
