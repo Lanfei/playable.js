@@ -32,7 +32,7 @@ stage.addChild(text);
 
 ## Documentation
 
-Check out the documentation [here](http://lanfei.github.io/playable.js/docs/).
+Check out the documentation [here](http://lanfei.github.io/playable.js/docs/globals.html).
 
 [build-url]: https://circleci.com/gh/Lanfei/playable.js
 [build-image]: https://img.shields.io/circleci/project/github/Lanfei/playable.js.svg
