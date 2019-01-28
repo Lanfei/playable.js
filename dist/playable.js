@@ -1349,7 +1349,7 @@
             var backgroundFillMode = this.$backgroundFillMode;
             var pixelRatio = Layer.pixelRatio;
             ctx.globalAlpha = 1;
-            ctx.resetTransform();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.clearRect(0, 0, canvasWidth, canvasHeight);
             this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode);
             ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
@@ -3407,39 +3407,38 @@
         };
         Stage.prototype.$addTouchEventListeners = function () {
             var _this = this;
-            var canvas = this.$viewportCanvas;
-            if (canvas.ontouchstart !== undefined) {
-                canvas.addEventListener('touchstart', function (event) {
+            if (document.ontouchstart !== undefined) {
+                document.addEventListener('touchstart', function (event) {
                     _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
                 });
-                canvas.addEventListener('touchmove', function (event) {
+                document.addEventListener('touchmove', function (event) {
                     _this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
                     event.preventDefault();
                 });
-                canvas.addEventListener('touchend', function (event) {
+                document.addEventListener('touchend', function (event) {
                     _this.$dispatchTouches(TouchEvent.TOUCH_END, event);
                     _this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
                 });
-                canvas.addEventListener('touchcancel', function (event) {
+                document.addEventListener('touchcancel', function (event) {
                     _this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
                 });
             }
             else {
                 var touching_1 = false;
-                canvas.addEventListener('mousedown', function (event) {
+                document.addEventListener('mousedown', function (event) {
                     _this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
                     touching_1 = true;
                 });
-                canvas.addEventListener('mousemove', function (event) {
+                document.addEventListener('mousemove', function (event) {
                     if (touching_1) {
                         _this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
                     }
                 });
-                canvas.addEventListener('mouseup', function (event) {
+                document.addEventListener('mouseup', function (event) {
                     _this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
                     touching_1 = false;
                 });
-                canvas.addEventListener('click', function (event) {
+                document.addEventListener('click', function (event) {
                     _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
                 });
                 window.addEventListener('mouseout', function (event) {
@@ -3459,13 +3458,15 @@
                 return;
             }
             var event = TouchEvent.create(type);
+            var scrollX = window.scrollX || 0;
+            var scrollY = window.scrollY || 0;
             var width = this.$canvas.width;
             var height = this.$canvas.height;
             var bounds = this.$renderBounds;
             var pixelRatio = Layer.pixelRatio;
             var viewportBounds = this.$viewportCanvas.getBoundingClientRect();
-            var x = (pageX - window.scrollX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
-            var y = (pageY - window.scrollY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+            var x = (pageX - scrollX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+            var y = (pageY - scrollY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
             var matrix = this.$getTransform();
             var localPos = Vector.create(x, y).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
             var inside = this.$localHitTest(localPos);
