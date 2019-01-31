@@ -23,7 +23,7 @@ Simply [download](https://github.com/Lanfei/playable.js/releases) and include wi
 ### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/playable.js/dist/playable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/playable.js"></script>
 ```
 
 You can browse the source of the NPM package at [cdn.jsdelivr.net/npm/playable.js](https://cdn.jsdelivr.net/npm/playable.js/).
