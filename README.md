@@ -1,4 +1,10 @@
-# playable.js · [![Build Status][build-image]][build-url] [![Version][version-image]][version-url] [![License][license-image]][license-url]
+# playable.js
+
+[![Build Status][build-image]][build-url]
+[![Version][version-image]][version-url]
+[![License][license-image]][license-url]
+[![Dependencies][dep-image]][dep-url]
+[![DevDependencies][dev-dep-image]][dev-dep-url]
 
 A lightweight HTML5 game engine.
 
@@ -42,3 +48,7 @@ Check out the documentation [here](http://lanfei.github.io/playable.js/docs/glob
 [version-image]: https://img.shields.io/npm/v/playable.js.svg
 [license-url]: https://github.com/Lanfei/playable.js/blob/master/LICENSE
 [license-image]: https://img.shields.io/npm/l/playable.js.svg
+[dep-url]: https://david-dm.org/Lanfei/playable.js
+[dep-image]: https://david-dm.org/Lanfei/playable.js/status.svg
+[dev-dep-url]: https://david-dm.org/Lanfei/playable.js?type=dev
+[dev-dep-image]: https://david-dm.org/Lanfei/playable.js/dev-status.svg

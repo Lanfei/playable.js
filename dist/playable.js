@@ -38,19 +38,33 @@
             this.type = null;
             this.type = type;
         }
+        /** @event added */
         Event.ADDED = 'added';
+        /** @event removed */
         Event.REMOVED = 'removed';
-        Event.ADDED_TO_STAGE = 'addToStage';
+        /** @event addedToStage */
+        Event.ADDED_TO_STAGE = 'addedToStage';
+        /** @event removeFromStage */
         Event.REMOVED_FROM_STAGE = 'removeFromStage';
+        /** @event enterFrame */
         Event.ENTER_FRAME = 'enterFrame';
+        /** @event tick */
         Event.TICK = 'tick';
+        /** @event tickerPause */
         Event.TICKER_PAUSE = 'tickerPause';
+        /** @event tickerResume */
         Event.TICKER_RESUME = 'tickerResume';
+        /** @event viewportResize */
         Event.VIEWPORT_RESIZE = 'viewportResize';
+        /** @event load */
         Event.LOAD = 'load';
+        /** @event error */
         Event.ERROR = 'error';
+        /** @event progress */
         Event.PROGRESS = 'progress';
+        /** @event complete */
         Event.COMPLETE = 'complete';
+        /** @event soundComplete */
         Event.SOUND_COMPLETE = 'soundComplete';
         return Event;
     }());
@@ -645,10 +659,15 @@
         TouchEvent.recycle = function (e) {
             this.$pool.push(e);
         };
+        /** @event touchStart */
         TouchEvent.TOUCH_START = 'touchStart';
+        /** @event touchMove */
         TouchEvent.TOUCH_MOVE = 'touchMove';
+        /** @event touchEnd */
         TouchEvent.TOUCH_END = 'touchEnd';
+        /** @event touchCancel */
         TouchEvent.TOUCH_CANCEL = 'touchCancel';
+        /** @event touchTap */
         TouchEvent.TOUCH_TAP = 'touchTap';
         TouchEvent.$pool = [];
         return TouchEvent;

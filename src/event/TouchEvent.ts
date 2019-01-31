@@ -3,10 +3,15 @@ import {Layer} from '../display/Layer';
 
 export class TouchEvent extends Event {
 
+	/** @event touchStart */
 	public static readonly TOUCH_START: string = 'touchStart';
+	/** @event touchMove */
 	public static readonly TOUCH_MOVE: string = 'touchMove';
+	/** @event touchEnd */
 	public static readonly TOUCH_END: string = 'touchEnd';
+	/** @event touchCancel */
 	public static readonly TOUCH_CANCEL: string = 'touchCancel';
+	/** @event touchTap */
 	public static readonly TOUCH_TAP: string = 'touchTap';
 
 	public target: Layer;
