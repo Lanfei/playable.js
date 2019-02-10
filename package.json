@@ -1,6 +1,6 @@
 {
   "name": "playable.js",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "author": "Jealous",
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.common.js",
@@ -15,9 +15,11 @@
   "scripts": {
     "test": "karma start --single-run",
     "coverage": "npm run test && codecov",
-    "docs": "typedoc --mode file --out docs",
+    "docs": "typedoc --theme markdown --mode file --readme none --name 'API Reference' --out docs && vuepress build",
+    "docs:dev": "npm run docs && vuepress dev",
+    "docs:build": "npm run docs && vuepress build",
     "clean": "rimraf dist types/*/ types/index.d.ts",
-    "build": "npm run clean && rollup -c && npm run uglify && tsc -b types/tsconfig.json && npm run docs",
+    "build": "npm run clean && rollup -c && npm run uglify && tsc -b types/tsconfig.json",
     "watch": "npm run clean && rollup -c -w",
     "uglify": "uglifyjs dist/playable.js -o dist/playable.min.js -c --source-map",
     "prepublish": "npm run test"
@@ -55,7 +57,9 @@
     "rollup-plugin-typescript": "^1.0.0",
     "tslib": "^1.9.3",
     "typedoc": "^0.14.2",
+    "typedoc-plugin-markdown": "^1.1.26",
     "typescript": "^3.3.3",
-    "uglify-js": "^3.4.9"
+    "uglify-js": "^3.4.9",
+    "vuepress": "^0.14.8"
   }
 }

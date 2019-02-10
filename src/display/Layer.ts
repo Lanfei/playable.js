@@ -10,7 +10,7 @@ import {EventEmitter} from '../event/EventEmitter';
 
 export class Layer extends EventEmitter {
 
-	public static pixelRatio: number = window.devicePixelRatio || 1;
+	public static pixelRatio: number = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1;
 
 	public name: string = '';
 	public tag: string = '';

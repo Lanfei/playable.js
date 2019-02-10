@@ -1568,7 +1568,7 @@ var Layer = /** @class */ (function (_super) {
         }
         return this;
     };
-    Layer.pixelRatio = window.devicePixelRatio || 1;
+    Layer.pixelRatio = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1;
     return Layer;
 }(EventEmitter));
 
