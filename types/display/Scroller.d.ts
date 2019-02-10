@@ -1,4 +1,3 @@
-import { Stage } from './Stage';
 import { Layer } from './Layer';
 import { Tween } from '../tween/Tween';
 import { Matrix } from '../geom/Matrix';
@@ -19,11 +18,13 @@ export declare class Scroller extends Layer {
     constructor();
     scrollTop: number;
     scrollLeft: number;
+    readonly scrollWidth: number;
+    readonly scrollHeight: number;
     protected $getChildTransform(child: Layer): Matrix;
     protected $resizeCanvas(): void;
     protected $onTouchStart(e: TouchEvent): void;
     protected $onTouchMove(e: TouchEvent): void;
     protected $onTouchEnd(e: TouchEvent): void;
     protected $onTouchCancel(e: TouchEvent): void;
-    protected $onRemovedFromStage(stage: Stage): void;
+    protected $emitRemovedFromStage(): void;
 }

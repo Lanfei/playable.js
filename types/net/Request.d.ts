@@ -8,6 +8,7 @@ export declare class Request extends EventEmitter {
     readonly response: any;
     readonly responseHeaders: Object;
     abort(): void;
+    protected $onAbort(): void;
     protected $onProgress(e: ProgressEvent): void;
     protected $onReadyStateChange(e: Event): void;
     protected static $getContentType(headers: Object): string;

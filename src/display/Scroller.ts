@@ -1,4 +1,3 @@
-import {Stage} from './Stage';
 import {Layer} from './Layer';
 import {Ease} from '../tween/Ease';
 import {Tween} from '../tween/Tween';
@@ -59,6 +58,14 @@ export class Scroller extends Layer {
 			this.$markDirty();
 		}
 		bounds.release();
+	}
+
+	public get scrollWidth(): number {
+		return this.$scrollWidth;
+	}
+
+	public get scrollHeight(): number {
+		return this.$scrollHeight;
 	}
 
 	protected $getChildTransform(child: Layer): Matrix {
@@ -160,10 +167,11 @@ export class Scroller extends Layer {
 		}
 	}
 
-	protected $onRemovedFromStage(stage: Stage): void {
-		super.$onRemovedFromStage(stage);
+	protected $emitRemovedFromStage(): void {
+		super.$emitRemovedFromStage();
 		if (this.$inertiaTween) {
 			this.$inertiaTween.pause();
+			this.$inertiaTween = null;
 		}
 	}
 

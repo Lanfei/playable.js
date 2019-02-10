@@ -1,14 +1,13 @@
 import { Stage } from '../display/Stage';
-import { Event } from '../event/Event';
 import { EventEmitter } from '../event/EventEmitter';
 export declare class Media extends EventEmitter {
-    protected $element: HTMLImageElement | HTMLAudioElement;
-    protected $stage: Stage;
-    protected $boundOnLoad: () => void;
-    protected $boundOnError: (e: Event) => void;
-    constructor(stage: Stage);
+    protected readonly $element: HTMLImageElement | HTMLAudioElement;
+    protected readonly $stage: Stage;
+    protected readonly $boundOnLoad: () => void;
+    protected readonly $boundOnError: (e: ErrorEvent) => void;
+    protected constructor(stage: Stage);
     readonly element: HTMLImageElement | HTMLAudioElement;
     url: string;
     protected $onLoad(): void;
-    protected $onError(e: Event): void;
+    protected $onError(e: ErrorEvent): void;
 }

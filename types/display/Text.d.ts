@@ -2,8 +2,8 @@ import { Layer } from './Layer';
 import { Rectangle } from '../geom/Rectangle';
 export declare class Text extends Layer {
     static defaultFontSize: number;
-    private static readonly wordRe;
-    private static readonly boundaryRe;
+    protected static readonly wordRe: RegExp;
+    protected static readonly boundaryRe: RegExp;
     protected $text: string;
     protected $color: string;
     protected $fontSize: number;

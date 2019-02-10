@@ -9,21 +9,21 @@ export declare class ResourceManager extends EventEmitter {
     threads: number;
     timeout: number;
     retryTimes: number;
-    private $errorCount;
-    private $loadedCount;
-    private $loadingCount;
-    private $list;
-    private readonly $total;
-    private readonly $stage;
-    private readonly $resources;
+    protected $errorCount: number;
+    protected $loadedCount: number;
+    protected $loadingCount: number;
+    protected $list: Array<ResourceInfo>;
+    protected readonly $total: number;
+    protected readonly $stage: Stage;
+    protected readonly $resources: Object;
     constructor(stage: Stage, list: Array<ResourceInfo>, options?: ResourceManagerOption);
     readonly total: number;
     readonly errorCount: number;
     readonly loadedCount: number;
-    private $checkPendingTasks;
-    private $load;
+    protected $checkPendingTasks(): void;
+    protected $load(info: ResourceInfo, attempts: number): void;
     has(name: string): boolean;
-    get<Media>(name: string): Media;
+    get<Resource>(name: string): Resource;
 }
 export interface ResourceInfo {
     name: string;

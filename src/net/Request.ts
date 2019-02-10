@@ -20,7 +20,7 @@ export class Request extends EventEmitter {
 		}
 		if (options) {
 			url = options.url || url;
-			method = options.method;
+			method = options.method || 'get';
 			headers = options.headers;
 			data = options.data;
 			responseType = options.responseType;
@@ -43,6 +43,7 @@ export class Request extends EventEmitter {
 				xhr.setRequestHeader(key, headers[key]);
 			});
 		}
+		xhr.addEventListener('abort', this.$onAbort.bind(this));
 		xhr.addEventListener('progress', this.$onProgress.bind(this));
 		xhr.addEventListener('readystatechange', this.$onReadyStateChange.bind(this));
 		xhr.send(data);
@@ -80,9 +81,15 @@ export class Request extends EventEmitter {
 		this.$xhr.abort();
 	}
 
+	protected $onAbort(): void {
+		this.emit(Event.ABORT);
+	}
+
 	protected $onProgress(e: ProgressEvent): void {
 		if (e.lengthComputable) {
-			this.emit(Event.PROGRESS, e.loaded / e.total);
+			let event = Event.create(Event.PROGRESS, e.loaded / e.total);
+			this.emit(event);
+			event.release();
 		}
 	}
 
@@ -92,8 +99,11 @@ export class Request extends EventEmitter {
 			if (xhr.status >= 400 || xhr.status === 0) {
 				this.emit(Event.ERROR, e);
 			} else {
-				this.emit(Event.COMPLETE);
+				let event = Event.create(Event.LOAD, xhr.response);
+				this.emit(event);
+				event.release();
 			}
+			this.emit(Event.COMPLETE);
 		}
 	}
 

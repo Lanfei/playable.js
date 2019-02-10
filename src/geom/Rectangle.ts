@@ -7,16 +7,8 @@ export class Rectangle {
 	public width: number;
 	public height: number;
 
-	private constructor(x?: number, y?: number, width?: number, height?: number) {
+	protected constructor(x?: number, y?: number, width?: number, height?: number) {
 		this.set(x, y, width, height);
-	}
-
-	public set(x: number, y: number, width: number, height: number): this {
-		this.x = x || 0;
-		this.y = y || 0;
-		this.width = width || 0;
-		this.height = height || 0;
-		return this;
 	}
 
 	public get top(): number {
@@ -71,16 +63,33 @@ export class Rectangle {
 		this.right = v.x;
 	}
 
-	public contains(x: number, y: number): boolean {
-		return x >= this.x && x <= this.x + this.width &&
-			y <= this.y && y <= this.y + this.height;
+	public set(x: number, y: number, width: number, height: number): this {
+		this.x = x || 0;
+		this.y = y || 0;
+		this.width = width || 0;
+		this.height = height || 0;
+		return this;
+	}
+
+	public contains(v: Vector): boolean;
+	public contains(x: number, y: number): boolean;
+	public contains(x: number | Vector, y?: number): boolean {
+		if (x instanceof Vector) {
+			return this.contains(x.x, x.y);
+		}
+		return x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height;
+	}
+
+	public equal(r: Rectangle): boolean {
+		return r instanceof Rectangle &&
+			r.x === this.x && r.y === this.y && r.width === this.width && r.height === this.height;
 	}
 
 	public release(): void {
 		Rectangle.recycle(this);
 	}
 
-	private static readonly $pool: Array<Rectangle> = [];
+	protected static readonly $pool: Array<Rectangle> = [];
 
 	public static create(x?: number, y?: number, width?: number, height?: number): Rectangle {
 		let pool = this.$pool;

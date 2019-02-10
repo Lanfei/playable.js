@@ -5,17 +5,17 @@ import {EventEmitter} from '../event/EventEmitter';
 
 export class Ticker extends EventEmitter {
 
+	protected $stage: Stage = null;
 	protected $fps: number = 0;
-
-	private $stage: Stage = null;
-	private $paused: boolean = false;
-	private $shouldResume: boolean = false;
-	private $timerIndex: number = 0;
-	private $lastTimestamp: number = 0;
-	private $tickHandle: number = null;
-	private readonly $timers: Object;
-	private readonly $boundTick: () => void;
-	private readonly $enterFrameCallbackList: Array<Layer>;
+	protected $deltaTime: number = 0;
+	protected $paused: boolean = true;
+	protected $shouldResume: boolean = false;
+	protected $timerIndex: number = 0;
+	protected $lastTimestamp: number = 0;
+	protected $tickHandle: number = null;
+	protected readonly $timers: Object;
+	protected readonly $boundTick: () => void;
+	protected readonly $enterFrameCallbackList: Array<Layer>;
 
 	public constructor(stage: Stage) {
 		super();
@@ -30,11 +30,16 @@ export class Ticker extends EventEmitter {
 		return this.$fps;
 	}
 
+	public get deltaTime(): number {
+		return this.$deltaTime;
+	}
+
 	public get paused(): boolean {
 		return this.$paused;
 	}
 
-	private $start(): this {
+	protected $start(): this {
+		let stage = this.$stage;
 		let prefixes = ['', 'o', 'ms', 'moz', 'webkit'];
 
 		for (let prefix of prefixes) {
@@ -42,8 +47,7 @@ export class Ticker extends EventEmitter {
 			let cancelKey = prefix ? prefix + 'CancelAnimationFrame' : 'cancelAnimationFrame';
 			let cancelRequestKey = prefix ? prefix + 'CancelRequestAnimationFrame' : 'cancelRequestAnimationFrame';
 			window.requestAnimationFrame = window.requestAnimationFrame || window[requestKey];
-			window.cancelAnimationFrame = window.cancelAnimationFrame || window[cancelKey];
-			window.cancelAnimationFrame = window.cancelAnimationFrame || window[cancelRequestKey];
+			window.cancelAnimationFrame = window.cancelAnimationFrame || window[cancelKey] || window[cancelRequestKey];
 		}
 		if (!window.requestAnimationFrame) {
 			window.requestAnimationFrame = function (callback) {
@@ -54,25 +58,26 @@ export class Ticker extends EventEmitter {
 			}
 		}
 
-		for (let prefix of prefixes) {
-			let hiddenKey = prefix ? prefix + 'Hidden' : 'hidden';
-			if (document[hiddenKey] === undefined) {
-				break;
+		stage.on(Event.ACTIVATE, () => {
+			if (this.$shouldResume) {
+				this.resume();
+				this.$shouldResume = false;
 			}
-			document.addEventListener(prefix + 'visibilitychange', () => {
-				let paused = this.$paused;
-				let hidden = document[hiddenKey];
-				if (hidden && !paused) {
-					this.pause();
-					this.$shouldResume = true;
-				} else if (this.$shouldResume) {
-					this.resume();
-					this.$shouldResume = false;
-				}
-			});
+		});
+		stage.on(Event.DEACTIVATE, () => {
+			if (!this.$paused) {
+				this.pause();
+				this.$shouldResume = true;
+			}
+		});
+
+		if (stage.activated) {
+			this.$paused = false;
+			this.$tick();
+		} else {
+			this.$shouldResume = true;
 		}
 
-		this.$tick();
 		return this;
 	}
 
@@ -132,22 +137,27 @@ export class Ticker extends EventEmitter {
 		return this;
 	}
 
-	private $tick(): void {
+	protected $tick(): void {
 		let now = Date.now();
 		let lastTimestamp = this.$lastTimestamp;
 		let deltaTime = lastTimestamp ? now - this.$lastTimestamp : 1000 / 60;
 		let enterFrameCallbackList = this.$enterFrameCallbackList;
-		for (let layer of enterFrameCallbackList) {
-			layer.emit(Event.ENTER_FRAME, deltaTime);
-		}
 		this.$fps = Math.round(1000 / deltaTime);
-		this.emit(Event.TICK, deltaTime);
-		this.$checkTimers(deltaTime);
+		this.$deltaTime = deltaTime;
 		this.$lastTimestamp = now;
-		this.$tickHandle = requestAnimationFrame(this.$boundTick);
+		this.$tickHandle = window.requestAnimationFrame(this.$boundTick);
+		this.$checkTimers(deltaTime);
+		let event = Event.create(Event.ENTER_FRAME, deltaTime);
+		for (let layer of enterFrameCallbackList) {
+			layer.emit(event);
+		}
+		event.release();
+		let tickEvent = Event.create(Event.TICK, deltaTime);
+		this.emit(tickEvent);
+		tickEvent.release();
 	}
 
-	private $checkTimers(dt: number): void {
+	protected $checkTimers(dt: number): void {
 		let timers = this.$timers;
 		for (let key in timers) {
 			let timer = timers[key];

@@ -83,18 +83,21 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-private-protected">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="event.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-protected"><a href="event.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Events</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="event.html#abort" class="tsd-kind-icon">ABORT</a></li>
+								<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="event.html#activate" class="tsd-kind-icon">ACTIVATE</a></li>
 								<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="event.html#added" class="tsd-kind-icon">ADDED</a></li>
 								<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="event.html#added_to_stage" class="tsd-kind-icon">ADDED_<wbr>TO_<wbr>STAGE</a></li>
 								<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="event.html#complete" class="tsd-kind-icon">COMPLETE</a></li>
+								<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="event.html#deactivate" class="tsd-kind-icon">DEACTIVATE</a></li>
 								<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="event.html#enter_frame" class="tsd-kind-icon">ENTER_<wbr>FRAME</a></li>
 								<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="event.html#error" class="tsd-kind-icon">ERROR</a></li>
 								<li class="tsd-kind-event tsd-parent-kind-class tsd-is-static"><a href="event.html#load" class="tsd-kind-icon">LOAD</a></li>
@@ -111,31 +114,47 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="event.html#currenttarget" class="tsd-kind-icon">current<wbr>Target</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="event.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="event.html#target" class="tsd-kind-icon">target</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="event.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-static"><a href="event.html#_pool" class="tsd-kind-icon">$pool</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="event.html#_init" class="tsd-kind-icon">$init</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="event.html#release" class="tsd-kind-icon">release</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="event.html#create" class="tsd-kind-icon">create</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="event.html#recycle" class="tsd-kind-icon">recycle</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-protected">
 					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Event<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="event.html" class="tsd-signature-type">Event</a></li>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Event<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="event.html" class="tsd-signature-type">Event</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L32">event/Event.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L43">event/Event.ts:43</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>type: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> data: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;null</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="event.html" class="tsd-signature-type">Event</a></h4>
@@ -146,12 +165,36 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Events</h2>
 				<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-class tsd-is-static">
+					<a name="abort" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> ABORT</h3>
+					<div class="tsd-signature tsd-kind-icon">ABORT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;abort&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L30">event/Event.ts:30</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-class tsd-is-static">
+					<a name="activate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> ACTIVATE</h3>
+					<div class="tsd-signature tsd-kind-icon">ACTIVATE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;activate&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L14">event/Event.ts:14</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-class tsd-is-static">
 					<a name="added" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> ADDED</h3>
 					<div class="tsd-signature tsd-kind-icon">ADDED<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;added&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L4">event/Event.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L6">event/Event.ts:6</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -163,7 +206,7 @@
 					<div class="tsd-signature tsd-kind-icon">ADDED_<wbr>TO_<wbr>STAGE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;addedToStage&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L8">event/Event.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L10">event/Event.ts:10</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -175,7 +218,19 @@
 					<div class="tsd-signature tsd-kind-icon">COMPLETE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;complete&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L28">event/Event.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L36">event/Event.ts:36</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event tsd-parent-kind-class tsd-is-static">
+					<a name="deactivate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> DEACTIVATE</h3>
+					<div class="tsd-signature tsd-kind-icon">DEACTIVATE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;deactivate&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L16">event/Event.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -187,7 +242,7 @@
 					<div class="tsd-signature tsd-kind-icon">ENTER_<wbr>FRAME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;enterFrame&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L12">event/Event.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L18">event/Event.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -199,7 +254,7 @@
 					<div class="tsd-signature tsd-kind-icon">ERROR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;error&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L24">event/Event.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L32">event/Event.ts:32</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -211,7 +266,7 @@
 					<div class="tsd-signature tsd-kind-icon">LOAD<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;load&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L22">event/Event.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L28">event/Event.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -223,7 +278,7 @@
 					<div class="tsd-signature tsd-kind-icon">PROGRESS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;progress&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L26">event/Event.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L34">event/Event.ts:34</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -235,7 +290,7 @@
 					<div class="tsd-signature tsd-kind-icon">REMOVED<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;removed&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L6">event/Event.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L8">event/Event.ts:8</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -247,7 +302,7 @@
 					<div class="tsd-signature tsd-kind-icon">REMOVED_<wbr>FROM_<wbr>STAGE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;removeFromStage&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L10">event/Event.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L12">event/Event.ts:12</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -259,7 +314,7 @@
 					<div class="tsd-signature tsd-kind-icon">SOUND_<wbr>COMPLETE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;soundComplete&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L30">event/Event.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L38">event/Event.ts:38</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -271,7 +326,7 @@
 					<div class="tsd-signature tsd-kind-icon">TICK<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;tick&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L14">event/Event.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L20">event/Event.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -283,7 +338,7 @@
 					<div class="tsd-signature tsd-kind-icon">TICKER_<wbr>PAUSE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;tickerPause&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L16">event/Event.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L22">event/Event.ts:22</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -295,7 +350,7 @@
 					<div class="tsd-signature tsd-kind-icon">TICKER_<wbr>RESUME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;tickerResume&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L18">event/Event.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L24">event/Event.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -307,7 +362,7 @@
 					<div class="tsd-signature tsd-kind-icon">VIEWPORT_<wbr>RESIZE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;viewportResize&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L20">event/Event.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L26">event/Event.ts:26</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -317,14 +372,149 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="currenttarget" class="tsd-anchor"></a>
+					<h3>current<wbr>Target</h3>
+					<div class="tsd-signature tsd-kind-icon">current<wbr>Target<span class="tsd-signature-symbol">:</span> <a href="eventemitter.html" class="tsd-signature-type">EventEmitter</a><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L43">event/Event.ts:43</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="data" class="tsd-anchor"></a>
+					<h3>data</h3>
+					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L41">event/Event.ts:41</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="target" class="tsd-anchor"></a>
+					<h3>target</h3>
+					<div class="tsd-signature tsd-kind-icon">target<span class="tsd-signature-symbol">:</span> <a href="eventemitter.html" class="tsd-signature-type">EventEmitter</a><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L42">event/Event.ts:42</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="type" class="tsd-anchor"></a>
 					<h3>type</h3>
 					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/Event.ts#L32">event/Event.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L40">event/Event.ts:40</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-static">
+					<a name="_pool" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagProtected">Protected</span> $pool</h3>
+					<div class="tsd-signature tsd-kind-icon">$pool<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="event.html" class="tsd-signature-type">Event</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L61">event/Event.ts:61</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="_init" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> $init</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">$init<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L49">event/Event.ts:49</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> data: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;null</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="release" class="tsd-anchor"></a>
+					<h3>release</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">release<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L55">event/Event.ts:55</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="create" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> create</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="event.html" class="tsd-signature-type">Event</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L63">event/Event.ts:63</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> data: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;null</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="event.html" class="tsd-signature-type">Event</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="recycle" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> recycle</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">recycle<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><a href="event.html" class="tsd-signature-type">Event</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/Event.ts#L72">event/Event.ts:72</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>e: <a href="event.html" class="tsd-signature-type">Event</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -346,8 +536,14 @@
 					<li class="current tsd-kind-class">
 						<a href="event.html" class="tsd-kind-icon">Event</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-protected">
 								<a href="event.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
+								<a href="event.html#abort" class="tsd-kind-icon">ABORT</a>
+							</li>
+							<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
+								<a href="event.html#activate" class="tsd-kind-icon">ACTIVATE</a>
 							</li>
 							<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
 								<a href="event.html#added" class="tsd-kind-icon">ADDED</a>
@@ -357,6 +553,9 @@
 							</li>
 							<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
 								<a href="event.html#complete" class="tsd-kind-icon">COMPLETE</a>
+							</li>
+							<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
+								<a href="event.html#deactivate" class="tsd-kind-icon">DEACTIVATE</a>
 							</li>
 							<li class=" tsd-kind-event tsd-parent-kind-class tsd-is-static">
 								<a href="event.html#enter_frame" class="tsd-kind-icon">ENTER_<wbr>FRAME</a>
@@ -392,7 +591,31 @@
 								<a href="event.html#viewport_resize" class="tsd-kind-icon">VIEWPORT_<wbr>RESIZE</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="event.html#currenttarget" class="tsd-kind-icon">current<wbr>Target</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="event.html#data" class="tsd-kind-icon">data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="event.html#target" class="tsd-kind-icon">target</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="event.html#type" class="tsd-kind-icon">type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-static">
+								<a href="event.html#_pool" class="tsd-kind-icon">$pool</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="event.html#_init" class="tsd-kind-icon">$init</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="event.html#release" class="tsd-kind-icon">release</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="event.html#create" class="tsd-kind-icon">create</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="event.html#recycle" class="tsd-kind-icon">recycle</a>
 							</li>
 						</ul>
 					</li>
@@ -456,6 +679,9 @@
 						<a href="vector.html" class="tsd-kind-icon">Vector</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="../interfaces/domlistener.html" class="tsd-kind-icon">DOMListener</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="../interfaces/inputoption.html" class="tsd-kind-icon">Input<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -474,10 +700,13 @@
 						<a href="../interfaces/textoption.html" class="tsd-kind-icon">Text<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="../interfaces/tweenoption.html" class="tsd-kind-icon">Tween<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="../interfaces/tweenstep.html" class="tsd-kind-icon">Tween<wbr>Step</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#backgroundfillmode" class="tsd-kind-icon">Background<wbr>Fill<wbr>Mode</a>
+						<a href="../globals.html#fillmode" class="tsd-kind-icon">Fill<wbr>Mode</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#fontstyle" class="tsd-kind-icon">Font<wbr>Style</a>

@@ -1,8 +1,10 @@
+import { Event } from './Event';
 export declare class EventEmitter {
     protected $events: Object;
-    on(event: string, listener: (...args: any[]) => void): this;
-    off(event: string, listener?: (...args: any[]) => void): this;
-    emit(event: string, ...args: any[]): boolean;
-    hasEventListener(event: string): boolean;
+    on(type: string, listener: (...args: any[]) => void): this;
+    off(type: string, listener?: (...args: any[]) => void): this;
+    emit(event: Event): boolean;
+    emit(type: string, ...args: any[]): boolean;
+    hasEventListener(type: string): boolean;
     removeAllListeners(): this;
 }

@@ -4,17 +4,19 @@ export declare class Rectangle {
     y: number;
     width: number;
     height: number;
-    private constructor();
-    set(x: number, y: number, width: number, height: number): this;
+    protected constructor(x?: number, y?: number, width?: number, height?: number);
     top: number;
     bottom: number;
     left: number;
     right: number;
     topLeft: Vector;
     bottomRight: Vector;
+    set(x: number, y: number, width: number, height: number): this;
+    contains(v: Vector): boolean;
     contains(x: number, y: number): boolean;
+    equal(r: Rectangle): boolean;
     release(): void;
-    private static readonly $pool;
+    protected static readonly $pool: Array<Rectangle>;
     static create(x?: number, y?: number, width?: number, height?: number): Rectangle;
     static recycle(r: Rectangle): void;
 }

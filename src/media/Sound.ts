@@ -6,9 +6,9 @@ export class Sound extends Media {
 
 	protected $loops: number = 1;
 	protected $startTime: number = 0;
-	protected $paused: boolean = false;
-	protected $element: HTMLAudioElement;
-	protected $boundOnTouch: () => void;
+	protected $paused: boolean = true;
+	protected readonly $element: HTMLAudioElement;
+	protected readonly $boundOnTouch: () => void;
 
 	public constructor(stage: Stage) {
 		super(stage);
@@ -21,10 +21,15 @@ export class Sound extends Media {
 		this.$boundOnTouch = this.$onTouch.bind(this);
 		stage.ticker.on(Event.TICKER_PAUSE, this.$onTickerPause.bind(this));
 		stage.ticker.on(Event.TICKER_RESUME, this.$onTickerResume.bind(this));
+		stage.on(Event.REMOVED_FROM_STAGE, this.$onRemovedFromStage.bind(this));
 	}
 
 	public get element(): HTMLAudioElement {
 		return this.$element;
+	}
+
+	public get url(): string {
+		return this.$element.src;
 	}
 
 	public set url(url: string) {
@@ -42,6 +47,25 @@ export class Sound extends Media {
 
 	public set volume(volume: number) {
 		this.$element.volume = volume;
+	}
+
+	public get paused(): boolean {
+		return this.$paused;
+	}
+
+	public play(startTime: number = 0, loops: number = 1): this {
+		this.$loops = loops;
+		this.$startTime = startTime;
+		this.$element.currentTime = startTime;
+		this.$paused = false;
+		this.$checkStatus();
+		return this;
+	}
+
+	public stop(): this {
+		this.$paused = true;
+		this.$element.pause();
+		return this;
 	}
 
 	protected $checkOnTouch(): void {
@@ -88,19 +112,10 @@ export class Sound extends Media {
 		}
 	}
 
-	public play(startTime: number = 0, loops: number = 1): this {
-		this.$loops = loops;
-		this.$startTime = startTime;
-		this.$element.currentTime = startTime;
-		this.$paused = false;
-		this.$checkStatus();
-		return this;
-	}
-
-	public stop(): this {
-		this.$paused = true;
-		this.$element.pause();
-		return this;
+	protected $onRemovedFromStage(): void {
+		this.stop();
+		document.removeEventListener('click', this.$boundOnTouch);
+		document.removeEventListener('touchend', this.$boundOnTouch);
 	}
 
 	protected $onLoad(): void {

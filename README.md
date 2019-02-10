@@ -1,6 +1,7 @@
 # playable.js
 
 [![Build Status][build-image]][build-url]
+[![Coverage Status][coverage-image]][coverage-url]
 [![Version][version-image]][version-url]
 [![License][license-image]][license-url]
 [![Dependencies][dep-image]][dep-url]

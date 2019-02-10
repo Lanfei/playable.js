@@ -107,7 +107,8 @@
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite"><a href="sound.html#element" class="tsd-kind-icon">element</a></li>
-								<li class="tsd-kind-set-signature tsd-parent-kind-class tsd-is-overwrite"><a href="sound.html#url" class="tsd-kind-icon">url</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="sound.html#paused" class="tsd-kind-icon">paused</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-overwrite"><a href="sound.html#url" class="tsd-kind-icon">url</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="sound.html#volume" class="tsd-kind-icon">volume</a></li>
 							</ul>
 						</section>
@@ -119,6 +120,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="sound.html#_onended" class="tsd-kind-icon">$on<wbr>Ended</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="sound.html#_onerror" class="tsd-kind-icon">$on<wbr>Error</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected"><a href="sound.html#_onload" class="tsd-kind-icon">$on<wbr>Load</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="sound.html#_onremovedfromstage" class="tsd-kind-icon">$on<wbr>Removed<wbr>From<wbr>Stage</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="sound.html#_ontickerpause" class="tsd-kind-icon">$on<wbr>Ticker<wbr>Pause</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="sound.html#_ontickerresume" class="tsd-kind-icon">$on<wbr>Ticker<wbr>Resume</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="sound.html#_ontouch" class="tsd-kind-icon">$on<wbr>Touch</a></li>
@@ -147,7 +149,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="media.html">Media</a>.<a href="media.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L11">media/Sound.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L11">media/Sound.ts:11</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -170,7 +172,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="media.html">Media</a>.<a href="media.html#_boundonerror">$boundOnError</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Media.ts#L11">media/Media.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Media.ts#L11">media/Media.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -178,14 +180,14 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><a href="event.html" class="tsd-signature-type">Event</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ErrorEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>e: <a href="event.html" class="tsd-signature-type">Event</a></h5>
+												<h5>e: <span class="tsd-signature-type">ErrorEvent</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -202,7 +204,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="media.html">Media</a>.<a href="media.html#_boundonload">$boundOnLoad</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Media.ts#L10">media/Media.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Media.ts#L10">media/Media.ts:10</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -227,7 +229,7 @@
 					<div class="tsd-signature tsd-kind-icon">$bound<wbr>OnTouch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L11">media/Sound.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L11">media/Sound.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -253,7 +255,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="media.html">Media</a>.<a href="media.html#_element">$element</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L10">media/Sound.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L10">media/Sound.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -264,7 +266,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="eventemitter.html">EventEmitter</a>.<a href="eventemitter.html#_events">$events</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/EventEmitter.ts#L3">event/EventEmitter.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/EventEmitter.ts#L5">event/EventEmitter.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -274,17 +276,17 @@
 					<div class="tsd-signature tsd-kind-icon">$loops<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L7">media/Sound.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L7">media/Sound.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 					<a name="_paused" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> $paused</h3>
-					<div class="tsd-signature tsd-kind-icon">$paused<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+					<div class="tsd-signature tsd-kind-icon">$paused<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L9">media/Sound.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L9">media/Sound.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -295,7 +297,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="media.html">Media</a>.<a href="media.html#_stage">$stage</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Media.ts#L9">media/Media.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Media.ts#L9">media/Media.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -305,7 +307,7 @@
 					<div class="tsd-signature tsd-kind-icon">$start<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L8">media/Sound.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L8">media/Sound.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -323,17 +325,35 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="media.html">Media</a>.<a href="media.html#element">element</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L26">media/Sound.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L27">media/Sound.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLAudioElement</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="paused" class="tsd-anchor"></a>
+					<h3>paused</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> paused<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L52">media/Sound.ts:52</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-overwrite">
 					<a name="url" class="tsd-anchor"></a>
 					<h3>url</h3>
-					<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class tsd-is-overwrite">
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> url<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> url<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -341,7 +361,16 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="media.html">Media</a>.<a href="media.html#url">url</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L30">media/Sound.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L31">media/Sound.ts:31</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="media.html">Media</a>.<a href="media.html#url">url</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L35">media/Sound.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -365,7 +394,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L39">media/Sound.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L44">media/Sound.ts:44</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -373,7 +402,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L43">media/Sound.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L48">media/Sound.ts:48</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -399,7 +428,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L47">media/Sound.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L71">media/Sound.ts:71</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -416,7 +445,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L52">media/Sound.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L76">media/Sound.ts:76</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -433,7 +462,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L68">media/Sound.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L92">media/Sound.ts:92</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -444,20 +473,20 @@
 					<a name="_onerror" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> $on<wbr>Error</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">$on<wbr>Error<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><a href="event.html" class="tsd-signature-type">Event</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">$on<wbr>Error<span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ErrorEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="media.html">Media</a>.<a href="media.html#_onerror">$onError</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Media.ts#L33">media/Media.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Media.ts#L37">media/Media.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>e: <a href="event.html" class="tsd-signature-type">Event</a></h5>
+									<h5>e: <span class="tsd-signature-type">ErrorEvent</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -475,7 +504,24 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="media.html">Media</a>.<a href="media.html#_onload">$onLoad</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L106">media/Sound.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L121">media/Sound.ts:121</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="_onremovedfromstage" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> $on<wbr>Removed<wbr>From<wbr>Stage</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">$on<wbr>Removed<wbr>From<wbr>Stage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L115">media/Sound.ts:115</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -492,7 +538,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L79">media/Sound.ts:79</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L103">media/Sound.ts:103</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -509,7 +555,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L85">media/Sound.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L109">media/Sound.ts:109</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -526,7 +572,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L62">media/Sound.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L86">media/Sound.ts:86</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -537,20 +583,36 @@
 					<a name="emit" class="tsd-anchor"></a>
 					<h3>emit</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="event.html" class="tsd-signature-type">Event</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="eventemitter.html">EventEmitter</a>.<a href="eventemitter.html#emit">emit</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/EventEmitter.ts#L25">event/EventEmitter.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/EventEmitter.ts#L27">event/EventEmitter.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>event: <span class="tsd-signature-type">string</span></h5>
+									<h5>event: <a href="event.html" class="tsd-signature-type">Event</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="eventemitter.html">EventEmitter</a>.<a href="eventemitter.html#emit">emit</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/EventEmitter.ts#L28">event/EventEmitter.ts:28</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
@@ -564,20 +626,20 @@
 					<a name="haseventlistener" class="tsd-anchor"></a>
 					<h3>has<wbr>Event<wbr>Listener</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Event<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Event<wbr>Listener<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="eventemitter.html">EventEmitter</a>.<a href="eventemitter.html#haseventlistener">hasEventListener</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/EventEmitter.ts#L36">event/EventEmitter.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/EventEmitter.ts#L56">event/EventEmitter.ts:56</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>event: <span class="tsd-signature-type">string</span></h5>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -588,20 +650,20 @@
 					<a name="off" class="tsd-anchor"></a>
 					<h3>off</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">off<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">off<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="eventemitter.html">EventEmitter</a>.<a href="eventemitter.html#off">off</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/EventEmitter.ts#L12">event/EventEmitter.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/EventEmitter.ts#L14">event/EventEmitter.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>event: <span class="tsd-signature-type">string</span></h5>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> listener: <span class="tsd-signature-type">function</span></h5>
@@ -633,20 +695,20 @@
 					<a name="on" class="tsd-anchor"></a>
 					<h3>on</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="eventemitter.html">EventEmitter</a>.<a href="eventemitter.html#on">on</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/EventEmitter.ts#L5">event/EventEmitter.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/EventEmitter.ts#L7">event/EventEmitter.ts:7</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>event: <span class="tsd-signature-type">string</span></h5>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
 									<h5>listener: <span class="tsd-signature-type">function</span></h5>
@@ -684,7 +746,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L91">media/Sound.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L56">media/Sound.ts:56</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -711,7 +773,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="eventemitter.html">EventEmitter</a>.<a href="eventemitter.html#removealllisteners">removeAllListeners</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/event/EventEmitter.ts#L41">event/EventEmitter.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/event/EventEmitter.ts#L61">event/EventEmitter.ts:61</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -728,7 +790,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/5a8bfaa/src/media/Sound.ts#L100">media/Sound.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/Lanfei/playable.js/blob/bf1dcd7/src/media/Sound.ts#L65">media/Sound.ts:65</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -824,7 +886,10 @@
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
 								<a href="sound.html#element" class="tsd-kind-icon">element</a>
 							</li>
-							<li class=" tsd-kind-set-signature tsd-parent-kind-class tsd-is-overwrite">
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="sound.html#paused" class="tsd-kind-icon">paused</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="sound.html#url" class="tsd-kind-icon">url</a>
 							</li>
 							<li class=" tsd-kind-accessor tsd-parent-kind-class">
@@ -844,6 +909,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
 								<a href="sound.html#_onload" class="tsd-kind-icon">$on<wbr>Load</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="sound.html#_onremovedfromstage" class="tsd-kind-icon">$on<wbr>Removed<wbr>From<wbr>Stage</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
 								<a href="sound.html#_ontickerpause" class="tsd-kind-icon">$on<wbr>Ticker<wbr>Pause</a>
@@ -901,6 +969,9 @@
 						<a href="vector.html" class="tsd-kind-icon">Vector</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="../interfaces/domlistener.html" class="tsd-kind-icon">DOMListener</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="../interfaces/inputoption.html" class="tsd-kind-icon">Input<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -919,10 +990,13 @@
 						<a href="../interfaces/textoption.html" class="tsd-kind-icon">Text<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="../interfaces/tweenoption.html" class="tsd-kind-icon">Tween<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="../interfaces/tweenstep.html" class="tsd-kind-icon">Tween<wbr>Step</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#backgroundfillmode" class="tsd-kind-icon">Background<wbr>Fill<wbr>Mode</a>
+						<a href="../globals.html#fillmode" class="tsd-kind-icon">Fill<wbr>Mode</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#fontstyle" class="tsd-kind-icon">Font<wbr>Style</a>

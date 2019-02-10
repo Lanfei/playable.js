@@ -3,10 +3,17 @@ import {Stage} from '../display/Stage';
 
 export class Texture extends Media {
 
+	public static SCALE: FillMode = 'scale';
+	public static REPEAT: FillMode = 'repeat';
+	public static REPEAT_X: FillMode = 'repeat-x';
+	public static REPEAT_Y: FillMode = 'repeat-y';
+	public static NO_REPEAT: FillMode = 'no-repeat';
+
 	public static defaultPixelRatio: number = 1;
 
 	public pixelRatio: number = Texture.defaultPixelRatio;
-	protected $element: HTMLImageElement;
+
+	protected readonly $element: HTMLImageElement;
 
 	public constructor(stage: Stage) {
 		super(stage);
@@ -22,19 +29,13 @@ export class Texture extends Media {
 	}
 
 	public get width(): number {
-		return this.$element.width;
-	}
-
-	public set width(width: number) {
-		this.$element.width = width;
+		return this.$element.width / this.pixelRatio;
 	}
 
 	public get height(): number {
-		return this.$element.height;
-	}
-
-	public set height(height: number) {
-		this.$element.height = height;
+		return this.$element.height / this.pixelRatio;
 	}
 
 }
+
+export type FillMode = 'scale' | 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat';

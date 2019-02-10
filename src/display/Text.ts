@@ -3,9 +3,10 @@ import {Rectangle} from '../geom/Rectangle';
 
 export class Text extends Layer {
 
-	public static defaultFontSize = 16;
-	private static readonly wordRe: RegExp = /\w+/;
-	private static readonly boundaryRe: RegExp = /\b/;
+	public static defaultFontSize: number = 16;
+
+	protected static readonly wordRe: RegExp = /\w+/;
+	protected static readonly boundaryRe: RegExp = /\b/;
 
 	protected $text: string = '';
 	protected $color: string = 'black';

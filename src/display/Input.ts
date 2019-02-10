@@ -17,7 +17,7 @@ export class Input extends Text {
 
 	public constructor(value?: string, options: InputOption = {}) {
 		super('', options);
-		this.$value = value;
+		this.$value = value || this.$value;
 		this.$type = options.type || this.$type;
 		this.$maxLength = options.maxLength || this.$maxLength;
 		this.$placeholder = options.placeholder || this.$placeholder;
@@ -77,6 +77,15 @@ export class Input extends Text {
 	public set placeholder(placeholder: string) {
 		this.$placeholder = placeholder;
 		this.$updateText();
+	}
+
+	public get placeholderColor(): string {
+		return this.$placeholderColor;
+	}
+
+	public set placeholderColor(placeholderColor: string) {
+		this.$placeholderColor = placeholderColor;
+		this.$markDirty();
 	}
 
 	public selectAll(): this {
@@ -195,7 +204,7 @@ export class Input extends Text {
 			});
 			if (tagName === 'input') {
 				element.addEventListener('keydown', e => {
-					if (e.keyCode === 13) {
+					if (e.key === 'Enter' || e.keyCode === 13) {
 						Input.$focusedInput.blur();
 					}
 				});
@@ -210,19 +219,19 @@ export class Input extends Text {
 }
 
 export type InputType =
-	'text'
-	| 'password'
-	| 'email'
-	| 'url'
-	| 'number'
-	| 'range'
-	| 'tel'
-	| 'date'
-	| 'month'
-	| 'week'
-	| 'time'
-	| 'datetime'
-	| 'datetime-local';
+	'text' |
+	'password' |
+	'email' |
+	'url' |
+	'number' |
+	'range' |
+	'tel' |
+	'date' |
+	'month' |
+	'week' |
+	'time' |
+	'datetime' |
+	'datetime-local';
 
 export interface InputOption extends TextOption {
 	type?: InputType,

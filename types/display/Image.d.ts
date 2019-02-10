@@ -5,7 +5,7 @@ export declare class Image extends Layer {
     protected $texture: Texture;
     protected $clipRect: Rectangle;
     protected $scale9Grid: Rectangle;
-    private readonly $boundOnTextureLoad;
+    protected readonly $boundOnTextureLoad: () => void;
     constructor(texture?: Texture);
     constructor(texture: Texture, width: number, height: number);
     texture: Texture;

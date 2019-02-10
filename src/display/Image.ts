@@ -4,19 +4,19 @@ import {Rectangle} from '../geom/Rectangle';
 
 export class Image extends Layer {
 
-	protected $texture: Texture;
-	protected $clipRect: Rectangle;
-	protected $scale9Grid: Rectangle;
-	private readonly $boundOnTextureLoad: () => void;
+	protected $texture: Texture = null;
+	protected $clipRect: Rectangle = null;
+	protected $scale9Grid: Rectangle = null;
+	protected readonly $boundOnTextureLoad: () => void;
 
 	public constructor(texture?: Texture);
 	public constructor(texture: Texture, width: number, height: number);
 	public constructor(texture?: Texture, width?: number, height?: number) {
 		super();
+		this.$boundOnTextureLoad = this.$onTextureLoad.bind(this);
 		if (texture) {
 			this.$width = width;
 			this.$height = height;
-			this.$boundOnTextureLoad = this.$onTextureLoad.bind(this);
 			this.texture = texture;
 		}
 	}
@@ -26,12 +26,16 @@ export class Image extends Layer {
 	}
 
 	public set texture(texture: Texture) {
-		this.$texture = texture;
-		if (texture.width && texture.height) {
+		if (this.$texture) {
+			this.$texture.off('load', this.$boundOnTextureLoad);
+		}
+		if (!texture || (texture.width && texture.height)) {
 			this.$resizeCanvas();
-		} else if (!this.$width || !this.$height) {
+		}
+		if (texture) {
 			texture.on('load', this.$boundOnTextureLoad);
 		}
+		this.$texture = texture;
 	}
 
 	public get clipRect(): Rectangle {
@@ -66,7 +70,7 @@ export class Image extends Layer {
 		if (clipRect) {
 			bounds.width = Math.max(bounds.width, clipRect.width);
 			bounds.height = Math.max(bounds.height, clipRect.height);
-		} else {
+		} else if (texture) {
 			bounds.width = Math.max(bounds.width, texture.width);
 			bounds.height = Math.max(bounds.height, texture.height);
 		}
@@ -100,9 +104,11 @@ export class Image extends Layer {
 		let height = canvas.height;
 		let clipX = clipRect ? clipRect.x : 0;
 		let clipY = clipRect ? clipRect.y : 0;
-		let clipWidth = clipRect ? clipRect.width : texture.width;
-		let clipHeight = clipRect ? clipRect.height : texture.height;
-		if (scale9Grid) {
+		let clipWidth = clipRect ? clipRect.width : texture ? texture.width : 0;
+		let clipHeight = clipRect ? clipRect.height : texture ? texture.height : 0;
+		if (!texture) {
+			return drawCalls;
+		} else if (scale9Grid) {
 			let sourceX0 = clipX;
 			let sourceY0 = clipY;
 			let sourceW0 = scale9Grid.x;

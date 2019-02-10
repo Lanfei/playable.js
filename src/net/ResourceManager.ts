@@ -18,13 +18,13 @@ export class ResourceManager extends EventEmitter {
 	public timeout: number;
 	public retryTimes: number;
 
-	private $errorCount: number = 0;
-	private $loadedCount: number = 0;
-	private $loadingCount: number = 0;
-	private $list: Array<ResourceInfo>;
-	private readonly $total: number;
-	private readonly $stage: Stage;
-	private readonly $resources: Object;
+	protected $errorCount: number = 0;
+	protected $loadedCount: number = 0;
+	protected $loadingCount: number = 0;
+	protected $list: Array<ResourceInfo>;
+	protected readonly $total: number;
+	protected readonly $stage: Stage;
+	protected readonly $resources: Object;
 
 	public constructor(stage: Stage, list: Array<ResourceInfo>, options?: ResourceManagerOption) {
 		super();
@@ -50,14 +50,14 @@ export class ResourceManager extends EventEmitter {
 		return this.$loadedCount;
 	}
 
-	private $checkPendingTasks(): void {
+	protected $checkPendingTasks(): void {
 		if (this.$loadingCount < this.threads && this.$list.length > 0) {
 			++this.$loadingCount;
 			this.$load(this.$list.shift(), 1);
 		}
 	}
 
-	private $load(info: ResourceInfo, attempts: number): void {
+	protected $load(info: ResourceInfo, attempts: number): void {
 		let timer;
 		let resource;
 		let name = info.name;
@@ -78,10 +78,11 @@ export class ResourceManager extends EventEmitter {
 			} else if (resource instanceof Media) {
 				resources[name] = resource;
 			}
-			resource.off(Event.COMPLETE, successCallback);
 			resource.off(Event.LOAD, successCallback);
 			resource.off(Event.ERROR, errorCallback);
-			this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
+			let event = Event.create(Event.PROGRESS, (loadedCount + errorCount) / total);
+			this.emit(event);
+			event.release();
 			if (loadedCount + errorCount === total) {
 				this.emit(Event.COMPLETE);
 			} else {
@@ -108,21 +109,20 @@ export class ResourceManager extends EventEmitter {
 				}
 			}
 			ticker.clearTimeout(timer);
-			resource.off(Event.COMPLETE, successCallback);
 			resource.off(Event.LOAD, successCallback);
 			resource.off(Event.ERROR, errorCallback);
 		};
 		if (type === ResourceManager.TYPE_TEXT) {
 			resource = new Request(url, {responseType: 'text'});
-			resource.on(Event.COMPLETE, successCallback);
+			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
 		} else if (type === ResourceManager.TYPE_JSON) {
 			resource = new Request(url, {responseType: 'json'});
-			resource.on(Event.COMPLETE, successCallback);
+			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
 		} else if (type === ResourceManager.TYPE_BINARY) {
 			resource = new Request(url, {responseType: 'arraybuffer'});
-			resource.on(Event.COMPLETE, successCallback);
+			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
 		} else if (type === ResourceManager.TYPE_TEXTURE) {
 			resource = new Texture(stage);
@@ -144,7 +144,7 @@ export class ResourceManager extends EventEmitter {
 		return !!this.$resources[name];
 	}
 
-	public get<Media>(name: string): Media {
+	public get<Resource>(name: string): Resource {
 		return this.$resources[name];
 	}
 

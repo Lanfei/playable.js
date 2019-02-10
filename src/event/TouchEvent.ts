@@ -25,7 +25,7 @@ export class TouchEvent extends Event {
 	public identifier: number;
 	public cancelBubble: boolean;
 
-	public constructor(type: string) {
+	protected constructor(type: string) {
 		super(type);
 		this.$init(type);
 	}
@@ -34,6 +34,8 @@ export class TouchEvent extends Event {
 		this.type = type;
 		this.targetX = 0;
 		this.targetY = 0;
+		this.localX = 0;
+		this.localY = 0;
 		this.stageX = 0;
 		this.stageY = 0;
 		this.identifier = 0;
@@ -51,7 +53,7 @@ export class TouchEvent extends Event {
 		TouchEvent.recycle(this);
 	}
 
-	private static readonly $pool: Array<TouchEvent> = [];
+	protected static readonly $pool: Array<TouchEvent> = [];
 
 	public static create(type: string): TouchEvent {
 		let pool = this.$pool;

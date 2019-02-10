@@ -5,12 +5,16 @@ export class Vector {
 	public x: number;
 	public y: number;
 
-	private constructor(x?: number, y?: number) {
+	protected constructor(x?: number, y?: number) {
 		this.set(x, y);
 	}
 
-	get length(): number {
+	public get length(): number {
 		return Math.sqrt(this.x * this.x + this.y * this.y);
+	}
+
+	public get angle(): number {
+		return Math.atan2(this.y, this.x);
 	}
 
 	public set(x: number, y: number): this {
@@ -41,19 +45,6 @@ export class Vector {
 		} else {
 			this.x -= x;
 			this.y -= y;
-		}
-		return this;
-	}
-
-	public divide(v: Vector): this;
-	public divide(x: number, y: number): this;
-	public divide(x: number | Vector, y?: number): this {
-		if (x instanceof Vector) {
-			this.x /= x.x;
-			this.y /= x.y;
-		} else {
-			this.x /= x;
-			this.y /= y;
 		}
 		return this;
 	}
@@ -95,18 +86,6 @@ export class Vector {
 		return this;
 	}
 
-	public angle(): number {
-		return Math.atan2(this.y, this.x);
-	}
-
-	public distance(v: Vector): number {
-		return Math.sqrt((this.x - v.x) * (this.x - v.x) + (this.y - v.y) * (this.y - v.y));
-	}
-
-	public equals(v: Vector): boolean {
-		return this.x === v.x && this.y === v.y;
-	}
-
 	public transform(m: Matrix): Vector {
 		let x = this.x;
 		let y = this.y;
@@ -115,12 +94,20 @@ export class Vector {
 		return this;
 	}
 
+	public distance(v: Vector): number {
+		return Math.sqrt((this.x - v.x) * (this.x - v.x) + (this.y - v.y) * (this.y - v.y));
+	}
+
+	public equal(v: Vector): boolean {
+		return this.x === v.x && this.y === v.y;
+	}
+
 	public release(): this {
 		Vector.recycle(this);
 		return this;
 	}
 
-	private static readonly $pool: Array<Vector> = [];
+	protected static readonly $pool: Array<Vector> = [];
 
 	public static create(x?: number, y?: number): Vector {
 		let pool = this.$pool;

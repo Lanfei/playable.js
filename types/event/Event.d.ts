@@ -1,3 +1,4 @@
+import { EventEmitter } from './EventEmitter';
 export declare class Event {
     /** @event added */
     static readonly ADDED: string;
@@ -7,6 +8,10 @@ export declare class Event {
     static readonly ADDED_TO_STAGE: string;
     /** @event removeFromStage */
     static readonly REMOVED_FROM_STAGE: string;
+    /** @event activate */
+    static readonly ACTIVATE: string;
+    /** @event deactivate */
+    static readonly DEACTIVATE: string;
     /** @event enterFrame */
     static readonly ENTER_FRAME: string;
     /** @event tick */
@@ -19,6 +24,8 @@ export declare class Event {
     static readonly VIEWPORT_RESIZE: string;
     /** @event load */
     static readonly LOAD: string;
+    /** @event abort */
+    static readonly ABORT: string;
     /** @event error */
     static readonly ERROR: string;
     /** @event progress */
@@ -28,5 +35,13 @@ export declare class Event {
     /** @event soundComplete */
     static readonly SOUND_COMPLETE: string;
     type: string;
-    constructor(type: string);
+    data: any;
+    target: EventEmitter;
+    currentTarget: EventEmitter;
+    protected constructor(type: string, data?: any);
+    protected $init(type: string, data?: any): this;
+    release(): void;
+    protected static readonly $pool: Array<Event>;
+    static create(type: string, data?: any): Event;
+    static recycle(e: Event): void;
 }

@@ -1,4 +1,5 @@
 export class Ease {
+
 	public static linear(t: number, b: number, c: number, d: number): number {
 		return c * t / d + b;
 	}
@@ -56,7 +57,7 @@ export class Ease {
 	}
 
 	public static easeInSine(t: number, b: number, c: number, d: number): number {
-		return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
+		return (t === d) ? b + c : -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
 	}
 
 	public static easeOutSine(t: number, b: number, c: number, d: number): number {
@@ -105,7 +106,9 @@ export class Ease {
 		if (a < Math.abs(c)) {
 			a = c;
 			s = p / 4;
-		} else s = p / (2 * Math.PI) * Math.asin(c / a);
+		} else {
+			s = p / (2 * Math.PI) * Math.asin(c / a);
+		}
 		return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
 	}
 
@@ -119,7 +122,9 @@ export class Ease {
 		if (a < Math.abs(c)) {
 			a = c;
 			s = p / 4;
-		} else s = p / (2 * Math.PI) * Math.asin(c / a);
+		} else {
+			s = p / (2 * Math.PI) * Math.asin(c / a);
+		}
 		return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b;
 	}
 
@@ -133,29 +138,28 @@ export class Ease {
 		if (a < Math.abs(c)) {
 			a = c;
 			s = p / 4;
-		} else s = p / (2 * Math.PI) * Math.asin(c / a);
+		} else {
+			s = p / (2 * Math.PI) * Math.asin(c / a);
+		}
 		if (t < 1) return -0.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
 		return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * 0.5 + c + b;
 	}
 
-	public static easeInBack(t: number, b: number, c: number, d: number, s: number): number {
-		if (s === undefined) s = 1.70158;
-		return c * (t /= d) * t * ((s + 1) * t - s) + b;
+	public static easeInBack(t: number, b: number, c: number, d: number, s: number = 1.70158): number {
+		return (t === d) ? b + c : c * (t /= d) * t * ((s + 1) * t - s) + b;
 	}
 
-	public static easeOutBack(t: number, b: number, c: number, d: number, s: number): number {
-		if (s === undefined) s = 1.70158;
-		return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
+	public static easeOutBack(t: number, b: number, c: number, d: number, s: number = 1.70158): number {
+		return (t === 0) ? b : c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
 	}
 
-	public static easeInOutBack(t: number, b: number, c: number, d: number, s: number): number {
-		if (s === undefined) s = 1.70158;
+	public static easeInOutBack(t: number, b: number, c: number, d: number, s: number = 1.70158): number {
 		if ((t /= d / 2) < 1) return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
 		return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
 	}
 
 	public static easeInBounce(t: number, b: number, c: number, d: number): number {
-		return c - this.easeOutBounce(d - t, 0, c, d) + b;
+		return c - Ease.easeOutBounce(d - t, 0, c, d) + b;
 	}
 
 	public static easeOutBounce(t: number, b: number, c: number, d: number): number {
@@ -171,7 +175,8 @@ export class Ease {
 	}
 
 	public static easeInOutBounce(t: number, b: number, c: number, d: number): number {
-		if (t < d / 2) return this.easeInBounce(t * 2, 0, c, d) * 0.5 + b;
-		return this.easeOutBounce(t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
+		if (t < d / 2) return Ease.easeInBounce(t * 2, 0, c, d) * 0.5 + b;
+		return Ease.easeOutBounce(t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
 	}
+
 }

@@ -1,8 +1,7 @@
-import { Layer, BackgroundFillMode } from './Layer';
+import { Layer } from './Layer';
 import { Ticker } from '../system/Ticker';
 import { Rectangle } from '../geom/Rectangle';
-import { Texture } from '../media/Texture';
-import { Event } from '../event/Event';
+import { Texture, FillMode } from '../media/Texture';
 import { ResourceManager, ResourceInfo, ResourceManagerOption } from '../net/ResourceManager';
 export declare class Stage extends Layer {
     static readonly NO_SCALE: string;
@@ -14,37 +13,49 @@ export declare class Stage extends Layer {
     static readonly FIXED_WIDTH: string;
     static readonly FIXED_HEIGHT: string;
     protected $drawCalls: number;
+    protected $activated: boolean;
     protected $scaleMode: string;
     protected $viewportWidth: number;
     protected $viewportHeight: number;
-    protected $renderBounds: Rectangle;
     protected $viewportBackgroundColor: string;
     protected $viewportBackgroundImage: Texture;
     protected $viewportBackgroundPattern: CanvasPattern;
-    protected $viewportBackgroundFillMode: BackgroundFillMode;
+    protected $viewportBackgroundFillMode: FillMode;
     protected readonly $ticker: Ticker;
+    protected readonly $browserListeners: DOMListener[];
     protected readonly $viewportCanvas: HTMLCanvasElement;
     protected readonly $viewportContext: CanvasRenderingContext2D;
+    protected readonly $renderBounds: Rectangle;
     protected readonly $boundResizeViewportCanvas: () => void;
     constructor(canvas?: HTMLCanvasElement);
-    protected $initEvents(): void;
     x: number;
     y: number;
+    readonly ticker: Ticker;
+    readonly fps: number;
+    readonly drawCalls: number;
+    readonly activated: boolean;
     scaleMode: string;
+    readonly viewportCanvas: HTMLCanvasElement;
     viewportWidth: number;
     viewportHeight: number;
     viewportBackgroundColor: string;
     viewportBackgroundImage: Texture;
-    viewportBackgroundFillMode: BackgroundFillMode;
-    readonly drawCalls: number;
-    readonly fps: number;
-    readonly ticker: Ticker;
+    viewportBackgroundFillMode: FillMode;
     createResourceManager(list: Array<ResourceInfo>, options?: ResourceManagerOption): ResourceManager;
+    removeSelf(): this;
+    protected $initEvents(): void;
+    protected $addElementListener(target: EventTarget, type: string, listener: (event: any) => void, options?: boolean | AddEventListenerOptions): void;
+    protected $removeElementListeners(): void;
     protected $addTouchEventListeners(): void;
-    protected $dispatchTouches(type: string, event: Event): void;
+    protected $dispatchTouches(type: string, event: any): void;
     protected $dispatchTouchEvent(type: string, pageX: number, pageY: number, identifier: number): void;
     protected $calculateRenderBounds(): void;
     protected $resizeCanvas(): void;
     protected $resizeViewportCanvas(): void;
     protected $render(): number;
+}
+export interface DOMListener {
+    target: EventTarget;
+    type: string;
+    listener: (event: any) => void;
 }

@@ -28,10 +28,38 @@ function __extends(d, b) {
 }
 
 var Event = /** @class */ (function () {
-    function Event(type) {
+    function Event(type, data) {
+        if (data === void 0) { data = null; }
         this.type = null;
-        this.type = type;
+        this.data = null;
+        this.target = null;
+        this.currentTarget = null;
+        this.$init(type, data);
     }
+    Event.prototype.$init = function (type, data) {
+        if (data === void 0) { data = null; }
+        this.type = type;
+        this.data = data;
+        return this;
+    };
+    Event.prototype.release = function () {
+        this.type = null;
+        this.data = null;
+        Event.recycle(this);
+    };
+    Event.create = function (type, data) {
+        if (data === void 0) { data = null; }
+        var pool = this.$pool;
+        if (pool.length > 0) {
+            return pool.pop().$init(type, data);
+        }
+        else {
+            return new Event(type, data);
+        }
+    };
+    Event.recycle = function (e) {
+        this.$pool.push(e);
+    };
     /** @event added */
     Event.ADDED = 'added';
     /** @event removed */
@@ -40,6 +68,10 @@ var Event = /** @class */ (function () {
     Event.ADDED_TO_STAGE = 'addedToStage';
     /** @event removeFromStage */
     Event.REMOVED_FROM_STAGE = 'removeFromStage';
+    /** @event activate */
+    Event.ACTIVATE = 'activate';
+    /** @event deactivate */
+    Event.DEACTIVATE = 'deactivate';
     /** @event enterFrame */
     Event.ENTER_FRAME = 'enterFrame';
     /** @event tick */
@@ -52,6 +84,8 @@ var Event = /** @class */ (function () {
     Event.VIEWPORT_RESIZE = 'viewportResize';
     /** @event load */
     Event.LOAD = 'load';
+    /** @event abort */
+    Event.ABORT = 'abort';
     /** @event error */
     Event.ERROR = 'error';
     /** @event progress */
@@ -60,6 +94,7 @@ var Event = /** @class */ (function () {
     Event.COMPLETE = 'complete';
     /** @event soundComplete */
     Event.SOUND_COMPLETE = 'soundComplete';
+    Event.$pool = [];
     return Event;
 }());
 
@@ -67,14 +102,14 @@ var EventEmitter = /** @class */ (function () {
     function EventEmitter() {
         this.$events = {};
     }
-    EventEmitter.prototype.on = function (event, listener) {
-        var listeners = this.$events[event] || [];
+    EventEmitter.prototype.on = function (type, listener) {
+        var listeners = this.$events[type] || [];
         listeners.push(listener);
-        this.$events[event] = listeners;
+        this.$events[type] = listeners;
         return this;
     };
-    EventEmitter.prototype.off = function (event, listener) {
-        var listeners = this.$events[event] || [];
+    EventEmitter.prototype.off = function (type, listener) {
+        var listeners = this.$events[type] || [];
         if (listener) {
             var index = listeners.indexOf(listener);
             if (index >= 0) {
@@ -86,24 +121,40 @@ var EventEmitter = /** @class */ (function () {
         }
         return this;
     };
-    EventEmitter.prototype.emit = function (event) {
+    EventEmitter.prototype.emit = function (type) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        var listeners = this.$events[event];
-        if (listeners && listeners.length) {
+        var event;
+        if (type instanceof Event) {
+            args = [type];
+            type.target = type.target || this;
+            type.currentTarget = this;
+            type = type.type;
+        }
+        var listeners = this.$events[type];
+        var hasListeners = listeners && listeners.length > 0;
+        if (!event && hasListeners && args.length === 0) {
+            event = Event.create(type);
+            event.target = this;
+            event.currentTarget = this;
+            args.push(event);
+        }
+        if (hasListeners) {
             for (var _a = 0, listeners_1 = listeners; _a < listeners_1.length; _a++) {
                 var listener = listeners_1[_a];
                 listener.apply(this, args);
             }
-            return true;
         }
-        return false;
+        if (event) {
+            event.release();
+        }
+        return hasListeners;
     };
-    EventEmitter.prototype.hasEventListener = function (event) {
-        var listeners = this.$events[event];
-        return listeners && listeners.length > 0;
+    EventEmitter.prototype.hasEventListener = function (type) {
+        var listeners = this.$events[type];
+        return !!listeners && listeners.length > 0;
     };
     EventEmitter.prototype.removeAllListeners = function () {
         this.$events = {};
@@ -116,9 +167,10 @@ var Ticker = /** @class */ (function (_super) {
     __extends(Ticker, _super);
     function Ticker(stage) {
         var _this = _super.call(this) || this;
-        _this.$fps = 0;
         _this.$stage = null;
-        _this.$paused = false;
+        _this.$fps = 0;
+        _this.$deltaTime = 0;
+        _this.$paused = true;
         _this.$shouldResume = false;
         _this.$timerIndex = 0;
         _this.$lastTimestamp = 0;
@@ -137,6 +189,13 @@ var Ticker = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Ticker.prototype, "deltaTime", {
+        get: function () {
+            return this.$deltaTime;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Ticker.prototype, "paused", {
         get: function () {
             return this.$paused;
@@ -146,6 +205,7 @@ var Ticker = /** @class */ (function (_super) {
     });
     Ticker.prototype.$start = function () {
         var _this = this;
+        var stage = this.$stage;
         var prefixes = ['', 'o', 'ms', 'moz', 'webkit'];
         for (var _i = 0, prefixes_1 = prefixes; _i < prefixes_1.length; _i++) {
             var prefix = prefixes_1[_i];
@@ -153,8 +213,7 @@ var Ticker = /** @class */ (function (_super) {
             var cancelKey = prefix ? prefix + 'CancelAnimationFrame' : 'cancelAnimationFrame';
             var cancelRequestKey = prefix ? prefix + 'CancelRequestAnimationFrame' : 'cancelRequestAnimationFrame';
             window.requestAnimationFrame = window.requestAnimationFrame || window[requestKey];
-            window.cancelAnimationFrame = window.cancelAnimationFrame || window[cancelKey];
-            window.cancelAnimationFrame = window.cancelAnimationFrame || window[cancelRequestKey];
+            window.cancelAnimationFrame = window.cancelAnimationFrame || window[cancelKey] || window[cancelRequestKey];
         }
         if (!window.requestAnimationFrame) {
             window.requestAnimationFrame = function (callback) {
@@ -164,31 +223,25 @@ var Ticker = /** @class */ (function (_super) {
                 window.clearTimeout(handle);
             };
         }
-        var _loop_1 = function (prefix) {
-            var hiddenKey = prefix ? prefix + 'Hidden' : 'hidden';
-            if (document[hiddenKey] === undefined) {
-                return "break";
+        stage.on(Event.ACTIVATE, function () {
+            if (_this.$shouldResume) {
+                _this.resume();
+                _this.$shouldResume = false;
             }
-            document.addEventListener(prefix + 'visibilitychange', function () {
-                var paused = _this.$paused;
-                var hidden = document[hiddenKey];
-                if (hidden && !paused) {
-                    _this.pause();
-                    _this.$shouldResume = true;
-                }
-                else if (_this.$shouldResume) {
-                    _this.resume();
-                    _this.$shouldResume = false;
-                }
-            });
-        };
-        for (var _a = 0, prefixes_2 = prefixes; _a < prefixes_2.length; _a++) {
-            var prefix = prefixes_2[_a];
-            var state_1 = _loop_1(prefix);
-            if (state_1 === "break")
-                break;
+        });
+        stage.on(Event.DEACTIVATE, function () {
+            if (!_this.$paused) {
+                _this.pause();
+                _this.$shouldResume = true;
+            }
+        });
+        if (stage.activated) {
+            this.$paused = false;
+            this.$tick();
         }
-        this.$tick();
+        else {
+            this.$shouldResume = true;
+        }
         return this;
     };
     Ticker.prototype.pause = function () {
@@ -245,15 +298,20 @@ var Ticker = /** @class */ (function (_super) {
         var lastTimestamp = this.$lastTimestamp;
         var deltaTime = lastTimestamp ? now - this.$lastTimestamp : 1000 / 60;
         var enterFrameCallbackList = this.$enterFrameCallbackList;
+        this.$fps = Math.round(1000 / deltaTime);
+        this.$deltaTime = deltaTime;
+        this.$lastTimestamp = now;
+        this.$tickHandle = window.requestAnimationFrame(this.$boundTick);
+        this.$checkTimers(deltaTime);
+        var event = Event.create(Event.ENTER_FRAME, deltaTime);
         for (var _i = 0, enterFrameCallbackList_1 = enterFrameCallbackList; _i < enterFrameCallbackList_1.length; _i++) {
             var layer = enterFrameCallbackList_1[_i];
-            layer.emit(Event.ENTER_FRAME, deltaTime);
+            layer.emit(event);
         }
-        this.$fps = Math.round(1000 / deltaTime);
-        this.emit(Event.TICK, deltaTime);
-        this.$checkTimers(deltaTime);
-        this.$lastTimestamp = now;
-        this.$tickHandle = requestAnimationFrame(this.$boundTick);
+        event.release();
+        var tickEvent = Event.create(Event.TICK, deltaTime);
+        this.emit(tickEvent);
+        tickEvent.release();
     };
     Ticker.prototype.$checkTimers = function (dt) {
         var timers = this.$timers;
@@ -285,6 +343,13 @@ var Vector = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Vector.prototype, "angle", {
+        get: function () {
+            return Math.atan2(this.y, this.x);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Vector.prototype.set = function (x, y) {
         this.x = x || 0;
         this.y = y || 0;
@@ -309,17 +374,6 @@ var Vector = /** @class */ (function () {
         else {
             this.x -= x;
             this.y -= y;
-        }
-        return this;
-    };
-    Vector.prototype.divide = function (x, y) {
-        if (x instanceof Vector) {
-            this.x /= x.x;
-            this.y /= x.y;
-        }
-        else {
-            this.x /= x;
-            this.y /= y;
         }
         return this;
     };
@@ -354,21 +408,18 @@ var Vector = /** @class */ (function () {
         this.y = x * Math.sin(angle) + y * Math.cos(angle);
         return this;
     };
-    Vector.prototype.angle = function () {
-        return Math.atan2(this.y, this.x);
-    };
-    Vector.prototype.distance = function (v) {
-        return Math.sqrt((this.x - v.x) * (this.x - v.x) + (this.y - v.y) * (this.y - v.y));
-    };
-    Vector.prototype.equals = function (v) {
-        return this.x === v.x && this.y === v.y;
-    };
     Vector.prototype.transform = function (m) {
         var x = this.x;
         var y = this.y;
         this.x = m.a * x + m.c * y + m.tx;
         this.y = m.b * x + m.d * y + m.ty;
         return this;
+    };
+    Vector.prototype.distance = function (v) {
+        return Math.sqrt((this.x - v.x) * (this.x - v.x) + (this.y - v.y) * (this.y - v.y));
+    };
+    Vector.prototype.equal = function (v) {
+        return this.x === v.x && this.y === v.y;
     };
     Vector.prototype.release = function () {
         Vector.recycle(this);
@@ -390,6 +441,11 @@ var Vector = /** @class */ (function () {
     return Vector;
 }());
 
+/*
+ *             |a  b  0|
+ * (x, y, 1) * |c  d  0| = (ax + cy + tx, bx + dy + ty, 1)
+ *             |tx ty 1|
+ */
 var Matrix = /** @class */ (function () {
     function Matrix(a, b, c, d, tx, ty) {
         if (arguments.length > 0) {
@@ -429,7 +485,7 @@ var Matrix = /** @class */ (function () {
     };
     Matrix.prototype.prepend = function (a, b, c, d, tx, ty) {
         if (a instanceof Matrix) {
-            return this.append(a.a, a.b, a.c, a.d, a.tx, a.ty);
+            return this.prepend(a.a, a.b, a.c, a.d, a.tx, a.ty);
         }
         var a1 = this.a;
         var b1 = this.b;
@@ -463,11 +519,6 @@ var Matrix = /** @class */ (function () {
         this.ty = b * tx1 + d * ty1 + ty;
         return this;
     };
-    Matrix.prototype.multiply = function (v) {
-        var x = this.a * v.x + this.c * v.y + this.tx;
-        var y = this.b * v.x + this.d * v.y + this.ty;
-        return Vector.create(x, y);
-    };
     Matrix.prototype.scale = function (x, y) {
         return this.append(x, 0, 0, y === undefined ? x : y, 0, 0);
     };
@@ -485,7 +536,7 @@ var Matrix = /** @class */ (function () {
         }
         return this.append(1, 0, 0, 1, x, y);
     };
-    Matrix.prototype.equals = function (m) {
+    Matrix.prototype.equal = function (m) {
         return m instanceof Matrix &&
             this.a === m.a && this.b === m.b &&
             this.c === m.c && this.d === m.d &&
@@ -522,13 +573,6 @@ var Rectangle = /** @class */ (function () {
     function Rectangle(x, y, width, height) {
         this.set(x, y, width, height);
     }
-    Rectangle.prototype.set = function (x, y, width, height) {
-        this.x = x || 0;
-        this.y = y || 0;
-        this.width = width || 0;
-        this.height = height || 0;
-        return this;
-    };
     Object.defineProperty(Rectangle.prototype, "top", {
         get: function () {
             return this.y;
@@ -593,9 +637,22 @@ var Rectangle = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Rectangle.prototype.set = function (x, y, width, height) {
+        this.x = x || 0;
+        this.y = y || 0;
+        this.width = width || 0;
+        this.height = height || 0;
+        return this;
+    };
     Rectangle.prototype.contains = function (x, y) {
-        return x >= this.x && x <= this.x + this.width &&
-            y <= this.y && y <= this.y + this.height;
+        if (x instanceof Vector) {
+            return this.contains(x.x, x.y);
+        }
+        return x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height;
+    };
+    Rectangle.prototype.equal = function (r) {
+        return r instanceof Rectangle &&
+            r.x === this.x && r.y === this.y && r.width === this.width && r.height === this.height;
     };
     Rectangle.prototype.release = function () {
         Rectangle.recycle(this);
@@ -616,6 +673,85 @@ var Rectangle = /** @class */ (function () {
     return Rectangle;
 }());
 
+var Media = /** @class */ (function (_super) {
+    __extends(Media, _super);
+    function Media(stage) {
+        var _this = _super.call(this) || this;
+        _this.$stage = stage;
+        _this.$boundOnLoad = _this.$onLoad.bind(_this);
+        _this.$boundOnError = _this.$onError.bind(_this);
+        return _this;
+    }
+    Object.defineProperty(Media.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Media.prototype, "url", {
+        get: function () {
+            return this.$element.src || '';
+        },
+        set: function (url) {
+            this.$element.src = url;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Media.prototype.$onLoad = function () {
+        this.emit(Event.LOAD);
+        this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
+    };
+    Media.prototype.$onError = function (e) {
+        this.emit(Event.ERROR, e);
+        this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
+    };
+    return Media;
+}(EventEmitter));
+
+var Texture = /** @class */ (function (_super) {
+    __extends(Texture, _super);
+    function Texture(stage) {
+        var _this = _super.call(this, stage) || this;
+        _this.pixelRatio = Texture.defaultPixelRatio;
+        var image = document.createElement('img');
+        image.crossOrigin = '*';
+        image.addEventListener('load', _this.$boundOnLoad);
+        image.addEventListener('error', _this.$boundOnError);
+        _this.$element = image;
+        return _this;
+    }
+    Object.defineProperty(Texture.prototype, "element", {
+        get: function () {
+            return this.$element;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Texture.prototype, "width", {
+        get: function () {
+            return this.$element.width / this.pixelRatio;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Texture.prototype, "height", {
+        get: function () {
+            return this.$element.height / this.pixelRatio;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Texture.SCALE = 'scale';
+    Texture.REPEAT = 'repeat';
+    Texture.REPEAT_X = 'repeat-x';
+    Texture.REPEAT_Y = 'repeat-y';
+    Texture.NO_REPEAT = 'no-repeat';
+    Texture.defaultPixelRatio = 1;
+    return Texture;
+}(Media));
+
 var TouchEvent = /** @class */ (function (_super) {
     __extends(TouchEvent, _super);
     function TouchEvent(type) {
@@ -627,6 +763,8 @@ var TouchEvent = /** @class */ (function (_super) {
         this.type = type;
         this.targetX = 0;
         this.targetY = 0;
+        this.localX = 0;
+        this.localY = 0;
         this.stageX = 0;
         this.stageY = 0;
         this.identifier = 0;
@@ -691,7 +829,7 @@ var Layer = /** @class */ (function (_super) {
         _this.$backgroundColor = null;
         _this.$backgroundImage = null;
         _this.$backgroundPattern = null;
-        _this.$backgroundFillMode = 'scale';
+        _this.$backgroundFillMode = Texture.SCALE;
         _this.$dirty = true;
         _this.$stage = null;
         _this.$parent = null;
@@ -700,38 +838,8 @@ var Layer = /** @class */ (function (_super) {
         _this.$touches = [];
         _this.$canvas = document.createElement('canvas');
         _this.$context = _this.$canvas.getContext('2d');
-        _this.on(Event.ADDED, _this.$onAdded);
-        _this.on(Event.REMOVED, _this.$onRemoved);
-        _this.on(Event.ADDED_TO_STAGE, _this.$onAddedToStage);
-        _this.on(Event.REMOVED_FROM_STAGE, _this.$onRemovedFromStage);
         return _this;
     }
-    Object.defineProperty(Layer.prototype, "width", {
-        get: function () {
-            return this.$width ? this.$width : this.$canvas.width / Layer.pixelRatio;
-        },
-        set: function (width) {
-            if (this.$width !== width) {
-                this.$width = width;
-                this.$resizeCanvas();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "height", {
-        get: function () {
-            return this.$height ? this.$height : this.$canvas.height / Layer.pixelRatio;
-        },
-        set: function (height) {
-            if (this.$height !== height) {
-                this.$height = height;
-                this.$resizeCanvas();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(Layer.prototype, "x", {
         get: function () {
             return this.$x;
@@ -753,6 +861,32 @@ var Layer = /** @class */ (function (_super) {
             if (this.$y !== y) {
                 this.$y = y;
                 this.$markParentDirty();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Layer.prototype, "width", {
+        get: function () {
+            return this.$width ? this.$width : this.$canvas.width / Layer.pixelRatio;
+        },
+        set: function (width) {
+            if (this.$width !== width) {
+                this.$width = width;
+                this.$resizeCanvas();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Layer.prototype, "height", {
+        get: function () {
+            return this.$height ? this.$height : this.$canvas.height / Layer.pixelRatio;
+        },
+        set: function (height) {
+            if (this.$height !== height) {
+                this.$height = height;
+                this.$resizeCanvas();
             }
         },
         enumerable: true,
@@ -862,6 +996,30 @@ var Layer = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Layer.prototype, "visible", {
+        get: function () {
+            return this.$visible;
+        },
+        set: function (visible) {
+            if (this.$visible !== visible) {
+                this.$visible = visible;
+                this.$markParentDirty();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Layer.prototype, "smoothing", {
+        get: function () {
+            return this.$smoothing;
+        },
+        set: function (smoothing) {
+            this.$smoothing = smoothing;
+            this.$resizeCanvas();
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Layer.prototype, "backgroundColor", {
         get: function () {
             return this.$backgroundColor;
@@ -894,35 +1052,11 @@ var Layer = /** @class */ (function (_super) {
             return this.$backgroundFillMode;
         },
         set: function (backgroundFillMode) {
-            if (this.$backgroundFillMode !== backgroundFillMode) {
-                this.$backgroundFillMode = backgroundFillMode || 'scale';
+            if (backgroundFillMode && this.$backgroundFillMode !== backgroundFillMode) {
+                this.$backgroundFillMode = backgroundFillMode;
                 this.$backgroundPattern = this.$getPattern(this.$backgroundImage, this.$backgroundFillMode);
                 this.$markDirty();
             }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "visible", {
-        get: function () {
-            return this.$visible;
-        },
-        set: function (visible) {
-            if (this.$visible !== visible) {
-                this.$visible = visible;
-                this.$markParentDirty();
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "smoothing", {
-        get: function () {
-            return this.$smoothing;
-        },
-        set: function (smoothing) {
-            this.$smoothing = smoothing;
-            this.$resizeCanvas();
         },
         enumerable: true,
         configurable: true
@@ -969,6 +1103,11 @@ var Layer = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Layer.prototype.resize = function (width, height) {
+        this.$width = width;
+        this.height = height;
+        return this;
+    };
     Layer.prototype.addChild = function (child) {
         return this.addChildAt(child, this.$children.length);
     };
@@ -976,21 +1115,15 @@ var Layer = /** @class */ (function (_super) {
         if (child.$parent) {
             child.$parent.removeChild(child);
         }
-        if (this.$stage) {
-            child.emit(Event.ADDED_TO_STAGE, this.$stage);
-        }
-        child.emit(Event.ADDED, this);
+        child.$emitAdded(this);
         this.$children.splice(index, 0, child);
         this.$resizeCanvas();
         return this;
     };
     Layer.prototype.replaceChild = function (oldChild, newChild) {
         var index = this.getChildIndex(oldChild);
-        if (index >= 0) {
-            this.$children[index] = newChild;
-            oldChild.emit(Event.REMOVED, this);
-            this.$stage && oldChild.emit(Event.REMOVED_FROM_STAGE, this.$stage);
-        }
+        this.removeChildAt(index);
+        this.addChildAt(newChild, index);
         return this;
     };
     Layer.prototype.getChildByName = function (name) {
@@ -1069,13 +1202,12 @@ var Layer = /** @class */ (function (_super) {
     Layer.prototype.removeChildAt = function (index) {
         if (index >= 0) {
             var child = this.$children.splice(index, 1)[0];
-            child.emit(Event.REMOVED, this);
-            this.$stage && child.emit(Event.REMOVED_FROM_STAGE, this.$stage);
+            child.$emitRemoved();
             this.$resizeCanvas();
         }
         return this;
     };
-    Layer.prototype.removeChildrenByName = function (name) {
+    Layer.prototype.removeChildByName = function (name) {
         var children = this.$children;
         for (var i = 0, l = children.length; i < l; ++i) {
             var child = children[i];
@@ -1100,8 +1232,7 @@ var Layer = /** @class */ (function (_super) {
         var children = this.$children;
         for (var _i = 0, children_3 = children; _i < children_3.length; _i++) {
             var child = children_3[_i];
-            child.emit(Event.REMOVED, this);
-            this.$stage && child.emit(Event.REMOVED_FROM_STAGE);
+            child.$emitRemoved();
         }
         this.$children.length = 0;
         this.$resizeCanvas();
@@ -1114,13 +1245,13 @@ var Layer = /** @class */ (function (_super) {
         return this;
     };
     Layer.prototype.$markDirty = function (sizeDirty) {
-        this.$dirty = true;
         if (sizeDirty) {
             this.$resizeParentCanvas();
         }
-        else {
+        else if (!this.$dirty) {
             this.$markParentDirty();
         }
+        this.$dirty = true;
     };
     Layer.prototype.$markParentDirty = function () {
         if (this.$parent) {
@@ -1257,13 +1388,53 @@ var Layer = /** @class */ (function (_super) {
         if (!event.cancelBubble) {
             event.localX = localX;
             event.localY = localY;
-            event.currentTarget = this;
-            this.emit(event.type, event);
+            this.emit(event);
         }
         return true;
     };
+    Layer.prototype.$emitAdded = function (parent) {
+        var stage = parent.$stage;
+        this.$parent = parent;
+        this.emit(Event.ADDED);
+        if (stage) {
+            this.$emitAddedToStage(stage);
+        }
+    };
+    Layer.prototype.$emitRemoved = function () {
+        var stage = this.$stage;
+        this.$parent = null;
+        this.emit(Event.REMOVED);
+        if (stage) {
+            this.$emitRemovedFromStage();
+        }
+    };
+    Layer.prototype.$emitAddedToStage = function (stage) {
+        var children = this.$children;
+        this.$stage = stage;
+        this.emit(Event.ADDED_TO_STAGE);
+        if (this.hasEventListener(Event.ENTER_FRAME)) {
+            stage.ticker.registerEnterFrameCallback(this);
+        }
+        for (var _i = 0, children_5 = children; _i < children_5.length; _i++) {
+            var child = children_5[_i];
+            child.$emitAddedToStage(stage);
+        }
+    };
+    Layer.prototype.$emitRemovedFromStage = function () {
+        var stage = this.$stage;
+        var children = this.$children;
+        this.$stage = null;
+        this.emit(Event.REMOVED_FROM_STAGE);
+        if (this.hasEventListener(Event.ENTER_FRAME)) {
+            stage.ticker.unregisterEnterFrameCallback(this);
+        }
+        for (var _i = 0, children_6 = children; _i < children_6.length; _i++) {
+            var child = children_6[_i];
+            child.$emitRemovedFromStage();
+        }
+    };
     Layer.prototype.$getPattern = function (texture, fillMode) {
-        if (texture && fillMode && fillMode !== 'scale' && fillMode !== 'no-repeat') {
+        if (texture && fillMode && fillMode !== Texture.SCALE && fillMode !== Texture.NO_REPEAT) {
             return this.$context.createPattern(texture.element, fillMode);
         }
         else {
@@ -1282,31 +1453,29 @@ var Layer = /** @class */ (function (_super) {
         var minY = -this.$anchorY;
         var maxY = this.height + minY;
         var bounds = this.$getChildBounds(child);
-        if (bounds.left > maxX || bounds.right < minX || bounds.top > maxY || bounds.bottom < minY) {
-            bounds.release();
-            return false;
-        }
+        var inside = bounds.left <= maxX && bounds.right >= minX && bounds.top <= maxY && bounds.bottom >= minY;
         bounds.release();
-        return true;
+        return inside;
     };
     Layer.prototype.$drawBackground = function (color, texture, pattern, fillMode, context) {
         var ctx = context || this.$context;
         var canvas = ctx.canvas;
         var width = canvas.width;
         var height = canvas.height;
-        var scale = Layer.pixelRatio / (texture ? texture.pixelRatio : 1);
+        var pixelRatio = Layer.pixelRatio;
         if (color) {
             ctx.fillStyle = color;
             ctx.fillRect(0, 0, width, height);
         }
         if (texture) {
-            if (fillMode === 'scale') {
+            if (fillMode === Texture.SCALE) {
                 ctx.drawImage(texture.element, 0, 0, width, height);
             }
-            else if (fillMode === 'no-repeat') {
-                ctx.drawImage(texture.element, 0, 0, texture.width * scale, texture.height * scale);
+            else if (fillMode === Texture.NO_REPEAT) {
+                ctx.drawImage(texture.element, 0, 0, texture.width * pixelRatio, texture.height * pixelRatio);
             }
             else if (pattern) {
+                var scale = pixelRatio / texture.pixelRatio;
                 scale !== 1 && ctx.scale(scale, scale);
                 ctx.fillStyle = pattern;
                 ctx.fillRect(0, 0, width, height);
@@ -1366,8 +1535,8 @@ var Layer = /** @class */ (function (_super) {
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode);
         ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
-        for (var _i = 0, children_5 = children; _i < children_5.length; _i++) {
-            var child = children_5[_i];
+        for (var _i = 0, children_7 = children; _i < children_7.length; _i++) {
+            var child = children_7[_i];
             if (this.$isChildVisible(child)) {
                 drawCalls += this.$drawChild(child);
             }
@@ -1375,53 +1544,29 @@ var Layer = /** @class */ (function (_super) {
         this.$dirty = false;
         return drawCalls;
     };
-    Layer.prototype.on = function (event, listener) {
-        _super.prototype.on.call(this, event, listener);
-        if (event === Event.ENTER_FRAME && this.$stage) {
-            this.$stage.ticker.registerEnterFrameCallback(this);
+    Layer.prototype.on = function (type, listener) {
+        _super.prototype.on.call(this, type, listener);
+        if (type === Event.ENTER_FRAME && this.ticker) {
+            this.ticker.registerEnterFrameCallback(this);
         }
-        else if (event === Event.ADDED && this.$parent) {
-            listener();
+        else if (type === Event.ADDED && this.$parent) {
+            var event = Event.create(type);
+            listener.call(this, event);
+            event.release();
         }
-        else if (event === Event.ADDED_TO_STAGE && this.$stage) {
-            listener();
-        }
-        return this;
-    };
-    Layer.prototype.off = function (event, listener) {
-        _super.prototype.off.call(this, event, listener);
-        if (this.$stage && event === Event.ENTER_FRAME && !this.hasEventListener(Event.ENTER_FRAME)) {
-            this.$stage.ticker.unregisterEnterFrameCallback(this);
+        else if (type === Event.ADDED_TO_STAGE && this.$stage) {
+            var event = Event.create(type);
+            listener.call(this, event);
+            event.release();
         }
         return this;
     };
-    Layer.prototype.$onAdded = function (parent) {
-        this.$parent = parent;
-    };
-    Layer.prototype.$onRemoved = function () {
-        this.$parent = null;
-    };
-    Layer.prototype.$onAddedToStage = function (stage) {
-        var children = this.$children;
-        if (this.hasEventListener(Event.ENTER_FRAME)) {
-            stage.ticker.registerEnterFrameCallback(this);
+    Layer.prototype.off = function (type, listener) {
+        _super.prototype.off.call(this, type, listener);
+        if (type === Event.ENTER_FRAME && !this.hasEventListener(Event.ENTER_FRAME) && this.ticker) {
+            this.ticker.unregisterEnterFrameCallback(this);
         }
-        this.$stage = stage;
-        for (var _i = 0, children_6 = children; _i < children_6.length; _i++) {
-            var child = children_6[_i];
-            child.emit(Event.ADDED_TO_STAGE, stage);
-        }
-    };
-    Layer.prototype.$onRemovedFromStage = function (stage) {
-        var children = this.$children;
-        if (this.hasEventListener(Event.ENTER_FRAME)) {
-            stage.ticker.unregisterEnterFrameCallback(this);
-        }
-        this.$stage = null;
-        for (var _i = 0, children_7 = children; _i < children_7.length; _i++) {
-            var child = children_7[_i];
-            child.emit(Event.ADDED_TO_STAGE);
-        }
+        return this;
     };
     Layer.pixelRatio = window.devicePixelRatio || 1;
     return Layer;
@@ -1478,7 +1623,7 @@ var Ease = /** @class */ (function () {
         return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
     };
     Ease.easeInSine = function (t, b, c, d) {
-        return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
+        return (t === d) ? b + c : -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
     };
     Ease.easeOutSine = function (t, b, c, d) {
         return c * Math.sin(t / d * (Math.PI / 2)) + b;
@@ -1526,8 +1671,9 @@ var Ease = /** @class */ (function () {
             a = c;
             s = p / 4;
         }
-        else
+        else {
             s = p / (2 * Math.PI) * Math.asin(c / a);
+        }
         return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
     };
     Ease.easeOutElastic = function (t, b, c, d) {
@@ -1544,8 +1690,9 @@ var Ease = /** @class */ (function () {
             a = c;
             s = p / 4;
         }
-        else
+        else {
             s = p / (2 * Math.PI) * Math.asin(c / a);
+        }
         return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b;
     };
     Ease.easeInOutElastic = function (t, b, c, d) {
@@ -1562,31 +1709,29 @@ var Ease = /** @class */ (function () {
             a = c;
             s = p / 4;
         }
-        else
+        else {
             s = p / (2 * Math.PI) * Math.asin(c / a);
+        }
         if (t < 1)
             return -0.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
         return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * 0.5 + c + b;
     };
     Ease.easeInBack = function (t, b, c, d, s) {
-        if (s === undefined)
-            s = 1.70158;
-        return c * (t /= d) * t * ((s + 1) * t - s) + b;
+        if (s === void 0) { s = 1.70158; }
+        return (t === d) ? b + c : c * (t /= d) * t * ((s + 1) * t - s) + b;
     };
     Ease.easeOutBack = function (t, b, c, d, s) {
-        if (s === undefined)
-            s = 1.70158;
-        return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
+        if (s === void 0) { s = 1.70158; }
+        return (t === 0) ? b : c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
     };
     Ease.easeInOutBack = function (t, b, c, d, s) {
-        if (s === undefined)
-            s = 1.70158;
+        if (s === void 0) { s = 1.70158; }
         if ((t /= d / 2) < 1)
             return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
         return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
     };
     Ease.easeInBounce = function (t, b, c, d) {
-        return c - this.easeOutBounce(d - t, 0, c, d) + b;
+        return c - Ease.easeOutBounce(d - t, 0, c, d) + b;
     };
     Ease.easeOutBounce = function (t, b, c, d) {
         if ((t /= d) < (1 / 2.75)) {
@@ -1604,8 +1749,8 @@ var Ease = /** @class */ (function () {
     };
     Ease.easeInOutBounce = function (t, b, c, d) {
         if (t < d / 2)
-            return this.easeInBounce(t * 2, 0, c, d) * 0.5 + b;
-        return this.easeOutBounce(t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
+            return Ease.easeInBounce(t * 2, 0, c, d) * 0.5 + b;
+        return Ease.easeOutBounce(t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
     };
     return Ease;
 }());
@@ -1617,6 +1762,7 @@ var Tween = /** @class */ (function (_super) {
         _this.loop = false;
         _this.$target = null;
         _this.$paused = true;
+        _this.$stopped = true;
         _this.$stepIndex = 0;
         _this.$stepPosition = 0;
         _this.$steps = [];
@@ -1630,6 +1776,13 @@ var Tween = /** @class */ (function (_super) {
     Object.defineProperty(Tween.prototype, "paused", {
         get: function () {
             return this.$paused;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Tween.prototype, "stopped", {
+        get: function () {
+            return this.$stopped;
         },
         enumerable: true,
         configurable: true
@@ -1665,25 +1818,38 @@ var Tween = /** @class */ (function (_super) {
         return this;
     };
     Tween.prototype.play = function () {
-        if (this.$paused) {
-            this.$paused = false;
-            this.$target.on(Event.ENTER_FRAME, this.$boundOnEnterFrame);
+        if (this.$stopped) {
+            this.resume();
             Tween.$tweens.push(this);
         }
         return this;
     };
     Tween.prototype.pause = function () {
-        if (!this.$paused) {
-            this.$paused = true;
-            this.$target.off(Event.ENTER_FRAME, this.$boundOnEnterFrame);
-            var index = Tween.$tweens.indexOf(this);
-            if (index >= 0) {
-                Tween.$tweens.splice(index, 1);
-            }
+        this.$paused = true;
+        this.$target.off(Event.ENTER_FRAME, this.$boundOnEnterFrame);
+        return this;
+    };
+    Tween.prototype.resume = function () {
+        if (this.$paused) {
+            this.$paused = false;
+            this.$stopped = false;
+            this.$target.on(Event.ENTER_FRAME, this.$boundOnEnterFrame);
         }
         return this;
     };
-    Tween.prototype.$onEnterFrame = function (dt) {
+    Tween.prototype.stop = function () {
+        this.pause();
+        this.$stopped = true;
+        var index = Tween.$tweens.indexOf(this);
+        if (index >= 0) {
+            Tween.$tweens.splice(index, 1);
+        }
+        return this;
+    };
+    Tween.prototype.$onEnterFrame = function (e) {
+        this.$nextFrame(e.data);
+    };
+    Tween.prototype.$nextFrame = function (dt) {
         var loop = this.loop;
         var steps = this.$steps;
         var stepLength = this.$steps.length;
@@ -1712,14 +1878,14 @@ var Tween = /** @class */ (function (_super) {
             this.$stepIndex = stepIndex + 1;
             this.$shouldSaveProps = true;
             this.$setProps(props);
-            this.$onEnterFrame(stepPosition - duration);
+            this.$nextFrame(stepPosition - duration);
         }
         else if (loop) {
             this.$stepIndex = 0;
             this.$stepPosition = 0;
             this.$shouldSaveProps = true;
             this.$setProps(props);
-            this.$onEnterFrame(stepPosition - duration);
+            this.$nextFrame(stepPosition - duration);
         }
         else {
             this.$stepIndex = 0;
@@ -1776,7 +1942,7 @@ var Tween = /** @class */ (function (_super) {
         for (var _i = 0, tweens_2 = tweens; _i < tweens_2.length; _i++) {
             var tween = tweens_2[_i];
             if (tween.$target === target) {
-                tween.play();
+                tween.resume();
             }
         }
     };
@@ -1785,7 +1951,7 @@ var Tween = /** @class */ (function (_super) {
         for (var i = tweens.length - 1; i >= 0; --i) {
             var tween = tweens[i];
             if (tween.$target === target) {
-                tween.pause();
+                tween.stop();
             }
         }
     };
@@ -1793,7 +1959,7 @@ var Tween = /** @class */ (function (_super) {
         var tweens = this.$tweens;
         for (var i = tweens.length - 1; i >= 0; --i) {
             var tween = tweens[i];
-            tween.pause();
+            tween.stop();
         }
     };
     Tween.$tweens = [];
@@ -1853,6 +2019,20 @@ var Scroller = /** @class */ (function (_super) {
                 this.$markDirty();
             }
             bounds.release();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Scroller.prototype, "scrollWidth", {
+        get: function () {
+            return this.$scrollWidth;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Scroller.prototype, "scrollHeight", {
+        get: function () {
+            return this.$scrollHeight;
         },
         enumerable: true,
         configurable: true
@@ -1951,10 +2131,11 @@ var Scroller = /** @class */ (function (_super) {
             this.$touchingId = null;
         }
     };
-    Scroller.prototype.$onRemovedFromStage = function (stage) {
-        _super.prototype.$onRemovedFromStage.call(this, stage);
+    Scroller.prototype.$emitRemovedFromStage = function () {
+        _super.prototype.$emitRemovedFromStage.call(this);
         if (this.$inertiaTween) {
             this.$inertiaTween.pause();
+            this.$inertiaTween = null;
         }
     };
     return Scroller;
@@ -1964,10 +2145,13 @@ var Image = /** @class */ (function (_super) {
     __extends(Image, _super);
     function Image(texture, width, height) {
         var _this = _super.call(this) || this;
+        _this.$texture = null;
+        _this.$clipRect = null;
+        _this.$scale9Grid = null;
+        _this.$boundOnTextureLoad = _this.$onTextureLoad.bind(_this);
         if (texture) {
             _this.$width = width;
             _this.$height = height;
-            _this.$boundOnTextureLoad = _this.$onTextureLoad.bind(_this);
             _this.texture = texture;
         }
         return _this;
@@ -1977,13 +2161,16 @@ var Image = /** @class */ (function (_super) {
             return this.$texture;
         },
         set: function (texture) {
-            this.$texture = texture;
-            if (texture.width && texture.height) {
+            if (this.$texture) {
+                this.$texture.off('load', this.$boundOnTextureLoad);
+            }
+            if (!texture || (texture.width && texture.height)) {
                 this.$resizeCanvas();
             }
-            else if (!this.$width || !this.$height) {
+            if (texture) {
                 texture.on('load', this.$boundOnTextureLoad);
             }
+            this.$texture = texture;
         },
         enumerable: true,
         configurable: true
@@ -2024,7 +2211,7 @@ var Image = /** @class */ (function (_super) {
             bounds.width = Math.max(bounds.width, clipRect.width);
             bounds.height = Math.max(bounds.height, clipRect.height);
         }
-        else {
+        else if (texture) {
             bounds.width = Math.max(bounds.width, texture.width);
             bounds.height = Math.max(bounds.height, texture.height);
         }
@@ -2056,9 +2243,12 @@ var Image = /** @class */ (function (_super) {
         var height = canvas.height;
         var clipX = clipRect ? clipRect.x : 0;
         var clipY = clipRect ? clipRect.y : 0;
-        var clipWidth = clipRect ? clipRect.width : texture.width;
-        var clipHeight = clipRect ? clipRect.height : texture.height;
-        if (scale9Grid) {
+        var clipWidth = clipRect ? clipRect.width : texture ? texture.width : 0;
+        var clipHeight = clipRect ? clipRect.height : texture ? texture.height : 0;
+        if (!texture) {
+            return drawCalls;
+        }
+        else if (scale9Grid) {
             var sourceX0 = clipX;
             var sourceY0 = clipY;
             var sourceW0 = scale9Grid.x;
@@ -2482,7 +2672,7 @@ var Input = /** @class */ (function (_super) {
         _this.$placeholder = '';
         _this.$placeholderColor = '#888';
         _this.$explicitColor = 'black';
-        _this.$value = value;
+        _this.$value = value || _this.$value;
         _this.$type = options.type || _this.$type;
         _this.$maxLength = options.maxLength || _this.$maxLength;
         _this.$placeholder = options.placeholder || _this.$placeholder;
@@ -2554,6 +2744,17 @@ var Input = /** @class */ (function (_super) {
         set: function (placeholder) {
             this.$placeholder = placeholder;
             this.$updateText();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Input.prototype, "placeholderColor", {
+        get: function () {
+            return this.$placeholderColor;
+        },
+        set: function (placeholderColor) {
+            this.$placeholderColor = placeholderColor;
+            this.$markDirty();
         },
         enumerable: true,
         configurable: true
@@ -2670,7 +2871,7 @@ var Input = /** @class */ (function (_super) {
             });
             if (tagName === 'input') {
                 element.addEventListener('keydown', function (e) {
-                    if (e.keyCode === 13) {
+                    if (e.key === 'Enter' || e.keyCode === 13) {
                         Input.$focusedInput.blur();
                     }
                 });
@@ -2690,10 +2891,10 @@ var MovieClip = /** @class */ (function (_super) {
     function MovieClip(texture, frames) {
         var _this = _super.call(this, texture) || this;
         _this.$loop = true;
-        _this.$paused = true;
+        _this.$interval = 30;
+        _this.$paused = false;
         _this.$currentFrame = 0;
         _this.$frames = null;
-        _this.$interval = 30;
         _this.$frames = frames;
         _this.$boundNextFrame = _this.nextFrame.bind(_this);
         _this.play();
@@ -2709,12 +2910,19 @@ var MovieClip = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(MovieClip.prototype, "interval", {
+        get: function () {
+            return this.$interval;
+        },
+        set: function (interval) {
+            this.$interval = interval;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(MovieClip.prototype, "paused", {
         get: function () {
             return this.$paused;
-        },
-        set: function (paused) {
-            this.$paused = paused;
         },
         enumerable: true,
         configurable: true
@@ -2722,9 +2930,6 @@ var MovieClip = /** @class */ (function (_super) {
     Object.defineProperty(MovieClip.prototype, "currentFrame", {
         get: function () {
             return this.$currentFrame;
-        },
-        set: function (currentFrame) {
-            this.$currentFrame = currentFrame;
         },
         enumerable: true,
         configurable: true
@@ -2760,6 +2965,9 @@ var MovieClip = /** @class */ (function (_super) {
         var frames = this.$frames;
         var totalFrames = frames.length;
         var frameData = frames[this.$currentFrame];
+        if (!frameData) {
+            return;
+        }
         if (ticker) {
             ticker.clearTimeout(this.$timer);
             if (frame < totalFrames - 1 || loop) {
@@ -2785,6 +2993,9 @@ var MovieClip = /** @class */ (function (_super) {
             frame = 0;
         }
         var frameData = this.$frames[frame];
+        if (!frameData) {
+            return;
+        }
         this.$currentFrame = frame;
         this.clipRect = frameData.clip;
         if (this.stage && frameData.callback) {
@@ -2810,7 +3021,7 @@ var Request = /** @class */ (function (_super) {
         }
         if (options) {
             url = options.url || url;
-            method = options.method;
+            method = options.method || 'get';
             headers = options.headers;
             data = options.data;
             responseType = options.responseType;
@@ -2835,6 +3046,7 @@ var Request = /** @class */ (function (_super) {
                 xhr.setRequestHeader(key, headers[key]);
             });
         }
+        xhr.addEventListener('abort', _this.$onAbort.bind(_this));
         xhr.addEventListener('progress', _this.$onProgress.bind(_this));
         xhr.addEventListener('readystatechange', _this.$onReadyStateChange.bind(_this));
         xhr.send(data);
@@ -2882,9 +3094,14 @@ var Request = /** @class */ (function (_super) {
     Request.prototype.abort = function () {
         this.$xhr.abort();
     };
+    Request.prototype.$onAbort = function () {
+        this.emit(Event.ABORT);
+    };
     Request.prototype.$onProgress = function (e) {
         if (e.lengthComputable) {
-            this.emit(Event.PROGRESS, e.loaded / e.total);
+            var event = Event.create(Event.PROGRESS, e.loaded / e.total);
+            this.emit(event);
+            event.release();
         }
     };
     Request.prototype.$onReadyStateChange = function (e) {
@@ -2894,8 +3111,11 @@ var Request = /** @class */ (function (_super) {
                 this.emit(Event.ERROR, e);
             }
             else {
-                this.emit(Event.COMPLETE);
+                var event = Event.create(Event.LOAD, xhr.response);
+                this.emit(event);
+                event.release();
             }
+            this.emit(Event.COMPLETE);
         }
     };
     Request.$getContentType = function (headers) {
@@ -2912,47 +3132,13 @@ var Request = /** @class */ (function (_super) {
     return Request;
 }(EventEmitter));
 
-var Media = /** @class */ (function (_super) {
-    __extends(Media, _super);
-    function Media(stage) {
-        var _this = _super.call(this) || this;
-        _this.$stage = stage;
-        _this.$boundOnLoad = _this.$onLoad.bind(_this);
-        _this.$boundOnError = _this.$onError.bind(_this);
-        return _this;
-    }
-    Object.defineProperty(Media.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Media.prototype, "url", {
-        set: function (url) {
-            this.$element.src = url;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Media.prototype.$onLoad = function () {
-        this.emit('load');
-        this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
-    };
-    Media.prototype.$onError = function (e) {
-        this.emit('error', e);
-        this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
-    };
-    return Media;
-}(EventEmitter));
-
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
     function Sound(stage) {
         var _this = _super.call(this, stage) || this;
         _this.$loops = 1;
         _this.$startTime = 0;
-        _this.$paused = false;
+        _this.$paused = true;
         var audio = document.createElement('audio');
         audio.crossOrigin = '*';
         audio.addEventListener('canplaythrough', _this.$boundOnLoad);
@@ -2962,6 +3148,7 @@ var Sound = /** @class */ (function (_super) {
         _this.$boundOnTouch = _this.$onTouch.bind(_this);
         stage.ticker.on(Event.TICKER_PAUSE, _this.$onTickerPause.bind(_this));
         stage.ticker.on(Event.TICKER_RESUME, _this.$onTickerResume.bind(_this));
+        stage.on(Event.REMOVED_FROM_STAGE, _this.$onRemovedFromStage.bind(_this));
         return _this;
     }
     Object.defineProperty(Sound.prototype, "element", {
@@ -2972,6 +3159,9 @@ var Sound = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(Sound.prototype, "url", {
+        get: function () {
+            return this.$element.src;
+        },
         set: function (url) {
             this.$paused = true;
             this.$element.src = url;
@@ -2993,6 +3183,28 @@ var Sound = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Sound.prototype, "paused", {
+        get: function () {
+            return this.$paused;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Sound.prototype.play = function (startTime, loops) {
+        if (startTime === void 0) { startTime = 0; }
+        if (loops === void 0) { loops = 1; }
+        this.$loops = loops;
+        this.$startTime = startTime;
+        this.$element.currentTime = startTime;
+        this.$paused = false;
+        this.$checkStatus();
+        return this;
+    };
+    Sound.prototype.stop = function () {
+        this.$paused = true;
+        this.$element.pause();
+        return this;
+    };
     Sound.prototype.$checkOnTouch = function () {
         document.addEventListener('click', this.$boundOnTouch);
         document.addEventListener('touchend', this.$boundOnTouch);
@@ -3033,20 +3245,10 @@ var Sound = /** @class */ (function (_super) {
             this.$checkStatus();
         }
     };
-    Sound.prototype.play = function (startTime, loops) {
-        if (startTime === void 0) { startTime = 0; }
-        if (loops === void 0) { loops = 1; }
-        this.$loops = loops;
-        this.$startTime = startTime;
-        this.$element.currentTime = startTime;
-        this.$paused = false;
-        this.$checkStatus();
-        return this;
-    };
-    Sound.prototype.stop = function () {
-        this.$paused = true;
-        this.$element.pause();
-        return this;
+    Sound.prototype.$onRemovedFromStage = function () {
+        this.stop();
+        document.removeEventListener('click', this.$boundOnTouch);
+        document.removeEventListener('touchend', this.$boundOnTouch);
     };
     Sound.prototype.$onLoad = function () {
         _super.prototype.$onLoad.call(this);
@@ -3060,49 +3262,6 @@ var Sound = /** @class */ (function (_super) {
         }
     };
     return Sound;
-}(Media));
-
-var Texture = /** @class */ (function (_super) {
-    __extends(Texture, _super);
-    function Texture(stage) {
-        var _this = _super.call(this, stage) || this;
-        _this.pixelRatio = Texture.defaultPixelRatio;
-        var image = document.createElement('img');
-        image.crossOrigin = '*';
-        image.addEventListener('load', _this.$boundOnLoad);
-        image.addEventListener('error', _this.$boundOnError);
-        _this.$element = image;
-        return _this;
-    }
-    Object.defineProperty(Texture.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Texture.prototype, "width", {
-        get: function () {
-            return this.$element.width;
-        },
-        set: function (width) {
-            this.$element.width = width;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Texture.prototype, "height", {
-        get: function () {
-            return this.$element.height;
-        },
-        set: function (height) {
-            this.$element.height = height;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Texture.defaultPixelRatio = 1;
-    return Texture;
 }(Media));
 
 var ResourceManager = /** @class */ (function (_super) {
@@ -3172,10 +3331,11 @@ var ResourceManager = /** @class */ (function (_super) {
             else if (resource instanceof Media) {
                 resources[name] = resource;
             }
-            resource.off(Event.COMPLETE, successCallback);
             resource.off(Event.LOAD, successCallback);
             resource.off(Event.ERROR, errorCallback);
-            _this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
+            var event = Event.create(Event.PROGRESS, (loadedCount + errorCount) / total);
+            _this.emit(event);
+            event.release();
             if (loadedCount + errorCount === total) {
                 _this.emit(Event.COMPLETE);
             }
@@ -3206,23 +3366,22 @@ var ResourceManager = /** @class */ (function (_super) {
                 }
             }
             ticker.clearTimeout(timer);
-            resource.off(Event.COMPLETE, successCallback);
             resource.off(Event.LOAD, successCallback);
             resource.off(Event.ERROR, errorCallback);
         };
         if (type === ResourceManager.TYPE_TEXT) {
             resource = new Request(url, { responseType: 'text' });
-            resource.on(Event.COMPLETE, successCallback);
+            resource.on(Event.LOAD, successCallback);
             resource.on(Event.ERROR, errorCallback);
         }
         else if (type === ResourceManager.TYPE_JSON) {
             resource = new Request(url, { responseType: 'json' });
-            resource.on(Event.COMPLETE, successCallback);
+            resource.on(Event.LOAD, successCallback);
             resource.on(Event.ERROR, errorCallback);
         }
         else if (type === ResourceManager.TYPE_BINARY) {
             resource = new Request(url, { responseType: 'arraybuffer' });
-            resource.on(Event.COMPLETE, successCallback);
+            resource.on(Event.LOAD, successCallback);
             resource.on(Event.ERROR, errorCallback);
         }
         else if (type === ResourceManager.TYPE_TEXTURE) {
@@ -3260,17 +3419,25 @@ var Stage = /** @class */ (function (_super) {
     __extends(Stage, _super);
     function Stage(canvas) {
         var _this = _super.call(this) || this;
-        _this.$viewportBackgroundFillMode = 'scale';
+        _this.$drawCalls = 0;
+        _this.$activated = false;
         _this.$scaleMode = Stage.SHOW_ALL;
+        _this.$viewportWidth = 0;
+        _this.$viewportHeight = 0;
+        _this.$viewportBackgroundColor = null;
+        _this.$viewportBackgroundImage = null;
+        _this.$viewportBackgroundPattern = null;
+        _this.$viewportBackgroundFillMode = Texture.SCALE;
+        _this.$renderBounds = Rectangle.create();
         _this.$ticker = new Ticker(_this);
+        _this.$browserListeners = [];
         _this.$viewportCanvas = canvas || document.createElement('canvas');
         _this.$viewportContext = _this.$viewportCanvas.getContext('2d');
         _this.$boundResizeViewportCanvas = _this.$resizeViewportCanvas.bind(_this);
+        _this.$resizeViewportCanvas();
         _this.$initEvents();
         _this.width = 320;
         _this.height = 568;
-        _this.viewportWidth = 0;
-        _this.viewportHeight = 0;
         if (!canvas) {
             _this.$viewportCanvas.style.top = '0';
             _this.$viewportCanvas.style.left = '0';
@@ -3279,21 +3446,6 @@ var Stage = /** @class */ (function (_super) {
         }
         return _this;
     }
-    Stage.prototype.$initEvents = function () {
-        var _this = this;
-        var resizeTimer;
-        var ticker = this.$ticker;
-        this.$addTouchEventListeners();
-        this.on(Event.ENTER_FRAME, this.$render);
-        ticker.setTimeout(function () {
-            _this.$resizeViewportCanvas();
-            _this.emit(Event.ADDED_TO_STAGE, _this);
-        }, 100);
-        window.addEventListener('orientationchange', function () {
-            ticker.clearTimeout(resizeTimer);
-            resizeTimer = ticker.setTimeout(_this.$boundResizeViewportCanvas, 100);
-        });
-    };
     Object.defineProperty(Stage.prototype, "x", {
         get: function () {
             return 0;
@@ -3314,6 +3466,34 @@ var Stage = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Stage.prototype, "ticker", {
+        get: function () {
+            return this.$ticker;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "fps", {
+        get: function () {
+            return this.$ticker.fps;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "drawCalls", {
+        get: function () {
+            return this.$drawCalls;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "activated", {
+        get: function () {
+            return this.$activated;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Stage.prototype, "scaleMode", {
         get: function () {
             return this.$scaleMode;
@@ -3323,6 +3503,13 @@ var Stage = /** @class */ (function (_super) {
                 this.$scaleMode = scaleMode;
                 this.$resizeCanvas();
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Stage.prototype, "viewportCanvas", {
+        get: function () {
+            return this.$viewportCanvas;
         },
         enumerable: true,
         configurable: true
@@ -3386,7 +3573,7 @@ var Stage = /** @class */ (function (_super) {
         },
         set: function (viewportBackgroundFillMode) {
             if (this.$viewportBackgroundFillMode !== viewportBackgroundFillMode) {
-                this.$viewportBackgroundFillMode = viewportBackgroundFillMode || 'scale';
+                this.$viewportBackgroundFillMode = viewportBackgroundFillMode || Texture.SCALE;
                 this.$viewportBackgroundPattern = this.$getPattern(this.$viewportBackgroundImage, this.$viewportBackgroundFillMode);
                 this.$markDirty();
             }
@@ -3394,68 +3581,106 @@ var Stage = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Stage.prototype, "drawCalls", {
-        get: function () {
-            return this.$drawCalls;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "fps", {
-        get: function () {
-            return this.$ticker.fps;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "ticker", {
-        get: function () {
-            return this.$ticker;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Stage.prototype.createResourceManager = function (list, options) {
         return new ResourceManager(this, list, options);
+    };
+    Stage.prototype.removeSelf = function () {
+        var canvas = this.$viewportCanvas;
+        if (canvas.parentElement) {
+            canvas.parentElement.removeChild(canvas);
+        }
+        if (this.$activated) {
+            this.$activated = false;
+            this.emit(Event.DEACTIVATE);
+        }
+        if (this.$stage) {
+            this.$emitRemovedFromStage();
+        }
+        this.$removeElementListeners();
+        return this;
+    };
+    Stage.prototype.$initEvents = function () {
+        var _this = this;
+        var prefix;
+        var hiddenKey;
+        var resizeTimer;
+        var ticker = this.$ticker;
+        var prefixes = ['', 'o', 'ms', 'moz', 'webkit'];
+        for (var _i = 0, prefixes_1 = prefixes; _i < prefixes_1.length; _i++) {
+            prefix = prefixes_1[_i];
+            hiddenKey = prefix ? prefix + 'Hidden' : 'hidden';
+            if (document[hiddenKey] !== undefined) {
+                break;
+            }
+        }
+        this.$emitAddedToStage(this);
+        this.$addTouchEventListeners();
+        this.$addElementListener(window, 'orientationchange', function () {
+            ticker.clearTimeout(resizeTimer);
+            resizeTimer = ticker.setTimeout(_this.$boundResizeViewportCanvas, 100);
+        });
+        this.$addElementListener(window, prefix + 'visibilitychange', function () {
+            var hidden = document[hiddenKey];
+            _this.$activated = !hidden;
+            _this.emit(hidden ? Event.DEACTIVATE : Event.ACTIVATE);
+        });
+        this.on(Event.ENTER_FRAME, this.$render);
+        if (!document[hiddenKey]) {
+            this.$activated = true;
+            this.emit(Event.ACTIVATE);
+        }
+    };
+    Stage.prototype.$addElementListener = function (target, type, listener, options) {
+        target.addEventListener(type, listener, options);
+        this.$browserListeners.push({ target: target, type: type, listener: listener });
+    };
+    Stage.prototype.$removeElementListeners = function () {
+        var listeners = this.$browserListeners;
+        for (var _i = 0, listeners_1 = listeners; _i < listeners_1.length; _i++) {
+            var _a = listeners_1[_i], target = _a.target, type = _a.type, listener = _a.listener;
+            target.removeEventListener(type, listener);
+        }
+        listeners.length = 0;
     };
     Stage.prototype.$addTouchEventListeners = function () {
         var _this = this;
         if (document.ontouchstart !== undefined) {
-            document.addEventListener('touchstart', function (event) {
+            this.$addElementListener(document, 'touchstart', function (event) {
                 _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
             });
-            document.addEventListener('touchmove', function (event) {
+            this.$addElementListener(document, 'touchmove', function (event) {
                 _this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
                 event.preventDefault();
-            });
-            document.addEventListener('touchend', function (event) {
+            }, { passive: false });
+            this.$addElementListener(document, 'touchend', function (event) {
                 _this.$dispatchTouches(TouchEvent.TOUCH_END, event);
                 _this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
             });
-            document.addEventListener('touchcancel', function (event) {
+            this.$addElementListener(document, 'touchcancel', function (event) {
                 _this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
             });
         }
         else {
             var touching_1 = false;
-            window.addEventListener('mousedown', function (event) {
+            this.$addElementListener(window, 'mousedown', function (event) {
                 _this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
                 touching_1 = true;
             });
-            window.addEventListener('mousemove', function (event) {
+            this.$addElementListener(window, 'mousemove', function (event) {
                 if (touching_1) {
                     _this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
                 }
             });
-            window.addEventListener('mouseup', function (event) {
+            this.$addElementListener(window, 'mouseup', function (event) {
                 _this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
                 touching_1 = false;
             });
-            window.addEventListener('click', function (event) {
+            this.$addElementListener(window, 'click', function (event) {
                 _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
             });
-            window.addEventListener('blur', function () {
+            this.$addElementListener(window, 'blur', function () {
                 _this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, 0, 0, 0);
+                touching_1 = false;
             });
         }
     };
@@ -3501,13 +3726,13 @@ var Stage = /** @class */ (function (_super) {
         var canvas = this.$canvas;
         var width = canvas.width;
         var height = canvas.height;
-        var scaleMode = this.scaleMode;
+        var scaleMode = this.$scaleMode;
+        var bounds = this.$renderBounds;
         var aspectRatio = width / height;
         var viewportCanvas = this.$viewportCanvas;
         var viewportWidth = viewportCanvas.width;
         var viewportHeight = viewportCanvas.height;
         var viewportAspectRatio = viewportWidth / viewportHeight;
-        var bounds = this.$renderBounds || Rectangle.create();
         if (scaleMode === Stage.NO_SCALE) ;
         else if (scaleMode === Stage.NO_BORDER) {
             if (aspectRatio < viewportAspectRatio) {
@@ -3573,7 +3798,6 @@ var Stage = /** @class */ (function (_super) {
         bounds.y = y;
         bounds.width = width;
         bounds.height = height;
-        this.$renderBounds = bounds;
     };
     Stage.prototype.$resizeCanvas = function () {
         _super.prototype.$resizeCanvas.call(this);

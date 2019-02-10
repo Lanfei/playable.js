@@ -3,16 +3,17 @@ import { Texture } from '../media/Texture';
 import { Rectangle } from '../geom/Rectangle';
 export declare class MovieClip extends Image {
     protected $loop: boolean;
+    protected $interval: number;
     protected $paused: boolean;
     protected $currentFrame: number;
     protected $frames: Array<MovieClipFrameData>;
-    protected $interval: number;
     protected $timer: number;
     protected $boundNextFrame: Function;
     constructor(texture: Texture, frames: Array<MovieClipFrameData>);
     loop: boolean;
-    paused: boolean;
-    currentFrame: number;
+    interval: number;
+    readonly paused: boolean;
+    readonly currentFrame: number;
     readonly totalFrames: number;
     play(): this;
     pause(): this;
@@ -23,6 +24,6 @@ export declare class MovieClip extends Image {
 }
 export interface MovieClipFrameData {
     clip: Rectangle;
-    interval: number;
-    callback: Function;
+    interval?: number;
+    callback?: Function;
 }

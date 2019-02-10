@@ -17,6 +17,7 @@ export declare class Input extends Text {
     color: string;
     maxLength: number;
     placeholder: string;
+    placeholderColor: string;
     selectAll(): this;
     focus(): this;
     blur(): this;

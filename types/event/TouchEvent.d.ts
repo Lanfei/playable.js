@@ -21,11 +21,11 @@ export declare class TouchEvent extends Event {
     stageY: number;
     identifier: number;
     cancelBubble: boolean;
-    constructor(type: string);
+    protected constructor(type: string);
     protected $init(type: string): this;
     stopPropagation(): void;
     release(): void;
-    private static readonly $pool;
+    protected static readonly $pool: Array<TouchEvent>;
     static create(type: string): TouchEvent;
     static recycle(e: TouchEvent): void;
 }

@@ -1,5 +1,10 @@
 import {Vector} from './Vector';
 
+/*
+ *             |a  b  0|
+ * (x, y, 1) * |c  d  0| = (ax + cy + tx, bx + dy + ty, 1)
+ *             |tx ty 1|
+ */
 export class Matrix {
 
 	public a: number;
@@ -9,7 +14,7 @@ export class Matrix {
 	public tx: number;
 	public ty: number;
 
-	private constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number) {
+	protected constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number) {
 		if (arguments.length > 0) {
 			this.set(a, b, c, d, tx, ty);
 		} else {
@@ -48,9 +53,11 @@ export class Matrix {
 		return this;
 	}
 
+	public prepend(m: Matrix): this;
+	public prepend(a: number, b: number, c: number, d: number, tx: number, ty: number): this;
 	public prepend(a: number | Matrix, b?: number, c?: number, d?: number, tx?: number, ty?: number): this {
 		if (a instanceof Matrix) {
-			return this.append(a.a, a.b, a.c, a.d, a.tx, a.ty);
+			return this.prepend(a.a, a.b, a.c, a.d, a.tx, a.ty);
 		}
 		let a1 = this.a;
 		let b1 = this.b;
@@ -67,6 +74,8 @@ export class Matrix {
 		return this;
 	}
 
+	public append(m: Matrix): this;
+	public append(a: number, b: number, c: number, d: number, tx: number, ty: number): this;
 	public append(a: number | Matrix, b?: number, c?: number, d?: number, tx?: number, ty?: number): this {
 		if (a instanceof Matrix) {
 			return this.append(a.a, a.b, a.c, a.d, a.tx, a.ty);
@@ -84,12 +93,6 @@ export class Matrix {
 		this.tx = a * tx1 + c * ty1 + tx;
 		this.ty = b * tx1 + d * ty1 + ty;
 		return this;
-	}
-
-	public multiply(v: Vector): Vector {
-		let x = this.a * v.x + this.c * v.y + this.tx;
-		let y = this.b * v.x + this.d * v.y + this.ty;
-		return Vector.create(x, y);
 	}
 
 	public scale(x: number, y?: number): this {
@@ -115,7 +118,7 @@ export class Matrix {
 		return this.append(1, 0, 0, 1, x, y);
 	}
 
-	public equals(m: Matrix): boolean {
+	public equal(m: Matrix): boolean {
 		return m instanceof Matrix &&
 			this.a === m.a && this.b === m.b &&
 			this.c === m.c && this.d === m.d &&
@@ -126,7 +129,7 @@ export class Matrix {
 		Matrix.recycle(this);
 	}
 
-	private static readonly $pool: Array<Matrix> = [];
+	protected static readonly $pool: Array<Matrix> = [];
 
 	public static create(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number): Matrix {
 		let m;

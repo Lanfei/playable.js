@@ -9,6 +9,7 @@ export class Tween extends EventEmitter {
 
 	protected $target: Layer = null;
 	protected $paused: boolean = true;
+	protected $stopped: boolean = true;
 	protected $stepIndex: number = 0;
 	protected $stepPosition: number = 0;
 	protected $steps: Array<TweenStep> = [];
@@ -16,7 +17,7 @@ export class Tween extends EventEmitter {
 	protected $shouldSaveProps: boolean = true;
 	protected $boundOnEnterFrame: () => void;
 
-	private constructor(target: Layer, option?: { loop?: boolean }) {
+	protected constructor(target: Layer, option?: TweenOption) {
 		super();
 		this.$target = target;
 		this.loop = option ? option.loop : false;
@@ -25,6 +26,10 @@ export class Tween extends EventEmitter {
 
 	public get paused(): boolean {
 		return this.$paused;
+	}
+
+	public get stopped(): boolean {
+		return this.$stopped;
 	}
 
 	public set(props: Object): this {
@@ -62,27 +67,43 @@ export class Tween extends EventEmitter {
 	}
 
 	public play(): this {
-		if (this.$paused) {
-			this.$paused = false;
-			this.$target.on(Event.ENTER_FRAME, this.$boundOnEnterFrame);
+		if (this.$stopped) {
+			this.resume();
 			Tween.$tweens.push(this);
 		}
 		return this;
 	}
 
 	public pause(): this {
-		if (!this.$paused) {
-			this.$paused = true;
-			this.$target.off(Event.ENTER_FRAME, this.$boundOnEnterFrame);
-			let index = Tween.$tweens.indexOf(this);
-			if (index >= 0) {
-				Tween.$tweens.splice(index, 1);
-			}
+		this.$paused = true;
+		this.$target.off(Event.ENTER_FRAME, this.$boundOnEnterFrame);
+		return this;
+	}
+
+	public resume(): this {
+		if (this.$paused) {
+			this.$paused = false;
+			this.$stopped = false;
+			this.$target.on(Event.ENTER_FRAME, this.$boundOnEnterFrame);
 		}
 		return this;
 	}
 
-	protected $onEnterFrame(dt: number): void {
+	public stop(): this {
+		this.pause();
+		this.$stopped = true;
+		let index = Tween.$tweens.indexOf(this);
+		if (index >= 0) {
+			Tween.$tweens.splice(index, 1);
+		}
+		return this;
+	}
+
+	protected $onEnterFrame(e: Event): void {
+		this.$nextFrame(e.data);
+	}
+
+	protected $nextFrame(dt: number): void {
 		let loop = this.loop;
 		let steps = this.$steps;
 		let stepLength = this.$steps.length;
@@ -108,13 +129,13 @@ export class Tween extends EventEmitter {
 			this.$stepIndex = stepIndex + 1;
 			this.$shouldSaveProps = true;
 			this.$setProps(props);
-			this.$onEnterFrame(stepPosition - duration);
+			this.$nextFrame(stepPosition - duration);
 		} else if (loop) {
 			this.$stepIndex = 0;
 			this.$stepPosition = 0;
 			this.$shouldSaveProps = true;
 			this.$setProps(props);
-			this.$onEnterFrame(stepPosition - duration);
+			this.$nextFrame(stepPosition - duration);
 		} else {
 			this.$stepIndex = 0;
 			this.$stepPosition = 0;
@@ -157,7 +178,7 @@ export class Tween extends EventEmitter {
 		}
 	}
 
-	private static readonly $tweens: Array<Tween> = [];
+	protected static readonly $tweens: Array<Tween> = [];
 
 	public static get(target: Layer, option?: { loop?: boolean }): Tween {
 		return new Tween(target, option);
@@ -176,7 +197,7 @@ export class Tween extends EventEmitter {
 		let tweens = this.$tweens;
 		for (let tween of tweens) {
 			if (tween.$target === target) {
-				tween.play();
+				tween.resume();
 			}
 		}
 	}
@@ -186,7 +207,7 @@ export class Tween extends EventEmitter {
 		for (let i = tweens.length - 1; i >= 0; --i) {
 			let tween = tweens[i];
 			if (tween.$target === target) {
-				tween.pause();
+				tween.stop();
 			}
 		}
 	}
@@ -195,7 +216,7 @@ export class Tween extends EventEmitter {
 		let tweens = this.$tweens;
 		for (let i = tweens.length - 1; i >= 0; --i) {
 			let tween = tweens[i];
-			tween.pause();
+			tween.stop();
 		}
 	}
 
@@ -207,4 +228,8 @@ export interface TweenStep {
 	duration?: number,
 	ease?: Function,
 	callback?: Function
+}
+
+export interface TweenOption {
+	loop?: boolean
 }

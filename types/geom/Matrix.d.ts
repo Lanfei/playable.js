@@ -6,21 +6,22 @@ export declare class Matrix {
     d: number;
     tx: number;
     ty: number;
-    private constructor();
+    protected constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number);
     set(a: number, b: number, c: number, d: number, tx: number, ty: number): this;
     identity(): this;
     invert(): this;
-    prepend(a: number | Matrix, b?: number, c?: number, d?: number, tx?: number, ty?: number): this;
-    append(a: number | Matrix, b?: number, c?: number, d?: number, tx?: number, ty?: number): this;
-    multiply(v: Vector): Vector;
+    prepend(m: Matrix): this;
+    prepend(a: number, b: number, c: number, d: number, tx: number, ty: number): this;
+    append(m: Matrix): this;
+    append(a: number, b: number, c: number, d: number, tx: number, ty: number): this;
     scale(x: number, y?: number): this;
     rotate(angle: number): this;
     skew(skewX: number, skewY: number): this;
     translate(v: Vector): this;
     translate(x: number, y: number): this;
-    equals(m: Matrix): boolean;
+    equal(m: Matrix): boolean;
     release(): void;
-    private static readonly $pool;
+    protected static readonly $pool: Array<Matrix>;
     static create(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number): Matrix;
     static recycle(m: Matrix): void;
 }

@@ -3,7 +3,7 @@ import {Ticker} from '../system/Ticker';
 import {Matrix} from '../geom/Matrix';
 import {Vector} from '../geom/Vector';
 import {Rectangle} from '../geom/Rectangle';
-import {Texture} from '../media/Texture';
+import {Texture, FillMode} from '../media/Texture';
 import {Event} from '../event/Event';
 import {TouchEvent} from '../event/TouchEvent';
 import {EventEmitter} from '../event/EventEmitter';
@@ -33,7 +33,7 @@ export class Layer extends EventEmitter {
 	protected $backgroundColor: string = null;
 	protected $backgroundImage: Texture = null;
 	protected $backgroundPattern: CanvasPattern = null;
-	protected $backgroundFillMode: BackgroundFillMode = 'scale';
+	protected $backgroundFillMode: FillMode = Texture.SCALE;
 	protected $dirty: boolean = true;
 	protected $stage: Stage = null;
 	protected $parent: Layer = null;
@@ -47,32 +47,6 @@ export class Layer extends EventEmitter {
 		super();
 		this.$canvas = document.createElement('canvas');
 		this.$context = this.$canvas.getContext('2d');
-		this.on(Event.ADDED, this.$onAdded);
-		this.on(Event.REMOVED, this.$onRemoved);
-		this.on(Event.ADDED_TO_STAGE, this.$onAddedToStage);
-		this.on(Event.REMOVED_FROM_STAGE, this.$onRemovedFromStage);
-	}
-
-	public get width(): number {
-		return this.$width ? this.$width : this.$canvas.width / Layer.pixelRatio;
-	}
-
-	public set width(width: number) {
-		if (this.$width !== width) {
-			this.$width = width;
-			this.$resizeCanvas();
-		}
-	}
-
-	public get height(): number {
-		return this.$height ? this.$height : this.$canvas.height / Layer.pixelRatio;
-	}
-
-	public set height(height: number) {
-		if (this.$height !== height) {
-			this.$height = height;
-			this.$resizeCanvas();
-		}
 	}
 
 	public get x(): number {
@@ -94,6 +68,28 @@ export class Layer extends EventEmitter {
 		if (this.$y !== y) {
 			this.$y = y;
 			this.$markParentDirty();
+		}
+	}
+
+	public get width(): number {
+		return this.$width ? this.$width : this.$canvas.width / Layer.pixelRatio;
+	}
+
+	public set width(width: number) {
+		if (this.$width !== width) {
+			this.$width = width;
+			this.$resizeCanvas();
+		}
+	}
+
+	public get height(): number {
+		return this.$height ? this.$height : this.$canvas.height / Layer.pixelRatio;
+	}
+
+	public set height(height: number) {
+		if (this.$height !== height) {
+			this.$height = height;
+			this.$resizeCanvas();
 		}
 	}
 
@@ -185,6 +181,26 @@ export class Layer extends EventEmitter {
 		}
 	}
 
+	public get visible(): boolean {
+		return this.$visible;
+	}
+
+	public set visible(visible: boolean) {
+		if (this.$visible !== visible) {
+			this.$visible = visible;
+			this.$markParentDirty();
+		}
+	}
+
+	public get smoothing(): boolean {
+		return this.$smoothing;
+	}
+
+	public set smoothing(smoothing: boolean) {
+		this.$smoothing = smoothing;
+		this.$resizeCanvas();
+	}
+
 	public get backgroundColor(): string {
 		return this.$backgroundColor;
 	}
@@ -208,36 +224,16 @@ export class Layer extends EventEmitter {
 		}
 	}
 
-	public get backgroundFillMode(): BackgroundFillMode {
+	public get backgroundFillMode(): FillMode {
 		return this.$backgroundFillMode;
 	}
 
-	public set backgroundFillMode(backgroundFillMode: BackgroundFillMode) {
-		if (this.$backgroundFillMode !== backgroundFillMode) {
-			this.$backgroundFillMode = backgroundFillMode || 'scale';
+	public set backgroundFillMode(backgroundFillMode: FillMode) {
+		if (backgroundFillMode && this.$backgroundFillMode !== backgroundFillMode) {
+			this.$backgroundFillMode = backgroundFillMode;
 			this.$backgroundPattern = this.$getPattern(this.$backgroundImage, this.$backgroundFillMode);
 			this.$markDirty();
 		}
-	}
-
-	public get visible(): boolean {
-		return this.$visible;
-	}
-
-	public set visible(visible: boolean) {
-		if (this.$visible !== visible) {
-			this.$visible = visible;
-			this.$markParentDirty();
-		}
-	}
-
-	public get smoothing(): boolean {
-		return this.$smoothing;
-	}
-
-	public set smoothing(smoothing: boolean) {
-		this.$smoothing = smoothing;
-		this.$resizeCanvas();
 	}
 
 	public get dirty(): boolean {
@@ -264,6 +260,12 @@ export class Layer extends EventEmitter {
 		return this.$canvas;
 	}
 
+	public resize(width: number, height: number): this {
+		this.$width = width;
+		this.height = height;
+		return this;
+	}
+
 	public addChild(child: Layer): this {
 		return this.addChildAt(child, this.$children.length);
 	}
@@ -272,10 +274,7 @@ export class Layer extends EventEmitter {
 		if (child.$parent) {
 			child.$parent.removeChild(child);
 		}
-		if (this.$stage) {
-			child.emit(Event.ADDED_TO_STAGE, this.$stage);
-		}
-		child.emit(Event.ADDED, this);
+		child.$emitAdded(this);
 		this.$children.splice(index, 0, child);
 		this.$resizeCanvas();
 		return this;
@@ -283,11 +282,8 @@ export class Layer extends EventEmitter {
 
 	public replaceChild(oldChild: Layer, newChild: Layer): this {
 		let index = this.getChildIndex(oldChild);
-		if (index >= 0) {
-			this.$children[index] = newChild;
-			oldChild.emit(Event.REMOVED, this);
-			this.$stage && oldChild.emit(Event.REMOVED_FROM_STAGE, this.$stage);
-		}
+		this.removeChildAt(index);
+		this.addChildAt(newChild, index);
 		return this;
 	}
 
@@ -373,14 +369,13 @@ export class Layer extends EventEmitter {
 	public removeChildAt(index: number): this {
 		if (index >= 0) {
 			let child = this.$children.splice(index, 1)[0];
-			child.emit(Event.REMOVED, this);
-			this.$stage && child.emit(Event.REMOVED_FROM_STAGE, this.$stage);
+			child.$emitRemoved();
 			this.$resizeCanvas();
 		}
 		return this;
 	}
 
-	public removeChildrenByName(name: string): this {
+	public removeChildByName(name: string): this {
 		let children = this.$children;
 		for (let i = 0, l = children.length; i < l; ++i) {
 			let child = children[i];
@@ -406,8 +401,7 @@ export class Layer extends EventEmitter {
 	public removeAllChildren(): this {
 		let children = this.$children;
 		for (let child of children) {
-			child.emit(Event.REMOVED, this);
-			this.$stage && child.emit(Event.REMOVED_FROM_STAGE);
+			child.$emitRemoved();
 		}
 		this.$children.length = 0;
 		this.$resizeCanvas();
@@ -422,12 +416,12 @@ export class Layer extends EventEmitter {
 	}
 
 	protected $markDirty(sizeDirty?: boolean): void {
-		this.$dirty = true;
 		if (sizeDirty) {
 			this.$resizeParentCanvas();
-		} else {
+		} else if (!this.$dirty) {
 			this.$markParentDirty();
 		}
+		this.$dirty = true;
 	}
 
 	protected $markParentDirty(): void {
@@ -567,14 +561,57 @@ export class Layer extends EventEmitter {
 		if (!event.cancelBubble) {
 			event.localX = localX;
 			event.localY = localY;
-			event.currentTarget = this;
-			this.emit(event.type, event);
+			this.emit(event);
 		}
 		return true;
 	}
 
-	protected $getPattern(texture: Texture, fillMode: BackgroundFillMode): CanvasPattern {
-		if (texture && fillMode && fillMode !== 'scale' && fillMode !== 'no-repeat') {
+	protected $emitAdded(parent: Layer): void {
+		let stage = parent.$stage;
+		this.$parent = parent;
+		this.emit(Event.ADDED);
+		if (stage) {
+			this.$emitAddedToStage(stage);
+		}
+	}
+
+	protected $emitRemoved(): void {
+		let stage = this.$stage;
+		this.$parent = null;
+		this.emit(Event.REMOVED);
+		if (stage) {
+			this.$emitRemovedFromStage();
+		}
+	}
+
+	protected $emitAddedToStage(stage: Stage): void {
+		let children = this.$children;
+		this.$stage = stage;
+		this.emit(Event.ADDED_TO_STAGE);
+
+		if (this.hasEventListener(Event.ENTER_FRAME)) {
+			stage.ticker.registerEnterFrameCallback(this);
+		}
+		for (let child of children) {
+			child.$emitAddedToStage(stage);
+		}
+	}
+
+	protected $emitRemovedFromStage(): void {
+		let stage = this.$stage;
+		let children = this.$children;
+		this.$stage = null;
+		this.emit(Event.REMOVED_FROM_STAGE);
+		if (this.hasEventListener(Event.ENTER_FRAME)) {
+			stage.ticker.unregisterEnterFrameCallback(this);
+		}
+		for (let child of children) {
+			child.$emitRemovedFromStage();
+		}
+	}
+
+	protected $getPattern(texture: Texture, fillMode: FillMode): CanvasPattern {
+		if (texture && fillMode && fillMode !== Texture.SCALE && fillMode !== Texture.NO_REPEAT) {
 			return this.$context.createPattern(texture.element, fillMode);
 		} else {
 			return null;
@@ -594,30 +631,28 @@ export class Layer extends EventEmitter {
 		let minY = -this.$anchorY;
 		let maxY = this.height + minY;
 		let bounds = this.$getChildBounds(child);
-		if (bounds.left > maxX || bounds.right < minX || bounds.top > maxY || bounds.bottom < minY) {
-			bounds.release();
-			return false;
-		}
+		let inside = bounds.left <= maxX && bounds.right >= minX && bounds.top <= maxY && bounds.bottom >= minY;
 		bounds.release();
-		return true;
+		return inside;
 	}
 
-	protected $drawBackground(color: string, texture: Texture, pattern: CanvasPattern, fillMode: BackgroundFillMode, context?: CanvasRenderingContext2D): void {
+	protected $drawBackground(color: string, texture: Texture, pattern: CanvasPattern, fillMode: FillMode, context?: CanvasRenderingContext2D): void {
 		let ctx = context || this.$context;
 		let canvas = ctx.canvas;
 		let width = canvas.width;
 		let height = canvas.height;
-		let scale = Layer.pixelRatio / (texture ? texture.pixelRatio : 1);
+		let pixelRatio = Layer.pixelRatio;
 		if (color) {
 			ctx.fillStyle = color;
 			ctx.fillRect(0, 0, width, height);
 		}
 		if (texture) {
-			if (fillMode === 'scale') {
+			if (fillMode === Texture.SCALE) {
 				ctx.drawImage(texture.element, 0, 0, width, height);
-			} else if (fillMode === 'no-repeat') {
-				ctx.drawImage(texture.element, 0, 0, texture.width * scale, texture.height * scale);
+			} else if (fillMode === Texture.NO_REPEAT) {
+				ctx.drawImage(texture.element, 0, 0, texture.width * pixelRatio, texture.height * pixelRatio);
 			} else if (pattern) {
+				let scale = pixelRatio / texture.pixelRatio;
 				scale !== 1 && ctx.scale(scale, scale);
 				ctx.fillStyle = pattern;
 				ctx.fillRect(0, 0, width, height);
@@ -688,56 +723,28 @@ export class Layer extends EventEmitter {
 		return drawCalls;
 	}
 
-	public on(event: string, listener: (...args: any[]) => void): this {
-		super.on(event, listener);
-		if (event === Event.ENTER_FRAME && this.$stage) {
-			this.$stage.ticker.registerEnterFrameCallback(this);
-		} else if (event === Event.ADDED && this.$parent) {
-			listener();
-		} else if (event === Event.ADDED_TO_STAGE && this.$stage) {
-			listener();
+	public on(type: string, listener: (...args: any[]) => void): this {
+		super.on(type, listener);
+		if (type === Event.ENTER_FRAME && this.ticker) {
+			this.ticker.registerEnterFrameCallback(this);
+		} else if (type === Event.ADDED && this.$parent) {
+			let event = Event.create(type);
+			listener.call(this, event);
+			event.release();
+		} else if (type === Event.ADDED_TO_STAGE && this.$stage) {
+			let event = Event.create(type);
+			listener.call(this, event);
+			event.release();
 		}
 		return this;
 	}
 
-	public off(event: string, listener?: (...args: any[]) => void): this {
-		super.off(event, listener);
-		if (this.$stage && event === Event.ENTER_FRAME && !this.hasEventListener(Event.ENTER_FRAME)) {
-			this.$stage.ticker.unregisterEnterFrameCallback(this);
+	public off(type: string, listener?: (...args: any[]) => void): this {
+		super.off(type, listener);
+		if (type === Event.ENTER_FRAME && !this.hasEventListener(Event.ENTER_FRAME) && this.ticker) {
+			this.ticker.unregisterEnterFrameCallback(this);
 		}
 		return this;
-	}
-
-	protected $onAdded(parent: Layer): void {
-		this.$parent = parent;
-	}
-
-	protected $onRemoved(): void {
-		this.$parent = null;
-	}
-
-	protected $onAddedToStage(stage: Stage): void {
-		let children = this.$children;
-		if (this.hasEventListener(Event.ENTER_FRAME)) {
-			stage.ticker.registerEnterFrameCallback(this);
-		}
-		this.$stage = stage;
-		for (let child of children) {
-			child.emit(Event.ADDED_TO_STAGE, stage);
-		}
-	}
-
-	protected $onRemovedFromStage(stage: Stage): void {
-		let children = this.$children;
-		if (this.hasEventListener(Event.ENTER_FRAME)) {
-			stage.ticker.unregisterEnterFrameCallback(this);
-		}
-		this.$stage = null;
-		for (let child of children) {
-			child.emit(Event.ADDED_TO_STAGE);
-		}
 	}
 
 }
-
-export type BackgroundFillMode = 'scale' | 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat';

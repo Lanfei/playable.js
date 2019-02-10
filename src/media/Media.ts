@@ -4,13 +4,13 @@ import {EventEmitter} from '../event/EventEmitter';
 
 export class Media extends EventEmitter {
 
-	protected $element: HTMLImageElement | HTMLAudioElement;
+	protected readonly $element: HTMLImageElement | HTMLAudioElement;
 
-	protected $stage: Stage;
-	protected $boundOnLoad: () => void;
-	protected $boundOnError: (e: Event) => void;
+	protected readonly $stage: Stage;
+	protected readonly $boundOnLoad: () => void;
+	protected readonly $boundOnError: (e: ErrorEvent) => void;
 
-	public constructor(stage: Stage) {
+	protected constructor(stage: Stage) {
 		super();
 		this.$stage = stage;
 		this.$boundOnLoad = this.$onLoad.bind(this);
@@ -21,17 +21,21 @@ export class Media extends EventEmitter {
 		return this.$element;
 	}
 
+	public get url(): string {
+		return this.$element.src || '';
+	}
+
 	public set url(url: string) {
 		this.$element.src = url;
 	}
 
 	protected $onLoad(): void {
-		this.emit('load');
+		this.emit(Event.LOAD);
 		this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
 	}
 
-	protected $onError(e: Event): void {
-		this.emit('error', e);
+	protected $onError(e: ErrorEvent): void {
+		this.emit(Event.ERROR, e);
 		this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
 	}
 

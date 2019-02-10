@@ -6,10 +6,10 @@ import {Rectangle} from '../geom/Rectangle';
 export class MovieClip extends Image {
 
 	protected $loop: boolean = true;
-	protected $paused: boolean = true;
+	protected $interval: number = 30;
+	protected $paused: boolean = false;
 	protected $currentFrame: number = 0;
 	protected $frames: Array<MovieClipFrameData> = null;
-	protected $interval: number = 30;
 	protected $timer: number;
 	protected $boundNextFrame: Function;
 
@@ -28,20 +28,20 @@ export class MovieClip extends Image {
 		this.$loop = loop;
 	}
 
+	public get interval(): number {
+		return this.$interval;
+	}
+
+	public set interval(interval: number) {
+		this.$interval = interval;
+	}
+
 	public get paused(): boolean {
 		return this.$paused;
 	}
 
-	public set paused(paused: boolean) {
-		this.$paused = paused;
-	}
-
 	public get currentFrame(): number {
 		return this.$currentFrame;
-	}
-
-	public set currentFrame(currentFrame: number) {
-		this.$currentFrame = currentFrame;
 	}
 
 	public get totalFrames(): number {
@@ -75,6 +75,9 @@ export class MovieClip extends Image {
 		let frames = this.$frames;
 		let totalFrames = frames.length;
 		let frameData = frames[this.$currentFrame];
+		if (!frameData) {
+			return;
+		}
 		if (ticker) {
 			ticker.clearTimeout(this.$timer);
 			if (frame < totalFrames - 1 || loop) {
@@ -101,6 +104,9 @@ export class MovieClip extends Image {
 			frame = 0;
 		}
 		let frameData = this.$frames[frame];
+		if (!frameData) {
+			return;
+		}
 		this.$currentFrame = frame;
 		this.clipRect = frameData.clip;
 		if (this.stage && frameData.callback) {
@@ -112,6 +118,6 @@ export class MovieClip extends Image {
 
 export interface MovieClipFrameData {
 	clip: Rectangle,
-	interval: number,
-	callback: Function
+	interval?: number,
+	callback?: Function
 }
