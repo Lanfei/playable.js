@@ -3619,7 +3619,6 @@
                     break;
                 }
             }
-            this.$emitAddedToStage(this);
             this.$addTouchEventListeners();
             this.$addElementListener(window, 'orientationchange', function () {
                 ticker.clearTimeout(resizeTimer);
@@ -3631,10 +3630,13 @@
                 _this.emit(hidden ? Event.DEACTIVATE : Event.ACTIVATE);
             });
             this.on(Event.ENTER_FRAME, this.$render);
-            if (!document[hiddenKey]) {
-                this.$activated = true;
-                this.emit(Event.ACTIVATE);
-            }
+            setTimeout(function () {
+                if (!document[hiddenKey]) {
+                    _this.$activated = true;
+                    _this.emit(Event.ACTIVATE);
+                }
+                _this.$emitAddedToStage(_this);
+            });
         };
         Stage.prototype.$addElementListener = function (target, type, listener, options) {
             target.addEventListener(type, listener, options);

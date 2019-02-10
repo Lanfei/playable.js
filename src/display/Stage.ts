@@ -190,7 +190,6 @@ export class Stage extends Layer {
 				break;
 			}
 		}
-		this.$emitAddedToStage(this);
 		this.$addTouchEventListeners();
 		this.$addElementListener(window, 'orientationchange', () => {
 			ticker.clearTimeout(resizeTimer);
@@ -202,10 +201,13 @@ export class Stage extends Layer {
 			this.emit(hidden ? Event.DEACTIVATE : Event.ACTIVATE);
 		});
 		this.on(Event.ENTER_FRAME, this.$render);
-		if (!document[hiddenKey]) {
-			this.$activated = true;
-			this.emit(Event.ACTIVATE);
-		}
+		setTimeout(() => {
+			if (!document[hiddenKey]) {
+				this.$activated = true;
+				this.emit(Event.ACTIVATE);
+			}
+			this.$emitAddedToStage(this);
+		});
 	}
 
 	protected $addElementListener(target: EventTarget, type: string, listener: (event) => void, options?: boolean | AddEventListenerOptions): void {

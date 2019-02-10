@@ -90,13 +90,16 @@ describe('Stage', () => {
 		assert.instanceOf(rm, playable.ResourceManager);
 	});
 
-	it('.removeSelf(): this', () => {
-		assert.strictEqual(stage.viewportCanvas.parentElement, document.body);
-		assert.strictEqual(stage.stage, stage);
-		stage.removeSelf();
-		assert.strictEqual(stage.viewportCanvas.parentElement, null);
-		assert.strictEqual(stage.activated, false);
-		assert.strictEqual(stage.stage, null);
+	it('.removeSelf(): this', done => {
+		stage.on(playable.Event.ADDED_TO_STAGE, () => {
+			assert.strictEqual(stage.viewportCanvas.parentElement, document.body);
+			assert.strictEqual(stage.stage, stage);
+			stage.removeSelf();
+			assert.strictEqual(stage.viewportCanvas.parentElement, null);
+			assert.strictEqual(stage.activated, false);
+			assert.strictEqual(stage.stage, null);
+			done();
+		});
 	});
 
 });
