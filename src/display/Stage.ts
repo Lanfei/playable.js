@@ -28,7 +28,7 @@ export class Stage extends Layer {
 	protected $viewportBackgroundPattern: CanvasPattern = null;
 	protected $viewportBackgroundFillMode: FillMode = Texture.SCALE;
 	protected readonly $ticker: Ticker;
-	protected readonly $browserListeners: DOMListener[];
+	protected readonly $elementEvents: ElementEvent[];
 	protected readonly $viewportCanvas: HTMLCanvasElement;
 	protected readonly $viewportContext: CanvasRenderingContext2D;
 	protected readonly $renderBounds: Rectangle = Rectangle.create();
@@ -37,7 +37,7 @@ export class Stage extends Layer {
 	public constructor(canvas?: HTMLCanvasElement) {
 		super();
 		this.$ticker = new Ticker(this);
-		this.$browserListeners = [];
+		this.$elementEvents = [];
 		this.$viewportCanvas = canvas || document.createElement('canvas');
 		this.$viewportContext = this.$viewportCanvas.getContext('2d');
 		this.$boundResizeViewportCanvas = this.$resizeViewportCanvas.bind(this);
@@ -174,7 +174,7 @@ export class Stage extends Layer {
 		if (this.$stage) {
 			this.$emitRemovedFromStage();
 		}
-		this.$removeElementListeners();
+		this.$removeElementEvents();
 		return this;
 	}
 
@@ -191,11 +191,11 @@ export class Stage extends Layer {
 			}
 		}
 		this.$addTouchEventListeners();
-		this.$addElementListener(window, 'orientationchange', () => {
+		this.$addElementEvent(window, 'orientationchange', () => {
 			ticker.clearTimeout(resizeTimer);
 			resizeTimer = ticker.setTimeout(this.$boundResizeViewportCanvas, 100);
 		});
-		this.$addElementListener(window, prefix + 'visibilitychange', () => {
+		this.$addElementEvent(window, prefix + 'visibilitychange', () => {
 			let hidden = document[hiddenKey];
 			this.$activated = !hidden;
 			this.emit(hidden ? Event.DEACTIVATE : Event.ACTIVATE);
@@ -210,13 +210,13 @@ export class Stage extends Layer {
 		});
 	}
 
-	protected $addElementListener(target: EventTarget, type: string, listener: (event) => void, options?: boolean | AddEventListenerOptions): void {
+	protected $addElementEvent(target: EventTarget, type: string, listener: (event) => void, options?: boolean | AddEventListenerOptions): void {
 		target.addEventListener(type, listener, options);
-		this.$browserListeners.push({target, type, listener});
+		this.$elementEvents.push({target, type, listener});
 	}
 
-	protected $removeElementListeners(): void {
-		let listeners = this.$browserListeners;
+	protected $removeElementEvents(): void {
+		let listeners = this.$elementEvents;
 		for (let {target, type, listener} of listeners) {
 			target.removeEventListener(type, listener);
 		}
@@ -225,39 +225,39 @@ export class Stage extends Layer {
 
 	protected $addTouchEventListeners(): void {
 		if (document.ontouchstart !== undefined) {
-			this.$addElementListener(document, 'touchstart', event => {
+			this.$addElementEvent(document, 'touchstart', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_START, event);
 			});
-			this.$addElementListener(document, 'touchmove', event => {
+			this.$addElementEvent(document, 'touchmove', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
 				event.preventDefault();
 			}, {passive: false});
-			this.$addElementListener(document, 'touchend', event => {
+			this.$addElementEvent(document, 'touchend', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_END, event);
 				this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
 			});
-			this.$addElementListener(document, 'touchcancel', event => {
+			this.$addElementEvent(document, 'touchcancel', event => {
 				this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
 			});
 		} else {
 			let touching = false;
-			this.$addElementListener(window, 'mousedown', event => {
+			this.$addElementEvent(window, 'mousedown', event => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
 				touching = true;
 			});
-			this.$addElementListener(window, 'mousemove', event => {
+			this.$addElementEvent(window, 'mousemove', event => {
 				if (touching) {
 					this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
 				}
 			});
-			this.$addElementListener(window, 'mouseup', event => {
+			this.$addElementEvent(window, 'mouseup', event => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
 				touching = false;
 			});
-			this.$addElementListener(window, 'click', event => {
+			this.$addElementEvent(window, 'click', event => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
 			});
-			this.$addElementListener(window, 'blur', () => {
+			this.$addElementEvent(window, 'blur', () => {
 				this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, 0, 0, 0);
 				touching = false;
 			});
@@ -420,7 +420,7 @@ export class Stage extends Layer {
 
 }
 
-export interface DOMListener {
+export interface ElementEvent {
 	target: EventTarget,
 	type: string,
 	listener: (event) => void

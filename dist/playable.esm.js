@@ -3430,7 +3430,7 @@ var Stage = /** @class */ (function (_super) {
         _this.$viewportBackgroundFillMode = Texture.SCALE;
         _this.$renderBounds = Rectangle.create();
         _this.$ticker = new Ticker(_this);
-        _this.$browserListeners = [];
+        _this.$elementEvents = [];
         _this.$viewportCanvas = canvas || document.createElement('canvas');
         _this.$viewportContext = _this.$viewportCanvas.getContext('2d');
         _this.$boundResizeViewportCanvas = _this.$resizeViewportCanvas.bind(_this);
@@ -3596,7 +3596,7 @@ var Stage = /** @class */ (function (_super) {
         if (this.$stage) {
             this.$emitRemovedFromStage();
         }
-        this.$removeElementListeners();
+        this.$removeElementEvents();
         return this;
     };
     Stage.prototype.$initEvents = function () {
@@ -3614,11 +3614,11 @@ var Stage = /** @class */ (function (_super) {
             }
         }
         this.$addTouchEventListeners();
-        this.$addElementListener(window, 'orientationchange', function () {
+        this.$addElementEvent(window, 'orientationchange', function () {
             ticker.clearTimeout(resizeTimer);
             resizeTimer = ticker.setTimeout(_this.$boundResizeViewportCanvas, 100);
         });
-        this.$addElementListener(window, prefix + 'visibilitychange', function () {
+        this.$addElementEvent(window, prefix + 'visibilitychange', function () {
             var hidden = document[hiddenKey];
             _this.$activated = !hidden;
             _this.emit(hidden ? Event.DEACTIVATE : Event.ACTIVATE);
@@ -3632,12 +3632,12 @@ var Stage = /** @class */ (function (_super) {
             _this.$emitAddedToStage(_this);
         });
     };
-    Stage.prototype.$addElementListener = function (target, type, listener, options) {
+    Stage.prototype.$addElementEvent = function (target, type, listener, options) {
         target.addEventListener(type, listener, options);
-        this.$browserListeners.push({ target: target, type: type, listener: listener });
+        this.$elementEvents.push({ target: target, type: type, listener: listener });
     };
-    Stage.prototype.$removeElementListeners = function () {
-        var listeners = this.$browserListeners;
+    Stage.prototype.$removeElementEvents = function () {
+        var listeners = this.$elementEvents;
         for (var _i = 0, listeners_1 = listeners; _i < listeners_1.length; _i++) {
             var _a = listeners_1[_i], target = _a.target, type = _a.type, listener = _a.listener;
             target.removeEventListener(type, listener);
@@ -3647,40 +3647,40 @@ var Stage = /** @class */ (function (_super) {
     Stage.prototype.$addTouchEventListeners = function () {
         var _this = this;
         if (document.ontouchstart !== undefined) {
-            this.$addElementListener(document, 'touchstart', function (event) {
+            this.$addElementEvent(document, 'touchstart', function (event) {
                 _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
             });
-            this.$addElementListener(document, 'touchmove', function (event) {
+            this.$addElementEvent(document, 'touchmove', function (event) {
                 _this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
                 event.preventDefault();
             }, { passive: false });
-            this.$addElementListener(document, 'touchend', function (event) {
+            this.$addElementEvent(document, 'touchend', function (event) {
                 _this.$dispatchTouches(TouchEvent.TOUCH_END, event);
                 _this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
             });
-            this.$addElementListener(document, 'touchcancel', function (event) {
+            this.$addElementEvent(document, 'touchcancel', function (event) {
                 _this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
             });
         }
         else {
             var touching_1 = false;
-            this.$addElementListener(window, 'mousedown', function (event) {
+            this.$addElementEvent(window, 'mousedown', function (event) {
                 _this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
                 touching_1 = true;
             });
-            this.$addElementListener(window, 'mousemove', function (event) {
+            this.$addElementEvent(window, 'mousemove', function (event) {
                 if (touching_1) {
                     _this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
                 }
             });
-            this.$addElementListener(window, 'mouseup', function (event) {
+            this.$addElementEvent(window, 'mouseup', function (event) {
                 _this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
                 touching_1 = false;
             });
-            this.$addElementListener(window, 'click', function (event) {
+            this.$addElementEvent(window, 'click', function (event) {
                 _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
             });
-            this.$addElementListener(window, 'blur', function () {
+            this.$addElementEvent(window, 'blur', function () {
                 _this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, 0, 0, 0);
                 touching_1 = false;
             });

@@ -22,7 +22,7 @@ export declare class Stage extends Layer {
     protected $viewportBackgroundPattern: CanvasPattern;
     protected $viewportBackgroundFillMode: FillMode;
     protected readonly $ticker: Ticker;
-    protected readonly $browserListeners: DOMListener[];
+    protected readonly $elementEvents: ElementEvent[];
     protected readonly $viewportCanvas: HTMLCanvasElement;
     protected readonly $viewportContext: CanvasRenderingContext2D;
     protected readonly $renderBounds: Rectangle;
@@ -44,8 +44,8 @@ export declare class Stage extends Layer {
     createResourceManager(list: Array<ResourceInfo>, options?: ResourceManagerOption): ResourceManager;
     removeSelf(): this;
     protected $initEvents(): void;
-    protected $addElementListener(target: EventTarget, type: string, listener: (event: any) => void, options?: boolean | AddEventListenerOptions): void;
-    protected $removeElementListeners(): void;
+    protected $addElementEvent(target: EventTarget, type: string, listener: (event: any) => void, options?: boolean | AddEventListenerOptions): void;
+    protected $removeElementEvents(): void;
     protected $addTouchEventListeners(): void;
     protected $dispatchTouches(type: string, event: any): void;
     protected $dispatchTouchEvent(type: string, pageX: number, pageY: number, identifier: number): void;
@@ -54,7 +54,7 @@ export declare class Stage extends Layer {
     protected $resizeViewportCanvas(): void;
     protected $render(): number;
 }
-export interface DOMListener {
+export interface ElementEvent {
     target: EventTarget;
     type: string;
     listener: (event: any) => void;
