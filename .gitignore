@@ -1,3 +1,7 @@
+# Docs
+docs
+.vuepress/dist
+
 # IDE
 .idea
 

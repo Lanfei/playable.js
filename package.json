@@ -1,6 +1,6 @@
 {
   "name": "playable.js",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "author": "Jealous",
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.common.js",
@@ -22,8 +22,7 @@
     "clean": "rimraf dist types/*/ types/index.d.ts",
     "build": "npm run clean && rollup -c && npm run uglify && tsc -b types/tsconfig.json",
     "watch": "npm run clean && rollup -c -w",
-    "uglify": "uglifyjs dist/playable.js -o dist/playable.min.js -c --source-map",
-    "prepublish": "npm run test"
+    "uglify": "uglifyjs dist/playable.js -o dist/playable.min.js -c --source-map"
   },
   "repository": {
     "type": "git",

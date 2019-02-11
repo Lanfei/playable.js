@@ -8,11 +8,11 @@ module.exports = {
 	themeConfig: {
 		nav: [
 			{text: 'Guide', link: '/'},
-			{text: 'API Reference', link: '/docs/api/'},
+			{text: 'API Reference', link: '/docs/'},
 			{
 				text: 'Classes',
 				items: Object.keys(playable).map(name => {
-					return {text: name, link: `/docs/api/classes/${name.toLowerCase()}.html`}
+					return {text: name, link: `/docs/classes/${name.toLowerCase()}.html`}
 				})
 			},
 			{text: 'GitHub', link: 'https://github.com/Lanfei/playable.js'},
