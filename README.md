@@ -23,11 +23,19 @@ Simply [download](https://github.com/Lanfei/playable.js/releases) and include wi
 
 ### CDN
 
+For prototyping or learning purposes, you can use the latest version with:
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/playable.js"></script>
 ```
 
-You can browse the source of the NPM package at [cdn.jsdelivr.net/npm/playable.js](https://cdn.jsdelivr.net/npm/playable.js/).
+For production, we recommend linking to a specific version number and build to avoid unexpected breakage from newer versions:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/playable.js@3.2.1/dist/playable.min.js"></script>
+```
+
+You can browse the source of the NPM package at [jsDelivr](https://cdn.jsdelivr.net/npm/playable.js/) or [unpkg](https://unpkg.com/playable.js/).
 
 ## Hello World
 
@@ -63,6 +71,7 @@ new Main();
 
 - [Guide](http://lanfei.github.io/playable.js/)
 - [API Reference](http://lanfei.github.io/playable.js/docs/)
+- Examples(Coming soon)
 
 [build-url]: https://circleci.com/gh/Lanfei/playable.js
 [build-image]: https://img.shields.io/circleci/project/github/Lanfei/playable.js.svg
