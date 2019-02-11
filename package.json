@@ -16,7 +16,7 @@
     "test": "karma start --single-run",
     "coverage": "npm run test && codecov",
     "docs": "npm run docs:md && vuepress build",
-    "docs:md": "typedoc --theme markdown --mode file --readme none --name 'API Reference' --out docs && vuepress build",
+    "docs:md": "typedoc --theme markdown --mode file --readme none --name 'API Reference' --out docs",
     "docs:dev": "vuepress dev",
     "docs:build": "vuepress build",
     "clean": "rimraf dist types/*/ types/index.d.ts",
