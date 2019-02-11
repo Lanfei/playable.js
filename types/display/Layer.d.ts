@@ -25,10 +25,10 @@ export declare class Layer extends EventEmitter {
     protected $visible: boolean;
     protected $smoothing: boolean;
     protected $background: string;
-    protected $dirty: boolean;
     protected $stage: Stage;
     protected $parent: Layer;
     protected $children: Array<Layer>;
+    protected $dirty: boolean;
     protected $shouldEmitTap: boolean;
     protected $touches: Array<boolean>;
     protected readonly $canvas: HTMLCanvasElement;
@@ -49,13 +49,11 @@ export declare class Layer extends EventEmitter {
     visible: boolean;
     smoothing: boolean;
     background: string;
-    readonly dirty: boolean;
     readonly stage: Stage;
     readonly parent: Layer;
-    readonly children: Array<Layer>;
+    readonly numChildren: number;
     readonly ticker: Ticker;
     readonly canvas: HTMLCanvasElement;
-    resize(width: number, height: number): this;
     addChild(child: Layer): this;
     addChildAt(child: Layer, index: number): this;
     replaceChild(oldChild: Layer, newChild: Layer): this;

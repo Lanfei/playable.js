@@ -26,7 +26,7 @@ describe('Text', () => {
 		let text = new playable.Text('color');
 		assert.strictEqual(text.color, 'black');
 		text.color = null;
-		assert.strictEqual(text.color, null);
+		assert.isNull(text.color);
 		stage.addChild(text);
 	});
 
@@ -88,7 +88,7 @@ describe('Text', () => {
 
 	it('.strokeColor', () => {
 		let text = new playable.Text('strokeColor');
-		assert.strictEqual(text.strokeColor, null);
+		assert.isNull(text.strokeColor);
 		text.strokeSize = 1;
 		text.strokeColor = 'black';
 		assert.strictEqual(text.strokeColor, 'black');

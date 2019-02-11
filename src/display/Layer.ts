@@ -30,10 +30,10 @@ export class Layer extends EventEmitter {
 	protected $visible: boolean = true;
 	protected $smoothing: boolean = true;
 	protected $background: string = null;
-	protected $dirty: boolean = true;
 	protected $stage: Stage = null;
 	protected $parent: Layer = null;
 	protected $children: Array<Layer> = [];
+	protected $dirty: boolean = true;
 	protected $shouldEmitTap: boolean = true;
 	protected $touches: Array<boolean> = [];
 	protected readonly $canvas: HTMLCanvasElement;
@@ -208,10 +208,6 @@ export class Layer extends EventEmitter {
 		}
 	}
 
-	public get dirty(): boolean {
-		return this.$dirty;
-	}
-
 	public get stage(): Stage {
 		return this.$stage;
 	}
@@ -220,8 +216,8 @@ export class Layer extends EventEmitter {
 		return this.$parent;
 	}
 
-	public get children(): Array<Layer> {
-		return this.$children;
+	public get numChildren(): number {
+		return this.$children.length;
 	}
 
 	public get ticker(): Ticker {
@@ -232,22 +228,20 @@ export class Layer extends EventEmitter {
 		return this.$canvas;
 	}
 
-	public resize(width: number, height: number): this {
-		this.$width = width;
-		this.height = height;
-		return this;
-	}
-
 	public addChild(child: Layer): this {
 		return this.addChildAt(child, this.$children.length);
 	}
 
 	public addChildAt(child: Layer, index: number): this {
+		let children = this.$children;
 		if (child.$parent) {
 			child.$parent.removeChild(child);
 		}
+		if (index < 0 || index > children.length) {
+			index = children.length;
+		}
 		child.$emitAdded(this);
-		this.$children.splice(index, 0, child);
+		children.splice(index, 0, child);
 		this.$resizeCanvas();
 		return this;
 	}
@@ -302,14 +296,12 @@ export class Layer extends EventEmitter {
 	}
 
 	public swapChildrenAt(index1: number, index2: number): this {
-		if (index1 !== index2) {
-			let child1 = this.$children[index1];
-			let child2 = this.$children[index2];
-			if (child1 && child2) {
-				this.$children[index1] = child2;
-				this.$children[index2] = child1;
-				this.$markDirty();
-			}
+		let child1 = this.$children[index1];
+		let child2 = this.$children[index2];
+		if (index1 !== index2 && child1 && child2) {
+			this.$children[index1] = child2;
+			this.$children[index2] = child1;
+			this.$markDirty();
 		}
 		return this;
 	}
@@ -317,6 +309,11 @@ export class Layer extends EventEmitter {
 	public setChildIndex(child: Layer, index: number): this {
 		let children = this.$children;
 		let oldIndex = this.getChildIndex(child);
+		if (index < 0) {
+			index = 0;
+		} else if (index > children.length) {
+			index = children.length;
+		}
 		if (oldIndex >= 0 && index > oldIndex) {
 			for (let i = oldIndex + 1; i <= index; ++i) {
 				children[i - 1] = children[i];
@@ -334,13 +331,15 @@ export class Layer extends EventEmitter {
 	}
 
 	public removeChild(child: Layer): this {
-		let index = this.$children.indexOf(child);
+		let index = this.getChildIndex(child);
 		return this.removeChildAt(index);
 	}
 
 	public removeChildAt(index: number): this {
-		if (index >= 0) {
-			let child = this.$children.splice(index, 1)[0];
+		let children = this.$children;
+		let child = children[index];
+		if (child) {
+			children.splice(index, 1);
 			child.$emitRemoved();
 			this.$resizeCanvas();
 		}

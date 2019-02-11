@@ -150,35 +150,58 @@ describe('Layer', () => {
 
 	it('.background', () => {
 		let layer = new playable.Layer();
-		assert.strictEqual(layer.background, null);
+		assert.isNull(layer.background);
 		layer.background = 'black';
 		stage.addChild(layer);
 		assert.strictEqual(layer.background, 'black');
 	});
 
-	it('.resize', () => {
+	it('stage', () => {
 		let layer = new playable.Layer();
 		let child1 = new playable.Layer();
-		child1.resize(100, 100);
-		layer.addChild(child1);
-		assert.strictEqual(layer.width, 100);
-		assert.strictEqual(layer.height, 100);
 		let child2 = new playable.Layer();
+		assert.isNull(layer.stage);
+		assert.isNull(child1.stage);
+		assert.isNull(child2.stage);
+		layer.addChild(child1);
+		stage.addChild(layer);
 		layer.addChild(child2);
-		child2.x = -100;
-		child2.y = -100;
-		child2.resize(200, 200);
-		assert.strictEqual(layer.width, 100);
-		assert.strictEqual(layer.height, 100);
-		let child3 = new playable.Layer();
-		child3.resize(300, 300);
-		child3.visible = false;
-		layer.addChild(child3);
-		assert.strictEqual(layer.width, 100);
-		assert.strictEqual(layer.height, 100);
-		layer.resize(80, 80);
-		assert.strictEqual(layer.width, 80);
-		assert.strictEqual(layer.height, 80);
+		assert.strictEqual(layer.stage, stage);
+		assert.strictEqual(child1.stage, stage);
+		assert.strictEqual(child2.stage, stage);
+	});
+
+	it('parent', () => {
+		let layer = new playable.Layer();
+		let child = new playable.Layer();
+		assert.isNull(layer.parent);
+		assert.isNull(child.parent);
+		stage.addChild(layer);
+		assert.strictEqual(layer.parent, stage);
+		layer.addChild(child);
+		assert.strictEqual(child.parent, layer);
+	});
+
+	it('numChildren', () => {
+		let layer = new playable.Layer();
+		let child = new playable.Layer();
+		assert.strictEqual(layer.numChildren, 0);
+		layer.addChild(child);
+		assert.strictEqual(layer.numChildren, 1);
+		layer.removeChild(child);
+		assert.strictEqual(layer.numChildren, 0);
+	});
+
+	it('ticker', () => {
+		let layer = new playable.Layer();
+		assert.isNull(layer.ticker);
+		stage.addChild(layer);
+		assert.instanceOf(layer.ticker, playable.Ticker);
+	});
+
+	it('canvas', () => {
+		let layer = new playable.Layer();
+		assert.instanceOf(layer.canvas, HTMLCanvasElement);
 	});
 
 	it('.addChild(child: Layer)', () => {
@@ -187,10 +210,10 @@ describe('Layer', () => {
 		let parent = new playable.Layer();
 		stage.addChild(layer);
 		parent.addChild(child);
-		assert.include(parent.children, child);
+		assert.isTrue(parent.hasChild(child));
 		layer.addChild(child);
-		assert.include(layer.children, child);
-		assert.notInclude(parent.children, child);
+		assert.isTrue(layer.hasChild(child));
+		assert.isFalse(parent.hasChild(child));
 		assert.strictEqual(child.parent, layer);
 		assert.strictEqual(child.stage, stage);
 	});
@@ -201,10 +224,10 @@ describe('Layer', () => {
 		let parent = new playable.Layer();
 		stage.addChild(layer);
 		parent.addChild(child);
-		assert.include(parent.children, child);
+		assert.isTrue(parent.hasChild(child));
 		layer.addChildAt(child, 0);
-		assert.strictEqual(layer.children.indexOf(child), 0);
-		assert.notInclude(parent.children, child);
+		assert.strictEqual(layer.getChildIndex(child), 0);
+		assert.isFalse(parent.hasChild(child));
 		assert.strictEqual(child.parent, layer);
 		assert.strictEqual(child.stage, stage);
 	});
@@ -216,13 +239,13 @@ describe('Layer', () => {
 		let parent = new playable.Layer();
 		layer.addChild(oldChild);
 		parent.addChild(newChild);
-		assert.include(parent.children, newChild);
+		assert.isTrue(parent.hasChild(newChild));
 		layer.replaceChild(oldChild, newChild);
-		assert.strictEqual(layer.children[0], newChild);
-		assert.notInclude(parent.children, newChild);
+		assert.strictEqual(layer.getChildAt(0), newChild);
+		assert.isFalse(parent.hasChild(newChild));
 		assert.strictEqual(newChild.parent, layer);
-		assert.strictEqual(oldChild.parent, null);
-		assert.strictEqual(oldChild.stage, null);
+		assert.isNull(oldChild.parent);
+		assert.isNull(oldChild.stage);
 	});
 
 	it('.getChildByName(name: string)', () => {
@@ -232,7 +255,7 @@ describe('Layer', () => {
 		child.name = name;
 		layer.addChild(child);
 		assert.strictEqual(layer.getChildByName(name), child);
-		assert.strictEqual(layer.getChildByName('not-found'), null);
+		assert.isNull(layer.getChildByName('not-found'));
 	});
 
 	it('.getChildrenByTag(tag: string)', () => {
@@ -252,8 +275,8 @@ describe('Layer', () => {
 	it('.getChildAt(index: number)', () => {
 		let layer = new playable.Layer();
 		layer.addChild(new playable.Layer());
-		assert.strictEqual(layer.getChildAt(0), layer.children[0]);
-		assert.strictEqual(layer.getChildAt(layer.children.length), null);
+		assert.strictEqual(layer.getChildAt(0), layer.getChildAt(0));
+		assert.isNull(layer.getChildAt(layer.numChildren));
 	});
 
 	it('.getChildIndex(child: Layer)', () => {
@@ -279,8 +302,8 @@ describe('Layer', () => {
 		layer.addChild(child1);
 		layer.addChild(child2);
 		layer.swapChildren(child1, child2);
-		assert.strictEqual(layer.children[0], child2);
-		assert.strictEqual(layer.children[1], child1);
+		assert.strictEqual(layer.getChildAt(0), child2);
+		assert.strictEqual(layer.getChildAt(1), child1);
 	});
 
 	it('.swapChildrenAt(index1: number, index2: number)', () => {
@@ -290,55 +313,55 @@ describe('Layer', () => {
 		layer.addChild(child1);
 		layer.addChild(child2);
 		layer.swapChildrenAt(0, 1);
-		assert.strictEqual(layer.children[0], child2);
-		assert.strictEqual(layer.children[1], child1);
+		assert.strictEqual(layer.getChildAt(0), child2);
+		assert.strictEqual(layer.getChildAt(1), child1);
 	});
 
 	it('.setChildIndex(child: Layer, index: number)', () => {
 		let layer = new playable.Layer();
-		while (layer.children.length < 5) {
+		while (layer.numChildren < 5) {
 			layer.addChild(new playable.Layer());
 		}
-		let child1 = layer.children[1];
-		let beforeChild1 = layer.children[0];
-		let targetChild1 = layer.children[2];
-		let afterChild1 = layer.children[3];
+		let child1 = layer.getChildAt(1);
+		let beforeChild1 = layer.getChildAt(0);
+		let targetChild1 = layer.getChildAt(2);
+		let afterChild1 = layer.getChildAt(3);
 		layer.setChildIndex(child1, 2);
-		assert.strictEqual(layer.children.indexOf(beforeChild1), 0);
-		assert.strictEqual(layer.children.indexOf(targetChild1), 1);
-		assert.strictEqual(layer.children.indexOf(child1), 2);
-		assert.strictEqual(layer.children.indexOf(afterChild1), 3);
-		let child2 = layer.children[2];
-		let beforeChild2 = layer.children[0];
-		let targetChild2 = layer.children[1];
-		let afterChild2 = layer.children[3];
+		assert.strictEqual(layer.getChildIndex(beforeChild1), 0);
+		assert.strictEqual(layer.getChildIndex(targetChild1), 1);
+		assert.strictEqual(layer.getChildIndex(child1), 2);
+		assert.strictEqual(layer.getChildIndex(afterChild1), 3);
+		let child2 = layer.getChildAt(2);
+		let beforeChild2 = layer.getChildAt(0);
+		let targetChild2 = layer.getChildAt(1);
+		let afterChild2 = layer.getChildAt(3);
 		layer.setChildIndex(child2, 1);
-		assert.strictEqual(layer.children.indexOf(beforeChild2), 0);
-		assert.strictEqual(layer.children.indexOf(targetChild2), 2);
-		assert.strictEqual(layer.children.indexOf(child2), 1);
-		assert.strictEqual(layer.children.indexOf(afterChild2), 3);
+		assert.strictEqual(layer.getChildIndex(beforeChild2), 0);
+		assert.strictEqual(layer.getChildIndex(targetChild2), 2);
+		assert.strictEqual(layer.getChildIndex(child2), 1);
+		assert.strictEqual(layer.getChildIndex(afterChild2), 3);
 	});
 
 	it('.removeChild(child: Layer)', () => {
 		let layer = new playable.Layer();
 		let child = new playable.Layer();
 		layer.addChild(child);
-		assert.include(layer.children, child);
+		assert.isTrue(layer.hasChild(child));
 		layer.removeChild(child);
-		assert.notInclude(layer.children, child);
-		assert.strictEqual(child.parent, null);
-		assert.strictEqual(child.stage, null);
+		assert.isFalse(layer.hasChild(child));
+		assert.isNull(child.parent);
+		assert.isNull(child.stage);
 	});
 
 	it('.removeChildAt(index: number)', () => {
 		let layer = new playable.Layer();
 		let child = new playable.Layer();
 		layer.addChildAt(child, 0);
-		assert.include(layer.children, child);
+		assert.isTrue(layer.hasChild(child));
 		layer.removeChildAt(0);
-		assert.notInclude(layer.children, child);
-		assert.strictEqual(child.parent, null);
-		assert.strictEqual(child.stage, null);
+		assert.isFalse(layer.hasChild(child));
+		assert.isNull(child.parent);
+		assert.isNull(child.stage);
 	});
 
 	it('.removeChildByName(name: string)', () => {
@@ -348,12 +371,12 @@ describe('Layer', () => {
 		child1.name = 'name';
 		layer.addChild(child1);
 		layer.addChild(child2);
-		assert.include(layer.children, child1);
+		assert.isTrue(layer.hasChild(child1));
 		layer.removeChildByName('name');
-		assert.include(layer.children, child2);
-		assert.notInclude(layer.children, child1);
-		assert.strictEqual(child1.parent, null);
-		assert.strictEqual(child1.stage, null);
+		assert.isTrue(layer.hasChild(child2));
+		assert.isFalse(layer.hasChild(child1));
+		assert.isNull(child1.parent);
+		assert.isNull(child1.stage);
 	});
 
 	it('.removeChildrenByTag(tag: string)', () => {
@@ -367,36 +390,36 @@ describe('Layer', () => {
 		layer.addChild(child2);
 		layer.addChild(child3);
 		layer.removeChildrenByTag('tag');
-		assert.include(layer.children, child3);
-		assert.notInclude(layer.children, child1);
-		assert.notInclude(layer.children, child2);
-		assert.strictEqual(child1.parent, null);
-		assert.strictEqual(child1.stage, null);
-		assert.strictEqual(child2.parent, null);
-		assert.strictEqual(child2.stage, null);
+		assert.isTrue(layer.hasChild(child3));
+		assert.isFalse(layer.hasChild(child1));
+		assert.isFalse(layer.hasChild(child2));
+		assert.isNull(child1.parent);
+		assert.isNull(child1.stage);
+		assert.isNull(child2.parent);
+		assert.isNull(child2.stage);
 	});
 
 	it('.removeAllChildren()', () => {
 		let layer = new playable.Layer();
 		let child = new playable.Layer();
 		layer.addChild(child);
-		while (layer.children.length < 5) {
+		while (layer.numChildren < 5) {
 			layer.addChild(new playable.Layer());
 		}
 		layer.removeAllChildren();
-		assert.strictEqual(child.stage, null);
-		assert.strictEqual(child.parent, null);
-		assert.strictEqual(layer.children.length, 0);
+		assert.isNull(child.stage);
+		assert.isNull(child.parent);
+		assert.strictEqual(layer.numChildren, 0);
 	});
 
 	it('.removeSelf()', () => {
 		let layer = new playable.Layer();
 		stage.addChild(layer);
-		assert.include(stage.children, layer);
+		assert.isTrue(stage.hasChild(layer));
 		layer.removeSelf();
-		assert.notInclude(stage.children, layer);
-		assert.strictEqual(layer.parent, null);
-		assert.strictEqual(layer.stage, null);
+		assert.isFalse(stage.hasChild(layer));
+		assert.isNull(layer.parent);
+		assert.isNull(layer.stage);
 		stage.addChild(layer);
 	});
 
@@ -494,13 +517,13 @@ describe('Layer', () => {
 		child1.on(eventType, e => {
 			++counter;
 			assert.strictEqual(e.type, eventType);
-			assert.strictEqual(child1.stage, null);
-			assert.strictEqual(child1.parent, null);
+			assert.isNull(child1.stage);
+			assert.isNull(child1.parent);
 		});
 		child2.on(eventType, e => {
 			++counter;
 			assert.strictEqual(e.type, eventType);
-			assert.strictEqual(child2.stage, null);
+			assert.isNull(child2.stage);
 			assert.strictEqual(child2.parent, child1);
 		});
 		layer.removeChild(child1);

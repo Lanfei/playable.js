@@ -15,6 +15,7 @@ module.exports = {
 					return {text: name, link: `/docs/classes/${name.toLowerCase()}.html`}
 				})
 			},
+			{text: 'Examples', link: '/examples/'},
 			{text: 'GitHub', link: 'https://github.com/Lanfei/playable.js'},
 		],
 		sidebar: 'auto'

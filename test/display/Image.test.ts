@@ -18,13 +18,13 @@ describe('Image', () => {
 		let image = new playable.Image();
 		let texture = new playable.Texture(stage);
 		texture.url = '/base/test/fixtures/image@1x.jpg';
-		assert.strictEqual(image.texture, null);
+		assert.isNull(image.texture);
 		texture.on(playable.Event.LOAD, () => {
 			image.texture = texture;
 			stage.addChild(image);
 			assert.strictEqual(image.texture, texture);
 			image.texture = null;
-			assert.strictEqual(image.texture, null);
+			assert.isNull(image.texture);
 			done();
 		});
 	});
@@ -50,7 +50,7 @@ describe('Image', () => {
 		let image = new playable.Image(texture);
 		let clipRect = playable.Rectangle.create(10, 10, 10, 10);
 		texture.url = '/base/test/fixtures/image@1x.jpg';
-		assert.strictEqual(image.clipRect, null);
+		assert.isNull(image.clipRect);
 		image.clipRect = clipRect;
 		stage.addChild(image);
 		assert.strictEqual(image.clipRect, clipRect);
@@ -61,7 +61,7 @@ describe('Image', () => {
 		let image = new playable.Image(texture);
 		let scale9Grid = playable.Rectangle.create(10, 10, 10, 10);
 		texture.url = '/base/test/fixtures/image@1x.jpg';
-		assert.strictEqual(image.scale9Grid, null);
+		assert.isNull(image.scale9Grid);
 		image.scale9Grid = scale9Grid;
 		stage.addChild(image);
 		assert.strictEqual(image.scale9Grid, scale9Grid);

@@ -61,7 +61,7 @@ describe('Stage', () => {
 	});
 
 	it('.viewportBackground', () => {
-		assert.strictEqual(stage.viewportBackground, null);
+		assert.isNull(stage.viewportBackground);
 		stage.viewportBackground = 'black';
 		assert.strictEqual(stage.viewportBackground, 'black');
 	});
@@ -76,9 +76,9 @@ describe('Stage', () => {
 			assert.strictEqual(stage.viewportCanvas.parentElement, document.body);
 			assert.strictEqual(stage.stage, stage);
 			stage.removeSelf();
-			assert.strictEqual(stage.viewportCanvas.parentElement, null);
+			assert.isNull(stage.viewportCanvas.parentElement);
 			assert.strictEqual(stage.activated, false);
-			assert.strictEqual(stage.stage, null);
+			assert.isNull(stage.stage);
 			done();
 		});
 	});

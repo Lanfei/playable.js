@@ -750,10 +750,10 @@ var Layer = /** @class */ (function (_super) {
         _this.$visible = true;
         _this.$smoothing = true;
         _this.$background = null;
-        _this.$dirty = true;
         _this.$stage = null;
         _this.$parent = null;
         _this.$children = [];
+        _this.$dirty = true;
         _this.$shouldEmitTap = true;
         _this.$touches = [];
         _this.$canvas = document.createElement('canvas');
@@ -953,13 +953,6 @@ var Layer = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Layer.prototype, "dirty", {
-        get: function () {
-            return this.$dirty;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(Layer.prototype, "stage", {
         get: function () {
             return this.$stage;
@@ -974,9 +967,9 @@ var Layer = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Layer.prototype, "children", {
+    Object.defineProperty(Layer.prototype, "numChildren", {
         get: function () {
-            return this.$children;
+            return this.$children.length;
         },
         enumerable: true,
         configurable: true
@@ -995,20 +988,19 @@ var Layer = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Layer.prototype.resize = function (width, height) {
-        this.$width = width;
-        this.height = height;
-        return this;
-    };
     Layer.prototype.addChild = function (child) {
         return this.addChildAt(child, this.$children.length);
     };
     Layer.prototype.addChildAt = function (child, index) {
+        var children = this.$children;
         if (child.$parent) {
             child.$parent.removeChild(child);
         }
+        if (index < 0 || index > children.length) {
+            index = children.length;
+        }
         child.$emitAdded(this);
-        this.$children.splice(index, 0, child);
+        children.splice(index, 0, child);
         this.$resizeCanvas();
         return this;
     };
@@ -1057,20 +1049,24 @@ var Layer = /** @class */ (function (_super) {
         return this;
     };
     Layer.prototype.swapChildrenAt = function (index1, index2) {
-        if (index1 !== index2) {
-            var child1 = this.$children[index1];
-            var child2 = this.$children[index2];
-            if (child1 && child2) {
-                this.$children[index1] = child2;
-                this.$children[index2] = child1;
-                this.$markDirty();
-            }
+        var child1 = this.$children[index1];
+        var child2 = this.$children[index2];
+        if (index1 !== index2 && child1 && child2) {
+            this.$children[index1] = child2;
+            this.$children[index2] = child1;
+            this.$markDirty();
         }
         return this;
     };
     Layer.prototype.setChildIndex = function (child, index) {
         var children = this.$children;
         var oldIndex = this.getChildIndex(child);
+        if (index < 0) {
+            index = 0;
+        }
+        else if (index > children.length) {
+            index = children.length;
+        }
         if (oldIndex >= 0 && index > oldIndex) {
             for (var i = oldIndex + 1; i <= index; ++i) {
                 children[i - 1] = children[i];
@@ -1088,12 +1084,14 @@ var Layer = /** @class */ (function (_super) {
         return this;
     };
     Layer.prototype.removeChild = function (child) {
-        var index = this.$children.indexOf(child);
+        var index = this.getChildIndex(child);
         return this.removeChildAt(index);
     };
     Layer.prototype.removeChildAt = function (index) {
-        if (index >= 0) {
-            var child = this.$children.splice(index, 1)[0];
+        var children = this.$children;
+        var child = children[index];
+        if (child) {
+            children.splice(index, 1);
             child.$emitRemoved();
             this.$resizeCanvas();
         }
