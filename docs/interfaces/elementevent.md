@@ -24,7 +24,7 @@
 
 **● listener**: *`function`*
 
-*Defined in [display/Stage.ts:426](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Stage.ts#L426)*
+*Defined in [display/Stage.ts:426](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Stage.ts#L426)*
 
 #### Type declaration
 ▸(event: *`any`*): `void`
@@ -44,7 +44,7 @@ ___
 
 **● target**: *`EventTarget`*
 
-*Defined in [display/Stage.ts:424](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Stage.ts#L424)*
+*Defined in [display/Stage.ts:424](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Stage.ts#L424)*
 
 ___
 <a id="type"></a>
@@ -53,7 +53,7 @@ ___
 
 **● type**: *`string`*
 
-*Defined in [display/Stage.ts:425](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Stage.ts#L425)*
+*Defined in [display/Stage.ts:425](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Stage.ts#L425)*
 
 ___
 

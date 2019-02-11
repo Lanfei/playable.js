@@ -61,7 +61,7 @@
 
 ⊕ **new ResourceManager**(stage: *[Stage](stage.md)*, list: *`Array`<[ResourceInfo](../interfaces/resourceinfo.md)>*, options?: *[ResourceManagerOption](../interfaces/resourcemanageroption.md)*): [ResourceManager](resourcemanager.md)
 
-*Defined in [net/ResourceManager.ts:27](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L27)*
+*Defined in [net/ResourceManager.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L27)*
 
 **Parameters:**
 
@@ -83,7 +83,7 @@ ___
 
 **● $errorCount**: *`number`* = 0
 
-*Defined in [net/ResourceManager.ts:21](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L21)*
+*Defined in [net/ResourceManager.ts:21](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L21)*
 
 ___
 <a id="_events"></a>
@@ -94,7 +94,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[$events](eventemitter.md#_events)*
 
-*Defined in [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L5)*
+*Defined in [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L5)*
 
 ___
 <a id="_list"></a>
@@ -103,7 +103,7 @@ ___
 
 **● $list**: *`Array`<[ResourceInfo](../interfaces/resourceinfo.md)>*
 
-*Defined in [net/ResourceManager.ts:24](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L24)*
+*Defined in [net/ResourceManager.ts:24](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L24)*
 
 ___
 <a id="_loadedcount"></a>
@@ -112,7 +112,7 @@ ___
 
 **● $loadedCount**: *`number`* = 0
 
-*Defined in [net/ResourceManager.ts:22](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L22)*
+*Defined in [net/ResourceManager.ts:22](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L22)*
 
 ___
 <a id="_loadingcount"></a>
@@ -121,7 +121,7 @@ ___
 
 **● $loadingCount**: *`number`* = 0
 
-*Defined in [net/ResourceManager.ts:23](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L23)*
+*Defined in [net/ResourceManager.ts:23](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L23)*
 
 ___
 <a id="_resources"></a>
@@ -130,7 +130,7 @@ ___
 
 **● $resources**: *`Object`*
 
-*Defined in [net/ResourceManager.ts:27](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L27)*
+*Defined in [net/ResourceManager.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L27)*
 
 ___
 <a id="_stage"></a>
@@ -139,7 +139,7 @@ ___
 
 **● $stage**: *[Stage](stage.md)*
 
-*Defined in [net/ResourceManager.ts:26](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L26)*
+*Defined in [net/ResourceManager.ts:26](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L26)*
 
 ___
 <a id="_total"></a>
@@ -148,7 +148,7 @@ ___
 
 **● $total**: *`number`*
 
-*Defined in [net/ResourceManager.ts:25](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L25)*
+*Defined in [net/ResourceManager.ts:25](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L25)*
 
 ___
 <a id="retrytimes"></a>
@@ -157,7 +157,7 @@ ___
 
 **● retryTimes**: *`number`*
 
-*Defined in [net/ResourceManager.ts:19](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L19)*
+*Defined in [net/ResourceManager.ts:19](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L19)*
 
 ___
 <a id="threads"></a>
@@ -166,7 +166,7 @@ ___
 
 **● threads**: *`number`*
 
-*Defined in [net/ResourceManager.ts:17](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L17)*
+*Defined in [net/ResourceManager.ts:17](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L17)*
 
 ___
 <a id="timeout"></a>
@@ -175,7 +175,7 @@ ___
 
 **● timeout**: *`number`*
 
-*Defined in [net/ResourceManager.ts:18](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L18)*
+*Defined in [net/ResourceManager.ts:18](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L18)*
 
 ___
 <a id="type_binary"></a>
@@ -184,7 +184,7 @@ ___
 
 **● TYPE_BINARY**: *`string`* = "binary"
 
-*Defined in [net/ResourceManager.ts:13](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L13)*
+*Defined in [net/ResourceManager.ts:13](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L13)*
 
 ___
 <a id="type_json"></a>
@@ -193,7 +193,7 @@ ___
 
 **● TYPE_JSON**: *`string`* = "json"
 
-*Defined in [net/ResourceManager.ts:12](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L12)*
+*Defined in [net/ResourceManager.ts:12](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L12)*
 
 ___
 <a id="type_sound"></a>
@@ -202,7 +202,7 @@ ___
 
 **● TYPE_SOUND**: *`string`* = "sound"
 
-*Defined in [net/ResourceManager.ts:15](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L15)*
+*Defined in [net/ResourceManager.ts:15](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L15)*
 
 ___
 <a id="type_text"></a>
@@ -211,7 +211,7 @@ ___
 
 **● TYPE_TEXT**: *`string`* = "text"
 
-*Defined in [net/ResourceManager.ts:11](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L11)*
+*Defined in [net/ResourceManager.ts:11](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L11)*
 
 ___
 <a id="type_texture"></a>
@@ -220,7 +220,7 @@ ___
 
 **● TYPE_TEXTURE**: *`string`* = "texture"
 
-*Defined in [net/ResourceManager.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L14)*
+*Defined in [net/ResourceManager.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L14)*
 
 ___
 
@@ -232,7 +232,7 @@ ___
 
 geterrorCount(): `number`
 
-*Defined in [net/ResourceManager.ts:45](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L45)*
+*Defined in [net/ResourceManager.ts:45](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L45)*
 
 **Returns:** `number`
 
@@ -243,7 +243,7 @@ ___
 
 getloadedCount(): `number`
 
-*Defined in [net/ResourceManager.ts:49](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L49)*
+*Defined in [net/ResourceManager.ts:49](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L49)*
 
 **Returns:** `number`
 
@@ -254,7 +254,7 @@ ___
 
 gettotal(): `number`
 
-*Defined in [net/ResourceManager.ts:41](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L41)*
+*Defined in [net/ResourceManager.ts:41](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L41)*
 
 **Returns:** `number`
 
@@ -268,7 +268,7 @@ ___
 
 ▸ **$checkPendingTasks**(): `void`
 
-*Defined in [net/ResourceManager.ts:53](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L53)*
+*Defined in [net/ResourceManager.ts:53](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L53)*
 
 **Returns:** `void`
 
@@ -279,7 +279,7 @@ ___
 
 ▸ **$load**(info: *[ResourceInfo](../interfaces/resourceinfo.md)*, attempts: *`number`*): `void`
 
-*Defined in [net/ResourceManager.ts:60](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L60)*
+*Defined in [net/ResourceManager.ts:60](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L60)*
 
 **Parameters:**
 
@@ -301,7 +301,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[emit](eventemitter.md#emit)*
 
-*Defined in [event/EventEmitter.ts:27](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L27)*
+*Defined in [event/EventEmitter.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L27)*
 
 **Parameters:**
 
@@ -313,7 +313,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[emit](eventemitter.md#emit)*
 
-*Defined in [event/EventEmitter.ts:28](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L28)*
+*Defined in [event/EventEmitter.ts:28](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L28)*
 
 **Parameters:**
 
@@ -331,7 +331,7 @@ ___
 
 ▸ **get**<`Resource`>(name: *`string`*): `Resource`
 
-*Defined in [net/ResourceManager.ts:147](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L147)*
+*Defined in [net/ResourceManager.ts:147](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L147)*
 
 **Type parameters:**
 
@@ -351,7 +351,7 @@ ___
 
 ▸ **has**(name: *`string`*): `boolean`
 
-*Defined in [net/ResourceManager.ts:143](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L143)*
+*Defined in [net/ResourceManager.ts:143](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L143)*
 
 **Parameters:**
 
@@ -370,7 +370,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[hasEventListener](eventemitter.md#haseventlistener)*
 
-*Defined in [event/EventEmitter.ts:56](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L56)*
+*Defined in [event/EventEmitter.ts:56](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L56)*
 
 **Parameters:**
 
@@ -389,7 +389,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[off](eventemitter.md#off)*
 
-*Defined in [event/EventEmitter.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L14)*
+*Defined in [event/EventEmitter.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L14)*
 
 **Parameters:**
 
@@ -409,7 +409,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[on](eventemitter.md#on)*
 
-*Defined in [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L7)*
+*Defined in [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L7)*
 
 **Parameters:**
 
@@ -429,7 +429,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[removeAllListeners](eventemitter.md#removealllisteners)*
 
-*Defined in [event/EventEmitter.ts:61](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L61)*
+*Defined in [event/EventEmitter.ts:61](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L61)*
 
 **Returns:** `this`
 

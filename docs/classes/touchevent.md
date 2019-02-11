@@ -75,7 +75,7 @@
 
 *Overrides [Event](event.md).[constructor](event.md#constructor)*
 
-*Defined in [event/TouchEvent.ts:26](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L26)*
+*Defined in [event/TouchEvent.ts:26](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L26)*
 
 **Parameters:**
 
@@ -97,7 +97,7 @@ ___
 
 *Inherited from [Event](event.md).[ABORT](event.md#abort)*
 
-*Defined in [event/Event.ts:30](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L30)*
+*Defined in [event/Event.ts:30](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L30)*
 
 ___
 <a id="activate"></a>
@@ -108,7 +108,7 @@ ___
 
 *Inherited from [Event](event.md).[ACTIVATE](event.md#activate)*
 
-*Defined in [event/Event.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L14)*
+*Defined in [event/Event.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L14)*
 
 ___
 <a id="added"></a>
@@ -119,7 +119,7 @@ ___
 
 *Inherited from [Event](event.md).[ADDED](event.md#added)*
 
-*Defined in [event/Event.ts:6](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L6)*
+*Defined in [event/Event.ts:6](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L6)*
 
 ___
 <a id="added_to_stage"></a>
@@ -130,7 +130,7 @@ ___
 
 *Inherited from [Event](event.md).[ADDED_TO_STAGE](event.md#added_to_stage)*
 
-*Defined in [event/Event.ts:10](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L10)*
+*Defined in [event/Event.ts:10](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L10)*
 
 ___
 <a id="complete"></a>
@@ -141,7 +141,7 @@ ___
 
 *Inherited from [Event](event.md).[COMPLETE](event.md#complete)*
 
-*Defined in [event/Event.ts:36](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L36)*
+*Defined in [event/Event.ts:36](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L36)*
 
 ___
 <a id="deactivate"></a>
@@ -152,7 +152,7 @@ ___
 
 *Inherited from [Event](event.md).[DEACTIVATE](event.md#deactivate)*
 
-*Defined in [event/Event.ts:16](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L16)*
+*Defined in [event/Event.ts:16](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L16)*
 
 ___
 <a id="enter_frame"></a>
@@ -163,7 +163,7 @@ ___
 
 *Inherited from [Event](event.md).[ENTER_FRAME](event.md#enter_frame)*
 
-*Defined in [event/Event.ts:18](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L18)*
+*Defined in [event/Event.ts:18](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L18)*
 
 ___
 <a id="error"></a>
@@ -174,7 +174,7 @@ ___
 
 *Inherited from [Event](event.md).[ERROR](event.md#error)*
 
-*Defined in [event/Event.ts:32](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L32)*
+*Defined in [event/Event.ts:32](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L32)*
 
 ___
 <a id="load"></a>
@@ -185,7 +185,7 @@ ___
 
 *Inherited from [Event](event.md).[LOAD](event.md#load)*
 
-*Defined in [event/Event.ts:28](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L28)*
+*Defined in [event/Event.ts:28](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L28)*
 
 ___
 <a id="progress"></a>
@@ -196,7 +196,7 @@ ___
 
 *Inherited from [Event](event.md).[PROGRESS](event.md#progress)*
 
-*Defined in [event/Event.ts:34](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L34)*
+*Defined in [event/Event.ts:34](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L34)*
 
 ___
 <a id="removed"></a>
@@ -207,7 +207,7 @@ ___
 
 *Inherited from [Event](event.md).[REMOVED](event.md#removed)*
 
-*Defined in [event/Event.ts:8](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L8)*
+*Defined in [event/Event.ts:8](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L8)*
 
 ___
 <a id="removed_from_stage"></a>
@@ -218,7 +218,7 @@ ___
 
 *Inherited from [Event](event.md).[REMOVED_FROM_STAGE](event.md#removed_from_stage)*
 
-*Defined in [event/Event.ts:12](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L12)*
+*Defined in [event/Event.ts:12](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L12)*
 
 ___
 <a id="sound_complete"></a>
@@ -229,7 +229,7 @@ ___
 
 *Inherited from [Event](event.md).[SOUND_COMPLETE](event.md#sound_complete)*
 
-*Defined in [event/Event.ts:38](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L38)*
+*Defined in [event/Event.ts:38](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L38)*
 
 ___
 <a id="tick"></a>
@@ -240,7 +240,7 @@ ___
 
 *Inherited from [Event](event.md).[TICK](event.md#tick)*
 
-*Defined in [event/Event.ts:20](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L20)*
+*Defined in [event/Event.ts:20](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L20)*
 
 ___
 <a id="ticker_pause"></a>
@@ -251,7 +251,7 @@ ___
 
 *Inherited from [Event](event.md).[TICKER_PAUSE](event.md#ticker_pause)*
 
-*Defined in [event/Event.ts:22](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L22)*
+*Defined in [event/Event.ts:22](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L22)*
 
 ___
 <a id="ticker_resume"></a>
@@ -262,7 +262,7 @@ ___
 
 *Inherited from [Event](event.md).[TICKER_RESUME](event.md#ticker_resume)*
 
-*Defined in [event/Event.ts:24](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L24)*
+*Defined in [event/Event.ts:24](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L24)*
 
 ___
 <a id="touch_cancel"></a>
@@ -271,7 +271,7 @@ ___
 
 **TOUCH_CANCEL**: *`string`* = "touchCancel"
 
-*Defined in [event/TouchEvent.ts:13](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L13)*
+*Defined in [event/TouchEvent.ts:13](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L13)*
 
 ___
 <a id="touch_end"></a>
@@ -280,7 +280,7 @@ ___
 
 **TOUCH_END**: *`string`* = "touchEnd"
 
-*Defined in [event/TouchEvent.ts:11](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L11)*
+*Defined in [event/TouchEvent.ts:11](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L11)*
 
 ___
 <a id="touch_move"></a>
@@ -289,7 +289,7 @@ ___
 
 **TOUCH_MOVE**: *`string`* = "touchMove"
 
-*Defined in [event/TouchEvent.ts:9](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L9)*
+*Defined in [event/TouchEvent.ts:9](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L9)*
 
 ___
 <a id="touch_start"></a>
@@ -298,7 +298,7 @@ ___
 
 **TOUCH_START**: *`string`* = "touchStart"
 
-*Defined in [event/TouchEvent.ts:7](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L7)*
+*Defined in [event/TouchEvent.ts:7](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L7)*
 
 ___
 <a id="touch_tap"></a>
@@ -307,7 +307,7 @@ ___
 
 **TOUCH_TAP**: *`string`* = "touchTap"
 
-*Defined in [event/TouchEvent.ts:15](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L15)*
+*Defined in [event/TouchEvent.ts:15](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L15)*
 
 ___
 <a id="viewport_resize"></a>
@@ -318,7 +318,7 @@ ___
 
 *Inherited from [Event](event.md).[VIEWPORT_RESIZE](event.md#viewport_resize)*
 
-*Defined in [event/Event.ts:26](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L26)*
+*Defined in [event/Event.ts:26](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L26)*
 
 ___
 
@@ -330,7 +330,7 @@ ___
 
 **● cancelBubble**: *`boolean`*
 
-*Defined in [event/TouchEvent.ts:26](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L26)*
+*Defined in [event/TouchEvent.ts:26](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L26)*
 
 ___
 <a id="currenttarget"></a>
@@ -341,7 +341,7 @@ ___
 
 *Overrides [Event](event.md).[currentTarget](event.md#currenttarget)*
 
-*Defined in [event/TouchEvent.ts:18](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L18)*
+*Defined in [event/TouchEvent.ts:18](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L18)*
 
 ___
 <a id="data"></a>
@@ -352,7 +352,7 @@ ___
 
 *Inherited from [Event](event.md).[data](event.md#data)*
 
-*Defined in [event/Event.ts:41](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L41)*
+*Defined in [event/Event.ts:41](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L41)*
 
 ___
 <a id="identifier"></a>
@@ -361,7 +361,7 @@ ___
 
 **● identifier**: *`number`*
 
-*Defined in [event/TouchEvent.ts:25](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L25)*
+*Defined in [event/TouchEvent.ts:25](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L25)*
 
 ___
 <a id="localx"></a>
@@ -370,7 +370,7 @@ ___
 
 **● localX**: *`number`*
 
-*Defined in [event/TouchEvent.ts:21](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L21)*
+*Defined in [event/TouchEvent.ts:21](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L21)*
 
 ___
 <a id="localy"></a>
@@ -379,7 +379,7 @@ ___
 
 **● localY**: *`number`*
 
-*Defined in [event/TouchEvent.ts:22](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L22)*
+*Defined in [event/TouchEvent.ts:22](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L22)*
 
 ___
 <a id="stagex"></a>
@@ -388,7 +388,7 @@ ___
 
 **● stageX**: *`number`*
 
-*Defined in [event/TouchEvent.ts:23](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L23)*
+*Defined in [event/TouchEvent.ts:23](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L23)*
 
 ___
 <a id="stagey"></a>
@@ -397,7 +397,7 @@ ___
 
 **● stageY**: *`number`*
 
-*Defined in [event/TouchEvent.ts:24](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L24)*
+*Defined in [event/TouchEvent.ts:24](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L24)*
 
 ___
 <a id="target"></a>
@@ -408,7 +408,7 @@ ___
 
 *Overrides [Event](event.md).[target](event.md#target)*
 
-*Defined in [event/TouchEvent.ts:17](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L17)*
+*Defined in [event/TouchEvent.ts:17](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L17)*
 
 ___
 <a id="targetx"></a>
@@ -417,7 +417,7 @@ ___
 
 **● targetX**: *`number`*
 
-*Defined in [event/TouchEvent.ts:19](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L19)*
+*Defined in [event/TouchEvent.ts:19](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L19)*
 
 ___
 <a id="targety"></a>
@@ -426,7 +426,7 @@ ___
 
 **● targetY**: *`number`*
 
-*Defined in [event/TouchEvent.ts:20](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L20)*
+*Defined in [event/TouchEvent.ts:20](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L20)*
 
 ___
 <a id="type"></a>
@@ -437,7 +437,7 @@ ___
 
 *Inherited from [Event](event.md).[type](event.md#type)*
 
-*Defined in [event/Event.ts:40](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L40)*
+*Defined in [event/Event.ts:40](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L40)*
 
 ___
 <a id="_pool"></a>
@@ -448,7 +448,7 @@ ___
 
 *Overrides [Event](event.md).[$pool](event.md#_pool)*
 
-*Defined in [event/TouchEvent.ts:56](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L56)*
+*Defined in [event/TouchEvent.ts:56](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L56)*
 
 ___
 
@@ -462,7 +462,7 @@ ___
 
 *Overrides [Event](event.md).[$init](event.md#_init)*
 
-*Defined in [event/TouchEvent.ts:33](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L33)*
+*Defined in [event/TouchEvent.ts:33](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L33)*
 
 **Parameters:**
 
@@ -481,7 +481,7 @@ ___
 
 *Overrides [Event](event.md).[release](event.md#release)*
 
-*Defined in [event/TouchEvent.ts:52](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L52)*
+*Defined in [event/TouchEvent.ts:52](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L52)*
 
 **Returns:** `void`
 
@@ -492,7 +492,7 @@ ___
 
 ▸ **stopPropagation**(): `void`
 
-*Defined in [event/TouchEvent.ts:48](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L48)*
+*Defined in [event/TouchEvent.ts:48](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L48)*
 
 **Returns:** `void`
 
@@ -505,7 +505,7 @@ ___
 
 *Overrides [Event](event.md).[create](event.md#create)*
 
-*Defined in [event/TouchEvent.ts:58](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L58)*
+*Defined in [event/TouchEvent.ts:58](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L58)*
 
 **Parameters:**
 
@@ -524,7 +524,7 @@ ___
 
 *Overrides [Event](event.md).[recycle](event.md#recycle)*
 
-*Defined in [event/TouchEvent.ts:67](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/TouchEvent.ts#L67)*
+*Defined in [event/TouchEvent.ts:67](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/TouchEvent.ts#L67)*
 
 **Parameters:**
 

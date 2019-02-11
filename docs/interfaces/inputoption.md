@@ -43,7 +43,7 @@
 
 *Inherited from [TextOption](textoption.md).[autoFitSize](textoption.md#autofitsize)*
 
-*Defined in [display/Text.ts:356](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L356)*
+*Defined in [display/Text.ts:356](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L356)*
 
 ___
 <a id="breakword"></a>
@@ -54,7 +54,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[breakWord](textoption.md#breakword)*
 
-*Defined in [display/Text.ts:355](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L355)*
+*Defined in [display/Text.ts:355](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L355)*
 
 ___
 <a id="color"></a>
@@ -65,7 +65,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[color](textoption.md#color)*
 
-*Defined in [display/Text.ts:344](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L344)*
+*Defined in [display/Text.ts:344](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L344)*
 
 ___
 <a id="fontfamily"></a>
@@ -76,7 +76,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[fontFamily](textoption.md#fontfamily)*
 
-*Defined in [display/Text.ts:353](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L353)*
+*Defined in [display/Text.ts:353](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L353)*
 
 ___
 <a id="fontsize"></a>
@@ -87,7 +87,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[fontSize](textoption.md#fontsize)*
 
-*Defined in [display/Text.ts:345](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L345)*
+*Defined in [display/Text.ts:345](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L345)*
 
 ___
 <a id="fontstyle"></a>
@@ -98,7 +98,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[fontStyle](textoption.md#fontstyle)*
 
-*Defined in [display/Text.ts:347](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L347)*
+*Defined in [display/Text.ts:347](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L347)*
 
 ___
 <a id="fontweight"></a>
@@ -109,7 +109,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[fontWeight](textoption.md#fontweight)*
 
-*Defined in [display/Text.ts:346](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L346)*
+*Defined in [display/Text.ts:346](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L346)*
 
 ___
 <a id="lineheight"></a>
@@ -120,7 +120,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[lineHeight](textoption.md#lineheight)*
 
-*Defined in [display/Text.ts:350](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L350)*
+*Defined in [display/Text.ts:350](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L350)*
 
 ___
 <a id="maxlength"></a>
@@ -129,7 +129,7 @@ ___
 
 **● maxLength**: *`number`*
 
-*Defined in [display/Input.ts:238](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Input.ts#L238)*
+*Defined in [display/Input.ts:238](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Input.ts#L238)*
 
 ___
 <a id="minfontsize"></a>
@@ -140,7 +140,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[minFontSize](textoption.md#minfontsize)*
 
-*Defined in [display/Text.ts:357](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L357)*
+*Defined in [display/Text.ts:357](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L357)*
 
 ___
 <a id="multiline"></a>
@@ -151,7 +151,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[multiline](textoption.md#multiline)*
 
-*Defined in [display/Text.ts:354](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L354)*
+*Defined in [display/Text.ts:354](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L354)*
 
 ___
 <a id="placeholder"></a>
@@ -160,7 +160,7 @@ ___
 
 **● placeholder**: *`string`*
 
-*Defined in [display/Input.ts:239](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Input.ts#L239)*
+*Defined in [display/Input.ts:239](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Input.ts#L239)*
 
 ___
 <a id="placeholdercolor"></a>
@@ -169,7 +169,7 @@ ___
 
 **● placeholderColor**: *`string`*
 
-*Defined in [display/Input.ts:240](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Input.ts#L240)*
+*Defined in [display/Input.ts:240](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Input.ts#L240)*
 
 ___
 <a id="strokecolor"></a>
@@ -180,7 +180,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[strokeColor](textoption.md#strokecolor)*
 
-*Defined in [display/Text.ts:352](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L352)*
+*Defined in [display/Text.ts:352](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L352)*
 
 ___
 <a id="strokesize"></a>
@@ -191,7 +191,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[strokeSize](textoption.md#strokesize)*
 
-*Defined in [display/Text.ts:351](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L351)*
+*Defined in [display/Text.ts:351](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L351)*
 
 ___
 <a id="textalign"></a>
@@ -202,7 +202,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[textAlign](textoption.md#textalign)*
 
-*Defined in [display/Text.ts:348](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L348)*
+*Defined in [display/Text.ts:348](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L348)*
 
 ___
 <a id="type"></a>
@@ -211,7 +211,7 @@ ___
 
 **● type**: *[InputType](../#inputtype)*
 
-*Defined in [display/Input.ts:237](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Input.ts#L237)*
+*Defined in [display/Input.ts:237](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Input.ts#L237)*
 
 ___
 <a id="verticalalign"></a>
@@ -222,7 +222,7 @@ ___
 
 *Inherited from [TextOption](textoption.md).[verticalAlign](textoption.md#verticalalign)*
 
-*Defined in [display/Text.ts:349](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L349)*
+*Defined in [display/Text.ts:349](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L349)*
 
 ___
 

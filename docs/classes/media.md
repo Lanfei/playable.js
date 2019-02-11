@@ -51,7 +51,7 @@
 
 ⊕ **new Media**(stage: *[Stage](stage.md)*): [Media](media.md)
 
-*Defined in [media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L11)*
+*Defined in [media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L11)*
 
 **Parameters:**
 
@@ -71,7 +71,7 @@ ___
 
 **● $boundOnError**: *`function`*
 
-*Defined in [media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L11)*
+*Defined in [media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L11)*
 
 #### Type declaration
 ▸(e: *`ErrorEvent`*): `void`
@@ -91,7 +91,7 @@ ___
 
 **● $boundOnLoad**: *`function`*
 
-*Defined in [media/Media.ts:10](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L10)*
+*Defined in [media/Media.ts:10](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L10)*
 
 #### Type declaration
 ▸(): `void`
@@ -105,7 +105,7 @@ ___
 
 **● $element**: *`HTMLImageElement` \| `HTMLAudioElement`*
 
-*Defined in [media/Media.ts:7](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L7)*
+*Defined in [media/Media.ts:7](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L7)*
 
 ___
 <a id="_events"></a>
@@ -116,7 +116,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[$events](eventemitter.md#_events)*
 
-*Defined in [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L5)*
+*Defined in [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L5)*
 
 ___
 <a id="_stage"></a>
@@ -125,7 +125,7 @@ ___
 
 **● $stage**: *[Stage](stage.md)*
 
-*Defined in [media/Media.ts:9](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L9)*
+*Defined in [media/Media.ts:9](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L9)*
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 getelement(): `HTMLImageElement` \| `HTMLAudioElement`
 
-*Defined in [media/Media.ts:20](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L20)*
+*Defined in [media/Media.ts:20](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L20)*
 
 **Returns:** `HTMLImageElement` \| `HTMLAudioElement`
 
@@ -148,11 +148,11 @@ ___
 
 geturl(): `string`seturl(url: *`string`*): `void`
 
-*Defined in [media/Media.ts:24](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L24)*
+*Defined in [media/Media.ts:24](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L24)*
 
 **Returns:** `string`
 
-*Defined in [media/Media.ts:28](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L28)*
+*Defined in [media/Media.ts:28](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L28)*
 
 **Parameters:**
 
@@ -172,7 +172,7 @@ ___
 
 ▸ **$onError**(e: *`ErrorEvent`*): `void`
 
-*Defined in [media/Media.ts:37](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L37)*
+*Defined in [media/Media.ts:37](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L37)*
 
 **Parameters:**
 
@@ -189,7 +189,7 @@ ___
 
 ▸ **$onLoad**(): `void`
 
-*Defined in [media/Media.ts:32](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L32)*
+*Defined in [media/Media.ts:32](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L32)*
 
 **Returns:** `void`
 
@@ -204,7 +204,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[emit](eventemitter.md#emit)*
 
-*Defined in [event/EventEmitter.ts:27](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L27)*
+*Defined in [event/EventEmitter.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L27)*
 
 **Parameters:**
 
@@ -216,7 +216,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[emit](eventemitter.md#emit)*
 
-*Defined in [event/EventEmitter.ts:28](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L28)*
+*Defined in [event/EventEmitter.ts:28](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L28)*
 
 **Parameters:**
 
@@ -236,7 +236,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[hasEventListener](eventemitter.md#haseventlistener)*
 
-*Defined in [event/EventEmitter.ts:56](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L56)*
+*Defined in [event/EventEmitter.ts:56](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L56)*
 
 **Parameters:**
 
@@ -255,7 +255,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[off](eventemitter.md#off)*
 
-*Defined in [event/EventEmitter.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L14)*
+*Defined in [event/EventEmitter.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L14)*
 
 **Parameters:**
 
@@ -275,7 +275,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[on](eventemitter.md#on)*
 
-*Defined in [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L7)*
+*Defined in [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L7)*
 
 **Parameters:**
 
@@ -295,7 +295,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[removeAllListeners](eventemitter.md#removealllisteners)*
 
-*Defined in [event/EventEmitter.ts:61](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L61)*
+*Defined in [event/EventEmitter.ts:61](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L61)*
 
 **Returns:** `this`
 

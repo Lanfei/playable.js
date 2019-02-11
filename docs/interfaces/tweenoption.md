@@ -22,7 +22,7 @@
 
 **● loop**: *`boolean`*
 
-*Defined in [tween/Tween.ts:234](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L234)*
+*Defined in [tween/Tween.ts:234](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L234)*
 
 ___
 

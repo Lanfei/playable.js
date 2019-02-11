@@ -59,7 +59,7 @@
 
 ⊕ **new Event**(type: *`string`*, data?: *`any`*): [Event](event.md)
 
-*Defined in [event/Event.ts:43](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L43)*
+*Defined in [event/Event.ts:43](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L43)*
 
 **Parameters:**
 
@@ -80,7 +80,7 @@ ___
 
 **ABORT**: *`string`* = "abort"
 
-*Defined in [event/Event.ts:30](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L30)*
+*Defined in [event/Event.ts:30](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L30)*
 
 ___
 <a id="activate"></a>
@@ -89,7 +89,7 @@ ___
 
 **ACTIVATE**: *`string`* = "activate"
 
-*Defined in [event/Event.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L14)*
+*Defined in [event/Event.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L14)*
 
 ___
 <a id="added"></a>
@@ -98,7 +98,7 @@ ___
 
 **ADDED**: *`string`* = "added"
 
-*Defined in [event/Event.ts:6](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L6)*
+*Defined in [event/Event.ts:6](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L6)*
 
 ___
 <a id="added_to_stage"></a>
@@ -107,7 +107,7 @@ ___
 
 **ADDED_TO_STAGE**: *`string`* = "addedToStage"
 
-*Defined in [event/Event.ts:10](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L10)*
+*Defined in [event/Event.ts:10](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L10)*
 
 ___
 <a id="complete"></a>
@@ -116,7 +116,7 @@ ___
 
 **COMPLETE**: *`string`* = "complete"
 
-*Defined in [event/Event.ts:36](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L36)*
+*Defined in [event/Event.ts:36](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L36)*
 
 ___
 <a id="deactivate"></a>
@@ -125,7 +125,7 @@ ___
 
 **DEACTIVATE**: *`string`* = "deactivate"
 
-*Defined in [event/Event.ts:16](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L16)*
+*Defined in [event/Event.ts:16](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L16)*
 
 ___
 <a id="enter_frame"></a>
@@ -134,7 +134,7 @@ ___
 
 **ENTER_FRAME**: *`string`* = "enterFrame"
 
-*Defined in [event/Event.ts:18](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L18)*
+*Defined in [event/Event.ts:18](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L18)*
 
 ___
 <a id="error"></a>
@@ -143,7 +143,7 @@ ___
 
 **ERROR**: *`string`* = "error"
 
-*Defined in [event/Event.ts:32](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L32)*
+*Defined in [event/Event.ts:32](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L32)*
 
 ___
 <a id="load"></a>
@@ -152,7 +152,7 @@ ___
 
 **LOAD**: *`string`* = "load"
 
-*Defined in [event/Event.ts:28](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L28)*
+*Defined in [event/Event.ts:28](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L28)*
 
 ___
 <a id="progress"></a>
@@ -161,7 +161,7 @@ ___
 
 **PROGRESS**: *`string`* = "progress"
 
-*Defined in [event/Event.ts:34](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L34)*
+*Defined in [event/Event.ts:34](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L34)*
 
 ___
 <a id="removed"></a>
@@ -170,7 +170,7 @@ ___
 
 **REMOVED**: *`string`* = "removed"
 
-*Defined in [event/Event.ts:8](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L8)*
+*Defined in [event/Event.ts:8](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L8)*
 
 ___
 <a id="removed_from_stage"></a>
@@ -179,7 +179,7 @@ ___
 
 **REMOVED_FROM_STAGE**: *`string`* = "removeFromStage"
 
-*Defined in [event/Event.ts:12](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L12)*
+*Defined in [event/Event.ts:12](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L12)*
 
 ___
 <a id="sound_complete"></a>
@@ -188,7 +188,7 @@ ___
 
 **SOUND_COMPLETE**: *`string`* = "soundComplete"
 
-*Defined in [event/Event.ts:38](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L38)*
+*Defined in [event/Event.ts:38](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L38)*
 
 ___
 <a id="tick"></a>
@@ -197,7 +197,7 @@ ___
 
 **TICK**: *`string`* = "tick"
 
-*Defined in [event/Event.ts:20](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L20)*
+*Defined in [event/Event.ts:20](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L20)*
 
 ___
 <a id="ticker_pause"></a>
@@ -206,7 +206,7 @@ ___
 
 **TICKER_PAUSE**: *`string`* = "tickerPause"
 
-*Defined in [event/Event.ts:22](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L22)*
+*Defined in [event/Event.ts:22](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L22)*
 
 ___
 <a id="ticker_resume"></a>
@@ -215,7 +215,7 @@ ___
 
 **TICKER_RESUME**: *`string`* = "tickerResume"
 
-*Defined in [event/Event.ts:24](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L24)*
+*Defined in [event/Event.ts:24](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L24)*
 
 ___
 <a id="viewport_resize"></a>
@@ -224,7 +224,7 @@ ___
 
 **VIEWPORT_RESIZE**: *`string`* = "viewportResize"
 
-*Defined in [event/Event.ts:26](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L26)*
+*Defined in [event/Event.ts:26](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L26)*
 
 ___
 
@@ -236,7 +236,7 @@ ___
 
 **● currentTarget**: *[EventEmitter](eventemitter.md)* =  null
 
-*Defined in [event/Event.ts:43](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L43)*
+*Defined in [event/Event.ts:43](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L43)*
 
 ___
 <a id="data"></a>
@@ -245,7 +245,7 @@ ___
 
 **● data**: *`any`* =  null
 
-*Defined in [event/Event.ts:41](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L41)*
+*Defined in [event/Event.ts:41](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L41)*
 
 ___
 <a id="target"></a>
@@ -254,7 +254,7 @@ ___
 
 **● target**: *[EventEmitter](eventemitter.md)* =  null
 
-*Defined in [event/Event.ts:42](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L42)*
+*Defined in [event/Event.ts:42](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L42)*
 
 ___
 <a id="type"></a>
@@ -263,7 +263,7 @@ ___
 
 **● type**: *`string`* =  null
 
-*Defined in [event/Event.ts:40](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L40)*
+*Defined in [event/Event.ts:40](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L40)*
 
 ___
 <a id="_pool"></a>
@@ -272,7 +272,7 @@ ___
 
 **● $pool**: *`Array`<[Event](event.md)>* =  []
 
-*Defined in [event/Event.ts:61](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L61)*
+*Defined in [event/Event.ts:61](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L61)*
 
 ___
 
@@ -284,7 +284,7 @@ ___
 
 ▸ **$init**(type: *`string`*, data?: *`any`*): `this`
 
-*Defined in [event/Event.ts:49](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L49)*
+*Defined in [event/Event.ts:49](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L49)*
 
 **Parameters:**
 
@@ -302,7 +302,7 @@ ___
 
 ▸ **release**(): `void`
 
-*Defined in [event/Event.ts:55](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L55)*
+*Defined in [event/Event.ts:55](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L55)*
 
 **Returns:** `void`
 
@@ -313,7 +313,7 @@ ___
 
 ▸ **create**(type: *`string`*, data?: *`any`*): [Event](event.md)
 
-*Defined in [event/Event.ts:63](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L63)*
+*Defined in [event/Event.ts:63](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L63)*
 
 **Parameters:**
 
@@ -331,7 +331,7 @@ ___
 
 ▸ **recycle**(e: *[Event](event.md)*): `void`
 
-*Defined in [event/Event.ts:72](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/Event.ts#L72)*
+*Defined in [event/Event.ts:72](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/Event.ts#L72)*
 
 **Parameters:**
 

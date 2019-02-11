@@ -70,7 +70,7 @@
 
 ⊕ **new Tween**(target: *[Layer](layer.md)*, option?: *[TweenOption](../interfaces/tweenoption.md)*): [Tween](tween.md)
 
-*Defined in [tween/Tween.ts:18](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L18)*
+*Defined in [tween/Tween.ts:18](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L18)*
 
 **Parameters:**
 
@@ -91,7 +91,7 @@ ___
 
 **● $boundOnEnterFrame**: *`function`*
 
-*Defined in [tween/Tween.ts:18](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L18)*
+*Defined in [tween/Tween.ts:18](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L18)*
 
 #### Type declaration
 ▸(): `void`
@@ -107,7 +107,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[$events](eventemitter.md#_events)*
 
-*Defined in [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L5)*
+*Defined in [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L5)*
 
 ___
 <a id="_paused"></a>
@@ -116,7 +116,7 @@ ___
 
 **● $paused**: *`boolean`* = true
 
-*Defined in [tween/Tween.ts:11](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L11)*
+*Defined in [tween/Tween.ts:11](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L11)*
 
 ___
 <a id="_shouldsaveprops"></a>
@@ -125,7 +125,7 @@ ___
 
 **● $shouldSaveProps**: *`boolean`* = true
 
-*Defined in [tween/Tween.ts:17](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L17)*
+*Defined in [tween/Tween.ts:17](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L17)*
 
 ___
 <a id="_stepindex"></a>
@@ -134,7 +134,7 @@ ___
 
 **● $stepIndex**: *`number`* = 0
 
-*Defined in [tween/Tween.ts:13](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L13)*
+*Defined in [tween/Tween.ts:13](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L13)*
 
 ___
 <a id="_stepposition"></a>
@@ -143,7 +143,7 @@ ___
 
 **● $stepPosition**: *`number`* = 0
 
-*Defined in [tween/Tween.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L14)*
+*Defined in [tween/Tween.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L14)*
 
 ___
 <a id="_stepprops"></a>
@@ -152,7 +152,7 @@ ___
 
 **● $stepProps**: *`Array`<`Object`>* =  []
 
-*Defined in [tween/Tween.ts:16](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L16)*
+*Defined in [tween/Tween.ts:16](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L16)*
 
 ___
 <a id="_steps"></a>
@@ -161,7 +161,7 @@ ___
 
 **● $steps**: *`Array`<[TweenStep](../interfaces/tweenstep.md)>* =  []
 
-*Defined in [tween/Tween.ts:15](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L15)*
+*Defined in [tween/Tween.ts:15](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L15)*
 
 ___
 <a id="_stopped"></a>
@@ -170,7 +170,7 @@ ___
 
 **● $stopped**: *`boolean`* = true
 
-*Defined in [tween/Tween.ts:12](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L12)*
+*Defined in [tween/Tween.ts:12](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L12)*
 
 ___
 <a id="_target"></a>
@@ -179,7 +179,7 @@ ___
 
 **● $target**: *[Layer](layer.md)* =  null
 
-*Defined in [tween/Tween.ts:10](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L10)*
+*Defined in [tween/Tween.ts:10](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L10)*
 
 ___
 <a id="loop"></a>
@@ -188,7 +188,7 @@ ___
 
 **● loop**: *`boolean`* = false
 
-*Defined in [tween/Tween.ts:8](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L8)*
+*Defined in [tween/Tween.ts:8](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L8)*
 
 ___
 <a id="_tweens"></a>
@@ -197,7 +197,7 @@ ___
 
 **● $tweens**: *`Array`<[Tween](tween.md)>* =  []
 
-*Defined in [tween/Tween.ts:181](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L181)*
+*Defined in [tween/Tween.ts:181](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L181)*
 
 ___
 
@@ -209,7 +209,7 @@ ___
 
 getpaused(): `boolean`
 
-*Defined in [tween/Tween.ts:27](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L27)*
+*Defined in [tween/Tween.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L27)*
 
 **Returns:** `boolean`
 
@@ -220,7 +220,7 @@ ___
 
 getstopped(): `boolean`
 
-*Defined in [tween/Tween.ts:31](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L31)*
+*Defined in [tween/Tween.ts:31](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L31)*
 
 **Returns:** `boolean`
 
@@ -234,7 +234,7 @@ ___
 
 ▸ **$easeProps**(stepIndex: *`number`*, props: *`Object`*, position: *`number`*, duration: *`number`*, ease: *`Function`*): `void`
 
-*Defined in [tween/Tween.ts:158](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L158)*
+*Defined in [tween/Tween.ts:158](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L158)*
 
 **Parameters:**
 
@@ -255,7 +255,7 @@ ___
 
 ▸ **$nextFrame**(dt: *`number`*): `void`
 
-*Defined in [tween/Tween.ts:106](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L106)*
+*Defined in [tween/Tween.ts:106](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L106)*
 
 **Parameters:**
 
@@ -272,7 +272,7 @@ ___
 
 ▸ **$onEnterFrame**(e: *[Event](event.md)*): `void`
 
-*Defined in [tween/Tween.ts:102](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L102)*
+*Defined in [tween/Tween.ts:102](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L102)*
 
 **Parameters:**
 
@@ -289,7 +289,7 @@ ___
 
 ▸ **$saveOriginalProps**(stepIndex: *`number`*, props: *`Object`*): `void`
 
-*Defined in [tween/Tween.ts:148](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L148)*
+*Defined in [tween/Tween.ts:148](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L148)*
 
 **Parameters:**
 
@@ -307,7 +307,7 @@ ___
 
 ▸ **$setProps**(props: *`Object`*): `void`
 
-*Defined in [tween/Tween.ts:174](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L174)*
+*Defined in [tween/Tween.ts:174](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L174)*
 
 **Parameters:**
 
@@ -324,7 +324,7 @@ ___
 
 ▸ **call**(callback: *`Function`*): `this`
 
-*Defined in [tween/Tween.ts:61](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L61)*
+*Defined in [tween/Tween.ts:61](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L61)*
 
 **Parameters:**
 
@@ -345,7 +345,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[emit](eventemitter.md#emit)*
 
-*Defined in [event/EventEmitter.ts:27](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L27)*
+*Defined in [event/EventEmitter.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L27)*
 
 **Parameters:**
 
@@ -357,7 +357,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[emit](eventemitter.md#emit)*
 
-*Defined in [event/EventEmitter.ts:28](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L28)*
+*Defined in [event/EventEmitter.ts:28](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L28)*
 
 **Parameters:**
 
@@ -377,7 +377,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[hasEventListener](eventemitter.md#haseventlistener)*
 
-*Defined in [event/EventEmitter.ts:56](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L56)*
+*Defined in [event/EventEmitter.ts:56](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L56)*
 
 **Parameters:**
 
@@ -396,7 +396,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[off](eventemitter.md#off)*
 
-*Defined in [event/EventEmitter.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L14)*
+*Defined in [event/EventEmitter.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L14)*
 
 **Parameters:**
 
@@ -416,7 +416,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[on](eventemitter.md#on)*
 
-*Defined in [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L7)*
+*Defined in [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L7)*
 
 **Parameters:**
 
@@ -434,7 +434,7 @@ ___
 
 ▸ **pause**(): `this`
 
-*Defined in [tween/Tween.ts:77](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L77)*
+*Defined in [tween/Tween.ts:77](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L77)*
 
 **Returns:** `this`
 
@@ -445,7 +445,7 @@ ___
 
 ▸ **play**(): `this`
 
-*Defined in [tween/Tween.ts:69](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L69)*
+*Defined in [tween/Tween.ts:69](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L69)*
 
 **Returns:** `this`
 
@@ -458,7 +458,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[removeAllListeners](eventemitter.md#removealllisteners)*
 
-*Defined in [event/EventEmitter.ts:61](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L61)*
+*Defined in [event/EventEmitter.ts:61](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L61)*
 
 **Returns:** `this`
 
@@ -469,7 +469,7 @@ ___
 
 ▸ **resume**(): `this`
 
-*Defined in [tween/Tween.ts:83](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L83)*
+*Defined in [tween/Tween.ts:83](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L83)*
 
 **Returns:** `this`
 
@@ -480,7 +480,7 @@ ___
 
 ▸ **set**(props: *`Object`*): `this`
 
-*Defined in [tween/Tween.ts:35](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L35)*
+*Defined in [tween/Tween.ts:35](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L35)*
 
 **Parameters:**
 
@@ -497,7 +497,7 @@ ___
 
 ▸ **stop**(): `this`
 
-*Defined in [tween/Tween.ts:92](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L92)*
+*Defined in [tween/Tween.ts:92](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L92)*
 
 **Returns:** `this`
 
@@ -508,7 +508,7 @@ ___
 
 ▸ **to**(props: *`Object`*, duration: *`number`*, ease?: *`Function`*): `this`
 
-*Defined in [tween/Tween.ts:43](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L43)*
+*Defined in [tween/Tween.ts:43](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L43)*
 
 **Parameters:**
 
@@ -527,7 +527,7 @@ ___
 
 ▸ **wait**(duration: *`number`*): `this`
 
-*Defined in [tween/Tween.ts:53](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L53)*
+*Defined in [tween/Tween.ts:53](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L53)*
 
 **Parameters:**
 
@@ -544,7 +544,7 @@ ___
 
 ▸ **get**(target: *[Layer](layer.md)*, option?: *`object`*): [Tween](tween.md)
 
-*Defined in [tween/Tween.ts:183](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L183)*
+*Defined in [tween/Tween.ts:183](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L183)*
 
 **Parameters:**
 
@@ -565,7 +565,7 @@ ___
 
 ▸ **pauseTweens**(target: *[Layer](layer.md)*): `void`
 
-*Defined in [tween/Tween.ts:187](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L187)*
+*Defined in [tween/Tween.ts:187](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L187)*
 
 **Parameters:**
 
@@ -582,7 +582,7 @@ ___
 
 ▸ **removeAllTweens**(): `void`
 
-*Defined in [tween/Tween.ts:215](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L215)*
+*Defined in [tween/Tween.ts:215](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L215)*
 
 **Returns:** `void`
 
@@ -593,7 +593,7 @@ ___
 
 ▸ **removeTweens**(target: *[Layer](layer.md)*): `void`
 
-*Defined in [tween/Tween.ts:205](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L205)*
+*Defined in [tween/Tween.ts:205](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L205)*
 
 **Parameters:**
 
@@ -610,7 +610,7 @@ ___
 
 ▸ **resumeTweens**(target: *[Layer](layer.md)*): `void`
 
-*Defined in [tween/Tween.ts:196](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L196)*
+*Defined in [tween/Tween.ts:196](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L196)*
 
 **Parameters:**
 

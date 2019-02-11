@@ -24,7 +24,7 @@
 
 **● retryTimes**: *`number`*
 
-*Defined in [net/ResourceManager.ts:162](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L162)*
+*Defined in [net/ResourceManager.ts:162](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L162)*
 
 ___
 <a id="threads"></a>
@@ -33,7 +33,7 @@ ___
 
 **● threads**: *`number`*
 
-*Defined in [net/ResourceManager.ts:160](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L160)*
+*Defined in [net/ResourceManager.ts:160](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L160)*
 
 ___
 <a id="timeout"></a>
@@ -42,7 +42,7 @@ ___
 
 **● timeout**: *`number`*
 
-*Defined in [net/ResourceManager.ts:161](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/ResourceManager.ts#L161)*
+*Defined in [net/ResourceManager.ts:161](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/ResourceManager.ts#L161)*
 
 ___
 

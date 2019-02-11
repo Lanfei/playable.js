@@ -24,7 +24,7 @@
 
 **● callback**: *`Function`*
 
-*Defined in [display/MovieClip.ts:122](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/MovieClip.ts#L122)*
+*Defined in [display/MovieClip.ts:122](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/MovieClip.ts#L122)*
 
 ___
 <a id="clip"></a>
@@ -33,7 +33,7 @@ ___
 
 **● clip**: *[Rectangle](../classes/rectangle.md)*
 
-*Defined in [display/MovieClip.ts:120](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/MovieClip.ts#L120)*
+*Defined in [display/MovieClip.ts:120](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/MovieClip.ts#L120)*
 
 ___
 <a id="interval"></a>
@@ -42,7 +42,7 @@ ___
 
 **● interval**: *`number`*
 
-*Defined in [display/MovieClip.ts:121](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/MovieClip.ts#L121)*
+*Defined in [display/MovieClip.ts:121](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/MovieClip.ts#L121)*
 
 ___
 

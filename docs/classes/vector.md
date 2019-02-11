@@ -50,7 +50,7 @@
 
 ⊕ **new Vector**(x?: *`number`*, y?: *`number`*): [Vector](vector.md)
 
-*Defined in [geom/Vector.ts:6](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L6)*
+*Defined in [geom/Vector.ts:6](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L6)*
 
 **Parameters:**
 
@@ -71,7 +71,7 @@ ___
 
 **● x**: *`number`*
 
-*Defined in [geom/Vector.ts:5](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L5)*
+*Defined in [geom/Vector.ts:5](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L5)*
 
 ___
 <a id="y"></a>
@@ -80,7 +80,7 @@ ___
 
 **● y**: *`number`*
 
-*Defined in [geom/Vector.ts:6](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L6)*
+*Defined in [geom/Vector.ts:6](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L6)*
 
 ___
 <a id="_pool"></a>
@@ -89,7 +89,7 @@ ___
 
 **● $pool**: *`Array`<[Vector](vector.md)>* =  []
 
-*Defined in [geom/Vector.ts:110](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L110)*
+*Defined in [geom/Vector.ts:110](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L110)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 getangle(): `number`
 
-*Defined in [geom/Vector.ts:16](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L16)*
+*Defined in [geom/Vector.ts:16](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L16)*
 
 **Returns:** `number`
 
@@ -112,7 +112,7 @@ ___
 
 getlength(): `number`
 
-*Defined in [geom/Vector.ts:12](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L12)*
+*Defined in [geom/Vector.ts:12](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L12)*
 
 **Returns:** `number`
 
@@ -128,7 +128,7 @@ ___
 
 ▸ **add**(x: *`number`*, y: *`number`*): `this`
 
-*Defined in [geom/Vector.ts:26](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L26)*
+*Defined in [geom/Vector.ts:26](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L26)*
 
 **Parameters:**
 
@@ -138,7 +138,7 @@ ___
 
 **Returns:** `this`
 
-*Defined in [geom/Vector.ts:27](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L27)*
+*Defined in [geom/Vector.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L27)*
 
 **Parameters:**
 
@@ -156,7 +156,7 @@ ___
 
 ▸ **distance**(v: *[Vector](vector.md)*): `number`
 
-*Defined in [geom/Vector.ts:97](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L97)*
+*Defined in [geom/Vector.ts:97](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L97)*
 
 **Parameters:**
 
@@ -175,7 +175,7 @@ ___
 
 ▸ **dotProduct**(x: *`number`*, y: *`number`*): `number`
 
-*Defined in [geom/Vector.ts:52](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L52)*
+*Defined in [geom/Vector.ts:52](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L52)*
 
 **Parameters:**
 
@@ -185,7 +185,7 @@ ___
 
 **Returns:** `number`
 
-*Defined in [geom/Vector.ts:53](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L53)*
+*Defined in [geom/Vector.ts:53](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L53)*
 
 **Parameters:**
 
@@ -203,7 +203,7 @@ ___
 
 ▸ **equal**(v: *[Vector](vector.md)*): `boolean`
 
-*Defined in [geom/Vector.ts:101](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L101)*
+*Defined in [geom/Vector.ts:101](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L101)*
 
 **Parameters:**
 
@@ -220,7 +220,7 @@ ___
 
 ▸ **negate**(): `this`
 
-*Defined in [geom/Vector.ts:69](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L69)*
+*Defined in [geom/Vector.ts:69](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L69)*
 
 **Returns:** `this`
 
@@ -231,7 +231,7 @@ ___
 
 ▸ **normalize**(): `this`
 
-*Defined in [geom/Vector.ts:62](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L62)*
+*Defined in [geom/Vector.ts:62](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L62)*
 
 **Returns:** `this`
 
@@ -242,7 +242,7 @@ ___
 
 ▸ **release**(): `this`
 
-*Defined in [geom/Vector.ts:105](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L105)*
+*Defined in [geom/Vector.ts:105](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L105)*
 
 **Returns:** `this`
 
@@ -253,7 +253,7 @@ ___
 
 ▸ **rotate**(angle: *`number`*): `this`
 
-*Defined in [geom/Vector.ts:81](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L81)*
+*Defined in [geom/Vector.ts:81](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L81)*
 
 **Parameters:**
 
@@ -270,7 +270,7 @@ ___
 
 ▸ **scale**(x: *`number`*, y?: *`number`*): `this`
 
-*Defined in [geom/Vector.ts:75](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L75)*
+*Defined in [geom/Vector.ts:75](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L75)*
 
 **Parameters:**
 
@@ -288,7 +288,7 @@ ___
 
 ▸ **set**(x: *`number`*, y: *`number`*): `this`
 
-*Defined in [geom/Vector.ts:20](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L20)*
+*Defined in [geom/Vector.ts:20](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L20)*
 
 **Parameters:**
 
@@ -308,7 +308,7 @@ ___
 
 ▸ **subtract**(x: *`number`*, y: *`number`*): `this`
 
-*Defined in [geom/Vector.ts:39](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L39)*
+*Defined in [geom/Vector.ts:39](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L39)*
 
 **Parameters:**
 
@@ -318,7 +318,7 @@ ___
 
 **Returns:** `this`
 
-*Defined in [geom/Vector.ts:40](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L40)*
+*Defined in [geom/Vector.ts:40](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L40)*
 
 **Parameters:**
 
@@ -336,7 +336,7 @@ ___
 
 ▸ **transform**(m: *[Matrix](matrix.md)*): [Vector](vector.md)
 
-*Defined in [geom/Vector.ts:89](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L89)*
+*Defined in [geom/Vector.ts:89](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L89)*
 
 **Parameters:**
 
@@ -353,7 +353,7 @@ ___
 
 ▸ **create**(x?: *`number`*, y?: *`number`*): [Vector](vector.md)
 
-*Defined in [geom/Vector.ts:112](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L112)*
+*Defined in [geom/Vector.ts:112](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L112)*
 
 **Parameters:**
 
@@ -371,7 +371,7 @@ ___
 
 ▸ **recycle**(v: *[Vector](vector.md)*): `void`
 
-*Defined in [geom/Vector.ts:121](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Vector.ts#L121)*
+*Defined in [geom/Vector.ts:121](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Vector.ts#L121)*
 
 **Parameters:**
 

@@ -26,7 +26,7 @@
 
 **● data**: *`any`*
 
-*Defined in [net/Request.ts:130](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L130)*
+*Defined in [net/Request.ts:130](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L130)*
 
 ___
 <a id="headers"></a>
@@ -35,7 +35,7 @@ ___
 
 **● headers**: *`object`*
 
-*Defined in [net/Request.ts:128](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L128)*
+*Defined in [net/Request.ts:128](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L128)*
 
 ___
 <a id="method"></a>
@@ -44,7 +44,7 @@ ___
 
 **● method**: *`string`*
 
-*Defined in [net/Request.ts:127](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L127)*
+*Defined in [net/Request.ts:127](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L127)*
 
 ___
 <a id="responsetype"></a>
@@ -53,7 +53,7 @@ ___
 
 **● responseType**: *`XMLHttpRequestResponseType`*
 
-*Defined in [net/Request.ts:129](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L129)*
+*Defined in [net/Request.ts:129](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L129)*
 
 ___
 <a id="url"></a>
@@ -62,7 +62,7 @@ ___
 
 **● url**: *`string`*
 
-*Defined in [net/Request.ts:126](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L126)*
+*Defined in [net/Request.ts:126](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L126)*
 
 ___
 

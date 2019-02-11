@@ -58,7 +58,7 @@
 
 *Overrides [Media](media.md).[constructor](media.md#constructor)*
 
-*Defined in [media/Texture.ts:16](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L16)*
+*Defined in [media/Texture.ts:16](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L16)*
 
 **Parameters:**
 
@@ -80,7 +80,7 @@ ___
 
 *Inherited from [Media](media.md).[$boundOnError](media.md#_boundonerror)*
 
-*Defined in [media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L11)*
+*Defined in [media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L11)*
 
 #### Type declaration
 ▸(e: *`ErrorEvent`*): `void`
@@ -102,7 +102,7 @@ ___
 
 *Inherited from [Media](media.md).[$boundOnLoad](media.md#_boundonload)*
 
-*Defined in [media/Media.ts:10](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L10)*
+*Defined in [media/Media.ts:10](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L10)*
 
 #### Type declaration
 ▸(): `void`
@@ -118,7 +118,7 @@ ___
 
 *Overrides [Media](media.md).[$element](media.md#_element)*
 
-*Defined in [media/Texture.ts:16](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L16)*
+*Defined in [media/Texture.ts:16](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L16)*
 
 ___
 <a id="_events"></a>
@@ -129,7 +129,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[$events](eventemitter.md#_events)*
 
-*Defined in [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L5)*
+*Defined in [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L5)*
 
 ___
 <a id="_stage"></a>
@@ -140,7 +140,7 @@ ___
 
 *Inherited from [Media](media.md).[$stage](media.md#_stage)*
 
-*Defined in [media/Media.ts:9](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L9)*
+*Defined in [media/Media.ts:9](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L9)*
 
 ___
 <a id="pixelratio"></a>
@@ -149,7 +149,7 @@ ___
 
 **● pixelRatio**: *`number`* =  Texture.defaultPixelRatio
 
-*Defined in [media/Texture.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L14)*
+*Defined in [media/Texture.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L14)*
 
 ___
 <a id="no_repeat"></a>
@@ -158,7 +158,7 @@ ___
 
 **● NO_REPEAT**: *[FillMode](../#fillmode)* = "no-repeat"
 
-*Defined in [media/Texture.ts:10](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L10)*
+*Defined in [media/Texture.ts:10](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L10)*
 
 ___
 <a id="repeat"></a>
@@ -167,7 +167,7 @@ ___
 
 **● REPEAT**: *[FillMode](../#fillmode)* = "repeat"
 
-*Defined in [media/Texture.ts:7](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L7)*
+*Defined in [media/Texture.ts:7](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L7)*
 
 ___
 <a id="repeat_x"></a>
@@ -176,7 +176,7 @@ ___
 
 **● REPEAT_X**: *[FillMode](../#fillmode)* = "repeat-x"
 
-*Defined in [media/Texture.ts:8](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L8)*
+*Defined in [media/Texture.ts:8](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L8)*
 
 ___
 <a id="repeat_y"></a>
@@ -185,7 +185,7 @@ ___
 
 **● REPEAT_Y**: *[FillMode](../#fillmode)* = "repeat-y"
 
-*Defined in [media/Texture.ts:9](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L9)*
+*Defined in [media/Texture.ts:9](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L9)*
 
 ___
 <a id="scale"></a>
@@ -194,7 +194,7 @@ ___
 
 **● SCALE**: *[FillMode](../#fillmode)* = "scale"
 
-*Defined in [media/Texture.ts:6](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L6)*
+*Defined in [media/Texture.ts:6](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L6)*
 
 ___
 <a id="defaultpixelratio"></a>
@@ -203,7 +203,7 @@ ___
 
 **● defaultPixelRatio**: *`number`* = 1
 
-*Defined in [media/Texture.ts:12](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L12)*
+*Defined in [media/Texture.ts:12](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L12)*
 
 ___
 
@@ -217,7 +217,7 @@ getelement(): `HTMLImageElement`
 
 *Overrides [Media](media.md).[element](media.md#element)*
 
-*Defined in [media/Texture.ts:27](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L27)*
+*Defined in [media/Texture.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L27)*
 
 **Returns:** `HTMLImageElement`
 
@@ -228,7 +228,7 @@ ___
 
 getheight(): `number`
 
-*Defined in [media/Texture.ts:35](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L35)*
+*Defined in [media/Texture.ts:35](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L35)*
 
 **Returns:** `number`
 
@@ -241,13 +241,13 @@ geturl(): `string`seturl(url: *`string`*): `void`
 
 *Inherited from [Media](media.md).[url](media.md#url)*
 
-*Defined in [media/Media.ts:24](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L24)*
+*Defined in [media/Media.ts:24](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L24)*
 
 **Returns:** `string`
 
 *Inherited from [Media](media.md).[url](media.md#url)*
 
-*Defined in [media/Media.ts:28](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L28)*
+*Defined in [media/Media.ts:28](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L28)*
 
 **Parameters:**
 
@@ -264,7 +264,7 @@ ___
 
 getwidth(): `number`
 
-*Defined in [media/Texture.ts:31](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L31)*
+*Defined in [media/Texture.ts:31](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L31)*
 
 **Returns:** `number`
 
@@ -280,7 +280,7 @@ ___
 
 *Inherited from [Media](media.md).[$onError](media.md#_onerror)*
 
-*Defined in [media/Media.ts:37](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L37)*
+*Defined in [media/Media.ts:37](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L37)*
 
 **Parameters:**
 
@@ -299,7 +299,7 @@ ___
 
 *Inherited from [Media](media.md).[$onLoad](media.md#_onload)*
 
-*Defined in [media/Media.ts:32](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Media.ts#L32)*
+*Defined in [media/Media.ts:32](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Media.ts#L32)*
 
 **Returns:** `void`
 
@@ -314,7 +314,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[emit](eventemitter.md#emit)*
 
-*Defined in [event/EventEmitter.ts:27](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L27)*
+*Defined in [event/EventEmitter.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L27)*
 
 **Parameters:**
 
@@ -326,7 +326,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[emit](eventemitter.md#emit)*
 
-*Defined in [event/EventEmitter.ts:28](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L28)*
+*Defined in [event/EventEmitter.ts:28](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L28)*
 
 **Parameters:**
 
@@ -346,7 +346,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[hasEventListener](eventemitter.md#haseventlistener)*
 
-*Defined in [event/EventEmitter.ts:56](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L56)*
+*Defined in [event/EventEmitter.ts:56](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L56)*
 
 **Parameters:**
 
@@ -365,7 +365,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[off](eventemitter.md#off)*
 
-*Defined in [event/EventEmitter.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L14)*
+*Defined in [event/EventEmitter.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L14)*
 
 **Parameters:**
 
@@ -385,7 +385,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[on](eventemitter.md#on)*
 
-*Defined in [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L7)*
+*Defined in [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L7)*
 
 **Parameters:**
 
@@ -405,7 +405,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[removeAllListeners](eventemitter.md#removealllisteners)*
 
-*Defined in [event/EventEmitter.ts:61](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L61)*
+*Defined in [event/EventEmitter.ts:61](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L61)*
 
 **Returns:** `this`
 

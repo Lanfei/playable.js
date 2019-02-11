@@ -1,9 +1,11 @@
 import {Vector} from './Vector';
 
-/*
- *             |a  b  0|
- * (x, y, 1) * |c  d  0| = (ax + cy + tx, bx + dy + ty, 1)
- *             |tx ty 1|
+/**
+ * ```
+ *             {a  b  0}
+ * (x, y, 1) * {c  d  0} = (ax + cy + tx, bx + dy + ty, 1)
+ *             {tx ty 1}
+ * ```
  */
 export class Matrix {
 

@@ -51,7 +51,7 @@
 
 ⊕ **new Request**(url: *`string`*, options?: *[RequestOption](../interfaces/requestoption.md)*): [Request](request.md)
 
-*Defined in [net/Request.ts:6](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L6)*
+*Defined in [net/Request.ts:6](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L6)*
 
 **Parameters:**
 
@@ -61,7 +61,7 @@
 
 **Returns:** [Request](request.md)
 
-*Defined in [net/Request.ts:8](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L8)*
+*Defined in [net/Request.ts:8](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L8)*
 
 **Parameters:**
 
@@ -84,7 +84,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[$events](eventemitter.md#_events)*
 
-*Defined in [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L5)*
+*Defined in [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L5)*
 
 ___
 <a id="_xhr"></a>
@@ -93,7 +93,7 @@ ___
 
 **● $xhr**: *`XMLHttpRequest`* =  new XMLHttpRequest()
 
-*Defined in [net/Request.ts:6](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L6)*
+*Defined in [net/Request.ts:6](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L6)*
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 getresponse(): `any`
 
-*Defined in [net/Request.ts:56](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L56)*
+*Defined in [net/Request.ts:56](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L56)*
 
 **Returns:** `any`
 
@@ -116,7 +116,7 @@ ___
 
 getresponseHeaders(): `Object`
 
-*Defined in [net/Request.ts:60](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L60)*
+*Defined in [net/Request.ts:60](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L60)*
 
 **Returns:** `Object`
 
@@ -127,7 +127,7 @@ ___
 
 getstatus(): `number`
 
-*Defined in [net/Request.ts:52](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L52)*
+*Defined in [net/Request.ts:52](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L52)*
 
 **Returns:** `number`
 
@@ -141,7 +141,7 @@ ___
 
 ▸ **$onAbort**(): `void`
 
-*Defined in [net/Request.ts:84](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L84)*
+*Defined in [net/Request.ts:84](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L84)*
 
 **Returns:** `void`
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **$onProgress**(e: *`ProgressEvent`*): `void`
 
-*Defined in [net/Request.ts:88](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L88)*
+*Defined in [net/Request.ts:88](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L88)*
 
 **Parameters:**
 
@@ -169,7 +169,7 @@ ___
 
 ▸ **$onReadyStateChange**(e: *[Event](event.md)*): `void`
 
-*Defined in [net/Request.ts:96](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L96)*
+*Defined in [net/Request.ts:96](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L96)*
 
 **Parameters:**
 
@@ -186,7 +186,7 @@ ___
 
 ▸ **abort**(): `void`
 
-*Defined in [net/Request.ts:80](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L80)*
+*Defined in [net/Request.ts:80](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L80)*
 
 **Returns:** `void`
 
@@ -201,7 +201,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[emit](eventemitter.md#emit)*
 
-*Defined in [event/EventEmitter.ts:27](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L27)*
+*Defined in [event/EventEmitter.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L27)*
 
 **Parameters:**
 
@@ -213,7 +213,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[emit](eventemitter.md#emit)*
 
-*Defined in [event/EventEmitter.ts:28](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L28)*
+*Defined in [event/EventEmitter.ts:28](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L28)*
 
 **Parameters:**
 
@@ -233,7 +233,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[hasEventListener](eventemitter.md#haseventlistener)*
 
-*Defined in [event/EventEmitter.ts:56](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L56)*
+*Defined in [event/EventEmitter.ts:56](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L56)*
 
 **Parameters:**
 
@@ -252,7 +252,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[off](eventemitter.md#off)*
 
-*Defined in [event/EventEmitter.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L14)*
+*Defined in [event/EventEmitter.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L14)*
 
 **Parameters:**
 
@@ -272,7 +272,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[on](eventemitter.md#on)*
 
-*Defined in [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L7)*
+*Defined in [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L7)*
 
 **Parameters:**
 
@@ -292,7 +292,7 @@ ___
 
 *Inherited from [EventEmitter](eventemitter.md).[removeAllListeners](eventemitter.md#removealllisteners)*
 
-*Defined in [event/EventEmitter.ts:61](https://github.com/Lanfei/playable.js/blob/76571fa/src/event/EventEmitter.ts#L61)*
+*Defined in [event/EventEmitter.ts:61](https://github.com/Lanfei/playable.js/blob/877c13c/src/event/EventEmitter.ts#L61)*
 
 **Returns:** `this`
 
@@ -303,7 +303,7 @@ ___
 
 ▸ **$getContentType**(headers: *`Object`*): `string`
 
-*Defined in [net/Request.ts:110](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L110)*
+*Defined in [net/Request.ts:110](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L110)*
 
 **Parameters:**
 
@@ -320,7 +320,7 @@ ___
 
 ▸ **$getQueryString**(data: *`Object`*): `string`
 
-*Defined in [net/Request.ts:119](https://github.com/Lanfei/playable.js/blob/76571fa/src/net/Request.ts#L119)*
+*Defined in [net/Request.ts:119](https://github.com/Lanfei/playable.js/blob/877c13c/src/net/Request.ts#L119)*
 
 **Parameters:**
 

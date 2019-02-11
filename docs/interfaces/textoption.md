@@ -37,7 +37,7 @@
 
 **● autoFitSize**: *`boolean`*
 
-*Defined in [display/Text.ts:356](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L356)*
+*Defined in [display/Text.ts:356](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L356)*
 
 ___
 <a id="breakword"></a>
@@ -46,7 +46,7 @@ ___
 
 **● breakWord**: *`boolean`*
 
-*Defined in [display/Text.ts:355](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L355)*
+*Defined in [display/Text.ts:355](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L355)*
 
 ___
 <a id="color"></a>
@@ -55,7 +55,7 @@ ___
 
 **● color**: *`string`*
 
-*Defined in [display/Text.ts:344](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L344)*
+*Defined in [display/Text.ts:344](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L344)*
 
 ___
 <a id="fontfamily"></a>
@@ -64,7 +64,7 @@ ___
 
 **● fontFamily**: *`string`*
 
-*Defined in [display/Text.ts:353](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L353)*
+*Defined in [display/Text.ts:353](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L353)*
 
 ___
 <a id="fontsize"></a>
@@ -73,7 +73,7 @@ ___
 
 **● fontSize**: *`number`*
 
-*Defined in [display/Text.ts:345](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L345)*
+*Defined in [display/Text.ts:345](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L345)*
 
 ___
 <a id="fontstyle"></a>
@@ -82,7 +82,7 @@ ___
 
 **● fontStyle**: *[FontStyle](../#fontstyle)*
 
-*Defined in [display/Text.ts:347](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L347)*
+*Defined in [display/Text.ts:347](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L347)*
 
 ___
 <a id="fontweight"></a>
@@ -91,7 +91,7 @@ ___
 
 **● fontWeight**: *[FontWeight](../#fontweight)*
 
-*Defined in [display/Text.ts:346](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L346)*
+*Defined in [display/Text.ts:346](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L346)*
 
 ___
 <a id="lineheight"></a>
@@ -100,7 +100,7 @@ ___
 
 **● lineHeight**: *`number`*
 
-*Defined in [display/Text.ts:350](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L350)*
+*Defined in [display/Text.ts:350](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L350)*
 
 ___
 <a id="minfontsize"></a>
@@ -109,7 +109,7 @@ ___
 
 **● minFontSize**: *`number`*
 
-*Defined in [display/Text.ts:357](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L357)*
+*Defined in [display/Text.ts:357](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L357)*
 
 ___
 <a id="multiline"></a>
@@ -118,7 +118,7 @@ ___
 
 **● multiline**: *`boolean`*
 
-*Defined in [display/Text.ts:354](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L354)*
+*Defined in [display/Text.ts:354](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L354)*
 
 ___
 <a id="strokecolor"></a>
@@ -127,7 +127,7 @@ ___
 
 **● strokeColor**: *`string`*
 
-*Defined in [display/Text.ts:352](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L352)*
+*Defined in [display/Text.ts:352](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L352)*
 
 ___
 <a id="strokesize"></a>
@@ -136,7 +136,7 @@ ___
 
 **● strokeSize**: *`number`*
 
-*Defined in [display/Text.ts:351](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L351)*
+*Defined in [display/Text.ts:351](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L351)*
 
 ___
 <a id="textalign"></a>
@@ -145,7 +145,7 @@ ___
 
 **● textAlign**: *[TextAlign](../#textalign)*
 
-*Defined in [display/Text.ts:348](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L348)*
+*Defined in [display/Text.ts:348](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L348)*
 
 ___
 <a id="verticalalign"></a>
@@ -154,7 +154,7 @@ ___
 
 **● verticalAlign**: *[VerticalAlign](../#verticalalign)*
 
-*Defined in [display/Text.ts:349](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L349)*
+*Defined in [display/Text.ts:349](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L349)*
 
 ___
 

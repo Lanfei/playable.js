@@ -52,7 +52,7 @@
 
 ▸ **easeInBack**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*, s?: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:148](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L148)*
+*Defined in [tween/Ease.ts:148](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L148)*
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ ___
 
 ▸ **easeInBounce**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:161](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L161)*
+*Defined in [tween/Ease.ts:161](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L161)*
 
 **Parameters:**
 
@@ -93,7 +93,7 @@ ___
 
 ▸ **easeInCirc**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:86](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L86)*
+*Defined in [tween/Ease.ts:86](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L86)*
 
 **Parameters:**
 
@@ -113,7 +113,7 @@ ___
 
 ▸ **easeInCubic**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:20](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L20)*
+*Defined in [tween/Ease.ts:20](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L20)*
 
 **Parameters:**
 
@@ -133,7 +133,7 @@ ___
 
 ▸ **easeInElastic**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:99](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L99)*
+*Defined in [tween/Ease.ts:99](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L99)*
 
 **Parameters:**
 
@@ -153,7 +153,7 @@ ___
 
 ▸ **easeInExpo**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:71](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L71)*
+*Defined in [tween/Ease.ts:71](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L71)*
 
 **Parameters:**
 
@@ -173,7 +173,7 @@ ___
 
 ▸ **easeInOutBack**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*, s?: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:156](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L156)*
+*Defined in [tween/Ease.ts:156](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L156)*
 
 **Parameters:**
 
@@ -194,7 +194,7 @@ ___
 
 ▸ **easeInOutBounce**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:177](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L177)*
+*Defined in [tween/Ease.ts:177](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L177)*
 
 **Parameters:**
 
@@ -214,7 +214,7 @@ ___
 
 ▸ **easeInOutCirc**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:94](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L94)*
+*Defined in [tween/Ease.ts:94](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L94)*
 
 **Parameters:**
 
@@ -234,7 +234,7 @@ ___
 
 ▸ **easeInOutCubic**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:28](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L28)*
+*Defined in [tween/Ease.ts:28](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L28)*
 
 **Parameters:**
 
@@ -254,7 +254,7 @@ ___
 
 ▸ **easeInOutElastic**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:131](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L131)*
+*Defined in [tween/Ease.ts:131](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L131)*
 
 **Parameters:**
 
@@ -274,7 +274,7 @@ ___
 
 ▸ **easeInOutExpo**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:79](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L79)*
+*Defined in [tween/Ease.ts:79](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L79)*
 
 **Parameters:**
 
@@ -294,7 +294,7 @@ ___
 
 ▸ **easeInOutQuad**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:15](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L15)*
+*Defined in [tween/Ease.ts:15](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L15)*
 
 **Parameters:**
 
@@ -314,7 +314,7 @@ ___
 
 ▸ **easeInOutQuart**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:41](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L41)*
+*Defined in [tween/Ease.ts:41](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L41)*
 
 **Parameters:**
 
@@ -334,7 +334,7 @@ ___
 
 ▸ **easeInOutQuint**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:54](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L54)*
+*Defined in [tween/Ease.ts:54](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L54)*
 
 **Parameters:**
 
@@ -354,7 +354,7 @@ ___
 
 ▸ **easeInOutSine**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:67](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L67)*
+*Defined in [tween/Ease.ts:67](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L67)*
 
 **Parameters:**
 
@@ -374,7 +374,7 @@ ___
 
 ▸ **easeInQuad**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:7](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L7)*
+*Defined in [tween/Ease.ts:7](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L7)*
 
 **Parameters:**
 
@@ -394,7 +394,7 @@ ___
 
 ▸ **easeInQuart**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:33](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L33)*
+*Defined in [tween/Ease.ts:33](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L33)*
 
 **Parameters:**
 
@@ -414,7 +414,7 @@ ___
 
 ▸ **easeInQuint**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:46](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L46)*
+*Defined in [tween/Ease.ts:46](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L46)*
 
 **Parameters:**
 
@@ -434,7 +434,7 @@ ___
 
 ▸ **easeInSine**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:59](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L59)*
+*Defined in [tween/Ease.ts:59](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L59)*
 
 **Parameters:**
 
@@ -454,7 +454,7 @@ ___
 
 ▸ **easeOutBack**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*, s?: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:152](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L152)*
+*Defined in [tween/Ease.ts:152](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L152)*
 
 **Parameters:**
 
@@ -475,7 +475,7 @@ ___
 
 ▸ **easeOutBounce**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:165](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L165)*
+*Defined in [tween/Ease.ts:165](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L165)*
 
 **Parameters:**
 
@@ -495,7 +495,7 @@ ___
 
 ▸ **easeOutCirc**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:90](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L90)*
+*Defined in [tween/Ease.ts:90](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L90)*
 
 **Parameters:**
 
@@ -515,7 +515,7 @@ ___
 
 ▸ **easeOutCubic**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:24](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L24)*
+*Defined in [tween/Ease.ts:24](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L24)*
 
 **Parameters:**
 
@@ -535,7 +535,7 @@ ___
 
 ▸ **easeOutElastic**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:115](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L115)*
+*Defined in [tween/Ease.ts:115](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L115)*
 
 **Parameters:**
 
@@ -555,7 +555,7 @@ ___
 
 ▸ **easeOutExpo**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:75](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L75)*
+*Defined in [tween/Ease.ts:75](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L75)*
 
 **Parameters:**
 
@@ -575,7 +575,7 @@ ___
 
 ▸ **easeOutQuad**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:11](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L11)*
+*Defined in [tween/Ease.ts:11](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L11)*
 
 **Parameters:**
 
@@ -595,7 +595,7 @@ ___
 
 ▸ **easeOutQuart**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:37](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L37)*
+*Defined in [tween/Ease.ts:37](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L37)*
 
 **Parameters:**
 
@@ -615,7 +615,7 @@ ___
 
 ▸ **easeOutQuint**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:50](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L50)*
+*Defined in [tween/Ease.ts:50](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L50)*
 
 **Parameters:**
 
@@ -635,7 +635,7 @@ ___
 
 ▸ **easeOutSine**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:63](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L63)*
+*Defined in [tween/Ease.ts:63](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L63)*
 
 **Parameters:**
 
@@ -655,7 +655,7 @@ ___
 
 ▸ **linear**(t: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*): `number`
 
-*Defined in [tween/Ease.ts:3](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Ease.ts#L3)*
+*Defined in [tween/Ease.ts:3](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Ease.ts#L3)*
 
 **Parameters:**
 

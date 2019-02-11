@@ -26,7 +26,7 @@
 
 **● callback**: *`Function`*
 
-*Defined in [tween/Tween.ts:230](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L230)*
+*Defined in [tween/Tween.ts:230](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L230)*
 
 ___
 <a id="duration"></a>
@@ -35,7 +35,7 @@ ___
 
 **● duration**: *`number`*
 
-*Defined in [tween/Tween.ts:228](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L228)*
+*Defined in [tween/Tween.ts:228](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L228)*
 
 ___
 <a id="ease"></a>
@@ -44,7 +44,7 @@ ___
 
 **● ease**: *`Function`*
 
-*Defined in [tween/Tween.ts:229](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L229)*
+*Defined in [tween/Tween.ts:229](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L229)*
 
 ___
 <a id="props"></a>
@@ -53,7 +53,7 @@ ___
 
 **● props**: *`Object`*
 
-*Defined in [tween/Tween.ts:227](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L227)*
+*Defined in [tween/Tween.ts:227](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L227)*
 
 ___
 <a id="type"></a>
@@ -62,7 +62,7 @@ ___
 
 **● type**: *`string`*
 
-*Defined in [tween/Tween.ts:226](https://github.com/Lanfei/playable.js/blob/76571fa/src/tween/Tween.ts#L226)*
+*Defined in [tween/Tween.ts:226](https://github.com/Lanfei/playable.js/blob/877c13c/src/tween/Tween.ts#L226)*
 
 ___
 

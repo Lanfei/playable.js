@@ -58,7 +58,7 @@
 
 **Ƭ FillMode**: *"scale" \| "repeat" \| "repeat-x" \| "repeat-y" \| "no-repeat"*
 
-*Defined in [media/Texture.ts:41](https://github.com/Lanfei/playable.js/blob/76571fa/src/media/Texture.ts#L41)*
+*Defined in [media/Texture.ts:41](https://github.com/Lanfei/playable.js/blob/877c13c/src/media/Texture.ts#L41)*
 
 ___
 <a id="fontstyle"></a>
@@ -67,7 +67,7 @@ ___
 
 **Ƭ FontStyle**: *"normal" \| "italic" \| "oblique"*
 
-*Defined in [display/Text.ts:338](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L338)*
+*Defined in [display/Text.ts:338](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L338)*
 
 ___
 <a id="fontweight"></a>
@@ -76,7 +76,7 @@ ___
 
 **Ƭ FontWeight**: *"normal" \| "bold" \| "bolder" \| "lighter" \| `100` \| `200` \| `300` \| `400` \| `500` \| `600` \| `700` \| `800` \| `900`*
 
-*Defined in [display/Text.ts:339](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L339)*
+*Defined in [display/Text.ts:339](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L339)*
 
 ___
 <a id="inputtype"></a>
@@ -85,7 +85,7 @@ ___
 
 **Ƭ InputType**: *"text" \| "password" \| "email" \| "url" \| "number" \| "range" \| "tel" \| "date" \| "month" \| "week" \| "time" \| "datetime" \| "datetime-local"*
 
-*Defined in [display/Input.ts:221](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Input.ts#L221)*
+*Defined in [display/Input.ts:221](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Input.ts#L221)*
 
 ___
 <a id="textalign"></a>
@@ -94,7 +94,7 @@ ___
 
 **Ƭ TextAlign**: *"left" \| "right" \| "center"*
 
-*Defined in [display/Text.ts:340](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L340)*
+*Defined in [display/Text.ts:340](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L340)*
 
 ___
 <a id="verticalalign"></a>
@@ -103,7 +103,7 @@ ___
 
 **Ƭ VerticalAlign**: *"top" \| "middle" \| "bottom"*
 
-*Defined in [display/Text.ts:341](https://github.com/Lanfei/playable.js/blob/76571fa/src/display/Text.ts#L341)*
+*Defined in [display/Text.ts:341](https://github.com/Lanfei/playable.js/blob/877c13c/src/display/Text.ts#L341)*
 
 ___
 

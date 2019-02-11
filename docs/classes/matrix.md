@@ -2,6 +2,12 @@
 
 # Class: Matrix
 
+```
+            {a  b  0}
+(x, y, 1) * {c  d  0} = (ax + cy + tx, bx + dy + ty, 1)
+            {tx ty 1}
+```
+
 ## Hierarchy
 
 **Matrix**
@@ -48,7 +54,7 @@
 
 ⊕ **new Matrix**(a?: *`number`*, b?: *`number`*, c?: *`number`*, d?: *`number`*, tx?: *`number`*, ty?: *`number`*): [Matrix](matrix.md)
 
-*Defined in [geom/Matrix.ts:15](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L15)*
+*Defined in [geom/Matrix.ts:17](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L17)*
 
 **Parameters:**
 
@@ -73,7 +79,7 @@ ___
 
 **● a**: *`number`*
 
-*Defined in [geom/Matrix.ts:10](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L10)*
+*Defined in [geom/Matrix.ts:12](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L12)*
 
 ___
 <a id="b"></a>
@@ -82,7 +88,7 @@ ___
 
 **● b**: *`number`*
 
-*Defined in [geom/Matrix.ts:11](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L11)*
+*Defined in [geom/Matrix.ts:13](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L13)*
 
 ___
 <a id="c"></a>
@@ -91,7 +97,7 @@ ___
 
 **● c**: *`number`*
 
-*Defined in [geom/Matrix.ts:12](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L12)*
+*Defined in [geom/Matrix.ts:14](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L14)*
 
 ___
 <a id="d"></a>
@@ -100,7 +106,7 @@ ___
 
 **● d**: *`number`*
 
-*Defined in [geom/Matrix.ts:13](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L13)*
+*Defined in [geom/Matrix.ts:15](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L15)*
 
 ___
 <a id="tx"></a>
@@ -109,7 +115,7 @@ ___
 
 **● tx**: *`number`*
 
-*Defined in [geom/Matrix.ts:14](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L14)*
+*Defined in [geom/Matrix.ts:16](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L16)*
 
 ___
 <a id="ty"></a>
@@ -118,7 +124,7 @@ ___
 
 **● ty**: *`number`*
 
-*Defined in [geom/Matrix.ts:15](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L15)*
+*Defined in [geom/Matrix.ts:17](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L17)*
 
 ___
 <a id="_pool"></a>
@@ -127,7 +133,7 @@ ___
 
 **● $pool**: *`Array`<[Matrix](matrix.md)>* =  []
 
-*Defined in [geom/Matrix.ts:132](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L132)*
+*Defined in [geom/Matrix.ts:134](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L134)*
 
 ___
 
@@ -141,7 +147,7 @@ ___
 
 ▸ **append**(a: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*, tx: *`number`*, ty: *`number`*): `this`
 
-*Defined in [geom/Matrix.ts:77](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L77)*
+*Defined in [geom/Matrix.ts:79](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L79)*
 
 **Parameters:**
 
@@ -151,7 +157,7 @@ ___
 
 **Returns:** `this`
 
-*Defined in [geom/Matrix.ts:78](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L78)*
+*Defined in [geom/Matrix.ts:80](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L80)*
 
 **Parameters:**
 
@@ -173,7 +179,7 @@ ___
 
 ▸ **equal**(m: *[Matrix](matrix.md)*): `boolean`
 
-*Defined in [geom/Matrix.ts:121](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L121)*
+*Defined in [geom/Matrix.ts:123](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L123)*
 
 **Parameters:**
 
@@ -190,7 +196,7 @@ ___
 
 ▸ **identity**(): `this`
 
-*Defined in [geom/Matrix.ts:35](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L35)*
+*Defined in [geom/Matrix.ts:37](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L37)*
 
 **Returns:** `this`
 
@@ -201,7 +207,7 @@ ___
 
 ▸ **invert**(): `this`
 
-*Defined in [geom/Matrix.ts:39](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L39)*
+*Defined in [geom/Matrix.ts:41](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L41)*
 
 **Returns:** `this`
 
@@ -214,7 +220,7 @@ ___
 
 ▸ **prepend**(a: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*, tx: *`number`*, ty: *`number`*): `this`
 
-*Defined in [geom/Matrix.ts:56](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L56)*
+*Defined in [geom/Matrix.ts:58](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L58)*
 
 **Parameters:**
 
@@ -224,7 +230,7 @@ ___
 
 **Returns:** `this`
 
-*Defined in [geom/Matrix.ts:57](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L57)*
+*Defined in [geom/Matrix.ts:59](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L59)*
 
 **Parameters:**
 
@@ -246,7 +252,7 @@ ___
 
 ▸ **release**(): `void`
 
-*Defined in [geom/Matrix.ts:128](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L128)*
+*Defined in [geom/Matrix.ts:130](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L130)*
 
 **Returns:** `void`
 
@@ -257,7 +263,7 @@ ___
 
 ▸ **rotate**(angle: *`number`*): `this`
 
-*Defined in [geom/Matrix.ts:102](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L102)*
+*Defined in [geom/Matrix.ts:104](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L104)*
 
 **Parameters:**
 
@@ -274,7 +280,7 @@ ___
 
 ▸ **scale**(x: *`number`*, y?: *`number`*): `this`
 
-*Defined in [geom/Matrix.ts:98](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L98)*
+*Defined in [geom/Matrix.ts:100](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L100)*
 
 **Parameters:**
 
@@ -292,7 +298,7 @@ ___
 
 ▸ **set**(a: *`number`*, b: *`number`*, c: *`number`*, d: *`number`*, tx: *`number`*, ty: *`number`*): `this`
 
-*Defined in [geom/Matrix.ts:25](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L25)*
+*Defined in [geom/Matrix.ts:27](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L27)*
 
 **Parameters:**
 
@@ -314,7 +320,7 @@ ___
 
 ▸ **skew**(skewX: *`number`*, skewY: *`number`*): `this`
 
-*Defined in [geom/Matrix.ts:108](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L108)*
+*Defined in [geom/Matrix.ts:110](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L110)*
 
 **Parameters:**
 
@@ -334,7 +340,7 @@ ___
 
 ▸ **translate**(x: *`number`*, y: *`number`*): `this`
 
-*Defined in [geom/Matrix.ts:112](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L112)*
+*Defined in [geom/Matrix.ts:114](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L114)*
 
 **Parameters:**
 
@@ -344,7 +350,7 @@ ___
 
 **Returns:** `this`
 
-*Defined in [geom/Matrix.ts:113](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L113)*
+*Defined in [geom/Matrix.ts:115](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L115)*
 
 **Parameters:**
 
@@ -362,7 +368,7 @@ ___
 
 ▸ **create**(a?: *`number`*, b?: *`number`*, c?: *`number`*, d?: *`number`*, tx?: *`number`*, ty?: *`number`*): [Matrix](matrix.md)
 
-*Defined in [geom/Matrix.ts:134](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L134)*
+*Defined in [geom/Matrix.ts:136](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L136)*
 
 **Parameters:**
 
@@ -384,7 +390,7 @@ ___
 
 ▸ **recycle**(m: *[Matrix](matrix.md)*): `void`
 
-*Defined in [geom/Matrix.ts:150](https://github.com/Lanfei/playable.js/blob/76571fa/src/geom/Matrix.ts#L150)*
+*Defined in [geom/Matrix.ts:152](https://github.com/Lanfei/playable.js/blob/877c13c/src/geom/Matrix.ts#L152)*
 
 **Parameters:**
 
