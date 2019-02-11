@@ -60,29 +60,10 @@ describe('Stage', () => {
 		assert.strictEqual(stage.viewportHeight, 100);
 	});
 
-	it('.viewportBackgroundColor', () => {
-		assert.strictEqual(stage.viewportBackgroundColor, null);
-		stage.viewportBackgroundColor = 'black';
-		assert.strictEqual(stage.viewportBackgroundColor, 'black');
-	});
-
-	it('.viewportBackgroundImage', () => {
-		let texture = new playable.Texture(stage);
-		assert.strictEqual(stage.viewportBackgroundImage, null);
-		stage.viewportBackgroundImage = texture;
-		assert.strictEqual(stage.viewportBackgroundImage, texture);
-	});
-
-	it('.viewportBackgroundFillMode', done => {
-		let texture = new playable.Texture(stage);
-		texture.url = '/base/test/fixtures/image@1x.jpg';
-		texture.on(playable.Event.LOAD, () => {
-			assert.strictEqual(stage.viewportBackgroundFillMode, 'scale');
-			stage.viewportBackgroundImage = texture;
-			stage.viewportBackgroundFillMode = 'repeat';
-			assert.strictEqual(stage.viewportBackgroundFillMode, 'repeat');
-			done();
-		});
+	it('.viewportBackground', () => {
+		assert.strictEqual(stage.viewportBackground, null);
+		stage.viewportBackground = 'black';
+		assert.strictEqual(stage.viewportBackground, 'black');
 	});
 
 	it('.createResourceManager(list: Array<ResourceInfo>, options?: ResourceManagerOption): ResourceManager', () => {

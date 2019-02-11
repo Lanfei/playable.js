@@ -7,12 +7,12 @@ module.exports = {
 	base: `/${pkg.name}/`,
 	themeConfig: {
 		nav: [
-			{text: 'Home', link: '/'},
-			{text: 'API Reference', link: '/docs/'},
+			{text: 'Guide', link: '/'},
+			{text: 'API Reference', link: '/docs/api/'},
 			{
 				text: 'Classes',
 				items: Object.keys(playable).map(name => {
-					return {text: name, link: `/docs/classes/${name.toLowerCase()}.html`}
+					return {text: name, link: `/docs/api/classes/${name.toLowerCase()}.html`}
 				})
 			},
 			{text: 'GitHub', link: 'https://github.com/Lanfei/playable.js'},

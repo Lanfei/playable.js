@@ -1,12 +1,20 @@
 import {Layer} from './Layer';
+import {Event} from '../event/Event';
 import {Texture} from '../media/Texture';
 import {Rectangle} from '../geom/Rectangle';
 
 export class Image extends Layer {
 
+	public static SCALE: FillMode = 'scale';
+	public static REPEAT: FillMode = 'repeat';
+	public static REPEAT_X: FillMode = 'repeat-x';
+	public static REPEAT_Y: FillMode = 'repeat-y';
+
 	protected $texture: Texture = null;
+	protected $fillMode: FillMode = Image.SCALE;
 	protected $clipRect: Rectangle = null;
 	protected $scale9Grid: Rectangle = null;
+	protected $pattern: CanvasPattern = null;
 	protected readonly $boundOnTextureLoad: () => void;
 
 	public constructor(texture?: Texture);
@@ -27,15 +35,26 @@ export class Image extends Layer {
 
 	public set texture(texture: Texture) {
 		if (this.$texture) {
-			this.$texture.off('load', this.$boundOnTextureLoad);
+			this.$texture.off(Event.LOAD, this.$boundOnTextureLoad);
 		}
 		if (!texture || (texture.width && texture.height)) {
+			this.$updatePattern();
 			this.$resizeCanvas();
 		}
 		if (texture) {
-			texture.on('load', this.$boundOnTextureLoad);
+			texture.on(Event.LOAD, this.$boundOnTextureLoad);
 		}
 		this.$texture = texture;
+	}
+
+	public get fillMode(): FillMode {
+		return this.$fillMode;
+	}
+
+	public set fillMode(fillMode: FillMode) {
+		this.$fillMode = fillMode;
+		this.$updatePattern();
+		this.$markDirty();
 	}
 
 	public get clipRect(): Rectangle {
@@ -56,9 +75,22 @@ export class Image extends Layer {
 		this.$markDirty();
 	}
 
-	protected $onTextureLoad() {
+	protected $onTextureLoad(): void {
+		this.$updatePattern();
 		this.$resizeCanvas();
-		this.$texture.off('load', this.$boundOnTextureLoad);
+		this.$texture.off(Event.LOAD, this.$boundOnTextureLoad);
+	}
+
+	protected $updatePattern(): void {
+		let width = this.$width;
+		let height = this.$height;
+		let texture = this.$texture;
+		let fillMode = this.$fillMode;
+		if ((width || height) && texture && fillMode && fillMode !== Image.SCALE) {
+			this.$pattern = this.$context.createPattern(texture.element, fillMode);
+		} else {
+			this.$pattern = null;
+		}
 	}
 
 	protected $getContentBounds(): Rectangle {
@@ -77,7 +109,20 @@ export class Image extends Layer {
 		return bounds;
 	}
 
+	protected $drawPattern(targetX, targetY, targetW, targetH): void {
+		let ctx = this.$context;
+		let texture = this.$texture;
+		let pattern = this.$pattern;
+		let scale = Layer.pixelRatio / texture.pixelRatio;
+		scale !== 1 && ctx.scale(scale, scale);
+		ctx.fillStyle = pattern;
+		ctx.fillRect(targetX, targetY, targetW, targetH);
+	}
+
 	protected $drawTexture(sourceX: number, sourceY: number, sourceW: number, sourceH: number, targetX: number, targetY: number, targetW: number, targetH: number): void {
+		if (sourceW <= 0 || sourceH <= 0 || targetW <= 0 || targetH <= 0) {
+			return;
+		}
 		let ctx = this.$context;
 		let texture = this.$texture;
 		let pixelRatio = texture.pixelRatio;
@@ -91,9 +136,10 @@ export class Image extends Layer {
 			return 0;
 		}
 		let canvas = this.$canvas;
-		let texture = this.$texture;
 		let anchorX = this.$anchorX;
 		let anchorY = this.$anchorY;
+		let texture = this.$texture;
+		let pattern = this.$pattern;
 		let clipRect = this.$clipRect;
 		let scale9Grid = this.$scale9Grid;
 		let drawCalls = super.$render();
@@ -108,6 +154,8 @@ export class Image extends Layer {
 		let clipHeight = clipRect ? clipRect.height : texture ? texture.height : 0;
 		if (!texture) {
 			return drawCalls;
+		} else if (pattern) {
+			this.$drawPattern(x, y, width, height);
 		} else if (scale9Grid) {
 			let sourceX0 = clipX;
 			let sourceY0 = clipY;
@@ -149,3 +197,5 @@ export class Image extends Layer {
 	}
 
 }
+
+export type FillMode = 'scale' | 'repeat' | 'repeat-x' | 'repeat-y';

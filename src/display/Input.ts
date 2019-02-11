@@ -168,7 +168,7 @@ export class Input extends Text {
 		element.style.lineHeight = this.$lineHeight + '';
 		element.style.fontWeight = this.$fontWeight + '';
 		element.style.wordBreak = this.$breakWord ? 'break-all' : 'normal';
-		element.style.backgroundColor = this.$backgroundColor;
+		element.style.background = this.$background;
 		element.style.webkitTapHighlightColor = 'transparent';
 		element.style.boxShadow = '0 0 8px #aaa';
 		return element;

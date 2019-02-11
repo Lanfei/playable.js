@@ -2,7 +2,6 @@ import {Layer} from './Layer';
 import {Ticker} from '../system/Ticker';
 import {Vector} from '../geom/Vector';
 import {Rectangle} from '../geom/Rectangle';
-import {Texture, FillMode} from '../media/Texture';
 import {Event} from '../event/Event';
 import {TouchEvent} from '../event/TouchEvent';
 import {ResourceManager, ResourceInfo, ResourceManagerOption} from '../net/ResourceManager';
@@ -23,10 +22,7 @@ export class Stage extends Layer {
 	protected $scaleMode: string = Stage.SHOW_ALL;
 	protected $viewportWidth: number = 0;
 	protected $viewportHeight: number = 0;
-	protected $viewportBackgroundColor: string = null;
-	protected $viewportBackgroundImage: Texture = null;
-	protected $viewportBackgroundPattern: CanvasPattern = null;
-	protected $viewportBackgroundFillMode: FillMode = Texture.SCALE;
+	protected $viewportBackground: string = null;
 	protected readonly $ticker: Ticker;
 	protected readonly $elementEvents: ElementEvent[];
 	protected readonly $viewportCanvas: HTMLCanvasElement;
@@ -123,39 +119,13 @@ export class Stage extends Layer {
 		}
 	}
 
-	public get viewportBackgroundColor(): string {
-		return this.$viewportBackgroundColor;
+	public get viewportBackground(): string {
+		return this.$viewportBackground;
 	}
 
-	public set viewportBackgroundColor(viewportBackgroundColor: string) {
-		if (this.$viewportBackgroundColor !== viewportBackgroundColor) {
-			this.$viewportBackgroundColor = viewportBackgroundColor;
-			this.$markDirty();
-		}
-	}
-
-	public get viewportBackgroundImage(): Texture {
-		return this.$viewportBackgroundImage;
-	}
-
-	public set viewportBackgroundImage(viewportBackgroundImage: Texture) {
-		if (this.$viewportBackgroundImage !== viewportBackgroundImage) {
-			this.$viewportBackgroundImage = viewportBackgroundImage;
-			this.$viewportBackgroundPattern = this.$getPattern(this.$viewportBackgroundImage, this.$viewportBackgroundFillMode);
-			this.$markDirty();
-		}
-	}
-
-	public get viewportBackgroundFillMode(): FillMode {
-		return this.$viewportBackgroundFillMode;
-	}
-
-	public set viewportBackgroundFillMode(viewportBackgroundFillMode: FillMode) {
-		if (this.$viewportBackgroundFillMode !== viewportBackgroundFillMode) {
-			this.$viewportBackgroundFillMode = viewportBackgroundFillMode || Texture.SCALE;
-			this.$viewportBackgroundPattern = this.$getPattern(this.$viewportBackgroundImage, this.$viewportBackgroundFillMode);
-			this.$markDirty();
-		}
+	public set viewportBackground(viewportBackground: string) {
+		this.$viewportBackground = viewportBackground;
+		this.$viewportCanvas.style.background = viewportBackground;
 	}
 
 	public createResourceManager(list: Array<ResourceInfo>, options?: ResourceManagerOption): ResourceManager {
@@ -407,12 +377,7 @@ export class Stage extends Layer {
 		let viewportCanvas = this.$viewportCanvas;
 		let viewportWidth = viewportCanvas.width;
 		let viewportHeight = viewportCanvas.height;
-		let backgroundColor = this.$viewportBackgroundColor;
-		let backgroundImage = this.$viewportBackgroundImage;
-		let backgroundPattern = this.$viewportBackgroundPattern;
-		let backgroundFillMode = this.$viewportBackgroundFillMode;
 		ctx.clearRect(0, 0, viewportWidth, viewportHeight);
-		this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode, ctx);
 		ctx.drawImage(canvas, (bounds.x + 0.5) | 0, (bounds.y + 0.5) | 0, (bounds.width + 0.5) | 0, (bounds.height + 0.5) | 0);
 		this.$drawCalls = ++drawCalls;
 		return drawCalls;

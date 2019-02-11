@@ -3,7 +3,6 @@ import {Ticker} from '../system/Ticker';
 import {Matrix} from '../geom/Matrix';
 import {Vector} from '../geom/Vector';
 import {Rectangle} from '../geom/Rectangle';
-import {Texture, FillMode} from '../media/Texture';
 import {Event} from '../event/Event';
 import {TouchEvent} from '../event/TouchEvent';
 import {EventEmitter} from '../event/EventEmitter';
@@ -30,10 +29,7 @@ export class Layer extends EventEmitter {
 	protected $alpha: number = 1;
 	protected $visible: boolean = true;
 	protected $smoothing: boolean = true;
-	protected $backgroundColor: string = null;
-	protected $backgroundImage: Texture = null;
-	protected $backgroundPattern: CanvasPattern = null;
-	protected $backgroundFillMode: FillMode = Texture.SCALE;
+	protected $background: string = null;
 	protected $dirty: boolean = true;
 	protected $stage: Stage = null;
 	protected $parent: Layer = null;
@@ -201,37 +197,13 @@ export class Layer extends EventEmitter {
 		this.$resizeCanvas();
 	}
 
-	public get backgroundColor(): string {
-		return this.$backgroundColor;
+	public get background(): string {
+		return this.$background;
 	}
 
-	public set backgroundColor(backgroundColor: string) {
-		if (this.$backgroundColor !== backgroundColor) {
-			this.$backgroundColor = backgroundColor;
-			this.$markDirty();
-		}
-	}
-
-	public get backgroundImage(): Texture {
-		return this.$backgroundImage;
-	}
-
-	public set backgroundImage(backgroundImage: Texture) {
-		if (this.$backgroundImage !== backgroundImage) {
-			this.$backgroundImage = backgroundImage;
-			this.$backgroundPattern = this.$getPattern(this.$backgroundImage, this.$backgroundFillMode);
-			this.$markDirty();
-		}
-	}
-
-	public get backgroundFillMode(): FillMode {
-		return this.$backgroundFillMode;
-	}
-
-	public set backgroundFillMode(backgroundFillMode: FillMode) {
-		if (backgroundFillMode && this.$backgroundFillMode !== backgroundFillMode) {
-			this.$backgroundFillMode = backgroundFillMode;
-			this.$backgroundPattern = this.$getPattern(this.$backgroundImage, this.$backgroundFillMode);
+	public set background(background: string) {
+		if (this.$background !== background) {
+			this.$background = background;
 			this.$markDirty();
 		}
 	}
@@ -610,14 +582,6 @@ export class Layer extends EventEmitter {
 		}
 	}
 
-	protected $getPattern(texture: Texture, fillMode: FillMode): CanvasPattern {
-		if (texture && fillMode && fillMode !== Texture.SCALE && fillMode !== Texture.NO_REPEAT) {
-			return this.$context.createPattern(texture.element, fillMode);
-		} else {
-			return null;
-		}
-	}
-
 	protected $localHitTest(vector: Vector): boolean {
 		return vector.x >= -this.anchorX && vector.x <= this.width - this.anchorX && vector.y >= -this.anchorY && vector.y <= this.height - this.anchorY;
 	}
@@ -634,30 +598,6 @@ export class Layer extends EventEmitter {
 		let inside = bounds.left <= maxX && bounds.right >= minX && bounds.top <= maxY && bounds.bottom >= minY;
 		bounds.release();
 		return inside;
-	}
-
-	protected $drawBackground(color: string, texture: Texture, pattern: CanvasPattern, fillMode: FillMode, context?: CanvasRenderingContext2D): void {
-		let ctx = context || this.$context;
-		let canvas = ctx.canvas;
-		let width = canvas.width;
-		let height = canvas.height;
-		let pixelRatio = Layer.pixelRatio;
-		if (color) {
-			ctx.fillStyle = color;
-			ctx.fillRect(0, 0, width, height);
-		}
-		if (texture) {
-			if (fillMode === Texture.SCALE) {
-				ctx.drawImage(texture.element, 0, 0, width, height);
-			} else if (fillMode === Texture.NO_REPEAT) {
-				ctx.drawImage(texture.element, 0, 0, texture.width * pixelRatio, texture.height * pixelRatio);
-			} else if (pattern) {
-				let scale = pixelRatio / texture.pixelRatio;
-				scale !== 1 && ctx.scale(scale, scale);
-				ctx.fillStyle = pattern;
-				ctx.fillRect(0, 0, width, height);
-			}
-		}
 	}
 
 	protected $drawChild(child: Layer): number {
@@ -703,16 +643,16 @@ export class Layer extends EventEmitter {
 		let canvasHeight = canvas.height;
 		let anchorX = (this.$anchorX + 0.5) | 0;
 		let anchorY = (this.$anchorY + 0.5) | 0;
-		let backgroundColor = this.$backgroundColor;
-		let backgroundImage = this.$backgroundImage;
-		let backgroundPattern = this.$backgroundPattern;
-		let backgroundFillMode = this.$backgroundFillMode;
+		let background = this.$background;
 		let pixelRatio = Layer.pixelRatio;
 
 		ctx.globalAlpha = 1;
 		ctx.setTransform(1, 0, 0, 1, 0, 0);
 		ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-		this.$drawBackground(backgroundColor, backgroundImage, backgroundPattern, backgroundFillMode);
+		if (background) {
+			ctx.fillStyle = background;
+			ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+		}
 		ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
 		for (let child of children) {
 			if (this.$isChildVisible(child)) {

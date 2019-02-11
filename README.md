@@ -29,7 +29,9 @@ Simply [download](https://github.com/Lanfei/playable.js/releases) and include wi
 
 You can browse the source of the NPM package at [cdn.jsdelivr.net/npm/playable.js](https://cdn.jsdelivr.net/npm/playable.js/).
 
-## Examples
+## Hello World
+
+### JavaScript
 
 ```js
 let stage = new playable.Stage();
@@ -37,9 +39,30 @@ let text = new playable.Text('Hello playable.js');
 stage.addChild(text);
 ```
 
+[Try it on CodePen](https://codepen.io/Lanfei/pen/WPzBLW/left/?editors=0010)
+
+### TypeScript(Recommended)
+
+```typescript
+class Main extends playable.Stage {
+  
+  public constructor() {
+    super();
+    let text = new playable.Text('Hello playable.js');
+    this.addChild(text);
+  }
+  
+}
+
+new Main();
+```
+
+[Try it on CodePen](https://codepen.io/Lanfei/pen/qgoeZg/left/?editors=0010)
+
 ## Documentation
 
-Check out the documentation [here](http://lanfei.github.io/playable.js/).
+- [Guide](http://lanfei.github.io/playable.js/).
+- [API Reference](http://lanfei.github.io/playable.js/docs/).
 
 [build-url]: https://circleci.com/gh/Lanfei/playable.js
 [build-image]: https://img.shields.io/circleci/project/github/Lanfei/playable.js.svg

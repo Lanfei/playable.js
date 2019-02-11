@@ -3,7 +3,6 @@ import { Ticker } from '../system/Ticker';
 import { Matrix } from '../geom/Matrix';
 import { Vector } from '../geom/Vector';
 import { Rectangle } from '../geom/Rectangle';
-import { Texture, FillMode } from '../media/Texture';
 import { TouchEvent } from '../event/TouchEvent';
 import { EventEmitter } from '../event/EventEmitter';
 export declare class Layer extends EventEmitter {
@@ -25,10 +24,7 @@ export declare class Layer extends EventEmitter {
     protected $alpha: number;
     protected $visible: boolean;
     protected $smoothing: boolean;
-    protected $backgroundColor: string;
-    protected $backgroundImage: Texture;
-    protected $backgroundPattern: CanvasPattern;
-    protected $backgroundFillMode: FillMode;
+    protected $background: string;
     protected $dirty: boolean;
     protected $stage: Stage;
     protected $parent: Layer;
@@ -52,9 +48,7 @@ export declare class Layer extends EventEmitter {
     alpha: number;
     visible: boolean;
     smoothing: boolean;
-    backgroundColor: string;
-    backgroundImage: Texture;
-    backgroundFillMode: FillMode;
+    background: string;
     readonly dirty: boolean;
     readonly stage: Stage;
     readonly parent: Layer;
@@ -92,10 +86,8 @@ export declare class Layer extends EventEmitter {
     protected $emitRemoved(): void;
     protected $emitAddedToStage(stage: Stage): void;
     protected $emitRemovedFromStage(): void;
-    protected $getPattern(texture: Texture, fillMode: FillMode): CanvasPattern;
     protected $localHitTest(vector: Vector): boolean;
     protected $isChildVisible(child: Layer): boolean;
-    protected $drawBackground(color: string, texture: Texture, pattern: CanvasPattern, fillMode: FillMode, context?: CanvasRenderingContext2D): void;
     protected $drawChild(child: Layer): number;
     protected $render(): number;
     on(type: string, listener: (...args: any[]) => void): this;

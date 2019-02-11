@@ -1,7 +1,6 @@
 import { Layer } from './Layer';
 import { Ticker } from '../system/Ticker';
 import { Rectangle } from '../geom/Rectangle';
-import { Texture, FillMode } from '../media/Texture';
 import { ResourceManager, ResourceInfo, ResourceManagerOption } from '../net/ResourceManager';
 export declare class Stage extends Layer {
     static readonly NO_SCALE: string;
@@ -17,10 +16,7 @@ export declare class Stage extends Layer {
     protected $scaleMode: string;
     protected $viewportWidth: number;
     protected $viewportHeight: number;
-    protected $viewportBackgroundColor: string;
-    protected $viewportBackgroundImage: Texture;
-    protected $viewportBackgroundPattern: CanvasPattern;
-    protected $viewportBackgroundFillMode: FillMode;
+    protected $viewportBackground: string;
     protected readonly $ticker: Ticker;
     protected readonly $elementEvents: ElementEvent[];
     protected readonly $viewportCanvas: HTMLCanvasElement;
@@ -38,9 +34,7 @@ export declare class Stage extends Layer {
     readonly viewportCanvas: HTMLCanvasElement;
     viewportWidth: number;
     viewportHeight: number;
-    viewportBackgroundColor: string;
-    viewportBackgroundImage: Texture;
-    viewportBackgroundFillMode: FillMode;
+    viewportBackground: string;
     createResourceManager(list: Array<ResourceInfo>, options?: ResourceManagerOption): ResourceManager;
     removeSelf(): this;
     protected $initEvents(): void;

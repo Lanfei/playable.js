@@ -29,6 +29,22 @@ describe('Image', () => {
 		});
 	});
 
+	it('.texture', done => {
+		let image = new playable.Image();
+		let texture = new playable.Texture(stage);
+		texture.url = '/base/test/fixtures/image@1x.jpg';
+		texture.on(playable.Event.LOAD, () => {
+			assert.strictEqual(image.fillMode, playable.Image.SCALE);
+			image.texture = texture;
+			image.width = 100;
+			image.height = 100;
+			image.fillMode = playable.Image.REPEAT;
+			stage.addChild(image);
+			assert.strictEqual(image.fillMode, playable.Image.REPEAT);
+			done();
+		});
+	});
+
 	it('.clipRect', () => {
 		let texture = new playable.Texture(stage);
 		let image = new playable.Image(texture);

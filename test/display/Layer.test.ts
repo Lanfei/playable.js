@@ -148,35 +148,12 @@ describe('Layer', () => {
 		assert.strictEqual(layer.smoothing, false);
 	});
 
-	it('.backgroundColor', () => {
+	it('.background', () => {
 		let layer = new playable.Layer();
-		assert.strictEqual(layer.backgroundColor, null);
-		layer.backgroundColor = 'black';
+		assert.strictEqual(layer.background, null);
+		layer.background = 'black';
 		stage.addChild(layer);
-		assert.strictEqual(layer.backgroundColor, 'black');
-	});
-
-	it('.backgroundImage', () => {
-		let layer = new playable.Layer();
-		let texture = new playable.Texture(stage);
-		assert.strictEqual(layer.backgroundImage, null);
-		layer.backgroundImage = texture;
-		stage.addChild(layer);
-		assert.strictEqual(layer.backgroundImage, texture);
-	});
-
-	it('.backgroundFillMode', done => {
-		let layer = new playable.Layer();
-		let texture = new playable.Texture(stage);
-		texture.url = '/base/test/fixtures/image@1x.jpg';
-		texture.on(playable.Event.LOAD, () => {
-			assert.strictEqual(layer.backgroundFillMode, 'scale');
-			layer.backgroundImage = texture;
-			layer.backgroundFillMode = 'repeat';
-			stage.addChild(layer);
-			assert.strictEqual(layer.backgroundFillMode, 'repeat');
-			done();
-		});
+		assert.strictEqual(layer.background, 'black');
 	});
 
 	it('.resize', () => {
@@ -565,7 +542,7 @@ describe('Layer', () => {
 		layer.anchorX = 100;
 		layer.anchorY = 100;
 		layer.rotation = 30;
-		layer.backgroundColor = 'rgba(0, 0, 0, .1)';
+		layer.background = 'rgba(0, 0, 0, .1)';
 		let child = new playable.Layer();
 		child.x = 50;
 		child.y = 50;
@@ -574,7 +551,7 @@ describe('Layer', () => {
 		child.width = 100;
 		child.height = 100;
 		child.rotation = -30;
-		child.backgroundColor = 'rgba(0, 0, 0, .1)';
+		child.background = 'rgba(0, 0, 0, .1)';
 		stage.anchorX = stage.width / 2;
 		stage.anchorY = stage.height / 2;
 		stage.addChild(layer);

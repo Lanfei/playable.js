@@ -3,12 +3,6 @@ import {Stage} from '../display/Stage';
 
 export class Texture extends Media {
 
-	public static SCALE: FillMode = 'scale';
-	public static REPEAT: FillMode = 'repeat';
-	public static REPEAT_X: FillMode = 'repeat-x';
-	public static REPEAT_Y: FillMode = 'repeat-y';
-	public static NO_REPEAT: FillMode = 'no-repeat';
-
 	public static defaultPixelRatio: number = 1;
 
 	public pixelRatio: number = Texture.defaultPixelRatio;
@@ -37,5 +31,3 @@ export class Texture extends Media {
 	}
 
 }
-
-export type FillMode = 'scale' | 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat';
