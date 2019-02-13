@@ -125,15 +125,13 @@ export class ResourceManager extends EventEmitter {
 			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
 		} else if (type === ResourceManager.TYPE_TEXTURE) {
-			resource = new Texture(stage);
+			resource = new Texture(stage, url);
 			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
-			resource.url = url;
 		} else if (type === ResourceManager.TYPE_SOUND) {
-			resource = new Sound(stage);
+			resource = new Sound(stage, url);
 			resource.on(Event.LOAD, successCallback);
 			resource.on(Event.ERROR, errorCallback);
-			resource.url = url;
 		} else {
 			throw new Error('Unsupported resource type: ' + type);
 		}

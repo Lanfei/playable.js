@@ -6,6 +6,8 @@ export class Media extends EventEmitter {
 
 	protected readonly $element: HTMLImageElement | HTMLAudioElement;
 
+	protected $loaded: boolean = false;
+	protected $errored: boolean = false;
 	protected readonly $stage: Stage;
 	protected readonly $boundOnLoad: () => void;
 	protected readonly $boundOnError: (e: ErrorEvent) => void;
@@ -26,16 +28,34 @@ export class Media extends EventEmitter {
 	}
 
 	public set url(url: string) {
+		this.$loaded = false;
+		this.$errored = false;
 		this.$element.src = url;
 	}
 
+	public on(type: string, listener: (...args: any[]) => void): this {
+		super.on(type, listener);
+		if (type === Event.LOAD && this.$loaded) {
+			let event = Event.create(type);
+			listener.call(this, event);
+			event.release();
+		} else if (type === Event.ERROR && this.$errored) {
+			let event = Event.create(type);
+			listener.call(this, event);
+			event.release();
+		}
+		return this;
+	}
+
 	protected $onLoad(): void {
+		this.$loaded = true;
 		this.emit(Event.LOAD);
 		this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
 	}
 
-	protected $onError(e: ErrorEvent): void {
-		this.emit(Event.ERROR, e);
+	protected $onError(): void {
+		this.$errored = true;
+		this.emit(Event.ERROR);
 		this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
 	}
 

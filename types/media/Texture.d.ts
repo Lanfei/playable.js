@@ -4,7 +4,7 @@ export declare class Texture extends Media {
     static defaultPixelRatio: number;
     pixelRatio: number;
     protected readonly $element: HTMLImageElement;
-    constructor(stage: Stage);
+    constructor(stage: Stage, url?: string);
     readonly element: HTMLImageElement;
     readonly width: number;
     readonly height: number;

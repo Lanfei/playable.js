@@ -10,7 +10,7 @@ export class Sound extends Media {
 	protected readonly $element: HTMLAudioElement;
 	protected readonly $boundOnTouch: () => void;
 
-	public constructor(stage: Stage) {
+	public constructor(stage: Stage, url?: string) {
 		super(stage);
 		let audio = document.createElement('audio');
 		audio.crossOrigin = '*';
@@ -19,6 +19,9 @@ export class Sound extends Media {
 		audio.addEventListener('ended', this.$onEnded.bind(this));
 		this.$element = audio;
 		this.$boundOnTouch = this.$onTouch.bind(this);
+		if (url) {
+			this.url = url;
+		}
 		stage.ticker.on(Event.TICKER_PAUSE, this.$onTickerPause.bind(this));
 		stage.ticker.on(Event.TICKER_RESUME, this.$onTickerResume.bind(this));
 		stage.on(Event.REMOVED_FROM_STAGE, this.$onRemovedFromStage.bind(this));
@@ -90,6 +93,7 @@ export class Sound extends Media {
 	}
 
 	protected $onEnded(): void {
+		this.emit(Event.ENDED);
 		if (this.$loops === 1) {
 			this.stop();
 			this.emit(Event.SOUND_COMPLETE);

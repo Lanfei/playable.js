@@ -9,13 +9,16 @@ export class Texture extends Media {
 
 	protected readonly $element: HTMLImageElement;
 
-	public constructor(stage: Stage) {
+	public constructor(stage: Stage, url?: string) {
 		super(stage);
 		let image = document.createElement('img');
 		image.crossOrigin = '*';
 		image.addEventListener('load', this.$boundOnLoad);
 		image.addEventListener('error', this.$boundOnError);
 		this.$element = image;
+		if (url) {
+			this.url = url;
+		}
 	}
 
 	public get element(): HTMLImageElement {

@@ -37,14 +37,13 @@ export class Image extends Layer {
 		if (this.$texture) {
 			this.$texture.off(Event.LOAD, this.$boundOnTextureLoad);
 		}
-		if (!texture || (texture.width && texture.height)) {
+		this.$texture = texture;
+		if (texture) {
+			texture.on(Event.LOAD, this.$boundOnTextureLoad);
+		} else {
 			this.$updatePattern();
 			this.$resizeCanvas();
 		}
-		if (texture) {
-			texture.on(Event.LOAD, this.$boundOnTextureLoad);
-		}
-		this.$texture = texture;
 	}
 
 	public get fillMode(): FillMode {

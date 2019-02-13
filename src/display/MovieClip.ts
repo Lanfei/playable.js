@@ -9,11 +9,11 @@ export class MovieClip extends Image {
 	protected $interval: number = 30;
 	protected $paused: boolean = false;
 	protected $currentFrame: number = 0;
-	protected $frames: Array<MovieClipFrameData> = null;
+	protected $frames: Array<MovieClipFrame> = null;
 	protected $timer: number;
 	protected $boundNextFrame: Function;
 
-	public constructor(texture: Texture, frames: Array<MovieClipFrameData>) {
+	public constructor(texture: Texture, frames: Array<MovieClipFrame>) {
 		super(texture);
 		this.$frames = frames;
 		this.$boundNextFrame = this.nextFrame.bind(this);
@@ -116,7 +116,7 @@ export class MovieClip extends Image {
 
 }
 
-export interface MovieClipFrameData {
+export interface MovieClipFrame {
 	clip: Rectangle,
 	interval?: number,
 	callback?: Function

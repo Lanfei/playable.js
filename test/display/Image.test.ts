@@ -16,8 +16,7 @@ describe('Image', () => {
 
 	it('.texture', done => {
 		let image = new playable.Image();
-		let texture = new playable.Texture(stage);
-		texture.url = '/base/test/fixtures/image@1x.jpg';
+		let texture = new playable.Texture(stage, '/base/test/fixtures/image@1x.jpg');
 		assert.isNull(image.texture);
 		texture.on(playable.Event.LOAD, () => {
 			image.texture = texture;
@@ -29,10 +28,9 @@ describe('Image', () => {
 		});
 	});
 
-	it('.texture', done => {
+	it('.fillMode', done => {
 		let image = new playable.Image();
-		let texture = new playable.Texture(stage);
-		texture.url = '/base/test/fixtures/image@1x.jpg';
+		let texture = new playable.Texture(stage, '/base/test/fixtures/image@1x.jpg');
 		texture.on(playable.Event.LOAD, () => {
 			assert.strictEqual(image.fillMode, playable.Image.SCALE);
 			image.texture = texture;

@@ -48,8 +48,9 @@ export declare class Stage extends Layer {
     protected $resizeViewportCanvas(): void;
     protected $render(): number;
 }
-export interface ElementEvent {
+interface ElementEvent {
     target: EventTarget;
     type: string;
     listener: (event: any) => void;
 }
+export {};

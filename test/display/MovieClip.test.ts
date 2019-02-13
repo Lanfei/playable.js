@@ -4,7 +4,7 @@ import {assert} from 'chai';
 describe('MovieClip', () => {
 	let stage = new playable.Stage();
 	let texture = new playable.Texture(stage);
-	let frameData: playable.MovieClipFrameData[] = [
+	let frameData: playable.MovieClipFrame[] = [
 		{clip: playable.Rectangle.create(0, 0, 10, 10)},
 		{clip: playable.Rectangle.create(0, 10, 10, 10)}
 	];

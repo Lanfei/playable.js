@@ -354,7 +354,7 @@ export class Stage extends Layer {
 		let viewportHeight = this.$viewportHeight || window.innerHeight;
 		let canvasWidth = viewportWidth * pixelRatio;
 		let canvasHeight = viewportHeight * pixelRatio;
-		if (canvas.width !== canvasWidth || canvasHeight !== canvasHeight) {
+		if (canvas.width !== canvasWidth || canvas.height !== canvasHeight) {
 			this.$viewportCanvas.width = canvasWidth;
 			this.$viewportCanvas.height = canvasHeight;
 			this.$viewportCanvas.style.transformOrigin = '0 0';
@@ -385,7 +385,7 @@ export class Stage extends Layer {
 
 }
 
-export interface ElementEvent {
+interface ElementEvent {
 	target: EventTarget,
 	type: string,
 	listener: (event) => void

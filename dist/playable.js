@@ -98,6 +98,8 @@
         Event.PROGRESS = 'progress';
         /** @event complete */
         Event.COMPLETE = 'complete';
+        /** @event ended */
+        Event.ENDED = 'ended';
         /** @event soundComplete */
         Event.SOUND_COMPLETE = 'soundComplete';
         Event.$pool = [];
@@ -2029,14 +2031,14 @@
                 if (this.$texture) {
                     this.$texture.off(Event.LOAD, this.$boundOnTextureLoad);
                 }
-                if (!texture || (texture.width && texture.height)) {
-                    this.$updatePattern();
-                    this.$resizeCanvas();
-                }
+                this.$texture = texture;
                 if (texture) {
                     texture.on(Event.LOAD, this.$boundOnTextureLoad);
                 }
-                this.$texture = texture;
+                else {
+                    this.$updatePattern();
+                    this.$resizeCanvas();
+                }
             },
             enumerable: true,
             configurable: true
@@ -3047,6 +3049,8 @@
         __extends(Media, _super);
         function Media(stage) {
             var _this = _super.call(this) || this;
+            _this.$loaded = false;
+            _this.$errored = false;
             _this.$stage = stage;
             _this.$boundOnLoad = _this.$onLoad.bind(_this);
             _this.$boundOnError = _this.$onError.bind(_this);
@@ -3064,17 +3068,35 @@
                 return this.$element.src || '';
             },
             set: function (url) {
+                this.$loaded = false;
+                this.$errored = false;
                 this.$element.src = url;
             },
             enumerable: true,
             configurable: true
         });
+        Media.prototype.on = function (type, listener) {
+            _super.prototype.on.call(this, type, listener);
+            if (type === Event.LOAD && this.$loaded) {
+                var event = Event.create(type);
+                listener.call(this, event);
+                event.release();
+            }
+            else if (type === Event.ERROR && this.$errored) {
+                var event = Event.create(type);
+                listener.call(this, event);
+                event.release();
+            }
+            return this;
+        };
         Media.prototype.$onLoad = function () {
+            this.$loaded = true;
             this.emit(Event.LOAD);
             this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
         };
-        Media.prototype.$onError = function (e) {
-            this.emit(Event.ERROR, e);
+        Media.prototype.$onError = function () {
+            this.$errored = true;
+            this.emit(Event.ERROR);
             this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
         };
         return Media;
@@ -3082,7 +3104,7 @@
 
     var Sound = /** @class */ (function (_super) {
         __extends(Sound, _super);
-        function Sound(stage) {
+        function Sound(stage, url) {
             var _this = _super.call(this, stage) || this;
             _this.$loops = 1;
             _this.$startTime = 0;
@@ -3094,6 +3116,9 @@
             audio.addEventListener('ended', _this.$onEnded.bind(_this));
             _this.$element = audio;
             _this.$boundOnTouch = _this.$onTouch.bind(_this);
+            if (url) {
+                _this.url = url;
+            }
             stage.ticker.on(Event.TICKER_PAUSE, _this.$onTickerPause.bind(_this));
             stage.ticker.on(Event.TICKER_RESUME, _this.$onTickerResume.bind(_this));
             stage.on(Event.REMOVED_FROM_STAGE, _this.$onRemovedFromStage.bind(_this));
@@ -3172,6 +3197,7 @@
             document.removeEventListener('touchend', this.$boundOnTouch);
         };
         Sound.prototype.$onEnded = function () {
+            this.emit(Event.ENDED);
             if (this.$loops === 1) {
                 this.stop();
                 this.emit(Event.SOUND_COMPLETE);
@@ -3214,7 +3240,7 @@
 
     var Texture = /** @class */ (function (_super) {
         __extends(Texture, _super);
-        function Texture(stage) {
+        function Texture(stage, url) {
             var _this = _super.call(this, stage) || this;
             _this.pixelRatio = Texture.defaultPixelRatio;
             var image = document.createElement('img');
@@ -3222,6 +3248,9 @@
             image.addEventListener('load', _this.$boundOnLoad);
             image.addEventListener('error', _this.$boundOnError);
             _this.$element = image;
+            if (url) {
+                _this.url = url;
+            }
             return _this;
         }
         Object.defineProperty(Texture.prototype, "element", {
@@ -3370,16 +3399,14 @@
                 resource.on(Event.ERROR, errorCallback);
             }
             else if (type === ResourceManager.TYPE_TEXTURE) {
-                resource = new Texture(stage);
+                resource = new Texture(stage, url);
                 resource.on(Event.LOAD, successCallback);
                 resource.on(Event.ERROR, errorCallback);
-                resource.url = url;
             }
             else if (type === ResourceManager.TYPE_SOUND) {
-                resource = new Sound(stage);
+                resource = new Sound(stage, url);
                 resource.on(Event.LOAD, successCallback);
                 resource.on(Event.ERROR, errorCallback);
-                resource.url = url;
             }
             else {
                 throw new Error('Unsupported resource type: ' + type);
@@ -3764,7 +3791,7 @@
             var viewportHeight = this.$viewportHeight || window.innerHeight;
             var canvasWidth = viewportWidth * pixelRatio;
             var canvasHeight = viewportHeight * pixelRatio;
-            if (canvas.width !== canvasWidth || canvasHeight !== canvasHeight) {
+            if (canvas.width !== canvasWidth || canvas.height !== canvasHeight) {
                 this.$viewportCanvas.width = canvasWidth;
                 this.$viewportCanvas.height = canvasHeight;
                 this.$viewportCanvas.style.transformOrigin = '0 0';

@@ -34,6 +34,8 @@ export class Event {
 	public static readonly PROGRESS: string = 'progress';
 	/** @event complete */
 	public static readonly COMPLETE: string = 'complete';
+	/** @event ended */
+	public static readonly ENDED: string = 'ended';
 	/** @event soundComplete */
 	public static readonly SOUND_COMPLETE: string = 'soundComplete';
 

@@ -32,6 +32,8 @@ export declare class Event {
     static readonly PROGRESS: string;
     /** @event complete */
     static readonly COMPLETE: string;
+    /** @event ended */
+    static readonly ENDED: string;
     /** @event soundComplete */
     static readonly SOUND_COMPLETE: string;
     type: string;
