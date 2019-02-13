@@ -355,10 +355,10 @@ export class Stage extends Layer {
 		let canvasWidth = viewportWidth * pixelRatio;
 		let canvasHeight = viewportHeight * pixelRatio;
 		if (canvas.width !== canvasWidth || canvas.height !== canvasHeight) {
-			this.$viewportCanvas.width = canvasWidth;
-			this.$viewportCanvas.height = canvasHeight;
-			this.$viewportCanvas.style.transformOrigin = '0 0';
-			this.$viewportCanvas.style.transform = `scale(${1 / pixelRatio})`;
+			canvas.width = canvasWidth;
+			canvas.height = canvasHeight;
+			canvas.style.width = viewportWidth + 'px';
+			canvas.style.height = viewportHeight + 'px';
 			this.$calculateRenderBounds();
 			this.$markDirty();
 			this.emit(Event.VIEWPORT_RESIZE);
