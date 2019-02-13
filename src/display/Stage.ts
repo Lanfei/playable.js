@@ -8,10 +8,10 @@ import {ResourceManager, ResourceInfo, ResourceManagerOption} from '../net/Resou
 
 export class Stage extends Layer {
 
-	public static readonly NO_SCALE: string = 'noScale';
-	public static readonly NO_BORDER: string = 'noBorder';
 	public static readonly SHOW_ALL: string = 'showAll';
 	public static readonly EXACT_FIT: string = 'exactFit';
+	public static readonly NO_SCALE: string = 'noScale';
+	public static readonly NO_BORDER: string = 'noBorder';
 	public static readonly FIXED_WIDE: string = 'fixedWide';
 	public static readonly FIXED_NARROW: string = 'fixedNarrow';
 	public static readonly FIXED_WIDTH: string = 'fixedWidth';
@@ -285,18 +285,7 @@ export class Stage extends Layer {
 		let viewportWidth = viewportCanvas.width;
 		let viewportHeight = viewportCanvas.height;
 		let viewportAspectRatio = viewportWidth / viewportHeight;
-		if (scaleMode === Stage.NO_SCALE) {
-		} else if (scaleMode === Stage.NO_BORDER) {
-			if (aspectRatio < viewportAspectRatio) {
-				width = viewportWidth;
-				height = width / aspectRatio;
-			} else {
-				height = viewportHeight;
-				width = height * aspectRatio;
-			}
-			x = (viewportWidth - width) / 2;
-			y = (viewportHeight - height) / 2;
-		} else if (scaleMode === Stage.SHOW_ALL) {
+		if (scaleMode === Stage.SHOW_ALL) {
 			if (aspectRatio > viewportAspectRatio) {
 				width = viewportWidth;
 				height = width / aspectRatio;
@@ -307,6 +296,16 @@ export class Stage extends Layer {
 		} else if (scaleMode === Stage.EXACT_FIT) {
 			width = viewportWidth;
 			height = viewportHeight;
+		} else if (scaleMode === Stage.NO_BORDER) {
+			if (aspectRatio < viewportAspectRatio) {
+				width = viewportWidth;
+				height = width / aspectRatio;
+			} else {
+				height = viewportHeight;
+				width = height * aspectRatio;
+			}
+			x = (viewportWidth - width) / 2;
+			y = (viewportHeight - height) / 2;
 		} else if (scaleMode === Stage.FIXED_WIDTH) {
 			width = viewportWidth;
 			height = width / aspectRatio;

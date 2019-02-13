@@ -32,7 +32,7 @@ For prototyping or learning purposes, you can use the latest version with:
 For production, we recommend linking to a specific version number and build to avoid unexpected breakage from newer versions:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/playable.js@3.4.1/dist/playable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/playable.js@3.4.2/dist/playable.min.js"></script>
 ```
 
 You can browse the source of the NPM package at [jsDelivr](https://cdn.jsdelivr.net/npm/playable.js/) or [unpkg](https://unpkg.com/playable.js/).
