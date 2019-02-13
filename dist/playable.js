@@ -3714,20 +3714,7 @@
             var viewportWidth = viewportCanvas.width;
             var viewportHeight = viewportCanvas.height;
             var viewportAspectRatio = viewportWidth / viewportHeight;
-            if (scaleMode === Stage.NO_SCALE) ;
-            else if (scaleMode === Stage.NO_BORDER) {
-                if (aspectRatio < viewportAspectRatio) {
-                    width = viewportWidth;
-                    height = width / aspectRatio;
-                }
-                else {
-                    height = viewportHeight;
-                    width = height * aspectRatio;
-                }
-                x = (viewportWidth - width) / 2;
-                y = (viewportHeight - height) / 2;
-            }
-            else if (scaleMode === Stage.SHOW_ALL) {
+            if (scaleMode === Stage.SHOW_ALL) {
                 if (aspectRatio > viewportAspectRatio) {
                     width = viewportWidth;
                     height = width / aspectRatio;
@@ -3740,6 +3727,18 @@
             else if (scaleMode === Stage.EXACT_FIT) {
                 width = viewportWidth;
                 height = viewportHeight;
+            }
+            else if (scaleMode === Stage.NO_BORDER) {
+                if (aspectRatio < viewportAspectRatio) {
+                    width = viewportWidth;
+                    height = width / aspectRatio;
+                }
+                else {
+                    height = viewportHeight;
+                    width = height * aspectRatio;
+                }
+                x = (viewportWidth - width) / 2;
+                y = (viewportHeight - height) / 2;
             }
             else if (scaleMode === Stage.FIXED_WIDTH) {
                 width = viewportWidth;
@@ -3792,10 +3791,10 @@
             var canvasWidth = viewportWidth * pixelRatio;
             var canvasHeight = viewportHeight * pixelRatio;
             if (canvas.width !== canvasWidth || canvas.height !== canvasHeight) {
-                this.$viewportCanvas.width = canvasWidth;
-                this.$viewportCanvas.height = canvasHeight;
-                this.$viewportCanvas.style.transformOrigin = '0 0';
-                this.$viewportCanvas.style.transform = "scale(" + 1 / pixelRatio + ")";
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+                canvas.style.width = viewportWidth + 'px';
+                canvas.style.height = viewportHeight + 'px';
                 this.$calculateRenderBounds();
                 this.$markDirty();
                 this.emit(Event.VIEWPORT_RESIZE);
@@ -3818,10 +3817,10 @@
             this.$drawCalls = ++drawCalls;
             return drawCalls;
         };
-        Stage.NO_SCALE = 'noScale';
-        Stage.NO_BORDER = 'noBorder';
         Stage.SHOW_ALL = 'showAll';
         Stage.EXACT_FIT = 'exactFit';
+        Stage.NO_SCALE = 'noScale';
+        Stage.NO_BORDER = 'noBorder';
         Stage.FIXED_WIDE = 'fixedWide';
         Stage.FIXED_NARROW = 'fixedNarrow';
         Stage.FIXED_WIDTH = 'fixedWidth';

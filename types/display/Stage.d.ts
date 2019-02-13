@@ -3,10 +3,10 @@ import { Ticker } from '../system/Ticker';
 import { Rectangle } from '../geom/Rectangle';
 import { ResourceManager, ResourceInfo, ResourceManagerOption } from '../net/ResourceManager';
 export declare class Stage extends Layer {
-    static readonly NO_SCALE: string;
-    static readonly NO_BORDER: string;
     static readonly SHOW_ALL: string;
     static readonly EXACT_FIT: string;
+    static readonly NO_SCALE: string;
+    static readonly NO_BORDER: string;
     static readonly FIXED_WIDE: string;
     static readonly FIXED_NARROW: string;
     static readonly FIXED_WIDTH: string;
