@@ -1182,7 +1182,9 @@ var Layer = /** @class */ (function (_super) {
     Layer.prototype.$getTransform = function () {
         var matrix = Matrix.create();
         matrix.translate(-this.$anchorX, -this.$anchorY);
-        matrix.rotate(this.rotation * Math.PI / 180).scale(this.scaleX, this.scaleY).skew(this.skewX, this.skewY);
+        matrix.skew(this.skewX * Math.PI / 180, this.skewY * Math.PI / 180);
+        matrix.rotate(this.rotation * Math.PI / 180);
+        matrix.scale(this.scaleX, this.scaleY);
         matrix.translate(this.x, this.y);
         return matrix;
     };
