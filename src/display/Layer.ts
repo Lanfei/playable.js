@@ -432,10 +432,11 @@ export class Layer extends EventEmitter {
 	}
 
 	protected $getTransform(): Matrix {
+		let degToRad = Math.PI / 180;
 		let matrix = Matrix.create();
 		matrix.translate(-this.$anchorX, -this.$anchorY);
-		matrix.skew(this.skewX * Math.PI / 180, this.skewY * Math.PI / 180);
-		matrix.rotate(this.rotation * Math.PI / 180);
+		matrix.skew(this.skewX * degToRad, this.skewY * degToRad);
+		matrix.rotate(this.rotation * degToRad);
 		matrix.scale(this.scaleX, this.scaleY);
 		matrix.translate(this.x, this.y);
 		return matrix;
