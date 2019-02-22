@@ -32,7 +32,7 @@ For prototyping or learning purposes, you can use the latest version with:
 For production, we recommend linking to a specific version number and build to avoid unexpected breakage from newer versions:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/playable.js@3.4.4/dist/playable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/playable.js@3.4.5/dist/playable.min.js"></script>
 ```
 
 You can browse the source of the NPM package at [jsDelivr](https://cdn.jsdelivr.net/npm/playable.js/) or [unpkg](https://unpkg.com/playable.js/).
@@ -75,8 +75,8 @@ new Main();
 
 [build-url]: https://circleci.com/gh/Lanfei/playable.js
 [build-image]: https://img.shields.io/circleci/project/github/Lanfei/playable.js.svg
-[coverage-url]: https://codecov.io/github/Lanfei/playable.js
-[coverage-image]: https://img.shields.io/codecov/c/github/Lanfei/playable.js.svg
+[coverage-url]: https://coveralls.io/github/Lanfei/playable.js
+[coverage-image]: https://coveralls.io/repos/github/Lanfei/playable.js/badge.svg
 [version-url]: https://npmjs.org/package/playable.js
 [version-image]: https://img.shields.io/npm/v/playable.js.svg
 [license-url]: https://github.com/Lanfei/playable.js/blob/master/LICENSE
