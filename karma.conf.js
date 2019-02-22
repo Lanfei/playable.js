@@ -8,9 +8,9 @@ module.exports = function (config) {
 		karmaTypescriptConfig: {
 			reports: {
 				html: 'coverage',
-				json: {
+				lcovonly: {
 					directory: 'coverage',
-					filename: 'coverage.json',
+					filename: 'lcov.info',
 				}
 			}
 		}
