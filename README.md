@@ -69,9 +69,9 @@ new Main();
 
 ## Documentation
 
-- [Guide](http://lanfei.github.io/playable.js/)
-- [Examples](http://lanfei.github.io/playable.js/examples/)
-- [API Reference](http://lanfei.github.io/playable.js/docs/)
+- [Guide](https://lanfei.github.io/playable.js/)
+- [Examples](https://lanfei.github.io/playable.js/examples/)
+- [API Reference](https://lanfei.github.io/playable.js/docs/)
 
 [build-url]: https://circleci.com/gh/Lanfei/playable.js
 [build-image]: https://img.shields.io/circleci/project/github/Lanfei/playable.js.svg

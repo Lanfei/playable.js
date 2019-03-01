@@ -10,3 +10,7 @@ Here are the examples for `playable.js`.
 ## Stage
 
 - [Scale Modes](https://codepen.io/Lanfei/pen/QYByqE/left/?editors=0010)
+
+## Image
+
+- [Clipped Image](https://codepen.io/Lanfei/pen/qvbmbO/left/?editors=0010)
