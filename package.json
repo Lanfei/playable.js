@@ -1,6 +1,6 @@
 {
   "name": "playable.js",
-  "version": "3.4.6",
+  "version": "3.4.7",
   "author": "Jealous",
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.common.js",

@@ -103,6 +103,8 @@ var Event = /** @class */ (function () {
 var EventEmitter = /** @class */ (function () {
     function EventEmitter() {
         this.$events = {};
+        this.$emittingType = null;
+        this.$removedListeners = [];
     }
     EventEmitter.prototype.on = function (type, listener) {
         var listeners = this.$events[type] || [];
@@ -111,19 +113,33 @@ var EventEmitter = /** @class */ (function () {
         return this;
     };
     EventEmitter.prototype.off = function (type, listener) {
-        var listeners = this.$events[type] || [];
-        if (listener) {
-            var index = listeners.indexOf(listener);
-            if (index >= 0) {
-                listeners.splice(index, 1);
-            }
+        if (this.$emittingType === type && listener) {
+            this.$removedListeners.push(listener);
         }
         else {
-            listeners.length = 0;
+            var listeners = this.$events[type] || [];
+            if (listener) {
+                var index = listeners.indexOf(listener);
+                if (index >= 0) {
+                    listeners.splice(index, 1);
+                }
+            }
+            else {
+                listeners.length = 0;
+            }
         }
         return this;
     };
+    EventEmitter.prototype.once = function (type, listener) {
+        var that = this;
+        var wrapper = function () {
+            listener.apply(this, arguments);
+            that.off(type, wrapper);
+        };
+        return this.on(type, wrapper);
+    };
     EventEmitter.prototype.emit = function (type) {
+        var _this = this;
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
@@ -144,14 +160,20 @@ var EventEmitter = /** @class */ (function () {
             args.push(event);
         }
         if (hasListeners) {
+            this.$emittingType = type;
             for (var _a = 0, listeners_1 = listeners; _a < listeners_1.length; _a++) {
                 var listener = listeners_1[_a];
                 listener.apply(this, args);
             }
+            this.$emittingType = null;
         }
         if (event) {
             event.release();
         }
+        this.$removedListeners.forEach(function (listener) {
+            _this.off(type, listener);
+        });
+        this.$removedListeners.length = 0;
         return hasListeners;
     };
     EventEmitter.prototype.hasEventListener = function (type) {
@@ -1180,10 +1202,11 @@ var Layer = /** @class */ (function (_super) {
         }
     };
     Layer.prototype.$getTransform = function () {
+        var degToRad = Math.PI / 180;
         var matrix = Matrix.create();
         matrix.translate(-this.$anchorX, -this.$anchorY);
-        matrix.skew(this.skewX * Math.PI / 180, this.skewY * Math.PI / 180);
-        matrix.rotate(this.rotation * Math.PI / 180);
+        matrix.skew(this.skewX * degToRad, this.skewY * degToRad);
+        matrix.rotate(this.rotation * degToRad);
         matrix.scale(this.scaleX, this.scaleY);
         matrix.translate(this.x, this.y);
         return matrix;
@@ -2029,7 +2052,7 @@ var Image = /** @class */ (function (_super) {
             }
             this.$texture = texture;
             if (texture) {
-                texture.on(Event.LOAD, this.$boundOnTextureLoad);
+                texture.once(Event.LOAD, this.$boundOnTextureLoad);
             }
             else {
                 this.$updatePattern();
@@ -2076,7 +2099,6 @@ var Image = /** @class */ (function (_super) {
     Image.prototype.$onTextureLoad = function () {
         this.$updatePattern();
         this.$resizeCanvas();
-        this.$texture.off(Event.LOAD, this.$boundOnTextureLoad);
     };
     Image.prototype.$updatePattern = function () {
         var width = this.$width;
