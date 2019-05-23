@@ -7,7 +7,7 @@ export class EventEmitter {
 	protected $removedListeners: Listener[] = [];
 
 	public on(type: string, listener: Listener): this {
-		let listeners: Array<Function> = this.$events[type] || [];
+		let listeners: Listener[] = this.$events[type] || [];
 		listeners.push(listener);
 		this.$events[type] = listeners;
 		return this;
@@ -17,7 +17,7 @@ export class EventEmitter {
 		if (this.$emittingType === type && listener) {
 			this.$removedListeners.push(listener);
 		} else {
-			let listeners: Array<Function> = this.$events[type] || [];
+			let listeners: Listener[] = this.$events[type] || [];
 			if (listener) {
 				let index = listeners.indexOf(listener);
 				if (index >= 0) {
@@ -49,8 +49,9 @@ export class EventEmitter {
 			type.currentTarget = this;
 			type = type.type;
 		}
-		let listeners: Array<Function> = this.$events[type];
+		let listeners: Listener[] = this.$events[type];
 		let hasListeners = listeners && listeners.length > 0;
+		let removedListeners = this.$removedListeners;
 		if (!event && hasListeners && args.length === 0) {
 			event = Event.create(type);
 			event.target = this;
@@ -60,22 +61,24 @@ export class EventEmitter {
 		if (hasListeners) {
 			this.$emittingType = type;
 			for (let listener of listeners) {
-				listener.apply(this, args);
+				if (removedListeners.indexOf(listener) < 0) {
+					listener.apply(this, args);
+				}
 			}
 			this.$emittingType = null;
 		}
 		if (event) {
 			event.release();
 		}
-		this.$removedListeners.forEach(listener => {
+		for (let listener of removedListeners) {
 			this.off(<string>type, listener);
-		});
-		this.$removedListeners.length = 0;
+		}
+		removedListeners.length = 0;
 		return hasListeners;
 	}
 
 	public hasEventListener(type: string): boolean {
-		let listeners: Array<Function> = this.$events[type];
+		let listeners: Listener[] = this.$events[type];
 		return !!listeners && listeners.length > 0;
 	}
 

@@ -139,7 +139,6 @@ var EventEmitter = /** @class */ (function () {
         return this.on(type, wrapper);
     };
     EventEmitter.prototype.emit = function (type) {
-        var _this = this;
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
@@ -153,6 +152,7 @@ var EventEmitter = /** @class */ (function () {
         }
         var listeners = this.$events[type];
         var hasListeners = listeners && listeners.length > 0;
+        var removedListeners = this.$removedListeners;
         if (!event && hasListeners && args.length === 0) {
             event = Event.create(type);
             event.target = this;
@@ -163,17 +163,20 @@ var EventEmitter = /** @class */ (function () {
             this.$emittingType = type;
             for (var _a = 0, listeners_1 = listeners; _a < listeners_1.length; _a++) {
                 var listener = listeners_1[_a];
-                listener.apply(this, args);
+                if (removedListeners.indexOf(listener) < 0) {
+                    listener.apply(this, args);
+                }
             }
             this.$emittingType = null;
         }
         if (event) {
             event.release();
         }
-        this.$removedListeners.forEach(function (listener) {
-            _this.off(type, listener);
-        });
-        this.$removedListeners.length = 0;
+        for (var _b = 0, removedListeners_1 = removedListeners; _b < removedListeners_1.length; _b++) {
+            var listener = removedListeners_1[_b];
+            this.off(type, listener);
+        }
+        removedListeners.length = 0;
         return hasListeners;
     };
     EventEmitter.prototype.hasEventListener = function (type) {
@@ -2052,7 +2055,7 @@ var Image = /** @class */ (function (_super) {
             }
             this.$texture = texture;
             if (texture) {
-                texture.once(Event.LOAD, this.$boundOnTextureLoad);
+                texture.on(Event.LOAD, this.$boundOnTextureLoad);
             }
             else {
                 this.$updatePattern();
@@ -2099,6 +2102,7 @@ var Image = /** @class */ (function (_super) {
     Image.prototype.$onTextureLoad = function () {
         this.$updatePattern();
         this.$resizeCanvas();
+        this.$texture.off(Event.LOAD, this.$boundOnTextureLoad);
     };
     Image.prototype.$updatePattern = function () {
         var width = this.$width;
@@ -3846,4 +3850,4 @@ var Stage = /** @class */ (function (_super) {
     return Stage;
 }(Layer));
 
-export { Ticker, Layer, Scroller, Image, Text, Input, MovieClip, Stage, Event, TouchEvent, EventEmitter, Matrix, Vector, Rectangle, Media, Texture, Sound, Ease, Tween, Request, ResourceManager };
+export { Ease, Event, EventEmitter, Image, Input, Layer, Matrix, Media, MovieClip, Rectangle, Request, ResourceManager, Scroller, Sound, Stage, Text, Texture, Ticker, TouchEvent, Tween, Vector };

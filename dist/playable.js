@@ -145,7 +145,6 @@
             return this.on(type, wrapper);
         };
         EventEmitter.prototype.emit = function (type) {
-            var _this = this;
             var args = [];
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
@@ -159,6 +158,7 @@
             }
             var listeners = this.$events[type];
             var hasListeners = listeners && listeners.length > 0;
+            var removedListeners = this.$removedListeners;
             if (!event && hasListeners && args.length === 0) {
                 event = Event.create(type);
                 event.target = this;
@@ -169,17 +169,20 @@
                 this.$emittingType = type;
                 for (var _a = 0, listeners_1 = listeners; _a < listeners_1.length; _a++) {
                     var listener = listeners_1[_a];
-                    listener.apply(this, args);
+                    if (removedListeners.indexOf(listener) < 0) {
+                        listener.apply(this, args);
+                    }
                 }
                 this.$emittingType = null;
             }
             if (event) {
                 event.release();
             }
-            this.$removedListeners.forEach(function (listener) {
-                _this.off(type, listener);
-            });
-            this.$removedListeners.length = 0;
+            for (var _b = 0, removedListeners_1 = removedListeners; _b < removedListeners_1.length; _b++) {
+                var listener = removedListeners_1[_b];
+                this.off(type, listener);
+            }
+            removedListeners.length = 0;
             return hasListeners;
         };
         EventEmitter.prototype.hasEventListener = function (type) {
@@ -2058,7 +2061,7 @@
                 }
                 this.$texture = texture;
                 if (texture) {
-                    texture.once(Event.LOAD, this.$boundOnTextureLoad);
+                    texture.on(Event.LOAD, this.$boundOnTextureLoad);
                 }
                 else {
                     this.$updatePattern();
@@ -2105,6 +2108,7 @@
         Image.prototype.$onTextureLoad = function () {
             this.$updatePattern();
             this.$resizeCanvas();
+            this.$texture.off(Event.LOAD, this.$boundOnTextureLoad);
         };
         Image.prototype.$updatePattern = function () {
             var width = this.$width;
@@ -3852,27 +3856,27 @@
         return Stage;
     }(Layer));
 
-    exports.Ticker = Ticker;
-    exports.Layer = Layer;
-    exports.Scroller = Scroller;
-    exports.Image = Image;
-    exports.Text = Text;
-    exports.Input = Input;
-    exports.MovieClip = MovieClip;
-    exports.Stage = Stage;
-    exports.Event = Event;
-    exports.TouchEvent = TouchEvent;
-    exports.EventEmitter = EventEmitter;
-    exports.Matrix = Matrix;
-    exports.Vector = Vector;
-    exports.Rectangle = Rectangle;
-    exports.Media = Media;
-    exports.Texture = Texture;
-    exports.Sound = Sound;
     exports.Ease = Ease;
-    exports.Tween = Tween;
+    exports.Event = Event;
+    exports.EventEmitter = EventEmitter;
+    exports.Image = Image;
+    exports.Input = Input;
+    exports.Layer = Layer;
+    exports.Matrix = Matrix;
+    exports.Media = Media;
+    exports.MovieClip = MovieClip;
+    exports.Rectangle = Rectangle;
     exports.Request = Request;
     exports.ResourceManager = ResourceManager;
+    exports.Scroller = Scroller;
+    exports.Sound = Sound;
+    exports.Stage = Stage;
+    exports.Text = Text;
+    exports.Texture = Texture;
+    exports.Ticker = Ticker;
+    exports.TouchEvent = TouchEvent;
+    exports.Tween = Tween;
+    exports.Vector = Vector;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
