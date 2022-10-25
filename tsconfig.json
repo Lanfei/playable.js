@@ -4,6 +4,6 @@
 		"module": "commonjs"
 	},
 	"include": [
-		"./src/*/*.ts"
+		"./src/**/*.ts"
 	]
 }

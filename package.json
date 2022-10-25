@@ -1,6 +1,6 @@
 {
   "name": "playable.js",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "author": "Jealous",
   "description": "A lightweight HTML5 game engine.",
   "main": "dist/playable.cjs",
@@ -16,7 +16,7 @@
     "test": "karma start --single-run",
     "coverage": "npm run test && cat coverage/**/lcov.info | coveralls",
     "docs": "npm run docs:md && vuepress build",
-    "docs:md": "typedoc --theme markdown --mode file --readme none --name 'API Reference' --out docs",
+    "docs:md": "typedoc --theme markdown --readme none --name 'API Reference' --out docs src/index.ts",
     "docs:dev": "vuepress dev",
     "docs:build": "vuepress build",
     "clean": "rimraf dist types/*/ types/index.d.ts",
