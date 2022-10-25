@@ -7,10 +7,12 @@ export declare class Sound extends Media {
     protected readonly $element: HTMLAudioElement;
     protected readonly $boundOnTouch: () => void;
     constructor(stage: Stage, url?: string);
-    readonly element: HTMLAudioElement;
-    url: string;
-    volume: number;
-    readonly paused: boolean;
+    get element(): HTMLAudioElement;
+    get url(): string;
+    set url(url: string);
+    get volume(): number;
+    set volume(volume: number);
+    get paused(): boolean;
     play(startTime?: number, loops?: number): this;
     stop(): this;
     protected $checkOnTouch(): void;

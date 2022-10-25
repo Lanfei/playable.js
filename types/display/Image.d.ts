@@ -14,10 +14,14 @@ export declare class Image extends Layer {
     protected readonly $boundOnTextureLoad: () => void;
     constructor(texture?: Texture);
     constructor(texture: Texture, width: number, height: number);
-    texture: Texture;
-    fillMode: FillMode;
-    clipRect: Rectangle;
-    scale9Grid: Rectangle;
+    get texture(): Texture;
+    set texture(texture: Texture);
+    get fillMode(): FillMode;
+    set fillMode(fillMode: FillMode);
+    get clipRect(): Rectangle;
+    set clipRect(clipRect: Rectangle);
+    get scale9Grid(): Rectangle;
+    set scale9Grid(scale9Grid: Rectangle);
     protected $onTextureLoad(): void;
     protected $updatePattern(): void;
     protected $getContentBounds(): Rectangle;

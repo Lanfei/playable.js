@@ -14,9 +14,9 @@ export declare class Ticker extends EventEmitter {
     protected readonly $boundTick: () => void;
     protected readonly $enterFrameCallbackList: Array<Layer>;
     constructor(stage: Stage);
-    readonly fps: number;
-    readonly deltaTime: number;
-    readonly paused: boolean;
+    get fps(): number;
+    get deltaTime(): number;
+    get paused(): boolean;
     protected $start(): this;
     pause(): this;
     resume(): this;

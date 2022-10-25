@@ -10,11 +10,13 @@ export declare class MovieClip extends Image {
     protected $timer: number;
     protected $boundNextFrame: Function;
     constructor(texture: Texture, frames: Array<MovieClipFrame>);
-    loop: boolean;
-    interval: number;
-    readonly paused: boolean;
-    readonly currentFrame: number;
-    readonly totalFrames: number;
+    get loop(): boolean;
+    set loop(loop: boolean);
+    get interval(): number;
+    set interval(interval: number);
+    get paused(): boolean;
+    get currentFrame(): number;
+    get totalFrames(): number;
     play(): this;
     pause(): this;
     nextFrame(): this;

@@ -13,8 +13,8 @@ export declare class Tween extends EventEmitter {
     protected $shouldSaveProps: boolean;
     protected $boundOnEnterFrame: () => void;
     protected constructor(target: Layer, option?: TweenOption);
-    readonly paused: boolean;
-    readonly stopped: boolean;
+    get paused(): boolean;
+    get stopped(): boolean;
     set(props: Object): this;
     to(props: Object, duration: number, ease?: Function): this;
     wait(duration: number): this;

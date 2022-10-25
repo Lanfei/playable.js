@@ -537,22 +537,21 @@ describe('Layer', () => {
 	});
 
 	it('.on(Event.ENTER_FRAME, listener: (...args: any[]) => void)', done => {
-		let deltaTime;
 		let layer = new playable.Layer();
 		let stage = new playable.Stage();
 		let eventType = playable.Event.ENTER_FRAME;
 		stage.emit(playable.Event.ACTIVATE);
 		layer.on(eventType, e => {
-			deltaTime = e.data;
+			let deltaTime = e.data;
 			assert.strictEqual(e.type, eventType);
 			layer.off(eventType);
-		});
-		stage.ticker.on(playable.Event.TICK, e => {
-			assert.strictEqual(e.data, deltaTime);
-			assert.isAbove(e.data, 0);
-			stage.ticker.off(playable.Event.TICK);
-			stage.removeSelf();
-			done();
+			stage.ticker.on(playable.Event.TICK, e => {
+				assert.strictEqual(e.data, deltaTime);
+				assert.isAbove(e.data, 0);
+				stage.ticker.off(playable.Event.TICK);
+				stage.removeSelf();
+				done();
+			});
 		});
 		stage.addChild(layer);
 	});

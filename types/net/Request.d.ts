@@ -4,9 +4,9 @@ export declare class Request extends EventEmitter {
     protected $xhr: XMLHttpRequest;
     constructor(options: RequestOption);
     constructor(url: string, options?: RequestOption);
-    readonly status: number;
-    readonly response: any;
-    readonly responseHeaders: Object;
+    get status(): number;
+    get response(): any;
+    get responseHeaders(): Object;
     abort(): void;
     protected $onAbort(): void;
     protected $onProgress(e: ProgressEvent): void;

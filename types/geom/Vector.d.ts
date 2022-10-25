@@ -3,8 +3,8 @@ export declare class Vector {
     x: number;
     y: number;
     protected constructor(x?: number, y?: number);
-    readonly length: number;
-    readonly angle: number;
+    get length(): number;
+    get angle(): number;
     set(x: number, y: number): this;
     add(v: Vector): this;
     add(x: number, y: number): this;

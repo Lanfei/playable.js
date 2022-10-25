@@ -1,31 +1,29 @@
-'use strict';
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
 
-Object.defineProperty(exports, '__esModule', { value: true });
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
 
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
 var extendStatics = function(d, b) {
     extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
     return extendStatics(d, b);
 };
 
 function __extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
     extendStatics(d, b);
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -217,21 +215,21 @@ var Ticker = /** @class */ (function (_super) {
         get: function () {
             return this.$fps;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Ticker.prototype, "deltaTime", {
         get: function () {
             return this.$deltaTime;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Ticker.prototype, "paused", {
         get: function () {
             return this.$paused;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Ticker.prototype.$start = function () {
@@ -371,14 +369,14 @@ var Vector = /** @class */ (function () {
         get: function () {
             return Math.sqrt(this.x * this.x + this.y * this.y);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Vector.prototype, "angle", {
         get: function () {
             return Math.atan2(this.y, this.x);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Vector.prototype.set = function (x, y) {
@@ -614,7 +612,7 @@ var Rectangle = /** @class */ (function () {
             this.height += this.y - top;
             this.y = top;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Rectangle.prototype, "bottom", {
@@ -624,7 +622,7 @@ var Rectangle = /** @class */ (function () {
         set: function (bottom) {
             this.height = bottom - this.y;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Rectangle.prototype, "left", {
@@ -635,7 +633,7 @@ var Rectangle = /** @class */ (function () {
             this.width += this.x - left;
             this.x = left;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Rectangle.prototype, "right", {
@@ -645,7 +643,7 @@ var Rectangle = /** @class */ (function () {
         set: function (right) {
             this.width = right - this.x;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Rectangle.prototype, "topLeft", {
@@ -656,7 +654,7 @@ var Rectangle = /** @class */ (function () {
             this.top = v.y;
             this.left = v.x;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Rectangle.prototype, "bottomRight", {
@@ -667,7 +665,7 @@ var Rectangle = /** @class */ (function () {
             this.bottom = v.y;
             this.right = v.x;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Rectangle.prototype.set = function (x, y, width, height) {
@@ -801,7 +799,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$markParentDirty();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "y", {
@@ -814,7 +812,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$markParentDirty();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "width", {
@@ -827,7 +825,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$resizeCanvas();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "height", {
@@ -840,7 +838,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$resizeCanvas();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "anchorX", {
@@ -853,7 +851,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$resizeCanvas();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "anchorY", {
@@ -866,7 +864,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$resizeCanvas();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "skewX", {
@@ -879,7 +877,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$markParentDirty();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "skewY", {
@@ -892,7 +890,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$markParentDirty();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "scaleX", {
@@ -905,7 +903,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$markParentDirty();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "scaleY", {
@@ -918,7 +916,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$markParentDirty();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "rotation", {
@@ -931,7 +929,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$markParentDirty();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "alpha", {
@@ -944,7 +942,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$markParentDirty();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "visible", {
@@ -957,7 +955,7 @@ var Layer = /** @class */ (function (_super) {
                 this.$markParentDirty();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "smoothing", {
@@ -968,7 +966,7 @@ var Layer = /** @class */ (function (_super) {
             this.$smoothing = smoothing;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "background", {
@@ -981,42 +979,42 @@ var Layer = /** @class */ (function (_super) {
                 this.$markDirty();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "stage", {
         get: function () {
             return this.$stage;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "parent", {
         get: function () {
             return this.$parent;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "numChildren", {
         get: function () {
             return this.$children.length;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "ticker", {
         get: function () {
             return this.$stage ? this.$stage.ticker : null;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Layer.prototype, "canvas", {
         get: function () {
             return this.$canvas;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Layer.prototype.addChild = function (child) {
@@ -1668,14 +1666,14 @@ var Tween = /** @class */ (function (_super) {
         get: function () {
             return this.$paused;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Tween.prototype, "stopped", {
         get: function () {
             return this.$stopped;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Tween.prototype.set = function (props) {
@@ -1894,7 +1892,7 @@ var Scroller = /** @class */ (function (_super) {
             }
             bounds.release();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Scroller.prototype, "scrollLeft", {
@@ -1911,21 +1909,21 @@ var Scroller = /** @class */ (function (_super) {
             }
             bounds.release();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Scroller.prototype, "scrollWidth", {
         get: function () {
             return this.$scrollWidth;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Scroller.prototype, "scrollHeight", {
         get: function () {
             return this.$scrollHeight;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Scroller.prototype.$getChildTransform = function (child) {
@@ -2066,7 +2064,7 @@ var Image = /** @class */ (function (_super) {
                 this.$resizeCanvas();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Image.prototype, "fillMode", {
@@ -2078,7 +2076,7 @@ var Image = /** @class */ (function (_super) {
             this.$updatePattern();
             this.$markDirty();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Image.prototype, "clipRect", {
@@ -2089,7 +2087,7 @@ var Image = /** @class */ (function (_super) {
             this.$clipRect = clipRect;
             this.$markDirty();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Image.prototype, "scale9Grid", {
@@ -2100,7 +2098,7 @@ var Image = /** @class */ (function (_super) {
             this.$scale9Grid = scale9Grid;
             this.$markDirty();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Image.prototype.$onTextureLoad = function () {
@@ -2278,7 +2276,7 @@ var Text = /** @class */ (function (_super) {
             this.$text = text;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "color", {
@@ -2289,7 +2287,7 @@ var Text = /** @class */ (function (_super) {
             this.$color = color;
             this.$markDirty();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "fontSize", {
@@ -2300,7 +2298,7 @@ var Text = /** @class */ (function (_super) {
             this.$fontSize = fontSize;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "fontStyle", {
@@ -2311,7 +2309,7 @@ var Text = /** @class */ (function (_super) {
             this.$fontStyle = fontStyle;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "fontWeight", {
@@ -2322,7 +2320,7 @@ var Text = /** @class */ (function (_super) {
             this.$fontWeight = fontWeight;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "textAlign", {
@@ -2333,7 +2331,7 @@ var Text = /** @class */ (function (_super) {
             this.$textAlign = textAlign;
             this.$markDirty();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "verticalAlign", {
@@ -2344,7 +2342,7 @@ var Text = /** @class */ (function (_super) {
             this.$verticalAlign = verticalAlign;
             this.$markDirty();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "lineHeight", {
@@ -2355,7 +2353,7 @@ var Text = /** @class */ (function (_super) {
             this.$lineHeight = lineHeight;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "strokeSize", {
@@ -2366,7 +2364,7 @@ var Text = /** @class */ (function (_super) {
             this.$strokeSize = strokeSize;
             this.$markDirty();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "strokeColor", {
@@ -2377,7 +2375,7 @@ var Text = /** @class */ (function (_super) {
             this.$strokeColor = strokeColor;
             this.$markDirty();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "fontFamily", {
@@ -2388,7 +2386,7 @@ var Text = /** @class */ (function (_super) {
             this.$fontFamily = fontFamily;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "multiline", {
@@ -2399,7 +2397,7 @@ var Text = /** @class */ (function (_super) {
             this.$multiline = multiline;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "breakWord", {
@@ -2410,7 +2408,7 @@ var Text = /** @class */ (function (_super) {
             this.$breakWord = breakWord;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "autoFitSize", {
@@ -2421,7 +2419,7 @@ var Text = /** @class */ (function (_super) {
             this.$autoFitSize = autoFitSize;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Text.prototype, "minFontSize", {
@@ -2432,7 +2430,7 @@ var Text = /** @class */ (function (_super) {
             this.$minFontSize = minFontSize;
             this.$resizeCanvas();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Text.prototype.$updateContext = function () {
@@ -2624,7 +2622,7 @@ var Input = /** @class */ (function (_super) {
     Object.defineProperty(Input.prototype, "text", {
         set: function (text) {
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Input.prototype, "value", {
@@ -2635,7 +2633,7 @@ var Input = /** @class */ (function (_super) {
             this.$value = value;
             this.$updateText();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Input.prototype, "type", {
@@ -2646,7 +2644,7 @@ var Input = /** @class */ (function (_super) {
             this.$type = type;
             this.$updateText();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Input.prototype, "color", {
@@ -2663,7 +2661,7 @@ var Input = /** @class */ (function (_super) {
             }
             this.$markDirty();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Input.prototype, "maxLength", {
@@ -2673,7 +2671,7 @@ var Input = /** @class */ (function (_super) {
         set: function (maxLength) {
             this.$maxLength = maxLength;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Input.prototype, "placeholder", {
@@ -2684,7 +2682,7 @@ var Input = /** @class */ (function (_super) {
             this.$placeholder = placeholder;
             this.$updateText();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Input.prototype, "placeholderColor", {
@@ -2695,7 +2693,7 @@ var Input = /** @class */ (function (_super) {
             this.$placeholderColor = placeholderColor;
             this.$markDirty();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Input.prototype.selectAll = function () {
@@ -2777,7 +2775,7 @@ var Input = /** @class */ (function (_super) {
         element.style.fontWeight = this.$fontWeight + '';
         element.style.wordBreak = this.$breakWord ? 'break-all' : 'normal';
         element.style.background = this.$background;
-        element.style.webkitTapHighlightColor = 'transparent';
+        // element.style.webkitTapHighlightColor = 'transparent';
         element.style.boxShadow = '0 0 8px #aaa';
         return element;
     };
@@ -2846,7 +2844,7 @@ var MovieClip = /** @class */ (function (_super) {
         set: function (loop) {
             this.$loop = loop;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MovieClip.prototype, "interval", {
@@ -2856,28 +2854,28 @@ var MovieClip = /** @class */ (function (_super) {
         set: function (interval) {
             this.$interval = interval;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MovieClip.prototype, "paused", {
         get: function () {
             return this.$paused;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MovieClip.prototype, "currentFrame", {
         get: function () {
             return this.$currentFrame;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(MovieClip.prototype, "totalFrames", {
         get: function () {
             return this.$frames.length;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     MovieClip.prototype.play = function () {
@@ -2995,14 +2993,14 @@ var Request = /** @class */ (function (_super) {
         get: function () {
             return this.$xhr.status;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Request.prototype, "response", {
         get: function () {
             return this.$xhr.response;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Request.prototype, "responseHeaders", {
@@ -3027,7 +3025,7 @@ var Request = /** @class */ (function (_super) {
             }
             return headers;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Request.prototype.abort = function () {
@@ -3086,7 +3084,7 @@ var Media = /** @class */ (function (_super) {
         get: function () {
             return this.$element;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Media.prototype, "url", {
@@ -3098,7 +3096,7 @@ var Media = /** @class */ (function (_super) {
             this.$errored = false;
             this.$element.src = url;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Media.prototype.on = function (type, listener) {
@@ -3154,7 +3152,7 @@ var Sound = /** @class */ (function (_super) {
         get: function () {
             return this.$element;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Sound.prototype, "url", {
@@ -3169,7 +3167,7 @@ var Sound = /** @class */ (function (_super) {
                 this.$stage.ticker.setTimeout(this.$boundOnLoad);
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Sound.prototype, "volume", {
@@ -3179,14 +3177,14 @@ var Sound = /** @class */ (function (_super) {
         set: function (volume) {
             this.$element.volume = volume;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Sound.prototype, "paused", {
         get: function () {
             return this.$paused;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Sound.prototype.play = function (startTime, loops) {
@@ -3211,7 +3209,7 @@ var Sound = /** @class */ (function (_super) {
     Sound.prototype.$checkStatus = function () {
         var promise = this.$element.play();
         if (promise) {
-            promise["catch"]();
+            promise.catch();
         }
         if (this.$paused) {
             this.$element.pause();
@@ -3255,7 +3253,8 @@ var Sound = /** @class */ (function (_super) {
         var promise = this.$element.play();
         if (promise) {
             promise
-                .then(this.$checkStatus.bind(this))["catch"](this.$checkOnTouch.bind(this));
+                .then(this.$checkStatus.bind(this))
+                .catch(this.$checkOnTouch.bind(this));
         }
         else {
             this.$checkOnTouch();
@@ -3283,21 +3282,21 @@ var Texture = /** @class */ (function (_super) {
         get: function () {
             return this.$element;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Texture.prototype, "width", {
         get: function () {
             return this.$element.width / this.pixelRatio;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Texture.prototype, "height", {
         get: function () {
             return this.$element.height / this.pixelRatio;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Texture.defaultPixelRatio = 1;
@@ -3325,21 +3324,21 @@ var ResourceManager = /** @class */ (function (_super) {
         get: function () {
             return this.$total;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ResourceManager.prototype, "errorCount", {
         get: function () {
             return this.$errorCount;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ResourceManager.prototype, "loadedCount", {
         get: function () {
             return this.$loadedCount;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     ResourceManager.prototype.$checkPendingTasks = function () {
@@ -3488,7 +3487,7 @@ var Stage = /** @class */ (function (_super) {
         set: function (x) {
             this.$x = 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Stage.prototype, "y", {
@@ -3498,35 +3497,35 @@ var Stage = /** @class */ (function (_super) {
         set: function (y) {
             this.$y = 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Stage.prototype, "ticker", {
         get: function () {
             return this.$ticker;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Stage.prototype, "fps", {
         get: function () {
             return this.$ticker.fps;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Stage.prototype, "drawCalls", {
         get: function () {
             return this.$drawCalls;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Stage.prototype, "activated", {
         get: function () {
             return this.$activated;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Stage.prototype, "scaleMode", {
@@ -3539,14 +3538,14 @@ var Stage = /** @class */ (function (_super) {
                 this.$resizeCanvas();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Stage.prototype, "viewportCanvas", {
         get: function () {
             return this.$viewportCanvas;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Stage.prototype, "viewportWidth", {
@@ -3559,7 +3558,7 @@ var Stage = /** @class */ (function (_super) {
                 this.$resizeViewportCanvas();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Stage.prototype, "viewportHeight", {
@@ -3572,7 +3571,7 @@ var Stage = /** @class */ (function (_super) {
                 this.$resizeViewportCanvas();
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(Stage.prototype, "viewportBackground", {
@@ -3583,7 +3582,7 @@ var Stage = /** @class */ (function (_super) {
             this.$viewportBackground = viewportBackground;
             this.$viewportCanvas.style.background = viewportBackground;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Stage.prototype.createResourceManager = function (list, options) {
@@ -3854,24 +3853,4 @@ var Stage = /** @class */ (function (_super) {
     return Stage;
 }(Layer));
 
-exports.Ease = Ease;
-exports.Event = Event;
-exports.EventEmitter = EventEmitter;
-exports.Image = Image;
-exports.Input = Input;
-exports.Layer = Layer;
-exports.Matrix = Matrix;
-exports.Media = Media;
-exports.MovieClip = MovieClip;
-exports.Rectangle = Rectangle;
-exports.Request = Request;
-exports.ResourceManager = ResourceManager;
-exports.Scroller = Scroller;
-exports.Sound = Sound;
-exports.Stage = Stage;
-exports.Text = Text;
-exports.Texture = Texture;
-exports.Ticker = Ticker;
-exports.TouchEvent = TouchEvent;
-exports.Tween = Tween;
-exports.Vector = Vector;
+export { Ease, Event, EventEmitter, Image, Input, Layer, Matrix, Media, MovieClip, Rectangle, Request, ResourceManager, Scroller, Sound, Stage, Text, Texture, Ticker, TouchEvent, Tween, Vector };

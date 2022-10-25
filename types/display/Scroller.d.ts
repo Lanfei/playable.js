@@ -16,10 +16,12 @@ export declare class Scroller extends Layer {
     protected $velocitiesY: Array<number>;
     protected $inertiaTween: Tween;
     constructor();
-    scrollTop: number;
-    scrollLeft: number;
-    readonly scrollWidth: number;
-    readonly scrollHeight: number;
+    get scrollTop(): number;
+    set scrollTop(scrollTop: number);
+    get scrollLeft(): number;
+    set scrollLeft(scrollLeft: number);
+    get scrollWidth(): number;
+    get scrollHeight(): number;
     protected $getChildTransform(child: Layer): Matrix;
     protected $resizeCanvas(): void;
     protected $onTouchStart(e: TouchEvent): void;

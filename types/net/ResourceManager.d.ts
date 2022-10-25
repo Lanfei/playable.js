@@ -17,9 +17,9 @@ export declare class ResourceManager extends EventEmitter {
     protected readonly $stage: Stage;
     protected readonly $resources: Object;
     constructor(stage: Stage, list: Array<ResourceInfo>, options?: ResourceManagerOption);
-    readonly total: number;
-    readonly errorCount: number;
-    readonly loadedCount: number;
+    get total(): number;
+    get errorCount(): number;
+    get loadedCount(): number;
     protected $checkPendingTasks(): void;
     protected $load(info: ResourceInfo, attempts: number): void;
     has(name: string): boolean;

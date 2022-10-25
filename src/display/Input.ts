@@ -169,7 +169,7 @@ export class Input extends Text {
 		element.style.fontWeight = this.$fontWeight + '';
 		element.style.wordBreak = this.$breakWord ? 'break-all' : 'normal';
 		element.style.background = this.$background;
-		element.style.webkitTapHighlightColor = 'transparent';
+		// element.style.webkitTapHighlightColor = 'transparent';
 		element.style.boxShadow = '0 0 8px #aaa';
 		return element;
 	}
