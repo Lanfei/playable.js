@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[net/Request.ts:130](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L130)
+[net/Request.ts:130](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L130)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:128](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L128)
+[net/Request.ts:128](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L128)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:127](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L127)
+[net/Request.ts:127](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L127)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:129](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L129)
+[net/Request.ts:129](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L129)
 
 ___
 
@@ -60,4 +60,4 @@ ___
 
 #### Defined in
 
-[net/Request.ts:126](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L126)
+[net/Request.ts:126](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L126)

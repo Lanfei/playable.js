@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- [`Media`](Media.md)
+- [`Media`](../README.md#media)
 
   ↳ **`Texture`**
 
@@ -56,16 +56,16 @@
 
 | Name | Type |
 | :------ | :------ |
-| `stage` | [`Stage`](Stage.md) |
+| `stage` | [`Stage`](../README.md#stage) |
 | `url?` | `string` |
 
 #### Overrides
 
-[Media](Media.md).[constructor](Media.md#constructor)
+[Media](../README.md#media).[constructor](../README.md#constructor)
 
 #### Defined in
 
-[media/Texture.ts:12](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Texture.ts#L12)
+[media/Texture.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L12)
 
 ## Properties
 
@@ -89,11 +89,11 @@
 
 #### Inherited from
 
-[Media](Media.md).[$boundOnError](Media.md#$boundonerror)
+[Media](../README.md#media).[$boundOnError](../README.md#$boundonerror)
 
 #### Defined in
 
-[media/Media.ts:13](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Media.ts#L13)
+[media/Media.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L13)
 
 ___
 
@@ -111,11 +111,11 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[$boundOnLoad](Media.md#$boundonload)
+[Media](../README.md#media).[$boundOnLoad](../README.md#$boundonload)
 
 #### Defined in
 
-[media/Media.ts:12](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Media.ts#L12)
+[media/Media.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L12)
 
 ___
 
@@ -125,11 +125,11 @@ ___
 
 #### Overrides
 
-[Media](Media.md).[$element](Media.md#$element)
+[Media](../README.md#media).[$element](../README.md#$element)
 
 #### Defined in
 
-[media/Texture.ts:10](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Texture.ts#L10)
+[media/Texture.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L10)
 
 ___
 
@@ -139,11 +139,11 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[$emittingType](Media.md#$emittingtype)
+[Media](../README.md#media).[$emittingType](../README.md#$emittingtype)
 
 #### Defined in
 
-[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L6)
+[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L6)
 
 ___
 
@@ -153,11 +153,11 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[$errored](Media.md#$errored)
+[Media](../README.md#media).[$errored](../README.md#$errored)
 
 #### Defined in
 
-[media/Media.ts:10](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Media.ts#L10)
+[media/Media.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L10)
 
 ___
 
@@ -167,11 +167,11 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[$events](Media.md#$events)
+[Media](../README.md#media).[$events](../README.md#$events)
 
 #### Defined in
 
-[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L5)
+[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L5)
 
 ___
 
@@ -181,11 +181,11 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[$loaded](Media.md#$loaded)
+[Media](../README.md#media).[$loaded](../README.md#$loaded)
 
 #### Defined in
 
-[media/Media.ts:9](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Media.ts#L9)
+[media/Media.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L9)
 
 ___
 
@@ -195,25 +195,25 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[$removedListeners](Media.md#$removedlisteners)
+[Media](../README.md#media).[$removedListeners](../README.md#$removedlisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L7)
+[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L7)
 
 ___
 
 ### $stage
 
-• `Protected` `Readonly` **$stage**: [`Stage`](Stage.md)
+• `Protected` `Readonly` **$stage**: [`Stage`](../README.md#stage)
 
 #### Inherited from
 
-[Media](Media.md).[$stage](Media.md#$stage)
+[Media](../README.md#media).[$stage](../README.md#$stage)
 
 #### Defined in
 
-[media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Media.ts#L11)
+[media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L11)
 
 ___
 
@@ -223,7 +223,7 @@ ___
 
 #### Defined in
 
-[media/Texture.ts:8](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Texture.ts#L8)
+[media/Texture.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L8)
 
 ___
 
@@ -233,7 +233,7 @@ ___
 
 #### Defined in
 
-[media/Texture.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Texture.ts#L6)
+[media/Texture.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L6)
 
 ## Accessors
 
@@ -251,7 +251,7 @@ Media.element
 
 #### Defined in
 
-[media/Texture.ts:24](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Texture.ts#L24)
+[media/Texture.ts:24](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L24)
 
 ___
 
@@ -265,7 +265,7 @@ ___
 
 #### Defined in
 
-[media/Texture.ts:32](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Texture.ts#L32)
+[media/Texture.ts:32](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L32)
 
 ___
 
@@ -283,7 +283,7 @@ Media.url
 
 #### Defined in
 
-[media/Media.ts:26](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Media.ts#L26)
+[media/Media.ts:26](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L26)
 
 • `set` **url**(`url`): `void`
 
@@ -303,7 +303,7 @@ Media.url
 
 #### Defined in
 
-[media/Media.ts:30](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Media.ts#L30)
+[media/Media.ts:30](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L30)
 
 ___
 
@@ -317,7 +317,7 @@ ___
 
 #### Defined in
 
-[media/Texture.ts:28](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Texture.ts#L28)
+[media/Texture.ts:28](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L28)
 
 ## Methods
 
@@ -331,11 +331,11 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[$onError](Media.md#$onerror)
+[Media](../README.md#media).[$onError](../README.md#$onerror)
 
 #### Defined in
 
-[media/Media.ts:56](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Media.ts#L56)
+[media/Media.ts:56](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L56)
 
 ___
 
@@ -349,11 +349,11 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[$onLoad](Media.md#$onload)
+[Media](../README.md#media).[$onLoad](../README.md#$onload)
 
 #### Defined in
 
-[media/Media.ts:50](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Media.ts#L50)
+[media/Media.ts:50](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L50)
 
 ___
 
@@ -365,7 +365,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `event` | [`Event`](Event.md) |
+| `event` | [`Event`](../README.md#event) |
 
 #### Returns
 
@@ -373,13 +373,13 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[emit](Media.md#emit)
+[Media](../README.md#media).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L42)
+[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L42)
 
-▸ **emit**(`type`, ...`args`): `boolean`
+▸ **emit**(`type`, `...args`): `boolean`
 
 #### Parameters
 
@@ -394,11 +394,11 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[emit](Media.md#emit)
+[Media](../README.md#media).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L43)
+[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L43)
 
 ___
 
@@ -418,17 +418,17 @@ ___
 
 #### Inherited from
 
-[Media](Media.md).[hasEventListener](Media.md#haseventlistener)
+[Media](../README.md#media).[hasEventListener](../README.md#haseventlistener)
 
 #### Defined in
 
-[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L80)
+[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L80)
 
 ___
 
 ### off
 
-▸ **off**(`type`, `listener?`): [`Texture`](Texture.md)
+▸ **off**(`type`, `listener?`): [`Texture`](../README.md#texture)
 
 #### Parameters
 
@@ -439,21 +439,21 @@ ___
 
 #### Returns
 
-[`Texture`](Texture.md)
+[`Texture`](../README.md#texture)
 
 #### Inherited from
 
-[Media](Media.md).[off](Media.md#off)
+[Media](../README.md#media).[off](../README.md#off)
 
 #### Defined in
 
-[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L16)
+[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L16)
 
 ___
 
 ### on
 
-▸ **on**(`type`, `listener`): [`Texture`](Texture.md)
+▸ **on**(`type`, `listener`): [`Texture`](../README.md#texture)
 
 #### Parameters
 
@@ -464,21 +464,21 @@ ___
 
 #### Returns
 
-[`Texture`](Texture.md)
+[`Texture`](../README.md#texture)
 
 #### Inherited from
 
-[Media](Media.md).[on](Media.md#on)
+[Media](../README.md#media).[on](../README.md#on)
 
 #### Defined in
 
-[media/Media.ts:36](https://github.com/Lanfei/playable.js/blob/99bdc51/src/media/Media.ts#L36)
+[media/Media.ts:36](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L36)
 
 ___
 
 ### once
 
-▸ **once**(`type`, `listener`): [`Texture`](Texture.md)
+▸ **once**(`type`, `listener`): [`Texture`](../README.md#texture)
 
 #### Parameters
 
@@ -489,30 +489,30 @@ ___
 
 #### Returns
 
-[`Texture`](Texture.md)
+[`Texture`](../README.md#texture)
 
 #### Inherited from
 
-[Media](Media.md).[once](Media.md#once)
+[Media](../README.md#media).[once](../README.md#once)
 
 #### Defined in
 
-[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L33)
+[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L33)
 
 ___
 
 ### removeAllListeners
 
-▸ **removeAllListeners**(): [`Texture`](Texture.md)
+▸ **removeAllListeners**(): [`Texture`](../README.md#texture)
 
 #### Returns
 
-[`Texture`](Texture.md)
+[`Texture`](../README.md#texture)
 
 #### Inherited from
 
-[Media](Media.md).[removeAllListeners](Media.md#removealllisteners)
+[Media](../README.md#media).[removeAllListeners](../README.md#removealllisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L85)
+[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L85)

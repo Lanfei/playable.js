@@ -18,17 +18,17 @@
 
 #### Defined in
 
-[display/MovieClip.ts:122](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/MovieClip.ts#L122)
+[display/MovieClip.ts:122](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/MovieClip.ts#L122)
 
 ___
 
 ### clip
 
-• **clip**: [`Rectangle`](../classes/Rectangle.md)
+• **clip**: [`Rectangle`](../README.md#rectangle)
 
 #### Defined in
 
-[display/MovieClip.ts:120](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/MovieClip.ts#L120)
+[display/MovieClip.ts:120](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/MovieClip.ts#L120)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[display/MovieClip.ts:121](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/MovieClip.ts#L121)
+[display/MovieClip.ts:121](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/MovieClip.ts#L121)

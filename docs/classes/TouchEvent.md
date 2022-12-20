@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- [`Event`](Event.md)
+- [`Event`](../README.md#event)
 
   ↳ **`TouchEvent`**
 
@@ -78,11 +78,11 @@
 
 #### Overrides
 
-[Event](Event.md).[constructor](Event.md#constructor)
+[Event](../README.md#event).[constructor](../README.md#constructor)
 
 #### Defined in
 
-[event/TouchEvent.ts:28](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L28)
+[event/TouchEvent.ts:28](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L28)
 
 ## Properties
 
@@ -92,21 +92,21 @@
 
 #### Defined in
 
-[event/TouchEvent.ts:26](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L26)
+[event/TouchEvent.ts:26](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L26)
 
 ___
 
 ### currentTarget
 
-• **currentTarget**: [`Layer`](Layer.md)
+• **currentTarget**: [`Layer`](../README.md#layer)
 
 #### Overrides
 
-[Event](Event.md).[currentTarget](Event.md#currenttarget)
+[Event](../README.md#event).[currentTarget](../README.md#currenttarget)
 
 #### Defined in
 
-[event/TouchEvent.ts:18](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L18)
+[event/TouchEvent.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L18)
 
 ___
 
@@ -116,11 +116,11 @@ ___
 
 #### Inherited from
 
-[Event](Event.md).[data](Event.md#data)
+[Event](../README.md#event).[data](../README.md#data)
 
 #### Defined in
 
-[event/Event.ts:43](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L43)
+[event/Event.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L43)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-[event/TouchEvent.ts:25](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L25)
+[event/TouchEvent.ts:25](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L25)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 #### Defined in
 
-[event/TouchEvent.ts:21](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L21)
+[event/TouchEvent.ts:21](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L21)
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 #### Defined in
 
-[event/TouchEvent.ts:22](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L22)
+[event/TouchEvent.ts:22](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L22)
 
 ___
 
@@ -160,7 +160,7 @@ ___
 
 #### Defined in
 
-[event/TouchEvent.ts:23](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L23)
+[event/TouchEvent.ts:23](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L23)
 
 ___
 
@@ -170,21 +170,21 @@ ___
 
 #### Defined in
 
-[event/TouchEvent.ts:24](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L24)
+[event/TouchEvent.ts:24](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L24)
 
 ___
 
 ### target
 
-• **target**: [`Layer`](Layer.md)
+• **target**: [`Layer`](../README.md#layer)
 
 #### Overrides
 
-[Event](Event.md).[target](Event.md#target)
+[Event](../README.md#event).[target](../README.md#target)
 
 #### Defined in
 
-[event/TouchEvent.ts:17](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L17)
+[event/TouchEvent.ts:17](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L17)
 
 ___
 
@@ -194,7 +194,7 @@ ___
 
 #### Defined in
 
-[event/TouchEvent.ts:19](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L19)
+[event/TouchEvent.ts:19](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L19)
 
 ___
 
@@ -204,7 +204,7 @@ ___
 
 #### Defined in
 
-[event/TouchEvent.ts:20](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L20)
+[event/TouchEvent.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L20)
 
 ___
 
@@ -214,25 +214,25 @@ ___
 
 #### Inherited from
 
-[Event](Event.md).[type](Event.md#type)
+[Event](../README.md#event).[type](../README.md#type)
 
 #### Defined in
 
-[event/Event.ts:42](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L42)
+[event/Event.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L42)
 
 ___
 
 ### $pool
 
-▪ `Static` `Protected` `Readonly` **$pool**: [`TouchEvent`](TouchEvent.md)[] = `[]`
+▪ `Static` `Protected` `Readonly` **$pool**: [`TouchEvent`](../README.md#touchevent)[] = `[]`
 
 #### Overrides
 
-[Event](Event.md).[$pool](Event.md#$pool)
+[Event](../README.md#event).[$pool](../README.md#$pool)
 
 #### Defined in
 
-[event/TouchEvent.ts:56](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L56)
+[event/TouchEvent.ts:56](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L56)
 
 ## Events
 
@@ -244,11 +244,11 @@ abort
 
 #### Inherited from
 
-[Event](Event.md).[ABORT](Event.md#abort)
+[Event](../README.md#event).[ABORT](../README.md#abort)
 
 #### Defined in
 
-[event/Event.ts:30](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L30)
+[event/Event.ts:30](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L30)
 
 ___
 
@@ -260,11 +260,11 @@ activate
 
 #### Inherited from
 
-[Event](Event.md).[ACTIVATE](Event.md#activate)
+[Event](../README.md#event).[ACTIVATE](../README.md#activate)
 
 #### Defined in
 
-[event/Event.ts:14](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L14)
+[event/Event.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L14)
 
 ___
 
@@ -276,11 +276,11 @@ added
 
 #### Inherited from
 
-[Event](Event.md).[ADDED](Event.md#added)
+[Event](../README.md#event).[ADDED](../README.md#added)
 
 #### Defined in
 
-[event/Event.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L6)
+[event/Event.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L6)
 
 ___
 
@@ -292,11 +292,11 @@ addedToStage
 
 #### Inherited from
 
-[Event](Event.md).[ADDED_TO_STAGE](Event.md#added_to_stage)
+[Event](../README.md#event).[ADDED_TO_STAGE](../README.md#added_to_stage)
 
 #### Defined in
 
-[event/Event.ts:10](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L10)
+[event/Event.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L10)
 
 ___
 
@@ -308,11 +308,11 @@ complete
 
 #### Inherited from
 
-[Event](Event.md).[COMPLETE](Event.md#complete)
+[Event](../README.md#event).[COMPLETE](../README.md#complete)
 
 #### Defined in
 
-[event/Event.ts:36](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L36)
+[event/Event.ts:36](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L36)
 
 ___
 
@@ -324,11 +324,11 @@ deactivate
 
 #### Inherited from
 
-[Event](Event.md).[DEACTIVATE](Event.md#deactivate)
+[Event](../README.md#event).[DEACTIVATE](../README.md#deactivate)
 
 #### Defined in
 
-[event/Event.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L16)
+[event/Event.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L16)
 
 ___
 
@@ -340,11 +340,11 @@ ended
 
 #### Inherited from
 
-[Event](Event.md).[ENDED](Event.md#ended)
+[Event](../README.md#event).[ENDED](../README.md#ended)
 
 #### Defined in
 
-[event/Event.ts:38](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L38)
+[event/Event.ts:38](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L38)
 
 ___
 
@@ -356,11 +356,11 @@ enterFrame
 
 #### Inherited from
 
-[Event](Event.md).[ENTER_FRAME](Event.md#enter_frame)
+[Event](../README.md#event).[ENTER_FRAME](../README.md#enter_frame)
 
 #### Defined in
 
-[event/Event.ts:18](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L18)
+[event/Event.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L18)
 
 ___
 
@@ -372,11 +372,11 @@ error
 
 #### Inherited from
 
-[Event](Event.md).[ERROR](Event.md#error)
+[Event](../README.md#event).[ERROR](../README.md#error)
 
 #### Defined in
 
-[event/Event.ts:32](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L32)
+[event/Event.ts:32](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L32)
 
 ___
 
@@ -388,11 +388,11 @@ load
 
 #### Inherited from
 
-[Event](Event.md).[LOAD](Event.md#load)
+[Event](../README.md#event).[LOAD](../README.md#load)
 
 #### Defined in
 
-[event/Event.ts:28](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L28)
+[event/Event.ts:28](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L28)
 
 ___
 
@@ -404,11 +404,11 @@ progress
 
 #### Inherited from
 
-[Event](Event.md).[PROGRESS](Event.md#progress)
+[Event](../README.md#event).[PROGRESS](../README.md#progress)
 
 #### Defined in
 
-[event/Event.ts:34](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L34)
+[event/Event.ts:34](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L34)
 
 ___
 
@@ -420,11 +420,11 @@ removed
 
 #### Inherited from
 
-[Event](Event.md).[REMOVED](Event.md#removed)
+[Event](../README.md#event).[REMOVED](../README.md#removed)
 
 #### Defined in
 
-[event/Event.ts:8](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L8)
+[event/Event.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L8)
 
 ___
 
@@ -436,11 +436,11 @@ removeFromStage
 
 #### Inherited from
 
-[Event](Event.md).[REMOVED_FROM_STAGE](Event.md#removed_from_stage)
+[Event](../README.md#event).[REMOVED_FROM_STAGE](../README.md#removed_from_stage)
 
 #### Defined in
 
-[event/Event.ts:12](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L12)
+[event/Event.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L12)
 
 ___
 
@@ -452,11 +452,11 @@ soundComplete
 
 #### Inherited from
 
-[Event](Event.md).[SOUND_COMPLETE](Event.md#sound_complete)
+[Event](../README.md#event).[SOUND_COMPLETE](../README.md#sound_complete)
 
 #### Defined in
 
-[event/Event.ts:40](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L40)
+[event/Event.ts:40](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L40)
 
 ___
 
@@ -468,11 +468,11 @@ tick
 
 #### Inherited from
 
-[Event](Event.md).[TICK](Event.md#tick)
+[Event](../README.md#event).[TICK](../README.md#tick)
 
 #### Defined in
 
-[event/Event.ts:20](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L20)
+[event/Event.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L20)
 
 ___
 
@@ -484,11 +484,11 @@ tickerPause
 
 #### Inherited from
 
-[Event](Event.md).[TICKER_PAUSE](Event.md#ticker_pause)
+[Event](../README.md#event).[TICKER_PAUSE](../README.md#ticker_pause)
 
 #### Defined in
 
-[event/Event.ts:22](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L22)
+[event/Event.ts:22](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L22)
 
 ___
 
@@ -500,11 +500,11 @@ tickerResume
 
 #### Inherited from
 
-[Event](Event.md).[TICKER_RESUME](Event.md#ticker_resume)
+[Event](../README.md#event).[TICKER_RESUME](../README.md#ticker_resume)
 
 #### Defined in
 
-[event/Event.ts:24](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L24)
+[event/Event.ts:24](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L24)
 
 ___
 
@@ -516,7 +516,7 @@ touchCancel
 
 #### Defined in
 
-[event/TouchEvent.ts:13](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L13)
+[event/TouchEvent.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L13)
 
 ___
 
@@ -528,7 +528,7 @@ touchEnd
 
 #### Defined in
 
-[event/TouchEvent.ts:11](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L11)
+[event/TouchEvent.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L11)
 
 ___
 
@@ -540,7 +540,7 @@ touchMove
 
 #### Defined in
 
-[event/TouchEvent.ts:9](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L9)
+[event/TouchEvent.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L9)
 
 ___
 
@@ -552,7 +552,7 @@ touchStart
 
 #### Defined in
 
-[event/TouchEvent.ts:7](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L7)
+[event/TouchEvent.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L7)
 
 ___
 
@@ -564,7 +564,7 @@ touchTap
 
 #### Defined in
 
-[event/TouchEvent.ts:15](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L15)
+[event/TouchEvent.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L15)
 
 ___
 
@@ -576,17 +576,17 @@ viewportResize
 
 #### Inherited from
 
-[Event](Event.md).[VIEWPORT_RESIZE](Event.md#viewport_resize)
+[Event](../README.md#event).[VIEWPORT_RESIZE](../README.md#viewport_resize)
 
 #### Defined in
 
-[event/Event.ts:26](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L26)
+[event/Event.ts:26](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L26)
 
 ## Methods
 
 ### $init
 
-▸ `Protected` **$init**(`type`): [`TouchEvent`](TouchEvent.md)
+▸ `Protected` **$init**(`type`): [`TouchEvent`](../README.md#touchevent)
 
 #### Parameters
 
@@ -596,15 +596,15 @@ viewportResize
 
 #### Returns
 
-[`TouchEvent`](TouchEvent.md)
+[`TouchEvent`](../README.md#touchevent)
 
 #### Overrides
 
-[Event](Event.md).[$init](Event.md#$init)
+[Event](../README.md#event).[$init](../README.md#$init)
 
 #### Defined in
 
-[event/TouchEvent.ts:33](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L33)
+[event/TouchEvent.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L33)
 
 ___
 
@@ -618,11 +618,11 @@ ___
 
 #### Overrides
 
-[Event](Event.md).[release](Event.md#release)
+[Event](../README.md#event).[release](../README.md#release)
 
 #### Defined in
 
-[event/TouchEvent.ts:52](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L52)
+[event/TouchEvent.ts:52](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L52)
 
 ___
 
@@ -636,13 +636,13 @@ ___
 
 #### Defined in
 
-[event/TouchEvent.ts:48](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L48)
+[event/TouchEvent.ts:48](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L48)
 
 ___
 
 ### create
 
-▸ `Static` **create**(`type`): [`TouchEvent`](TouchEvent.md)
+▸ `Static` **create**(`type`): [`TouchEvent`](../README.md#touchevent)
 
 #### Parameters
 
@@ -652,15 +652,15 @@ ___
 
 #### Returns
 
-[`TouchEvent`](TouchEvent.md)
+[`TouchEvent`](../README.md#touchevent)
 
 #### Overrides
 
-[Event](Event.md).[create](Event.md#create)
+[Event](../README.md#event).[create](../README.md#create)
 
 #### Defined in
 
-[event/TouchEvent.ts:58](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L58)
+[event/TouchEvent.ts:58](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L58)
 
 ___
 
@@ -672,7 +672,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `e` | [`TouchEvent`](TouchEvent.md) |
+| `e` | [`TouchEvent`](../README.md#touchevent) |
 
 #### Returns
 
@@ -680,8 +680,8 @@ ___
 
 #### Overrides
 
-[Event](Event.md).[recycle](Event.md#recycle)
+[Event](../README.md#event).[recycle](../README.md#recycle)
 
 #### Defined in
 
-[event/TouchEvent.ts:67](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/TouchEvent.ts#L67)
+[event/TouchEvent.ts:67](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/TouchEvent.ts#L67)

@@ -4,11 +4,9 @@
 
 ## Hierarchy
 
-- [`Layer`](Layer.md)
+- [`Layer`](../README.md#layer)
 
   ↳ **`Text`**
-
-  ↳↳ [`Input`](Input.md)
 
 ## Table of contents
 
@@ -168,11 +166,11 @@
 
 #### Overrides
 
-[Layer](Layer.md).[constructor](Layer.md#constructor)
+[Layer](../README.md#layer).[constructor](../README.md#constructor)
 
 #### Defined in
 
-[display/Text.ts:29](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L29)
+[display/Text.ts:29](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L29)
 
 ## Properties
 
@@ -182,11 +180,11 @@
 
 #### Inherited from
 
-[Layer](Layer.md).[$alpha](Layer.md#$alpha)
+[Layer](../README.md#layer).[$alpha](../README.md#$alpha)
 
 #### Defined in
 
-[display/Layer.ts:29](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L29)
+[display/Layer.ts:29](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L29)
 
 ___
 
@@ -196,11 +194,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$anchorX](Layer.md#$anchorx)
+[Layer](../README.md#layer).[$anchorX](../README.md#$anchorx)
 
 #### Defined in
 
-[display/Layer.ts:22](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L22)
+[display/Layer.ts:22](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L22)
 
 ___
 
@@ -210,11 +208,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$anchorY](Layer.md#$anchory)
+[Layer](../README.md#layer).[$anchorY](../README.md#$anchory)
 
 #### Defined in
 
-[display/Layer.ts:23](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L23)
+[display/Layer.ts:23](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L23)
 
 ___
 
@@ -224,7 +222,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:24](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L24)
+[display/Text.ts:24](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L24)
 
 ___
 
@@ -234,11 +232,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$background](Layer.md#$background)
+[Layer](../README.md#layer).[$background](../README.md#$background)
 
 #### Defined in
 
-[display/Layer.ts:32](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L32)
+[display/Layer.ts:32](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L32)
 
 ___
 
@@ -248,7 +246,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:23](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L23)
+[display/Text.ts:23](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L23)
 
 ___
 
@@ -258,25 +256,25 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$canvas](Layer.md#$canvas)
+[Layer](../README.md#layer).[$canvas](../README.md#$canvas)
 
 #### Defined in
 
-[display/Layer.ts:39](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L39)
+[display/Layer.ts:39](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L39)
 
 ___
 
 ### $children
 
-• `Protected` **$children**: [`Layer`](Layer.md)[] = `[]`
+• `Protected` **$children**: [`Layer`](../README.md#layer)[] = `[]`
 
 #### Inherited from
 
-[Layer](Layer.md).[$children](Layer.md#$children)
+[Layer](../README.md#layer).[$children](../README.md#$children)
 
 #### Defined in
 
-[display/Layer.ts:35](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L35)
+[display/Layer.ts:35](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L35)
 
 ___
 
@@ -286,7 +284,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:12](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L12)
+[display/Text.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L12)
 
 ___
 
@@ -296,11 +294,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$context](Layer.md#$context)
+[Layer](../README.md#layer).[$context](../README.md#$context)
 
 #### Defined in
 
-[display/Layer.ts:40](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L40)
+[display/Layer.ts:40](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L40)
 
 ___
 
@@ -310,11 +308,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$dirty](Layer.md#$dirty)
+[Layer](../README.md#layer).[$dirty](../README.md#$dirty)
 
 #### Defined in
 
-[display/Layer.ts:36](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L36)
+[display/Layer.ts:36](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L36)
 
 ___
 
@@ -324,11 +322,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$emittingType](Layer.md#$emittingtype)
+[Layer](../README.md#layer).[$emittingType](../README.md#$emittingtype)
 
 #### Defined in
 
-[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L6)
+[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L6)
 
 ___
 
@@ -338,11 +336,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$events](Layer.md#$events)
+[Layer](../README.md#layer).[$events](../README.md#$events)
 
 #### Defined in
 
-[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L5)
+[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L5)
 
 ___
 
@@ -352,7 +350,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:26](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L26)
+[display/Text.ts:26](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L26)
 
 ___
 
@@ -362,7 +360,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:21](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L21)
+[display/Text.ts:21](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L21)
 
 ___
 
@@ -372,7 +370,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:13](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L13)
+[display/Text.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L13)
 
 ___
 
@@ -382,7 +380,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:14](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L14)
+[display/Text.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L14)
 
 ___
 
@@ -392,7 +390,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:15](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L15)
+[display/Text.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L15)
 
 ___
 
@@ -402,11 +400,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$height](Layer.md#$height)
+[Layer](../README.md#layer).[$height](../README.md#$height)
 
 #### Defined in
 
-[display/Layer.ts:21](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L21)
+[display/Layer.ts:21](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L21)
 
 ___
 
@@ -416,7 +414,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:18](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L18)
+[display/Text.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L18)
 
 ___
 
@@ -426,7 +424,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:27](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L27)
+[display/Text.ts:27](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L27)
 
 ___
 
@@ -436,7 +434,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:25](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L25)
+[display/Text.ts:25](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L25)
 
 ___
 
@@ -446,21 +444,21 @@ ___
 
 #### Defined in
 
-[display/Text.ts:22](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L22)
+[display/Text.ts:22](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L22)
 
 ___
 
 ### $parent
 
-• `Protected` **$parent**: [`Layer`](Layer.md) = `null`
+• `Protected` **$parent**: [`Layer`](../README.md#layer) = `null`
 
 #### Inherited from
 
-[Layer](Layer.md).[$parent](Layer.md#$parent)
+[Layer](../README.md#layer).[$parent](../README.md#$parent)
 
 #### Defined in
 
-[display/Layer.ts:34](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L34)
+[display/Layer.ts:34](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L34)
 
 ___
 
@@ -470,11 +468,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$removedListeners](Layer.md#$removedlisteners)
+[Layer](../README.md#layer).[$removedListeners](../README.md#$removedlisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L7)
+[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L7)
 
 ___
 
@@ -484,11 +482,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$rotation](Layer.md#$rotation)
+[Layer](../README.md#layer).[$rotation](../README.md#$rotation)
 
 #### Defined in
 
-[display/Layer.ts:28](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L28)
+[display/Layer.ts:28](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L28)
 
 ___
 
@@ -498,11 +496,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$scaleX](Layer.md#$scalex)
+[Layer](../README.md#layer).[$scaleX](../README.md#$scalex)
 
 #### Defined in
 
-[display/Layer.ts:26](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L26)
+[display/Layer.ts:26](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L26)
 
 ___
 
@@ -512,11 +510,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$scaleY](Layer.md#$scaley)
+[Layer](../README.md#layer).[$scaleY](../README.md#$scaley)
 
 #### Defined in
 
-[display/Layer.ts:27](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L27)
+[display/Layer.ts:27](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L27)
 
 ___
 
@@ -526,11 +524,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$shouldEmitTap](Layer.md#$shouldemittap)
+[Layer](../README.md#layer).[$shouldEmitTap](../README.md#$shouldemittap)
 
 #### Defined in
 
-[display/Layer.ts:37](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L37)
+[display/Layer.ts:37](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L37)
 
 ___
 
@@ -540,11 +538,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$skewX](Layer.md#$skewx)
+[Layer](../README.md#layer).[$skewX](../README.md#$skewx)
 
 #### Defined in
 
-[display/Layer.ts:24](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L24)
+[display/Layer.ts:24](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L24)
 
 ___
 
@@ -554,11 +552,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$skewY](Layer.md#$skewy)
+[Layer](../README.md#layer).[$skewY](../README.md#$skewy)
 
 #### Defined in
 
-[display/Layer.ts:25](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L25)
+[display/Layer.ts:25](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L25)
 
 ___
 
@@ -568,25 +566,25 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$smoothing](Layer.md#$smoothing)
+[Layer](../README.md#layer).[$smoothing](../README.md#$smoothing)
 
 #### Defined in
 
-[display/Layer.ts:31](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L31)
+[display/Layer.ts:31](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L31)
 
 ___
 
 ### $stage
 
-• `Protected` **$stage**: [`Stage`](Stage.md) = `null`
+• `Protected` **$stage**: [`Stage`](../README.md#stage) = `null`
 
 #### Inherited from
 
-[Layer](Layer.md).[$stage](Layer.md#$stage)
+[Layer](../README.md#layer).[$stage](../README.md#$stage)
 
 #### Defined in
 
-[display/Layer.ts:33](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L33)
+[display/Layer.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L33)
 
 ___
 
@@ -596,7 +594,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:20](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L20)
+[display/Text.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L20)
 
 ___
 
@@ -606,7 +604,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:19](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L19)
+[display/Text.ts:19](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L19)
 
 ___
 
@@ -616,7 +614,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:11](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L11)
+[display/Text.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L11)
 
 ___
 
@@ -626,7 +624,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L16)
+[display/Text.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L16)
 
 ___
 
@@ -636,11 +634,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$touches](Layer.md#$touches)
+[Layer](../README.md#layer).[$touches](../README.md#$touches)
 
 #### Defined in
 
-[display/Layer.ts:38](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L38)
+[display/Layer.ts:38](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L38)
 
 ___
 
@@ -650,7 +648,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:17](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L17)
+[display/Text.ts:17](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L17)
 
 ___
 
@@ -660,11 +658,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$visible](Layer.md#$visible)
+[Layer](../README.md#layer).[$visible](../README.md#$visible)
 
 #### Defined in
 
-[display/Layer.ts:30](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L30)
+[display/Layer.ts:30](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L30)
 
 ___
 
@@ -674,11 +672,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$width](Layer.md#$width)
+[Layer](../README.md#layer).[$width](../README.md#$width)
 
 #### Defined in
 
-[display/Layer.ts:20](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L20)
+[display/Layer.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L20)
 
 ___
 
@@ -688,11 +686,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$x](Layer.md#$x)
+[Layer](../README.md#layer).[$x](../README.md#$x)
 
 #### Defined in
 
-[display/Layer.ts:18](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L18)
+[display/Layer.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L18)
 
 ___
 
@@ -702,11 +700,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$y](Layer.md#$y)
+[Layer](../README.md#layer).[$y](../README.md#$y)
 
 #### Defined in
 
-[display/Layer.ts:19](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L19)
+[display/Layer.ts:19](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L19)
 
 ___
 
@@ -716,11 +714,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[name](Layer.md#name)
+[Layer](../README.md#layer).[name](../README.md#name)
 
 #### Defined in
 
-[display/Layer.ts:14](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L14)
+[display/Layer.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L14)
 
 ___
 
@@ -730,11 +728,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[tag](Layer.md#tag)
+[Layer](../README.md#layer).[tag](../README.md#tag)
 
 #### Defined in
 
-[display/Layer.ts:15](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L15)
+[display/Layer.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L15)
 
 ___
 
@@ -744,11 +742,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[touchable](Layer.md#touchable)
+[Layer](../README.md#layer).[touchable](../README.md#touchable)
 
 #### Defined in
 
-[display/Layer.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L16)
+[display/Layer.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L16)
 
 ___
 
@@ -758,7 +756,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:9](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L9)
+[display/Text.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L9)
 
 ___
 
@@ -768,7 +766,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L6)
+[display/Text.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L6)
 
 ___
 
@@ -778,11 +776,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[pixelRatio](Layer.md#pixelratio)
+[Layer](../README.md#layer).[pixelRatio](../README.md#pixelratio)
 
 #### Defined in
 
-[display/Layer.ts:12](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L12)
+[display/Layer.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L12)
 
 ___
 
@@ -792,7 +790,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:8](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L8)
+[display/Text.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L8)
 
 ## Accessors
 
@@ -810,7 +808,7 @@ Layer.alpha
 
 #### Defined in
 
-[display/Layer.ts:169](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L169)
+[display/Layer.ts:169](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L169)
 
 • `set` **alpha**(`alpha`): `void`
 
@@ -830,7 +828,7 @@ Layer.alpha
 
 #### Defined in
 
-[display/Layer.ts:173](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L173)
+[display/Layer.ts:173](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L173)
 
 ___
 
@@ -848,7 +846,7 @@ Layer.anchorX
 
 #### Defined in
 
-[display/Layer.ts:92](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L92)
+[display/Layer.ts:92](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L92)
 
 • `set` **anchorX**(`anchorX`): `void`
 
@@ -868,7 +866,7 @@ Layer.anchorX
 
 #### Defined in
 
-[display/Layer.ts:96](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L96)
+[display/Layer.ts:96](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L96)
 
 ___
 
@@ -886,7 +884,7 @@ Layer.anchorY
 
 #### Defined in
 
-[display/Layer.ts:103](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L103)
+[display/Layer.ts:103](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L103)
 
 • `set` **anchorY**(`anchorY`): `void`
 
@@ -906,7 +904,7 @@ Layer.anchorY
 
 #### Defined in
 
-[display/Layer.ts:107](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L107)
+[display/Layer.ts:107](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L107)
 
 ___
 
@@ -920,7 +918,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:166](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L166)
+[display/Text.ts:166](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L166)
 
 • `set` **autoFitSize**(`autoFitSize`): `void`
 
@@ -936,7 +934,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:170](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L170)
+[display/Text.ts:170](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L170)
 
 ___
 
@@ -954,7 +952,7 @@ Layer.background
 
 #### Defined in
 
-[display/Layer.ts:200](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L200)
+[display/Layer.ts:200](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L200)
 
 • `set` **background**(`background`): `void`
 
@@ -974,7 +972,7 @@ Layer.background
 
 #### Defined in
 
-[display/Layer.ts:204](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L204)
+[display/Layer.ts:204](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L204)
 
 ___
 
@@ -988,7 +986,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:157](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L157)
+[display/Text.ts:157](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L157)
 
 • `set` **breakWord**(`breakWord`): `void`
 
@@ -1004,7 +1002,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:161](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L161)
+[display/Text.ts:161](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L161)
 
 ___
 
@@ -1022,7 +1020,7 @@ Layer.canvas
 
 #### Defined in
 
-[display/Layer.ts:227](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L227)
+[display/Layer.ts:227](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L227)
 
 ___
 
@@ -1036,7 +1034,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:58](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L58)
+[display/Text.ts:58](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L58)
 
 • `set` **color**(`color`): `void`
 
@@ -1052,7 +1050,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:62](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L62)
+[display/Text.ts:62](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L62)
 
 ___
 
@@ -1066,7 +1064,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:139](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L139)
+[display/Text.ts:139](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L139)
 
 • `set` **fontFamily**(`fontFamily`): `void`
 
@@ -1082,7 +1080,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:143](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L143)
+[display/Text.ts:143](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L143)
 
 ___
 
@@ -1096,7 +1094,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:67](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L67)
+[display/Text.ts:67](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L67)
 
 • `set` **fontSize**(`fontSize`): `void`
 
@@ -1112,7 +1110,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:71](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L71)
+[display/Text.ts:71](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L71)
 
 ___
 
@@ -1126,7 +1124,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:76](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L76)
+[display/Text.ts:76](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L76)
 
 • `set` **fontStyle**(`fontStyle`): `void`
 
@@ -1142,7 +1140,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:80](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L80)
+[display/Text.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L80)
 
 ___
 
@@ -1156,7 +1154,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:85](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L85)
+[display/Text.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L85)
 
 • `set` **fontWeight**(`fontWeight`): `void`
 
@@ -1172,7 +1170,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:89](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L89)
+[display/Text.ts:89](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L89)
 
 ___
 
@@ -1190,7 +1188,7 @@ Layer.height
 
 #### Defined in
 
-[display/Layer.ts:81](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L81)
+[display/Layer.ts:81](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L81)
 
 • `set` **height**(`height`): `void`
 
@@ -1210,7 +1208,7 @@ Layer.height
 
 #### Defined in
 
-[display/Layer.ts:85](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L85)
+[display/Layer.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L85)
 
 ___
 
@@ -1224,7 +1222,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:112](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L112)
+[display/Text.ts:112](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L112)
 
 • `set` **lineHeight**(`lineHeight`): `void`
 
@@ -1240,7 +1238,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:116](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L116)
+[display/Text.ts:116](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L116)
 
 ___
 
@@ -1254,7 +1252,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:175](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L175)
+[display/Text.ts:175](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L175)
 
 • `set` **minFontSize**(`minFontSize`): `void`
 
@@ -1270,7 +1268,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:179](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L179)
+[display/Text.ts:179](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L179)
 
 ___
 
@@ -1284,7 +1282,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:148](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L148)
+[display/Text.ts:148](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L148)
 
 • `set` **multiline**(`multiline`): `void`
 
@@ -1300,7 +1298,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:152](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L152)
+[display/Text.ts:152](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L152)
 
 ___
 
@@ -1318,17 +1316,17 @@ Layer.numChildren
 
 #### Defined in
 
-[display/Layer.ts:219](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L219)
+[display/Layer.ts:219](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L219)
 
 ___
 
 ### parent
 
-• `get` **parent**(): [`Layer`](Layer.md)
+• `get` **parent**(): [`Layer`](../README.md#layer)
 
 #### Returns
 
-[`Layer`](Layer.md)
+[`Layer`](../README.md#layer)
 
 #### Inherited from
 
@@ -1336,7 +1334,7 @@ Layer.parent
 
 #### Defined in
 
-[display/Layer.ts:215](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L215)
+[display/Layer.ts:215](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L215)
 
 ___
 
@@ -1354,7 +1352,7 @@ Layer.rotation
 
 #### Defined in
 
-[display/Layer.ts:158](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L158)
+[display/Layer.ts:158](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L158)
 
 • `set` **rotation**(`rotation`): `void`
 
@@ -1374,7 +1372,7 @@ Layer.rotation
 
 #### Defined in
 
-[display/Layer.ts:162](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L162)
+[display/Layer.ts:162](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L162)
 
 ___
 
@@ -1392,7 +1390,7 @@ Layer.scaleX
 
 #### Defined in
 
-[display/Layer.ts:136](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L136)
+[display/Layer.ts:136](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L136)
 
 • `set` **scaleX**(`scaleX`): `void`
 
@@ -1412,7 +1410,7 @@ Layer.scaleX
 
 #### Defined in
 
-[display/Layer.ts:140](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L140)
+[display/Layer.ts:140](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L140)
 
 ___
 
@@ -1430,7 +1428,7 @@ Layer.scaleY
 
 #### Defined in
 
-[display/Layer.ts:147](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L147)
+[display/Layer.ts:147](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L147)
 
 • `set` **scaleY**(`scaleY`): `void`
 
@@ -1450,7 +1448,7 @@ Layer.scaleY
 
 #### Defined in
 
-[display/Layer.ts:151](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L151)
+[display/Layer.ts:151](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L151)
 
 ___
 
@@ -1468,7 +1466,7 @@ Layer.skewX
 
 #### Defined in
 
-[display/Layer.ts:114](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L114)
+[display/Layer.ts:114](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L114)
 
 • `set` **skewX**(`skewX`): `void`
 
@@ -1488,7 +1486,7 @@ Layer.skewX
 
 #### Defined in
 
-[display/Layer.ts:118](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L118)
+[display/Layer.ts:118](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L118)
 
 ___
 
@@ -1506,7 +1504,7 @@ Layer.skewY
 
 #### Defined in
 
-[display/Layer.ts:125](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L125)
+[display/Layer.ts:125](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L125)
 
 • `set` **skewY**(`skewY`): `void`
 
@@ -1526,7 +1524,7 @@ Layer.skewY
 
 #### Defined in
 
-[display/Layer.ts:129](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L129)
+[display/Layer.ts:129](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L129)
 
 ___
 
@@ -1544,7 +1542,7 @@ Layer.smoothing
 
 #### Defined in
 
-[display/Layer.ts:191](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L191)
+[display/Layer.ts:191](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L191)
 
 • `set` **smoothing**(`smoothing`): `void`
 
@@ -1564,17 +1562,17 @@ Layer.smoothing
 
 #### Defined in
 
-[display/Layer.ts:195](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L195)
+[display/Layer.ts:195](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L195)
 
 ___
 
 ### stage
 
-• `get` **stage**(): [`Stage`](Stage.md)
+• `get` **stage**(): [`Stage`](../README.md#stage)
 
 #### Returns
 
-[`Stage`](Stage.md)
+[`Stage`](../README.md#stage)
 
 #### Inherited from
 
@@ -1582,7 +1580,7 @@ Layer.stage
 
 #### Defined in
 
-[display/Layer.ts:211](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L211)
+[display/Layer.ts:211](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L211)
 
 ___
 
@@ -1596,7 +1594,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:130](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L130)
+[display/Text.ts:130](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L130)
 
 • `set` **strokeColor**(`strokeColor`): `void`
 
@@ -1612,7 +1610,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:134](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L134)
+[display/Text.ts:134](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L134)
 
 ___
 
@@ -1626,7 +1624,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:121](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L121)
+[display/Text.ts:121](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L121)
 
 • `set` **strokeSize**(`strokeSize`): `void`
 
@@ -1642,7 +1640,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:125](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L125)
+[display/Text.ts:125](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L125)
 
 ___
 
@@ -1656,7 +1654,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:49](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L49)
+[display/Text.ts:49](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L49)
 
 • `set` **text**(`text`): `void`
 
@@ -1672,7 +1670,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:53](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L53)
+[display/Text.ts:53](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L53)
 
 ___
 
@@ -1686,7 +1684,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:94](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L94)
+[display/Text.ts:94](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L94)
 
 • `set` **textAlign**(`textAlign`): `void`
 
@@ -1702,17 +1700,17 @@ ___
 
 #### Defined in
 
-[display/Text.ts:98](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L98)
+[display/Text.ts:98](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L98)
 
 ___
 
 ### ticker
 
-• `get` **ticker**(): [`Ticker`](Ticker.md)
+• `get` **ticker**(): [`Ticker`](../README.md#ticker)
 
 #### Returns
 
-[`Ticker`](Ticker.md)
+[`Ticker`](../README.md#ticker)
 
 #### Inherited from
 
@@ -1720,7 +1718,7 @@ Layer.ticker
 
 #### Defined in
 
-[display/Layer.ts:223](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L223)
+[display/Layer.ts:223](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L223)
 
 ___
 
@@ -1734,7 +1732,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:103](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L103)
+[display/Text.ts:103](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L103)
 
 • `set` **verticalAlign**(`verticalAlign`): `void`
 
@@ -1750,7 +1748,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:107](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L107)
+[display/Text.ts:107](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L107)
 
 ___
 
@@ -1768,7 +1766,7 @@ Layer.visible
 
 #### Defined in
 
-[display/Layer.ts:180](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L180)
+[display/Layer.ts:180](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L180)
 
 • `set` **visible**(`visible`): `void`
 
@@ -1788,7 +1786,7 @@ Layer.visible
 
 #### Defined in
 
-[display/Layer.ts:184](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L184)
+[display/Layer.ts:184](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L184)
 
 ___
 
@@ -1806,7 +1804,7 @@ Layer.width
 
 #### Defined in
 
-[display/Layer.ts:70](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L70)
+[display/Layer.ts:70](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L70)
 
 • `set` **width**(`width`): `void`
 
@@ -1826,7 +1824,7 @@ Layer.width
 
 #### Defined in
 
-[display/Layer.ts:74](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L74)
+[display/Layer.ts:74](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L74)
 
 ___
 
@@ -1844,7 +1842,7 @@ Layer.x
 
 #### Defined in
 
-[display/Layer.ts:48](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L48)
+[display/Layer.ts:48](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L48)
 
 • `set` **x**(`x`): `void`
 
@@ -1864,7 +1862,7 @@ Layer.x
 
 #### Defined in
 
-[display/Layer.ts:52](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L52)
+[display/Layer.ts:52](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L52)
 
 ___
 
@@ -1882,7 +1880,7 @@ Layer.y
 
 #### Defined in
 
-[display/Layer.ts:59](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L59)
+[display/Layer.ts:59](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L59)
 
 • `set` **y**(`y`): `void`
 
@@ -1902,7 +1900,7 @@ Layer.y
 
 #### Defined in
 
-[display/Layer.ts:63](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L63)
+[display/Layer.ts:63](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L63)
 
 ## Methods
 
@@ -1916,7 +1914,7 @@ Layer.y
 
 #### Defined in
 
-[display/Text.ts:221](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L221)
+[display/Text.ts:221](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L221)
 
 ___
 
@@ -1930,7 +1928,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:199](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L199)
+[display/Text.ts:199](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L199)
 
 ___
 
@@ -1942,7 +1940,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `child` | [`Layer`](Layer.md) |
+| `child` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
@@ -1950,11 +1948,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$drawChild](Layer.md#$drawchild)
+[Layer](../README.md#layer).[$drawChild](../README.md#$drawchild)
 
 #### Defined in
 
-[display/Layer.ts:605](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L605)
+[display/Layer.ts:605](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L605)
 
 ___
 
@@ -1966,7 +1964,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `parent` | [`Layer`](Layer.md) |
+| `parent` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
@@ -1974,11 +1972,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$emitAdded](Layer.md#$emitadded)
+[Layer](../README.md#layer).[$emitAdded](../README.md#$emitadded)
 
 #### Defined in
 
-[display/Layer.ts:543](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L543)
+[display/Layer.ts:543](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L543)
 
 ___
 
@@ -1990,7 +1988,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `stage` | [`Stage`](Stage.md) |
+| `stage` | [`Stage`](../README.md#stage) |
 
 #### Returns
 
@@ -1998,11 +1996,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$emitAddedToStage](Layer.md#$emitaddedtostage)
+[Layer](../README.md#layer).[$emitAddedToStage](../README.md#$emitaddedtostage)
 
 #### Defined in
 
-[display/Layer.ts:561](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L561)
+[display/Layer.ts:561](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L561)
 
 ___
 
@@ -2016,11 +2014,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$emitRemoved](Layer.md#$emitremoved)
+[Layer](../README.md#layer).[$emitRemoved](../README.md#$emitremoved)
 
 #### Defined in
 
-[display/Layer.ts:552](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L552)
+[display/Layer.ts:552](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L552)
 
 ___
 
@@ -2034,11 +2032,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$emitRemovedFromStage](Layer.md#$emitremovedfromstage)
+[Layer](../README.md#layer).[$emitRemovedFromStage](../README.md#$emitremovedfromstage)
 
 #### Defined in
 
-[display/Layer.ts:574](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L574)
+[display/Layer.ts:574](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L574)
 
 ___
 
@@ -2050,7 +2048,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `event` | [`TouchEvent`](TouchEvent.md) |
+| `event` | [`TouchEvent`](../README.md#touchevent) |
 | `inside` | `boolean` |
 
 #### Returns
@@ -2059,95 +2057,95 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$emitTouchEvent](Layer.md#$emittouchevent)
+[Layer](../README.md#layer).[$emitTouchEvent](../README.md#$emittouchevent)
 
 #### Defined in
 
-[display/Layer.ts:495](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L495)
+[display/Layer.ts:495](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L495)
 
 ___
 
 ### $getChildBounds
 
-▸ `Protected` **$getChildBounds**(`child`): [`Rectangle`](Rectangle.md)
+▸ `Protected` **$getChildBounds**(`child`): [`Rectangle`](../README.md#rectangle)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `child` | [`Layer`](Layer.md) |
+| `child` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
-[`Rectangle`](Rectangle.md)
+[`Rectangle`](../README.md#rectangle)
 
 #### Inherited from
 
-[Layer](Layer.md).[$getChildBounds](Layer.md#$getchildbounds)
+[Layer](../README.md#layer).[$getChildBounds](../README.md#$getchildbounds)
 
 #### Defined in
 
-[display/Layer.ts:449](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L449)
+[display/Layer.ts:449](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L449)
 
 ___
 
 ### $getChildTransform
 
-▸ `Protected` **$getChildTransform**(`child`): [`Matrix`](Matrix.md)
+▸ `Protected` **$getChildTransform**(`child`): [`Matrix`](../README.md#matrix)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `child` | [`Layer`](Layer.md) |
+| `child` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
-[`Matrix`](Matrix.md)
+[`Matrix`](../README.md#matrix)
 
 #### Inherited from
 
-[Layer](Layer.md).[$getChildTransform](Layer.md#$getchildtransform)
+[Layer](../README.md#layer).[$getChildTransform](../README.md#$getchildtransform)
 
 #### Defined in
 
-[display/Layer.ts:445](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L445)
+[display/Layer.ts:445](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L445)
 
 ___
 
 ### $getContentBounds
 
-▸ `Protected` **$getContentBounds**(): [`Rectangle`](Rectangle.md)
+▸ `Protected` **$getContentBounds**(): [`Rectangle`](../README.md#rectangle)
 
 #### Returns
 
-[`Rectangle`](Rectangle.md)
+[`Rectangle`](../README.md#rectangle)
 
 #### Overrides
 
-[Layer](Layer.md).[$getContentBounds](Layer.md#$getcontentbounds)
+[Layer](../README.md#layer).[$getContentBounds](../README.md#$getcontentbounds)
 
 #### Defined in
 
-[display/Text.ts:273](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L273)
+[display/Text.ts:273](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L273)
 
 ___
 
 ### $getTransform
 
-▸ `Protected` **$getTransform**(): [`Matrix`](Matrix.md)
+▸ `Protected` **$getTransform**(): [`Matrix`](../README.md#matrix)
 
 #### Returns
 
-[`Matrix`](Matrix.md)
+[`Matrix`](../README.md#matrix)
 
 #### Inherited from
 
-[Layer](Layer.md).[$getTransform](Layer.md#$gettransform)
+[Layer](../README.md#layer).[$getTransform](../README.md#$gettransform)
 
 #### Defined in
 
-[display/Layer.ts:434](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L434)
+[display/Layer.ts:434](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L434)
 
 ___
 
@@ -2159,7 +2157,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `child` | [`Layer`](Layer.md) |
+| `child` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
@@ -2167,11 +2165,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$isChildVisible](Layer.md#$ischildvisible)
+[Layer](../README.md#layer).[$isChildVisible](../README.md#$ischildvisible)
 
 #### Defined in
 
-[display/Layer.ts:591](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L591)
+[display/Layer.ts:591](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L591)
 
 ___
 
@@ -2183,7 +2181,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `vector` | [`Vector`](Vector.md) |
+| `vector` | [`Vector`](../README.md#vector) |
 
 #### Returns
 
@@ -2191,11 +2189,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$localHitTest](Layer.md#$localhittest)
+[Layer](../README.md#layer).[$localHitTest](../README.md#$localhittest)
 
 #### Defined in
 
-[display/Layer.ts:587](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L587)
+[display/Layer.ts:587](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L587)
 
 ___
 
@@ -2215,11 +2213,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$markDirty](Layer.md#$markdirty)
+[Layer](../README.md#layer).[$markDirty](../README.md#$markdirty)
 
 #### Defined in
 
-[display/Layer.ts:389](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L389)
+[display/Layer.ts:389](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L389)
 
 ___
 
@@ -2233,11 +2231,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$markParentDirty](Layer.md#$markparentdirty)
+[Layer](../README.md#layer).[$markParentDirty](../README.md#$markparentdirty)
 
 #### Defined in
 
-[display/Layer.ts:398](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L398)
+[display/Layer.ts:398](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L398)
 
 ___
 
@@ -2251,11 +2249,11 @@ ___
 
 #### Overrides
 
-[Layer](Layer.md).[$render](Layer.md#$render)
+[Layer](../README.md#layer).[$render](../README.md#$render)
 
 #### Defined in
 
-[display/Text.ts:288](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L288)
+[display/Text.ts:288](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L288)
 
 ___
 
@@ -2269,11 +2267,11 @@ ___
 
 #### Overrides
 
-[Layer](Layer.md).[$resizeCanvas](Layer.md#$resizecanvas)
+[Layer](../README.md#layer).[$resizeCanvas](../README.md#$resizecanvas)
 
 #### Defined in
 
-[display/Text.ts:253](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L253)
+[display/Text.ts:253](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L253)
 
 ___
 
@@ -2287,11 +2285,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[$resizeParentCanvas](Layer.md#$resizeparentcanvas)
+[Layer](../README.md#layer).[$resizeParentCanvas](../README.md#$resizeparentcanvas)
 
 #### Defined in
 
-[display/Layer.ts:428](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L428)
+[display/Layer.ts:428](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L428)
 
 ___
 
@@ -2305,56 +2303,56 @@ ___
 
 #### Defined in
 
-[display/Text.ts:184](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L184)
+[display/Text.ts:184](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L184)
 
 ___
 
 ### addChild
 
-▸ **addChild**(`child`): [`Text`](Text.md)
+▸ **addChild**(`child`): [`Text`](../README.md#text)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `child` | [`Layer`](Layer.md) |
+| `child` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[addChild](Layer.md#addchild)
+[Layer](../README.md#layer).[addChild](../README.md#addchild)
 
 #### Defined in
 
-[display/Layer.ts:231](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L231)
+[display/Layer.ts:231](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L231)
 
 ___
 
 ### addChildAt
 
-▸ **addChildAt**(`child`, `index`): [`Text`](Text.md)
+▸ **addChildAt**(`child`, `index`): [`Text`](../README.md#text)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `child` | [`Layer`](Layer.md) |
+| `child` | [`Layer`](../README.md#layer) |
 | `index` | `number` |
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[addChildAt](Layer.md#addchildat)
+[Layer](../README.md#layer).[addChildAt](../README.md#addchildat)
 
 #### Defined in
 
-[display/Layer.ts:235](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L235)
+[display/Layer.ts:235](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L235)
 
 ___
 
@@ -2366,7 +2364,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `event` | [`Event`](Event.md) |
+| `event` | [`Event`](../README.md#event) |
 
 #### Returns
 
@@ -2374,13 +2372,13 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[emit](Layer.md#emit)
+[Layer](../README.md#layer).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L42)
+[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L42)
 
-▸ **emit**(`type`, ...`args`): `boolean`
+▸ **emit**(`type`, `...args`): `boolean`
 
 #### Parameters
 
@@ -2395,17 +2393,17 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[emit](Layer.md#emit)
+[Layer](../README.md#layer).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L43)
+[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L43)
 
 ___
 
 ### getChildAt
 
-▸ **getChildAt**(`index`): [`Layer`](Layer.md)
+▸ **getChildAt**(`index`): [`Layer`](../README.md#layer)
 
 #### Parameters
 
@@ -2415,21 +2413,21 @@ ___
 
 #### Returns
 
-[`Layer`](Layer.md)
+[`Layer`](../README.md#layer)
 
 #### Inherited from
 
-[Layer](Layer.md).[getChildAt](Layer.md#getchildat)
+[Layer](../README.md#layer).[getChildAt](../README.md#getchildat)
 
 #### Defined in
 
-[display/Layer.ts:277](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L277)
+[display/Layer.ts:277](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L277)
 
 ___
 
 ### getChildByName
 
-▸ **getChildByName**(`name`): [`Layer`](Layer.md)
+▸ **getChildByName**(`name`): [`Layer`](../README.md#layer)
 
 #### Parameters
 
@@ -2439,15 +2437,15 @@ ___
 
 #### Returns
 
-[`Layer`](Layer.md)
+[`Layer`](../README.md#layer)
 
 #### Inherited from
 
-[Layer](Layer.md).[getChildByName](Layer.md#getchildbyname)
+[Layer](../README.md#layer).[getChildByName](../README.md#getchildbyname)
 
 #### Defined in
 
-[display/Layer.ts:256](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L256)
+[display/Layer.ts:256](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L256)
 
 ___
 
@@ -2459,7 +2457,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `child` | [`Layer`](Layer.md) |
+| `child` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
@@ -2467,17 +2465,17 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[getChildIndex](Layer.md#getchildindex)
+[Layer](../README.md#layer).[getChildIndex](../README.md#getchildindex)
 
 #### Defined in
 
-[display/Layer.ts:281](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L281)
+[display/Layer.ts:281](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L281)
 
 ___
 
 ### getChildrenByTag
 
-▸ **getChildrenByTag**(`tag`): [`Layer`](Layer.md)[]
+▸ **getChildrenByTag**(`tag`): [`Layer`](../README.md#layer)[]
 
 #### Parameters
 
@@ -2487,15 +2485,15 @@ ___
 
 #### Returns
 
-[`Layer`](Layer.md)[]
+[`Layer`](../README.md#layer)[]
 
 #### Inherited from
 
-[Layer](Layer.md).[getChildrenByTag](Layer.md#getchildrenbytag)
+[Layer](../README.md#layer).[getChildrenByTag](../README.md#getchildrenbytag)
 
 #### Defined in
 
-[display/Layer.ts:266](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L266)
+[display/Layer.ts:266](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L266)
 
 ___
 
@@ -2507,7 +2505,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `child` | [`Layer`](Layer.md) |
+| `child` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
@@ -2515,11 +2513,11 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[hasChild](Layer.md#haschild)
+[Layer](../README.md#layer).[hasChild](../README.md#haschild)
 
 #### Defined in
 
-[display/Layer.ts:285](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L285)
+[display/Layer.ts:285](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L285)
 
 ___
 
@@ -2539,17 +2537,17 @@ ___
 
 #### Inherited from
 
-[Layer](Layer.md).[hasEventListener](Layer.md#haseventlistener)
+[Layer](../README.md#layer).[hasEventListener](../README.md#haseventlistener)
 
 #### Defined in
 
-[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L80)
+[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L80)
 
 ___
 
 ### off
 
-▸ **off**(`type`, `listener?`): [`Text`](Text.md)
+▸ **off**(`type`, `listener?`): [`Text`](../README.md#text)
 
 #### Parameters
 
@@ -2560,21 +2558,21 @@ ___
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[off](Layer.md#off)
+[Layer](../README.md#layer).[off](../README.md#off)
 
 #### Defined in
 
-[display/Layer.ts:684](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L684)
+[display/Layer.ts:684](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L684)
 
 ___
 
 ### on
 
-▸ **on**(`type`, `listener`): [`Text`](Text.md)
+▸ **on**(`type`, `listener`): [`Text`](../README.md#text)
 
 #### Parameters
 
@@ -2585,21 +2583,21 @@ ___
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[on](Layer.md#on)
+[Layer](../README.md#layer).[on](../README.md#on)
 
 #### Defined in
 
-[display/Layer.ts:668](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L668)
+[display/Layer.ts:668](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L668)
 
 ___
 
 ### once
 
-▸ **once**(`type`, `listener`): [`Text`](Text.md)
+▸ **once**(`type`, `listener`): [`Text`](../README.md#text)
 
 #### Parameters
 
@@ -2610,81 +2608,81 @@ ___
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[once](Layer.md#once)
+[Layer](../README.md#layer).[once](../README.md#once)
 
 #### Defined in
 
-[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L33)
+[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L33)
 
 ___
 
 ### removeAllChildren
 
-▸ **removeAllChildren**(): [`Text`](Text.md)
+▸ **removeAllChildren**(): [`Text`](../README.md#text)
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[removeAllChildren](Layer.md#removeallchildren)
+[Layer](../README.md#layer).[removeAllChildren](../README.md#removeallchildren)
 
 #### Defined in
 
-[display/Layer.ts:372](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L372)
+[display/Layer.ts:372](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L372)
 
 ___
 
 ### removeAllListeners
 
-▸ **removeAllListeners**(): [`Text`](Text.md)
+▸ **removeAllListeners**(): [`Text`](../README.md#text)
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[removeAllListeners](Layer.md#removealllisteners)
+[Layer](../README.md#layer).[removeAllListeners](../README.md#removealllisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L85)
+[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L85)
 
 ___
 
 ### removeChild
 
-▸ **removeChild**(`child`): [`Text`](Text.md)
+▸ **removeChild**(`child`): [`Text`](../README.md#text)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `child` | [`Layer`](Layer.md) |
+| `child` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[removeChild](Layer.md#removechild)
+[Layer](../README.md#layer).[removeChild](../README.md#removechild)
 
 #### Defined in
 
-[display/Layer.ts:333](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L333)
+[display/Layer.ts:333](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L333)
 
 ___
 
 ### removeChildAt
 
-▸ **removeChildAt**(`index`): [`Text`](Text.md)
+▸ **removeChildAt**(`index`): [`Text`](../README.md#text)
 
 #### Parameters
 
@@ -2694,21 +2692,21 @@ ___
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[removeChildAt](Layer.md#removechildat)
+[Layer](../README.md#layer).[removeChildAt](../README.md#removechildat)
 
 #### Defined in
 
-[display/Layer.ts:338](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L338)
+[display/Layer.ts:338](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L338)
 
 ___
 
 ### removeChildByName
 
-▸ **removeChildByName**(`name`): [`Text`](Text.md)
+▸ **removeChildByName**(`name`): [`Text`](../README.md#text)
 
 #### Parameters
 
@@ -2718,21 +2716,21 @@ ___
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[removeChildByName](Layer.md#removechildbyname)
+[Layer](../README.md#layer).[removeChildByName](../README.md#removechildbyname)
 
 #### Defined in
 
-[display/Layer.ts:349](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L349)
+[display/Layer.ts:349](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L349)
 
 ___
 
 ### removeChildrenByTag
 
-▸ **removeChildrenByTag**(`tag`): [`Text`](Text.md)
+▸ **removeChildrenByTag**(`tag`): [`Text`](../README.md#text)
 
 #### Parameters
 
@@ -2742,114 +2740,114 @@ ___
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[removeChildrenByTag](Layer.md#removechildrenbytag)
+[Layer](../README.md#layer).[removeChildrenByTag](../README.md#removechildrenbytag)
 
 #### Defined in
 
-[display/Layer.ts:361](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L361)
+[display/Layer.ts:361](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L361)
 
 ___
 
 ### removeSelf
 
-▸ **removeSelf**(): [`Text`](Text.md)
+▸ **removeSelf**(): [`Text`](../README.md#text)
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[removeSelf](Layer.md#removeself)
+[Layer](../README.md#layer).[removeSelf](../README.md#removeself)
 
 #### Defined in
 
-[display/Layer.ts:382](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L382)
+[display/Layer.ts:382](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L382)
 
 ___
 
 ### replaceChild
 
-▸ **replaceChild**(`oldChild`, `newChild`): [`Text`](Text.md)
+▸ **replaceChild**(`oldChild`, `newChild`): [`Text`](../README.md#text)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `oldChild` | [`Layer`](Layer.md) |
-| `newChild` | [`Layer`](Layer.md) |
+| `oldChild` | [`Layer`](../README.md#layer) |
+| `newChild` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[replaceChild](Layer.md#replacechild)
+[Layer](../README.md#layer).[replaceChild](../README.md#replacechild)
 
 #### Defined in
 
-[display/Layer.ts:249](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L249)
+[display/Layer.ts:249](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L249)
 
 ___
 
 ### setChildIndex
 
-▸ **setChildIndex**(`child`, `index`): [`Text`](Text.md)
+▸ **setChildIndex**(`child`, `index`): [`Text`](../README.md#text)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `child` | [`Layer`](Layer.md) |
+| `child` | [`Layer`](../README.md#layer) |
 | `index` | `number` |
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[setChildIndex](Layer.md#setchildindex)
+[Layer](../README.md#layer).[setChildIndex](../README.md#setchildindex)
 
 #### Defined in
 
-[display/Layer.ts:309](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L309)
+[display/Layer.ts:309](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L309)
 
 ___
 
 ### swapChildren
 
-▸ **swapChildren**(`child1`, `child2`): [`Text`](Text.md)
+▸ **swapChildren**(`child1`, `child2`): [`Text`](../README.md#text)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `child1` | [`Layer`](Layer.md) |
-| `child2` | [`Layer`](Layer.md) |
+| `child1` | [`Layer`](../README.md#layer) |
+| `child2` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[swapChildren](Layer.md#swapchildren)
+[Layer](../README.md#layer).[swapChildren](../README.md#swapchildren)
 
 #### Defined in
 
-[display/Layer.ts:289](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L289)
+[display/Layer.ts:289](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L289)
 
 ___
 
 ### swapChildrenAt
 
-▸ **swapChildrenAt**(`index1`, `index2`): [`Text`](Text.md)
+▸ **swapChildrenAt**(`index1`, `index2`): [`Text`](../README.md#text)
 
 #### Parameters
 
@@ -2860,12 +2858,12 @@ ___
 
 #### Returns
 
-[`Text`](Text.md)
+[`Text`](../README.md#text)
 
 #### Inherited from
 
-[Layer](Layer.md).[swapChildrenAt](Layer.md#swapchildrenat)
+[Layer](../README.md#layer).[swapChildrenAt](../README.md#swapchildrenat)
 
 #### Defined in
 
-[display/Layer.ts:298](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Layer.ts#L298)
+[display/Layer.ts:298](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L298)

@@ -29,4 +29,4 @@ export declare class Image extends Layer {
     protected $drawTexture(sourceX: number, sourceY: number, sourceW: number, sourceH: number, targetX: number, targetY: number, targetW: number, targetH: number): void;
     protected $render(): number;
 }
-export declare type FillMode = 'scale' | 'repeat' | 'repeat-x' | 'repeat-y';
+export type FillMode = 'scale' | 'repeat' | 'repeat-x' | 'repeat-y';

@@ -16,4 +16,4 @@
 
 #### Defined in
 
-[tween/Tween.ts:234](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L234)
+[tween/Tween.ts:234](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L234)

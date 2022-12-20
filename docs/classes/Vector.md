@@ -51,7 +51,7 @@
 
 #### Defined in
 
-[geom/Vector.ts:8](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L8)
+[geom/Vector.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L8)
 
 ## Properties
 
@@ -61,7 +61,7 @@
 
 #### Defined in
 
-[geom/Vector.ts:5](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L5)
+[geom/Vector.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L5)
 
 ___
 
@@ -71,17 +71,17 @@ ___
 
 #### Defined in
 
-[geom/Vector.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L6)
+[geom/Vector.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L6)
 
 ___
 
 ### $pool
 
-▪ `Static` `Protected` `Readonly` **$pool**: [`Vector`](Vector.md)[] = `[]`
+▪ `Static` `Protected` `Readonly` **$pool**: [`Vector`](../README.md#vector)[] = `[]`
 
 #### Defined in
 
-[geom/Vector.ts:110](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L110)
+[geom/Vector.ts:110](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L110)
 
 ## Accessors
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[geom/Vector.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L16)
+[geom/Vector.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L16)
 
 ___
 
@@ -109,29 +109,29 @@ ___
 
 #### Defined in
 
-[geom/Vector.ts:12](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L12)
+[geom/Vector.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L12)
 
 ## Methods
 
 ### add
 
-▸ **add**(`v`): [`Vector`](Vector.md)
+▸ **add**(`v`): [`Vector`](../README.md#vector)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `v` | [`Vector`](Vector.md) |
+| `v` | [`Vector`](../README.md#vector) |
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:26](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L26)
+[geom/Vector.ts:26](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L26)
 
-▸ **add**(`x`, `y`): [`Vector`](Vector.md)
+▸ **add**(`x`, `y`): [`Vector`](../README.md#vector)
 
 #### Parameters
 
@@ -142,11 +142,11 @@ ___
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:27](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L27)
+[geom/Vector.ts:27](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L27)
 
 ___
 
@@ -158,7 +158,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `v` | [`Vector`](Vector.md) |
+| `v` | [`Vector`](../README.md#vector) |
 
 #### Returns
 
@@ -166,7 +166,7 @@ ___
 
 #### Defined in
 
-[geom/Vector.ts:97](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L97)
+[geom/Vector.ts:97](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L97)
 
 ___
 
@@ -178,7 +178,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `v` | [`Vector`](Vector.md) |
+| `v` | [`Vector`](../README.md#vector) |
 
 #### Returns
 
@@ -186,7 +186,7 @@ ___
 
 #### Defined in
 
-[geom/Vector.ts:52](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L52)
+[geom/Vector.ts:52](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L52)
 
 ▸ **dotProduct**(`x`, `y`): `number`
 
@@ -203,7 +203,7 @@ ___
 
 #### Defined in
 
-[geom/Vector.ts:53](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L53)
+[geom/Vector.ts:53](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L53)
 
 ___
 
@@ -215,7 +215,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `v` | [`Vector`](Vector.md) |
+| `v` | [`Vector`](../README.md#vector) |
 
 #### Returns
 
@@ -223,55 +223,55 @@ ___
 
 #### Defined in
 
-[geom/Vector.ts:101](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L101)
+[geom/Vector.ts:101](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L101)
 
 ___
 
 ### negate
 
-▸ **negate**(): [`Vector`](Vector.md)
+▸ **negate**(): [`Vector`](../README.md#vector)
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:69](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L69)
+[geom/Vector.ts:69](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L69)
 
 ___
 
 ### normalize
 
-▸ **normalize**(): [`Vector`](Vector.md)
+▸ **normalize**(): [`Vector`](../README.md#vector)
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:62](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L62)
+[geom/Vector.ts:62](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L62)
 
 ___
 
 ### release
 
-▸ **release**(): [`Vector`](Vector.md)
+▸ **release**(): [`Vector`](../README.md#vector)
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:105](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L105)
+[geom/Vector.ts:105](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L105)
 
 ___
 
 ### rotate
 
-▸ **rotate**(`angle`): [`Vector`](Vector.md)
+▸ **rotate**(`angle`): [`Vector`](../README.md#vector)
 
 #### Parameters
 
@@ -281,17 +281,17 @@ ___
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:81](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L81)
+[geom/Vector.ts:81](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L81)
 
 ___
 
 ### scale
 
-▸ **scale**(`x`, `y?`): [`Vector`](Vector.md)
+▸ **scale**(`x`, `y?`): [`Vector`](../README.md#vector)
 
 #### Parameters
 
@@ -302,17 +302,17 @@ ___
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:75](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L75)
+[geom/Vector.ts:75](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L75)
 
 ___
 
 ### set
 
-▸ **set**(`x`, `y`): [`Vector`](Vector.md)
+▸ **set**(`x`, `y`): [`Vector`](../README.md#vector)
 
 #### Parameters
 
@@ -323,33 +323,33 @@ ___
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:20](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L20)
+[geom/Vector.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L20)
 
 ___
 
 ### subtract
 
-▸ **subtract**(`v`): [`Vector`](Vector.md)
+▸ **subtract**(`v`): [`Vector`](../README.md#vector)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `v` | [`Vector`](Vector.md) |
+| `v` | [`Vector`](../README.md#vector) |
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:39](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L39)
+[geom/Vector.ts:39](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L39)
 
-▸ **subtract**(`x`, `y`): [`Vector`](Vector.md)
+▸ **subtract**(`x`, `y`): [`Vector`](../README.md#vector)
 
 #### Parameters
 
@@ -360,37 +360,37 @@ ___
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:40](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L40)
+[geom/Vector.ts:40](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L40)
 
 ___
 
 ### transform
 
-▸ **transform**(`m`): [`Vector`](Vector.md)
+▸ **transform**(`m`): [`Vector`](../README.md#vector)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `m` | [`Matrix`](Matrix.md) |
+| `m` | [`Matrix`](../README.md#matrix) |
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:89](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L89)
+[geom/Vector.ts:89](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L89)
 
 ___
 
 ### create
 
-▸ `Static` **create**(`x?`, `y?`): [`Vector`](Vector.md)
+▸ `Static` **create**(`x?`, `y?`): [`Vector`](../README.md#vector)
 
 #### Parameters
 
@@ -401,11 +401,11 @@ ___
 
 #### Returns
 
-[`Vector`](Vector.md)
+[`Vector`](../README.md#vector)
 
 #### Defined in
 
-[geom/Vector.ts:112](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L112)
+[geom/Vector.ts:112](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L112)
 
 ___
 
@@ -417,7 +417,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `v` | [`Vector`](Vector.md) |
+| `v` | [`Vector`](../README.md#vector) |
 
 #### Returns
 
@@ -425,4 +425,4 @@ ___
 
 #### Defined in
 
-[geom/Vector.ts:121](https://github.com/Lanfei/playable.js/blob/99bdc51/src/geom/Vector.ts#L121)
+[geom/Vector.ts:121](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Vector.ts#L121)

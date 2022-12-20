@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- [`EventEmitter`](EventEmitter.md)
+- [`EventEmitter`](../README.md#eventemitter)
 
   ↳ **`Request`**
 
@@ -56,11 +56,11 @@
 
 #### Overrides
 
-[EventEmitter](EventEmitter.md).[constructor](EventEmitter.md#constructor)
+[EventEmitter](../README.md#eventemitter).[constructor](../README.md#constructor)
 
 #### Defined in
 
-[net/Request.ts:8](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L8)
+[net/Request.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L8)
 
 • **new Request**(`url`, `options?`)
 
@@ -77,7 +77,7 @@ EventEmitter.constructor
 
 #### Defined in
 
-[net/Request.ts:9](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L9)
+[net/Request.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L9)
 
 ## Properties
 
@@ -87,11 +87,11 @@ EventEmitter.constructor
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$emittingType](EventEmitter.md#$emittingtype)
+[EventEmitter](../README.md#eventemitter).[$emittingType](../README.md#$emittingtype)
 
 #### Defined in
 
-[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L6)
+[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L6)
 
 ___
 
@@ -101,11 +101,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$events](EventEmitter.md#$events)
+[EventEmitter](../README.md#eventemitter).[$events](../README.md#$events)
 
 #### Defined in
 
-[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L5)
+[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L5)
 
 ___
 
@@ -115,11 +115,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$removedListeners](EventEmitter.md#$removedlisteners)
+[EventEmitter](../README.md#eventemitter).[$removedListeners](../README.md#$removedlisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L7)
+[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L7)
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L6)
+[net/Request.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L6)
 
 ## Accessors
 
@@ -143,7 +143,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:56](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L56)
+[net/Request.ts:56](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L56)
 
 ___
 
@@ -157,7 +157,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:60](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L60)
+[net/Request.ts:60](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L60)
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:52](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L52)
+[net/Request.ts:52](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L52)
 
 ## Methods
 
@@ -185,7 +185,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:84](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L84)
+[net/Request.ts:84](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L84)
 
 ___
 
@@ -205,7 +205,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:88](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L88)
+[net/Request.ts:88](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L88)
 
 ___
 
@@ -217,7 +217,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `e` | [`Event`](Event.md) |
+| `e` | [`Event`](../README.md#event) |
 
 #### Returns
 
@@ -225,7 +225,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:96](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L96)
+[net/Request.ts:96](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L96)
 
 ___
 
@@ -239,7 +239,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:80](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L80)
+[net/Request.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L80)
 
 ___
 
@@ -251,7 +251,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `event` | [`Event`](Event.md) |
+| `event` | [`Event`](../README.md#event) |
 
 #### Returns
 
@@ -259,13 +259,13 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[emit](EventEmitter.md#emit)
+[EventEmitter](../README.md#eventemitter).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L42)
+[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L42)
 
-▸ **emit**(`type`, ...`args`): `boolean`
+▸ **emit**(`type`, `...args`): `boolean`
 
 #### Parameters
 
@@ -280,11 +280,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[emit](EventEmitter.md#emit)
+[EventEmitter](../README.md#eventemitter).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L43)
+[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L43)
 
 ___
 
@@ -304,17 +304,17 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[hasEventListener](EventEmitter.md#haseventlistener)
+[EventEmitter](../README.md#eventemitter).[hasEventListener](../README.md#haseventlistener)
 
 #### Defined in
 
-[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L80)
+[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L80)
 
 ___
 
 ### off
 
-▸ **off**(`type`, `listener?`): [`Request`](Request.md)
+▸ **off**(`type`, `listener?`): [`Request`](../README.md#request)
 
 #### Parameters
 
@@ -325,21 +325,21 @@ ___
 
 #### Returns
 
-[`Request`](Request.md)
+[`Request`](../README.md#request)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[off](EventEmitter.md#off)
+[EventEmitter](../README.md#eventemitter).[off](../README.md#off)
 
 #### Defined in
 
-[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L16)
+[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L16)
 
 ___
 
 ### on
 
-▸ **on**(`type`, `listener`): [`Request`](Request.md)
+▸ **on**(`type`, `listener`): [`Request`](../README.md#request)
 
 #### Parameters
 
@@ -350,21 +350,21 @@ ___
 
 #### Returns
 
-[`Request`](Request.md)
+[`Request`](../README.md#request)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[on](EventEmitter.md#on)
+[EventEmitter](../README.md#eventemitter).[on](../README.md#on)
 
 #### Defined in
 
-[event/EventEmitter.ts:9](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L9)
+[event/EventEmitter.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L9)
 
 ___
 
 ### once
 
-▸ **once**(`type`, `listener`): [`Request`](Request.md)
+▸ **once**(`type`, `listener`): [`Request`](../README.md#request)
 
 #### Parameters
 
@@ -375,33 +375,33 @@ ___
 
 #### Returns
 
-[`Request`](Request.md)
+[`Request`](../README.md#request)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[once](EventEmitter.md#once)
+[EventEmitter](../README.md#eventemitter).[once](../README.md#once)
 
 #### Defined in
 
-[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L33)
+[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L33)
 
 ___
 
 ### removeAllListeners
 
-▸ **removeAllListeners**(): [`Request`](Request.md)
+▸ **removeAllListeners**(): [`Request`](../README.md#request)
 
 #### Returns
 
-[`Request`](Request.md)
+[`Request`](../README.md#request)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[removeAllListeners](EventEmitter.md#removealllisteners)
+[EventEmitter](../README.md#eventemitter).[removeAllListeners](../README.md#removealllisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L85)
+[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L85)
 
 ___
 
@@ -421,7 +421,7 @@ ___
 
 #### Defined in
 
-[net/Request.ts:110](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L110)
+[net/Request.ts:110](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L110)
 
 ___
 
@@ -441,4 +441,4 @@ ___
 
 #### Defined in
 
-[net/Request.ts:119](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/Request.ts#L119)
+[net/Request.ts:119](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L119)

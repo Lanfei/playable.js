@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[tween/Tween.ts:230](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L230)
+[tween/Tween.ts:230](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L230)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:228](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L228)
+[tween/Tween.ts:228](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L228)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:229](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L229)
+[tween/Tween.ts:229](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L229)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:227](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L227)
+[tween/Tween.ts:227](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L227)
 
 ___
 
@@ -60,4 +60,4 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:226](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L226)
+[tween/Tween.ts:226](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L226)
