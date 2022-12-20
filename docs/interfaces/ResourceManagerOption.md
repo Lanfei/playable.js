@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[net/ResourceManager.ts:160](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L160)
+[net/ResourceManager.ts:160](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L160)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:158](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L158)
+[net/ResourceManager.ts:158](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L158)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:159](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L159)
+[net/ResourceManager.ts:159](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L159)

@@ -59,10 +59,10 @@ export declare class Text extends Layer {
     protected $getContentBounds(): Rectangle;
     protected $render(): number;
 }
-export declare type FontStyle = 'normal' | 'italic' | 'oblique';
-export declare type FontWeight = 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-export declare type TextAlign = 'left' | 'right' | 'center';
-export declare type VerticalAlign = 'top' | 'middle' | 'bottom';
+export type FontStyle = 'normal' | 'italic' | 'oblique';
+export type FontWeight = 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+export type TextAlign = 'left' | 'right' | 'center';
+export type VerticalAlign = 'top' | 'middle' | 'bottom';
 export interface TextOption {
     color?: string;
     fontSize?: number;

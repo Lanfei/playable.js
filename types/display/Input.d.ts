@@ -33,7 +33,7 @@ export declare class Input extends Text {
     protected $onTouchTap(): void;
     protected static $getElement(tagName: string): HTMLInputElement | HTMLTextAreaElement;
 }
-export declare type InputType = 'text' | 'password' | 'email' | 'url' | 'number' | 'range' | 'tel' | 'date' | 'month' | 'week' | 'time' | 'datetime' | 'datetime-local';
+export type InputType = 'text' | 'password' | 'email' | 'url' | 'number' | 'range' | 'tel' | 'date' | 'month' | 'week' | 'time' | 'datetime' | 'datetime-local';
 export interface InputOption extends TextOption {
     type?: InputType;
     maxLength?: number;

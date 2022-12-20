@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[display/Text.ts:356](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L356)
+[display/Text.ts:356](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L356)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:355](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L355)
+[display/Text.ts:355](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L355)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:344](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L344)
+[display/Text.ts:344](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L344)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:353](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L353)
+[display/Text.ts:353](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L353)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:345](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L345)
+[display/Text.ts:345](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L345)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:347](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L347)
+[display/Text.ts:347](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L347)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:346](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L346)
+[display/Text.ts:346](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L346)
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:350](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L350)
+[display/Text.ts:350](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L350)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:357](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L357)
+[display/Text.ts:357](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L357)
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:354](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L354)
+[display/Text.ts:354](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L354)
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:352](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L352)
+[display/Text.ts:352](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L352)
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:351](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L351)
+[display/Text.ts:351](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L351)
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 #### Defined in
 
-[display/Text.ts:348](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L348)
+[display/Text.ts:348](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L348)
 
 ___
 
@@ -165,4 +165,4 @@ ___
 
 #### Defined in
 
-[display/Text.ts:349](https://github.com/Lanfei/playable.js/blob/99bdc51/src/display/Text.ts#L349)
+[display/Text.ts:349](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L349)

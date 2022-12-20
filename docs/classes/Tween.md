@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- [`EventEmitter`](EventEmitter.md)
+- [`EventEmitter`](../README.md#eventemitter)
 
   ↳ **`Tween`**
 
@@ -73,16 +73,16 @@
 
 | Name | Type |
 | :------ | :------ |
-| `target` | [`Layer`](Layer.md) |
+| `target` | [`Layer`](../README.md#layer) |
 | `option?` | [`TweenOption`](../interfaces/TweenOption.md) |
 
 #### Overrides
 
-[EventEmitter](EventEmitter.md).[constructor](EventEmitter.md#constructor)
+[EventEmitter](../README.md#eventemitter).[constructor](../README.md#constructor)
 
 #### Defined in
 
-[tween/Tween.ts:20](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L20)
+[tween/Tween.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L20)
 
 ## Properties
 
@@ -100,7 +100,7 @@
 
 #### Defined in
 
-[tween/Tween.ts:18](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L18)
+[tween/Tween.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L18)
 
 ___
 
@@ -110,11 +110,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$emittingType](EventEmitter.md#$emittingtype)
+[EventEmitter](../README.md#eventemitter).[$emittingType](../README.md#$emittingtype)
 
 #### Defined in
 
-[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L6)
+[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L6)
 
 ___
 
@@ -124,11 +124,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$events](EventEmitter.md#$events)
+[EventEmitter](../README.md#eventemitter).[$events](../README.md#$events)
 
 #### Defined in
 
-[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L5)
+[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L5)
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:11](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L11)
+[tween/Tween.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L11)
 
 ___
 
@@ -148,11 +148,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$removedListeners](EventEmitter.md#$removedlisteners)
+[EventEmitter](../README.md#eventemitter).[$removedListeners](../README.md#$removedlisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L7)
+[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L7)
 
 ___
 
@@ -162,7 +162,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:17](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L17)
+[tween/Tween.ts:17](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L17)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:13](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L13)
+[tween/Tween.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L13)
 
 ___
 
@@ -182,7 +182,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:14](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L14)
+[tween/Tween.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L14)
 
 ___
 
@@ -192,7 +192,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L16)
+[tween/Tween.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L16)
 
 ___
 
@@ -202,7 +202,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:15](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L15)
+[tween/Tween.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L15)
 
 ___
 
@@ -212,17 +212,17 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:12](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L12)
+[tween/Tween.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L12)
 
 ___
 
 ### $target
 
-• `Protected` **$target**: [`Layer`](Layer.md) = `null`
+• `Protected` **$target**: [`Layer`](../README.md#layer) = `null`
 
 #### Defined in
 
-[tween/Tween.ts:10](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L10)
+[tween/Tween.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L10)
 
 ___
 
@@ -232,17 +232,17 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:8](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L8)
+[tween/Tween.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L8)
 
 ___
 
 ### $tweens
 
-▪ `Static` `Protected` `Readonly` **$tweens**: [`Tween`](Tween.md)[] = `[]`
+▪ `Static` `Protected` `Readonly` **$tweens**: [`Tween`](../README.md#tween)[] = `[]`
 
 #### Defined in
 
-[tween/Tween.ts:181](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L181)
+[tween/Tween.ts:181](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L181)
 
 ## Accessors
 
@@ -256,7 +256,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:27](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L27)
+[tween/Tween.ts:27](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L27)
 
 ___
 
@@ -270,7 +270,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:31](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L31)
+[tween/Tween.ts:31](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L31)
 
 ## Methods
 
@@ -294,7 +294,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:158](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L158)
+[tween/Tween.ts:158](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L158)
 
 ___
 
@@ -314,7 +314,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:106](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L106)
+[tween/Tween.ts:106](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L106)
 
 ___
 
@@ -326,7 +326,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `e` | [`Event`](Event.md) |
+| `e` | [`Event`](../README.md#event) |
 
 #### Returns
 
@@ -334,7 +334,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:102](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L102)
+[tween/Tween.ts:102](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L102)
 
 ___
 
@@ -355,7 +355,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:148](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L148)
+[tween/Tween.ts:148](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L148)
 
 ___
 
@@ -375,13 +375,13 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:174](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L174)
+[tween/Tween.ts:174](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L174)
 
 ___
 
 ### call
 
-▸ **call**(`callback`): [`Tween`](Tween.md)
+▸ **call**(`callback`): [`Tween`](../README.md#tween)
 
 #### Parameters
 
@@ -391,11 +391,11 @@ ___
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Defined in
 
-[tween/Tween.ts:61](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L61)
+[tween/Tween.ts:61](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L61)
 
 ___
 
@@ -407,7 +407,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `event` | [`Event`](Event.md) |
+| `event` | [`Event`](../README.md#event) |
 
 #### Returns
 
@@ -415,13 +415,13 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[emit](EventEmitter.md#emit)
+[EventEmitter](../README.md#eventemitter).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L42)
+[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L42)
 
-▸ **emit**(`type`, ...`args`): `boolean`
+▸ **emit**(`type`, `...args`): `boolean`
 
 #### Parameters
 
@@ -436,11 +436,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[emit](EventEmitter.md#emit)
+[EventEmitter](../README.md#eventemitter).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L43)
+[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L43)
 
 ___
 
@@ -460,17 +460,17 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[hasEventListener](EventEmitter.md#haseventlistener)
+[EventEmitter](../README.md#eventemitter).[hasEventListener](../README.md#haseventlistener)
 
 #### Defined in
 
-[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L80)
+[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L80)
 
 ___
 
 ### off
 
-▸ **off**(`type`, `listener?`): [`Tween`](Tween.md)
+▸ **off**(`type`, `listener?`): [`Tween`](../README.md#tween)
 
 #### Parameters
 
@@ -481,21 +481,21 @@ ___
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[off](EventEmitter.md#off)
+[EventEmitter](../README.md#eventemitter).[off](../README.md#off)
 
 #### Defined in
 
-[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L16)
+[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L16)
 
 ___
 
 ### on
 
-▸ **on**(`type`, `listener`): [`Tween`](Tween.md)
+▸ **on**(`type`, `listener`): [`Tween`](../README.md#tween)
 
 #### Parameters
 
@@ -506,21 +506,21 @@ ___
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[on](EventEmitter.md#on)
+[EventEmitter](../README.md#eventemitter).[on](../README.md#on)
 
 #### Defined in
 
-[event/EventEmitter.ts:9](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L9)
+[event/EventEmitter.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L9)
 
 ___
 
 ### once
 
-▸ **once**(`type`, `listener`): [`Tween`](Tween.md)
+▸ **once**(`type`, `listener`): [`Tween`](../README.md#tween)
 
 #### Parameters
 
@@ -531,81 +531,81 @@ ___
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[once](EventEmitter.md#once)
+[EventEmitter](../README.md#eventemitter).[once](../README.md#once)
 
 #### Defined in
 
-[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L33)
+[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L33)
 
 ___
 
 ### pause
 
-▸ **pause**(): [`Tween`](Tween.md)
+▸ **pause**(): [`Tween`](../README.md#tween)
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Defined in
 
-[tween/Tween.ts:77](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L77)
+[tween/Tween.ts:77](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L77)
 
 ___
 
 ### play
 
-▸ **play**(): [`Tween`](Tween.md)
+▸ **play**(): [`Tween`](../README.md#tween)
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Defined in
 
-[tween/Tween.ts:69](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L69)
+[tween/Tween.ts:69](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L69)
 
 ___
 
 ### removeAllListeners
 
-▸ **removeAllListeners**(): [`Tween`](Tween.md)
+▸ **removeAllListeners**(): [`Tween`](../README.md#tween)
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[removeAllListeners](EventEmitter.md#removealllisteners)
+[EventEmitter](../README.md#eventemitter).[removeAllListeners](../README.md#removealllisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L85)
+[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L85)
 
 ___
 
 ### resume
 
-▸ **resume**(): [`Tween`](Tween.md)
+▸ **resume**(): [`Tween`](../README.md#tween)
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Defined in
 
-[tween/Tween.ts:83](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L83)
+[tween/Tween.ts:83](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L83)
 
 ___
 
 ### set
 
-▸ **set**(`props`): [`Tween`](Tween.md)
+▸ **set**(`props`): [`Tween`](../README.md#tween)
 
 #### Parameters
 
@@ -615,31 +615,31 @@ ___
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Defined in
 
-[tween/Tween.ts:35](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L35)
+[tween/Tween.ts:35](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L35)
 
 ___
 
 ### stop
 
-▸ **stop**(): [`Tween`](Tween.md)
+▸ **stop**(): [`Tween`](../README.md#tween)
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Defined in
 
-[tween/Tween.ts:92](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L92)
+[tween/Tween.ts:92](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L92)
 
 ___
 
 ### to
 
-▸ **to**(`props`, `duration`, `ease?`): [`Tween`](Tween.md)
+▸ **to**(`props`, `duration`, `ease?`): [`Tween`](../README.md#tween)
 
 #### Parameters
 
@@ -651,17 +651,17 @@ ___
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Defined in
 
-[tween/Tween.ts:43](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L43)
+[tween/Tween.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L43)
 
 ___
 
 ### wait
 
-▸ **wait**(`duration`): [`Tween`](Tween.md)
+▸ **wait**(`duration`): [`Tween`](../README.md#tween)
 
 #### Parameters
 
@@ -671,33 +671,33 @@ ___
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Defined in
 
-[tween/Tween.ts:53](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L53)
+[tween/Tween.ts:53](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L53)
 
 ___
 
 ### get
 
-▸ `Static` **get**(`target`, `option?`): [`Tween`](Tween.md)
+▸ `Static` **get**(`target`, `option?`): [`Tween`](../README.md#tween)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `target` | [`Layer`](Layer.md) |
+| `target` | [`Layer`](../README.md#layer) |
 | `option?` | `Object` |
 | `option.loop?` | `boolean` |
 
 #### Returns
 
-[`Tween`](Tween.md)
+[`Tween`](../README.md#tween)
 
 #### Defined in
 
-[tween/Tween.ts:183](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L183)
+[tween/Tween.ts:183](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L183)
 
 ___
 
@@ -709,7 +709,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `target` | [`Layer`](Layer.md) |
+| `target` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
@@ -717,7 +717,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:187](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L187)
+[tween/Tween.ts:187](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L187)
 
 ___
 
@@ -731,7 +731,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:215](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L215)
+[tween/Tween.ts:215](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L215)
 
 ___
 
@@ -743,7 +743,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `target` | [`Layer`](Layer.md) |
+| `target` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
@@ -751,7 +751,7 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:205](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L205)
+[tween/Tween.ts:205](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L205)
 
 ___
 
@@ -763,7 +763,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `target` | [`Layer`](Layer.md) |
+| `target` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
@@ -771,4 +771,4 @@ ___
 
 #### Defined in
 
-[tween/Tween.ts:196](https://github.com/Lanfei/playable.js/blob/99bdc51/src/tween/Tween.ts#L196)
+[tween/Tween.ts:196](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L196)

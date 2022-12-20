@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- [`EventEmitter`](EventEmitter.md)
+- [`EventEmitter`](../README.md#eventemitter)
 
   ↳ **`ResourceManager`**
 
@@ -64,17 +64,17 @@
 
 | Name | Type |
 | :------ | :------ |
-| `stage` | [`Stage`](Stage.md) |
+| `stage` | [`Stage`](../README.md#stage) |
 | `list` | [`ResourceInfo`](../interfaces/ResourceInfo.md)[] |
 | `options?` | [`ResourceManagerOption`](../interfaces/ResourceManagerOption.md) |
 
 #### Overrides
 
-[EventEmitter](EventEmitter.md).[constructor](EventEmitter.md#constructor)
+[EventEmitter](../README.md#eventemitter).[constructor](../README.md#constructor)
 
 #### Defined in
 
-[net/ResourceManager.ts:29](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L29)
+[net/ResourceManager.ts:29](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L29)
 
 ## Properties
 
@@ -84,11 +84,11 @@
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$emittingType](EventEmitter.md#$emittingtype)
+[EventEmitter](../README.md#eventemitter).[$emittingType](../README.md#$emittingtype)
 
 #### Defined in
 
-[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L6)
+[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L6)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:21](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L21)
+[net/ResourceManager.ts:21](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L21)
 
 ___
 
@@ -108,11 +108,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$events](EventEmitter.md#$events)
+[EventEmitter](../README.md#eventemitter).[$events](../README.md#$events)
 
 #### Defined in
 
-[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L5)
+[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L5)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:24](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L24)
+[net/ResourceManager.ts:24](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L24)
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:22](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L22)
+[net/ResourceManager.ts:22](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L22)
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:23](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L23)
+[net/ResourceManager.ts:23](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L23)
 
 ___
 
@@ -152,11 +152,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$removedListeners](EventEmitter.md#$removedlisteners)
+[EventEmitter](../README.md#eventemitter).[$removedListeners](../README.md#$removedlisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L7)
+[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L7)
 
 ___
 
@@ -166,17 +166,17 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:27](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L27)
+[net/ResourceManager.ts:27](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L27)
 
 ___
 
 ### $stage
 
-• `Protected` `Readonly` **$stage**: [`Stage`](Stage.md)
+• `Protected` `Readonly` **$stage**: [`Stage`](../README.md#stage)
 
 #### Defined in
 
-[net/ResourceManager.ts:26](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L26)
+[net/ResourceManager.ts:26](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L26)
 
 ___
 
@@ -186,7 +186,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:25](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L25)
+[net/ResourceManager.ts:25](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L25)
 
 ___
 
@@ -196,7 +196,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:19](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L19)
+[net/ResourceManager.ts:19](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L19)
 
 ___
 
@@ -206,7 +206,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:17](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L17)
+[net/ResourceManager.ts:17](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L17)
 
 ___
 
@@ -216,7 +216,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:18](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L18)
+[net/ResourceManager.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L18)
 
 ___
 
@@ -226,7 +226,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:13](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L13)
+[net/ResourceManager.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L13)
 
 ___
 
@@ -236,7 +236,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:12](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L12)
+[net/ResourceManager.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L12)
 
 ___
 
@@ -246,7 +246,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:15](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L15)
+[net/ResourceManager.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L15)
 
 ___
 
@@ -256,7 +256,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:11](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L11)
+[net/ResourceManager.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L11)
 
 ___
 
@@ -266,7 +266,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:14](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L14)
+[net/ResourceManager.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L14)
 
 ## Accessors
 
@@ -280,7 +280,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:45](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L45)
+[net/ResourceManager.ts:45](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L45)
 
 ___
 
@@ -294,7 +294,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:49](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L49)
+[net/ResourceManager.ts:49](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L49)
 
 ___
 
@@ -308,7 +308,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:41](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L41)
+[net/ResourceManager.ts:41](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L41)
 
 ## Methods
 
@@ -322,7 +322,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:53](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L53)
+[net/ResourceManager.ts:53](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L53)
 
 ___
 
@@ -343,7 +343,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:60](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L60)
+[net/ResourceManager.ts:60](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L60)
 
 ___
 
@@ -355,7 +355,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `event` | [`Event`](Event.md) |
+| `event` | [`Event`](../README.md#event) |
 
 #### Returns
 
@@ -363,13 +363,13 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[emit](EventEmitter.md#emit)
+[EventEmitter](../README.md#eventemitter).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L42)
+[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L42)
 
-▸ **emit**(`type`, ...`args`): `boolean`
+▸ **emit**(`type`, `...args`): `boolean`
 
 #### Parameters
 
@@ -384,11 +384,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[emit](EventEmitter.md#emit)
+[EventEmitter](../README.md#eventemitter).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L43)
+[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L43)
 
 ___
 
@@ -414,7 +414,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:145](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L145)
+[net/ResourceManager.ts:145](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L145)
 
 ___
 
@@ -434,7 +434,7 @@ ___
 
 #### Defined in
 
-[net/ResourceManager.ts:141](https://github.com/Lanfei/playable.js/blob/99bdc51/src/net/ResourceManager.ts#L141)
+[net/ResourceManager.ts:141](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L141)
 
 ___
 
@@ -454,17 +454,17 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[hasEventListener](EventEmitter.md#haseventlistener)
+[EventEmitter](../README.md#eventemitter).[hasEventListener](../README.md#haseventlistener)
 
 #### Defined in
 
-[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L80)
+[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L80)
 
 ___
 
 ### off
 
-▸ **off**(`type`, `listener?`): [`ResourceManager`](ResourceManager.md)
+▸ **off**(`type`, `listener?`): [`ResourceManager`](../README.md#resourcemanager)
 
 #### Parameters
 
@@ -475,21 +475,21 @@ ___
 
 #### Returns
 
-[`ResourceManager`](ResourceManager.md)
+[`ResourceManager`](../README.md#resourcemanager)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[off](EventEmitter.md#off)
+[EventEmitter](../README.md#eventemitter).[off](../README.md#off)
 
 #### Defined in
 
-[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L16)
+[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L16)
 
 ___
 
 ### on
 
-▸ **on**(`type`, `listener`): [`ResourceManager`](ResourceManager.md)
+▸ **on**(`type`, `listener`): [`ResourceManager`](../README.md#resourcemanager)
 
 #### Parameters
 
@@ -500,21 +500,21 @@ ___
 
 #### Returns
 
-[`ResourceManager`](ResourceManager.md)
+[`ResourceManager`](../README.md#resourcemanager)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[on](EventEmitter.md#on)
+[EventEmitter](../README.md#eventemitter).[on](../README.md#on)
 
 #### Defined in
 
-[event/EventEmitter.ts:9](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L9)
+[event/EventEmitter.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L9)
 
 ___
 
 ### once
 
-▸ **once**(`type`, `listener`): [`ResourceManager`](ResourceManager.md)
+▸ **once**(`type`, `listener`): [`ResourceManager`](../README.md#resourcemanager)
 
 #### Parameters
 
@@ -525,30 +525,30 @@ ___
 
 #### Returns
 
-[`ResourceManager`](ResourceManager.md)
+[`ResourceManager`](../README.md#resourcemanager)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[once](EventEmitter.md#once)
+[EventEmitter](../README.md#eventemitter).[once](../README.md#once)
 
 #### Defined in
 
-[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L33)
+[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L33)
 
 ___
 
 ### removeAllListeners
 
-▸ **removeAllListeners**(): [`ResourceManager`](ResourceManager.md)
+▸ **removeAllListeners**(): [`ResourceManager`](../README.md#resourcemanager)
 
 #### Returns
 
-[`ResourceManager`](ResourceManager.md)
+[`ResourceManager`](../README.md#resourcemanager)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[removeAllListeners](EventEmitter.md#removealllisteners)
+[EventEmitter](../README.md#eventemitter).[removeAllListeners](../README.md#removealllisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L85)
+[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L85)

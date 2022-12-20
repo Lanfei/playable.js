@@ -2,12 +2,6 @@
 
 # Class: Event
 
-## Hierarchy
-
-- **`Event`**
-
-  ↳ [`TouchEvent`](TouchEvent.md)
-
 ## Table of contents
 
 ### Constructors
@@ -65,17 +59,17 @@
 
 #### Defined in
 
-[event/Event.ts:47](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L47)
+[event/Event.ts:47](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L47)
 
 ## Properties
 
 ### currentTarget
 
-• **currentTarget**: [`EventEmitter`](EventEmitter.md) = `null`
+• **currentTarget**: [`EventEmitter`](../README.md#eventemitter) = `null`
 
 #### Defined in
 
-[event/Event.ts:45](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L45)
+[event/Event.ts:45](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L45)
 
 ___
 
@@ -85,17 +79,17 @@ ___
 
 #### Defined in
 
-[event/Event.ts:43](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L43)
+[event/Event.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L43)
 
 ___
 
 ### target
 
-• **target**: [`EventEmitter`](EventEmitter.md) = `null`
+• **target**: [`EventEmitter`](../README.md#eventemitter) = `null`
 
 #### Defined in
 
-[event/Event.ts:44](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L44)
+[event/Event.ts:44](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L44)
 
 ___
 
@@ -105,17 +99,17 @@ ___
 
 #### Defined in
 
-[event/Event.ts:42](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L42)
+[event/Event.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L42)
 
 ___
 
 ### $pool
 
-▪ `Static` `Protected` `Readonly` **$pool**: [`Event`](Event.md)[] = `[]`
+▪ `Static` `Protected` `Readonly` **$pool**: [`Event`](../README.md#event)[] = `[]`
 
 #### Defined in
 
-[event/Event.ts:63](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L63)
+[event/Event.ts:63](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L63)
 
 ## Events
 
@@ -127,7 +121,7 @@ abort
 
 #### Defined in
 
-[event/Event.ts:30](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L30)
+[event/Event.ts:30](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L30)
 
 ___
 
@@ -139,7 +133,7 @@ activate
 
 #### Defined in
 
-[event/Event.ts:14](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L14)
+[event/Event.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L14)
 
 ___
 
@@ -151,7 +145,7 @@ added
 
 #### Defined in
 
-[event/Event.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L6)
+[event/Event.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L6)
 
 ___
 
@@ -163,7 +157,7 @@ addedToStage
 
 #### Defined in
 
-[event/Event.ts:10](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L10)
+[event/Event.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L10)
 
 ___
 
@@ -175,7 +169,7 @@ complete
 
 #### Defined in
 
-[event/Event.ts:36](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L36)
+[event/Event.ts:36](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L36)
 
 ___
 
@@ -187,7 +181,7 @@ deactivate
 
 #### Defined in
 
-[event/Event.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L16)
+[event/Event.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L16)
 
 ___
 
@@ -199,7 +193,7 @@ ended
 
 #### Defined in
 
-[event/Event.ts:38](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L38)
+[event/Event.ts:38](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L38)
 
 ___
 
@@ -211,7 +205,7 @@ enterFrame
 
 #### Defined in
 
-[event/Event.ts:18](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L18)
+[event/Event.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L18)
 
 ___
 
@@ -223,7 +217,7 @@ error
 
 #### Defined in
 
-[event/Event.ts:32](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L32)
+[event/Event.ts:32](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L32)
 
 ___
 
@@ -235,7 +229,7 @@ load
 
 #### Defined in
 
-[event/Event.ts:28](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L28)
+[event/Event.ts:28](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L28)
 
 ___
 
@@ -247,7 +241,7 @@ progress
 
 #### Defined in
 
-[event/Event.ts:34](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L34)
+[event/Event.ts:34](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L34)
 
 ___
 
@@ -259,7 +253,7 @@ removed
 
 #### Defined in
 
-[event/Event.ts:8](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L8)
+[event/Event.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L8)
 
 ___
 
@@ -271,7 +265,7 @@ removeFromStage
 
 #### Defined in
 
-[event/Event.ts:12](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L12)
+[event/Event.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L12)
 
 ___
 
@@ -283,7 +277,7 @@ soundComplete
 
 #### Defined in
 
-[event/Event.ts:40](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L40)
+[event/Event.ts:40](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L40)
 
 ___
 
@@ -295,7 +289,7 @@ tick
 
 #### Defined in
 
-[event/Event.ts:20](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L20)
+[event/Event.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L20)
 
 ___
 
@@ -307,7 +301,7 @@ tickerPause
 
 #### Defined in
 
-[event/Event.ts:22](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L22)
+[event/Event.ts:22](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L22)
 
 ___
 
@@ -319,7 +313,7 @@ tickerResume
 
 #### Defined in
 
-[event/Event.ts:24](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L24)
+[event/Event.ts:24](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L24)
 
 ___
 
@@ -331,13 +325,13 @@ viewportResize
 
 #### Defined in
 
-[event/Event.ts:26](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L26)
+[event/Event.ts:26](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L26)
 
 ## Methods
 
 ### $init
 
-▸ `Protected` **$init**(`type`, `data?`): [`Event`](Event.md)
+▸ `Protected` **$init**(`type`, `data?`): [`Event`](../README.md#event)
 
 #### Parameters
 
@@ -348,11 +342,11 @@ viewportResize
 
 #### Returns
 
-[`Event`](Event.md)
+[`Event`](../README.md#event)
 
 #### Defined in
 
-[event/Event.ts:51](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L51)
+[event/Event.ts:51](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L51)
 
 ___
 
@@ -366,13 +360,13 @@ ___
 
 #### Defined in
 
-[event/Event.ts:57](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L57)
+[event/Event.ts:57](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L57)
 
 ___
 
 ### create
 
-▸ `Static` **create**(`type`, `data?`): [`Event`](Event.md)
+▸ `Static` **create**(`type`, `data?`): [`Event`](../README.md#event)
 
 #### Parameters
 
@@ -383,11 +377,11 @@ ___
 
 #### Returns
 
-[`Event`](Event.md)
+[`Event`](../README.md#event)
 
 #### Defined in
 
-[event/Event.ts:65](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L65)
+[event/Event.ts:65](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L65)
 
 ___
 
@@ -399,7 +393,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `e` | [`Event`](Event.md) |
+| `e` | [`Event`](../README.md#event) |
 
 #### Returns
 
@@ -407,4 +401,4 @@ ___
 
 #### Defined in
 
-[event/Event.ts:74](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/Event.ts#L74)
+[event/Event.ts:74](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/Event.ts#L74)

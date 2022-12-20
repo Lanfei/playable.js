@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -30,6 +32,17 @@ function __extends(d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 
 var Event = /** @class */ (function () {
     function Event(type, data) {
@@ -103,6 +116,11 @@ var Event = /** @class */ (function () {
     Event.$pool = [];
     return Event;
 }());
+
+var Event$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Event: Event
+});
 
 var EventEmitter = /** @class */ (function () {
     function EventEmitter() {
@@ -193,6 +211,11 @@ var EventEmitter = /** @class */ (function () {
     };
     return EventEmitter;
 }());
+
+var EventEmitter$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    EventEmitter: EventEmitter
+});
 
 var Ticker = /** @class */ (function (_super) {
     __extends(Ticker, _super);
@@ -363,6 +386,11 @@ var Ticker = /** @class */ (function (_super) {
     return Ticker;
 }(EventEmitter));
 
+var Ticker$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Ticker: Ticker
+});
+
 var Vector = /** @class */ (function () {
     function Vector(x, y) {
         this.set(x, y);
@@ -471,6 +499,11 @@ var Vector = /** @class */ (function () {
     Vector.$pool = [];
     return Vector;
 }());
+
+var Vector$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Vector: Vector
+});
 
 /**
  * ```
@@ -602,6 +635,11 @@ var Matrix = /** @class */ (function () {
     return Matrix;
 }());
 
+var Matrix$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Matrix: Matrix
+});
+
 var Rectangle = /** @class */ (function () {
     function Rectangle(x, y, width, height) {
         this.set(x, y, width, height);
@@ -706,6 +744,11 @@ var Rectangle = /** @class */ (function () {
     return Rectangle;
 }());
 
+var Rectangle$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Rectangle: Rectangle
+});
+
 var TouchEvent = /** @class */ (function (_super) {
     __extends(TouchEvent, _super);
     function TouchEvent(type) {
@@ -758,6 +801,11 @@ var TouchEvent = /** @class */ (function (_super) {
     TouchEvent.$pool = [];
     return TouchEvent;
 }(Event));
+
+var TouchEvent$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    TouchEvent: TouchEvent
+});
 
 var Layer = /** @class */ (function (_super) {
     __extends(Layer, _super);
@@ -1441,14 +1489,14 @@ var Layer = /** @class */ (function (_super) {
             this.ticker.registerEnterFrameCallback(this);
         }
         else if (type === Event.ADDED && this.$parent) {
-            var event = Event.create(type);
-            listener.call(this, event);
-            event.release();
+            var event_1 = Event.create(type);
+            listener.call(this, event_1);
+            event_1.release();
         }
         else if (type === Event.ADDED_TO_STAGE && this.$stage) {
-            var event = Event.create(type);
-            listener.call(this, event);
-            event.release();
+            var event_2 = Event.create(type);
+            listener.call(this, event_2);
+            event_2.release();
         }
         return this;
     };
@@ -1462,6 +1510,11 @@ var Layer = /** @class */ (function (_super) {
     Layer.pixelRatio = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1;
     return Layer;
 }(EventEmitter));
+
+var Layer$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Layer: Layer
+});
 
 var Ease = /** @class */ (function () {
     function Ease() {
@@ -1645,6 +1698,11 @@ var Ease = /** @class */ (function () {
     };
     return Ease;
 }());
+
+var Ease$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Ease: Ease
+});
 
 var Tween = /** @class */ (function (_super) {
     __extends(Tween, _super);
@@ -1857,6 +1915,11 @@ var Tween = /** @class */ (function (_super) {
     return Tween;
 }(EventEmitter));
 
+var Tween$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Tween: Tween
+});
+
 var Scroller = /** @class */ (function (_super) {
     __extends(Scroller, _super);
     function Scroller() {
@@ -2031,6 +2094,11 @@ var Scroller = /** @class */ (function (_super) {
     };
     return Scroller;
 }(Layer));
+
+var Scroller$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Scroller: Scroller
+});
 
 var Image = /** @class */ (function (_super) {
     __extends(Image, _super);
@@ -2229,6 +2297,11 @@ var Image = /** @class */ (function (_super) {
     Image.REPEAT_Y = 'repeat-y';
     return Image;
 }(Layer));
+
+var Image$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Image: Image
+});
 
 var Text = /** @class */ (function (_super) {
     __extends(Text, _super);
@@ -2600,6 +2673,11 @@ var Text = /** @class */ (function (_super) {
     return Text;
 }(Layer));
 
+var Text$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Text: Text
+});
+
 var Input = /** @class */ (function (_super) {
     __extends(Input, _super);
     function Input(value, options) {
@@ -2825,6 +2903,11 @@ var Input = /** @class */ (function (_super) {
     return Input;
 }(Text));
 
+var Input$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Input: Input
+});
+
 var MovieClip = /** @class */ (function (_super) {
     __extends(MovieClip, _super);
     function MovieClip(texture, frames) {
@@ -2944,6 +3027,11 @@ var MovieClip = /** @class */ (function (_super) {
     return MovieClip;
 }(Image));
 
+var MovieClip$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    MovieClip: MovieClip
+});
+
 var Request = /** @class */ (function (_super) {
     __extends(Request, _super);
     function Request(url, options) {
@@ -2968,8 +3056,8 @@ var Request = /** @class */ (function (_super) {
         if (data instanceof Object) {
             var contentType = Request.$getContentType(headers);
             if (method.toLowerCase() === 'get') {
-                var qs = Request.$getQueryString(data);
-                url += url.indexOf('?') < 0 ? '?' + qs : '&' + qs;
+                var qs_1 = Request.$getQueryString(data);
+                url += url.indexOf('?') < 0 ? '?' + qs_1 : '&' + qs_1;
             }
             else if (contentType === 'application/x-www-form-urlencoded') {
                 data = Request.$getQueryString(data);
@@ -3038,9 +3126,9 @@ var Request = /** @class */ (function (_super) {
     };
     Request.prototype.$onProgress = function (e) {
         if (e.lengthComputable) {
-            var event = Event.create(Event.PROGRESS, e.loaded / e.total);
-            this.emit(event);
-            event.release();
+            var event_1 = Event.create(Event.PROGRESS, e.loaded / e.total);
+            this.emit(event_1);
+            event_1.release();
         }
     };
     Request.prototype.$onReadyStateChange = function (e) {
@@ -3050,9 +3138,9 @@ var Request = /** @class */ (function (_super) {
                 this.emit(Event.ERROR, e);
             }
             else {
-                var event = Event.create(Event.LOAD, xhr.response);
-                this.emit(event);
-                event.release();
+                var event_2 = Event.create(Event.LOAD, xhr.response);
+                this.emit(event_2);
+                event_2.release();
             }
             this.emit(Event.COMPLETE);
         }
@@ -3070,6 +3158,11 @@ var Request = /** @class */ (function (_super) {
     };
     return Request;
 }(EventEmitter));
+
+var Request$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Request: Request
+});
 
 var Media = /** @class */ (function (_super) {
     __extends(Media, _super);
@@ -3104,14 +3197,14 @@ var Media = /** @class */ (function (_super) {
     Media.prototype.on = function (type, listener) {
         _super.prototype.on.call(this, type, listener);
         if (type === Event.LOAD && this.$loaded) {
-            var event = Event.create(type);
-            listener.call(this, event);
-            event.release();
+            var event_1 = Event.create(type);
+            listener.call(this, event_1);
+            event_1.release();
         }
         else if (type === Event.ERROR && this.$errored) {
-            var event = Event.create(type);
-            listener.call(this, event);
-            event.release();
+            var event_2 = Event.create(type);
+            listener.call(this, event_2);
+            event_2.release();
         }
         return this;
     };
@@ -3127,6 +3220,11 @@ var Media = /** @class */ (function (_super) {
     };
     return Media;
 }(EventEmitter));
+
+var Media$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Media: Media
+});
 
 var Sound = /** @class */ (function (_super) {
     __extends(Sound, _super);
@@ -3265,6 +3363,11 @@ var Sound = /** @class */ (function (_super) {
     return Sound;
 }(Media));
 
+var Sound$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Sound: Sound
+});
+
 var Texture = /** @class */ (function (_super) {
     __extends(Texture, _super);
     function Texture(stage, url) {
@@ -3304,6 +3407,11 @@ var Texture = /** @class */ (function (_super) {
     Texture.defaultPixelRatio = 1;
     return Texture;
 }(Media));
+
+var Texture$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Texture: Texture
+});
 
 var ResourceManager = /** @class */ (function (_super) {
     __extends(ResourceManager, _super);
@@ -3453,6 +3561,11 @@ var ResourceManager = /** @class */ (function (_super) {
     ResourceManager.TYPE_SOUND = 'sound';
     return ResourceManager;
 }(EventEmitter));
+
+var ResourceManager$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    ResourceManager: ResourceManager
+});
 
 var Stage = /** @class */ (function (_super) {
     __extends(Stage, _super);
@@ -3855,6 +3968,13 @@ var Stage = /** @class */ (function (_super) {
     return Stage;
 }(Layer));
 
+var Stage$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Stage: Stage
+});
+
+var index = __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({}, Ticker$1), Layer$1), Scroller$1), Image$1), Text$1), Input$1), MovieClip$1), Stage$1), Event$1), TouchEvent$1), EventEmitter$1), Matrix$1), Vector$1), Rectangle$1), Media$1), Texture$1), Sound$1), Ease$1), Tween$1), Request$1), ResourceManager$1);
+
 exports.Ease = Ease;
 exports.Event = Event;
 exports.EventEmitter = EventEmitter;
@@ -3876,3 +3996,4 @@ exports.Ticker = Ticker;
 exports.TouchEvent = TouchEvent;
 exports.Tween = Tween;
 exports.Vector = Vector;
+exports.default = index;

@@ -11,4 +11,4 @@ export declare class EventEmitter {
     hasEventListener(type: string): boolean;
     removeAllListeners(): this;
 }
-export declare type Listener = (...args: any[]) => any;
+export type Listener = (...args: any[]) => any;

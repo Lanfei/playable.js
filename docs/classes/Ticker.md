@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- [`EventEmitter`](EventEmitter.md)
+- [`EventEmitter`](../README.md#eventemitter)
 
   ↳ **`Ticker`**
 
@@ -67,15 +67,15 @@
 
 | Name | Type |
 | :------ | :------ |
-| `stage` | [`Stage`](Stage.md) |
+| `stage` | [`Stage`](../README.md#stage) |
 
 #### Overrides
 
-[EventEmitter](EventEmitter.md).[constructor](EventEmitter.md#constructor)
+[EventEmitter](../README.md#eventemitter).[constructor](../README.md#constructor)
 
 #### Defined in
 
-[system/Ticker.ts:20](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L20)
+[system/Ticker.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L20)
 
 ## Properties
 
@@ -93,7 +93,7 @@
 
 #### Defined in
 
-[system/Ticker.ts:17](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L17)
+[system/Ticker.ts:17](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L17)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:10](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L10)
+[system/Ticker.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L10)
 
 ___
 
@@ -113,21 +113,21 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$emittingType](EventEmitter.md#$emittingtype)
+[EventEmitter](../README.md#eventemitter).[$emittingType](../README.md#$emittingtype)
 
 #### Defined in
 
-[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L6)
+[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L6)
 
 ___
 
 ### $enterFrameCallbackList
 
-• `Protected` `Readonly` **$enterFrameCallbackList**: [`Layer`](Layer.md)[]
+• `Protected` `Readonly` **$enterFrameCallbackList**: [`Layer`](../README.md#layer)[]
 
 #### Defined in
 
-[system/Ticker.ts:18](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L18)
+[system/Ticker.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L18)
 
 ___
 
@@ -137,11 +137,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$events](EventEmitter.md#$events)
+[EventEmitter](../README.md#eventemitter).[$events](../README.md#$events)
 
 #### Defined in
 
-[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L5)
+[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L5)
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:9](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L9)
+[system/Ticker.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L9)
 
 ___
 
@@ -161,7 +161,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:14](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L14)
+[system/Ticker.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L14)
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:11](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L11)
+[system/Ticker.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L11)
 
 ___
 
@@ -181,11 +181,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[$removedListeners](EventEmitter.md#$removedlisteners)
+[EventEmitter](../README.md#eventemitter).[$removedListeners](../README.md#$removedlisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L7)
+[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L7)
 
 ___
 
@@ -195,17 +195,17 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:12](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L12)
+[system/Ticker.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L12)
 
 ___
 
 ### $stage
 
-• `Protected` **$stage**: [`Stage`](Stage.md) = `null`
+• `Protected` **$stage**: [`Stage`](../README.md#stage) = `null`
 
 #### Defined in
 
-[system/Ticker.ts:8](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L8)
+[system/Ticker.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L8)
 
 ___
 
@@ -215,7 +215,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:15](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L15)
+[system/Ticker.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L15)
 
 ___
 
@@ -225,7 +225,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:13](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L13)
+[system/Ticker.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L13)
 
 ___
 
@@ -235,7 +235,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L16)
+[system/Ticker.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L16)
 
 ## Accessors
 
@@ -249,7 +249,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:33](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L33)
+[system/Ticker.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L33)
 
 ___
 
@@ -263,7 +263,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:29](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L29)
+[system/Ticker.ts:29](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L29)
 
 ___
 
@@ -277,7 +277,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:37](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L37)
+[system/Ticker.ts:37](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L37)
 
 ## Methods
 
@@ -297,21 +297,21 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:160](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L160)
+[system/Ticker.ts:160](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L160)
 
 ___
 
 ### $start
 
-▸ `Protected` **$start**(): [`Ticker`](Ticker.md)
+▸ `Protected` **$start**(): [`Ticker`](../README.md#ticker)
 
 #### Returns
 
-[`Ticker`](Ticker.md)
+[`Ticker`](../README.md#ticker)
 
 #### Defined in
 
-[system/Ticker.ts:41](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L41)
+[system/Ticker.ts:41](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L41)
 
 ___
 
@@ -325,7 +325,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:140](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L140)
+[system/Ticker.ts:140](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L140)
 
 ___
 
@@ -345,7 +345,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:119](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L119)
+[system/Ticker.ts:119](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L119)
 
 ___
 
@@ -365,7 +365,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:109](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L109)
+[system/Ticker.ts:109](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L109)
 
 ___
 
@@ -377,7 +377,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `event` | [`Event`](Event.md) |
+| `event` | [`Event`](../README.md#event) |
 
 #### Returns
 
@@ -385,13 +385,13 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[emit](EventEmitter.md#emit)
+[EventEmitter](../README.md#eventemitter).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L42)
+[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L42)
 
-▸ **emit**(`type`, ...`args`): `boolean`
+▸ **emit**(`type`, `...args`): `boolean`
 
 #### Parameters
 
@@ -406,11 +406,11 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[emit](EventEmitter.md#emit)
+[EventEmitter](../README.md#eventemitter).[emit](../README.md#emit)
 
 #### Defined in
 
-[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L43)
+[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L43)
 
 ___
 
@@ -430,17 +430,17 @@ ___
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[hasEventListener](EventEmitter.md#haseventlistener)
+[EventEmitter](../README.md#eventemitter).[hasEventListener](../README.md#haseventlistener)
 
 #### Defined in
 
-[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L80)
+[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L80)
 
 ___
 
 ### off
 
-▸ **off**(`type`, `listener?`): [`Ticker`](Ticker.md)
+▸ **off**(`type`, `listener?`): [`Ticker`](../README.md#ticker)
 
 #### Parameters
 
@@ -451,21 +451,21 @@ ___
 
 #### Returns
 
-[`Ticker`](Ticker.md)
+[`Ticker`](../README.md#ticker)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[off](EventEmitter.md#off)
+[EventEmitter](../README.md#eventemitter).[off](../README.md#off)
 
 #### Defined in
 
-[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L16)
+[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L16)
 
 ___
 
 ### on
 
-▸ **on**(`type`, `listener`): [`Ticker`](Ticker.md)
+▸ **on**(`type`, `listener`): [`Ticker`](../README.md#ticker)
 
 #### Parameters
 
@@ -476,21 +476,21 @@ ___
 
 #### Returns
 
-[`Ticker`](Ticker.md)
+[`Ticker`](../README.md#ticker)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[on](EventEmitter.md#on)
+[EventEmitter](../README.md#eventemitter).[on](../README.md#on)
 
 #### Defined in
 
-[event/EventEmitter.ts:9](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L9)
+[event/EventEmitter.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L9)
 
 ___
 
 ### once
 
-▸ **once**(`type`, `listener`): [`Ticker`](Ticker.md)
+▸ **once**(`type`, `listener`): [`Ticker`](../README.md#ticker)
 
 #### Parameters
 
@@ -501,81 +501,81 @@ ___
 
 #### Returns
 
-[`Ticker`](Ticker.md)
+[`Ticker`](../README.md#ticker)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[once](EventEmitter.md#once)
+[EventEmitter](../README.md#eventemitter).[once](../README.md#once)
 
 #### Defined in
 
-[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L33)
+[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L33)
 
 ___
 
 ### pause
 
-▸ **pause**(): [`Ticker`](Ticker.md)
+▸ **pause**(): [`Ticker`](../README.md#ticker)
 
 #### Returns
 
-[`Ticker`](Ticker.md)
+[`Ticker`](../README.md#ticker)
 
 #### Defined in
 
-[system/Ticker.ts:84](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L84)
+[system/Ticker.ts:84](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L84)
 
 ___
 
 ### registerEnterFrameCallback
 
-▸ **registerEnterFrameCallback**(`layer`): [`Ticker`](Ticker.md)
+▸ **registerEnterFrameCallback**(`layer`): [`Ticker`](../README.md#ticker)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `layer` | [`Layer`](Layer.md) |
+| `layer` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
-[`Ticker`](Ticker.md)
+[`Ticker`](../README.md#ticker)
 
 #### Defined in
 
-[system/Ticker.ts:123](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L123)
+[system/Ticker.ts:123](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L123)
 
 ___
 
 ### removeAllListeners
 
-▸ **removeAllListeners**(): [`Ticker`](Ticker.md)
+▸ **removeAllListeners**(): [`Ticker`](../README.md#ticker)
 
 #### Returns
 
-[`Ticker`](Ticker.md)
+[`Ticker`](../README.md#ticker)
 
 #### Inherited from
 
-[EventEmitter](EventEmitter.md).[removeAllListeners](EventEmitter.md#removealllisteners)
+[EventEmitter](../README.md#eventemitter).[removeAllListeners](../README.md#removealllisteners)
 
 #### Defined in
 
-[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/99bdc51/src/event/EventEmitter.ts#L85)
+[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L85)
 
 ___
 
 ### resume
 
-▸ **resume**(): [`Ticker`](Ticker.md)
+▸ **resume**(): [`Ticker`](../README.md#ticker)
 
 #### Returns
 
-[`Ticker`](Ticker.md)
+[`Ticker`](../README.md#ticker)
 
 #### Defined in
 
-[system/Ticker.ts:94](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L94)
+[system/Ticker.ts:94](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L94)
 
 ___
 
@@ -596,7 +596,7 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:113](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L113)
+[system/Ticker.ts:113](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L113)
 
 ___
 
@@ -617,24 +617,24 @@ ___
 
 #### Defined in
 
-[system/Ticker.ts:103](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L103)
+[system/Ticker.ts:103](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L103)
 
 ___
 
 ### unregisterEnterFrameCallback
 
-▸ **unregisterEnterFrameCallback**(`layer`): [`Ticker`](Ticker.md)
+▸ **unregisterEnterFrameCallback**(`layer`): [`Ticker`](../README.md#ticker)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `layer` | [`Layer`](Layer.md) |
+| `layer` | [`Layer`](../README.md#layer) |
 
 #### Returns
 
-[`Ticker`](Ticker.md)
+[`Ticker`](../README.md#ticker)
 
 #### Defined in
 
-[system/Ticker.ts:131](https://github.com/Lanfei/playable.js/blob/99bdc51/src/system/Ticker.ts#L131)
+[system/Ticker.ts:131](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L131)
