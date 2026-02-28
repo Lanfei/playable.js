@@ -1,0 +1,1 @@
+import{_ as a,o as i,c as e,ae as t}from"./chunks/framework.BYg2hXjb.js";const c=JSON.parse('{"title":"playable.js","description":"","frontmatter":{},"headers":[],"relativePath":"index.md","filePath":"README.md"}'),l={name:"index.md"};function n(h,s,p,r,k,d){return i(),e("div",null,[...s[0]||(s[0]=[t("",23)])])}const g=a(l,[["render",n]]);export{c as __pageData,g as default};
