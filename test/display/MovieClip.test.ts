@@ -1,5 +1,5 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('MovieClip', () => {
 	let stage = new playable.Stage();
@@ -9,9 +9,10 @@ describe('MovieClip', () => {
 		{clip: playable.Rectangle.create(0, 10, 10, 10)}
 	];
 
+	// The ticker won't start when the window is not visible, emit an `activate` event to start ticking.
 	stage.emit(playable.Event.ACTIVATE);
 
-	texture.url = '/base/test/fixtures/image@1x.jpg';
+	texture.url = '/test/fixtures/image@1x.jpg';
 
 	afterEach(() => {
 		// Emit an `enterFrame` event to render the stage
@@ -19,7 +20,7 @@ describe('MovieClip', () => {
 		stage.removeAllChildren();
 	});
 
-	after(() => {
+	afterAll(() => {
 		stage.removeSelf();
 	});
 
@@ -70,19 +71,19 @@ describe('MovieClip', () => {
 		assert.strictEqual(movieClip.paused, true);
 	});
 
-	it('.nextFrame(): this', done => {
+	it('.nextFrame(): this', () => new Promise<void>(resolve => {
 		let movieClip = new playable.MovieClip(texture, frameData.concat({
 			clip: playable.Rectangle.create(0, 20, 10, 10),
 			callback: () => {
 				assert.strictEqual(movieClip.currentFrame, 2);
-				done();
+				resolve();
 			}
 		}));
 		stage.addChild(movieClip);
 		assert.strictEqual(movieClip.currentFrame, 0);
 		movieClip.nextFrame();
 		assert.strictEqual(movieClip.currentFrame, 1);
-	});
+	}));
 
 	it('.gotoAndPlay(frame: number): this', () => {
 		let movieClip = new playable.MovieClip(texture, frameData);

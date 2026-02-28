@@ -1,268 +1,213 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / InputOption
 
 # Interface: InputOption
 
-## Hierarchy
+Defined in: [display/Input.ts:236](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Input.ts#L236)
+
+## Extends
 
 - [`TextOption`](TextOption.md)
 
-  ↳ **`InputOption`**
-
-## Table of contents
-
-### Properties
-
-- [autoFitSize](InputOption.md#autofitsize)
-- [breakWord](InputOption.md#breakword)
-- [color](InputOption.md#color)
-- [fontFamily](InputOption.md#fontfamily)
-- [fontSize](InputOption.md#fontsize)
-- [fontStyle](InputOption.md#fontstyle)
-- [fontWeight](InputOption.md#fontweight)
-- [lineHeight](InputOption.md#lineheight)
-- [maxLength](InputOption.md#maxlength)
-- [minFontSize](InputOption.md#minfontsize)
-- [multiline](InputOption.md#multiline)
-- [placeholder](InputOption.md#placeholder)
-- [placeholderColor](InputOption.md#placeholdercolor)
-- [strokeColor](InputOption.md#strokecolor)
-- [strokeSize](InputOption.md#strokesize)
-- [textAlign](InputOption.md#textalign)
-- [type](InputOption.md#type)
-- [verticalAlign](InputOption.md#verticalalign)
-
 ## Properties
 
-### autoFitSize
+### autoFitSize?
 
-• `Optional` **autoFitSize**: `boolean`
+> `optional` **autoFitSize**: `boolean`
 
-#### Inherited from
-
-[TextOption](TextOption.md).[autoFitSize](TextOption.md#autofitsize)
-
-#### Defined in
-
-[display/Text.ts:356](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L356)
-
-___
-
-### breakWord
-
-• `Optional` **breakWord**: `boolean`
+Defined in: [display/Text.ts:356](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L356)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[breakWord](TextOption.md#breakword)
+[`TextOption`](TextOption.md).[`autoFitSize`](TextOption.md#autofitsize)
 
-#### Defined in
+***
 
-[display/Text.ts:355](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L355)
+### breakWord?
 
-___
+> `optional` **breakWord**: `boolean`
 
-### color
-
-• `Optional` **color**: `string`
+Defined in: [display/Text.ts:355](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L355)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[color](TextOption.md#color)
+[`TextOption`](TextOption.md).[`breakWord`](TextOption.md#breakword)
 
-#### Defined in
+***
 
-[display/Text.ts:344](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L344)
+### color?
 
-___
+> `optional` **color**: `string`
 
-### fontFamily
-
-• `Optional` **fontFamily**: `string`
+Defined in: [display/Text.ts:344](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L344)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[fontFamily](TextOption.md#fontfamily)
+[`TextOption`](TextOption.md).[`color`](TextOption.md#color)
 
-#### Defined in
+***
 
-[display/Text.ts:353](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L353)
+### fontFamily?
 
-___
+> `optional` **fontFamily**: `string`
 
-### fontSize
-
-• `Optional` **fontSize**: `number`
+Defined in: [display/Text.ts:353](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L353)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[fontSize](TextOption.md#fontsize)
+[`TextOption`](TextOption.md).[`fontFamily`](TextOption.md#fontfamily)
 
-#### Defined in
+***
 
-[display/Text.ts:345](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L345)
+### fontSize?
 
-___
+> `optional` **fontSize**: `number`
 
-### fontStyle
-
-• `Optional` **fontStyle**: [`FontStyle`](../README.md#fontstyle)
+Defined in: [display/Text.ts:345](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L345)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[fontStyle](TextOption.md#fontstyle)
+[`TextOption`](TextOption.md).[`fontSize`](TextOption.md#fontsize)
 
-#### Defined in
+***
 
-[display/Text.ts:347](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L347)
+### fontStyle?
 
-___
+> `optional` **fontStyle**: [`FontStyle`](../type-aliases/FontStyle.md)
 
-### fontWeight
-
-• `Optional` **fontWeight**: [`FontWeight`](../README.md#fontweight)
+Defined in: [display/Text.ts:347](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L347)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[fontWeight](TextOption.md#fontweight)
+[`TextOption`](TextOption.md).[`fontStyle`](TextOption.md#fontstyle)
 
-#### Defined in
+***
 
-[display/Text.ts:346](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L346)
+### fontWeight?
 
-___
+> `optional` **fontWeight**: [`FontWeight`](../type-aliases/FontWeight.md)
 
-### lineHeight
-
-• `Optional` **lineHeight**: `number`
+Defined in: [display/Text.ts:346](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L346)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[lineHeight](TextOption.md#lineheight)
+[`TextOption`](TextOption.md).[`fontWeight`](TextOption.md#fontweight)
 
-#### Defined in
+***
 
-[display/Text.ts:350](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L350)
+### lineHeight?
 
-___
+> `optional` **lineHeight**: `number`
 
-### maxLength
-
-• `Optional` **maxLength**: `number`
-
-#### Defined in
-
-[display/Input.ts:238](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Input.ts#L238)
-
-___
-
-### minFontSize
-
-• `Optional` **minFontSize**: `number`
+Defined in: [display/Text.ts:350](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L350)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[minFontSize](TextOption.md#minfontsize)
+[`TextOption`](TextOption.md).[`lineHeight`](TextOption.md#lineheight)
 
-#### Defined in
+***
 
-[display/Text.ts:357](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L357)
+### maxLength?
 
-___
+> `optional` **maxLength**: `number`
 
-### multiline
+Defined in: [display/Input.ts:238](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Input.ts#L238)
 
-• `Optional` **multiline**: `boolean`
+***
 
-#### Inherited from
+### minFontSize?
 
-[TextOption](TextOption.md).[multiline](TextOption.md#multiline)
+> `optional` **minFontSize**: `number`
 
-#### Defined in
-
-[display/Text.ts:354](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L354)
-
-___
-
-### placeholder
-
-• `Optional` **placeholder**: `string`
-
-#### Defined in
-
-[display/Input.ts:239](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Input.ts#L239)
-
-___
-
-### placeholderColor
-
-• `Optional` **placeholderColor**: `string`
-
-#### Defined in
-
-[display/Input.ts:240](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Input.ts#L240)
-
-___
-
-### strokeColor
-
-• `Optional` **strokeColor**: `string`
+Defined in: [display/Text.ts:357](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L357)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[strokeColor](TextOption.md#strokecolor)
+[`TextOption`](TextOption.md).[`minFontSize`](TextOption.md#minfontsize)
 
-#### Defined in
+***
 
-[display/Text.ts:352](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L352)
+### multiline?
 
-___
+> `optional` **multiline**: `boolean`
 
-### strokeSize
-
-• `Optional` **strokeSize**: `number`
+Defined in: [display/Text.ts:354](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L354)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[strokeSize](TextOption.md#strokesize)
+[`TextOption`](TextOption.md).[`multiline`](TextOption.md#multiline)
 
-#### Defined in
+***
 
-[display/Text.ts:351](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L351)
+### placeholder?
 
-___
+> `optional` **placeholder**: `string`
 
-### textAlign
+Defined in: [display/Input.ts:239](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Input.ts#L239)
 
-• `Optional` **textAlign**: [`TextAlign`](../README.md#textalign)
+***
 
-#### Inherited from
+### placeholderColor?
 
-[TextOption](TextOption.md).[textAlign](TextOption.md#textalign)
+> `optional` **placeholderColor**: `string`
 
-#### Defined in
+Defined in: [display/Input.ts:240](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Input.ts#L240)
 
-[display/Text.ts:348](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L348)
+***
 
-___
+### strokeColor?
 
-### type
+> `optional` **strokeColor**: `string`
 
-• `Optional` **type**: [`InputType`](../README.md#inputtype)
-
-#### Defined in
-
-[display/Input.ts:237](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Input.ts#L237)
-
-___
-
-### verticalAlign
-
-• `Optional` **verticalAlign**: [`VerticalAlign`](../README.md#verticalalign)
+Defined in: [display/Text.ts:352](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L352)
 
 #### Inherited from
 
-[TextOption](TextOption.md).[verticalAlign](TextOption.md#verticalalign)
+[`TextOption`](TextOption.md).[`strokeColor`](TextOption.md#strokecolor)
 
-#### Defined in
+***
 
-[display/Text.ts:349](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Text.ts#L349)
+### strokeSize?
+
+> `optional` **strokeSize**: `number`
+
+Defined in: [display/Text.ts:351](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L351)
+
+#### Inherited from
+
+[`TextOption`](TextOption.md).[`strokeSize`](TextOption.md#strokesize)
+
+***
+
+### textAlign?
+
+> `optional` **textAlign**: [`TextAlign`](../type-aliases/TextAlign.md)
+
+Defined in: [display/Text.ts:348](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L348)
+
+#### Inherited from
+
+[`TextOption`](TextOption.md).[`textAlign`](TextOption.md#textalign)
+
+***
+
+### type?
+
+> `optional` **type**: [`InputType`](../type-aliases/InputType.md)
+
+Defined in: [display/Input.ts:237](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Input.ts#L237)
+
+***
+
+### verticalAlign?
+
+> `optional` **verticalAlign**: [`VerticalAlign`](../type-aliases/VerticalAlign.md)
+
+Defined in: [display/Text.ts:349](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Text.ts#L349)
+
+#### Inherited from
+
+[`TextOption`](TextOption.md).[`verticalAlign`](TextOption.md#verticalalign)

@@ -1,10 +1,10 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('Sound', () => {
 	let stage = new playable.Stage();
 
-	after(() => {
+	afterAll(() => {
 		stage.removeSelf();
 	});
 
@@ -16,7 +16,7 @@ describe('Sound', () => {
 	it('.url', () => {
 		let sound = new playable.Sound(stage);
 		assert.strictEqual(sound.url, '');
-		sound.url = '/base/test/fixtures/sound.mp3';
+		sound.url = '/test/fixtures/sound.mp3';
 		assert.isOk(sound.url);
 	});
 
@@ -34,7 +34,7 @@ describe('Sound', () => {
 
 	it('.play(startTime: number = 0, loops: number = 1): this', () => {
 		let sound = new playable.Sound(stage);
-		sound.url = '/base/test/fixtures/sound.mp3';
+		sound.url = '/test/fixtures/sound.mp3';
 		assert.strictEqual(sound.paused, true);
 		sound.play();
 		assert.strictEqual(sound.paused, false);

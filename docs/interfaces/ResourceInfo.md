@@ -1,41 +1,33 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / ResourceInfo
 
 # Interface: ResourceInfo
 
-## Table of contents
-
-### Properties
-
-- [name](ResourceInfo.md#name)
-- [type](ResourceInfo.md#type)
-- [url](ResourceInfo.md#url)
+Defined in: [net/ResourceManager.ts:151](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/net/ResourceManager.ts#L151)
 
 ## Properties
 
 ### name
 
-• **name**: `string`
+> **name**: `string`
 
-#### Defined in
+Defined in: [net/ResourceManager.ts:152](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/net/ResourceManager.ts#L152)
 
-[net/ResourceManager.ts:152](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L152)
-
-___
+***
 
 ### type
 
-• **type**: `string`
+> **type**: `string`
 
-#### Defined in
+Defined in: [net/ResourceManager.ts:153](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/net/ResourceManager.ts#L153)
 
-[net/ResourceManager.ts:153](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L153)
-
-___
+***
 
 ### url
 
-• **url**: `string`
+> **url**: `string`
 
-#### Defined in
-
-[net/ResourceManager.ts:154](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/ResourceManager.ts#L154)
+Defined in: [net/ResourceManager.ts:154](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/net/ResourceManager.ts#L154)

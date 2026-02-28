@@ -1,5 +1,5 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('Stage', () => {
 	let stage: playable.Stage;
@@ -71,7 +71,7 @@ describe('Stage', () => {
 		assert.instanceOf(rm, playable.ResourceManager);
 	});
 
-	it('.removeSelf(): this', done => {
+	it('.removeSelf(): this', () => new Promise<void>(resolve => {
 		stage.on(playable.Event.ADDED_TO_STAGE, () => {
 			assert.strictEqual(stage.viewportCanvas.parentElement, document.body);
 			assert.strictEqual(stage.stage, stage);
@@ -79,8 +79,8 @@ describe('Stage', () => {
 			assert.isNull(stage.viewportCanvas.parentElement);
 			assert.strictEqual(stage.activated, false);
 			assert.isNull(stage.stage);
-			done();
+			resolve();
 		});
-	});
+	}));
 
 });

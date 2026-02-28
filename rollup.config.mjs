@@ -1,6 +1,6 @@
 import fs from 'fs';
-import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
+import terser from '@rollup/plugin-terser';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json').toString());
 
@@ -12,8 +12,7 @@ export default [{
 		exports: 'named'
 	},
 	plugins: [
-		commonjs(),
-		typescript({tsconfig: false, target: "es5"})
+		typescript({tsconfig: false, target: "es2020", include: ['src/**/*.ts']})
 	]
 }, {
 	input: 'src/index.ts',
@@ -22,7 +21,7 @@ export default [{
 		format: 'es'
 	},
 	plugins: [
-		typescript({tsconfig: false, target: "es5"})
+		typescript({tsconfig: false, target: "es2020", include: ['src/**/*.ts']})
 	]
 }, {
 	input: 'src/index.ts',
@@ -33,6 +32,19 @@ export default [{
 		exports: 'named'
 	},
 	plugins: [
-		typescript({tsconfig: false, target: "es5"})
+		typescript({tsconfig: false, target: "es2020", include: ['src/**/*.ts']})
+	]
+}, {
+	input: 'src/index.ts',
+	output: {
+		name: 'playable',
+		file: pkg.browser.replace('.js', '.min.js'),
+		format: 'umd',
+		exports: 'named',
+		sourcemap: true
+	},
+	plugins: [
+		typescript({tsconfig: false, target: "es2020", include: ['src/**/*.ts']}),
+		terser()
 	]
 }];

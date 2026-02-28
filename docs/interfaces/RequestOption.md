@@ -1,63 +1,49 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / RequestOption
 
 # Interface: RequestOption
 
-## Table of contents
-
-### Properties
-
-- [data](RequestOption.md#data)
-- [headers](RequestOption.md#headers)
-- [method](RequestOption.md#method)
-- [responseType](RequestOption.md#responsetype)
-- [url](RequestOption.md#url)
+Defined in: [net/Request.ts:125](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/net/Request.ts#L125)
 
 ## Properties
 
-### data
+### data?
 
-• `Optional` **data**: `any`
+> `optional` **data**: `any`
 
-#### Defined in
+Defined in: [net/Request.ts:130](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/net/Request.ts#L130)
 
-[net/Request.ts:130](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L130)
+***
 
-___
+### headers?
 
-### headers
+> `optional` **headers**: `object`
 
-• `Optional` **headers**: `object`
+Defined in: [net/Request.ts:128](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/net/Request.ts#L128)
 
-#### Defined in
+***
 
-[net/Request.ts:128](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L128)
+### method?
 
-___
+> `optional` **method**: `string`
 
-### method
+Defined in: [net/Request.ts:127](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/net/Request.ts#L127)
 
-• `Optional` **method**: `string`
+***
 
-#### Defined in
+### responseType?
 
-[net/Request.ts:127](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L127)
+> `optional` **responseType**: `XMLHttpRequestResponseType`
 
-___
+Defined in: [net/Request.ts:129](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/net/Request.ts#L129)
 
-### responseType
+***
 
-• `Optional` **responseType**: `XMLHttpRequestResponseType`
+### url?
 
-#### Defined in
+> `optional` **url**: `string`
 
-[net/Request.ts:129](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L129)
-
-___
-
-### url
-
-• `Optional` **url**: `string`
-
-#### Defined in
-
-[net/Request.ts:126](https://github.com/Lanfei/playable.js/blob/2369e26/src/net/Request.ts#L126)
+Defined in: [net/Request.ts:126](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/net/Request.ts#L126)

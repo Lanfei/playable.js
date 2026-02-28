@@ -1,143 +1,97 @@
-/******************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    if (typeof b !== "function" && b !== null)
-        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-
-var Event = /** @class */ (function () {
-    function Event(type, data) {
-        if (data === void 0) { data = null; }
+class Event {
+    constructor(type, data = null) {
         this.type = null;
         this.data = null;
         this.target = null;
         this.currentTarget = null;
         this.$init(type, data);
     }
-    Event.prototype.$init = function (type, data) {
-        if (data === void 0) { data = null; }
+    $init(type, data = null) {
         this.type = type;
         this.data = data;
         return this;
-    };
-    Event.prototype.release = function () {
+    }
+    release() {
         this.type = null;
         this.data = null;
         Event.recycle(this);
-    };
-    Event.create = function (type, data) {
-        if (data === void 0) { data = null; }
-        var pool = this.$pool;
+    }
+    static create(type, data = null) {
+        let pool = this.$pool;
         if (pool.length > 0) {
             return pool.pop().$init(type, data);
         }
         else {
             return new Event(type, data);
         }
-    };
-    Event.recycle = function (e) {
+    }
+    static recycle(e) {
         this.$pool.push(e);
-    };
-    /** @event added */
-    Event.ADDED = 'added';
-    /** @event removed */
-    Event.REMOVED = 'removed';
-    /** @event addedToStage */
-    Event.ADDED_TO_STAGE = 'addedToStage';
-    /** @event removeFromStage */
-    Event.REMOVED_FROM_STAGE = 'removeFromStage';
-    /** @event activate */
-    Event.ACTIVATE = 'activate';
-    /** @event deactivate */
-    Event.DEACTIVATE = 'deactivate';
-    /** @event enterFrame */
-    Event.ENTER_FRAME = 'enterFrame';
-    /** @event tick */
-    Event.TICK = 'tick';
-    /** @event tickerPause */
-    Event.TICKER_PAUSE = 'tickerPause';
-    /** @event tickerResume */
-    Event.TICKER_RESUME = 'tickerResume';
-    /** @event viewportResize */
-    Event.VIEWPORT_RESIZE = 'viewportResize';
-    /** @event load */
-    Event.LOAD = 'load';
-    /** @event abort */
-    Event.ABORT = 'abort';
-    /** @event error */
-    Event.ERROR = 'error';
-    /** @event progress */
-    Event.PROGRESS = 'progress';
-    /** @event complete */
-    Event.COMPLETE = 'complete';
-    /** @event ended */
-    Event.ENDED = 'ended';
-    /** @event soundComplete */
-    Event.SOUND_COMPLETE = 'soundComplete';
-    Event.$pool = [];
-    return Event;
-}());
+    }
+}
+/** @event added */
+Event.ADDED = 'added';
+/** @event removed */
+Event.REMOVED = 'removed';
+/** @event addedToStage */
+Event.ADDED_TO_STAGE = 'addedToStage';
+/** @event removeFromStage */
+Event.REMOVED_FROM_STAGE = 'removeFromStage';
+/** @event activate */
+Event.ACTIVATE = 'activate';
+/** @event deactivate */
+Event.DEACTIVATE = 'deactivate';
+/** @event enterFrame */
+Event.ENTER_FRAME = 'enterFrame';
+/** @event tick */
+Event.TICK = 'tick';
+/** @event tickerPause */
+Event.TICKER_PAUSE = 'tickerPause';
+/** @event tickerResume */
+Event.TICKER_RESUME = 'tickerResume';
+/** @event viewportResize */
+Event.VIEWPORT_RESIZE = 'viewportResize';
+/** @event load */
+Event.LOAD = 'load';
+/** @event abort */
+Event.ABORT = 'abort';
+/** @event error */
+Event.ERROR = 'error';
+/** @event progress */
+Event.PROGRESS = 'progress';
+/** @event complete */
+Event.COMPLETE = 'complete';
+/** @event ended */
+Event.ENDED = 'ended';
+/** @event soundComplete */
+Event.SOUND_COMPLETE = 'soundComplete';
+Event.$pool = [];
 
 var Event$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Event: Event
 });
 
-var EventEmitter = /** @class */ (function () {
-    function EventEmitter() {
+class EventEmitter {
+    constructor() {
         this.$events = {};
         this.$emittingType = null;
         this.$removedListeners = [];
     }
-    EventEmitter.prototype.on = function (type, listener) {
-        var listeners = this.$events[type] || [];
+    on(type, listener) {
+        let listeners = this.$events[type] || [];
         listeners.push(listener);
         this.$events[type] = listeners;
         return this;
-    };
-    EventEmitter.prototype.off = function (type, listener) {
+    }
+    off(type, listener) {
         if (this.$emittingType === type && listener) {
             this.$removedListeners.push(listener);
         }
         else {
-            var listeners = this.$events[type] || [];
+            let listeners = this.$events[type] || [];
             if (listener) {
-                var index = listeners.indexOf(listener);
+                let index = listeners.indexOf(listener);
                 if (index >= 0) {
                     listeners.splice(index, 1);
                 }
@@ -147,30 +101,26 @@ var EventEmitter = /** @class */ (function () {
             }
         }
         return this;
-    };
-    EventEmitter.prototype.once = function (type, listener) {
-        var that = this;
-        var wrapper = function () {
+    }
+    once(type, listener) {
+        let that = this;
+        let wrapper = function () {
             listener.apply(this, arguments);
             that.off(type, wrapper);
         };
         return this.on(type, wrapper);
-    };
-    EventEmitter.prototype.emit = function (type) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        var event;
+    }
+    emit(type, ...args) {
+        let event;
         if (type instanceof Event) {
             args = [type];
             type.target = type.target || this;
             type.currentTarget = this;
             type = type.type;
         }
-        var listeners = this.$events[type];
-        var hasListeners = listeners && listeners.length > 0;
-        var removedListeners = this.$removedListeners;
+        let listeners = this.$events[type];
+        let hasListeners = listeners && listeners.length > 0;
+        let removedListeners = this.$removedListeners;
         if (!event && hasListeners && args.length === 0) {
             event = Event.create(type);
             event.target = this;
@@ -179,8 +129,7 @@ var EventEmitter = /** @class */ (function () {
         }
         if (hasListeners) {
             this.$emittingType = type;
-            for (var _a = 0, listeners_1 = listeners; _a < listeners_1.length; _a++) {
-                var listener = listeners_1[_a];
+            for (let listener of listeners) {
                 if (removedListeners.indexOf(listener) < 0) {
                     listener.apply(this, args);
                 }
@@ -190,78 +139,60 @@ var EventEmitter = /** @class */ (function () {
         if (event) {
             event.release();
         }
-        for (var _b = 0, removedListeners_1 = removedListeners; _b < removedListeners_1.length; _b++) {
-            var listener = removedListeners_1[_b];
+        for (let listener of removedListeners) {
             this.off(type, listener);
         }
         removedListeners.length = 0;
         return hasListeners;
-    };
-    EventEmitter.prototype.hasEventListener = function (type) {
-        var listeners = this.$events[type];
+    }
+    hasEventListener(type) {
+        let listeners = this.$events[type];
         return !!listeners && listeners.length > 0;
-    };
-    EventEmitter.prototype.removeAllListeners = function () {
+    }
+    removeAllListeners() {
         this.$events = {};
         return this;
-    };
-    return EventEmitter;
-}());
+    }
+}
 
 var EventEmitter$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     EventEmitter: EventEmitter
 });
 
-var Ticker = /** @class */ (function (_super) {
-    __extends(Ticker, _super);
-    function Ticker(stage) {
-        var _this = _super.call(this) || this;
-        _this.$stage = null;
-        _this.$fps = 0;
-        _this.$deltaTime = 0;
-        _this.$paused = true;
-        _this.$shouldResume = false;
-        _this.$timerIndex = 0;
-        _this.$lastTimestamp = 0;
-        _this.$tickHandle = null;
-        _this.$stage = stage;
-        _this.$timers = [];
-        _this.$boundTick = _this.$tick.bind(_this);
-        _this.$enterFrameCallbackList = [stage];
-        _this.$start();
-        return _this;
+class Ticker extends EventEmitter {
+    constructor(stage) {
+        super();
+        this.$stage = null;
+        this.$fps = 0;
+        this.$deltaTime = 0;
+        this.$paused = true;
+        this.$shouldResume = false;
+        this.$timerIndex = 0;
+        this.$lastTimestamp = 0;
+        this.$tickHandle = null;
+        this.$stage = stage;
+        this.$timers = [];
+        this.$boundTick = this.$tick.bind(this);
+        this.$enterFrameCallbackList = [stage];
+        this.$start();
     }
-    Object.defineProperty(Ticker.prototype, "fps", {
-        get: function () {
-            return this.$fps;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Ticker.prototype, "deltaTime", {
-        get: function () {
-            return this.$deltaTime;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Ticker.prototype, "paused", {
-        get: function () {
-            return this.$paused;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Ticker.prototype.$start = function () {
-        var _this = this;
-        var stage = this.$stage;
-        var prefixes = ['', 'o', 'ms', 'moz', 'webkit'];
-        for (var _i = 0, prefixes_1 = prefixes; _i < prefixes_1.length; _i++) {
-            var prefix = prefixes_1[_i];
-            var requestKey = prefix ? prefix + 'RequestAnimationFrame' : 'requestAnimationFrame';
-            var cancelKey = prefix ? prefix + 'CancelAnimationFrame' : 'cancelAnimationFrame';
-            var cancelRequestKey = prefix ? prefix + 'CancelRequestAnimationFrame' : 'cancelRequestAnimationFrame';
+    get fps() {
+        return this.$fps;
+    }
+    get deltaTime() {
+        return this.$deltaTime;
+    }
+    get paused() {
+        return this.$paused;
+    }
+    $start() {
+        let stage = this.$stage;
+        let prefixes = ['', 'o', 'ms', 'moz', 'webkit'];
+        for (let prefix of prefixes) {
+            let requestKey = prefix ? prefix + 'RequestAnimationFrame' : 'requestAnimationFrame';
+            let cancelKey = prefix ? prefix + 'CancelAnimationFrame' : 'cancelAnimationFrame';
+            let cancelRequestKey = prefix ? prefix + 'CancelRequestAnimationFrame' : 'cancelRequestAnimationFrame';
             window.requestAnimationFrame = window.requestAnimationFrame || window[requestKey];
             window.cancelAnimationFrame = window.cancelAnimationFrame || window[cancelKey] || window[cancelRequestKey];
         }
@@ -273,16 +204,16 @@ var Ticker = /** @class */ (function (_super) {
                 window.clearTimeout(handle);
             };
         }
-        stage.on(Event.ACTIVATE, function () {
-            if (_this.$shouldResume) {
-                _this.resume();
-                _this.$shouldResume = false;
+        stage.on(Event.ACTIVATE, () => {
+            if (this.$shouldResume) {
+                this.resume();
+                this.$shouldResume = false;
             }
         });
-        stage.on(Event.DEACTIVATE, function () {
-            if (!_this.$paused) {
-                _this.pause();
-                _this.$shouldResume = true;
+        stage.on(Event.DEACTIVATE, () => {
+            if (!this.$paused) {
+                this.pause();
+                this.$shouldResume = true;
             }
         });
         if (stage.activated) {
@@ -293,8 +224,8 @@ var Ticker = /** @class */ (function (_super) {
             this.$shouldResume = true;
         }
         return this;
-    };
-    Ticker.prototype.pause = function () {
+    }
+    pause() {
         if (!this.$paused) {
             this.$paused = true;
             this.$lastTimestamp = 0;
@@ -302,72 +233,70 @@ var Ticker = /** @class */ (function (_super) {
             cancelAnimationFrame(this.$tickHandle);
         }
         return this;
-    };
-    Ticker.prototype.resume = function () {
+    }
+    resume() {
         if (this.$paused) {
             this.$paused = false;
             this.$tick();
             this.emit(Event.TICKER_RESUME);
         }
         return this;
-    };
-    Ticker.prototype.setTimeout = function (handler, timeout) {
-        if (timeout === void 0) { timeout = 0; }
-        var handle = ++this.$timerIndex;
-        this.$timers[handle] = { handler: handler, timeout: timeout, resetTime: timeout };
+    }
+    setTimeout(handler, timeout = 0) {
+        let handle = ++this.$timerIndex;
+        this.$timers[handle] = { handler, timeout, resetTime: timeout };
         return handle;
-    };
-    Ticker.prototype.clearTimeout = function (handle) {
+    }
+    clearTimeout(handle) {
         delete this.$timers[handle];
-    };
-    Ticker.prototype.setInterval = function (handler, timeout) {
-        var handle = ++this.$timerIndex;
-        this.$timers[handle] = { handler: handler, timeout: timeout, resetTime: timeout, interval: true };
+    }
+    setInterval(handler, timeout) {
+        let handle = ++this.$timerIndex;
+        this.$timers[handle] = { handler, timeout, resetTime: timeout, interval: true };
         return handle;
-    };
-    Ticker.prototype.clearInterval = function (handle) {
+    }
+    clearInterval(handle) {
         delete this.$timers[handle];
-    };
-    Ticker.prototype.registerEnterFrameCallback = function (layer) {
-        var list = this.$enterFrameCallbackList;
+    }
+    registerEnterFrameCallback(layer) {
+        let list = this.$enterFrameCallbackList;
         if (list.indexOf(layer) < 0) {
             list.push(layer);
         }
         return this;
-    };
-    Ticker.prototype.unregisterEnterFrameCallback = function (layer) {
-        var list = this.$enterFrameCallbackList;
-        var index = list.indexOf(layer);
+    }
+    unregisterEnterFrameCallback(layer) {
+        let list = this.$enterFrameCallbackList;
+        let index = list.indexOf(layer);
         if (index >= 0) {
             list.splice(index, 1);
         }
         return this;
-    };
-    Ticker.prototype.$tick = function () {
-        var now = Date.now();
-        var lastTimestamp = this.$lastTimestamp;
-        var deltaTime = lastTimestamp ? now - this.$lastTimestamp : 1000 / 60;
-        var enterFrameCallbackList = this.$enterFrameCallbackList;
+    }
+    $tick() {
+        let now = Date.now();
+        let lastTimestamp = this.$lastTimestamp;
+        let deltaTime = lastTimestamp ? now - this.$lastTimestamp : 1000 / 60;
+        let enterFrameCallbackList = this.$enterFrameCallbackList;
         this.$fps = Math.round(1000 / deltaTime);
         this.$deltaTime = deltaTime;
         this.$lastTimestamp = now;
         this.$tickHandle = window.requestAnimationFrame(this.$boundTick);
         this.$checkTimers(deltaTime);
-        var event = Event.create(Event.ENTER_FRAME, deltaTime);
-        for (var _i = 0, enterFrameCallbackList_1 = enterFrameCallbackList; _i < enterFrameCallbackList_1.length; _i++) {
-            var layer = enterFrameCallbackList_1[_i];
+        let event = Event.create(Event.ENTER_FRAME, deltaTime);
+        for (let layer of enterFrameCallbackList) {
             layer.emit(event);
         }
         event.release();
-        var tickEvent = Event.create(Event.TICK, deltaTime);
+        let tickEvent = Event.create(Event.TICK, deltaTime);
         this.emit(tickEvent);
         tickEvent.release();
-    };
-    Ticker.prototype.$checkTimers = function (dt) {
-        var timers = this.$timers;
-        for (var key in timers) {
-            var timer = timers[key];
-            var restTime = timer.resetTime = timer.resetTime - dt;
+    }
+    $checkTimers(dt) {
+        let timers = this.$timers;
+        for (let key in timers) {
+            let timer = timers[key];
+            let restTime = timer.resetTime = timer.resetTime - dt;
             if (restTime <= 0) {
                 timer.handler();
                 if (timer.interval) {
@@ -378,39 +307,30 @@ var Ticker = /** @class */ (function (_super) {
                 }
             }
         }
-    };
-    return Ticker;
-}(EventEmitter));
+    }
+}
 
 var Ticker$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Ticker: Ticker
 });
 
-var Vector = /** @class */ (function () {
-    function Vector(x, y) {
+class Vector {
+    constructor(x, y) {
         this.set(x, y);
     }
-    Object.defineProperty(Vector.prototype, "length", {
-        get: function () {
-            return Math.sqrt(this.x * this.x + this.y * this.y);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Vector.prototype, "angle", {
-        get: function () {
-            return Math.atan2(this.y, this.x);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Vector.prototype.set = function (x, y) {
+    get length() {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
+    get angle() {
+        return Math.atan2(this.y, this.x);
+    }
+    set(x, y) {
         this.x = x || 0;
         this.y = y || 0;
         return this;
-    };
-    Vector.prototype.add = function (x, y) {
+    }
+    add(x, y) {
         if (x instanceof Vector) {
             this.x += x.x;
             this.y += x.y;
@@ -420,8 +340,8 @@ var Vector = /** @class */ (function () {
             this.y += y;
         }
         return this;
-    };
-    Vector.prototype.subtract = function (x, y) {
+    }
+    subtract(x, y) {
         if (x instanceof Vector) {
             this.x -= x.x;
             this.y -= x.y;
@@ -431,70 +351,69 @@ var Vector = /** @class */ (function () {
             this.y -= y;
         }
         return this;
-    };
-    Vector.prototype.dotProduct = function (x, y) {
+    }
+    dotProduct(x, y) {
         if (x instanceof Vector) {
             return this.x * x.x + this.y * x.y;
         }
         else {
             return this.x * x + this.y * y;
         }
-    };
-    Vector.prototype.normalize = function () {
-        var length = this.length;
+    }
+    normalize() {
+        let length = this.length;
         this.x = this.x / length;
         this.y = this.y / length;
         return this;
-    };
-    Vector.prototype.negate = function () {
+    }
+    negate() {
         this.x *= -1;
         this.y *= -1;
         return this;
-    };
-    Vector.prototype.scale = function (x, y) {
+    }
+    scale(x, y) {
         this.x *= x;
         this.y *= y === undefined ? x : y;
         return this;
-    };
-    Vector.prototype.rotate = function (angle) {
-        var x = this.x;
-        var y = this.y;
+    }
+    rotate(angle) {
+        let x = this.x;
+        let y = this.y;
         this.x = x * Math.cos(angle) - y * Math.sin(angle);
         this.y = x * Math.sin(angle) + y * Math.cos(angle);
         return this;
-    };
-    Vector.prototype.transform = function (m) {
-        var x = this.x;
-        var y = this.y;
+    }
+    transform(m) {
+        let x = this.x;
+        let y = this.y;
         this.x = m.a * x + m.c * y + m.tx;
         this.y = m.b * x + m.d * y + m.ty;
         return this;
-    };
-    Vector.prototype.distance = function (v) {
+    }
+    distance(v) {
         return Math.sqrt((this.x - v.x) * (this.x - v.x) + (this.y - v.y) * (this.y - v.y));
-    };
-    Vector.prototype.equal = function (v) {
+    }
+    equal(v) {
         return this.x === v.x && this.y === v.y;
-    };
-    Vector.prototype.release = function () {
+    }
+    release() {
         Vector.recycle(this);
         return this;
-    };
-    Vector.create = function (x, y) {
-        var pool = this.$pool;
+    }
+    static create(x, y) {
+        let pool = this.$pool;
         if (pool.length > 0) {
             return pool.pop().set(x, y);
         }
         else {
             return new Vector(x, y);
         }
-    };
-    Vector.recycle = function (v) {
+    }
+    static recycle(v) {
         this.$pool.push(v);
-    };
-    Vector.$pool = [];
-    return Vector;
-}());
+    }
+}
+Vector.$pool = [];
 
 var Vector$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
@@ -508,8 +427,8 @@ var Vector$1 = /*#__PURE__*/Object.freeze({
  *             {tx ty 1}
  * ```
  */
-var Matrix = /** @class */ (function () {
-    function Matrix(a, b, c, d, tx, ty) {
+class Matrix {
+    constructor(a, b, c, d, tx, ty) {
         if (arguments.length > 0) {
             this.set(a, b, c, d, tx, ty);
         }
@@ -517,7 +436,7 @@ var Matrix = /** @class */ (function () {
             this.identity();
         }
     }
-    Matrix.prototype.set = function (a, b, c, d, tx, ty) {
+    set(a, b, c, d, tx, ty) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -525,18 +444,18 @@ var Matrix = /** @class */ (function () {
         this.tx = tx;
         this.ty = ty;
         return this;
-    };
-    Matrix.prototype.identity = function () {
+    }
+    identity() {
         return this.set(1, 0, 0, 1, 0, 0);
-    };
-    Matrix.prototype.invert = function () {
-        var a = this.a;
-        var b = this.b;
-        var c = this.c;
-        var d = this.d;
-        var tx = this.tx;
-        var ty = this.ty;
-        var n = a * d - c * b;
+    }
+    invert() {
+        let a = this.a;
+        let b = this.b;
+        let c = this.c;
+        let d = this.d;
+        let tx = this.tx;
+        let ty = this.ty;
+        let n = a * d - c * b;
         this.a = d / n;
         this.b = -b / n;
         this.c = -c / n;
@@ -544,17 +463,17 @@ var Matrix = /** @class */ (function () {
         this.tx = (c * ty - d * tx) / n;
         this.ty = (b * tx - a * ty) / n;
         return this;
-    };
-    Matrix.prototype.prepend = function (a, b, c, d, tx, ty) {
+    }
+    prepend(a, b, c, d, tx, ty) {
         if (a instanceof Matrix) {
             return this.prepend(a.a, a.b, a.c, a.d, a.tx, a.ty);
         }
-        var a1 = this.a;
-        var b1 = this.b;
-        var c1 = this.c;
-        var d1 = this.d;
-        var tx1 = this.tx;
-        var ty1 = this.ty;
+        let a1 = this.a;
+        let b1 = this.b;
+        let c1 = this.c;
+        let d1 = this.d;
+        let tx1 = this.tx;
+        let ty1 = this.ty;
         this.a = a * a1 + b * c1;
         this.b = a * b1 + b * d1;
         this.c = c * a1 + d * c1;
@@ -562,17 +481,17 @@ var Matrix = /** @class */ (function () {
         this.tx = tx * a1 + ty * c1 + tx1;
         this.ty = tx * b1 + ty * d1 + ty1;
         return this;
-    };
-    Matrix.prototype.append = function (a, b, c, d, tx, ty) {
+    }
+    append(a, b, c, d, tx, ty) {
         if (a instanceof Matrix) {
             return this.append(a.a, a.b, a.c, a.d, a.tx, a.ty);
         }
-        var a1 = this.a;
-        var b1 = this.b;
-        var c1 = this.c;
-        var d1 = this.d;
-        var tx1 = this.tx;
-        var ty1 = this.ty;
+        let a1 = this.a;
+        let b1 = this.b;
+        let c1 = this.c;
+        let d1 = this.d;
+        let tx1 = this.tx;
+        let ty1 = this.ty;
         this.a = a * a1 + c * b1;
         this.b = b * a1 + d * b1;
         this.c = a * c1 + c * d1;
@@ -580,36 +499,36 @@ var Matrix = /** @class */ (function () {
         this.tx = a * tx1 + c * ty1 + tx;
         this.ty = b * tx1 + d * ty1 + ty;
         return this;
-    };
-    Matrix.prototype.scale = function (x, y) {
+    }
+    scale(x, y) {
         return this.append(x, 0, 0, y === undefined ? x : y, 0, 0);
-    };
-    Matrix.prototype.rotate = function (angle) {
-        var sin = Math.sin(angle);
-        var cos = Math.cos(angle);
+    }
+    rotate(angle) {
+        let sin = Math.sin(angle);
+        let cos = Math.cos(angle);
         return this.append(cos, sin, -sin, cos, 0, 0);
-    };
-    Matrix.prototype.skew = function (skewX, skewY) {
+    }
+    skew(skewX, skewY) {
         return this.append(1, Math.tan(skewY), Math.tan(skewX), 1, 0, 0);
-    };
-    Matrix.prototype.translate = function (x, y) {
+    }
+    translate(x, y) {
         if (x instanceof Vector) {
             return this.append(1, 0, 0, 1, x.x, x.y);
         }
         return this.append(1, 0, 0, 1, x, y);
-    };
-    Matrix.prototype.equal = function (m) {
+    }
+    equal(m) {
         return m instanceof Matrix &&
             this.a === m.a && this.b === m.b &&
             this.c === m.c && this.d === m.d &&
             this.tx === m.tx && this.ty === m.ty;
-    };
-    Matrix.prototype.release = function () {
+    }
+    release() {
         Matrix.recycle(this);
-    };
-    Matrix.create = function (a, b, c, d, tx, ty) {
-        var m;
-        var pool = this.$pool;
+    }
+    static create(a, b, c, d, tx, ty) {
+        let m;
+        let pool = this.$pool;
         if (pool.length > 0) {
             m = pool.pop();
         }
@@ -623,136 +542,108 @@ var Matrix = /** @class */ (function () {
             m.identity();
         }
         return m;
-    };
-    Matrix.recycle = function (m) {
+    }
+    static recycle(m) {
         this.$pool.push(m);
-    };
-    Matrix.$pool = [];
-    return Matrix;
-}());
+    }
+}
+Matrix.$pool = [];
 
 var Matrix$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Matrix: Matrix
 });
 
-var Rectangle = /** @class */ (function () {
-    function Rectangle(x, y, width, height) {
+class Rectangle {
+    constructor(x, y, width, height) {
         this.set(x, y, width, height);
     }
-    Object.defineProperty(Rectangle.prototype, "top", {
-        get: function () {
-            return this.y;
-        },
-        set: function (top) {
-            this.height += this.y - top;
-            this.y = top;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Rectangle.prototype, "bottom", {
-        get: function () {
-            return this.y + this.height;
-        },
-        set: function (bottom) {
-            this.height = bottom - this.y;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Rectangle.prototype, "left", {
-        get: function () {
-            return this.x;
-        },
-        set: function (left) {
-            this.width += this.x - left;
-            this.x = left;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Rectangle.prototype, "right", {
-        get: function () {
-            return this.x + this.width;
-        },
-        set: function (right) {
-            this.width = right - this.x;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Rectangle.prototype, "topLeft", {
-        get: function () {
-            return Vector.create(this.left, this.top);
-        },
-        set: function (v) {
-            this.top = v.y;
-            this.left = v.x;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Rectangle.prototype, "bottomRight", {
-        get: function () {
-            return Vector.create(this.right, this.bottom);
-        },
-        set: function (v) {
-            this.bottom = v.y;
-            this.right = v.x;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Rectangle.prototype.set = function (x, y, width, height) {
+    get top() {
+        return this.y;
+    }
+    set top(top) {
+        this.height += this.y - top;
+        this.y = top;
+    }
+    get bottom() {
+        return this.y + this.height;
+    }
+    set bottom(bottom) {
+        this.height = bottom - this.y;
+    }
+    get left() {
+        return this.x;
+    }
+    set left(left) {
+        this.width += this.x - left;
+        this.x = left;
+    }
+    get right() {
+        return this.x + this.width;
+    }
+    set right(right) {
+        this.width = right - this.x;
+    }
+    get topLeft() {
+        return Vector.create(this.left, this.top);
+    }
+    set topLeft(v) {
+        this.top = v.y;
+        this.left = v.x;
+    }
+    get bottomRight() {
+        return Vector.create(this.right, this.bottom);
+    }
+    set bottomRight(v) {
+        this.bottom = v.y;
+        this.right = v.x;
+    }
+    set(x, y, width, height) {
         this.x = x || 0;
         this.y = y || 0;
         this.width = width || 0;
         this.height = height || 0;
         return this;
-    };
-    Rectangle.prototype.contains = function (x, y) {
+    }
+    contains(x, y) {
         if (x instanceof Vector) {
             return this.contains(x.x, x.y);
         }
         return x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height;
-    };
-    Rectangle.prototype.equal = function (r) {
+    }
+    equal(r) {
         return r instanceof Rectangle &&
             r.x === this.x && r.y === this.y && r.width === this.width && r.height === this.height;
-    };
-    Rectangle.prototype.release = function () {
+    }
+    release() {
         Rectangle.recycle(this);
-    };
-    Rectangle.create = function (x, y, width, height) {
-        var pool = this.$pool;
+    }
+    static create(x, y, width, height) {
+        let pool = this.$pool;
         if (pool.length > 0) {
             return pool.pop().set(x, y, width, height);
         }
         else {
             return new Rectangle(x, y, width, height);
         }
-    };
-    Rectangle.recycle = function (r) {
+    }
+    static recycle(r) {
         this.$pool.push(r);
-    };
-    Rectangle.$pool = [];
-    return Rectangle;
-}());
+    }
+}
+Rectangle.$pool = [];
 
 var Rectangle$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Rectangle: Rectangle
 });
 
-var TouchEvent = /** @class */ (function (_super) {
-    __extends(TouchEvent, _super);
-    function TouchEvent(type) {
-        var _this = _super.call(this, type) || this;
-        _this.$init(type);
-        return _this;
+class TouchEvent extends Event {
+    constructor(type) {
+        super(type);
+        this.$init(type);
     }
-    TouchEvent.prototype.$init = function (type) {
+    $init(type) {
         this.type = type;
         this.targetX = 0;
         this.targetY = 0;
@@ -765,309 +656,226 @@ var TouchEvent = /** @class */ (function (_super) {
         this.currentTarget = null;
         this.cancelBubble = false;
         return this;
-    };
-    TouchEvent.prototype.stopPropagation = function () {
+    }
+    stopPropagation() {
         this.cancelBubble = true;
-    };
-    TouchEvent.prototype.release = function () {
+    }
+    release() {
         TouchEvent.recycle(this);
-    };
-    TouchEvent.create = function (type) {
-        var pool = this.$pool;
+    }
+    static create(type) {
+        let pool = this.$pool;
         if (pool.length > 0) {
             return pool.pop().$init(type);
         }
         else {
             return new TouchEvent(type);
         }
-    };
-    TouchEvent.recycle = function (e) {
+    }
+    static recycle(e) {
         this.$pool.push(e);
-    };
-    /** @event touchStart */
-    TouchEvent.TOUCH_START = 'touchStart';
-    /** @event touchMove */
-    TouchEvent.TOUCH_MOVE = 'touchMove';
-    /** @event touchEnd */
-    TouchEvent.TOUCH_END = 'touchEnd';
-    /** @event touchCancel */
-    TouchEvent.TOUCH_CANCEL = 'touchCancel';
-    /** @event touchTap */
-    TouchEvent.TOUCH_TAP = 'touchTap';
-    TouchEvent.$pool = [];
-    return TouchEvent;
-}(Event));
+    }
+}
+/** @event touchStart */
+TouchEvent.TOUCH_START = 'touchStart';
+/** @event touchMove */
+TouchEvent.TOUCH_MOVE = 'touchMove';
+/** @event touchEnd */
+TouchEvent.TOUCH_END = 'touchEnd';
+/** @event touchCancel */
+TouchEvent.TOUCH_CANCEL = 'touchCancel';
+/** @event touchTap */
+TouchEvent.TOUCH_TAP = 'touchTap';
+TouchEvent.$pool = [];
 
 var TouchEvent$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     TouchEvent: TouchEvent
 });
 
-var Layer = /** @class */ (function (_super) {
-    __extends(Layer, _super);
-    function Layer() {
-        var _this = _super.call(this) || this;
-        _this.name = '';
-        _this.tag = '';
-        _this.touchable = true;
-        _this.$x = 0;
-        _this.$y = 0;
-        _this.$width = 0;
-        _this.$height = 0;
-        _this.$anchorX = 0;
-        _this.$anchorY = 0;
-        _this.$skewX = 0;
-        _this.$skewY = 0;
-        _this.$scaleX = 1;
-        _this.$scaleY = 1;
-        _this.$rotation = 0;
-        _this.$alpha = 1;
-        _this.$visible = true;
-        _this.$smoothing = true;
-        _this.$background = null;
-        _this.$stage = null;
-        _this.$parent = null;
-        _this.$children = [];
-        _this.$dirty = true;
-        _this.$shouldEmitTap = true;
-        _this.$touches = [];
-        _this.$canvas = document.createElement('canvas');
-        _this.$context = _this.$canvas.getContext('2d');
-        return _this;
+class Layer extends EventEmitter {
+    constructor() {
+        super();
+        this.name = '';
+        this.tag = '';
+        this.touchable = true;
+        this.$x = 0;
+        this.$y = 0;
+        this.$width = 0;
+        this.$height = 0;
+        this.$anchorX = 0;
+        this.$anchorY = 0;
+        this.$skewX = 0;
+        this.$skewY = 0;
+        this.$scaleX = 1;
+        this.$scaleY = 1;
+        this.$rotation = 0;
+        this.$alpha = 1;
+        this.$visible = true;
+        this.$smoothing = true;
+        this.$background = null;
+        this.$stage = null;
+        this.$parent = null;
+        this.$children = [];
+        this.$dirty = true;
+        this.$shouldEmitTap = true;
+        this.$touches = [];
+        this.$canvas = document.createElement('canvas');
+        this.$context = this.$canvas.getContext('2d');
     }
-    Object.defineProperty(Layer.prototype, "x", {
-        get: function () {
-            return this.$x;
-        },
-        set: function (x) {
-            if (this.$x !== x) {
-                this.$x = x;
-                this.$markParentDirty();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "y", {
-        get: function () {
-            return this.$y;
-        },
-        set: function (y) {
-            if (this.$y !== y) {
-                this.$y = y;
-                this.$markParentDirty();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "width", {
-        get: function () {
-            return this.$width ? this.$width : this.$canvas.width / Layer.pixelRatio;
-        },
-        set: function (width) {
-            if (this.$width !== width) {
-                this.$width = width;
-                this.$resizeCanvas();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "height", {
-        get: function () {
-            return this.$height ? this.$height : this.$canvas.height / Layer.pixelRatio;
-        },
-        set: function (height) {
-            if (this.$height !== height) {
-                this.$height = height;
-                this.$resizeCanvas();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "anchorX", {
-        get: function () {
-            return this.$anchorX;
-        },
-        set: function (anchorX) {
-            if (this.$anchorX !== anchorX) {
-                this.$anchorX = anchorX;
-                this.$resizeCanvas();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "anchorY", {
-        get: function () {
-            return this.$anchorY;
-        },
-        set: function (anchorY) {
-            if (this.$anchorY !== anchorY) {
-                this.$anchorY = anchorY;
-                this.$resizeCanvas();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "skewX", {
-        get: function () {
-            return this.$skewX;
-        },
-        set: function (skewX) {
-            if (this.$skewX !== skewX) {
-                this.$skewX = skewX;
-                this.$markParentDirty();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "skewY", {
-        get: function () {
-            return this.$skewY;
-        },
-        set: function (skewY) {
-            if (this.$skewY !== skewY) {
-                this.$skewY = skewY;
-                this.$markParentDirty();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "scaleX", {
-        get: function () {
-            return this.$scaleX;
-        },
-        set: function (scaleX) {
-            if (this.$scaleX !== scaleX) {
-                this.$scaleX = scaleX;
-                this.$markParentDirty();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "scaleY", {
-        get: function () {
-            return this.$scaleY;
-        },
-        set: function (scaleY) {
-            if (this.$scaleY !== scaleY) {
-                this.$scaleY = scaleY;
-                this.$markParentDirty();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "rotation", {
-        get: function () {
-            return this.$rotation;
-        },
-        set: function (rotation) {
-            if (this.$rotation !== rotation) {
-                this.$rotation = rotation;
-                this.$markParentDirty();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "alpha", {
-        get: function () {
-            return this.$alpha;
-        },
-        set: function (alpha) {
-            if (this.$alpha !== alpha) {
-                this.$alpha = alpha;
-                this.$markParentDirty();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "visible", {
-        get: function () {
-            return this.$visible;
-        },
-        set: function (visible) {
-            if (this.$visible !== visible) {
-                this.$visible = visible;
-                this.$markParentDirty();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "smoothing", {
-        get: function () {
-            return this.$smoothing;
-        },
-        set: function (smoothing) {
-            this.$smoothing = smoothing;
+    get x() {
+        return this.$x;
+    }
+    set x(x) {
+        if (this.$x !== x) {
+            this.$x = x;
+            this.$markParentDirty();
+        }
+    }
+    get y() {
+        return this.$y;
+    }
+    set y(y) {
+        if (this.$y !== y) {
+            this.$y = y;
+            this.$markParentDirty();
+        }
+    }
+    get width() {
+        return this.$width ? this.$width : this.$canvas.width / Layer.pixelRatio;
+    }
+    set width(width) {
+        if (this.$width !== width) {
+            this.$width = width;
             this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "background", {
-        get: function () {
-            return this.$background;
-        },
-        set: function (background) {
-            if (this.$background !== background) {
-                this.$background = background;
-                this.$markDirty();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "stage", {
-        get: function () {
-            return this.$stage;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "parent", {
-        get: function () {
-            return this.$parent;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "numChildren", {
-        get: function () {
-            return this.$children.length;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "ticker", {
-        get: function () {
-            return this.$stage ? this.$stage.ticker : null;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Layer.prototype, "canvas", {
-        get: function () {
-            return this.$canvas;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Layer.prototype.addChild = function (child) {
+        }
+    }
+    get height() {
+        return this.$height ? this.$height : this.$canvas.height / Layer.pixelRatio;
+    }
+    set height(height) {
+        if (this.$height !== height) {
+            this.$height = height;
+            this.$resizeCanvas();
+        }
+    }
+    get anchorX() {
+        return this.$anchorX;
+    }
+    set anchorX(anchorX) {
+        if (this.$anchorX !== anchorX) {
+            this.$anchorX = anchorX;
+            this.$resizeCanvas();
+        }
+    }
+    get anchorY() {
+        return this.$anchorY;
+    }
+    set anchorY(anchorY) {
+        if (this.$anchorY !== anchorY) {
+            this.$anchorY = anchorY;
+            this.$resizeCanvas();
+        }
+    }
+    get skewX() {
+        return this.$skewX;
+    }
+    set skewX(skewX) {
+        if (this.$skewX !== skewX) {
+            this.$skewX = skewX;
+            this.$markParentDirty();
+        }
+    }
+    get skewY() {
+        return this.$skewY;
+    }
+    set skewY(skewY) {
+        if (this.$skewY !== skewY) {
+            this.$skewY = skewY;
+            this.$markParentDirty();
+        }
+    }
+    get scaleX() {
+        return this.$scaleX;
+    }
+    set scaleX(scaleX) {
+        if (this.$scaleX !== scaleX) {
+            this.$scaleX = scaleX;
+            this.$markParentDirty();
+        }
+    }
+    get scaleY() {
+        return this.$scaleY;
+    }
+    set scaleY(scaleY) {
+        if (this.$scaleY !== scaleY) {
+            this.$scaleY = scaleY;
+            this.$markParentDirty();
+        }
+    }
+    get rotation() {
+        return this.$rotation;
+    }
+    set rotation(rotation) {
+        if (this.$rotation !== rotation) {
+            this.$rotation = rotation;
+            this.$markParentDirty();
+        }
+    }
+    get alpha() {
+        return this.$alpha;
+    }
+    set alpha(alpha) {
+        if (this.$alpha !== alpha) {
+            this.$alpha = alpha;
+            this.$markParentDirty();
+        }
+    }
+    get visible() {
+        return this.$visible;
+    }
+    set visible(visible) {
+        if (this.$visible !== visible) {
+            this.$visible = visible;
+            this.$markParentDirty();
+        }
+    }
+    get smoothing() {
+        return this.$smoothing;
+    }
+    set smoothing(smoothing) {
+        this.$smoothing = smoothing;
+        this.$resizeCanvas();
+    }
+    get background() {
+        return this.$background;
+    }
+    set background(background) {
+        if (this.$background !== background) {
+            this.$background = background;
+            this.$markDirty();
+        }
+    }
+    get stage() {
+        return this.$stage;
+    }
+    get parent() {
+        return this.$parent;
+    }
+    get numChildren() {
+        return this.$children.length;
+    }
+    get ticker() {
+        return this.$stage ? this.$stage.ticker : null;
+    }
+    get canvas() {
+        return this.$canvas;
+    }
+    addChild(child) {
         return this.addChildAt(child, this.$children.length);
-    };
-    Layer.prototype.addChildAt = function (child, index) {
-        var children = this.$children;
+    }
+    addChildAt(child, index) {
+        let children = this.$children;
         if (child.$parent) {
             child.$parent.removeChild(child);
         }
@@ -1078,64 +886,62 @@ var Layer = /** @class */ (function (_super) {
         children.splice(index, 0, child);
         this.$resizeCanvas();
         return this;
-    };
-    Layer.prototype.replaceChild = function (oldChild, newChild) {
-        var index = this.getChildIndex(oldChild);
+    }
+    replaceChild(oldChild, newChild) {
+        let index = this.getChildIndex(oldChild);
         this.removeChildAt(index);
         this.addChildAt(newChild, index);
         return this;
-    };
-    Layer.prototype.getChildByName = function (name) {
-        var children = this.$children;
-        for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
-            var child = children_1[_i];
+    }
+    getChildByName(name) {
+        let children = this.$children;
+        for (let child of children) {
             if (child.name === name) {
                 return child;
             }
         }
         return null;
-    };
-    Layer.prototype.getChildrenByTag = function (tag) {
-        var result = [];
-        var children = this.$children;
-        for (var _i = 0, children_2 = children; _i < children_2.length; _i++) {
-            var child = children_2[_i];
+    }
+    getChildrenByTag(tag) {
+        let result = [];
+        let children = this.$children;
+        for (let child of children) {
             if (child.tag === tag) {
                 result.push(child);
             }
         }
         return result;
-    };
-    Layer.prototype.getChildAt = function (index) {
+    }
+    getChildAt(index) {
         return this.$children[index] || null;
-    };
-    Layer.prototype.getChildIndex = function (child) {
+    }
+    getChildIndex(child) {
         return this.$children.indexOf(child);
-    };
-    Layer.prototype.hasChild = function (child) {
+    }
+    hasChild(child) {
         return this.getChildIndex(child) >= 0;
-    };
-    Layer.prototype.swapChildren = function (child1, child2) {
-        var index1 = this.getChildIndex(child1);
-        var index2 = this.getChildIndex(child2);
+    }
+    swapChildren(child1, child2) {
+        let index1 = this.getChildIndex(child1);
+        let index2 = this.getChildIndex(child2);
         if (index1 >= 0 && index2 >= 0) {
             this.swapChildrenAt(index1, index2);
         }
         return this;
-    };
-    Layer.prototype.swapChildrenAt = function (index1, index2) {
-        var child1 = this.$children[index1];
-        var child2 = this.$children[index2];
+    }
+    swapChildrenAt(index1, index2) {
+        let child1 = this.$children[index1];
+        let child2 = this.$children[index2];
         if (index1 !== index2 && child1 && child2) {
             this.$children[index1] = child2;
             this.$children[index2] = child1;
             this.$markDirty();
         }
         return this;
-    };
-    Layer.prototype.setChildIndex = function (child, index) {
-        var children = this.$children;
-        var oldIndex = this.getChildIndex(child);
+    }
+    setChildIndex(child, index) {
+        let children = this.$children;
+        let oldIndex = this.getChildIndex(child);
         if (index < 0) {
             index = 0;
         }
@@ -1143,73 +949,72 @@ var Layer = /** @class */ (function (_super) {
             index = children.length;
         }
         if (oldIndex >= 0 && index > oldIndex) {
-            for (var i = oldIndex + 1; i <= index; ++i) {
+            for (let i = oldIndex + 1; i <= index; ++i) {
                 children[i - 1] = children[i];
             }
             children[index] = child;
             this.$markDirty();
         }
         else if (oldIndex >= 0 && index < oldIndex) {
-            for (var i = oldIndex - 1; i >= index; --i) {
+            for (let i = oldIndex - 1; i >= index; --i) {
                 children[i + 1] = children[i];
             }
             children[index] = child;
             this.$markDirty();
         }
         return this;
-    };
-    Layer.prototype.removeChild = function (child) {
-        var index = this.getChildIndex(child);
+    }
+    removeChild(child) {
+        let index = this.getChildIndex(child);
         return this.removeChildAt(index);
-    };
-    Layer.prototype.removeChildAt = function (index) {
-        var children = this.$children;
-        var child = children[index];
+    }
+    removeChildAt(index) {
+        let children = this.$children;
+        let child = children[index];
         if (child) {
             children.splice(index, 1);
             child.$emitRemoved();
             this.$resizeCanvas();
         }
         return this;
-    };
-    Layer.prototype.removeChildByName = function (name) {
-        var children = this.$children;
-        for (var i = 0, l = children.length; i < l; ++i) {
-            var child = children[i];
+    }
+    removeChildByName(name) {
+        let children = this.$children;
+        for (let i = 0, l = children.length; i < l; ++i) {
+            let child = children[i];
             if (child.name === name) {
                 this.removeChildAt(i);
                 break;
             }
         }
         return this;
-    };
-    Layer.prototype.removeChildrenByTag = function (tag) {
-        var children = this.$children;
-        for (var i = children.length - 1; i >= 0; --i) {
-            var child = children[i];
+    }
+    removeChildrenByTag(tag) {
+        let children = this.$children;
+        for (let i = children.length - 1; i >= 0; --i) {
+            let child = children[i];
             if (child.tag === tag) {
                 this.removeChildAt(i);
             }
         }
         return this;
-    };
-    Layer.prototype.removeAllChildren = function () {
-        var children = this.$children;
-        for (var _i = 0, children_3 = children; _i < children_3.length; _i++) {
-            var child = children_3[_i];
+    }
+    removeAllChildren() {
+        let children = this.$children;
+        for (let child of children) {
             child.$emitRemoved();
         }
         this.$children.length = 0;
         this.$resizeCanvas();
         return this;
-    };
-    Layer.prototype.removeSelf = function () {
+    }
+    removeSelf() {
         if (this.$parent) {
             this.$parent.removeChild(this);
         }
         return this;
-    };
-    Layer.prototype.$markDirty = function (sizeDirty) {
+    }
+    $markDirty(sizeDirty) {
         if (sizeDirty) {
             this.$resizeParentCanvas();
         }
@@ -1217,27 +1022,27 @@ var Layer = /** @class */ (function (_super) {
             this.$markParentDirty();
         }
         this.$dirty = true;
-    };
-    Layer.prototype.$markParentDirty = function () {
+    }
+    $markParentDirty() {
         if (this.$parent) {
             this.$parent.$markDirty();
         }
-    };
-    Layer.prototype.$resizeCanvas = function () {
-        var width = this.$width;
-        var height = this.$height;
-        var canvas = this.$canvas;
-        var anchorX = this.$anchorX;
-        var anchorY = this.$anchorY;
-        var context = this.$context;
-        var smoothing = this.$smoothing;
-        var pixelRatio = Layer.pixelRatio;
+    }
+    $resizeCanvas() {
+        let width = this.$width;
+        let height = this.$height;
+        let canvas = this.$canvas;
+        let anchorX = this.$anchorX;
+        let anchorY = this.$anchorY;
+        let context = this.$context;
+        let smoothing = this.$smoothing;
+        let pixelRatio = Layer.pixelRatio;
         if (width && height) {
             canvas.width = width * pixelRatio;
             canvas.height = height * pixelRatio;
         }
         else {
-            var bounds = this.$getContentBounds();
+            let bounds = this.$getContentBounds();
             canvas.width = (width || bounds.right + anchorX) * pixelRatio;
             canvas.height = (height || bounds.bottom + anchorY) * pixelRatio;
             bounds.release();
@@ -1246,38 +1051,38 @@ var Layer = /** @class */ (function (_super) {
             context.imageSmoothingEnabled = smoothing;
         }
         this.$markDirty(true);
-    };
-    Layer.prototype.$resizeParentCanvas = function () {
+    }
+    $resizeParentCanvas() {
         if (this.$parent) {
             this.$parent.$resizeCanvas();
         }
-    };
-    Layer.prototype.$getTransform = function () {
-        var degToRad = Math.PI / 180;
-        var matrix = Matrix.create();
+    }
+    $getTransform() {
+        let degToRad = Math.PI / 180;
+        let matrix = Matrix.create();
         matrix.translate(-this.$anchorX, -this.$anchorY);
         matrix.skew(this.skewX * degToRad, this.skewY * degToRad);
         matrix.rotate(this.rotation * degToRad);
         matrix.scale(this.scaleX, this.scaleY);
         matrix.translate(this.x, this.y);
         return matrix;
-    };
-    Layer.prototype.$getChildTransform = function (child) {
+    }
+    $getChildTransform(child) {
         return child.$getTransform();
-    };
-    Layer.prototype.$getChildBounds = function (child) {
-        var width = child.width;
-        var height = child.height;
-        var bounds = Rectangle.create();
-        var matrix = this.$getChildTransform(child);
-        var topLeft = Vector.create(0, 0).transform(matrix);
-        var topRight = Vector.create(width, 0).transform(matrix);
-        var bottomLeft = Vector.create(0, height).transform(matrix);
-        var bottomRight = Vector.create(width, height).transform(matrix);
-        var minX = Math.min(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
-        var maxX = Math.max(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
-        var minY = Math.min(topLeft.y, topRight.y, bottomLeft.y, bottomRight.y);
-        var maxY = Math.max(topLeft.y, topRight.y, bottomLeft.y, bottomRight.y);
+    }
+    $getChildBounds(child) {
+        let width = child.width;
+        let height = child.height;
+        let bounds = Rectangle.create();
+        let matrix = this.$getChildTransform(child);
+        let topLeft = Vector.create(0, 0).transform(matrix);
+        let topRight = Vector.create(width, 0).transform(matrix);
+        let bottomLeft = Vector.create(0, height).transform(matrix);
+        let bottomRight = Vector.create(width, height).transform(matrix);
+        let minX = Math.min(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
+        let maxX = Math.max(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x);
+        let minY = Math.min(topLeft.y, topRight.y, bottomLeft.y, bottomRight.y);
+        let maxY = Math.max(topLeft.y, topRight.y, bottomLeft.y, bottomRight.y);
         bounds.top = minY;
         bounds.bottom = maxY;
         bounds.left = minX;
@@ -1288,14 +1093,13 @@ var Layer = /** @class */ (function (_super) {
         bottomLeft.release();
         bottomRight.release();
         return bounds;
-    };
-    Layer.prototype.$getContentBounds = function () {
-        var bounds;
-        var children = this.$children;
-        for (var _i = 0, children_4 = children; _i < children_4.length; _i++) {
-            var child = children_4[_i];
+    }
+    $getContentBounds() {
+        let bounds;
+        let children = this.$children;
+        for (let child of children) {
             if (child.$visible) {
-                var childBounds = this.$getChildBounds(child);
+                let childBounds = this.$getChildBounds(child);
                 if (bounds) {
                     bounds.top = Math.min(bounds.top, childBounds.top);
                     bounds.bottom = Math.max(bounds.bottom, childBounds.bottom);
@@ -1310,13 +1114,13 @@ var Layer = /** @class */ (function (_super) {
         }
         bounds = bounds || Rectangle.create();
         return bounds;
-    };
-    Layer.prototype.$emitTouchEvent = function (event, inside) {
-        var type = event.type;
-        var localX = event.localX;
-        var localY = event.localY;
-        var touches = this.$touches;
-        var identifier = event.identifier;
+    }
+    $emitTouchEvent(event, inside) {
+        let type = event.type;
+        let localX = event.localX;
+        let localY = event.localY;
+        let touches = this.$touches;
+        let identifier = event.identifier;
         if (type === TouchEvent.TOUCH_START) {
             this.$shouldEmitTap = true;
             touches[identifier] = true;
@@ -1330,22 +1134,22 @@ var Layer = /** @class */ (function (_super) {
         if (type === TouchEvent.TOUCH_MOVE) {
             this.$shouldEmitTap = false;
         }
-        var children = this.$children;
-        for (var i = children.length - 1; i >= 0; --i) {
-            var child = children[i];
+        let children = this.$children;
+        for (let i = children.length - 1; i >= 0; --i) {
+            let child = children[i];
             if (!child.$visible || !child.touchable) {
                 continue;
             }
-            var matrix = this.$getChildTransform(child);
-            var localPos = Vector.create(localX, localY).transform(matrix.invert()).subtract(child.$anchorX, child.$anchorY);
-            var inside_1 = child.$localHitTest(localPos);
+            let matrix = this.$getChildTransform(child);
+            let localPos = Vector.create(localX, localY).transform(matrix.invert()).subtract(child.$anchorX, child.$anchorY);
+            let inside = child.$localHitTest(localPos);
             localPos.release();
             matrix.release();
-            if (inside_1 || type !== TouchEvent.TOUCH_START) {
+            if (inside || type !== TouchEvent.TOUCH_START) {
                 event.target = child;
                 event.localX = event.targetX = localPos.x;
                 event.localY = event.targetY = localPos.y;
-                if (child.$emitTouchEvent(event, inside_1)) {
+                if (child.$emitTouchEvent(event, inside)) {
                     break;
                 }
             }
@@ -1359,79 +1163,77 @@ var Layer = /** @class */ (function (_super) {
             this.emit(event);
         }
         return true;
-    };
-    Layer.prototype.$emitAdded = function (parent) {
-        var stage = parent.$stage;
+    }
+    $emitAdded(parent) {
+        let stage = parent.$stage;
         this.$parent = parent;
         this.emit(Event.ADDED);
         if (stage) {
             this.$emitAddedToStage(stage);
         }
-    };
-    Layer.prototype.$emitRemoved = function () {
-        var stage = this.$stage;
+    }
+    $emitRemoved() {
+        let stage = this.$stage;
         this.$parent = null;
         this.emit(Event.REMOVED);
         if (stage) {
             this.$emitRemovedFromStage();
         }
-    };
-    Layer.prototype.$emitAddedToStage = function (stage) {
-        var children = this.$children;
+    }
+    $emitAddedToStage(stage) {
+        let children = this.$children;
         this.$stage = stage;
         this.emit(Event.ADDED_TO_STAGE);
         if (this.hasEventListener(Event.ENTER_FRAME)) {
             stage.ticker.registerEnterFrameCallback(this);
         }
-        for (var _i = 0, children_5 = children; _i < children_5.length; _i++) {
-            var child = children_5[_i];
+        for (let child of children) {
             child.$emitAddedToStage(stage);
         }
-    };
-    Layer.prototype.$emitRemovedFromStage = function () {
-        var stage = this.$stage;
-        var children = this.$children;
+    }
+    $emitRemovedFromStage() {
+        let stage = this.$stage;
+        let children = this.$children;
         this.$stage = null;
         this.emit(Event.REMOVED_FROM_STAGE);
         if (this.hasEventListener(Event.ENTER_FRAME)) {
             stage.ticker.unregisterEnterFrameCallback(this);
         }
-        for (var _i = 0, children_6 = children; _i < children_6.length; _i++) {
-            var child = children_6[_i];
+        for (let child of children) {
             child.$emitRemovedFromStage();
         }
-    };
-    Layer.prototype.$localHitTest = function (vector) {
+    }
+    $localHitTest(vector) {
         return vector.x >= -this.anchorX && vector.x <= this.width - this.anchorX && vector.y >= -this.anchorY && vector.y <= this.height - this.anchorY;
-    };
-    Layer.prototype.$isChildVisible = function (child) {
+    }
+    $isChildVisible(child) {
         if (!child.visible || !child.alpha || !child.width || !child.height) {
             return false;
         }
-        var minX = -this.$anchorX;
-        var maxX = this.width + minX;
-        var minY = -this.$anchorY;
-        var maxY = this.height + minY;
-        var bounds = this.$getChildBounds(child);
-        var inside = bounds.left <= maxX && bounds.right >= minX && bounds.top <= maxY && bounds.bottom >= minY;
+        let minX = -this.$anchorX;
+        let maxX = this.width + minX;
+        let minY = -this.$anchorY;
+        let maxY = this.height + minY;
+        let bounds = this.$getChildBounds(child);
+        let inside = bounds.left <= maxX && bounds.right >= minX && bounds.top <= maxY && bounds.bottom >= minY;
         bounds.release();
         return inside;
-    };
-    Layer.prototype.$drawChild = function (child) {
-        var ctx = this.$context;
-        var canvas = child.$canvas;
-        var width = child.width;
-        var height = child.height;
-        var pixelRatio = Layer.pixelRatio;
-        var matrix = this.$getChildTransform(child).scale(pixelRatio);
-        var drawCalls = child.$render();
-        var globalAlpha = ctx.globalAlpha;
+    }
+    $drawChild(child) {
+        let ctx = this.$context;
+        let canvas = child.$canvas;
+        let width = child.width;
+        let height = child.height;
+        let pixelRatio = Layer.pixelRatio;
+        let matrix = this.$getChildTransform(child).scale(pixelRatio);
+        let drawCalls = child.$render();
+        let globalAlpha = ctx.globalAlpha;
         if (globalAlpha !== child.alpha) {
             ctx.globalAlpha = child.alpha;
         }
         if (matrix.b === 0 && matrix.c === 0) {
-            var tx = (matrix.tx + 0.5) | 0;
-            var ty = (matrix.ty + 0.5) | 0;
+            let tx = (matrix.tx + 0.5) | 0;
+            let ty = (matrix.ty + 0.5) | 0;
             width = (width * matrix.a) + 0.5 | 0;
             height = (height * matrix.d) + 0.5 | 0;
             ctx.drawImage(canvas, tx, ty, width, height);
@@ -1447,21 +1249,21 @@ var Layer = /** @class */ (function (_super) {
         }
         matrix.release();
         return drawCalls + 1;
-    };
-    Layer.prototype.$render = function () {
+    }
+    $render() {
         if (!this.$dirty) {
             return 0;
         }
-        var drawCalls = 0;
-        var ctx = this.$context;
-        var canvas = this.$canvas;
-        var children = this.$children;
-        var canvasWidth = canvas.width;
-        var canvasHeight = canvas.height;
-        var anchorX = (this.$anchorX + 0.5) | 0;
-        var anchorY = (this.$anchorY + 0.5) | 0;
-        var background = this.$background;
-        var pixelRatio = Layer.pixelRatio;
+        let drawCalls = 0;
+        let ctx = this.$context;
+        let canvas = this.$canvas;
+        let children = this.$children;
+        let canvasWidth = canvas.width;
+        let canvasHeight = canvas.height;
+        let anchorX = (this.$anchorX + 0.5) | 0;
+        let anchorY = (this.$anchorY + 0.5) | 0;
+        let background = this.$background;
+        let pixelRatio = Layer.pixelRatio;
         ctx.globalAlpha = 1;
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -1470,114 +1272,110 @@ var Layer = /** @class */ (function (_super) {
             ctx.fillRect(0, 0, canvasWidth, canvasHeight);
         }
         ctx.translate(anchorX * pixelRatio, anchorY * pixelRatio);
-        for (var _i = 0, children_7 = children; _i < children_7.length; _i++) {
-            var child = children_7[_i];
+        for (let child of children) {
             if (this.$isChildVisible(child)) {
                 drawCalls += this.$drawChild(child);
             }
         }
         this.$dirty = false;
         return drawCalls;
-    };
-    Layer.prototype.on = function (type, listener) {
-        _super.prototype.on.call(this, type, listener);
+    }
+    on(type, listener) {
+        super.on(type, listener);
         if (type === Event.ENTER_FRAME && this.ticker) {
             this.ticker.registerEnterFrameCallback(this);
         }
         else if (type === Event.ADDED && this.$parent) {
-            var event_1 = Event.create(type);
-            listener.call(this, event_1);
-            event_1.release();
+            let event = Event.create(type);
+            listener.call(this, event);
+            event.release();
         }
         else if (type === Event.ADDED_TO_STAGE && this.$stage) {
-            var event_2 = Event.create(type);
-            listener.call(this, event_2);
-            event_2.release();
+            let event = Event.create(type);
+            listener.call(this, event);
+            event.release();
         }
         return this;
-    };
-    Layer.prototype.off = function (type, listener) {
-        _super.prototype.off.call(this, type, listener);
+    }
+    off(type, listener) {
+        super.off(type, listener);
         if (type === Event.ENTER_FRAME && !this.hasEventListener(Event.ENTER_FRAME) && this.ticker) {
             this.ticker.unregisterEnterFrameCallback(this);
         }
         return this;
-    };
-    Layer.pixelRatio = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1;
-    return Layer;
-}(EventEmitter));
+    }
+}
+Layer.pixelRatio = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1;
 
 var Layer$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Layer: Layer
 });
 
-var Ease = /** @class */ (function () {
-    function Ease() {
-    }
-    Ease.linear = function (t, b, c, d) {
+class Ease {
+    static linear(t, b, c, d) {
         return c * t / d + b;
-    };
-    Ease.easeInQuad = function (t, b, c, d) {
+    }
+    static easeInQuad(t, b, c, d) {
         return c * (t /= d) * t + b;
-    };
-    Ease.easeOutQuad = function (t, b, c, d) {
+    }
+    static easeOutQuad(t, b, c, d) {
         return -c * (t /= d) * (t - 2) + b;
-    };
-    Ease.easeInOutQuad = function (t, b, c, d) {
+    }
+    static easeInOutQuad(t, b, c, d) {
         if ((t /= d / 2) < 1)
             return c / 2 * t * t + b;
         return -c / 2 * ((--t) * (t - 2) - 1) + b;
-    };
-    Ease.easeInCubic = function (t, b, c, d) {
+    }
+    static easeInCubic(t, b, c, d) {
         return c * (t /= d) * t * t + b;
-    };
-    Ease.easeOutCubic = function (t, b, c, d) {
+    }
+    static easeOutCubic(t, b, c, d) {
         return c * ((t = t / d - 1) * t * t + 1) + b;
-    };
-    Ease.easeInOutCubic = function (t, b, c, d) {
+    }
+    static easeInOutCubic(t, b, c, d) {
         if ((t /= d / 2) < 1)
             return c / 2 * t * t * t + b;
         return c / 2 * ((t -= 2) * t * t + 2) + b;
-    };
-    Ease.easeInQuart = function (t, b, c, d) {
+    }
+    static easeInQuart(t, b, c, d) {
         return c * (t /= d) * t * t * t + b;
-    };
-    Ease.easeOutQuart = function (t, b, c, d) {
+    }
+    static easeOutQuart(t, b, c, d) {
         return -c * ((t = t / d - 1) * t * t * t - 1) + b;
-    };
-    Ease.easeInOutQuart = function (t, b, c, d) {
+    }
+    static easeInOutQuart(t, b, c, d) {
         if ((t /= d / 2) < 1)
             return c / 2 * t * t * t * t + b;
         return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
-    };
-    Ease.easeInQuint = function (t, b, c, d) {
+    }
+    static easeInQuint(t, b, c, d) {
         return c * (t /= d) * t * t * t * t + b;
-    };
-    Ease.easeOutQuint = function (t, b, c, d) {
+    }
+    static easeOutQuint(t, b, c, d) {
         return c * ((t = t / d - 1) * t * t * t * t + 1) + b;
-    };
-    Ease.easeInOutQuint = function (t, b, c, d) {
+    }
+    static easeInOutQuint(t, b, c, d) {
         if ((t /= d / 2) < 1)
             return c / 2 * t * t * t * t * t + b;
         return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
-    };
-    Ease.easeInSine = function (t, b, c, d) {
+    }
+    static easeInSine(t, b, c, d) {
         return (t === d) ? b + c : -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
-    };
-    Ease.easeOutSine = function (t, b, c, d) {
+    }
+    static easeOutSine(t, b, c, d) {
         return c * Math.sin(t / d * (Math.PI / 2)) + b;
-    };
-    Ease.easeInOutSine = function (t, b, c, d) {
+    }
+    static easeInOutSine(t, b, c, d) {
         return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
-    };
-    Ease.easeInExpo = function (t, b, c, d) {
+    }
+    static easeInExpo(t, b, c, d) {
         return (t === 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
-    };
-    Ease.easeOutExpo = function (t, b, c, d) {
+    }
+    static easeOutExpo(t, b, c, d) {
         return (t === d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
-    };
-    Ease.easeInOutExpo = function (t, b, c, d) {
+    }
+    static easeInOutExpo(t, b, c, d) {
         if (t === 0)
             return b;
         if (t === d)
@@ -1585,22 +1383,22 @@ var Ease = /** @class */ (function () {
         if ((t /= d / 2) < 1)
             return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
         return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
-    };
-    Ease.easeInCirc = function (t, b, c, d) {
+    }
+    static easeInCirc(t, b, c, d) {
         return -c * (Math.sqrt(1 - (t /= d) * t) - 1) + b;
-    };
-    Ease.easeOutCirc = function (t, b, c, d) {
+    }
+    static easeOutCirc(t, b, c, d) {
         return c * Math.sqrt(1 - (t = t / d - 1) * t) + b;
-    };
-    Ease.easeInOutCirc = function (t, b, c, d) {
+    }
+    static easeInOutCirc(t, b, c, d) {
         if ((t /= d / 2) < 1)
             return -c / 2 * (Math.sqrt(1 - t * t) - 1) + b;
         return c / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1) + b;
-    };
-    Ease.easeInElastic = function (t, b, c, d) {
-        var s = 1.70158;
-        var p = 0;
-        var a = c;
+    }
+    static easeInElastic(t, b, c, d) {
+        let s = 1.70158;
+        let p = 0;
+        let a = c;
         if (t === 0)
             return b;
         if ((t /= d) === 1)
@@ -1615,11 +1413,11 @@ var Ease = /** @class */ (function () {
             s = p / (2 * Math.PI) * Math.asin(c / a);
         }
         return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
-    };
-    Ease.easeOutElastic = function (t, b, c, d) {
-        var s = 1.70158;
-        var p = 0;
-        var a = c;
+    }
+    static easeOutElastic(t, b, c, d) {
+        let s = 1.70158;
+        let p = 0;
+        let a = c;
         if (t === 0)
             return b;
         if ((t /= d) === 1)
@@ -1634,11 +1432,11 @@ var Ease = /** @class */ (function () {
             s = p / (2 * Math.PI) * Math.asin(c / a);
         }
         return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b;
-    };
-    Ease.easeInOutElastic = function (t, b, c, d) {
-        var s = 1.70158;
-        var p = 0;
-        var a = c;
+    }
+    static easeInOutElastic(t, b, c, d) {
+        let s = 1.70158;
+        let p = 0;
+        let a = c;
         if (t === 0)
             return b;
         if ((t /= d / 2) === 2)
@@ -1655,25 +1453,22 @@ var Ease = /** @class */ (function () {
         if (t < 1)
             return -0.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
         return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * 0.5 + c + b;
-    };
-    Ease.easeInBack = function (t, b, c, d, s) {
-        if (s === void 0) { s = 1.70158; }
+    }
+    static easeInBack(t, b, c, d, s = 1.70158) {
         return (t === d) ? b + c : c * (t /= d) * t * ((s + 1) * t - s) + b;
-    };
-    Ease.easeOutBack = function (t, b, c, d, s) {
-        if (s === void 0) { s = 1.70158; }
+    }
+    static easeOutBack(t, b, c, d, s = 1.70158) {
         return (t === 0) ? b : c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
-    };
-    Ease.easeInOutBack = function (t, b, c, d, s) {
-        if (s === void 0) { s = 1.70158; }
+    }
+    static easeInOutBack(t, b, c, d, s = 1.70158) {
         if ((t /= d / 2) < 1)
             return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
         return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
-    };
-    Ease.easeInBounce = function (t, b, c, d) {
+    }
+    static easeInBounce(t, b, c, d) {
         return c - Ease.easeOutBounce(d - t, 0, c, d) + b;
-    };
-    Ease.easeOutBounce = function (t, b, c, d) {
+    }
+    static easeOutBounce(t, b, c, d) {
         if ((t /= d) < (1 / 2.75)) {
             return c * (7.5625 * t * t) + b;
         }
@@ -1686,126 +1481,115 @@ var Ease = /** @class */ (function () {
         else {
             return c * (7.5625 * (t -= (2.625 / 2.75)) * t + 0.984375) + b;
         }
-    };
-    Ease.easeInOutBounce = function (t, b, c, d) {
+    }
+    static easeInOutBounce(t, b, c, d) {
         if (t < d / 2)
             return Ease.easeInBounce(t * 2, 0, c, d) * 0.5 + b;
         return Ease.easeOutBounce(t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
-    };
-    return Ease;
-}());
+    }
+}
 
 var Ease$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Ease: Ease
 });
 
-var Tween = /** @class */ (function (_super) {
-    __extends(Tween, _super);
-    function Tween(target, option) {
-        var _this = _super.call(this) || this;
-        _this.loop = false;
-        _this.$target = null;
-        _this.$paused = true;
-        _this.$stopped = true;
-        _this.$stepIndex = 0;
-        _this.$stepPosition = 0;
-        _this.$steps = [];
-        _this.$stepProps = [];
-        _this.$shouldSaveProps = true;
-        _this.$target = target;
-        _this.loop = option ? option.loop : false;
-        _this.$boundOnEnterFrame = _this.$onEnterFrame.bind(_this);
-        return _this;
+class Tween extends EventEmitter {
+    constructor(target, option) {
+        super();
+        this.loop = false;
+        this.$target = null;
+        this.$paused = true;
+        this.$stopped = true;
+        this.$stepIndex = 0;
+        this.$stepPosition = 0;
+        this.$steps = [];
+        this.$stepProps = [];
+        this.$shouldSaveProps = true;
+        this.$target = target;
+        this.loop = option ? option.loop : false;
+        this.$boundOnEnterFrame = this.$onEnterFrame.bind(this);
     }
-    Object.defineProperty(Tween.prototype, "paused", {
-        get: function () {
-            return this.$paused;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Tween.prototype, "stopped", {
-        get: function () {
-            return this.$stopped;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Tween.prototype.set = function (props) {
+    get paused() {
+        return this.$paused;
+    }
+    get stopped() {
+        return this.$stopped;
+    }
+    set(props) {
         this.$steps.push({
             type: 'set',
-            props: props
+            props
         });
         return this;
-    };
-    Tween.prototype.to = function (props, duration, ease) {
+    }
+    to(props, duration, ease) {
         this.$steps.push({
             type: 'to',
-            duration: duration,
-            props: props,
-            ease: ease
+            duration,
+            props,
+            ease
         });
         return this;
-    };
-    Tween.prototype.wait = function (duration) {
+    }
+    wait(duration) {
         this.$steps.push({
             type: 'wait',
-            duration: duration
+            duration
         });
         return this;
-    };
-    Tween.prototype.call = function (callback) {
+    }
+    call(callback) {
         this.$steps.push({
             type: 'call',
-            callback: callback
+            callback
         });
         return this;
-    };
-    Tween.prototype.play = function () {
+    }
+    play() {
         if (this.$stopped) {
             this.resume();
             Tween.$tweens.push(this);
         }
         return this;
-    };
-    Tween.prototype.pause = function () {
+    }
+    pause() {
         this.$paused = true;
         this.$target.off(Event.ENTER_FRAME, this.$boundOnEnterFrame);
         return this;
-    };
-    Tween.prototype.resume = function () {
+    }
+    resume() {
         if (this.$paused) {
             this.$paused = false;
             this.$stopped = false;
             this.$target.on(Event.ENTER_FRAME, this.$boundOnEnterFrame);
         }
         return this;
-    };
-    Tween.prototype.stop = function () {
+    }
+    stop() {
         this.pause();
         this.$stopped = true;
-        var index = Tween.$tweens.indexOf(this);
+        let index = Tween.$tweens.indexOf(this);
         if (index >= 0) {
             Tween.$tweens.splice(index, 1);
         }
         return this;
-    };
-    Tween.prototype.$onEnterFrame = function (e) {
+    }
+    $onEnterFrame(e) {
         this.$nextFrame(e.data);
-    };
-    Tween.prototype.$nextFrame = function (dt) {
-        var loop = this.loop;
-        var steps = this.$steps;
-        var stepLength = this.$steps.length;
-        var stepIndex = this.$stepIndex;
-        var stepPosition = this.$stepPosition + dt;
-        var step = steps[stepIndex];
-        var type = step.type;
-        var duration = step.duration || 0;
-        var props = step.props;
-        var ease = step.ease || Ease.linear;
-        var callback = step.callback;
+    }
+    $nextFrame(dt) {
+        let loop = this.loop;
+        let steps = this.$steps;
+        let stepLength = this.$steps.length;
+        let stepIndex = this.$stepIndex;
+        let stepPosition = this.$stepPosition + dt;
+        let step = steps[stepIndex];
+        let type = step.type;
+        let duration = step.duration || 0;
+        let props = step.props;
+        let ease = step.ease || Ease.linear;
+        let callback = step.callback;
         if (type === 'set') {
             this.$setProps(props);
         }
@@ -1839,168 +1623,147 @@ var Tween = /** @class */ (function (_super) {
             this.$setProps(props);
             this.pause();
         }
-    };
-    Tween.prototype.$saveOriginalProps = function (stepIndex, props) {
-        var target = this.$target;
-        var stepProps = this.$stepProps;
-        var originalProps = stepProps[stepIndex] = stepProps[stepIndex] || {};
-        for (var key in props) {
+    }
+    $saveOriginalProps(stepIndex, props) {
+        let target = this.$target;
+        let stepProps = this.$stepProps;
+        let originalProps = stepProps[stepIndex] = stepProps[stepIndex] || {};
+        for (let key in props) {
             originalProps[key] = target[key];
         }
         this.$shouldSaveProps = false;
-    };
-    Tween.prototype.$easeProps = function (stepIndex, props, position, duration, ease) {
+    }
+    $easeProps(stepIndex, props, position, duration, ease) {
         if (this.$shouldSaveProps) {
             this.$saveOriginalProps(stepIndex, props);
         }
-        var target = this.$target;
-        var originalProps = this.$stepProps[stepIndex] || {};
+        let target = this.$target;
+        let originalProps = this.$stepProps[stepIndex] || {};
         if (position > duration) {
             position = duration;
         }
-        for (var key in props) {
-            var originalValue = originalProps[key];
-            var offsetValue = props[key] - originalValue;
+        for (let key in props) {
+            let originalValue = originalProps[key];
+            let offsetValue = props[key] - originalValue;
             target[key] = ease(position, originalValue, offsetValue, duration);
         }
-    };
-    Tween.prototype.$setProps = function (props) {
-        var target = this.$target;
-        for (var key in props) {
+    }
+    $setProps(props) {
+        let target = this.$target;
+        for (let key in props) {
             target[key] = props[key];
         }
-    };
-    Tween.get = function (target, option) {
+    }
+    static get(target, option) {
         return new Tween(target, option);
-    };
-    Tween.pauseTweens = function (target) {
-        var tweens = this.$tweens;
-        for (var _i = 0, tweens_1 = tweens; _i < tweens_1.length; _i++) {
-            var tween = tweens_1[_i];
+    }
+    static pauseTweens(target) {
+        let tweens = this.$tweens;
+        for (let tween of tweens) {
             if (tween.$target === target) {
                 tween.pause();
             }
         }
-    };
-    Tween.resumeTweens = function (target) {
-        var tweens = this.$tweens;
-        for (var _i = 0, tweens_2 = tweens; _i < tweens_2.length; _i++) {
-            var tween = tweens_2[_i];
+    }
+    static resumeTweens(target) {
+        let tweens = this.$tweens;
+        for (let tween of tweens) {
             if (tween.$target === target) {
                 tween.resume();
             }
         }
-    };
-    Tween.removeTweens = function (target) {
-        var tweens = this.$tweens;
-        for (var i = tweens.length - 1; i >= 0; --i) {
-            var tween = tweens[i];
+    }
+    static removeTweens(target) {
+        let tweens = this.$tweens;
+        for (let i = tweens.length - 1; i >= 0; --i) {
+            let tween = tweens[i];
             if (tween.$target === target) {
                 tween.stop();
             }
         }
-    };
-    Tween.removeAllTweens = function () {
-        var tweens = this.$tweens;
-        for (var i = tweens.length - 1; i >= 0; --i) {
-            var tween = tweens[i];
+    }
+    static removeAllTweens() {
+        let tweens = this.$tweens;
+        for (let i = tweens.length - 1; i >= 0; --i) {
+            let tween = tweens[i];
             tween.stop();
         }
-    };
-    Tween.$tweens = [];
-    return Tween;
-}(EventEmitter));
+    }
+}
+Tween.$tweens = [];
 
 var Tween$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Tween: Tween
 });
 
-var Scroller = /** @class */ (function (_super) {
-    __extends(Scroller, _super);
-    function Scroller() {
-        var _this = _super.call(this) || this;
-        _this.$scrollTop = 0;
-        _this.$scrollLeft = 0;
-        _this.$scrollWidth = 0;
-        _this.$scrollHeight = 0;
-        _this.$touchingX = null;
-        _this.$touchingY = null;
-        _this.$touchingId = null;
-        _this.$touchingTime = null;
-        _this.$velocitiesX = [];
-        _this.$velocitiesY = [];
-        _this.$inertiaTween = null;
-        _this.width = 200;
-        _this.height = 200;
-        _this.on(TouchEvent.TOUCH_START, _this.$onTouchStart);
-        _this.on(TouchEvent.TOUCH_MOVE, _this.$onTouchMove);
-        _this.on(TouchEvent.TOUCH_END, _this.$onTouchEnd);
-        _this.on(TouchEvent.TOUCH_CANCEL, _this.$onTouchCancel);
-        return _this;
+class Scroller extends Layer {
+    constructor() {
+        super();
+        this.$scrollTop = 0;
+        this.$scrollLeft = 0;
+        this.$scrollWidth = 0;
+        this.$scrollHeight = 0;
+        this.$touchingX = null;
+        this.$touchingY = null;
+        this.$touchingId = null;
+        this.$touchingTime = null;
+        this.$velocitiesX = [];
+        this.$velocitiesY = [];
+        this.$inertiaTween = null;
+        this.width = 200;
+        this.height = 200;
+        this.on(TouchEvent.TOUCH_START, this.$onTouchStart);
+        this.on(TouchEvent.TOUCH_MOVE, this.$onTouchMove);
+        this.on(TouchEvent.TOUCH_END, this.$onTouchEnd);
+        this.on(TouchEvent.TOUCH_CANCEL, this.$onTouchCancel);
     }
-    Object.defineProperty(Scroller.prototype, "scrollTop", {
-        get: function () {
-            return this.$scrollTop;
-        },
-        set: function (scrollTop) {
-            var bounds = this.$getContentBounds();
-            var maxScrollTop = this.$scrollHeight - this.$height;
-            scrollTop = Math.max(0, Math.min(scrollTop, maxScrollTop));
-            if (scrollTop !== this.$scrollTop) {
-                this.$scrollTop = scrollTop;
-                this.$markDirty();
-            }
-            bounds.release();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Scroller.prototype, "scrollLeft", {
-        get: function () {
-            return this.$scrollLeft;
-        },
-        set: function (scrollLeft) {
-            var bounds = this.$getContentBounds();
-            var maxScrollLeft = this.$scrollWidth - this.width;
-            scrollLeft = Math.max(0, Math.min(scrollLeft, maxScrollLeft));
-            if (scrollLeft !== this.$scrollLeft) {
-                this.$scrollLeft = scrollLeft;
-                this.$markDirty();
-            }
-            bounds.release();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Scroller.prototype, "scrollWidth", {
-        get: function () {
-            return this.$scrollWidth;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Scroller.prototype, "scrollHeight", {
-        get: function () {
-            return this.$scrollHeight;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Scroller.prototype.$getChildTransform = function (child) {
-        var matrix = _super.prototype.$getChildTransform.call(this, child);
+    get scrollTop() {
+        return this.$scrollTop;
+    }
+    set scrollTop(scrollTop) {
+        let bounds = this.$getContentBounds();
+        let maxScrollTop = this.$scrollHeight - this.$height;
+        scrollTop = Math.max(0, Math.min(scrollTop, maxScrollTop));
+        if (scrollTop !== this.$scrollTop) {
+            this.$scrollTop = scrollTop;
+            this.$markDirty();
+        }
+        bounds.release();
+    }
+    get scrollLeft() {
+        return this.$scrollLeft;
+    }
+    set scrollLeft(scrollLeft) {
+        let bounds = this.$getContentBounds();
+        let maxScrollLeft = this.$scrollWidth - this.width;
+        scrollLeft = Math.max(0, Math.min(scrollLeft, maxScrollLeft));
+        if (scrollLeft !== this.$scrollLeft) {
+            this.$scrollLeft = scrollLeft;
+            this.$markDirty();
+        }
+        bounds.release();
+    }
+    get scrollWidth() {
+        return this.$scrollWidth;
+    }
+    get scrollHeight() {
+        return this.$scrollHeight;
+    }
+    $getChildTransform(child) {
+        let matrix = super.$getChildTransform(child);
         matrix.translate(-this.$scrollLeft, -this.$scrollTop);
         return matrix;
-    };
-    Scroller.prototype.$resizeCanvas = function () {
-        _super.prototype.$resizeCanvas.call(this);
-        var bounds = this.$getContentBounds();
+    }
+    $resizeCanvas() {
+        super.$resizeCanvas();
+        let bounds = this.$getContentBounds();
         this.$scrollWidth = this.$scrollLeft + bounds.right + this.$anchorX;
         this.$scrollHeight = this.$scrollTop + bounds.bottom + this.$anchorY;
         this.scrollTop = this.$scrollTop;
         this.scrollLeft = this.$scrollLeft;
-    };
-    Scroller.prototype.$onTouchStart = function (e) {
+    }
+    $onTouchStart(e) {
         this.$touchingX = e.localX;
         this.$touchingY = e.localY;
         this.$velocitiesX.length = 0;
@@ -2011,20 +1774,20 @@ var Scroller = /** @class */ (function (_super) {
             this.$inertiaTween.pause();
             this.$inertiaTween = null;
         }
-    };
-    Scroller.prototype.$onTouchMove = function (e) {
+    }
+    $onTouchMove(e) {
         if (e.identifier !== this.$touchingId) {
             return;
         }
-        var now = Date.now();
-        var scrollTop = this.scrollTop;
-        var scrollLeft = this.scrollLeft;
-        var dt = now - this.$touchingTime;
-        var velocitiesX = this.$velocitiesX;
-        var velocitiesY = this.$velocitiesY;
-        var offsetX = e.localX - this.$touchingX;
-        var offsetY = e.localY - this.$touchingY;
-        var scrollingView = Scroller.scrollingView || this;
+        let now = Date.now();
+        let scrollTop = this.scrollTop;
+        let scrollLeft = this.scrollLeft;
+        let dt = now - this.$touchingTime;
+        let velocitiesX = this.$velocitiesX;
+        let velocitiesY = this.$velocitiesY;
+        let offsetX = e.localX - this.$touchingX;
+        let offsetY = e.localY - this.$touchingY;
+        let scrollingView = Scroller.scrollingView || this;
         velocitiesX.push(offsetX / dt);
         velocitiesY.push(offsetY / dt);
         if (velocitiesX.length > 5) {
@@ -2041,8 +1804,8 @@ var Scroller = /** @class */ (function (_super) {
                 Scroller.scrollingView = this;
             }
         }
-    };
-    Scroller.prototype.$onTouchEnd = function (e) {
+    }
+    $onTouchEnd(e) {
         if (e.identifier !== this.$touchingId) {
             return;
         }
@@ -2052,142 +1815,123 @@ var Scroller = /** @class */ (function (_super) {
         else {
             return;
         }
-        var sumVelocityX = 0;
-        var sumVelocityY = 0;
-        var scrollTop = this.$scrollTop;
-        var scrollLeft = this.$scrollLeft;
-        var velocitiesX = this.$velocitiesX;
-        var velocitiesY = this.$velocitiesY;
-        var numVelocities = velocitiesX.length;
-        for (var i = 0; i < numVelocities; ++i) {
+        let sumVelocityX = 0;
+        let sumVelocityY = 0;
+        let scrollTop = this.$scrollTop;
+        let scrollLeft = this.$scrollLeft;
+        let velocitiesX = this.$velocitiesX;
+        let velocitiesY = this.$velocitiesY;
+        let numVelocities = velocitiesX.length;
+        for (let i = 0; i < numVelocities; ++i) {
             sumVelocityX += velocitiesX[i];
             sumVelocityY += velocitiesY[i];
         }
-        var velocityX = sumVelocityX / numVelocities;
-        var velocityY = sumVelocityY / numVelocities;
-        var absVelocityX = Math.abs(velocityX);
-        var absVelocityY = Math.abs(velocityY);
+        let velocityX = sumVelocityX / numVelocities;
+        let velocityY = sumVelocityY / numVelocities;
+        let absVelocityX = Math.abs(velocityX);
+        let absVelocityY = Math.abs(velocityY);
         if (absVelocityX > 0.01 || absVelocityY > 0.01) {
-            var duration = Math.max(absVelocityX, absVelocityY, 1) * 1000;
+            let duration = Math.max(absVelocityX, absVelocityY, 1) * 1000;
             this.$inertiaTween = Tween.get(this).to({
                 scrollTop: scrollTop - velocityY * (absVelocityY + 1) * 200,
                 scrollLeft: scrollLeft - velocityX * (absVelocityX + 1) * 200
             }, duration, Ease.easeOutQuart).play();
         }
         this.$touchingId = null;
-    };
-    Scroller.prototype.$onTouchCancel = function (e) {
+    }
+    $onTouchCancel(e) {
         if (e.identifier === this.$touchingId) {
             this.$touchingId = null;
         }
-    };
-    Scroller.prototype.$emitRemovedFromStage = function () {
-        _super.prototype.$emitRemovedFromStage.call(this);
+    }
+    $emitRemovedFromStage() {
+        super.$emitRemovedFromStage();
         if (this.$inertiaTween) {
             this.$inertiaTween.pause();
             this.$inertiaTween = null;
         }
-    };
-    return Scroller;
-}(Layer));
+    }
+}
 
 var Scroller$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Scroller: Scroller
 });
 
-var Image = /** @class */ (function (_super) {
-    __extends(Image, _super);
-    function Image(texture, width, height) {
-        var _this = _super.call(this) || this;
-        _this.$texture = null;
-        _this.$fillMode = Image.SCALE;
-        _this.$clipRect = null;
-        _this.$scale9Grid = null;
-        _this.$pattern = null;
-        _this.$boundOnTextureLoad = _this.$onTextureLoad.bind(_this);
+class Image extends Layer {
+    constructor(texture, width, height) {
+        super();
+        this.$texture = null;
+        this.$fillMode = Image.SCALE;
+        this.$clipRect = null;
+        this.$scale9Grid = null;
+        this.$pattern = null;
+        this.$boundOnTextureLoad = this.$onTextureLoad.bind(this);
         if (texture) {
-            _this.$width = width;
-            _this.$height = height;
-            _this.texture = texture;
+            this.$width = width;
+            this.$height = height;
+            this.texture = texture;
         }
-        return _this;
     }
-    Object.defineProperty(Image.prototype, "texture", {
-        get: function () {
-            return this.$texture;
-        },
-        set: function (texture) {
-            if (this.$texture) {
-                this.$texture.off(Event.LOAD, this.$boundOnTextureLoad);
-            }
-            this.$texture = texture;
-            if (texture) {
-                texture.on(Event.LOAD, this.$boundOnTextureLoad);
-            }
-            else {
-                this.$updatePattern();
-                this.$resizeCanvas();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "fillMode", {
-        get: function () {
-            return this.$fillMode;
-        },
-        set: function (fillMode) {
-            this.$fillMode = fillMode;
+    get texture() {
+        return this.$texture;
+    }
+    set texture(texture) {
+        if (this.$texture) {
+            this.$texture.off(Event.LOAD, this.$boundOnTextureLoad);
+        }
+        this.$texture = texture;
+        if (texture) {
+            texture.on(Event.LOAD, this.$boundOnTextureLoad);
+        }
+        else {
             this.$updatePattern();
-            this.$markDirty();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "clipRect", {
-        get: function () {
-            return this.$clipRect;
-        },
-        set: function (clipRect) {
-            this.$clipRect = clipRect;
-            this.$markDirty();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Image.prototype, "scale9Grid", {
-        get: function () {
-            return this.$scale9Grid;
-        },
-        set: function (scale9Grid) {
-            this.$scale9Grid = scale9Grid;
-            this.$markDirty();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Image.prototype.$onTextureLoad = function () {
+            this.$resizeCanvas();
+        }
+    }
+    get fillMode() {
+        return this.$fillMode;
+    }
+    set fillMode(fillMode) {
+        this.$fillMode = fillMode;
+        this.$updatePattern();
+        this.$markDirty();
+    }
+    get clipRect() {
+        return this.$clipRect;
+    }
+    set clipRect(clipRect) {
+        this.$clipRect = clipRect;
+        this.$markDirty();
+    }
+    get scale9Grid() {
+        return this.$scale9Grid;
+    }
+    set scale9Grid(scale9Grid) {
+        this.$scale9Grid = scale9Grid;
+        this.$markDirty();
+    }
+    $onTextureLoad() {
         this.$updatePattern();
         this.$resizeCanvas();
         this.$texture.off(Event.LOAD, this.$boundOnTextureLoad);
-    };
-    Image.prototype.$updatePattern = function () {
-        var width = this.$width;
-        var height = this.$height;
-        var texture = this.$texture;
-        var fillMode = this.$fillMode;
+    }
+    $updatePattern() {
+        let width = this.$width;
+        let height = this.$height;
+        let texture = this.$texture;
+        let fillMode = this.$fillMode;
         if ((width || height) && texture && fillMode && fillMode !== Image.SCALE) {
             this.$pattern = this.$context.createPattern(texture.element, fillMode);
         }
         else {
             this.$pattern = null;
         }
-    };
-    Image.prototype.$getContentBounds = function () {
-        var texture = this.$texture;
-        var clipRect = this.$clipRect;
-        var bounds = _super.prototype.$getContentBounds.call(this);
+    }
+    $getContentBounds() {
+        let texture = this.$texture;
+        let clipRect = this.$clipRect;
+        let bounds = super.$getContentBounds();
         bounds.x = Math.min(bounds.left, -this.$anchorX);
         bounds.y = Math.min(bounds.top, -this.$anchorY);
         if (clipRect) {
@@ -2199,48 +1943,48 @@ var Image = /** @class */ (function (_super) {
             bounds.height = Math.max(bounds.height, texture.height);
         }
         return bounds;
-    };
-    Image.prototype.$drawPattern = function (targetX, targetY, targetW, targetH) {
-        var ctx = this.$context;
-        var texture = this.$texture;
-        var pattern = this.$pattern;
-        var scale = Layer.pixelRatio / texture.pixelRatio;
+    }
+    $drawPattern(targetX, targetY, targetW, targetH) {
+        let ctx = this.$context;
+        let texture = this.$texture;
+        let pattern = this.$pattern;
+        let scale = Layer.pixelRatio / texture.pixelRatio;
         scale !== 1 && ctx.scale(scale, scale);
         ctx.fillStyle = pattern;
         ctx.fillRect(targetX, targetY, targetW, targetH);
-    };
-    Image.prototype.$drawTexture = function (sourceX, sourceY, sourceW, sourceH, targetX, targetY, targetW, targetH) {
+    }
+    $drawTexture(sourceX, sourceY, sourceW, sourceH, targetX, targetY, targetW, targetH) {
         if (sourceW <= 0 || sourceH <= 0 || targetW <= 0 || targetH <= 0) {
             return;
         }
-        var ctx = this.$context;
-        var texture = this.$texture;
-        var pixelRatio = texture.pixelRatio;
+        let ctx = this.$context;
+        let texture = this.$texture;
+        let pixelRatio = texture.pixelRatio;
         if (sourceW > 0 && sourceH > 0 && targetW > 0 && targetH > 0) {
             ctx.drawImage(texture.element, sourceX * pixelRatio, sourceY * pixelRatio, sourceW * pixelRatio, sourceH * pixelRatio, targetX, targetY, targetW, targetH);
         }
-    };
-    Image.prototype.$render = function () {
+    }
+    $render() {
         if (!this.$dirty) {
             return 0;
         }
-        var canvas = this.$canvas;
-        var anchorX = this.$anchorX;
-        var anchorY = this.$anchorY;
-        var texture = this.$texture;
-        var pattern = this.$pattern;
-        var clipRect = this.$clipRect;
-        var scale9Grid = this.$scale9Grid;
-        var drawCalls = _super.prototype.$render.call(this);
-        var pixelRatio = Layer.pixelRatio;
-        var x = -anchorX * pixelRatio;
-        var y = -anchorY * pixelRatio;
-        var width = canvas.width;
-        var height = canvas.height;
-        var clipX = clipRect ? clipRect.x : 0;
-        var clipY = clipRect ? clipRect.y : 0;
-        var clipWidth = clipRect ? clipRect.width : texture ? texture.width : 0;
-        var clipHeight = clipRect ? clipRect.height : texture ? texture.height : 0;
+        let canvas = this.$canvas;
+        let anchorX = this.$anchorX;
+        let anchorY = this.$anchorY;
+        let texture = this.$texture;
+        let pattern = this.$pattern;
+        let clipRect = this.$clipRect;
+        let scale9Grid = this.$scale9Grid;
+        let drawCalls = super.$render();
+        let pixelRatio = Layer.pixelRatio;
+        let x = -anchorX * pixelRatio;
+        let y = -anchorY * pixelRatio;
+        let width = canvas.width;
+        let height = canvas.height;
+        let clipX = clipRect ? clipRect.x : 0;
+        let clipY = clipRect ? clipRect.y : 0;
+        let clipWidth = clipRect ? clipRect.width : texture ? texture.width : 0;
+        let clipHeight = clipRect ? clipRect.height : texture ? texture.height : 0;
         if (!texture) {
             return drawCalls;
         }
@@ -2248,30 +1992,30 @@ var Image = /** @class */ (function (_super) {
             this.$drawPattern(x, y, width, height);
         }
         else if (scale9Grid) {
-            var sourceX0 = clipX;
-            var sourceY0 = clipY;
-            var sourceW0 = scale9Grid.x;
-            var sourceH0 = scale9Grid.y;
-            var sourceX1 = sourceX0 + sourceW0;
-            var sourceY1 = sourceY0 + sourceH0;
-            var sourceW1 = scale9Grid.width;
-            var sourceH1 = scale9Grid.height;
-            var sourceX2 = sourceX1 + sourceW1;
-            var sourceY2 = sourceY1 + sourceH1;
-            var sourceW2 = clipWidth - sourceW0 - sourceW1;
-            var sourceH2 = clipHeight - sourceH0 - sourceH1;
-            var targetX0 = -anchorX * pixelRatio;
-            var targetY0 = -anchorY * pixelRatio;
-            var targetW0 = sourceW0 * pixelRatio;
-            var targetH0 = sourceH0 * pixelRatio;
-            var targetX1 = targetX0 + targetW0;
-            var targetY1 = targetY0 + targetH0;
-            var targetW1 = width - (sourceW0 + sourceW2) * pixelRatio;
-            var targetH1 = height - (sourceH0 + sourceH2) * pixelRatio;
-            var targetX2 = targetX1 + targetW1;
-            var targetY2 = targetY1 + targetH1;
-            var targetW2 = width - targetW0 - targetW1;
-            var targetH2 = height - targetH0 - targetH1;
+            let sourceX0 = clipX;
+            let sourceY0 = clipY;
+            let sourceW0 = scale9Grid.x;
+            let sourceH0 = scale9Grid.y;
+            let sourceX1 = sourceX0 + sourceW0;
+            let sourceY1 = sourceY0 + sourceH0;
+            let sourceW1 = scale9Grid.width;
+            let sourceH1 = scale9Grid.height;
+            let sourceX2 = sourceX1 + sourceW1;
+            let sourceY2 = sourceY1 + sourceH1;
+            let sourceW2 = clipWidth - sourceW0 - sourceW1;
+            let sourceH2 = clipHeight - sourceH0 - sourceH1;
+            let targetX0 = -anchorX * pixelRatio;
+            let targetY0 = -anchorY * pixelRatio;
+            let targetW0 = sourceW0 * pixelRatio;
+            let targetH0 = sourceH0 * pixelRatio;
+            let targetX1 = targetX0 + targetW0;
+            let targetY1 = targetY0 + targetH0;
+            let targetW1 = width - (sourceW0 + sourceW2) * pixelRatio;
+            let targetH1 = height - (sourceH0 + sourceH2) * pixelRatio;
+            let targetX2 = targetX1 + targetW1;
+            let targetY2 = targetY1 + targetH1;
+            let targetW2 = width - targetW0 - targetW1;
+            let targetH2 = height - targetH0 - targetH1;
             this.$drawTexture(sourceX0, sourceY0, sourceW0, sourceH0, targetX0, targetY0, targetW0, targetH0);
             this.$drawTexture(sourceX1, sourceY0, sourceW1, sourceH0, targetX1, targetY0, targetW1, targetH0);
             this.$drawTexture(sourceX2, sourceY0, sourceW2, sourceH0, targetX2, targetY0, targetW2, targetH0);
@@ -2286,252 +2030,187 @@ var Image = /** @class */ (function (_super) {
             this.$drawTexture(clipX, clipY, clipWidth, clipHeight, x, y, width, height);
         }
         return drawCalls;
-    };
-    Image.SCALE = 'scale';
-    Image.REPEAT = 'repeat';
-    Image.REPEAT_X = 'repeat-x';
-    Image.REPEAT_Y = 'repeat-y';
-    return Image;
-}(Layer));
+    }
+}
+Image.SCALE = 'scale';
+Image.REPEAT = 'repeat';
+Image.REPEAT_X = 'repeat-x';
+Image.REPEAT_Y = 'repeat-y';
 
 var Image$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Image: Image
 });
 
-var Text = /** @class */ (function (_super) {
-    __extends(Text, _super);
-    function Text(text, options) {
-        if (options === void 0) { options = {}; }
-        var _this = _super.call(this) || this;
-        _this.$text = '';
-        _this.$color = 'black';
-        _this.$fontSize = Text.defaultFontSize;
-        _this.$fontStyle = 'normal';
-        _this.$fontWeight = 'normal';
-        _this.$textAlign = 'left';
-        _this.$verticalAlign = 'top';
-        _this.$lineHeight = 1.2;
-        _this.$strokeSize = 0;
-        _this.$strokeColor = null;
-        _this.$fontFamily = 'Helvetica';
-        _this.$multiline = false;
-        _this.$breakWord = false;
-        _this.$autoFitSize = false;
-        _this.$minFontSize = 0;
-        _this.$explicitSize = 0;
-        _this.$lines = [];
-        _this.$text = text || _this.$text;
-        _this.$color = options.color || _this.$color;
-        _this.$fontSize = options.fontSize || _this.$fontSize;
-        _this.$fontStyle = options.fontStyle || _this.$fontStyle;
-        _this.$fontWeight = options.fontWeight || _this.$fontWeight;
-        _this.$textAlign = options.textAlign || _this.$textAlign;
-        _this.$verticalAlign = options.verticalAlign || _this.$verticalAlign;
-        _this.$lineHeight = options.lineHeight || _this.$lineHeight;
-        _this.$strokeSize = options.strokeSize || _this.$strokeSize;
-        _this.$strokeColor = options.strokeColor || _this.$strokeColor;
-        _this.$fontFamily = options.fontFamily || _this.$fontFamily;
-        _this.$multiline = options.multiline || _this.$multiline;
-        _this.$breakWord = options.breakWord || _this.$breakWord;
-        _this.$autoFitSize = options.autoFitSize || _this.autoFitSize;
-        _this.$minFontSize = options.minFontSize || _this.minFontSize;
-        _this.$resizeCanvas();
-        return _this;
+class Text extends Layer {
+    constructor(text, options = {}) {
+        super();
+        this.$text = '';
+        this.$color = 'black';
+        this.$fontSize = Text.defaultFontSize;
+        this.$fontStyle = 'normal';
+        this.$fontWeight = 'normal';
+        this.$textAlign = 'left';
+        this.$verticalAlign = 'top';
+        this.$lineHeight = 1.2;
+        this.$strokeSize = 0;
+        this.$strokeColor = null;
+        this.$fontFamily = 'Helvetica';
+        this.$multiline = false;
+        this.$breakWord = false;
+        this.$autoFitSize = false;
+        this.$minFontSize = 0;
+        this.$explicitSize = 0;
+        this.$lines = [];
+        this.$text = text || this.$text;
+        this.$color = options.color || this.$color;
+        this.$fontSize = options.fontSize || this.$fontSize;
+        this.$fontStyle = options.fontStyle || this.$fontStyle;
+        this.$fontWeight = options.fontWeight || this.$fontWeight;
+        this.$textAlign = options.textAlign || this.$textAlign;
+        this.$verticalAlign = options.verticalAlign || this.$verticalAlign;
+        this.$lineHeight = options.lineHeight || this.$lineHeight;
+        this.$strokeSize = options.strokeSize || this.$strokeSize;
+        this.$strokeColor = options.strokeColor || this.$strokeColor;
+        this.$fontFamily = options.fontFamily || this.$fontFamily;
+        this.$multiline = options.multiline || this.$multiline;
+        this.$breakWord = options.breakWord || this.$breakWord;
+        this.$autoFitSize = options.autoFitSize || this.autoFitSize;
+        this.$minFontSize = options.minFontSize || this.minFontSize;
+        this.$resizeCanvas();
     }
-    Object.defineProperty(Text.prototype, "text", {
-        get: function () {
-            return this.$text;
-        },
-        set: function (text) {
-            this.$text = text;
-            this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "color", {
-        get: function () {
-            return this.$color;
-        },
-        set: function (color) {
-            this.$color = color;
-            this.$markDirty();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "fontSize", {
-        get: function () {
-            return this.$fontSize;
-        },
-        set: function (fontSize) {
-            this.$fontSize = fontSize;
-            this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "fontStyle", {
-        get: function () {
-            return this.$fontStyle;
-        },
-        set: function (fontStyle) {
-            this.$fontStyle = fontStyle;
-            this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "fontWeight", {
-        get: function () {
-            return this.$fontWeight;
-        },
-        set: function (fontWeight) {
-            this.$fontWeight = fontWeight;
-            this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "textAlign", {
-        get: function () {
-            return this.$textAlign;
-        },
-        set: function (textAlign) {
-            this.$textAlign = textAlign;
-            this.$markDirty();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "verticalAlign", {
-        get: function () {
-            return this.$verticalAlign;
-        },
-        set: function (verticalAlign) {
-            this.$verticalAlign = verticalAlign;
-            this.$markDirty();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "lineHeight", {
-        get: function () {
-            return this.$lineHeight;
-        },
-        set: function (lineHeight) {
-            this.$lineHeight = lineHeight;
-            this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "strokeSize", {
-        get: function () {
-            return this.$strokeSize;
-        },
-        set: function (strokeSize) {
-            this.$strokeSize = strokeSize;
-            this.$markDirty();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "strokeColor", {
-        get: function () {
-            return this.$strokeColor;
-        },
-        set: function (strokeColor) {
-            this.$strokeColor = strokeColor;
-            this.$markDirty();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "fontFamily", {
-        get: function () {
-            return this.$fontFamily;
-        },
-        set: function (fontFamily) {
-            this.$fontFamily = fontFamily;
-            this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "multiline", {
-        get: function () {
-            return this.$multiline;
-        },
-        set: function (multiline) {
-            this.$multiline = multiline;
-            this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "breakWord", {
-        get: function () {
-            return this.$breakWord;
-        },
-        set: function (breakWord) {
-            this.$breakWord = breakWord;
-            this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "autoFitSize", {
-        get: function () {
-            return this.$autoFitSize;
-        },
-        set: function (autoFitSize) {
-            this.$autoFitSize = autoFitSize;
-            this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Text.prototype, "minFontSize", {
-        get: function () {
-            return this.$minFontSize;
-        },
-        set: function (minFontSize) {
-            this.$minFontSize = minFontSize;
-            this.$resizeCanvas();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Text.prototype.$updateContext = function () {
-        var ctx = this.$context;
-        var fontStyle = this.$fontStyle;
-        var fontWeight = this.$fontWeight;
-        var pixelRatio = Layer.pixelRatio;
-        var fontSize = this.$explicitSize || this.$fontSize;
-        var sizeStr = fontSize * pixelRatio + 'px';
+    get text() {
+        return this.$text;
+    }
+    set text(text) {
+        this.$text = text;
+        this.$resizeCanvas();
+    }
+    get color() {
+        return this.$color;
+    }
+    set color(color) {
+        this.$color = color;
+        this.$markDirty();
+    }
+    get fontSize() {
+        return this.$fontSize;
+    }
+    set fontSize(fontSize) {
+        this.$fontSize = fontSize;
+        this.$resizeCanvas();
+    }
+    get fontStyle() {
+        return this.$fontStyle;
+    }
+    set fontStyle(fontStyle) {
+        this.$fontStyle = fontStyle;
+        this.$resizeCanvas();
+    }
+    get fontWeight() {
+        return this.$fontWeight;
+    }
+    set fontWeight(fontWeight) {
+        this.$fontWeight = fontWeight;
+        this.$resizeCanvas();
+    }
+    get textAlign() {
+        return this.$textAlign;
+    }
+    set textAlign(textAlign) {
+        this.$textAlign = textAlign;
+        this.$markDirty();
+    }
+    get verticalAlign() {
+        return this.$verticalAlign;
+    }
+    set verticalAlign(verticalAlign) {
+        this.$verticalAlign = verticalAlign;
+        this.$markDirty();
+    }
+    get lineHeight() {
+        return this.$lineHeight;
+    }
+    set lineHeight(lineHeight) {
+        this.$lineHeight = lineHeight;
+        this.$resizeCanvas();
+    }
+    get strokeSize() {
+        return this.$strokeSize;
+    }
+    set strokeSize(strokeSize) {
+        this.$strokeSize = strokeSize;
+        this.$markDirty();
+    }
+    get strokeColor() {
+        return this.$strokeColor;
+    }
+    set strokeColor(strokeColor) {
+        this.$strokeColor = strokeColor;
+        this.$markDirty();
+    }
+    get fontFamily() {
+        return this.$fontFamily;
+    }
+    set fontFamily(fontFamily) {
+        this.$fontFamily = fontFamily;
+        this.$resizeCanvas();
+    }
+    get multiline() {
+        return this.$multiline;
+    }
+    set multiline(multiline) {
+        this.$multiline = multiline;
+        this.$resizeCanvas();
+    }
+    get breakWord() {
+        return this.$breakWord;
+    }
+    set breakWord(breakWord) {
+        this.$breakWord = breakWord;
+        this.$resizeCanvas();
+    }
+    get autoFitSize() {
+        return this.$autoFitSize;
+    }
+    set autoFitSize(autoFitSize) {
+        this.$autoFitSize = autoFitSize;
+        this.$resizeCanvas();
+    }
+    get minFontSize() {
+        return this.$minFontSize;
+    }
+    set minFontSize(minFontSize) {
+        this.$minFontSize = minFontSize;
+        this.$resizeCanvas();
+    }
+    $updateContext() {
+        let ctx = this.$context;
+        let fontStyle = this.$fontStyle;
+        let fontWeight = this.$fontWeight;
+        let pixelRatio = Layer.pixelRatio;
+        let fontSize = this.$explicitSize || this.$fontSize;
+        let sizeStr = fontSize * pixelRatio + 'px';
         ctx.font = fontStyle + ' ' + fontWeight + ' ' + sizeStr + ' ' + this.$fontFamily;
         ctx.textAlign = this.$textAlign;
         ctx.textBaseline = 'top';
         ctx.fillStyle = this.$color;
         ctx.lineWidth = this.$strokeSize * pixelRatio;
         ctx.strokeStyle = this.$strokeColor;
-    };
-    Text.prototype.$divideUnits = function () {
-        var units;
-        var text = this.$text;
-        var breakWord = this.$breakWord;
-        var wordRe = Text.wordRe;
-        var boundaryRe = Text.boundaryRe;
+    }
+    $divideUnits() {
+        let units;
+        let text = this.$text;
+        let breakWord = this.$breakWord;
+        let wordRe = Text.wordRe;
+        let boundaryRe = Text.boundaryRe;
         if (breakWord) {
             units = text.split('');
         }
         else {
-            var words = text.split(boundaryRe);
+            let words = text.split(boundaryRe);
             units = [];
-            for (var _i = 0, words_1 = words; _i < words_1.length; _i++) {
-                var unit = words_1[_i];
+            for (let unit of words) {
                 if (wordRe.test(unit)) {
                     units.push(unit);
                 }
@@ -2541,9 +2220,9 @@ var Text = /** @class */ (function (_super) {
             }
         }
         return units;
-    };
-    Text.prototype.$divideLines = function () {
-        var text = this.$text;
+    }
+    $divideLines() {
+        let text = this.$text;
         if (!this.$multiline) {
             this.$lines = [text];
             return;
@@ -2552,20 +2231,19 @@ var Text = /** @class */ (function (_super) {
             this.$lines = text.split('\n');
             return;
         }
-        var line = '';
-        var ctx = this.$context;
-        var lines = this.$lines = [];
-        var units = this.$divideUnits();
-        var width = this.$width * Layer.pixelRatio;
+        let line = '';
+        let ctx = this.$context;
+        let lines = this.$lines = [];
+        let units = this.$divideUnits();
+        let width = this.$width * Layer.pixelRatio;
         this.$updateContext();
-        for (var _i = 0, units_1 = units; _i < units_1.length; _i++) {
-            var unit = units_1[_i];
+        for (let unit of units) {
             if (unit === '\n') {
                 lines.push(line);
                 line = '';
                 continue;
             }
-            var lineWidth = ctx.measureText(line + unit).width;
+            let lineWidth = ctx.measureText(line + unit).width;
             if (lineWidth <= width) {
                 line += unit;
             }
@@ -2575,16 +2253,16 @@ var Text = /** @class */ (function (_super) {
             }
         }
         lines.push(line);
-    };
-    Text.prototype.$resizeCanvas = function () {
-        var width = this.$width;
-        var height = this.$height;
+    }
+    $resizeCanvas() {
+        let width = this.$width;
+        let height = this.$height;
         this.$divideLines();
         if (this.$autoFitSize && (width || height)) {
-            var minFontSize = this.$minFontSize || 1;
+            let minFontSize = this.$minFontSize || 1;
             this.$explicitSize = this.$fontSize;
             while (this.$explicitSize > minFontSize) {
-                var bounds = this.$getContentBounds();
+                let bounds = this.$getContentBounds();
                 if ((width && bounds.width > width) || (height && bounds.height > height)) {
                     --this.$explicitSize;
                 }
@@ -2594,44 +2272,43 @@ var Text = /** @class */ (function (_super) {
                 bounds.release();
             }
         }
-        _super.prototype.$resizeCanvas.call(this);
-    };
-    Text.prototype.$getContentBounds = function () {
-        var ctx = this.$context;
-        var bounds = _super.prototype.$getContentBounds.call(this);
-        var lines = this.$lines;
-        var lineHeight = this.$lineHeight;
-        var pixelRatio = Layer.pixelRatio;
-        var fontSize = this.$explicitSize || this.$fontSize;
+        super.$resizeCanvas();
+    }
+    $getContentBounds() {
+        let ctx = this.$context;
+        let bounds = super.$getContentBounds();
+        let lines = this.$lines;
+        let lineHeight = this.$lineHeight;
+        let pixelRatio = Layer.pixelRatio;
+        let fontSize = this.$explicitSize || this.$fontSize;
         this.$updateContext();
-        for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
-            var line = lines_1[_i];
+        for (let line of lines) {
             bounds.width = Math.max(bounds.width, ctx.measureText(line).width / pixelRatio);
         }
         bounds.height = Math.max(bounds.height, fontSize * lineHeight * lines.length);
         return bounds;
-    };
-    Text.prototype.$render = function () {
+    }
+    $render() {
         if (!this.$dirty) {
             return 0;
         }
-        var x = 0;
-        var y = 0;
-        var width = this.width;
-        var height = this.height;
-        var anchorX = this.anchorX;
-        var anchorY = this.anchorY;
-        var ctx = this.$context;
-        var lines = this.$lines;
-        var color = this.$color;
-        var textAlign = this.$textAlign;
-        var verticalAlign = this.$verticalAlign;
-        var lineHeight = this.$lineHeight;
-        var strokeSize = this.$strokeSize;
-        var strokeColor = this.$strokeColor;
-        var pixelRatio = Layer.pixelRatio;
-        var fontSize = this.$explicitSize || this.$fontSize;
-        var drawCalls = _super.prototype.$render.call(this);
+        let x = 0;
+        let y = 0;
+        let width = this.width;
+        let height = this.height;
+        let anchorX = this.anchorX;
+        let anchorY = this.anchorY;
+        let ctx = this.$context;
+        let lines = this.$lines;
+        let color = this.$color;
+        let textAlign = this.$textAlign;
+        let verticalAlign = this.$verticalAlign;
+        let lineHeight = this.$lineHeight;
+        let strokeSize = this.$strokeSize;
+        let strokeColor = this.$strokeColor;
+        let pixelRatio = Layer.pixelRatio;
+        let fontSize = this.$explicitSize || this.$fontSize;
+        let drawCalls = super.$render();
         this.$updateContext();
         if (textAlign === 'center') {
             x = width * pixelRatio / 2 - anchorX * pixelRatio;
@@ -2651,8 +2328,7 @@ var Text = /** @class */ (function (_super) {
         else {
             y = -anchorY * pixelRatio;
         }
-        for (var _i = 0, lines_2 = lines; _i < lines_2.length; _i++) {
-            var line = lines_2[_i];
+        for (let line of lines) {
             if (color) {
                 ctx.fillText(line, x, y);
             }
@@ -2662,133 +2338,101 @@ var Text = /** @class */ (function (_super) {
             y += fontSize * lineHeight * pixelRatio;
         }
         return drawCalls;
-    };
-    Text.defaultFontSize = 16;
-    Text.wordRe = /\w+/;
-    Text.boundaryRe = /\b/;
-    return Text;
-}(Layer));
+    }
+}
+Text.defaultFontSize = 16;
+Text.wordRe = /\w+/;
+Text.boundaryRe = /\b/;
 
 var Text$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Text: Text
 });
 
-var Input = /** @class */ (function (_super) {
-    __extends(Input, _super);
-    function Input(value, options) {
-        if (options === void 0) { options = {}; }
-        var _this = _super.call(this, '', options) || this;
-        _this.$value = '';
-        _this.$type = 'text';
-        _this.$maxLength = 0xffffff;
-        _this.$placeholder = '';
-        _this.$placeholderColor = '#888';
-        _this.$explicitColor = 'black';
-        _this.$value = value || _this.$value;
-        _this.$type = options.type || _this.$type;
-        _this.$maxLength = options.maxLength || _this.$maxLength;
-        _this.$placeholder = options.placeholder || _this.$placeholder;
-        _this.$placeholderColor = options.placeholderColor || _this.$placeholderColor;
-        _this.$boundFocus = _this.focus.bind(_this);
-        _this.$updateText();
-        _this.on(TouchEvent.TOUCH_TAP, _this.$onTouchTap);
-        return _this;
+class Input extends Text {
+    constructor(value, options = {}) {
+        super('', options);
+        this.$value = '';
+        this.$type = 'text';
+        this.$maxLength = 0xffffff;
+        this.$placeholder = '';
+        this.$placeholderColor = '#888';
+        this.$explicitColor = 'black';
+        this.$value = value || this.$value;
+        this.$type = options.type || this.$type;
+        this.$maxLength = options.maxLength || this.$maxLength;
+        this.$placeholder = options.placeholder || this.$placeholder;
+        this.$placeholderColor = options.placeholderColor || this.$placeholderColor;
+        this.$boundFocus = this.focus.bind(this);
+        this.$updateText();
+        this.on(TouchEvent.TOUCH_TAP, this.$onTouchTap);
     }
-    Object.defineProperty(Input.prototype, "text", {
-        set: function (text) {
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Input.prototype, "value", {
-        get: function () {
-            return this.$value;
-        },
-        set: function (value) {
-            this.$value = value;
-            this.$updateText();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Input.prototype, "type", {
-        get: function () {
-            return this.$type;
-        },
-        set: function (type) {
-            this.$type = type;
-            this.$updateText();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Input.prototype, "color", {
-        get: function () {
-            return this.$explicitColor;
-        },
-        set: function (color) {
-            this.$explicitColor = color;
-            if (this.$value) {
-                this.$color = color;
-            }
-            else {
-                this.$color = this.$placeholderColor;
-            }
-            this.$markDirty();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Input.prototype, "maxLength", {
-        get: function () {
-            return this.$maxLength;
-        },
-        set: function (maxLength) {
-            this.$maxLength = maxLength;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Input.prototype, "placeholder", {
-        get: function () {
-            return this.$placeholder;
-        },
-        set: function (placeholder) {
-            this.$placeholder = placeholder;
-            this.$updateText();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Input.prototype, "placeholderColor", {
-        get: function () {
-            return this.$placeholderColor;
-        },
-        set: function (placeholderColor) {
-            this.$placeholderColor = placeholderColor;
-            this.$markDirty();
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Input.prototype.selectAll = function () {
-        var element = this.$updateElement();
+    set text(text) {
+    }
+    get value() {
+        return this.$value;
+    }
+    set value(value) {
+        this.$value = value;
+        this.$updateText();
+    }
+    get type() {
+        return this.$type;
+    }
+    set type(type) {
+        this.$type = type;
+        this.$updateText();
+    }
+    get color() {
+        return this.$explicitColor;
+    }
+    set color(color) {
+        this.$explicitColor = color;
+        if (this.$value) {
+            this.$color = color;
+        }
+        else {
+            this.$color = this.$placeholderColor;
+        }
+        this.$markDirty();
+    }
+    get maxLength() {
+        return this.$maxLength;
+    }
+    set maxLength(maxLength) {
+        this.$maxLength = maxLength;
+    }
+    get placeholder() {
+        return this.$placeholder;
+    }
+    set placeholder(placeholder) {
+        this.$placeholder = placeholder;
+        this.$updateText();
+    }
+    get placeholderColor() {
+        return this.$placeholderColor;
+    }
+    set placeholderColor(placeholderColor) {
+        this.$placeholderColor = placeholderColor;
+        this.$markDirty();
+    }
+    selectAll() {
+        let element = this.$updateElement();
         this.focus();
         element.selectionStart = 0;
         element.selectionEnd = this.$value.length;
         return this;
-    };
-    Input.prototype.focus = function () {
-        var element = this.$updateElement();
+    }
+    focus() {
+        let element = this.$updateElement();
         element.style.display = 'block';
         element.value = this.$value;
         element.focus();
         Input.$focusedInput = this;
         return this;
-    };
-    Input.prototype.blur = function () {
-        var element = this.$updateElement();
+    }
+    blur() {
+        let element = this.$updateElement();
         element.style.display = 'none';
         element.blur();
         if (Input.$focusedInput === this) {
@@ -2796,14 +2440,14 @@ var Input = /** @class */ (function (_super) {
             Input.$focusedInput = null;
         }
         return this;
-    };
-    Input.prototype.$updateText = function () {
-        var text;
-        var type = this.$type;
-        var value = this.$value;
+    }
+    $updateText() {
+        let text;
+        let type = this.$type;
+        let value = this.$value;
         if (type === 'password') {
             text = '';
-            for (var i = 0, l = value.length; i < l; ++i) {
+            for (let i = 0, l = value.length; i < l; ++i) {
                 text += '•';
             }
         }
@@ -2818,11 +2462,11 @@ var Input = /** @class */ (function (_super) {
         }
         this.color = this.$explicitColor;
         this.$resizeCanvas();
-    };
-    Input.prototype.$updateElement = function () {
-        var tagName = this.$multiline && this.$type === 'text' ? 'textarea' : 'input';
-        var element = Input.$getElement(tagName);
-        var isInput = tagName === 'input';
+    }
+    $updateElement() {
+        let tagName = this.$multiline && this.$type === 'text' ? 'textarea' : 'input';
+        let element = Input.$getElement(tagName);
+        let isInput = tagName === 'input';
         if (isInput) {
             // @ts-ignore
             element.type = this.$type;
@@ -2854,18 +2498,18 @@ var Input = /** @class */ (function (_super) {
         // element.style.webkitTapHighlightColor = 'transparent';
         element.style.boxShadow = '0 0 8px #aaa';
         return element;
-    };
-    Input.prototype.$markDirty = function (sizeDirty) {
-        _super.prototype.$markDirty.call(this, sizeDirty);
+    }
+    $markDirty(sizeDirty) {
+        super.$markDirty(sizeDirty);
         if (Input.$focusedInput) {
             this.$updateElement();
         }
-    };
-    Input.prototype.$onTouchTap = function () {
+    }
+    $onTouchTap() {
         setTimeout(this.$boundFocus, 100);
-    };
-    Input.$getElement = function (tagName) {
-        var element;
+    }
+    static $getElement(tagName) {
+        let element;
         if (tagName === 'input') {
             element = this.$inputElement;
         }
@@ -2876,14 +2520,14 @@ var Input = /** @class */ (function (_super) {
             element = document.createElement(tagName);
             element.style.display = 'none';
             document.body.appendChild(element);
-            element.addEventListener('input', function () {
+            element.addEventListener('input', () => {
                 Input.$focusedInput.value = element.value;
             });
-            element.addEventListener('blur', function () {
+            element.addEventListener('blur', () => {
                 Input.$focusedInput.blur();
             });
             if (tagName === 'input') {
-                element.addEventListener('keydown', function (e) {
+                element.addEventListener('keydown', e => {
                     if (e.key === 'Enter' || e.keyCode === 13) {
                         Input.$focusedInput.blur();
                     }
@@ -2895,94 +2539,71 @@ var Input = /** @class */ (function (_super) {
             }
         }
         return element;
-    };
-    return Input;
-}(Text));
+    }
+}
 
 var Input$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Input: Input
 });
 
-var MovieClip = /** @class */ (function (_super) {
-    __extends(MovieClip, _super);
-    function MovieClip(texture, frames) {
-        var _this = _super.call(this, texture) || this;
-        _this.$loop = true;
-        _this.$interval = 30;
-        _this.$paused = false;
-        _this.$currentFrame = 0;
-        _this.$frames = null;
-        _this.$frames = frames;
-        _this.$boundNextFrame = _this.nextFrame.bind(_this);
-        _this.play();
-        return _this;
+class MovieClip extends Image {
+    constructor(texture, frames) {
+        super(texture);
+        this.$loop = true;
+        this.$interval = 30;
+        this.$paused = false;
+        this.$currentFrame = 0;
+        this.$frames = null;
+        this.$frames = frames;
+        this.$boundNextFrame = this.nextFrame.bind(this);
+        this.play();
     }
-    Object.defineProperty(MovieClip.prototype, "loop", {
-        get: function () {
-            return this.$loop;
-        },
-        set: function (loop) {
-            this.$loop = loop;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(MovieClip.prototype, "interval", {
-        get: function () {
-            return this.$interval;
-        },
-        set: function (interval) {
-            this.$interval = interval;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(MovieClip.prototype, "paused", {
-        get: function () {
-            return this.$paused;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(MovieClip.prototype, "currentFrame", {
-        get: function () {
-            return this.$currentFrame;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(MovieClip.prototype, "totalFrames", {
-        get: function () {
-            return this.$frames.length;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    MovieClip.prototype.play = function () {
+    get loop() {
+        return this.$loop;
+    }
+    set loop(loop) {
+        this.$loop = loop;
+    }
+    get interval() {
+        return this.$interval;
+    }
+    set interval(interval) {
+        this.$interval = interval;
+    }
+    get paused() {
+        return this.$paused;
+    }
+    get currentFrame() {
+        return this.$currentFrame;
+    }
+    get totalFrames() {
+        return this.$frames.length;
+    }
+    play() {
         this.off(Event.ADDED_TO_STAGE, this.play);
         return this.gotoAndPlay(this.$currentFrame);
-    };
-    MovieClip.prototype.pause = function () {
-        var ticker = this.ticker;
+    }
+    pause() {
+        let ticker = this.ticker;
         this.$paused = true;
         if (ticker) {
             ticker.clearTimeout(this.$timer);
         }
         this.off(Event.ADDED_TO_STAGE, this.play);
         return this;
-    };
-    MovieClip.prototype.nextFrame = function () {
+    }
+    nextFrame() {
         return this.gotoAndPlay(this.$currentFrame + 1);
-    };
-    MovieClip.prototype.gotoAndPlay = function (frame) {
+    }
+    gotoAndPlay(frame) {
         this.$paused = false;
         this.$gotoFrame(frame);
-        var loop = this.$loop;
-        var ticker = this.ticker;
-        var frames = this.$frames;
-        var totalFrames = frames.length;
-        var frameData = frames[this.$currentFrame];
+        let loop = this.$loop;
+        let ticker = this.ticker;
+        let frames = this.$frames;
+        let totalFrames = frames.length;
+        let frameData = frames[this.$currentFrame];
         if (!frameData) {
             return;
         }
@@ -2996,21 +2617,21 @@ var MovieClip = /** @class */ (function (_super) {
             this.on(Event.ADDED_TO_STAGE, this.play);
         }
         return this;
-    };
-    MovieClip.prototype.gotoAndStop = function (frame) {
+    }
+    gotoAndStop(frame) {
         this.$paused = true;
         this.$gotoFrame(frame);
         return this;
-    };
-    MovieClip.prototype.$gotoFrame = function (frame) {
-        var totalFrames = this.$frames.length;
+    }
+    $gotoFrame(frame) {
+        let totalFrames = this.$frames.length;
         if (frame < 0 || frame >= totalFrames) {
             frame = (frame + totalFrames) % totalFrames;
         }
         if (frame < 0) {
             frame = 0;
         }
-        var frameData = this.$frames[frame];
+        let frameData = this.$frames[frame];
         if (!frameData) {
             return;
         }
@@ -3019,25 +2640,23 @@ var MovieClip = /** @class */ (function (_super) {
         if (this.stage && frameData.callback) {
             frameData.callback.call(this);
         }
-    };
-    return MovieClip;
-}(Image));
+    }
+}
 
 var MovieClip$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     MovieClip: MovieClip
 });
 
-var Request = /** @class */ (function (_super) {
-    __extends(Request, _super);
-    function Request(url, options) {
-        var _this = _super.call(this) || this;
-        _this.$xhr = new XMLHttpRequest();
-        var method;
-        var headers;
-        var data;
-        var responseType;
-        var xhr = _this.$xhr;
+class Request extends EventEmitter {
+    constructor(url, options) {
+        super();
+        this.$xhr = new XMLHttpRequest();
+        let method;
+        let headers;
+        let data;
+        let responseType;
+        let xhr = this.$xhr;
         if (url instanceof Object) {
             options = url;
             url = options.url;
@@ -3050,10 +2669,10 @@ var Request = /** @class */ (function (_super) {
             responseType = options.responseType;
         }
         if (data instanceof Object) {
-            var contentType = Request.$getContentType(headers);
+            let contentType = Request.$getContentType(headers);
             if (method.toLowerCase() === 'get') {
-                var qs_1 = Request.$getQueryString(data);
-                url += url.indexOf('?') < 0 ? '?' + qs_1 : '&' + qs_1;
+                let qs = Request.$getQueryString(data);
+                url += url.indexOf('?') < 0 ? '?' + qs : '&' + qs;
             }
             else if (contentType === 'application/x-www-form-urlencoded') {
                 data = Request.$getQueryString(data);
@@ -3065,258 +2684,212 @@ var Request = /** @class */ (function (_super) {
         xhr.open(method || 'get', url);
         xhr.responseType = responseType;
         if (headers) {
-            Object.keys(headers).forEach(function (key) {
+            Object.keys(headers).forEach(key => {
                 xhr.setRequestHeader(key, headers[key]);
             });
         }
-        xhr.addEventListener('abort', _this.$onAbort.bind(_this));
-        xhr.addEventListener('progress', _this.$onProgress.bind(_this));
-        xhr.addEventListener('readystatechange', _this.$onReadyStateChange.bind(_this));
+        xhr.addEventListener('abort', this.$onAbort.bind(this));
+        xhr.addEventListener('progress', this.$onProgress.bind(this));
+        xhr.addEventListener('readystatechange', this.$onReadyStateChange.bind(this));
         xhr.send(data);
-        return _this;
     }
-    Object.defineProperty(Request.prototype, "status", {
-        get: function () {
-            return this.$xhr.status;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Request.prototype, "response", {
-        get: function () {
-            return this.$xhr.response;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Request.prototype, "responseHeaders", {
-        get: function () {
-            var headers = {};
-            var str = this.$xhr.getAllResponseHeaders();
-            var arr = str.split('\n');
-            for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
-                var header = arr_1[_i];
-                var index = header.indexOf(':');
-                var key = header.slice(0, index).trim();
-                var value = header.slice(index + 1).trim();
-                if (headers[key]) {
-                    if (!Array.isArray(headers[key])) {
-                        headers[key] = [headers[key]];
-                    }
-                    headers[key].push(value);
+    get status() {
+        return this.$xhr.status;
+    }
+    get response() {
+        return this.$xhr.response;
+    }
+    get responseHeaders() {
+        let headers = {};
+        let str = this.$xhr.getAllResponseHeaders();
+        let arr = str.split('\n');
+        for (let header of arr) {
+            let index = header.indexOf(':');
+            let key = header.slice(0, index).trim();
+            let value = header.slice(index + 1).trim();
+            if (headers[key]) {
+                if (!Array.isArray(headers[key])) {
+                    headers[key] = [headers[key]];
                 }
-                else if (key) {
-                    headers[key] = value;
-                }
+                headers[key].push(value);
             }
-            return headers;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Request.prototype.abort = function () {
-        this.$xhr.abort();
-    };
-    Request.prototype.$onAbort = function () {
-        this.emit(Event.ABORT);
-    };
-    Request.prototype.$onProgress = function (e) {
-        if (e.lengthComputable) {
-            var event_1 = Event.create(Event.PROGRESS, e.loaded / e.total);
-            this.emit(event_1);
-            event_1.release();
+            else if (key) {
+                headers[key] = value;
+            }
         }
-    };
-    Request.prototype.$onReadyStateChange = function (e) {
-        var xhr = this.$xhr;
+        return headers;
+    }
+    abort() {
+        this.$xhr.abort();
+    }
+    $onAbort() {
+        this.emit(Event.ABORT);
+    }
+    $onProgress(e) {
+        if (e.lengthComputable) {
+            let event = Event.create(Event.PROGRESS, e.loaded / e.total);
+            this.emit(event);
+            event.release();
+        }
+    }
+    $onReadyStateChange(e) {
+        let xhr = this.$xhr;
         if (xhr.readyState === 4) {
             if (xhr.status >= 400 || xhr.status === 0) {
                 this.emit(Event.ERROR, e);
             }
             else {
-                var event_2 = Event.create(Event.LOAD, xhr.response);
-                this.emit(event_2);
-                event_2.release();
+                let event = Event.create(Event.LOAD, xhr.response);
+                this.emit(event);
+                event.release();
             }
             this.emit(Event.COMPLETE);
         }
-    };
-    Request.$getContentType = function (headers) {
-        for (var key in headers) {
+    }
+    static $getContentType(headers) {
+        for (let key in headers) {
             if (key.toLowerCase() === 'content-type') {
                 return headers[key].toLowerCase();
             }
         }
         return null;
-    };
-    Request.$getQueryString = function (data) {
-        return Object.keys(data).map(function (key) { return key + '=' + data[key]; }).join('&');
-    };
-    return Request;
-}(EventEmitter));
+    }
+    static $getQueryString(data) {
+        return Object.keys(data).map(key => key + '=' + data[key]).join('&');
+    }
+}
 
 var Request$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Request: Request
 });
 
-var Media = /** @class */ (function (_super) {
-    __extends(Media, _super);
-    function Media(stage) {
-        var _this = _super.call(this) || this;
-        _this.$loaded = false;
-        _this.$errored = false;
-        _this.$stage = stage;
-        _this.$boundOnLoad = _this.$onLoad.bind(_this);
-        _this.$boundOnError = _this.$onError.bind(_this);
-        return _this;
+class Media extends EventEmitter {
+    constructor(stage) {
+        super();
+        this.$loaded = false;
+        this.$errored = false;
+        this.$stage = stage;
+        this.$boundOnLoad = this.$onLoad.bind(this);
+        this.$boundOnError = this.$onError.bind(this);
     }
-    Object.defineProperty(Media.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Media.prototype, "url", {
-        get: function () {
-            return this.$element.src || '';
-        },
-        set: function (url) {
-            this.$loaded = false;
-            this.$errored = false;
-            this.$element.src = url;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Media.prototype.on = function (type, listener) {
-        _super.prototype.on.call(this, type, listener);
+    get element() {
+        return this.$element;
+    }
+    get url() {
+        return this.$element.src || '';
+    }
+    set url(url) {
+        this.$loaded = false;
+        this.$errored = false;
+        this.$element.src = url;
+    }
+    on(type, listener) {
+        super.on(type, listener);
         if (type === Event.LOAD && this.$loaded) {
-            var event_1 = Event.create(type);
-            listener.call(this, event_1);
-            event_1.release();
+            let event = Event.create(type);
+            listener.call(this, event);
+            event.release();
         }
         else if (type === Event.ERROR && this.$errored) {
-            var event_2 = Event.create(type);
-            listener.call(this, event_2);
-            event_2.release();
+            let event = Event.create(type);
+            listener.call(this, event);
+            event.release();
         }
         return this;
-    };
-    Media.prototype.$onLoad = function () {
+    }
+    $onLoad() {
         this.$loaded = true;
         this.emit(Event.LOAD);
         this.$element.removeEventListener(Event.LOAD, this.$boundOnLoad);
-    };
-    Media.prototype.$onError = function () {
+    }
+    $onError() {
         this.$errored = true;
         this.emit(Event.ERROR);
         this.$element.removeEventListener(Event.ERROR, this.$boundOnError);
-    };
-    return Media;
-}(EventEmitter));
+    }
+}
 
 var Media$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Media: Media
 });
 
-var Sound = /** @class */ (function (_super) {
-    __extends(Sound, _super);
-    function Sound(stage, url) {
-        var _this = _super.call(this, stage) || this;
-        _this.$loops = 1;
-        _this.$startTime = 0;
-        _this.$paused = true;
-        var audio = document.createElement('audio');
+class Sound extends Media {
+    constructor(stage, url) {
+        super(stage);
+        this.$loops = 1;
+        this.$startTime = 0;
+        this.$paused = true;
+        let audio = document.createElement('audio');
         audio.crossOrigin = '*';
-        audio.addEventListener('canplaythrough', _this.$boundOnLoad);
-        audio.addEventListener('error', _this.$boundOnError);
-        audio.addEventListener('ended', _this.$onEnded.bind(_this));
-        _this.$element = audio;
-        _this.$boundOnTouch = _this.$onTouch.bind(_this);
+        audio.addEventListener('canplaythrough', this.$boundOnLoad);
+        audio.addEventListener('error', this.$boundOnError);
+        audio.addEventListener('ended', this.$onEnded.bind(this));
+        this.$element = audio;
+        this.$boundOnTouch = this.$onTouch.bind(this);
         if (url) {
-            _this.url = url;
+            this.url = url;
         }
-        stage.ticker.on(Event.TICKER_PAUSE, _this.$onTickerPause.bind(_this));
-        stage.ticker.on(Event.TICKER_RESUME, _this.$onTickerResume.bind(_this));
-        stage.on(Event.REMOVED_FROM_STAGE, _this.$onRemovedFromStage.bind(_this));
-        return _this;
+        stage.ticker.on(Event.TICKER_PAUSE, this.$onTickerPause.bind(this));
+        stage.ticker.on(Event.TICKER_RESUME, this.$onTickerResume.bind(this));
+        stage.on(Event.REMOVED_FROM_STAGE, this.$onRemovedFromStage.bind(this));
     }
-    Object.defineProperty(Sound.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Sound.prototype, "url", {
-        get: function () {
-            return this.$element.src;
-        },
-        set: function (url) {
-            this.$paused = true;
-            this.$element.src = url;
-            this.$element.load();
-            if (url.indexOf('data:') === 0) {
-                this.$stage.ticker.setTimeout(this.$boundOnLoad);
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Sound.prototype, "volume", {
-        get: function () {
-            return this.$element.volume;
-        },
-        set: function (volume) {
-            this.$element.volume = volume;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Sound.prototype, "paused", {
-        get: function () {
-            return this.$paused;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Sound.prototype.play = function (startTime, loops) {
-        if (startTime === void 0) { startTime = 0; }
-        if (loops === void 0) { loops = 1; }
+    get element() {
+        return this.$element;
+    }
+    get url() {
+        return this.$element.src;
+    }
+    set url(url) {
+        this.$paused = true;
+        this.$element.src = url;
+        this.$element.load();
+        if (url.indexOf('data:') === 0) {
+            this.$stage.ticker.setTimeout(this.$boundOnLoad);
+        }
+    }
+    get volume() {
+        return this.$element.volume;
+    }
+    set volume(volume) {
+        this.$element.volume = volume;
+    }
+    get paused() {
+        return this.$paused;
+    }
+    play(startTime = 0, loops = 1) {
         this.$loops = loops;
         this.$startTime = startTime;
         this.$element.currentTime = startTime;
         this.$paused = false;
         this.$checkStatus();
         return this;
-    };
-    Sound.prototype.stop = function () {
+    }
+    stop() {
         this.$paused = true;
         this.$element.pause();
         return this;
-    };
-    Sound.prototype.$checkOnTouch = function () {
+    }
+    $checkOnTouch() {
         document.addEventListener('click', this.$boundOnTouch);
         document.addEventListener('touchend', this.$boundOnTouch);
-    };
-    Sound.prototype.$checkStatus = function () {
-        var promise = this.$element.play();
+    }
+    $checkStatus() {
+        let promise = this.$element.play();
         if (promise) {
             promise.catch();
         }
         if (this.$paused) {
             this.$element.pause();
         }
-    };
-    Sound.prototype.$onTouch = function () {
+    }
+    $onTouch() {
         this.$checkStatus();
         document.removeEventListener('click', this.$boundOnTouch);
         document.removeEventListener('touchend', this.$boundOnTouch);
-    };
-    Sound.prototype.$onEnded = function () {
+    }
+    $onEnded() {
         this.emit(Event.ENDED);
         if (this.$loops === 1) {
             this.stop();
@@ -3328,25 +2901,25 @@ var Sound = /** @class */ (function (_super) {
         else {
             this.play(this.$startTime, this.$loops - 1);
         }
-    };
-    Sound.prototype.$onTickerPause = function () {
+    }
+    $onTickerPause() {
         if (!this.$paused) {
             this.$element.pause();
         }
-    };
-    Sound.prototype.$onTickerResume = function () {
+    }
+    $onTickerResume() {
         if (!this.$paused) {
             this.$checkStatus();
         }
-    };
-    Sound.prototype.$onRemovedFromStage = function () {
+    }
+    $onRemovedFromStage() {
         this.stop();
         document.removeEventListener('click', this.$boundOnTouch);
         document.removeEventListener('touchend', this.$boundOnTouch);
-    };
-    Sound.prototype.$onLoad = function () {
-        _super.prototype.$onLoad.call(this);
-        var promise = this.$element.play();
+    }
+    $onLoad() {
+        super.$onLoad();
+        let promise = this.$element.play();
         if (promise) {
             promise
                 .then(this.$checkStatus.bind(this))
@@ -3355,120 +2928,89 @@ var Sound = /** @class */ (function (_super) {
         else {
             this.$checkOnTouch();
         }
-    };
-    return Sound;
-}(Media));
+    }
+}
 
 var Sound$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Sound: Sound
 });
 
-var Texture = /** @class */ (function (_super) {
-    __extends(Texture, _super);
-    function Texture(stage, url) {
-        var _this = _super.call(this, stage) || this;
-        _this.pixelRatio = Texture.defaultPixelRatio;
-        var image = document.createElement('img');
+class Texture extends Media {
+    constructor(stage, url) {
+        super(stage);
+        this.pixelRatio = Texture.defaultPixelRatio;
+        let image = document.createElement('img');
         image.crossOrigin = '*';
-        image.addEventListener('load', _this.$boundOnLoad);
-        image.addEventListener('error', _this.$boundOnError);
-        _this.$element = image;
+        image.addEventListener('load', this.$boundOnLoad);
+        image.addEventListener('error', this.$boundOnError);
+        this.$element = image;
         if (url) {
-            _this.url = url;
+            this.url = url;
         }
-        return _this;
     }
-    Object.defineProperty(Texture.prototype, "element", {
-        get: function () {
-            return this.$element;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Texture.prototype, "width", {
-        get: function () {
-            return this.$element.width / this.pixelRatio;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Texture.prototype, "height", {
-        get: function () {
-            return this.$element.height / this.pixelRatio;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Texture.defaultPixelRatio = 1;
-    return Texture;
-}(Media));
+    get element() {
+        return this.$element;
+    }
+    get width() {
+        return this.$element.width / this.pixelRatio;
+    }
+    get height() {
+        return this.$element.height / this.pixelRatio;
+    }
+}
+Texture.defaultPixelRatio = 1;
 
 var Texture$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Texture: Texture
 });
 
-var ResourceManager = /** @class */ (function (_super) {
-    __extends(ResourceManager, _super);
-    function ResourceManager(stage, list, options) {
-        var _this = _super.call(this) || this;
-        _this.$errorCount = 0;
-        _this.$loadedCount = 0;
-        _this.$loadingCount = 0;
-        _this.$stage = stage;
-        _this.threads = options && options.threads || 2;
-        _this.timeout = options && options.timeout || 10000;
-        _this.retryTimes = options && options.retryTimes || 3;
-        _this.$list = list.concat();
-        _this.$total = list.length;
-        _this.$resources = {};
-        _this.$checkPendingTasks();
-        return _this;
+class ResourceManager extends EventEmitter {
+    constructor(stage, list, options) {
+        super();
+        this.$errorCount = 0;
+        this.$loadedCount = 0;
+        this.$loadingCount = 0;
+        this.$stage = stage;
+        this.threads = options && options.threads || 2;
+        this.timeout = options && options.timeout || 10000;
+        this.retryTimes = options && options.retryTimes || 3;
+        this.$list = list.concat();
+        this.$total = list.length;
+        this.$resources = {};
+        this.$checkPendingTasks();
     }
-    Object.defineProperty(ResourceManager.prototype, "total", {
-        get: function () {
-            return this.$total;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(ResourceManager.prototype, "errorCount", {
-        get: function () {
-            return this.$errorCount;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(ResourceManager.prototype, "loadedCount", {
-        get: function () {
-            return this.$loadedCount;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    ResourceManager.prototype.$checkPendingTasks = function () {
+    get total() {
+        return this.$total;
+    }
+    get errorCount() {
+        return this.$errorCount;
+    }
+    get loadedCount() {
+        return this.$loadedCount;
+    }
+    $checkPendingTasks() {
         if (this.$loadingCount < this.threads && this.$list.length > 0) {
             ++this.$loadingCount;
             this.$load(this.$list.shift(), 1);
         }
-    };
-    ResourceManager.prototype.$load = function (info, attempts) {
-        var _this = this;
-        var timer;
-        var resource;
-        var name = info.name;
-        var type = info.type;
-        var url = info.url;
-        var total = this.$total;
-        var stage = this.$stage;
-        var ticker = stage.ticker;
-        var resources = this.$resources;
-        var retryTimes = this.retryTimes;
-        var successCallback = function () {
-            var errorCount = _this.$errorCount;
-            var loadedCount = ++_this.$loadedCount;
-            --_this.$loadingCount;
+    }
+    $load(info, attempts) {
+        let timer;
+        let resource;
+        let name = info.name;
+        let type = info.type;
+        let url = info.url;
+        let total = this.$total;
+        let stage = this.$stage;
+        let ticker = stage.ticker;
+        let resources = this.$resources;
+        let retryTimes = this.retryTimes;
+        let successCallback = () => {
+            let errorCount = this.$errorCount;
+            let loadedCount = ++this.$loadedCount;
+            --this.$loadingCount;
             ticker.clearTimeout(timer);
             if (resource instanceof Request) {
                 resources[name] = resource.response;
@@ -3478,36 +3020,36 @@ var ResourceManager = /** @class */ (function (_super) {
             }
             resource.off(Event.LOAD, successCallback);
             resource.off(Event.ERROR, errorCallback);
-            var event = Event.create(Event.PROGRESS, (loadedCount + errorCount) / total);
-            _this.emit(event);
+            let event = Event.create(Event.PROGRESS, (loadedCount + errorCount) / total);
+            this.emit(event);
             event.release();
             if (loadedCount + errorCount === total) {
-                _this.emit(Event.COMPLETE);
+                this.emit(Event.COMPLETE);
             }
             else {
-                _this.$checkPendingTasks();
+                this.$checkPendingTasks();
             }
         };
-        var errorCallback = function () {
+        let errorCallback = () => {
             if (attempts < retryTimes) {
-                _this.$load(info, attempts + 1);
+                this.$load(info, attempts + 1);
             }
             else {
-                --_this.$loadingCount;
-                var loadedCount = _this.$loadedCount;
-                var errorCount = ++_this.$errorCount;
+                --this.$loadingCount;
+                let loadedCount = this.$loadedCount;
+                let errorCount = ++this.$errorCount;
                 if (resource instanceof Request) {
                     resources[name] = resource.response;
                 }
                 else if (resource instanceof Media) {
                     resources[name] = resource;
                 }
-                _this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
+                this.emit(Event.PROGRESS, (loadedCount + errorCount) / total);
                 if (loadedCount + errorCount === total) {
-                    _this.emit(Event.COMPLETE);
+                    this.emit(Event.COMPLETE);
                 }
                 else {
-                    _this.$checkPendingTasks();
+                    this.$checkPendingTasks();
                 }
             }
             ticker.clearTimeout(timer);
@@ -3543,164 +3085,117 @@ var ResourceManager = /** @class */ (function (_super) {
             throw new Error('Unsupported resource type: ' + type);
         }
         timer = ticker.setTimeout(errorCallback, this.timeout);
-    };
-    ResourceManager.prototype.has = function (name) {
+    }
+    has(name) {
         return !!this.$resources[name];
-    };
-    ResourceManager.prototype.get = function (name) {
+    }
+    get(name) {
         return this.$resources[name];
-    };
-    ResourceManager.TYPE_TEXT = 'text';
-    ResourceManager.TYPE_JSON = 'json';
-    ResourceManager.TYPE_BINARY = 'binary';
-    ResourceManager.TYPE_TEXTURE = 'texture';
-    ResourceManager.TYPE_SOUND = 'sound';
-    return ResourceManager;
-}(EventEmitter));
+    }
+}
+ResourceManager.TYPE_TEXT = 'text';
+ResourceManager.TYPE_JSON = 'json';
+ResourceManager.TYPE_BINARY = 'binary';
+ResourceManager.TYPE_TEXTURE = 'texture';
+ResourceManager.TYPE_SOUND = 'sound';
 
 var ResourceManager$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     ResourceManager: ResourceManager
 });
 
-var Stage = /** @class */ (function (_super) {
-    __extends(Stage, _super);
-    function Stage(canvas) {
-        var _this = _super.call(this) || this;
-        _this.$drawCalls = 0;
-        _this.$activated = false;
-        _this.$scaleMode = Stage.SHOW_ALL;
-        _this.$viewportWidth = 0;
-        _this.$viewportHeight = 0;
-        _this.$viewportBackground = null;
-        _this.$renderBounds = Rectangle.create();
-        _this.$ticker = new Ticker(_this);
-        _this.$elementEvents = [];
-        _this.$viewportCanvas = canvas || document.createElement('canvas');
-        _this.$viewportContext = _this.$viewportCanvas.getContext('2d');
-        _this.$boundResizeViewportCanvas = _this.$resizeViewportCanvas.bind(_this);
-        _this.$resizeViewportCanvas();
-        _this.$initEvents();
-        _this.width = 320;
-        _this.height = 568;
+class Stage extends Layer {
+    constructor(canvas) {
+        super();
+        this.$drawCalls = 0;
+        this.$activated = false;
+        this.$scaleMode = Stage.SHOW_ALL;
+        this.$viewportWidth = 0;
+        this.$viewportHeight = 0;
+        this.$viewportBackground = null;
+        this.$renderBounds = Rectangle.create();
+        this.$ticker = new Ticker(this);
+        this.$elementEvents = [];
+        this.$viewportCanvas = canvas || document.createElement('canvas');
+        this.$viewportContext = this.$viewportCanvas.getContext('2d');
+        this.$boundResizeViewportCanvas = this.$resizeViewportCanvas.bind(this);
+        this.$resizeViewportCanvas();
+        this.$initEvents();
+        this.width = 320;
+        this.height = 568;
         if (!canvas) {
-            _this.$viewportCanvas.style.top = '0';
-            _this.$viewportCanvas.style.left = '0';
-            _this.$viewportCanvas.style.position = 'fixed';
-            document.body.appendChild(_this.$viewportCanvas);
+            this.$viewportCanvas.style.top = '0';
+            this.$viewportCanvas.style.left = '0';
+            this.$viewportCanvas.style.position = 'fixed';
+            document.body.appendChild(this.$viewportCanvas);
         }
-        return _this;
     }
-    Object.defineProperty(Stage.prototype, "x", {
-        get: function () {
-            return 0;
-        },
-        set: function (x) {
-            this.$x = 0;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "y", {
-        get: function () {
-            return 0;
-        },
-        set: function (y) {
-            this.$y = 0;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "ticker", {
-        get: function () {
-            return this.$ticker;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "fps", {
-        get: function () {
-            return this.$ticker.fps;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "drawCalls", {
-        get: function () {
-            return this.$drawCalls;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "activated", {
-        get: function () {
-            return this.$activated;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "scaleMode", {
-        get: function () {
-            return this.$scaleMode;
-        },
-        set: function (scaleMode) {
-            if (this.scaleMode !== scaleMode) {
-                this.$scaleMode = scaleMode;
-                this.$resizeCanvas();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "viewportCanvas", {
-        get: function () {
-            return this.$viewportCanvas;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "viewportWidth", {
-        get: function () {
-            return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / Layer.pixelRatio;
-        },
-        set: function (width) {
-            if (this.$viewportWidth !== width) {
-                this.$viewportWidth = width;
-                this.$resizeViewportCanvas();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "viewportHeight", {
-        get: function () {
-            return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / Layer.pixelRatio;
-        },
-        set: function (height) {
-            if (this.$viewportHeight !== height) {
-                this.$viewportHeight = height;
-                this.$resizeViewportCanvas();
-            }
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Stage.prototype, "viewportBackground", {
-        get: function () {
-            return this.$viewportBackground;
-        },
-        set: function (viewportBackground) {
-            this.$viewportBackground = viewportBackground;
-            this.$viewportCanvas.style.background = viewportBackground;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Stage.prototype.createResourceManager = function (list, options) {
+    get x() {
+        return 0;
+    }
+    set x(x) {
+        this.$x = 0;
+    }
+    get y() {
+        return 0;
+    }
+    set y(y) {
+        this.$y = 0;
+    }
+    get ticker() {
+        return this.$ticker;
+    }
+    get fps() {
+        return this.$ticker.fps;
+    }
+    get drawCalls() {
+        return this.$drawCalls;
+    }
+    get activated() {
+        return this.$activated;
+    }
+    get scaleMode() {
+        return this.$scaleMode;
+    }
+    set scaleMode(scaleMode) {
+        if (this.scaleMode !== scaleMode) {
+            this.$scaleMode = scaleMode;
+            this.$resizeCanvas();
+        }
+    }
+    get viewportCanvas() {
+        return this.$viewportCanvas;
+    }
+    get viewportWidth() {
+        return this.$viewportWidth ? this.$viewportWidth : this.$viewportCanvas.width / Layer.pixelRatio;
+    }
+    set viewportWidth(width) {
+        if (this.$viewportWidth !== width) {
+            this.$viewportWidth = width;
+            this.$resizeViewportCanvas();
+        }
+    }
+    get viewportHeight() {
+        return this.$viewportHeight ? this.$viewportHeight : this.$viewportCanvas.height / Layer.pixelRatio;
+    }
+    set viewportHeight(height) {
+        if (this.$viewportHeight !== height) {
+            this.$viewportHeight = height;
+            this.$resizeViewportCanvas();
+        }
+    }
+    get viewportBackground() {
+        return this.$viewportBackground;
+    }
+    set viewportBackground(viewportBackground) {
+        this.$viewportBackground = viewportBackground;
+        this.$viewportCanvas.style.background = viewportBackground;
+    }
+    createResourceManager(list, options) {
         return new ResourceManager(this, list, options);
-    };
-    Stage.prototype.removeSelf = function () {
-        var canvas = this.$viewportCanvas;
+    }
+    removeSelf() {
+        let canvas = this.$viewportCanvas;
         if (canvas.parentElement) {
             canvas.parentElement.removeChild(canvas);
         }
@@ -3713,118 +3208,114 @@ var Stage = /** @class */ (function (_super) {
         }
         this.$removeElementEvents();
         return this;
-    };
-    Stage.prototype.$initEvents = function () {
-        var _this = this;
-        var prefix;
-        var hiddenKey;
-        var resizeTimer;
-        var ticker = this.$ticker;
-        var prefixes = ['', 'o', 'ms', 'moz', 'webkit'];
-        for (var _i = 0, prefixes_1 = prefixes; _i < prefixes_1.length; _i++) {
-            prefix = prefixes_1[_i];
+    }
+    $initEvents() {
+        let prefix;
+        let hiddenKey;
+        let resizeTimer;
+        let ticker = this.$ticker;
+        let prefixes = ['', 'o', 'ms', 'moz', 'webkit'];
+        for (prefix of prefixes) {
             hiddenKey = prefix ? prefix + 'Hidden' : 'hidden';
             if (document[hiddenKey] !== undefined) {
                 break;
             }
         }
         this.$addTouchEventListeners();
-        this.$addElementEvent(window, 'orientationchange', function () {
+        this.$addElementEvent(window, 'orientationchange', () => {
             ticker.clearTimeout(resizeTimer);
-            resizeTimer = ticker.setTimeout(_this.$boundResizeViewportCanvas, 100);
+            resizeTimer = ticker.setTimeout(this.$boundResizeViewportCanvas, 100);
         });
-        this.$addElementEvent(window, prefix + 'visibilitychange', function () {
-            var hidden = document[hiddenKey];
-            _this.$activated = !hidden;
-            _this.emit(hidden ? Event.DEACTIVATE : Event.ACTIVATE);
+        this.$addElementEvent(window, prefix + 'visibilitychange', () => {
+            let hidden = document[hiddenKey];
+            this.$activated = !hidden;
+            this.emit(hidden ? Event.DEACTIVATE : Event.ACTIVATE);
         });
         this.on(Event.ENTER_FRAME, this.$render);
-        setTimeout(function () {
+        setTimeout(() => {
             if (!document[hiddenKey]) {
-                _this.$activated = true;
-                _this.emit(Event.ACTIVATE);
+                this.$activated = true;
+                this.emit(Event.ACTIVATE);
             }
-            _this.$emitAddedToStage(_this);
+            this.$emitAddedToStage(this);
         });
-    };
-    Stage.prototype.$addElementEvent = function (target, type, listener, options) {
+    }
+    $addElementEvent(target, type, listener, options) {
         target.addEventListener(type, listener, options);
-        this.$elementEvents.push({ target: target, type: type, listener: listener });
-    };
-    Stage.prototype.$removeElementEvents = function () {
-        var listeners = this.$elementEvents;
-        for (var _i = 0, listeners_1 = listeners; _i < listeners_1.length; _i++) {
-            var _a = listeners_1[_i], target = _a.target, type = _a.type, listener = _a.listener;
+        this.$elementEvents.push({ target, type, listener });
+    }
+    $removeElementEvents() {
+        let listeners = this.$elementEvents;
+        for (let { target, type, listener } of listeners) {
             target.removeEventListener(type, listener);
         }
         listeners.length = 0;
-    };
-    Stage.prototype.$addTouchEventListeners = function () {
-        var _this = this;
+    }
+    $addTouchEventListeners() {
         if (document.ontouchstart !== undefined) {
-            this.$addElementEvent(document, 'touchstart', function (event) {
-                _this.$dispatchTouches(TouchEvent.TOUCH_START, event);
+            this.$addElementEvent(document, 'touchstart', event => {
+                this.$dispatchTouches(TouchEvent.TOUCH_START, event);
             });
-            this.$addElementEvent(document, 'touchmove', function (event) {
-                _this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
+            this.$addElementEvent(document, 'touchmove', event => {
+                this.$dispatchTouches(TouchEvent.TOUCH_MOVE, event);
                 event.preventDefault();
             }, { passive: false });
-            this.$addElementEvent(document, 'touchend', function (event) {
-                _this.$dispatchTouches(TouchEvent.TOUCH_END, event);
-                _this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
+            this.$addElementEvent(document, 'touchend', event => {
+                this.$dispatchTouches(TouchEvent.TOUCH_END, event);
+                this.$dispatchTouches(TouchEvent.TOUCH_TAP, event);
             });
-            this.$addElementEvent(document, 'touchcancel', function (event) {
-                _this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
+            this.$addElementEvent(document, 'touchcancel', event => {
+                this.$dispatchTouches(TouchEvent.TOUCH_CANCEL, event);
             });
         }
         else {
-            var touching_1 = false;
-            this.$addElementEvent(window, 'mousedown', function (event) {
-                _this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
-                touching_1 = true;
+            let touching = false;
+            this.$addElementEvent(window, 'mousedown', event => {
+                this.$dispatchTouchEvent(TouchEvent.TOUCH_START, event.pageX, event.pageY, 0);
+                touching = true;
             });
-            this.$addElementEvent(window, 'mousemove', function (event) {
-                if (touching_1) {
-                    _this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
+            this.$addElementEvent(window, 'mousemove', event => {
+                if (touching) {
+                    this.$dispatchTouchEvent(TouchEvent.TOUCH_MOVE, event.pageX, event.pageY, 0);
                 }
             });
-            this.$addElementEvent(window, 'mouseup', function (event) {
-                _this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
-                touching_1 = false;
+            this.$addElementEvent(window, 'mouseup', event => {
+                this.$dispatchTouchEvent(TouchEvent.TOUCH_END, event.pageX, event.pageY, 0);
+                touching = false;
             });
-            this.$addElementEvent(window, 'click', function (event) {
-                _this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
+            this.$addElementEvent(window, 'click', event => {
+                this.$dispatchTouchEvent(TouchEvent.TOUCH_TAP, event.pageX, event.pageY, 0);
             });
-            this.$addElementEvent(window, 'blur', function () {
-                _this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, 0, 0, 0);
-                touching_1 = false;
+            this.$addElementEvent(window, 'blur', () => {
+                this.$dispatchTouchEvent(TouchEvent.TOUCH_CANCEL, 0, 0, 0);
+                touching = false;
             });
         }
-    };
-    Stage.prototype.$dispatchTouches = function (type, event) {
-        var touches = event['changedTouches'];
-        for (var i = 0, l = touches.length; i < l; ++i) {
-            var touch = touches[i];
+    }
+    $dispatchTouches(type, event) {
+        let touches = event['changedTouches'];
+        for (let i = 0, l = touches.length; i < l; ++i) {
+            let touch = touches[i];
             this.$dispatchTouchEvent(type, touch.pageX, touch.pageY, touch.identifier);
         }
-    };
-    Stage.prototype.$dispatchTouchEvent = function (type, pageX, pageY, identifier) {
+    }
+    $dispatchTouchEvent(type, pageX, pageY, identifier) {
         if (this.$ticker.paused || !this.$visible || !this.touchable) {
             return;
         }
-        var event = TouchEvent.create(type);
-        var scrollX = window.scrollX || 0;
-        var scrollY = window.scrollY || 0;
-        var width = this.$canvas.width;
-        var height = this.$canvas.height;
-        var bounds = this.$renderBounds;
-        var pixelRatio = Layer.pixelRatio;
-        var viewportBounds = this.$viewportCanvas.getBoundingClientRect();
-        var x = (pageX - scrollX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
-        var y = (pageY - scrollY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
-        var matrix = this.$getTransform();
-        var localPos = Vector.create(x, y).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
-        var inside = this.$localHitTest(localPos);
+        let event = TouchEvent.create(type);
+        let scrollX = window.scrollX || 0;
+        let scrollY = window.scrollY || 0;
+        let width = this.$canvas.width;
+        let height = this.$canvas.height;
+        let bounds = this.$renderBounds;
+        let pixelRatio = Layer.pixelRatio;
+        let viewportBounds = this.$viewportCanvas.getBoundingClientRect();
+        let x = (pageX - scrollX - viewportBounds.left - bounds.x / pixelRatio) * width / bounds.width - this.$anchorX;
+        let y = (pageY - scrollY - viewportBounds.top - bounds.y / pixelRatio) * height / bounds.height - this.$anchorY;
+        let matrix = this.$getTransform();
+        let localPos = Vector.create(x, y).transform(matrix.invert()).subtract(this.$anchorX, this.$anchorY);
+        let inside = this.$localHitTest(localPos);
         if (inside || type !== TouchEvent.TOUCH_START) {
             event.localX = localPos.x;
             event.localY = localPos.y;
@@ -3836,20 +3327,20 @@ var Stage = /** @class */ (function (_super) {
         event.release();
         matrix.release();
         localPos.release();
-    };
-    Stage.prototype.$calculateRenderBounds = function () {
-        var x = 0;
-        var y = 0;
-        var canvas = this.$canvas;
-        var width = canvas.width;
-        var height = canvas.height;
-        var scaleMode = this.$scaleMode;
-        var bounds = this.$renderBounds;
-        var aspectRatio = width / height;
-        var viewportCanvas = this.$viewportCanvas;
-        var viewportWidth = viewportCanvas.width;
-        var viewportHeight = viewportCanvas.height;
-        var viewportAspectRatio = viewportWidth / viewportHeight;
+    }
+    $calculateRenderBounds() {
+        let x = 0;
+        let y = 0;
+        let canvas = this.$canvas;
+        let width = canvas.width;
+        let height = canvas.height;
+        let scaleMode = this.$scaleMode;
+        let bounds = this.$renderBounds;
+        let aspectRatio = width / height;
+        let viewportCanvas = this.$viewportCanvas;
+        let viewportWidth = viewportCanvas.width;
+        let viewportHeight = viewportCanvas.height;
+        let viewportAspectRatio = viewportWidth / viewportHeight;
         if (scaleMode === Stage.SHOW_ALL) {
             if (aspectRatio > viewportAspectRatio) {
                 width = viewportWidth;
@@ -3914,18 +3405,18 @@ var Stage = /** @class */ (function (_super) {
         bounds.y = y;
         bounds.width = width;
         bounds.height = height;
-    };
-    Stage.prototype.$resizeCanvas = function () {
-        _super.prototype.$resizeCanvas.call(this);
+    }
+    $resizeCanvas() {
+        super.$resizeCanvas();
         this.$calculateRenderBounds();
-    };
-    Stage.prototype.$resizeViewportCanvas = function () {
-        var canvas = this.$viewportCanvas;
-        var pixelRatio = Layer.pixelRatio;
-        var viewportWidth = this.$viewportWidth || window.innerWidth;
-        var viewportHeight = this.$viewportHeight || window.innerHeight;
-        var canvasWidth = viewportWidth * pixelRatio;
-        var canvasHeight = viewportHeight * pixelRatio;
+    }
+    $resizeViewportCanvas() {
+        let canvas = this.$viewportCanvas;
+        let pixelRatio = Layer.pixelRatio;
+        let viewportWidth = this.$viewportWidth || window.innerWidth;
+        let viewportHeight = this.$viewportHeight || window.innerHeight;
+        let canvasWidth = viewportWidth * pixelRatio;
+        let canvasHeight = viewportHeight * pixelRatio;
         if (canvas.width !== canvasWidth || canvas.height !== canvasHeight) {
             canvas.width = canvasWidth;
             canvas.height = canvasHeight;
@@ -3935,40 +3426,61 @@ var Stage = /** @class */ (function (_super) {
             this.$markDirty();
             this.emit(Event.VIEWPORT_RESIZE);
         }
-    };
-    Stage.prototype.$render = function () {
+    }
+    $render() {
         if (!this.$dirty) {
             this.$drawCalls = 0;
             return 0;
         }
-        var drawCalls = _super.prototype.$render.call(this);
-        var canvas = this.$canvas;
-        var ctx = this.$viewportContext;
-        var bounds = this.$renderBounds;
-        var viewportCanvas = this.$viewportCanvas;
-        var viewportWidth = viewportCanvas.width;
-        var viewportHeight = viewportCanvas.height;
+        let drawCalls = super.$render();
+        let canvas = this.$canvas;
+        let ctx = this.$viewportContext;
+        let bounds = this.$renderBounds;
+        let viewportCanvas = this.$viewportCanvas;
+        let viewportWidth = viewportCanvas.width;
+        let viewportHeight = viewportCanvas.height;
         ctx.clearRect(0, 0, viewportWidth, viewportHeight);
         ctx.drawImage(canvas, (bounds.x + 0.5) | 0, (bounds.y + 0.5) | 0, (bounds.width + 0.5) | 0, (bounds.height + 0.5) | 0);
         this.$drawCalls = ++drawCalls;
         return drawCalls;
-    };
-    Stage.SHOW_ALL = 'showAll';
-    Stage.EXACT_FIT = 'exactFit';
-    Stage.NO_SCALE = 'noScale';
-    Stage.NO_BORDER = 'noBorder';
-    Stage.FIXED_WIDE = 'fixedWide';
-    Stage.FIXED_NARROW = 'fixedNarrow';
-    Stage.FIXED_WIDTH = 'fixedWidth';
-    Stage.FIXED_HEIGHT = 'fixedHeight';
-    return Stage;
-}(Layer));
+    }
+}
+Stage.SHOW_ALL = 'showAll';
+Stage.EXACT_FIT = 'exactFit';
+Stage.NO_SCALE = 'noScale';
+Stage.NO_BORDER = 'noBorder';
+Stage.FIXED_WIDE = 'fixedWide';
+Stage.FIXED_NARROW = 'fixedNarrow';
+Stage.FIXED_WIDTH = 'fixedWidth';
+Stage.FIXED_HEIGHT = 'fixedHeight';
 
 var Stage$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Stage: Stage
 });
 
-var index = __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({}, Ticker$1), Layer$1), Scroller$1), Image$1), Text$1), Input$1), MovieClip$1), Stage$1), Event$1), TouchEvent$1), EventEmitter$1), Matrix$1), Vector$1), Rectangle$1), Media$1), Texture$1), Sound$1), Ease$1), Tween$1), Request$1), ResourceManager$1);
+var index = {
+    ...Ticker$1,
+    ...Layer$1,
+    ...Scroller$1,
+    ...Image$1,
+    ...Text$1,
+    ...Input$1,
+    ...MovieClip$1,
+    ...Stage$1,
+    ...Event$1,
+    ...TouchEvent$1,
+    ...EventEmitter$1,
+    ...Matrix$1,
+    ...Vector$1,
+    ...Rectangle$1,
+    ...Media$1,
+    ...Texture$1,
+    ...Sound$1,
+    ...Ease$1,
+    ...Tween$1,
+    ...Request$1,
+    ...ResourceManager$1
+};
 
 export { Ease, Event, EventEmitter, Image, Input, Layer, Matrix, Media, MovieClip, Rectangle, Request, ResourceManager, Scroller, Sound, Stage, Text, Texture, Ticker, TouchEvent, Tween, Vector, index as default };

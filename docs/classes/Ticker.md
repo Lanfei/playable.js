@@ -1,383 +1,348 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / Ticker
 
 # Class: Ticker
 
-## Hierarchy
+Defined in: [system/Ticker.ts:6](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L6)
 
-- [`EventEmitter`](../README.md#eventemitter)
+## Extends
 
-  ↳ **`Ticker`**
-
-## Table of contents
-
-### Constructors
-
-- [constructor](Ticker.md#constructor)
-
-### Properties
-
-- [$boundTick](Ticker.md#$boundtick)
-- [$deltaTime](Ticker.md#$deltatime)
-- [$emittingType](Ticker.md#$emittingtype)
-- [$enterFrameCallbackList](Ticker.md#$enterframecallbacklist)
-- [$events](Ticker.md#$events)
-- [$fps](Ticker.md#$fps)
-- [$lastTimestamp](Ticker.md#$lasttimestamp)
-- [$paused](Ticker.md#$paused)
-- [$removedListeners](Ticker.md#$removedlisteners)
-- [$shouldResume](Ticker.md#$shouldresume)
-- [$stage](Ticker.md#$stage)
-- [$tickHandle](Ticker.md#$tickhandle)
-- [$timerIndex](Ticker.md#$timerindex)
-- [$timers](Ticker.md#$timers)
-
-### Accessors
-
-- [deltaTime](Ticker.md#deltatime)
-- [fps](Ticker.md#fps)
-- [paused](Ticker.md#paused)
-
-### Methods
-
-- [$checkTimers](Ticker.md#$checktimers)
-- [$start](Ticker.md#$start)
-- [$tick](Ticker.md#$tick)
-- [clearInterval](Ticker.md#clearinterval)
-- [clearTimeout](Ticker.md#cleartimeout)
-- [emit](Ticker.md#emit)
-- [hasEventListener](Ticker.md#haseventlistener)
-- [off](Ticker.md#off)
-- [on](Ticker.md#on)
-- [once](Ticker.md#once)
-- [pause](Ticker.md#pause)
-- [registerEnterFrameCallback](Ticker.md#registerenterframecallback)
-- [removeAllListeners](Ticker.md#removealllisteners)
-- [resume](Ticker.md#resume)
-- [setInterval](Ticker.md#setinterval)
-- [setTimeout](Ticker.md#settimeout)
-- [unregisterEnterFrameCallback](Ticker.md#unregisterenterframecallback)
+- [`EventEmitter`](../variables/default.md#eventemitter)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new Ticker**(`stage`)
+> **new Ticker**(`stage`): [`Ticker`](../variables/default.md#ticker)
+
+Defined in: [system/Ticker.ts:20](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L20)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `stage` | [`Stage`](../README.md#stage) |
+##### stage
+
+[`Stage`](../variables/default.md#stage)
+
+#### Returns
+
+[`Ticker`](../variables/default.md#ticker)
 
 #### Overrides
 
-[EventEmitter](../README.md#eventemitter).[constructor](../README.md#constructor)
-
-#### Defined in
-
-[system/Ticker.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L20)
+[`EventEmitter`](../variables/default.md#eventemitter).[`constructor`](../variables/default.md#eventemitterconstructor)
 
 ## Properties
 
-### $boundTick
+### $boundTick()
 
-• `Protected` `Readonly` **$boundTick**: () => `void`
+> `protected` `readonly` **$boundTick**: () => `void`
 
-#### Type declaration
+Defined in: [system/Ticker.ts:17](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L17)
 
-▸ (): `void`
-
-##### Returns
+#### Returns
 
 `void`
 
-#### Defined in
-
-[system/Ticker.ts:17](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L17)
-
-___
+***
 
 ### $deltaTime
 
-• `Protected` **$deltaTime**: `number` = `0`
+> `protected` **$deltaTime**: `number` = `0`
 
-#### Defined in
+Defined in: [system/Ticker.ts:10](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L10)
 
-[system/Ticker.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L10)
-
-___
+***
 
 ### $emittingType
 
-• `Protected` **$emittingType**: `string` = `null`
+> `protected` **$emittingType**: `string` = `null`
+
+Defined in: [event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L6)
 
 #### Inherited from
 
-[EventEmitter](../README.md#eventemitter).[$emittingType](../README.md#$emittingtype)
+[`EventEmitter`](../variables/default.md#eventemitter).[`$emittingType`](../variables/default.md#eventemitteremittingtype)
 
-#### Defined in
-
-[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L6)
-
-___
+***
 
 ### $enterFrameCallbackList
 
-• `Protected` `Readonly` **$enterFrameCallbackList**: [`Layer`](../README.md#layer)[]
+> `protected` `readonly` **$enterFrameCallbackList**: [`Layer`](../variables/default.md#layer)[]
 
-#### Defined in
+Defined in: [system/Ticker.ts:18](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L18)
 
-[system/Ticker.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L18)
-
-___
+***
 
 ### $events
 
-• `Protected` **$events**: `Object` = `{}`
+> `protected` **$events**: `Object` = `{}`
+
+Defined in: [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L5)
 
 #### Inherited from
 
-[EventEmitter](../README.md#eventemitter).[$events](../README.md#$events)
+[`EventEmitter`](../variables/default.md#eventemitter).[`$events`](../variables/default.md#eventemitterevents)
 
-#### Defined in
-
-[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L5)
-
-___
+***
 
 ### $fps
 
-• `Protected` **$fps**: `number` = `0`
+> `protected` **$fps**: `number` = `0`
 
-#### Defined in
+Defined in: [system/Ticker.ts:9](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L9)
 
-[system/Ticker.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L9)
-
-___
+***
 
 ### $lastTimestamp
 
-• `Protected` **$lastTimestamp**: `number` = `0`
+> `protected` **$lastTimestamp**: `number` = `0`
 
-#### Defined in
+Defined in: [system/Ticker.ts:14](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L14)
 
-[system/Ticker.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L14)
-
-___
+***
 
 ### $paused
 
-• `Protected` **$paused**: `boolean` = `true`
+> `protected` **$paused**: `boolean` = `true`
 
-#### Defined in
+Defined in: [system/Ticker.ts:11](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L11)
 
-[system/Ticker.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L11)
-
-___
+***
 
 ### $removedListeners
 
-• `Protected` **$removedListeners**: [`Listener`](../README.md#listener)[] = `[]`
+> `protected` **$removedListeners**: [`Listener`](../type-aliases/Listener.md)[] = `[]`
+
+Defined in: [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L7)
 
 #### Inherited from
 
-[EventEmitter](../README.md#eventemitter).[$removedListeners](../README.md#$removedlisteners)
+[`EventEmitter`](../variables/default.md#eventemitter).[`$removedListeners`](../variables/default.md#eventemitterremovedlisteners)
 
-#### Defined in
-
-[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L7)
-
-___
+***
 
 ### $shouldResume
 
-• `Protected` **$shouldResume**: `boolean` = `false`
+> `protected` **$shouldResume**: `boolean` = `false`
 
-#### Defined in
+Defined in: [system/Ticker.ts:12](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L12)
 
-[system/Ticker.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L12)
-
-___
+***
 
 ### $stage
 
-• `Protected` **$stage**: [`Stage`](../README.md#stage) = `null`
+> `protected` **$stage**: [`Stage`](../variables/default.md#stage) = `null`
 
-#### Defined in
+Defined in: [system/Ticker.ts:8](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L8)
 
-[system/Ticker.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L8)
-
-___
+***
 
 ### $tickHandle
 
-• `Protected` **$tickHandle**: `number` = `null`
+> `protected` **$tickHandle**: `number` = `null`
 
-#### Defined in
+Defined in: [system/Ticker.ts:15](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L15)
 
-[system/Ticker.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L15)
-
-___
+***
 
 ### $timerIndex
 
-• `Protected` **$timerIndex**: `number` = `0`
+> `protected` **$timerIndex**: `number` = `0`
 
-#### Defined in
+Defined in: [system/Ticker.ts:13](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L13)
 
-[system/Ticker.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L13)
-
-___
+***
 
 ### $timers
 
-• `Protected` `Readonly` **$timers**: `Object`
+> `protected` `readonly` **$timers**: `Object`
 
-#### Defined in
-
-[system/Ticker.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L16)
+Defined in: [system/Ticker.ts:16](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L16)
 
 ## Accessors
 
 ### deltaTime
 
-• `get` **deltaTime**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **deltaTime**(): `number`
+
+Defined in: [system/Ticker.ts:33](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L33)
+
+##### Returns
 
 `number`
 
-#### Defined in
-
-[system/Ticker.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L33)
-
-___
+***
 
 ### fps
 
-• `get` **fps**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **fps**(): `number`
+
+Defined in: [system/Ticker.ts:29](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L29)
+
+##### Returns
 
 `number`
 
-#### Defined in
-
-[system/Ticker.ts:29](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L29)
-
-___
+***
 
 ### paused
 
-• `get` **paused**(): `boolean`
+#### Get Signature
 
-#### Returns
+> **get** **paused**(): `boolean`
+
+Defined in: [system/Ticker.ts:37](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L37)
+
+##### Returns
 
 `boolean`
-
-#### Defined in
-
-[system/Ticker.ts:37](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L37)
 
 ## Methods
 
-### $checkTimers
+### $checkTimers()
 
-▸ `Protected` **$checkTimers**(`dt`): `void`
+> `protected` **$checkTimers**(`dt`): `void`
+
+Defined in: [system/Ticker.ts:160](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L160)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `dt` | `number` |
+##### dt
+
+`number`
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[system/Ticker.ts:160](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L160)
+### $start()
 
-___
+> `protected` **$start**(): `this`
 
-### $start
-
-▸ `Protected` **$start**(): [`Ticker`](../README.md#ticker)
+Defined in: [system/Ticker.ts:41](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L41)
 
 #### Returns
 
-[`Ticker`](../README.md#ticker)
+`this`
 
-#### Defined in
+***
 
-[system/Ticker.ts:41](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L41)
+### $tick()
 
-___
+> `protected` **$tick**(): `void`
 
-### $tick
-
-▸ `Protected` **$tick**(): `void`
+Defined in: [system/Ticker.ts:140](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L140)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[system/Ticker.ts:140](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L140)
+### clearInterval()
 
-___
+> **clearInterval**(`handle`): `void`
 
-### clearInterval
-
-▸ **clearInterval**(`handle`): `void`
+Defined in: [system/Ticker.ts:119](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L119)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `handle` | `number` |
+##### handle
+
+`number`
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[system/Ticker.ts:119](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L119)
+### clearTimeout()
 
-___
+> **clearTimeout**(`handle`): `void`
 
-### clearTimeout
-
-▸ **clearTimeout**(`handle`): `void`
+Defined in: [system/Ticker.ts:109](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L109)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `handle` | `number` |
+##### handle
+
+`number`
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[system/Ticker.ts:109](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L109)
+### emit()
 
-___
+#### Call Signature
 
-### emit
+> **emit**(`event`): `boolean`
 
-▸ **emit**(`event`): `boolean`
+Defined in: [event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L42)
+
+##### Parameters
+
+###### event
+
+[`Event`](../variables/default.md#event)
+
+##### Returns
+
+`boolean`
+
+##### Inherited from
+
+[`EventEmitter`](../variables/default.md#eventemitter).[`emit`](../variables/default.md#eventemitteremit)
+
+#### Call Signature
+
+> **emit**(`type`, ...`args`): `boolean`
+
+Defined in: [event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L43)
+
+##### Parameters
+
+###### type
+
+`string`
+
+###### args
+
+...`any`[]
+
+##### Returns
+
+`boolean`
+
+##### Inherited from
+
+[`EventEmitter`](../variables/default.md#eventemitter).[`emit`](../variables/default.md#eventemitteremit)
+
+***
+
+### hasEventListener()
+
+> **hasEventListener**(`type`): `boolean`
+
+Defined in: [event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L80)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | [`Event`](../README.md#event) |
+##### type
+
+`string`
 
 #### Returns
 
@@ -385,256 +350,202 @@ ___
 
 #### Inherited from
 
-[EventEmitter](../README.md#eventemitter).[emit](../README.md#emit)
+[`EventEmitter`](../variables/default.md#eventemitter).[`hasEventListener`](../variables/default.md#eventemitterhaseventlistener)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L42)
+### off()
 
-▸ **emit**(`type`, `...args`): `boolean`
+> **off**(`type`, `listener?`): `this`
+
+Defined in: [event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L16)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `...args` | `any`[] |
+##### type
+
+`string`
+
+##### listener?
+
+[`Listener`](../type-aliases/Listener.md)
 
 #### Returns
 
-`boolean`
+`this`
 
 #### Inherited from
 
-[EventEmitter](../README.md#eventemitter).[emit](../README.md#emit)
+[`EventEmitter`](../variables/default.md#eventemitter).[`off`](../variables/default.md#eventemitteroff)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L43)
+### on()
 
-___
+> **on**(`type`, `listener`): `this`
 
-### hasEventListener
-
-▸ **hasEventListener**(`type`): `boolean`
+Defined in: [event/EventEmitter.ts:9](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L9)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
+##### type
+
+`string`
+
+##### listener
+
+[`Listener`](../type-aliases/Listener.md)
 
 #### Returns
 
-`boolean`
+`this`
 
 #### Inherited from
 
-[EventEmitter](../README.md#eventemitter).[hasEventListener](../README.md#haseventlistener)
+[`EventEmitter`](../variables/default.md#eventemitter).[`on`](../variables/default.md#eventemitteron)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L80)
+### once()
 
-___
+> **once**(`type`, `listener`): `this`
 
-### off
-
-▸ **off**(`type`, `listener?`): [`Ticker`](../README.md#ticker)
+Defined in: [event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L33)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener?` | [`Listener`](../README.md#listener) |
+##### type
+
+`string`
+
+##### listener
+
+[`Listener`](../type-aliases/Listener.md)
 
 #### Returns
 
-[`Ticker`](../README.md#ticker)
+`this`
 
 #### Inherited from
 
-[EventEmitter](../README.md#eventemitter).[off](../README.md#off)
+[`EventEmitter`](../variables/default.md#eventemitter).[`once`](../variables/default.md#eventemitteronce)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L16)
+### pause()
 
-___
+> **pause**(): `this`
 
-### on
-
-▸ **on**(`type`, `listener`): [`Ticker`](../README.md#ticker)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener` | [`Listener`](../README.md#listener) |
+Defined in: [system/Ticker.ts:84](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L84)
 
 #### Returns
 
-[`Ticker`](../README.md#ticker)
+`this`
+
+***
+
+### registerEnterFrameCallback()
+
+> **registerEnterFrameCallback**(`layer`): `this`
+
+Defined in: [system/Ticker.ts:123](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L123)
+
+#### Parameters
+
+##### layer
+
+[`Layer`](../variables/default.md#layer)
+
+#### Returns
+
+`this`
+
+***
+
+### removeAllListeners()
+
+> **removeAllListeners**(): `this`
+
+Defined in: [event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L85)
+
+#### Returns
+
+`this`
 
 #### Inherited from
 
-[EventEmitter](../README.md#eventemitter).[on](../README.md#on)
+[`EventEmitter`](../variables/default.md#eventemitter).[`removeAllListeners`](../variables/default.md#eventemitterremovealllisteners)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L9)
+### resume()
 
-___
+> **resume**(): `this`
 
-### once
+Defined in: [system/Ticker.ts:94](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L94)
 
-▸ **once**(`type`, `listener`): [`Ticker`](../README.md#ticker)
+#### Returns
+
+`this`
+
+***
+
+### setInterval()
+
+> **setInterval**(`handler`, `timeout`): `number`
+
+Defined in: [system/Ticker.ts:113](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L113)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener` | [`Listener`](../README.md#listener) |
+##### handler
 
-#### Returns
+`Function`
 
-[`Ticker`](../README.md#ticker)
+##### timeout
 
-#### Inherited from
-
-[EventEmitter](../README.md#eventemitter).[once](../README.md#once)
-
-#### Defined in
-
-[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L33)
-
-___
-
-### pause
-
-▸ **pause**(): [`Ticker`](../README.md#ticker)
-
-#### Returns
-
-[`Ticker`](../README.md#ticker)
-
-#### Defined in
-
-[system/Ticker.ts:84](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L84)
-
-___
-
-### registerEnterFrameCallback
-
-▸ **registerEnterFrameCallback**(`layer`): [`Ticker`](../README.md#ticker)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `layer` | [`Layer`](../README.md#layer) |
-
-#### Returns
-
-[`Ticker`](../README.md#ticker)
-
-#### Defined in
-
-[system/Ticker.ts:123](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L123)
-
-___
-
-### removeAllListeners
-
-▸ **removeAllListeners**(): [`Ticker`](../README.md#ticker)
-
-#### Returns
-
-[`Ticker`](../README.md#ticker)
-
-#### Inherited from
-
-[EventEmitter](../README.md#eventemitter).[removeAllListeners](../README.md#removealllisteners)
-
-#### Defined in
-
-[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L85)
-
-___
-
-### resume
-
-▸ **resume**(): [`Ticker`](../README.md#ticker)
-
-#### Returns
-
-[`Ticker`](../README.md#ticker)
-
-#### Defined in
-
-[system/Ticker.ts:94](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L94)
-
-___
-
-### setInterval
-
-▸ **setInterval**(`handler`, `timeout`): `number`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `handler` | `Function` |
-| `timeout` | `number` |
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[system/Ticker.ts:113](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L113)
+### setTimeout()
 
-___
+> **setTimeout**(`handler`, `timeout?`): `number`
 
-### setTimeout
-
-▸ **setTimeout**(`handler`, `timeout?`): `number`
+Defined in: [system/Ticker.ts:103](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L103)
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `handler` | `Function` | `undefined` |
-| `timeout` | `number` | `0` |
+##### handler
+
+`Function`
+
+##### timeout?
+
+`number` = `0`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[system/Ticker.ts:103](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L103)
+### unregisterEnterFrameCallback()
 
-___
+> **unregisterEnterFrameCallback**(`layer`): `this`
 
-### unregisterEnterFrameCallback
-
-▸ **unregisterEnterFrameCallback**(`layer`): [`Ticker`](../README.md#ticker)
+Defined in: [system/Ticker.ts:131](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/system/Ticker.ts#L131)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `layer` | [`Layer`](../README.md#layer) |
+##### layer
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
-[`Ticker`](../README.md#ticker)
-
-#### Defined in
-
-[system/Ticker.ts:131](https://github.com/Lanfei/playable.js/blob/2369e26/src/system/Ticker.ts#L131)
+`this`

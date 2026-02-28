@@ -71,10 +71,10 @@ new Main();
 - [Examples](https://lanfei.github.io/playable.js/examples/)
 - [API Reference](https://lanfei.github.io/playable.js/docs/)
 
-[build-url]: https://circleci.com/gh/Lanfei/playable.js
-[build-image]: https://img.shields.io/circleci/project/github/Lanfei/playable.js.svg
-[coverage-url]: https://coveralls.io/github/Lanfei/playable.js
-[coverage-image]: https://coveralls.io/repos/github/Lanfei/playable.js/badge.svg
+[build-url]: https://github.com/Lanfei/playable.js/actions/workflows/ci.yml
+[build-image]: https://github.com/Lanfei/playable.js/actions/workflows/ci.yml/badge.svg
+[coverage-url]: https://codecov.io/gh/Lanfei/playable.js
+[coverage-image]: https://codecov.io/gh/Lanfei/playable.js/graph/badge.svg
 [version-url]: https://npmjs.org/package/playable.js
 [version-image]: https://img.shields.io/npm/v/playable.js.svg
 [license-url]: https://github.com/Lanfei/playable.js/blob/master/LICENSE

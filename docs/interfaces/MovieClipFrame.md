@@ -1,41 +1,33 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / MovieClipFrame
 
 # Interface: MovieClipFrame
 
-## Table of contents
-
-### Properties
-
-- [callback](MovieClipFrame.md#callback)
-- [clip](MovieClipFrame.md#clip)
-- [interval](MovieClipFrame.md#interval)
+Defined in: [display/MovieClip.ts:119](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/MovieClip.ts#L119)
 
 ## Properties
 
-### callback
+### callback?
 
-• `Optional` **callback**: `Function`
+> `optional` **callback**: `Function`
 
-#### Defined in
+Defined in: [display/MovieClip.ts:122](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/MovieClip.ts#L122)
 
-[display/MovieClip.ts:122](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/MovieClip.ts#L122)
-
-___
+***
 
 ### clip
 
-• **clip**: [`Rectangle`](../README.md#rectangle)
+> **clip**: [`Rectangle`](../variables/default.md#rectangle)
 
-#### Defined in
+Defined in: [display/MovieClip.ts:120](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/MovieClip.ts#L120)
 
-[display/MovieClip.ts:120](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/MovieClip.ts#L120)
+***
 
-___
+### interval?
 
-### interval
+> `optional` **interval**: `number`
 
-• `Optional` **interval**: `number`
-
-#### Defined in
-
-[display/MovieClip.ts:121](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/MovieClip.ts#L121)
+Defined in: [display/MovieClip.ts:121](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/MovieClip.ts#L121)

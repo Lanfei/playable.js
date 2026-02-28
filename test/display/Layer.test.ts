@@ -1,5 +1,5 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('Layer', () => {
 	let stage = new playable.Stage();
@@ -18,7 +18,7 @@ describe('Layer', () => {
 		stage.removeAllChildren();
 	});
 
-	after(() => {
+	afterAll(() => {
 		stage.removeSelf();
 	});
 
@@ -536,25 +536,25 @@ describe('Layer', () => {
 		assert.strictEqual(counter, 2);
 	});
 
-	it('.on(Event.ENTER_FRAME, listener: (...args: any[]) => void)', done => {
+	it('.on(Event.ENTER_FRAME, listener: (...args: any[]) => void)', () => new Promise<void>(resolve => {
 		let layer = new playable.Layer();
-		let stage = new playable.Stage();
+		let localStage = new playable.Stage();
 		let eventType = playable.Event.ENTER_FRAME;
-		stage.emit(playable.Event.ACTIVATE);
+		localStage.emit(playable.Event.ACTIVATE);
 		layer.on(eventType, e => {
 			let deltaTime = e.data;
 			assert.strictEqual(e.type, eventType);
 			layer.off(eventType);
-			stage.ticker.on(playable.Event.TICK, e => {
+			localStage.ticker.on(playable.Event.TICK, e => {
 				assert.strictEqual(e.data, deltaTime);
 				assert.isAbove(e.data, 0);
-				stage.ticker.off(playable.Event.TICK);
-				stage.removeSelf();
-				done();
+				localStage.ticker.off(playable.Event.TICK);
+				localStage.removeSelf();
+				resolve();
 			});
 		});
-		stage.addChild(layer);
-	});
+		localStage.addChild(layer);
+	}));
 
 	it('.on(Event.TOUCH_TAP, listener: (...args: any[]) => void)', () => {
 		let counter = 0;

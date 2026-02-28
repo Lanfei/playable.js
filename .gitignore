@@ -1,5 +1,9 @@
+# TypeScript build cache
+*.tsbuildinfo
+
 # Docs
-.vuepress/dist
+.vitepress/dist
+.vitepress/cache
 
 # IDE
 .idea

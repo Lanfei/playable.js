@@ -1,24 +1,24 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('Request', () => {
 
-	it('.status', done => {
+	it('.status', () => new Promise<void>(resolve => {
 		let req = new playable.Request({
-			url: '/base/test/fixtures/data.json',
+			url: '/test/fixtures/data.json',
 			responseType: 'json',
 			data: {test: true}
 		});
 		req.on(playable.Event.LOAD, e => {
 			assert.strictEqual(req.status, 200);
 			assert.strictEqual(e.data['msg'], 'ok');
-			done();
+			resolve();
 		});
-	});
+	}));
 
-	it('.response', done => {
+	it('.response', () => new Promise<void>(resolve => {
 		let req = new playable.Request({
-			url: '/base/test/fixtures/data.json',
+			url: '/test/fixtures/data.json',
 			responseType: 'json',
 			method: 'post',
 			data: {test: true},
@@ -28,24 +28,24 @@ describe('Request', () => {
 		});
 		req.on(playable.Event.LOAD, () => {
 			assert.strictEqual(req.response['msg'], 'ok');
-			done();
+			resolve();
 		});
-	});
+	}));
 
-	it('.responseHeaders', done => {
+	it('.responseHeaders', () => new Promise<void>(resolve => {
 		let req = new playable.Request({
-			url: '/base/test/fixtures/data.json',
+			url: '/test/fixtures/data.json',
 			responseType: 'json'
 		});
 		req.on(playable.Event.LOAD, () => {
 			assert.isOk(req.responseHeaders);
-			done();
+			resolve();
 		});
-	});
+	}));
 
-	it('.abort(): void', done => {
+	it('.abort(): void', () => new Promise<void>(resolve => {
 		let req = new playable.Request({
-			url: '/base/test/fixtures/data.json',
+			url: '/test/fixtures/data.json',
 			method: 'post',
 			responseType: 'json',
 			data: {test: true},
@@ -55,9 +55,9 @@ describe('Request', () => {
 			}
 		});
 		req.on(playable.Event.ABORT, () => {
-			done();
+			resolve();
 		});
 		req.abort();
-	});
+	}));
 
 });

@@ -1,10 +1,10 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('Texture', () => {
 	let stage = new playable.Stage();
 
-	after(() => {
+	afterAll(() => {
 		stage.removeSelf();
 	});
 
@@ -16,37 +16,37 @@ describe('Texture', () => {
 	it('.url', () => {
 		let texture = new playable.Texture(stage);
 		assert.strictEqual(texture.url, '');
-		texture.url = '/base/test/fixtures/image@1x.jpg';
+		texture.url = '/test/fixtures/image@1x.jpg';
 		assert.isOk(texture.url);
 	});
 
-	it('.width', done => {
+	it('.width', () => new Promise<void>(resolve => {
 		let texture = new playable.Texture(stage);
 		texture.on(playable.Event.LOAD, () => {
 			assert.strictEqual(texture.width, 100);
-			done();
+			resolve();
 		});
-		texture.url = '/base/test/fixtures/image@1x.jpg';
-	});
+		texture.url = '/test/fixtures/image@1x.jpg';
+	}));
 
-	it('.height', done => {
+	it('.height', () => new Promise<void>(resolve => {
 		let texture = new playable.Texture(stage);
 		texture.on(playable.Event.LOAD, () => {
 			assert.strictEqual(texture.height, 100);
-			done();
+			resolve();
 		});
-		texture.url = '/base/test/fixtures/image@1x.jpg';
-	});
+		texture.url = '/test/fixtures/image@1x.jpg';
+	}));
 
-	it('.pixelRatio', done => {
+	it('.pixelRatio', () => new Promise<void>(resolve => {
 		let texture = new playable.Texture(stage);
 		texture.on(playable.Event.LOAD, () => {
 			assert.strictEqual(texture.width, 200);
 			texture.pixelRatio = 2;
 			assert.strictEqual(texture.width, 100);
-			done();
+			resolve();
 		});
-		texture.url = '/base/test/fixtures/image@2x.jpg';
-	});
+		texture.url = '/test/fixtures/image@2x.jpg';
+	}));
 
 });

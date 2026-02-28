@@ -1,426 +1,340 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / Sound
 
 # Class: Sound
 
-## Hierarchy
+Defined in: [media/Sound.ts:5](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L5)
 
-- [`Media`](../README.md#media)
+## Extends
 
-  ↳ **`Sound`**
-
-## Table of contents
-
-### Constructors
-
-- [constructor](Sound.md#constructor)
-
-### Properties
-
-- [$boundOnError](Sound.md#$boundonerror)
-- [$boundOnLoad](Sound.md#$boundonload)
-- [$boundOnTouch](Sound.md#$boundontouch)
-- [$element](Sound.md#$element)
-- [$emittingType](Sound.md#$emittingtype)
-- [$errored](Sound.md#$errored)
-- [$events](Sound.md#$events)
-- [$loaded](Sound.md#$loaded)
-- [$loops](Sound.md#$loops)
-- [$paused](Sound.md#$paused)
-- [$removedListeners](Sound.md#$removedlisteners)
-- [$stage](Sound.md#$stage)
-- [$startTime](Sound.md#$starttime)
-
-### Accessors
-
-- [element](Sound.md#element)
-- [paused](Sound.md#paused)
-- [url](Sound.md#url)
-- [volume](Sound.md#volume)
-
-### Methods
-
-- [$checkOnTouch](Sound.md#$checkontouch)
-- [$checkStatus](Sound.md#$checkstatus)
-- [$onEnded](Sound.md#$onended)
-- [$onError](Sound.md#$onerror)
-- [$onLoad](Sound.md#$onload)
-- [$onRemovedFromStage](Sound.md#$onremovedfromstage)
-- [$onTickerPause](Sound.md#$ontickerpause)
-- [$onTickerResume](Sound.md#$ontickerresume)
-- [$onTouch](Sound.md#$ontouch)
-- [emit](Sound.md#emit)
-- [hasEventListener](Sound.md#haseventlistener)
-- [off](Sound.md#off)
-- [on](Sound.md#on)
-- [once](Sound.md#once)
-- [play](Sound.md#play)
-- [removeAllListeners](Sound.md#removealllisteners)
-- [stop](Sound.md#stop)
+- [`Media`](../variables/default.md#media)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new Sound**(`stage`, `url?`)
+> **new Sound**(`stage`, `url?`): [`Sound`](../variables/default.md#sound)
+
+Defined in: [media/Sound.ts:13](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L13)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `stage` | [`Stage`](../README.md#stage) |
-| `url?` | `string` |
+##### stage
+
+[`Stage`](../variables/default.md#stage)
+
+##### url?
+
+`string`
+
+#### Returns
+
+[`Sound`](../variables/default.md#sound)
 
 #### Overrides
 
-[Media](../README.md#media).[constructor](../README.md#constructor)
-
-#### Defined in
-
-[media/Sound.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L13)
+[`Media`](../variables/default.md#media).[`constructor`](../variables/default.md#mediaconstructor)
 
 ## Properties
 
-### $boundOnError
+### $boundOnError()
 
-• `Protected` `Readonly` **$boundOnError**: (`e`: `ErrorEvent`) => `void`
+> `protected` `readonly` **$boundOnError**: (`e`) => `void`
 
-#### Type declaration
+Defined in: [media/Media.ts:13](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L13)
 
-▸ (`e`): `void`
+#### Parameters
 
-##### Parameters
+##### e
 
-| Name | Type |
-| :------ | :------ |
-| `e` | `ErrorEvent` |
+`ErrorEvent`
 
-##### Returns
+#### Returns
 
 `void`
 
 #### Inherited from
 
-[Media](../README.md#media).[$boundOnError](../README.md#$boundonerror)
+[`Media`](../variables/default.md#media).[`$boundOnError`](../variables/default.md#mediaboundonerror)
 
-#### Defined in
+***
 
-[media/Media.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L13)
+### $boundOnLoad()
 
-___
+> `protected` `readonly` **$boundOnLoad**: () => `void`
 
-### $boundOnLoad
+Defined in: [media/Media.ts:12](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L12)
 
-• `Protected` `Readonly` **$boundOnLoad**: () => `void`
-
-#### Type declaration
-
-▸ (): `void`
-
-##### Returns
+#### Returns
 
 `void`
 
 #### Inherited from
 
-[Media](../README.md#media).[$boundOnLoad](../README.md#$boundonload)
+[`Media`](../variables/default.md#media).[`$boundOnLoad`](../variables/default.md#mediaboundonload)
 
-#### Defined in
+***
 
-[media/Media.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L12)
+### $boundOnTouch()
 
-___
+> `protected` `readonly` **$boundOnTouch**: () => `void`
 
-### $boundOnTouch
+Defined in: [media/Sound.ts:11](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L11)
 
-• `Protected` `Readonly` **$boundOnTouch**: () => `void`
-
-#### Type declaration
-
-▸ (): `void`
-
-##### Returns
+#### Returns
 
 `void`
 
-#### Defined in
-
-[media/Sound.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L11)
-
-___
+***
 
 ### $element
 
-• `Protected` `Readonly` **$element**: `HTMLAudioElement`
+> `protected` `readonly` **$element**: `HTMLAudioElement`
+
+Defined in: [media/Sound.ts:10](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L10)
 
 #### Overrides
 
-[Media](../README.md#media).[$element](../README.md#$element)
+[`Media`](../variables/default.md#media).[`$element`](../variables/default.md#mediaelement)
 
-#### Defined in
-
-[media/Sound.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L10)
-
-___
+***
 
 ### $emittingType
 
-• `Protected` **$emittingType**: `string` = `null`
+> `protected` **$emittingType**: `string` = `null`
+
+Defined in: [event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L6)
 
 #### Inherited from
 
-[Media](../README.md#media).[$emittingType](../README.md#$emittingtype)
+[`Media`](../variables/default.md#media).[`$emittingType`](../variables/default.md#mediaemittingtype)
 
-#### Defined in
-
-[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L6)
-
-___
+***
 
 ### $errored
 
-• `Protected` **$errored**: `boolean` = `false`
+> `protected` **$errored**: `boolean` = `false`
+
+Defined in: [media/Media.ts:10](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L10)
 
 #### Inherited from
 
-[Media](../README.md#media).[$errored](../README.md#$errored)
+[`Media`](../variables/default.md#media).[`$errored`](../variables/default.md#mediaerrored)
 
-#### Defined in
-
-[media/Media.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L10)
-
-___
+***
 
 ### $events
 
-• `Protected` **$events**: `Object` = `{}`
+> `protected` **$events**: `Object` = `{}`
+
+Defined in: [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L5)
 
 #### Inherited from
 
-[Media](../README.md#media).[$events](../README.md#$events)
+[`Media`](../variables/default.md#media).[`$events`](../variables/default.md#mediaevents)
 
-#### Defined in
-
-[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L5)
-
-___
+***
 
 ### $loaded
 
-• `Protected` **$loaded**: `boolean` = `false`
+> `protected` **$loaded**: `boolean` = `false`
+
+Defined in: [media/Media.ts:9](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L9)
 
 #### Inherited from
 
-[Media](../README.md#media).[$loaded](../README.md#$loaded)
+[`Media`](../variables/default.md#media).[`$loaded`](../variables/default.md#medialoaded)
 
-#### Defined in
-
-[media/Media.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L9)
-
-___
+***
 
 ### $loops
 
-• `Protected` **$loops**: `number` = `1`
+> `protected` **$loops**: `number` = `1`
 
-#### Defined in
+Defined in: [media/Sound.ts:7](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L7)
 
-[media/Sound.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L7)
-
-___
+***
 
 ### $paused
 
-• `Protected` **$paused**: `boolean` = `true`
+> `protected` **$paused**: `boolean` = `true`
 
-#### Defined in
+Defined in: [media/Sound.ts:9](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L9)
 
-[media/Sound.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L9)
-
-___
+***
 
 ### $removedListeners
 
-• `Protected` **$removedListeners**: [`Listener`](../README.md#listener)[] = `[]`
+> `protected` **$removedListeners**: [`Listener`](../type-aliases/Listener.md)[] = `[]`
+
+Defined in: [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L7)
 
 #### Inherited from
 
-[Media](../README.md#media).[$removedListeners](../README.md#$removedlisteners)
+[`Media`](../variables/default.md#media).[`$removedListeners`](../variables/default.md#mediaremovedlisteners)
 
-#### Defined in
-
-[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L7)
-
-___
+***
 
 ### $stage
 
-• `Protected` `Readonly` **$stage**: [`Stage`](../README.md#stage)
+> `protected` `readonly` **$stage**: [`Stage`](../variables/default.md#stage)
+
+Defined in: [media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L11)
 
 #### Inherited from
 
-[Media](../README.md#media).[$stage](../README.md#$stage)
+[`Media`](../variables/default.md#media).[`$stage`](../variables/default.md#mediastage)
 
-#### Defined in
-
-[media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L11)
-
-___
+***
 
 ### $startTime
 
-• `Protected` **$startTime**: `number` = `0`
+> `protected` **$startTime**: `number` = `0`
 
-#### Defined in
-
-[media/Sound.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L8)
+Defined in: [media/Sound.ts:8](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L8)
 
 ## Accessors
 
 ### element
 
-• `get` **element**(): `HTMLAudioElement`
+#### Get Signature
 
-#### Returns
+> **get** **element**(): `HTMLAudioElement`
+
+Defined in: [media/Sound.ts:30](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L30)
+
+##### Returns
 
 `HTMLAudioElement`
 
 #### Overrides
 
-Media.element
+[`Media`](../variables/default.md#media).[`element`](../variables/default.md#mediaelement-1)
 
-#### Defined in
-
-[media/Sound.ts:30](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L30)
-
-___
+***
 
 ### paused
 
-• `get` **paused**(): `boolean`
+#### Get Signature
 
-#### Returns
+> **get** **paused**(): `boolean`
+
+Defined in: [media/Sound.ts:55](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L55)
+
+##### Returns
 
 `boolean`
 
-#### Defined in
-
-[media/Sound.ts:55](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L55)
-
-___
+***
 
 ### url
 
-• `get` **url**(): `string`
+#### Get Signature
 
-#### Returns
+> **get** **url**(): `string`
+
+Defined in: [media/Sound.ts:34](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L34)
+
+##### Returns
 
 `string`
 
-#### Overrides
+#### Set Signature
 
-Media.url
+> **set** **url**(`url`): `void`
 
-#### Defined in
+Defined in: [media/Sound.ts:38](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L38)
 
-[media/Sound.ts:34](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L34)
+##### Parameters
 
-• `set` **url**(`url`): `void`
+###### url
 
-#### Parameters
+`string`
 
-| Name | Type |
-| :------ | :------ |
-| `url` | `string` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Overrides
 
-Media.url
+[`Media`](../variables/default.md#media).[`url`](../variables/default.md#mediaurl)
 
-#### Defined in
-
-[media/Sound.ts:38](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L38)
-
-___
+***
 
 ### volume
 
-• `get` **volume**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **volume**(): `number`
+
+Defined in: [media/Sound.ts:47](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L47)
+
+##### Returns
 
 `number`
 
-#### Defined in
+#### Set Signature
 
-[media/Sound.ts:47](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L47)
+> **set** **volume**(`volume`): `void`
 
-• `set` **volume**(`volume`): `void`
+Defined in: [media/Sound.ts:51](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L51)
 
-#### Parameters
+##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `volume` | `number` |
+###### volume
 
-#### Returns
+`number`
+
+##### Returns
 
 `void`
-
-#### Defined in
-
-[media/Sound.ts:51](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L51)
 
 ## Methods
 
-### $checkOnTouch
+### $checkOnTouch()
 
-▸ `Protected` **$checkOnTouch**(): `void`
+> `protected` **$checkOnTouch**(): `void`
 
-#### Returns
-
-`void`
-
-#### Defined in
-
-[media/Sound.ts:74](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L74)
-
-___
-
-### $checkStatus
-
-▸ `Protected` **$checkStatus**(): `void`
+Defined in: [media/Sound.ts:74](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L74)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[media/Sound.ts:79](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L79)
+### $checkStatus()
 
-___
+> `protected` **$checkStatus**(): `void`
 
-### $onEnded
-
-▸ `Protected` **$onEnded**(): `void`
+Defined in: [media/Sound.ts:79](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L79)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[media/Sound.ts:95](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L95)
+### $onEnded()
 
-___
+> `protected` **$onEnded**(): `void`
 
-### $onError
+Defined in: [media/Sound.ts:95](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L95)
 
-▸ `Protected` **$onError**(): `void`
+#### Returns
+
+`void`
+
+***
+
+### $onError()
+
+> `protected` **$onError**(): `void`
+
+Defined in: [media/Media.ts:56](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L56)
 
 #### Returns
 
@@ -428,17 +342,15 @@ ___
 
 #### Inherited from
 
-[Media](../README.md#media).[$onError](../README.md#$onerror)
+[`Media`](../variables/default.md#media).[`$onError`](../variables/default.md#mediaonerror)
 
-#### Defined in
+***
 
-[media/Media.ts:56](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L56)
+### $onLoad()
 
-___
+> `protected` **$onLoad**(): `void`
 
-### $onLoad
-
-▸ `Protected` **$onLoad**(): `void`
+Defined in: [media/Sound.ts:125](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L125)
 
 #### Returns
 
@@ -446,79 +358,117 @@ ___
 
 #### Overrides
 
-[Media](../README.md#media).[$onLoad](../README.md#$onload)
+[`Media`](../variables/default.md#media).[`$onLoad`](../variables/default.md#mediaonload)
 
-#### Defined in
+***
 
-[media/Sound.ts:125](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L125)
+### $onRemovedFromStage()
 
-___
+> `protected` **$onRemovedFromStage**(): `void`
 
-### $onRemovedFromStage
-
-▸ `Protected` **$onRemovedFromStage**(): `void`
+Defined in: [media/Sound.ts:119](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L119)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[media/Sound.ts:119](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L119)
+### $onTickerPause()
 
-___
+> `protected` **$onTickerPause**(): `void`
 
-### $onTickerPause
-
-▸ `Protected` **$onTickerPause**(): `void`
+Defined in: [media/Sound.ts:107](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L107)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[media/Sound.ts:107](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L107)
+### $onTickerResume()
 
-___
+> `protected` **$onTickerResume**(): `void`
 
-### $onTickerResume
-
-▸ `Protected` **$onTickerResume**(): `void`
+Defined in: [media/Sound.ts:113](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L113)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[media/Sound.ts:113](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L113)
+### $onTouch()
 
-___
+> `protected` **$onTouch**(): `void`
 
-### $onTouch
-
-▸ `Protected` **$onTouch**(): `void`
+Defined in: [media/Sound.ts:89](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L89)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[media/Sound.ts:89](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L89)
+### emit()
 
-___
+#### Call Signature
 
-### emit
+> **emit**(`event`): `boolean`
 
-▸ **emit**(`event`): `boolean`
+Defined in: [event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L42)
+
+##### Parameters
+
+###### event
+
+[`Event`](../variables/default.md#event)
+
+##### Returns
+
+`boolean`
+
+##### Inherited from
+
+[`Media`](../variables/default.md#media).[`emit`](../variables/default.md#mediaemit)
+
+#### Call Signature
+
+> **emit**(`type`, ...`args`): `boolean`
+
+Defined in: [event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L43)
+
+##### Parameters
+
+###### type
+
+`string`
+
+###### args
+
+...`any`[]
+
+##### Returns
+
+`boolean`
+
+##### Inherited from
+
+[`Media`](../variables/default.md#media).[`emit`](../variables/default.md#mediaemit)
+
+***
+
+### hasEventListener()
+
+> **hasEventListener**(`type`): `boolean`
+
+Defined in: [event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L80)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | [`Event`](../README.md#event) |
+##### type
+
+`string`
 
 #### Returns
 
@@ -526,181 +476,132 @@ ___
 
 #### Inherited from
 
-[Media](../README.md#media).[emit](../README.md#emit)
+[`Media`](../variables/default.md#media).[`hasEventListener`](../variables/default.md#mediahaseventlistener)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L42)
+### off()
 
-▸ **emit**(`type`, `...args`): `boolean`
+> **off**(`type`, `listener?`): `this`
 
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `...args` | `any`[] |
-
-#### Returns
-
-`boolean`
-
-#### Inherited from
-
-[Media](../README.md#media).[emit](../README.md#emit)
-
-#### Defined in
-
-[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L43)
-
-___
-
-### hasEventListener
-
-▸ **hasEventListener**(`type`): `boolean`
+Defined in: [event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L16)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
+##### type
+
+`string`
+
+##### listener?
+
+[`Listener`](../type-aliases/Listener.md)
 
 #### Returns
 
-`boolean`
+`this`
 
 #### Inherited from
 
-[Media](../README.md#media).[hasEventListener](../README.md#haseventlistener)
+[`Media`](../variables/default.md#media).[`off`](../variables/default.md#mediaoff)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L80)
+### on()
 
-___
+> **on**(`type`, `listener`): `this`
 
-### off
-
-▸ **off**(`type`, `listener?`): [`Sound`](../README.md#sound)
+Defined in: [media/Media.ts:36](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L36)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener?` | [`Listener`](../README.md#listener) |
+##### type
+
+`string`
+
+##### listener
+
+(...`args`) => `void`
 
 #### Returns
 
-[`Sound`](../README.md#sound)
+`this`
 
 #### Inherited from
 
-[Media](../README.md#media).[off](../README.md#off)
+[`Media`](../variables/default.md#media).[`on`](../variables/default.md#mediaon)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L16)
+### once()
 
-___
+> **once**(`type`, `listener`): `this`
 
-### on
-
-▸ **on**(`type`, `listener`): [`Sound`](../README.md#sound)
+Defined in: [event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L33)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener` | (...`args`: `any`[]) => `void` |
+##### type
+
+`string`
+
+##### listener
+
+[`Listener`](../type-aliases/Listener.md)
 
 #### Returns
 
-[`Sound`](../README.md#sound)
+`this`
 
 #### Inherited from
 
-[Media](../README.md#media).[on](../README.md#on)
+[`Media`](../variables/default.md#media).[`once`](../variables/default.md#mediaonce)
 
-#### Defined in
+***
 
-[media/Media.ts:36](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L36)
+### play()
 
-___
+> **play**(`startTime?`, `loops?`): `this`
 
-### once
-
-▸ **once**(`type`, `listener`): [`Sound`](../README.md#sound)
+Defined in: [media/Sound.ts:59](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L59)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener` | [`Listener`](../README.md#listener) |
+##### startTime?
+
+`number` = `0`
+
+##### loops?
+
+`number` = `1`
 
 #### Returns
 
-[`Sound`](../README.md#sound)
+`this`
+
+***
+
+### removeAllListeners()
+
+> **removeAllListeners**(): `this`
+
+Defined in: [event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L85)
+
+#### Returns
+
+`this`
 
 #### Inherited from
 
-[Media](../README.md#media).[once](../README.md#once)
+[`Media`](../variables/default.md#media).[`removeAllListeners`](../variables/default.md#mediaremovealllisteners)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L33)
+### stop()
 
-___
+> **stop**(): `this`
 
-### play
-
-▸ **play**(`startTime?`, `loops?`): [`Sound`](../README.md#sound)
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `startTime` | `number` | `0` |
-| `loops` | `number` | `1` |
+Defined in: [media/Sound.ts:68](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Sound.ts#L68)
 
 #### Returns
 
-[`Sound`](../README.md#sound)
-
-#### Defined in
-
-[media/Sound.ts:59](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L59)
-
-___
-
-### removeAllListeners
-
-▸ **removeAllListeners**(): [`Sound`](../README.md#sound)
-
-#### Returns
-
-[`Sound`](../README.md#sound)
-
-#### Inherited from
-
-[Media](../README.md#media).[removeAllListeners](../README.md#removealllisteners)
-
-#### Defined in
-
-[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L85)
-
-___
-
-### stop
-
-▸ **stop**(): [`Sound`](../README.md#sound)
-
-#### Returns
-
-[`Sound`](../README.md#sound)
-
-#### Defined in
-
-[media/Sound.ts:68](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Sound.ts#L68)
+`this`

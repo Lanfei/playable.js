@@ -1,765 +1,961 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / Ease
 
 # Class: Ease
 
-## Table of contents
-
-### Constructors
-
-- [constructor](Ease.md#constructor)
-
-### Methods
-
-- [easeInBack](Ease.md#easeinback)
-- [easeInBounce](Ease.md#easeinbounce)
-- [easeInCirc](Ease.md#easeincirc)
-- [easeInCubic](Ease.md#easeincubic)
-- [easeInElastic](Ease.md#easeinelastic)
-- [easeInExpo](Ease.md#easeinexpo)
-- [easeInOutBack](Ease.md#easeinoutback)
-- [easeInOutBounce](Ease.md#easeinoutbounce)
-- [easeInOutCirc](Ease.md#easeinoutcirc)
-- [easeInOutCubic](Ease.md#easeinoutcubic)
-- [easeInOutElastic](Ease.md#easeinoutelastic)
-- [easeInOutExpo](Ease.md#easeinoutexpo)
-- [easeInOutQuad](Ease.md#easeinoutquad)
-- [easeInOutQuart](Ease.md#easeinoutquart)
-- [easeInOutQuint](Ease.md#easeinoutquint)
-- [easeInOutSine](Ease.md#easeinoutsine)
-- [easeInQuad](Ease.md#easeinquad)
-- [easeInQuart](Ease.md#easeinquart)
-- [easeInQuint](Ease.md#easeinquint)
-- [easeInSine](Ease.md#easeinsine)
-- [easeOutBack](Ease.md#easeoutback)
-- [easeOutBounce](Ease.md#easeoutbounce)
-- [easeOutCirc](Ease.md#easeoutcirc)
-- [easeOutCubic](Ease.md#easeoutcubic)
-- [easeOutElastic](Ease.md#easeoutelastic)
-- [easeOutExpo](Ease.md#easeoutexpo)
-- [easeOutQuad](Ease.md#easeoutquad)
-- [easeOutQuart](Ease.md#easeoutquart)
-- [easeOutQuint](Ease.md#easeoutquint)
-- [easeOutSine](Ease.md#easeoutsine)
-- [linear](Ease.md#linear)
+Defined in: [tween/Ease.ts:1](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L1)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new Ease**()
+> **new Ease**(): [`Ease`](../variables/default.md#ease)
+
+#### Returns
+
+[`Ease`](../variables/default.md#ease)
 
 ## Methods
 
-### easeInBack
+### easeInBack()
 
-▸ `Static` **easeInBack**(`t`, `b`, `c`, `d`, `s?`): `number`
+> `static` **easeInBack**(`t`, `b`, `c`, `d`, `s?`): `number`
+
+Defined in: [tween/Ease.ts:148](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L148)
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `t` | `number` | `undefined` |
-| `b` | `number` | `undefined` |
-| `c` | `number` | `undefined` |
-| `d` | `number` | `undefined` |
-| `s` | `number` | `1.70158` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
+
+##### s?
+
+`number` = `1.70158`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:148](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L148)
+### easeInBounce()
 
-___
+> `static` **easeInBounce**(`t`, `b`, `c`, `d`): `number`
 
-### easeInBounce
-
-▸ `Static` **easeInBounce**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:161](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L161)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:161](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L161)
+### easeInCirc()
 
-___
+> `static` **easeInCirc**(`t`, `b`, `c`, `d`): `number`
 
-### easeInCirc
-
-▸ `Static` **easeInCirc**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:86](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L86)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:86](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L86)
+### easeInCubic()
 
-___
+> `static` **easeInCubic**(`t`, `b`, `c`, `d`): `number`
 
-### easeInCubic
-
-▸ `Static` **easeInCubic**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:20](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L20)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L20)
+### easeInElastic()
 
-___
+> `static` **easeInElastic**(`t`, `b`, `c`, `d`): `number`
 
-### easeInElastic
-
-▸ `Static` **easeInElastic**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:99](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L99)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:99](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L99)
+### easeInExpo()
 
-___
+> `static` **easeInExpo**(`t`, `b`, `c`, `d`): `number`
 
-### easeInExpo
-
-▸ `Static` **easeInExpo**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:71](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L71)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:71](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L71)
+### easeInOutBack()
 
-___
+> `static` **easeInOutBack**(`t`, `b`, `c`, `d`, `s?`): `number`
 
-### easeInOutBack
-
-▸ `Static` **easeInOutBack**(`t`, `b`, `c`, `d`, `s?`): `number`
+Defined in: [tween/Ease.ts:156](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L156)
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `t` | `number` | `undefined` |
-| `b` | `number` | `undefined` |
-| `c` | `number` | `undefined` |
-| `d` | `number` | `undefined` |
-| `s` | `number` | `1.70158` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
+
+##### s?
+
+`number` = `1.70158`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:156](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L156)
+### easeInOutBounce()
 
-___
+> `static` **easeInOutBounce**(`t`, `b`, `c`, `d`): `number`
 
-### easeInOutBounce
-
-▸ `Static` **easeInOutBounce**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:177](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L177)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:177](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L177)
+### easeInOutCirc()
 
-___
+> `static` **easeInOutCirc**(`t`, `b`, `c`, `d`): `number`
 
-### easeInOutCirc
-
-▸ `Static` **easeInOutCirc**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:94](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L94)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:94](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L94)
+### easeInOutCubic()
 
-___
+> `static` **easeInOutCubic**(`t`, `b`, `c`, `d`): `number`
 
-### easeInOutCubic
-
-▸ `Static` **easeInOutCubic**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:28](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L28)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:28](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L28)
+### easeInOutElastic()
 
-___
+> `static` **easeInOutElastic**(`t`, `b`, `c`, `d`): `number`
 
-### easeInOutElastic
-
-▸ `Static` **easeInOutElastic**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:131](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L131)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:131](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L131)
+### easeInOutExpo()
 
-___
+> `static` **easeInOutExpo**(`t`, `b`, `c`, `d`): `number`
 
-### easeInOutExpo
-
-▸ `Static` **easeInOutExpo**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:79](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L79)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:79](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L79)
+### easeInOutQuad()
 
-___
+> `static` **easeInOutQuad**(`t`, `b`, `c`, `d`): `number`
 
-### easeInOutQuad
-
-▸ `Static` **easeInOutQuad**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:15](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L15)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L15)
+### easeInOutQuart()
 
-___
+> `static` **easeInOutQuart**(`t`, `b`, `c`, `d`): `number`
 
-### easeInOutQuart
-
-▸ `Static` **easeInOutQuart**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:41](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L41)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:41](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L41)
+### easeInOutQuint()
 
-___
+> `static` **easeInOutQuint**(`t`, `b`, `c`, `d`): `number`
 
-### easeInOutQuint
-
-▸ `Static` **easeInOutQuint**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:54](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L54)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:54](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L54)
+### easeInOutSine()
 
-___
+> `static` **easeInOutSine**(`t`, `b`, `c`, `d`): `number`
 
-### easeInOutSine
-
-▸ `Static` **easeInOutSine**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:67](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L67)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:67](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L67)
+### easeInQuad()
 
-___
+> `static` **easeInQuad**(`t`, `b`, `c`, `d`): `number`
 
-### easeInQuad
-
-▸ `Static` **easeInQuad**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:7](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L7)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L7)
+### easeInQuart()
 
-___
+> `static` **easeInQuart**(`t`, `b`, `c`, `d`): `number`
 
-### easeInQuart
-
-▸ `Static` **easeInQuart**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:33](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L33)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L33)
+### easeInQuint()
 
-___
+> `static` **easeInQuint**(`t`, `b`, `c`, `d`): `number`
 
-### easeInQuint
-
-▸ `Static` **easeInQuint**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:46](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L46)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:46](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L46)
+### easeInSine()
 
-___
+> `static` **easeInSine**(`t`, `b`, `c`, `d`): `number`
 
-### easeInSine
-
-▸ `Static` **easeInSine**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:59](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L59)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:59](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L59)
+### easeOutBack()
 
-___
+> `static` **easeOutBack**(`t`, `b`, `c`, `d`, `s?`): `number`
 
-### easeOutBack
-
-▸ `Static` **easeOutBack**(`t`, `b`, `c`, `d`, `s?`): `number`
+Defined in: [tween/Ease.ts:152](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L152)
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `t` | `number` | `undefined` |
-| `b` | `number` | `undefined` |
-| `c` | `number` | `undefined` |
-| `d` | `number` | `undefined` |
-| `s` | `number` | `1.70158` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
+
+##### s?
+
+`number` = `1.70158`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:152](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L152)
+### easeOutBounce()
 
-___
+> `static` **easeOutBounce**(`t`, `b`, `c`, `d`): `number`
 
-### easeOutBounce
-
-▸ `Static` **easeOutBounce**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:165](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L165)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:165](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L165)
+### easeOutCirc()
 
-___
+> `static` **easeOutCirc**(`t`, `b`, `c`, `d`): `number`
 
-### easeOutCirc
-
-▸ `Static` **easeOutCirc**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:90](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L90)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:90](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L90)
+### easeOutCubic()
 
-___
+> `static` **easeOutCubic**(`t`, `b`, `c`, `d`): `number`
 
-### easeOutCubic
-
-▸ `Static` **easeOutCubic**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:24](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L24)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:24](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L24)
+### easeOutElastic()
 
-___
+> `static` **easeOutElastic**(`t`, `b`, `c`, `d`): `number`
 
-### easeOutElastic
-
-▸ `Static` **easeOutElastic**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:115](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L115)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:115](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L115)
+### easeOutExpo()
 
-___
+> `static` **easeOutExpo**(`t`, `b`, `c`, `d`): `number`
 
-### easeOutExpo
-
-▸ `Static` **easeOutExpo**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:75](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L75)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:75](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L75)
+### easeOutQuad()
 
-___
+> `static` **easeOutQuad**(`t`, `b`, `c`, `d`): `number`
 
-### easeOutQuad
-
-▸ `Static` **easeOutQuad**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:11](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L11)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L11)
+### easeOutQuart()
 
-___
+> `static` **easeOutQuart**(`t`, `b`, `c`, `d`): `number`
 
-### easeOutQuart
-
-▸ `Static` **easeOutQuart**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:37](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L37)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:37](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L37)
+### easeOutQuint()
 
-___
+> `static` **easeOutQuint**(`t`, `b`, `c`, `d`): `number`
 
-### easeOutQuint
-
-▸ `Static` **easeOutQuint**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:50](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L50)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:50](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L50)
+### easeOutSine()
 
-___
+> `static` **easeOutSine**(`t`, `b`, `c`, `d`): `number`
 
-### easeOutSine
-
-▸ `Static` **easeOutSine**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:63](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L63)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
 
-#### Defined in
+***
 
-[tween/Ease.ts:63](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L63)
+### linear()
 
-___
+> `static` **linear**(`t`, `b`, `c`, `d`): `number`
 
-### linear
-
-▸ `Static` **linear**(`t`, `b`, `c`, `d`): `number`
+Defined in: [tween/Ease.ts:3](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Ease.ts#L3)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `t` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
+##### t
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
 
 #### Returns
 
 `number`
-
-#### Defined in
-
-[tween/Ease.ts:3](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Ease.ts#L3)

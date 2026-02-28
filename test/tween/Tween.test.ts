@@ -1,11 +1,13 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('Tween', () => {
 	let stage = new playable.Stage();
 
+	// The ticker won't start when the window is not visible, emit an `activate` event to start ticking.
 	stage.emit(playable.Event.ACTIVATE);
 
+	// `requestAnimationFrame` won't invoke callback when the window is not visible, fallback to `setTimeout`.
 	window.requestAnimationFrame = function (fn) {
 		return window.setTimeout(fn, 1000 / 60);
 	};
@@ -16,7 +18,7 @@ describe('Tween', () => {
 		stage.removeAllChildren();
 	});
 
-	after(() => {
+	afterAll(() => {
 		stage.removeSelf();
 	});
 
@@ -32,7 +34,7 @@ describe('Tween', () => {
 		assert.isTrue(tween.stopped);
 	});
 
-	it('.set(props: Object): this', done => {
+	it('.set(props: Object): this', () => new Promise<void>(resolve => {
 		let layer = new playable.Layer();
 		let tween = playable.Tween.get(layer);
 		tween.set({x: 10, y: 10}).play();
@@ -40,11 +42,11 @@ describe('Tween', () => {
 		stage.ticker.setTimeout(() => {
 			assert.strictEqual(layer.x, 10);
 			assert.strictEqual(layer.y, 10);
-			done();
+			resolve();
 		}, 500);
-	});
+	}));
 
-	it('.to(props: Object, duration: number, ease?: Function): this', done => {
+	it('.to(props: Object, duration: number, ease?: Function): this', () => new Promise<void>(resolve => {
 		let layer = new playable.Layer();
 		let tween = playable.Tween.get(layer);
 		tween.to({x: 10, y: 10}, 300).play();
@@ -55,12 +57,12 @@ describe('Tween', () => {
 			stage.ticker.setTimeout(() => {
 				assert.strictEqual(layer.x, 10);
 				assert.strictEqual(layer.y, 10);
-				done();
+				resolve();
 			}, 500);
 		}, 100);
-	});
+	}));
 
-	it('.wait(duration: number): this', done => {
+	it('.wait(duration: number): this', () => new Promise<void>(resolve => {
 		let layer = new playable.Layer();
 		let tween = playable.Tween.get(layer);
 		tween.wait(300).set({x: 10, y: 10}).play();
@@ -71,21 +73,21 @@ describe('Tween', () => {
 			stage.ticker.setTimeout(() => {
 				assert.strictEqual(layer.x, 10);
 				assert.strictEqual(layer.y, 10);
-				done();
+				resolve();
 			}, 500);
 		}, 100);
-	});
+	}));
 
-	it('.call(callback: Function): this', done => {
+	it('.call(callback: Function): this', () => new Promise<void>(resolve => {
 		let layer = new playable.Layer();
 		let tween = playable.Tween.get(layer);
 		tween.call(() => {
-			done();
+			resolve();
 		}).play();
 		stage.addChild(layer);
-	});
+	}));
 
-	it('.play(): this', done => {
+	it('.play(): this', () => new Promise<void>(resolve => {
 		let counter = 0;
 		let layer = new playable.Layer();
 		let tween = playable.Tween.get(layer, {loop: true});
@@ -93,12 +95,12 @@ describe('Tween', () => {
 		tween.to({x: 10, y: 10}, 50).call(() => {
 			++counter;
 			if (counter >= 5) {
-				done();
+				resolve();
 			}
 		}).play();
 		assert.isFalse(tween.paused);
 		assert.isFalse(tween.stopped);
-	});
+	}));
 
 	it('.pause(): this', () => {
 		let layer = new playable.Layer();
@@ -123,7 +125,7 @@ describe('Tween', () => {
 		assert.isFalse(tween.stopped);
 	});
 
-	it('.resume(): this', () => {
+	it('.stop(): this', () => {
 		let layer = new playable.Layer();
 		let tween = playable.Tween.get(layer);
 		tween.play();
@@ -136,7 +138,7 @@ describe('Tween', () => {
 	it('#get(target: Layer, option?: { loop?: boolean }): Tween', () => {
 		let layer = new playable.Layer();
 		let tween = playable.Tween.get(layer);
-		assert.instanceOf(tween, playable.Tween);
+		assert.isTrue(tween instanceof playable.Tween);
 	});
 
 	it('#pauseTweens(target: Layer): void', () => {

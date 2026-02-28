@@ -1,5 +1,5 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('Image', () => {
 	let stage = new playable.Stage();
@@ -10,13 +10,13 @@ describe('Image', () => {
 		stage.removeAllChildren();
 	});
 
-	after(() => {
+	afterAll(() => {
 		stage.removeSelf();
 	});
 
-	it('.texture', done => {
+	it('.texture', () => new Promise<void>(resolve => {
 		let image = new playable.Image();
-		let texture = new playable.Texture(stage, '/base/test/fixtures/image@1x.jpg');
+		let texture = new playable.Texture(stage, '/test/fixtures/image@1x.jpg');
 		assert.isNull(image.texture);
 		texture.on(playable.Event.LOAD, () => {
 			image.texture = texture;
@@ -24,13 +24,13 @@ describe('Image', () => {
 			assert.strictEqual(image.texture, texture);
 			image.texture = null;
 			assert.isNull(image.texture);
-			done();
+			resolve();
 		});
-	});
+	}));
 
-	it('.fillMode', done => {
+	it('.fillMode', () => new Promise<void>(resolve => {
 		let image = new playable.Image();
-		let texture = new playable.Texture(stage, '/base/test/fixtures/image@1x.jpg');
+		let texture = new playable.Texture(stage, '/test/fixtures/image@1x.jpg');
 		texture.on(playable.Event.LOAD, () => {
 			assert.strictEqual(image.fillMode, playable.Image.SCALE);
 			image.texture = texture;
@@ -39,15 +39,15 @@ describe('Image', () => {
 			image.fillMode = playable.Image.REPEAT;
 			stage.addChild(image);
 			assert.strictEqual(image.fillMode, playable.Image.REPEAT);
-			done();
+			resolve();
 		});
-	});
+	}));
 
 	it('.clipRect', () => {
 		let texture = new playable.Texture(stage);
 		let image = new playable.Image(texture);
 		let clipRect = playable.Rectangle.create(10, 10, 10, 10);
-		texture.url = '/base/test/fixtures/image@1x.jpg';
+		texture.url = '/test/fixtures/image@1x.jpg';
 		assert.isNull(image.clipRect);
 		image.clipRect = clipRect;
 		stage.addChild(image);
@@ -58,7 +58,7 @@ describe('Image', () => {
 		let texture = new playable.Texture(stage);
 		let image = new playable.Image(texture);
 		let scale9Grid = playable.Rectangle.create(10, 10, 10, 10);
-		texture.url = '/base/test/fixtures/image@1x.jpg';
+		texture.url = '/test/fixtures/image@1x.jpg';
 		assert.isNull(image.scale9Grid);
 		image.scale9Grid = scale9Grid;
 		stage.addChild(image);

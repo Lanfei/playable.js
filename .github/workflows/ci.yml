@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: playwright-
+
+      - run: npx playwright install --with-deps
+
+      - run: npm run build
+
+      - run: npm run coverage
+
+      - uses: codecov/codecov-action@v5
+        with:
+          files: coverage/**/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}

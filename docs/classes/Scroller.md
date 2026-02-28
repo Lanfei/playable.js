@@ -1,1451 +1,1190 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / Scroller
 
 # Class: Scroller
 
-## Hierarchy
+Defined in: [display/Scroller.ts:7](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L7)
 
-- [`Layer`](../README.md#layer)
+## Extends
 
-  ↳ **`Scroller`**
-
-## Table of contents
-
-### Constructors
-
-- [constructor](Scroller.md#constructor)
-
-### Properties
-
-- [$alpha](Scroller.md#$alpha)
-- [$anchorX](Scroller.md#$anchorx)
-- [$anchorY](Scroller.md#$anchory)
-- [$background](Scroller.md#$background)
-- [$canvas](Scroller.md#$canvas)
-- [$children](Scroller.md#$children)
-- [$context](Scroller.md#$context)
-- [$dirty](Scroller.md#$dirty)
-- [$emittingType](Scroller.md#$emittingtype)
-- [$events](Scroller.md#$events)
-- [$height](Scroller.md#$height)
-- [$inertiaTween](Scroller.md#$inertiatween)
-- [$parent](Scroller.md#$parent)
-- [$removedListeners](Scroller.md#$removedlisteners)
-- [$rotation](Scroller.md#$rotation)
-- [$scaleX](Scroller.md#$scalex)
-- [$scaleY](Scroller.md#$scaley)
-- [$scrollHeight](Scroller.md#$scrollheight)
-- [$scrollLeft](Scroller.md#$scrollleft)
-- [$scrollTop](Scroller.md#$scrolltop)
-- [$scrollWidth](Scroller.md#$scrollwidth)
-- [$shouldEmitTap](Scroller.md#$shouldemittap)
-- [$skewX](Scroller.md#$skewx)
-- [$skewY](Scroller.md#$skewy)
-- [$smoothing](Scroller.md#$smoothing)
-- [$stage](Scroller.md#$stage)
-- [$touches](Scroller.md#$touches)
-- [$touchingId](Scroller.md#$touchingid)
-- [$touchingTime](Scroller.md#$touchingtime)
-- [$touchingX](Scroller.md#$touchingx)
-- [$touchingY](Scroller.md#$touchingy)
-- [$velocitiesX](Scroller.md#$velocitiesx)
-- [$velocitiesY](Scroller.md#$velocitiesy)
-- [$visible](Scroller.md#$visible)
-- [$width](Scroller.md#$width)
-- [$x](Scroller.md#$x)
-- [$y](Scroller.md#$y)
-- [name](Scroller.md#name)
-- [tag](Scroller.md#tag)
-- [touchable](Scroller.md#touchable)
-- [pixelRatio](Scroller.md#pixelratio)
-- [scrollingView](Scroller.md#scrollingview)
-
-### Accessors
-
-- [alpha](Scroller.md#alpha)
-- [anchorX](Scroller.md#anchorx)
-- [anchorY](Scroller.md#anchory)
-- [background](Scroller.md#background)
-- [canvas](Scroller.md#canvas)
-- [height](Scroller.md#height)
-- [numChildren](Scroller.md#numchildren)
-- [parent](Scroller.md#parent)
-- [rotation](Scroller.md#rotation)
-- [scaleX](Scroller.md#scalex)
-- [scaleY](Scroller.md#scaley)
-- [scrollHeight](Scroller.md#scrollheight)
-- [scrollLeft](Scroller.md#scrollleft)
-- [scrollTop](Scroller.md#scrolltop)
-- [scrollWidth](Scroller.md#scrollwidth)
-- [skewX](Scroller.md#skewx)
-- [skewY](Scroller.md#skewy)
-- [smoothing](Scroller.md#smoothing)
-- [stage](Scroller.md#stage)
-- [ticker](Scroller.md#ticker)
-- [visible](Scroller.md#visible)
-- [width](Scroller.md#width)
-- [x](Scroller.md#x)
-- [y](Scroller.md#y)
-
-### Methods
-
-- [$drawChild](Scroller.md#$drawchild)
-- [$emitAdded](Scroller.md#$emitadded)
-- [$emitAddedToStage](Scroller.md#$emitaddedtostage)
-- [$emitRemoved](Scroller.md#$emitremoved)
-- [$emitRemovedFromStage](Scroller.md#$emitremovedfromstage)
-- [$emitTouchEvent](Scroller.md#$emittouchevent)
-- [$getChildBounds](Scroller.md#$getchildbounds)
-- [$getChildTransform](Scroller.md#$getchildtransform)
-- [$getContentBounds](Scroller.md#$getcontentbounds)
-- [$getTransform](Scroller.md#$gettransform)
-- [$isChildVisible](Scroller.md#$ischildvisible)
-- [$localHitTest](Scroller.md#$localhittest)
-- [$markDirty](Scroller.md#$markdirty)
-- [$markParentDirty](Scroller.md#$markparentdirty)
-- [$onTouchCancel](Scroller.md#$ontouchcancel)
-- [$onTouchEnd](Scroller.md#$ontouchend)
-- [$onTouchMove](Scroller.md#$ontouchmove)
-- [$onTouchStart](Scroller.md#$ontouchstart)
-- [$render](Scroller.md#$render)
-- [$resizeCanvas](Scroller.md#$resizecanvas)
-- [$resizeParentCanvas](Scroller.md#$resizeparentcanvas)
-- [addChild](Scroller.md#addchild)
-- [addChildAt](Scroller.md#addchildat)
-- [emit](Scroller.md#emit)
-- [getChildAt](Scroller.md#getchildat)
-- [getChildByName](Scroller.md#getchildbyname)
-- [getChildIndex](Scroller.md#getchildindex)
-- [getChildrenByTag](Scroller.md#getchildrenbytag)
-- [hasChild](Scroller.md#haschild)
-- [hasEventListener](Scroller.md#haseventlistener)
-- [off](Scroller.md#off)
-- [on](Scroller.md#on)
-- [once](Scroller.md#once)
-- [removeAllChildren](Scroller.md#removeallchildren)
-- [removeAllListeners](Scroller.md#removealllisteners)
-- [removeChild](Scroller.md#removechild)
-- [removeChildAt](Scroller.md#removechildat)
-- [removeChildByName](Scroller.md#removechildbyname)
-- [removeChildrenByTag](Scroller.md#removechildrenbytag)
-- [removeSelf](Scroller.md#removeself)
-- [replaceChild](Scroller.md#replacechild)
-- [setChildIndex](Scroller.md#setchildindex)
-- [swapChildren](Scroller.md#swapchildren)
-- [swapChildrenAt](Scroller.md#swapchildrenat)
+- [`Layer`](../variables/default.md#layer)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new Scroller**()
+> **new Scroller**(): [`Scroller`](../variables/default.md#scroller)
+
+Defined in: [display/Scroller.ts:23](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L23)
+
+#### Returns
+
+[`Scroller`](../variables/default.md#scroller)
 
 #### Overrides
 
-[Layer](../README.md#layer).[constructor](../README.md#constructor)
-
-#### Defined in
-
-[display/Scroller.ts:23](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L23)
+[`Layer`](../variables/default.md#layer).[`constructor`](../variables/default.md#layerconstructor)
 
 ## Properties
 
 ### $alpha
 
-• `Protected` **$alpha**: `number` = `1`
+> `protected` **$alpha**: `number` = `1`
+
+Defined in: [display/Layer.ts:29](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L29)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$alpha](../README.md#$alpha)
+[`Layer`](../variables/default.md#layer).[`$alpha`](../variables/default.md#layeralpha)
 
-#### Defined in
-
-[display/Layer.ts:29](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L29)
-
-___
+***
 
 ### $anchorX
 
-• `Protected` **$anchorX**: `number` = `0`
+> `protected` **$anchorX**: `number` = `0`
+
+Defined in: [display/Layer.ts:22](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L22)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$anchorX](../README.md#$anchorx)
+[`Layer`](../variables/default.md#layer).[`$anchorX`](../variables/default.md#layeranchorx)
 
-#### Defined in
-
-[display/Layer.ts:22](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L22)
-
-___
+***
 
 ### $anchorY
 
-• `Protected` **$anchorY**: `number` = `0`
+> `protected` **$anchorY**: `number` = `0`
+
+Defined in: [display/Layer.ts:23](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L23)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$anchorY](../README.md#$anchory)
+[`Layer`](../variables/default.md#layer).[`$anchorY`](../variables/default.md#layeranchory)
 
-#### Defined in
-
-[display/Layer.ts:23](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L23)
-
-___
+***
 
 ### $background
 
-• `Protected` **$background**: `string` = `null`
+> `protected` **$background**: `string` = `null`
+
+Defined in: [display/Layer.ts:32](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L32)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$background](../README.md#$background)
+[`Layer`](../variables/default.md#layer).[`$background`](../variables/default.md#layerbackground)
 
-#### Defined in
-
-[display/Layer.ts:32](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L32)
-
-___
+***
 
 ### $canvas
 
-• `Protected` `Readonly` **$canvas**: `HTMLCanvasElement`
+> `protected` `readonly` **$canvas**: `HTMLCanvasElement`
+
+Defined in: [display/Layer.ts:39](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L39)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$canvas](../README.md#$canvas)
+[`Layer`](../variables/default.md#layer).[`$canvas`](../variables/default.md#layercanvas)
 
-#### Defined in
-
-[display/Layer.ts:39](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L39)
-
-___
+***
 
 ### $children
 
-• `Protected` **$children**: [`Layer`](../README.md#layer)[] = `[]`
+> `protected` **$children**: [`Layer`](../variables/default.md#layer)[] = `[]`
+
+Defined in: [display/Layer.ts:35](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L35)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$children](../README.md#$children)
+[`Layer`](../variables/default.md#layer).[`$children`](../variables/default.md#layerchildren)
 
-#### Defined in
-
-[display/Layer.ts:35](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L35)
-
-___
+***
 
 ### $context
 
-• `Protected` `Readonly` **$context**: `CanvasRenderingContext2D`
+> `protected` `readonly` **$context**: `CanvasRenderingContext2D`
+
+Defined in: [display/Layer.ts:40](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L40)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$context](../README.md#$context)
+[`Layer`](../variables/default.md#layer).[`$context`](../variables/default.md#layercontext)
 
-#### Defined in
-
-[display/Layer.ts:40](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L40)
-
-___
+***
 
 ### $dirty
 
-• `Protected` **$dirty**: `boolean` = `true`
+> `protected` **$dirty**: `boolean` = `true`
+
+Defined in: [display/Layer.ts:36](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L36)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$dirty](../README.md#$dirty)
+[`Layer`](../variables/default.md#layer).[`$dirty`](../variables/default.md#layerdirty)
 
-#### Defined in
-
-[display/Layer.ts:36](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L36)
-
-___
+***
 
 ### $emittingType
 
-• `Protected` **$emittingType**: `string` = `null`
+> `protected` **$emittingType**: `string` = `null`
+
+Defined in: [event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L6)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$emittingType](../README.md#$emittingtype)
+[`Layer`](../variables/default.md#layer).[`$emittingType`](../variables/default.md#layeremittingtype)
 
-#### Defined in
-
-[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L6)
-
-___
+***
 
 ### $events
 
-• `Protected` **$events**: `Object` = `{}`
+> `protected` **$events**: `Object` = `{}`
+
+Defined in: [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L5)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$events](../README.md#$events)
+[`Layer`](../variables/default.md#layer).[`$events`](../variables/default.md#layerevents)
 
-#### Defined in
-
-[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L5)
-
-___
+***
 
 ### $height
 
-• `Protected` **$height**: `number` = `0`
+> `protected` **$height**: `number` = `0`
+
+Defined in: [display/Layer.ts:21](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L21)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$height](../README.md#$height)
+[`Layer`](../variables/default.md#layer).[`$height`](../variables/default.md#layerheight)
 
-#### Defined in
-
-[display/Layer.ts:21](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L21)
-
-___
+***
 
 ### $inertiaTween
 
-• `Protected` **$inertiaTween**: [`Tween`](../README.md#tween) = `null`
+> `protected` **$inertiaTween**: [`Tween`](../variables/default.md#tween) = `null`
 
-#### Defined in
+Defined in: [display/Scroller.ts:21](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L21)
 
-[display/Scroller.ts:21](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L21)
-
-___
+***
 
 ### $parent
 
-• `Protected` **$parent**: [`Layer`](../README.md#layer) = `null`
+> `protected` **$parent**: [`Layer`](../variables/default.md#layer) = `null`
+
+Defined in: [display/Layer.ts:34](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L34)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$parent](../README.md#$parent)
+[`Layer`](../variables/default.md#layer).[`$parent`](../variables/default.md#layerparent)
 
-#### Defined in
-
-[display/Layer.ts:34](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L34)
-
-___
+***
 
 ### $removedListeners
 
-• `Protected` **$removedListeners**: [`Listener`](../README.md#listener)[] = `[]`
+> `protected` **$removedListeners**: [`Listener`](../type-aliases/Listener.md)[] = `[]`
+
+Defined in: [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L7)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$removedListeners](../README.md#$removedlisteners)
+[`Layer`](../variables/default.md#layer).[`$removedListeners`](../variables/default.md#layerremovedlisteners)
 
-#### Defined in
-
-[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L7)
-
-___
+***
 
 ### $rotation
 
-• `Protected` **$rotation**: `number` = `0`
+> `protected` **$rotation**: `number` = `0`
+
+Defined in: [display/Layer.ts:28](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L28)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$rotation](../README.md#$rotation)
+[`Layer`](../variables/default.md#layer).[`$rotation`](../variables/default.md#layerrotation)
 
-#### Defined in
-
-[display/Layer.ts:28](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L28)
-
-___
+***
 
 ### $scaleX
 
-• `Protected` **$scaleX**: `number` = `1`
+> `protected` **$scaleX**: `number` = `1`
+
+Defined in: [display/Layer.ts:26](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L26)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$scaleX](../README.md#$scalex)
+[`Layer`](../variables/default.md#layer).[`$scaleX`](../variables/default.md#layerscalex)
 
-#### Defined in
-
-[display/Layer.ts:26](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L26)
-
-___
+***
 
 ### $scaleY
 
-• `Protected` **$scaleY**: `number` = `1`
+> `protected` **$scaleY**: `number` = `1`
+
+Defined in: [display/Layer.ts:27](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L27)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$scaleY](../README.md#$scaley)
+[`Layer`](../variables/default.md#layer).[`$scaleY`](../variables/default.md#layerscaley)
 
-#### Defined in
-
-[display/Layer.ts:27](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L27)
-
-___
+***
 
 ### $scrollHeight
 
-• `Protected` **$scrollHeight**: `number` = `0`
+> `protected` **$scrollHeight**: `number` = `0`
 
-#### Defined in
+Defined in: [display/Scroller.ts:14](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L14)
 
-[display/Scroller.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L14)
-
-___
+***
 
 ### $scrollLeft
 
-• `Protected` **$scrollLeft**: `number` = `0`
+> `protected` **$scrollLeft**: `number` = `0`
 
-#### Defined in
+Defined in: [display/Scroller.ts:12](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L12)
 
-[display/Scroller.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L12)
-
-___
+***
 
 ### $scrollTop
 
-• `Protected` **$scrollTop**: `number` = `0`
+> `protected` **$scrollTop**: `number` = `0`
 
-#### Defined in
+Defined in: [display/Scroller.ts:11](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L11)
 
-[display/Scroller.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L11)
-
-___
+***
 
 ### $scrollWidth
 
-• `Protected` **$scrollWidth**: `number` = `0`
+> `protected` **$scrollWidth**: `number` = `0`
 
-#### Defined in
+Defined in: [display/Scroller.ts:13](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L13)
 
-[display/Scroller.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L13)
-
-___
+***
 
 ### $shouldEmitTap
 
-• `Protected` **$shouldEmitTap**: `boolean` = `true`
+> `protected` **$shouldEmitTap**: `boolean` = `true`
+
+Defined in: [display/Layer.ts:37](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L37)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$shouldEmitTap](../README.md#$shouldemittap)
+[`Layer`](../variables/default.md#layer).[`$shouldEmitTap`](../variables/default.md#layershouldemittap)
 
-#### Defined in
-
-[display/Layer.ts:37](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L37)
-
-___
+***
 
 ### $skewX
 
-• `Protected` **$skewX**: `number` = `0`
+> `protected` **$skewX**: `number` = `0`
+
+Defined in: [display/Layer.ts:24](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L24)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$skewX](../README.md#$skewx)
+[`Layer`](../variables/default.md#layer).[`$skewX`](../variables/default.md#layerskewx)
 
-#### Defined in
-
-[display/Layer.ts:24](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L24)
-
-___
+***
 
 ### $skewY
 
-• `Protected` **$skewY**: `number` = `0`
+> `protected` **$skewY**: `number` = `0`
+
+Defined in: [display/Layer.ts:25](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L25)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$skewY](../README.md#$skewy)
+[`Layer`](../variables/default.md#layer).[`$skewY`](../variables/default.md#layerskewy)
 
-#### Defined in
-
-[display/Layer.ts:25](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L25)
-
-___
+***
 
 ### $smoothing
 
-• `Protected` **$smoothing**: `boolean` = `true`
+> `protected` **$smoothing**: `boolean` = `true`
+
+Defined in: [display/Layer.ts:31](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L31)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$smoothing](../README.md#$smoothing)
+[`Layer`](../variables/default.md#layer).[`$smoothing`](../variables/default.md#layersmoothing)
 
-#### Defined in
-
-[display/Layer.ts:31](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L31)
-
-___
+***
 
 ### $stage
 
-• `Protected` **$stage**: [`Stage`](../README.md#stage) = `null`
+> `protected` **$stage**: [`Stage`](../variables/default.md#stage) = `null`
+
+Defined in: [display/Layer.ts:33](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L33)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$stage](../README.md#$stage)
+[`Layer`](../variables/default.md#layer).[`$stage`](../variables/default.md#layerstage)
 
-#### Defined in
-
-[display/Layer.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L33)
-
-___
+***
 
 ### $touches
 
-• `Protected` **$touches**: `boolean`[] = `[]`
+> `protected` **$touches**: `boolean`[] = `[]`
+
+Defined in: [display/Layer.ts:38](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L38)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$touches](../README.md#$touches)
+[`Layer`](../variables/default.md#layer).[`$touches`](../variables/default.md#layertouches)
 
-#### Defined in
-
-[display/Layer.ts:38](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L38)
-
-___
+***
 
 ### $touchingId
 
-• `Protected` **$touchingId**: `number` = `null`
+> `protected` **$touchingId**: `number` = `null`
 
-#### Defined in
+Defined in: [display/Scroller.ts:17](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L17)
 
-[display/Scroller.ts:17](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L17)
-
-___
+***
 
 ### $touchingTime
 
-• `Protected` **$touchingTime**: `number` = `null`
+> `protected` **$touchingTime**: `number` = `null`
 
-#### Defined in
+Defined in: [display/Scroller.ts:18](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L18)
 
-[display/Scroller.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L18)
-
-___
+***
 
 ### $touchingX
 
-• `Protected` **$touchingX**: `number` = `null`
+> `protected` **$touchingX**: `number` = `null`
 
-#### Defined in
+Defined in: [display/Scroller.ts:15](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L15)
 
-[display/Scroller.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L15)
-
-___
+***
 
 ### $touchingY
 
-• `Protected` **$touchingY**: `number` = `null`
+> `protected` **$touchingY**: `number` = `null`
 
-#### Defined in
+Defined in: [display/Scroller.ts:16](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L16)
 
-[display/Scroller.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L16)
-
-___
+***
 
 ### $velocitiesX
 
-• `Protected` **$velocitiesX**: `number`[] = `[]`
+> `protected` **$velocitiesX**: `number`[] = `[]`
 
-#### Defined in
+Defined in: [display/Scroller.ts:19](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L19)
 
-[display/Scroller.ts:19](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L19)
-
-___
+***
 
 ### $velocitiesY
 
-• `Protected` **$velocitiesY**: `number`[] = `[]`
+> `protected` **$velocitiesY**: `number`[] = `[]`
 
-#### Defined in
+Defined in: [display/Scroller.ts:20](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L20)
 
-[display/Scroller.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L20)
-
-___
+***
 
 ### $visible
 
-• `Protected` **$visible**: `boolean` = `true`
+> `protected` **$visible**: `boolean` = `true`
+
+Defined in: [display/Layer.ts:30](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L30)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$visible](../README.md#$visible)
+[`Layer`](../variables/default.md#layer).[`$visible`](../variables/default.md#layervisible)
 
-#### Defined in
-
-[display/Layer.ts:30](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L30)
-
-___
+***
 
 ### $width
 
-• `Protected` **$width**: `number` = `0`
+> `protected` **$width**: `number` = `0`
+
+Defined in: [display/Layer.ts:20](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L20)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$width](../README.md#$width)
+[`Layer`](../variables/default.md#layer).[`$width`](../variables/default.md#layerwidth)
 
-#### Defined in
-
-[display/Layer.ts:20](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L20)
-
-___
+***
 
 ### $x
 
-• `Protected` **$x**: `number` = `0`
+> `protected` **$x**: `number` = `0`
+
+Defined in: [display/Layer.ts:18](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L18)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$x](../README.md#$x)
+[`Layer`](../variables/default.md#layer).[`$x`](../variables/default.md#layerx)
 
-#### Defined in
-
-[display/Layer.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L18)
-
-___
+***
 
 ### $y
 
-• `Protected` **$y**: `number` = `0`
+> `protected` **$y**: `number` = `0`
+
+Defined in: [display/Layer.ts:19](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L19)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$y](../README.md#$y)
+[`Layer`](../variables/default.md#layer).[`$y`](../variables/default.md#layery)
 
-#### Defined in
-
-[display/Layer.ts:19](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L19)
-
-___
+***
 
 ### name
 
-• **name**: `string` = `''`
+> **name**: `string` = `''`
+
+Defined in: [display/Layer.ts:14](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L14)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[name](../README.md#name)
+[`Layer`](../variables/default.md#layer).[`name`](../variables/default.md#layername)
 
-#### Defined in
-
-[display/Layer.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L14)
-
-___
+***
 
 ### tag
 
-• **tag**: `string` = `''`
+> **tag**: `string` = `''`
+
+Defined in: [display/Layer.ts:15](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L15)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[tag](../README.md#tag)
+[`Layer`](../variables/default.md#layer).[`tag`](../variables/default.md#layertag)
 
-#### Defined in
-
-[display/Layer.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L15)
-
-___
+***
 
 ### touchable
 
-• **touchable**: `boolean` = `true`
+> **touchable**: `boolean` = `true`
+
+Defined in: [display/Layer.ts:16](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L16)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[touchable](../README.md#touchable)
+[`Layer`](../variables/default.md#layer).[`touchable`](../variables/default.md#layertouchable)
 
-#### Defined in
-
-[display/Layer.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L16)
-
-___
+***
 
 ### pixelRatio
 
-▪ `Static` **pixelRatio**: `number`
+> `static` **pixelRatio**: `number`
+
+Defined in: [display/Layer.ts:12](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L12)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[pixelRatio](../README.md#pixelratio)
+[`Layer`](../variables/default.md#layer).[`pixelRatio`](../variables/default.md#layerpixelratio)
 
-#### Defined in
-
-[display/Layer.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L12)
-
-___
+***
 
 ### scrollingView
 
-▪ `Static` `Protected` **scrollingView**: [`Scroller`](../README.md#scroller)
+> `protected` `static` **scrollingView**: [`Scroller`](../variables/default.md#scroller)
 
-#### Defined in
-
-[display/Scroller.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L9)
+Defined in: [display/Scroller.ts:9](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L9)
 
 ## Accessors
 
 ### alpha
 
-• `get` **alpha**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **alpha**(): `number`
+
+Defined in: [display/Layer.ts:169](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L169)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.alpha
+> **set** **alpha**(`alpha`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:173](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L173)
 
-[display/Layer.ts:169](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L169)
+##### Parameters
 
-• `set` **alpha**(`alpha`): `void`
+###### alpha
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `alpha` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.alpha
+[`Layer`](../variables/default.md#layer).[`alpha`](../variables/default.md#layeralpha-1)
 
-#### Defined in
-
-[display/Layer.ts:173](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L173)
-
-___
+***
 
 ### anchorX
 
-• `get` **anchorX**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **anchorX**(): `number`
+
+Defined in: [display/Layer.ts:92](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L92)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.anchorX
+> **set** **anchorX**(`anchorX`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:96](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L96)
 
-[display/Layer.ts:92](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L92)
+##### Parameters
 
-• `set` **anchorX**(`anchorX`): `void`
+###### anchorX
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `anchorX` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.anchorX
+[`Layer`](../variables/default.md#layer).[`anchorX`](../variables/default.md#layeranchorx-1)
 
-#### Defined in
-
-[display/Layer.ts:96](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L96)
-
-___
+***
 
 ### anchorY
 
-• `get` **anchorY**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **anchorY**(): `number`
+
+Defined in: [display/Layer.ts:103](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L103)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.anchorY
+> **set** **anchorY**(`anchorY`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:107](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L107)
 
-[display/Layer.ts:103](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L103)
+##### Parameters
 
-• `set` **anchorY**(`anchorY`): `void`
+###### anchorY
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `anchorY` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.anchorY
+[`Layer`](../variables/default.md#layer).[`anchorY`](../variables/default.md#layeranchory-1)
 
-#### Defined in
-
-[display/Layer.ts:107](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L107)
-
-___
+***
 
 ### background
 
-• `get` **background**(): `string`
+#### Get Signature
 
-#### Returns
+> **get** **background**(): `string`
+
+Defined in: [display/Layer.ts:200](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L200)
+
+##### Returns
 
 `string`
 
-#### Inherited from
+#### Set Signature
 
-Layer.background
+> **set** **background**(`background`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:204](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L204)
 
-[display/Layer.ts:200](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L200)
+##### Parameters
 
-• `set` **background**(`background`): `void`
+###### background
 
-#### Parameters
+`string`
 
-| Name | Type |
-| :------ | :------ |
-| `background` | `string` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.background
+[`Layer`](../variables/default.md#layer).[`background`](../variables/default.md#layerbackground-1)
 
-#### Defined in
-
-[display/Layer.ts:204](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L204)
-
-___
+***
 
 ### canvas
 
-• `get` **canvas**(): `HTMLCanvasElement`
+#### Get Signature
 
-#### Returns
+> **get** **canvas**(): `HTMLCanvasElement`
+
+Defined in: [display/Layer.ts:227](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L227)
+
+##### Returns
 
 `HTMLCanvasElement`
 
 #### Inherited from
 
-Layer.canvas
+[`Layer`](../variables/default.md#layer).[`canvas`](../variables/default.md#layercanvas-1)
 
-#### Defined in
-
-[display/Layer.ts:227](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L227)
-
-___
+***
 
 ### height
 
-• `get` **height**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **height**(): `number`
+
+Defined in: [display/Layer.ts:81](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L81)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.height
+> **set** **height**(`height`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:85](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L85)
 
-[display/Layer.ts:81](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L81)
+##### Parameters
 
-• `set` **height**(`height`): `void`
+###### height
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `height` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.height
+[`Layer`](../variables/default.md#layer).[`height`](../variables/default.md#layerheight-1)
 
-#### Defined in
-
-[display/Layer.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L85)
-
-___
+***
 
 ### numChildren
 
-• `get` **numChildren**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **numChildren**(): `number`
+
+Defined in: [display/Layer.ts:219](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L219)
+
+##### Returns
 
 `number`
 
 #### Inherited from
 
-Layer.numChildren
+[`Layer`](../variables/default.md#layer).[`numChildren`](../variables/default.md#layernumchildren)
 
-#### Defined in
-
-[display/Layer.ts:219](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L219)
-
-___
+***
 
 ### parent
 
-• `get` **parent**(): [`Layer`](../README.md#layer)
+#### Get Signature
 
-#### Returns
+> **get** **parent**(): [`Layer`](../variables/default.md#layer)
 
-[`Layer`](../README.md#layer)
+Defined in: [display/Layer.ts:215](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L215)
+
+##### Returns
+
+[`Layer`](../variables/default.md#layer)
 
 #### Inherited from
 
-Layer.parent
+[`Layer`](../variables/default.md#layer).[`parent`](../variables/default.md#layerparent-1)
 
-#### Defined in
-
-[display/Layer.ts:215](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L215)
-
-___
+***
 
 ### rotation
 
-• `get` **rotation**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **rotation**(): `number`
+
+Defined in: [display/Layer.ts:158](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L158)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.rotation
+> **set** **rotation**(`rotation`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:162](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L162)
 
-[display/Layer.ts:158](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L158)
+##### Parameters
 
-• `set` **rotation**(`rotation`): `void`
+###### rotation
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `rotation` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.rotation
+[`Layer`](../variables/default.md#layer).[`rotation`](../variables/default.md#layerrotation-1)
 
-#### Defined in
-
-[display/Layer.ts:162](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L162)
-
-___
+***
 
 ### scaleX
 
-• `get` **scaleX**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **scaleX**(): `number`
+
+Defined in: [display/Layer.ts:136](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L136)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.scaleX
+> **set** **scaleX**(`scaleX`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:140](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L140)
 
-[display/Layer.ts:136](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L136)
+##### Parameters
 
-• `set` **scaleX**(`scaleX`): `void`
+###### scaleX
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `scaleX` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.scaleX
+[`Layer`](../variables/default.md#layer).[`scaleX`](../variables/default.md#layerscalex-1)
 
-#### Defined in
-
-[display/Layer.ts:140](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L140)
-
-___
+***
 
 ### scaleY
 
-• `get` **scaleY**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **scaleY**(): `number`
+
+Defined in: [display/Layer.ts:147](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L147)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.scaleY
+> **set** **scaleY**(`scaleY`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:151](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L151)
 
-[display/Layer.ts:147](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L147)
+##### Parameters
 
-• `set` **scaleY**(`scaleY`): `void`
+###### scaleY
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `scaleY` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.scaleY
+[`Layer`](../variables/default.md#layer).[`scaleY`](../variables/default.md#layerscaley-1)
 
-#### Defined in
-
-[display/Layer.ts:151](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L151)
-
-___
+***
 
 ### scrollHeight
 
-• `get` **scrollHeight**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **scrollHeight**(): `number`
+
+Defined in: [display/Scroller.ts:67](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L67)
+
+##### Returns
 
 `number`
 
-#### Defined in
-
-[display/Scroller.ts:67](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L67)
-
-___
+***
 
 ### scrollLeft
 
-• `get` **scrollLeft**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **scrollLeft**(): `number`
+
+Defined in: [display/Scroller.ts:48](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L48)
+
+##### Returns
 
 `number`
 
-#### Defined in
+#### Set Signature
 
-[display/Scroller.ts:48](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L48)
+> **set** **scrollLeft**(`scrollLeft`): `void`
 
-• `set` **scrollLeft**(`scrollLeft`): `void`
+Defined in: [display/Scroller.ts:52](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L52)
 
-#### Parameters
+##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `scrollLeft` | `number` |
+###### scrollLeft
 
-#### Returns
+`number`
+
+##### Returns
 
 `void`
 
-#### Defined in
-
-[display/Scroller.ts:52](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L52)
-
-___
+***
 
 ### scrollTop
 
-• `get` **scrollTop**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **scrollTop**(): `number`
+
+Defined in: [display/Scroller.ts:33](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L33)
+
+##### Returns
 
 `number`
 
-#### Defined in
+#### Set Signature
 
-[display/Scroller.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L33)
+> **set** **scrollTop**(`scrollTop`): `void`
 
-• `set` **scrollTop**(`scrollTop`): `void`
+Defined in: [display/Scroller.ts:37](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L37)
 
-#### Parameters
+##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `scrollTop` | `number` |
+###### scrollTop
 
-#### Returns
+`number`
+
+##### Returns
 
 `void`
 
-#### Defined in
-
-[display/Scroller.ts:37](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L37)
-
-___
+***
 
 ### scrollWidth
 
-• `get` **scrollWidth**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **scrollWidth**(): `number`
+
+Defined in: [display/Scroller.ts:63](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L63)
+
+##### Returns
 
 `number`
 
-#### Defined in
-
-[display/Scroller.ts:63](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L63)
-
-___
+***
 
 ### skewX
 
-• `get` **skewX**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **skewX**(): `number`
+
+Defined in: [display/Layer.ts:114](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L114)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.skewX
+> **set** **skewX**(`skewX`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:118](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L118)
 
-[display/Layer.ts:114](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L114)
+##### Parameters
 
-• `set` **skewX**(`skewX`): `void`
+###### skewX
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `skewX` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.skewX
+[`Layer`](../variables/default.md#layer).[`skewX`](../variables/default.md#layerskewx-1)
 
-#### Defined in
-
-[display/Layer.ts:118](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L118)
-
-___
+***
 
 ### skewY
 
-• `get` **skewY**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **skewY**(): `number`
+
+Defined in: [display/Layer.ts:125](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L125)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.skewY
+> **set** **skewY**(`skewY`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:129](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L129)
 
-[display/Layer.ts:125](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L125)
+##### Parameters
 
-• `set` **skewY**(`skewY`): `void`
+###### skewY
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `skewY` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.skewY
+[`Layer`](../variables/default.md#layer).[`skewY`](../variables/default.md#layerskewy-1)
 
-#### Defined in
-
-[display/Layer.ts:129](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L129)
-
-___
+***
 
 ### smoothing
 
-• `get` **smoothing**(): `boolean`
+#### Get Signature
 
-#### Returns
+> **get** **smoothing**(): `boolean`
+
+Defined in: [display/Layer.ts:191](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L191)
+
+##### Returns
 
 `boolean`
 
-#### Inherited from
+#### Set Signature
 
-Layer.smoothing
+> **set** **smoothing**(`smoothing`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:195](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L195)
 
-[display/Layer.ts:191](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L191)
+##### Parameters
 
-• `set` **smoothing**(`smoothing`): `void`
+###### smoothing
 
-#### Parameters
+`boolean`
 
-| Name | Type |
-| :------ | :------ |
-| `smoothing` | `boolean` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.smoothing
+[`Layer`](../variables/default.md#layer).[`smoothing`](../variables/default.md#layersmoothing-1)
 
-#### Defined in
-
-[display/Layer.ts:195](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L195)
-
-___
+***
 
 ### stage
 
-• `get` **stage**(): [`Stage`](../README.md#stage)
+#### Get Signature
 
-#### Returns
+> **get** **stage**(): [`Stage`](../variables/default.md#stage)
 
-[`Stage`](../README.md#stage)
+Defined in: [display/Layer.ts:211](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L211)
+
+##### Returns
+
+[`Stage`](../variables/default.md#stage)
 
 #### Inherited from
 
-Layer.stage
+[`Layer`](../variables/default.md#layer).[`stage`](../variables/default.md#layerstage-1)
 
-#### Defined in
-
-[display/Layer.ts:211](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L211)
-
-___
+***
 
 ### ticker
 
-• `get` **ticker**(): [`Ticker`](../README.md#ticker)
+#### Get Signature
 
-#### Returns
+> **get** **ticker**(): [`Ticker`](../variables/default.md#ticker)
 
-[`Ticker`](../README.md#ticker)
+Defined in: [display/Layer.ts:223](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L223)
+
+##### Returns
+
+[`Ticker`](../variables/default.md#ticker)
 
 #### Inherited from
 
-Layer.ticker
+[`Layer`](../variables/default.md#layer).[`ticker`](../variables/default.md#layerticker)
 
-#### Defined in
-
-[display/Layer.ts:223](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L223)
-
-___
+***
 
 ### visible
 
-• `get` **visible**(): `boolean`
+#### Get Signature
 
-#### Returns
+> **get** **visible**(): `boolean`
+
+Defined in: [display/Layer.ts:180](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L180)
+
+##### Returns
 
 `boolean`
 
-#### Inherited from
+#### Set Signature
 
-Layer.visible
+> **set** **visible**(`visible`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:184](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L184)
 
-[display/Layer.ts:180](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L180)
+##### Parameters
 
-• `set` **visible**(`visible`): `void`
+###### visible
 
-#### Parameters
+`boolean`
 
-| Name | Type |
-| :------ | :------ |
-| `visible` | `boolean` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.visible
+[`Layer`](../variables/default.md#layer).[`visible`](../variables/default.md#layervisible-1)
 
-#### Defined in
-
-[display/Layer.ts:184](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L184)
-
-___
+***
 
 ### width
 
-• `get` **width**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **width**(): `number`
+
+Defined in: [display/Layer.ts:70](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L70)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.width
+> **set** **width**(`width`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:74](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L74)
 
-[display/Layer.ts:70](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L70)
+##### Parameters
 
-• `set` **width**(`width`): `void`
+###### width
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `width` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.width
+[`Layer`](../variables/default.md#layer).[`width`](../variables/default.md#layerwidth-1)
 
-#### Defined in
-
-[display/Layer.ts:74](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L74)
-
-___
+***
 
 ### x
 
-• `get` **x**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **x**(): `number`
+
+Defined in: [display/Layer.ts:48](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L48)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.x
+> **set** **x**(`x`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:52](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L52)
 
-[display/Layer.ts:48](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L48)
+##### Parameters
 
-• `set` **x**(`x`): `void`
+###### x
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `x` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.x
+[`Layer`](../variables/default.md#layer).[`x`](../variables/default.md#layerx-1)
 
-#### Defined in
-
-[display/Layer.ts:52](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L52)
-
-___
+***
 
 ### y
 
-• `get` **y**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **y**(): `number`
+
+Defined in: [display/Layer.ts:59](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L59)
+
+##### Returns
 
 `number`
 
-#### Inherited from
+#### Set Signature
 
-Layer.y
+> **set** **y**(`y`): `void`
 
-#### Defined in
+Defined in: [display/Layer.ts:63](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L63)
 
-[display/Layer.ts:59](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L59)
+##### Parameters
 
-• `set` **y**(`y`): `void`
+###### y
 
-#### Parameters
+`number`
 
-| Name | Type |
-| :------ | :------ |
-| `y` | `number` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Layer.y
-
-#### Defined in
-
-[display/Layer.ts:63](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L63)
+[`Layer`](../variables/default.md#layer).[`y`](../variables/default.md#layery-1)
 
 ## Methods
 
-### $drawChild
+### $drawChild()
 
-▸ `Protected` **$drawChild**(`child`): `number`
+> `protected` **$drawChild**(`child`): `number`
+
+Defined in: [display/Layer.ts:605](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L605)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child` | [`Layer`](../README.md#layer) |
+##### child
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
@@ -1453,23 +1192,21 @@ Layer.y
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$drawChild](../README.md#$drawchild)
+[`Layer`](../variables/default.md#layer).[`$drawChild`](../variables/default.md#layerdrawchild)
 
-#### Defined in
+***
 
-[display/Layer.ts:605](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L605)
+### $emitAdded()
 
-___
+> `protected` **$emitAdded**(`parent`): `void`
 
-### $emitAdded
-
-▸ `Protected` **$emitAdded**(`parent`): `void`
+Defined in: [display/Layer.ts:543](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L543)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `parent` | [`Layer`](../README.md#layer) |
+##### parent
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
@@ -1477,23 +1214,21 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$emitAdded](../README.md#$emitadded)
+[`Layer`](../variables/default.md#layer).[`$emitAdded`](../variables/default.md#layeremitadded)
 
-#### Defined in
+***
 
-[display/Layer.ts:543](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L543)
+### $emitAddedToStage()
 
-___
+> `protected` **$emitAddedToStage**(`stage`): `void`
 
-### $emitAddedToStage
-
-▸ `Protected` **$emitAddedToStage**(`stage`): `void`
+Defined in: [display/Layer.ts:561](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L561)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `stage` | [`Stage`](../README.md#stage) |
+##### stage
+
+[`Stage`](../variables/default.md#stage)
 
 #### Returns
 
@@ -1501,17 +1236,15 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$emitAddedToStage](../README.md#$emitaddedtostage)
+[`Layer`](../variables/default.md#layer).[`$emitAddedToStage`](../variables/default.md#layeremitaddedtostage)
 
-#### Defined in
+***
 
-[display/Layer.ts:561](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L561)
+### $emitRemoved()
 
-___
+> `protected` **$emitRemoved**(): `void`
 
-### $emitRemoved
-
-▸ `Protected` **$emitRemoved**(): `void`
+Defined in: [display/Layer.ts:552](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L552)
 
 #### Returns
 
@@ -1519,17 +1252,15 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$emitRemoved](../README.md#$emitremoved)
+[`Layer`](../variables/default.md#layer).[`$emitRemoved`](../variables/default.md#layeremitremoved)
 
-#### Defined in
+***
 
-[display/Layer.ts:552](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L552)
+### $emitRemovedFromStage()
 
-___
+> `protected` **$emitRemovedFromStage**(): `void`
 
-### $emitRemovedFromStage
-
-▸ `Protected` **$emitRemovedFromStage**(): `void`
+Defined in: [display/Scroller.ts:170](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L170)
 
 #### Returns
 
@@ -1537,24 +1268,25 @@ ___
 
 #### Overrides
 
-[Layer](../README.md#layer).[$emitRemovedFromStage](../README.md#$emitremovedfromstage)
+[`Layer`](../variables/default.md#layer).[`$emitRemovedFromStage`](../variables/default.md#layeremitremovedfromstage)
 
-#### Defined in
+***
 
-[display/Scroller.ts:170](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L170)
+### $emitTouchEvent()
 
-___
+> `protected` **$emitTouchEvent**(`event`, `inside`): `boolean`
 
-### $emitTouchEvent
-
-▸ `Protected` **$emitTouchEvent**(`event`, `inside`): `boolean`
+Defined in: [display/Layer.ts:495](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L495)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | [`TouchEvent`](../README.md#touchevent) |
-| `inside` | `boolean` |
+##### event
+
+[`TouchEvent`](../variables/default.md#touchevent)
+
+##### inside
+
+`boolean`
 
 #### Returns
 
@@ -1562,107 +1294,97 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$emitTouchEvent](../README.md#$emittouchevent)
+[`Layer`](../variables/default.md#layer).[`$emitTouchEvent`](../variables/default.md#layeremittouchevent)
 
-#### Defined in
+***
 
-[display/Layer.ts:495](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L495)
+### $getChildBounds()
 
-___
+> `protected` **$getChildBounds**(`child`): [`Rectangle`](../variables/default.md#rectangle)
 
-### $getChildBounds
-
-▸ `Protected` **$getChildBounds**(`child`): [`Rectangle`](../README.md#rectangle)
+Defined in: [display/Layer.ts:449](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L449)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child` | [`Layer`](../README.md#layer) |
+##### child
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
-[`Rectangle`](../README.md#rectangle)
+[`Rectangle`](../variables/default.md#rectangle)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$getChildBounds](../README.md#$getchildbounds)
+[`Layer`](../variables/default.md#layer).[`$getChildBounds`](../variables/default.md#layergetchildbounds)
 
-#### Defined in
+***
 
-[display/Layer.ts:449](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L449)
+### $getChildTransform()
 
-___
+> `protected` **$getChildTransform**(`child`): [`Matrix`](../variables/default.md#matrix)
 
-### $getChildTransform
-
-▸ `Protected` **$getChildTransform**(`child`): [`Matrix`](../README.md#matrix)
+Defined in: [display/Scroller.ts:71](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L71)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child` | [`Layer`](../README.md#layer) |
+##### child
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
-[`Matrix`](../README.md#matrix)
+[`Matrix`](../variables/default.md#matrix)
 
 #### Overrides
 
-[Layer](../README.md#layer).[$getChildTransform](../README.md#$getchildtransform)
+[`Layer`](../variables/default.md#layer).[`$getChildTransform`](../variables/default.md#layergetchildtransform)
 
-#### Defined in
+***
 
-[display/Scroller.ts:71](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L71)
+### $getContentBounds()
 
-___
+> `protected` **$getContentBounds**(): [`Rectangle`](../variables/default.md#rectangle)
 
-### $getContentBounds
-
-▸ `Protected` **$getContentBounds**(): [`Rectangle`](../README.md#rectangle)
+Defined in: [display/Layer.ts:474](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L474)
 
 #### Returns
 
-[`Rectangle`](../README.md#rectangle)
+[`Rectangle`](../variables/default.md#rectangle)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$getContentBounds](../README.md#$getcontentbounds)
+[`Layer`](../variables/default.md#layer).[`$getContentBounds`](../variables/default.md#layergetcontentbounds)
 
-#### Defined in
+***
 
-[display/Layer.ts:474](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L474)
+### $getTransform()
 
-___
+> `protected` **$getTransform**(): [`Matrix`](../variables/default.md#matrix)
 
-### $getTransform
-
-▸ `Protected` **$getTransform**(): [`Matrix`](../README.md#matrix)
+Defined in: [display/Layer.ts:434](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L434)
 
 #### Returns
 
-[`Matrix`](../README.md#matrix)
+[`Matrix`](../variables/default.md#matrix)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$getTransform](../README.md#$gettransform)
+[`Layer`](../variables/default.md#layer).[`$getTransform`](../variables/default.md#layergettransform)
 
-#### Defined in
+***
 
-[display/Layer.ts:434](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L434)
+### $isChildVisible()
 
-___
+> `protected` **$isChildVisible**(`child`): `boolean`
 
-### $isChildVisible
-
-▸ `Protected` **$isChildVisible**(`child`): `boolean`
+Defined in: [display/Layer.ts:591](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L591)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child` | [`Layer`](../README.md#layer) |
+##### child
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
@@ -1670,23 +1392,21 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$isChildVisible](../README.md#$ischildvisible)
+[`Layer`](../variables/default.md#layer).[`$isChildVisible`](../variables/default.md#layerischildvisible)
 
-#### Defined in
+***
 
-[display/Layer.ts:591](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L591)
+### $localHitTest()
 
-___
+> `protected` **$localHitTest**(`vector`): `boolean`
 
-### $localHitTest
-
-▸ `Protected` **$localHitTest**(`vector`): `boolean`
+Defined in: [display/Layer.ts:587](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L587)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `vector` | [`Vector`](../README.md#vector) |
+##### vector
+
+[`Vector`](../variables/default.md#vector)
 
 #### Returns
 
@@ -1694,23 +1414,21 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$localHitTest](../README.md#$localhittest)
+[`Layer`](../variables/default.md#layer).[`$localHitTest`](../variables/default.md#layerlocalhittest)
 
-#### Defined in
+***
 
-[display/Layer.ts:587](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L587)
+### $markDirty()
 
-___
+> `protected` **$markDirty**(`sizeDirty?`): `void`
 
-### $markDirty
-
-▸ `Protected` **$markDirty**(`sizeDirty?`): `void`
+Defined in: [display/Layer.ts:389](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L389)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `sizeDirty?` | `boolean` |
+##### sizeDirty?
+
+`boolean`
 
 #### Returns
 
@@ -1718,17 +1436,15 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$markDirty](../README.md#$markdirty)
+[`Layer`](../variables/default.md#layer).[`$markDirty`](../variables/default.md#layermarkdirty)
 
-#### Defined in
+***
 
-[display/Layer.ts:389](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L389)
+### $markParentDirty()
 
-___
+> `protected` **$markParentDirty**(): `void`
 
-### $markParentDirty
-
-▸ `Protected` **$markParentDirty**(): `void`
+Defined in: [display/Layer.ts:398](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L398)
 
 #### Returns
 
@@ -1736,97 +1452,87 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$markParentDirty](../README.md#$markparentdirty)
+[`Layer`](../variables/default.md#layer).[`$markParentDirty`](../variables/default.md#layermarkparentdirty)
 
-#### Defined in
+***
 
-[display/Layer.ts:398](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L398)
+### $onTouchCancel()
 
-___
+> `protected` **$onTouchCancel**(`e`): `void`
 
-### $onTouchCancel
-
-▸ `Protected` **$onTouchCancel**(`e`): `void`
+Defined in: [display/Scroller.ts:164](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L164)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `e` | [`TouchEvent`](../README.md#touchevent) |
+##### e
+
+[`TouchEvent`](../variables/default.md#touchevent)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[display/Scroller.ts:164](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L164)
+### $onTouchEnd()
 
-___
+> `protected` **$onTouchEnd**(`e`): `void`
 
-### $onTouchEnd
-
-▸ `Protected` **$onTouchEnd**(`e`): `void`
+Defined in: [display/Scroller.ts:130](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L130)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `e` | [`TouchEvent`](../README.md#touchevent) |
+##### e
+
+[`TouchEvent`](../variables/default.md#touchevent)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[display/Scroller.ts:130](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L130)
+### $onTouchMove()
 
-___
+> `protected` **$onTouchMove**(`e`): `void`
 
-### $onTouchMove
-
-▸ `Protected` **$onTouchMove**(`e`): `void`
+Defined in: [display/Scroller.ts:99](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L99)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `e` | [`TouchEvent`](../README.md#touchevent) |
+##### e
+
+[`TouchEvent`](../variables/default.md#touchevent)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[display/Scroller.ts:99](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L99)
+### $onTouchStart()
 
-___
+> `protected` **$onTouchStart**(`e`): `void`
 
-### $onTouchStart
-
-▸ `Protected` **$onTouchStart**(`e`): `void`
+Defined in: [display/Scroller.ts:86](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L86)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `e` | [`TouchEvent`](../README.md#touchevent) |
+##### e
+
+[`TouchEvent`](../variables/default.md#touchevent)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[display/Scroller.ts:86](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L86)
+### $render()
 
-___
+> `protected` **$render**(): `number`
 
-### $render
-
-▸ `Protected` **$render**(): `number`
+Defined in: [display/Layer.ts:636](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L636)
 
 #### Returns
 
@@ -1834,17 +1540,15 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$render](../README.md#$render)
+[`Layer`](../variables/default.md#layer).[`$render`](../variables/default.md#layerrender)
 
-#### Defined in
+***
 
-[display/Layer.ts:636](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L636)
+### $resizeCanvas()
 
-___
+> `protected` **$resizeCanvas**(): `void`
 
-### $resizeCanvas
-
-▸ `Protected` **$resizeCanvas**(): `void`
+Defined in: [display/Scroller.ts:77](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Scroller.ts#L77)
 
 #### Returns
 
@@ -1852,17 +1556,15 @@ ___
 
 #### Overrides
 
-[Layer](../README.md#layer).[$resizeCanvas](../README.md#$resizecanvas)
+[`Layer`](../variables/default.md#layer).[`$resizeCanvas`](../variables/default.md#layerresizecanvas)
 
-#### Defined in
+***
 
-[display/Scroller.ts:77](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Scroller.ts#L77)
+### $resizeParentCanvas()
 
-___
+> `protected` **$resizeParentCanvas**(): `void`
 
-### $resizeParentCanvas
-
-▸ `Protected` **$resizeParentCanvas**(): `void`
+Defined in: [display/Layer.ts:428](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L428)
 
 #### Returns
 
@@ -1870,165 +1572,161 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[$resizeParentCanvas](../README.md#$resizeparentcanvas)
+[`Layer`](../variables/default.md#layer).[`$resizeParentCanvas`](../variables/default.md#layerresizeparentcanvas)
 
-#### Defined in
+***
 
-[display/Layer.ts:428](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L428)
+### addChild()
 
-___
+> **addChild**(`child`): `this`
 
-### addChild
-
-▸ **addChild**(`child`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:231](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L231)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child` | [`Layer`](../README.md#layer) |
+##### child
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[addChild](../README.md#addchild)
+[`Layer`](../variables/default.md#layer).[`addChild`](../variables/default.md#layeraddchild)
 
-#### Defined in
+***
 
-[display/Layer.ts:231](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L231)
+### addChildAt()
 
-___
+> **addChildAt**(`child`, `index`): `this`
 
-### addChildAt
-
-▸ **addChildAt**(`child`, `index`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:235](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L235)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child` | [`Layer`](../README.md#layer) |
-| `index` | `number` |
+##### child
+
+[`Layer`](../variables/default.md#layer)
+
+##### index
+
+`number`
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[addChildAt](../README.md#addchildat)
+[`Layer`](../variables/default.md#layer).[`addChildAt`](../variables/default.md#layeraddchildat)
 
-#### Defined in
+***
 
-[display/Layer.ts:235](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L235)
+### emit()
 
-___
+#### Call Signature
 
-### emit
+> **emit**(`event`): `boolean`
 
-▸ **emit**(`event`): `boolean`
+Defined in: [event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L42)
 
-#### Parameters
+##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | [`Event`](../README.md#event) |
+###### event
 
-#### Returns
+[`Event`](../variables/default.md#event)
+
+##### Returns
 
 `boolean`
 
-#### Inherited from
+##### Inherited from
 
-[Layer](../README.md#layer).[emit](../README.md#emit)
+[`Layer`](../variables/default.md#layer).[`emit`](../variables/default.md#layeremit)
 
-#### Defined in
+#### Call Signature
 
-[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L42)
+> **emit**(`type`, ...`args`): `boolean`
 
-▸ **emit**(`type`, `...args`): `boolean`
+Defined in: [event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L43)
 
-#### Parameters
+##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `...args` | `any`[] |
+###### type
 
-#### Returns
+`string`
+
+###### args
+
+...`any`[]
+
+##### Returns
 
 `boolean`
 
-#### Inherited from
+##### Inherited from
 
-[Layer](../README.md#layer).[emit](../README.md#emit)
+[`Layer`](../variables/default.md#layer).[`emit`](../variables/default.md#layeremit)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L43)
+### getChildAt()
 
-___
+> **getChildAt**(`index`): [`Layer`](../variables/default.md#layer)
 
-### getChildAt
-
-▸ **getChildAt**(`index`): [`Layer`](../README.md#layer)
+Defined in: [display/Layer.ts:277](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L277)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `index` | `number` |
+##### index
+
+`number`
 
 #### Returns
 
-[`Layer`](../README.md#layer)
+[`Layer`](../variables/default.md#layer)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[getChildAt](../README.md#getchildat)
+[`Layer`](../variables/default.md#layer).[`getChildAt`](../variables/default.md#layergetchildat)
 
-#### Defined in
+***
 
-[display/Layer.ts:277](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L277)
+### getChildByName()
 
-___
+> **getChildByName**(`name`): [`Layer`](../variables/default.md#layer)
 
-### getChildByName
-
-▸ **getChildByName**(`name`): [`Layer`](../README.md#layer)
+Defined in: [display/Layer.ts:256](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L256)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `name` | `string` |
+##### name
+
+`string`
 
 #### Returns
 
-[`Layer`](../README.md#layer)
+[`Layer`](../variables/default.md#layer)
 
 #### Inherited from
 
-[Layer](../README.md#layer).[getChildByName](../README.md#getchildbyname)
+[`Layer`](../variables/default.md#layer).[`getChildByName`](../variables/default.md#layergetchildbyname)
 
-#### Defined in
+***
 
-[display/Layer.ts:256](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L256)
+### getChildIndex()
 
-___
+> **getChildIndex**(`child`): `number`
 
-### getChildIndex
-
-▸ **getChildIndex**(`child`): `number`
+Defined in: [display/Layer.ts:281](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L281)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child` | [`Layer`](../README.md#layer) |
+##### child
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
@@ -2036,47 +1734,43 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[getChildIndex](../README.md#getchildindex)
+[`Layer`](../variables/default.md#layer).[`getChildIndex`](../variables/default.md#layergetchildindex)
 
-#### Defined in
+***
 
-[display/Layer.ts:281](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L281)
+### getChildrenByTag()
 
-___
+> **getChildrenByTag**(`tag`): [`Layer`](../variables/default.md#layer)[]
 
-### getChildrenByTag
-
-▸ **getChildrenByTag**(`tag`): [`Layer`](../README.md#layer)[]
+Defined in: [display/Layer.ts:266](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L266)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `tag` | `string` |
+##### tag
+
+`string`
 
 #### Returns
 
-[`Layer`](../README.md#layer)[]
+[`Layer`](../variables/default.md#layer)[]
 
 #### Inherited from
 
-[Layer](../README.md#layer).[getChildrenByTag](../README.md#getchildrenbytag)
+[`Layer`](../variables/default.md#layer).[`getChildrenByTag`](../variables/default.md#layergetchildrenbytag)
 
-#### Defined in
+***
 
-[display/Layer.ts:266](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L266)
+### hasChild()
 
-___
+> **hasChild**(`child`): `boolean`
 
-### hasChild
-
-▸ **hasChild**(`child`): `boolean`
+Defined in: [display/Layer.ts:285](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L285)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child` | [`Layer`](../README.md#layer) |
+##### child
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
@@ -2084,23 +1778,21 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[hasChild](../README.md#haschild)
+[`Layer`](../variables/default.md#layer).[`hasChild`](../variables/default.md#layerhaschild)
 
-#### Defined in
+***
 
-[display/Layer.ts:285](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L285)
+### hasEventListener()
 
-___
+> **hasEventListener**(`type`): `boolean`
 
-### hasEventListener
-
-▸ **hasEventListener**(`type`): `boolean`
+Defined in: [event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L80)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
+##### type
+
+`string`
 
 #### Returns
 
@@ -2108,333 +1800,322 @@ ___
 
 #### Inherited from
 
-[Layer](../README.md#layer).[hasEventListener](../README.md#haseventlistener)
+[`Layer`](../variables/default.md#layer).[`hasEventListener`](../variables/default.md#layerhaseventlistener)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L80)
+### off()
 
-___
+> **off**(`type`, `listener?`): `this`
 
-### off
-
-▸ **off**(`type`, `listener?`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:684](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L684)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener?` | (...`args`: `any`[]) => `void` |
+##### type
+
+`string`
+
+##### listener?
+
+(...`args`) => `void`
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[off](../README.md#off)
+[`Layer`](../variables/default.md#layer).[`off`](../variables/default.md#layeroff)
 
-#### Defined in
+***
 
-[display/Layer.ts:684](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L684)
+### on()
 
-___
+> **on**(`type`, `listener`): `this`
 
-### on
-
-▸ **on**(`type`, `listener`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:668](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L668)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener` | (...`args`: `any`[]) => `void` |
+##### type
+
+`string`
+
+##### listener
+
+(...`args`) => `void`
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[on](../README.md#on)
+[`Layer`](../variables/default.md#layer).[`on`](../variables/default.md#layeron)
 
-#### Defined in
+***
 
-[display/Layer.ts:668](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L668)
+### once()
 
-___
+> **once**(`type`, `listener`): `this`
 
-### once
-
-▸ **once**(`type`, `listener`): [`Scroller`](../README.md#scroller)
+Defined in: [event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L33)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener` | [`Listener`](../README.md#listener) |
+##### type
+
+`string`
+
+##### listener
+
+[`Listener`](../type-aliases/Listener.md)
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[once](../README.md#once)
+[`Layer`](../variables/default.md#layer).[`once`](../variables/default.md#layeronce)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L33)
+### removeAllChildren()
 
-___
+> **removeAllChildren**(): `this`
 
-### removeAllChildren
-
-▸ **removeAllChildren**(): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:372](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L372)
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[removeAllChildren](../README.md#removeallchildren)
+[`Layer`](../variables/default.md#layer).[`removeAllChildren`](../variables/default.md#layerremoveallchildren)
 
-#### Defined in
+***
 
-[display/Layer.ts:372](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L372)
+### removeAllListeners()
 
-___
+> **removeAllListeners**(): `this`
 
-### removeAllListeners
-
-▸ **removeAllListeners**(): [`Scroller`](../README.md#scroller)
+Defined in: [event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L85)
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[removeAllListeners](../README.md#removealllisteners)
+[`Layer`](../variables/default.md#layer).[`removeAllListeners`](../variables/default.md#layerremovealllisteners)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L85)
+### removeChild()
 
-___
+> **removeChild**(`child`): `this`
 
-### removeChild
-
-▸ **removeChild**(`child`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:333](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L333)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child` | [`Layer`](../README.md#layer) |
+##### child
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[removeChild](../README.md#removechild)
+[`Layer`](../variables/default.md#layer).[`removeChild`](../variables/default.md#layerremovechild)
 
-#### Defined in
+***
 
-[display/Layer.ts:333](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L333)
+### removeChildAt()
 
-___
+> **removeChildAt**(`index`): `this`
 
-### removeChildAt
-
-▸ **removeChildAt**(`index`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:338](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L338)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `index` | `number` |
+##### index
+
+`number`
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[removeChildAt](../README.md#removechildat)
+[`Layer`](../variables/default.md#layer).[`removeChildAt`](../variables/default.md#layerremovechildat)
 
-#### Defined in
+***
 
-[display/Layer.ts:338](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L338)
+### removeChildByName()
 
-___
+> **removeChildByName**(`name`): `this`
 
-### removeChildByName
-
-▸ **removeChildByName**(`name`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:349](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L349)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `name` | `string` |
+##### name
+
+`string`
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[removeChildByName](../README.md#removechildbyname)
+[`Layer`](../variables/default.md#layer).[`removeChildByName`](../variables/default.md#layerremovechildbyname)
 
-#### Defined in
+***
 
-[display/Layer.ts:349](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L349)
+### removeChildrenByTag()
 
-___
+> **removeChildrenByTag**(`tag`): `this`
 
-### removeChildrenByTag
-
-▸ **removeChildrenByTag**(`tag`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:361](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L361)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `tag` | `string` |
+##### tag
+
+`string`
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[removeChildrenByTag](../README.md#removechildrenbytag)
+[`Layer`](../variables/default.md#layer).[`removeChildrenByTag`](../variables/default.md#layerremovechildrenbytag)
 
-#### Defined in
+***
 
-[display/Layer.ts:361](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L361)
+### removeSelf()
 
-___
+> **removeSelf**(): `this`
 
-### removeSelf
-
-▸ **removeSelf**(): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:382](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L382)
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[removeSelf](../README.md#removeself)
+[`Layer`](../variables/default.md#layer).[`removeSelf`](../variables/default.md#layerremoveself)
 
-#### Defined in
+***
 
-[display/Layer.ts:382](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L382)
+### replaceChild()
 
-___
+> **replaceChild**(`oldChild`, `newChild`): `this`
 
-### replaceChild
-
-▸ **replaceChild**(`oldChild`, `newChild`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:249](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L249)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `oldChild` | [`Layer`](../README.md#layer) |
-| `newChild` | [`Layer`](../README.md#layer) |
+##### oldChild
+
+[`Layer`](../variables/default.md#layer)
+
+##### newChild
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[replaceChild](../README.md#replacechild)
+[`Layer`](../variables/default.md#layer).[`replaceChild`](../variables/default.md#layerreplacechild)
 
-#### Defined in
+***
 
-[display/Layer.ts:249](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L249)
+### setChildIndex()
 
-___
+> **setChildIndex**(`child`, `index`): `this`
 
-### setChildIndex
-
-▸ **setChildIndex**(`child`, `index`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:309](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L309)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child` | [`Layer`](../README.md#layer) |
-| `index` | `number` |
+##### child
+
+[`Layer`](../variables/default.md#layer)
+
+##### index
+
+`number`
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[setChildIndex](../README.md#setchildindex)
+[`Layer`](../variables/default.md#layer).[`setChildIndex`](../variables/default.md#layersetchildindex)
 
-#### Defined in
+***
 
-[display/Layer.ts:309](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L309)
+### swapChildren()
 
-___
+> **swapChildren**(`child1`, `child2`): `this`
 
-### swapChildren
-
-▸ **swapChildren**(`child1`, `child2`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:289](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L289)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `child1` | [`Layer`](../README.md#layer) |
-| `child2` | [`Layer`](../README.md#layer) |
+##### child1
+
+[`Layer`](../variables/default.md#layer)
+
+##### child2
+
+[`Layer`](../variables/default.md#layer)
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[swapChildren](../README.md#swapchildren)
+[`Layer`](../variables/default.md#layer).[`swapChildren`](../variables/default.md#layerswapchildren)
 
-#### Defined in
+***
 
-[display/Layer.ts:289](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L289)
+### swapChildrenAt()
 
-___
+> **swapChildrenAt**(`index1`, `index2`): `this`
 
-### swapChildrenAt
-
-▸ **swapChildrenAt**(`index1`, `index2`): [`Scroller`](../README.md#scroller)
+Defined in: [display/Layer.ts:298](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/display/Layer.ts#L298)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `index1` | `number` |
-| `index2` | `number` |
+##### index1
+
+`number`
+
+##### index2
+
+`number`
 
 #### Returns
 
-[`Scroller`](../README.md#scroller)
+`this`
 
 #### Inherited from
 
-[Layer](../README.md#layer).[swapChildrenAt](../README.md#swapchildrenat)
-
-#### Defined in
-
-[display/Layer.ts:298](https://github.com/Lanfei/playable.js/blob/2369e26/src/display/Layer.ts#L298)
+[`Layer`](../variables/default.md#layer).[`swapChildrenAt`](../variables/default.md#layerswapchildrenat)

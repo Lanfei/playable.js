@@ -1,63 +1,49 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / TweenStep
 
 # Interface: TweenStep
 
-## Table of contents
-
-### Properties
-
-- [callback](TweenStep.md#callback)
-- [duration](TweenStep.md#duration)
-- [ease](TweenStep.md#ease)
-- [props](TweenStep.md#props)
-- [type](TweenStep.md#type)
+Defined in: [tween/Tween.ts:225](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Tween.ts#L225)
 
 ## Properties
 
-### callback
+### callback?
 
-• `Optional` **callback**: `Function`
+> `optional` **callback**: `Function`
 
-#### Defined in
+Defined in: [tween/Tween.ts:230](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Tween.ts#L230)
 
-[tween/Tween.ts:230](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L230)
+***
 
-___
+### duration?
 
-### duration
+> `optional` **duration**: `number`
 
-• `Optional` **duration**: `number`
+Defined in: [tween/Tween.ts:228](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Tween.ts#L228)
 
-#### Defined in
+***
 
-[tween/Tween.ts:228](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L228)
+### ease?
 
-___
+> `optional` **ease**: `Function`
 
-### ease
+Defined in: [tween/Tween.ts:229](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Tween.ts#L229)
 
-• `Optional` **ease**: `Function`
+***
 
-#### Defined in
+### props?
 
-[tween/Tween.ts:229](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L229)
+> `optional` **props**: `Object`
 
-___
+Defined in: [tween/Tween.ts:227](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Tween.ts#L227)
 
-### props
-
-• `Optional` **props**: `Object`
-
-#### Defined in
-
-[tween/Tween.ts:227](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L227)
-
-___
+***
 
 ### type
 
-• **type**: `string`
+> **type**: `string`
 
-#### Defined in
-
-[tween/Tween.ts:226](https://github.com/Lanfei/playable.js/blob/2369e26/src/tween/Tween.ts#L226)
+Defined in: [tween/Tween.ts:226](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/tween/Tween.ts#L226)

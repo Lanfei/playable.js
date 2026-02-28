@@ -1,5 +1,5 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('Matrix', () => {
 

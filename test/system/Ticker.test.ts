@@ -1,11 +1,11 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('Ticker', () => {
 	let stage = new playable.Stage();
 	let ticker = stage.ticker;
 
-	after(() => {
+	afterAll(() => {
 		stage.removeSelf();
 	});
 
@@ -31,32 +31,32 @@ describe('Ticker', () => {
 		assert.strictEqual(ticker.paused, false);
 	});
 
-	it('.setTimeout(handler: Function, timeout: number = 0): number', done => {
+	it('.setTimeout(handler: Function, timeout: number = 0): number', () => new Promise<void>(resolve => {
 		ticker.setTimeout(() => {
-			done();
+			resolve();
 		}, 50);
-	});
+	}));
 
-	it('.clearTimeout(handle: number): void', done => {
+	it('.clearTimeout(handle: number): void', () => new Promise<void>(resolve => {
 		let handle = ticker.setTimeout(() => {
 			assert.notOk(true);
 		}, 10);
 		ticker.clearTimeout(handle);
 		ticker.setTimeout(() => {
-			done();
+			resolve();
 		}, 50);
-	});
+	}));
 
-	it('.setInterval(handler: Function, timeout: number): number', done => {
+	it('.setInterval(handler: Function, timeout: number): number', () => new Promise<void>(resolve => {
 		let counter = 0;
 		ticker.setInterval(() => {
 			if (++counter > 5) {
-				done();
+				resolve();
 			}
 		}, 50);
-	});
+	}));
 
-	it('.clearInterval(handle: number): void', done => {
+	it('.clearInterval(handle: number): void', () => new Promise<void>(resolve => {
 		let counter = 0;
 		let handle = ticker.setInterval(() => {
 			++counter;
@@ -67,21 +67,21 @@ describe('Ticker', () => {
 			}
 		}, 10);
 		ticker.setTimeout(() => {
-			done();
+			resolve();
 		}, 50);
-	});
+	}));
 
-	it('.registerEnterFrameCallback(layer: Layer): this', done => {
+	it('.registerEnterFrameCallback(layer: Layer): this', () => new Promise<void>(resolve => {
 		let layer = new playable.Layer();
 		ticker.registerEnterFrameCallback(layer);
 		let eventType = playable.Event.ENTER_FRAME;
 		layer.on(eventType, e => {
 			assert.strictEqual(e.type, eventType);
-			done();
+			resolve();
 		});
-	});
+	}));
 
-	it('.unregisterEnterFrameCallback(layer: Layer): this', done => {
+	it('.unregisterEnterFrameCallback(layer: Layer): this', () => new Promise<void>(resolve => {
 		let layer = new playable.Layer();
 		ticker.registerEnterFrameCallback(layer);
 		let eventType = playable.Event.ENTER_FRAME;
@@ -90,8 +90,8 @@ describe('Ticker', () => {
 		});
 		ticker.unregisterEnterFrameCallback(layer);
 		ticker.on(playable.Event.TICK, () => {
-			done();
+			resolve();
 		});
-	});
+	}));
 
 });

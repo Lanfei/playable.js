@@ -1,347 +1,268 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / Texture
 
 # Class: Texture
 
-## Hierarchy
+Defined in: [media/Texture.ts:4](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Texture.ts#L4)
 
-- [`Media`](../README.md#media)
+## Extends
 
-  ↳ **`Texture`**
-
-## Table of contents
-
-### Constructors
-
-- [constructor](Texture.md#constructor)
-
-### Properties
-
-- [$boundOnError](Texture.md#$boundonerror)
-- [$boundOnLoad](Texture.md#$boundonload)
-- [$element](Texture.md#$element)
-- [$emittingType](Texture.md#$emittingtype)
-- [$errored](Texture.md#$errored)
-- [$events](Texture.md#$events)
-- [$loaded](Texture.md#$loaded)
-- [$removedListeners](Texture.md#$removedlisteners)
-- [$stage](Texture.md#$stage)
-- [pixelRatio](Texture.md#pixelratio)
-- [defaultPixelRatio](Texture.md#defaultpixelratio)
-
-### Accessors
-
-- [element](Texture.md#element)
-- [height](Texture.md#height)
-- [url](Texture.md#url)
-- [width](Texture.md#width)
-
-### Methods
-
-- [$onError](Texture.md#$onerror)
-- [$onLoad](Texture.md#$onload)
-- [emit](Texture.md#emit)
-- [hasEventListener](Texture.md#haseventlistener)
-- [off](Texture.md#off)
-- [on](Texture.md#on)
-- [once](Texture.md#once)
-- [removeAllListeners](Texture.md#removealllisteners)
+- [`Media`](../variables/default.md#media)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• **new Texture**(`stage`, `url?`)
+> **new Texture**(`stage`, `url?`): [`Texture`](../variables/default.md#texture)
+
+Defined in: [media/Texture.ts:12](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Texture.ts#L12)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `stage` | [`Stage`](../README.md#stage) |
-| `url?` | `string` |
+##### stage
+
+[`Stage`](../variables/default.md#stage)
+
+##### url?
+
+`string`
+
+#### Returns
+
+[`Texture`](../variables/default.md#texture)
 
 #### Overrides
 
-[Media](../README.md#media).[constructor](../README.md#constructor)
-
-#### Defined in
-
-[media/Texture.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L12)
+[`Media`](../variables/default.md#media).[`constructor`](../variables/default.md#mediaconstructor)
 
 ## Properties
 
-### $boundOnError
+### $boundOnError()
 
-• `Protected` `Readonly` **$boundOnError**: (`e`: `ErrorEvent`) => `void`
+> `protected` `readonly` **$boundOnError**: (`e`) => `void`
 
-#### Type declaration
+Defined in: [media/Media.ts:13](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L13)
 
-▸ (`e`): `void`
+#### Parameters
 
-##### Parameters
+##### e
 
-| Name | Type |
-| :------ | :------ |
-| `e` | `ErrorEvent` |
+`ErrorEvent`
 
-##### Returns
+#### Returns
 
 `void`
 
 #### Inherited from
 
-[Media](../README.md#media).[$boundOnError](../README.md#$boundonerror)
+[`Media`](../variables/default.md#media).[`$boundOnError`](../variables/default.md#mediaboundonerror)
 
-#### Defined in
+***
 
-[media/Media.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L13)
+### $boundOnLoad()
 
-___
+> `protected` `readonly` **$boundOnLoad**: () => `void`
 
-### $boundOnLoad
+Defined in: [media/Media.ts:12](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L12)
 
-• `Protected` `Readonly` **$boundOnLoad**: () => `void`
-
-#### Type declaration
-
-▸ (): `void`
-
-##### Returns
+#### Returns
 
 `void`
 
 #### Inherited from
 
-[Media](../README.md#media).[$boundOnLoad](../README.md#$boundonload)
+[`Media`](../variables/default.md#media).[`$boundOnLoad`](../variables/default.md#mediaboundonload)
 
-#### Defined in
-
-[media/Media.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L12)
-
-___
+***
 
 ### $element
 
-• `Protected` `Readonly` **$element**: `HTMLImageElement`
+> `protected` `readonly` **$element**: `HTMLImageElement`
+
+Defined in: [media/Texture.ts:10](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Texture.ts#L10)
 
 #### Overrides
 
-[Media](../README.md#media).[$element](../README.md#$element)
+[`Media`](../variables/default.md#media).[`$element`](../variables/default.md#mediaelement)
 
-#### Defined in
-
-[media/Texture.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L10)
-
-___
+***
 
 ### $emittingType
 
-• `Protected` **$emittingType**: `string` = `null`
+> `protected` **$emittingType**: `string` = `null`
+
+Defined in: [event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L6)
 
 #### Inherited from
 
-[Media](../README.md#media).[$emittingType](../README.md#$emittingtype)
+[`Media`](../variables/default.md#media).[`$emittingType`](../variables/default.md#mediaemittingtype)
 
-#### Defined in
-
-[event/EventEmitter.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L6)
-
-___
+***
 
 ### $errored
 
-• `Protected` **$errored**: `boolean` = `false`
+> `protected` **$errored**: `boolean` = `false`
+
+Defined in: [media/Media.ts:10](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L10)
 
 #### Inherited from
 
-[Media](../README.md#media).[$errored](../README.md#$errored)
+[`Media`](../variables/default.md#media).[`$errored`](../variables/default.md#mediaerrored)
 
-#### Defined in
-
-[media/Media.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L10)
-
-___
+***
 
 ### $events
 
-• `Protected` **$events**: `Object` = `{}`
+> `protected` **$events**: `Object` = `{}`
+
+Defined in: [event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L5)
 
 #### Inherited from
 
-[Media](../README.md#media).[$events](../README.md#$events)
+[`Media`](../variables/default.md#media).[`$events`](../variables/default.md#mediaevents)
 
-#### Defined in
-
-[event/EventEmitter.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L5)
-
-___
+***
 
 ### $loaded
 
-• `Protected` **$loaded**: `boolean` = `false`
+> `protected` **$loaded**: `boolean` = `false`
+
+Defined in: [media/Media.ts:9](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L9)
 
 #### Inherited from
 
-[Media](../README.md#media).[$loaded](../README.md#$loaded)
+[`Media`](../variables/default.md#media).[`$loaded`](../variables/default.md#medialoaded)
 
-#### Defined in
-
-[media/Media.ts:9](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L9)
-
-___
+***
 
 ### $removedListeners
 
-• `Protected` **$removedListeners**: [`Listener`](../README.md#listener)[] = `[]`
+> `protected` **$removedListeners**: [`Listener`](../type-aliases/Listener.md)[] = `[]`
+
+Defined in: [event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L7)
 
 #### Inherited from
 
-[Media](../README.md#media).[$removedListeners](../README.md#$removedlisteners)
+[`Media`](../variables/default.md#media).[`$removedListeners`](../variables/default.md#mediaremovedlisteners)
 
-#### Defined in
-
-[event/EventEmitter.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L7)
-
-___
+***
 
 ### $stage
 
-• `Protected` `Readonly` **$stage**: [`Stage`](../README.md#stage)
+> `protected` `readonly` **$stage**: [`Stage`](../variables/default.md#stage)
+
+Defined in: [media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L11)
 
 #### Inherited from
 
-[Media](../README.md#media).[$stage](../README.md#$stage)
+[`Media`](../variables/default.md#media).[`$stage`](../variables/default.md#mediastage)
 
-#### Defined in
-
-[media/Media.ts:11](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L11)
-
-___
+***
 
 ### pixelRatio
 
-• **pixelRatio**: `number` = `Texture.defaultPixelRatio`
+> **pixelRatio**: `number` = `Texture.defaultPixelRatio`
 
-#### Defined in
+Defined in: [media/Texture.ts:8](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Texture.ts#L8)
 
-[media/Texture.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L8)
-
-___
+***
 
 ### defaultPixelRatio
 
-▪ `Static` **defaultPixelRatio**: `number` = `1`
+> `static` **defaultPixelRatio**: `number` = `1`
 
-#### Defined in
-
-[media/Texture.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L6)
+Defined in: [media/Texture.ts:6](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Texture.ts#L6)
 
 ## Accessors
 
 ### element
 
-• `get` **element**(): `HTMLImageElement`
+#### Get Signature
 
-#### Returns
+> **get** **element**(): `HTMLImageElement`
+
+Defined in: [media/Texture.ts:24](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Texture.ts#L24)
+
+##### Returns
 
 `HTMLImageElement`
 
 #### Overrides
 
-Media.element
+[`Media`](../variables/default.md#media).[`element`](../variables/default.md#mediaelement-1)
 
-#### Defined in
-
-[media/Texture.ts:24](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L24)
-
-___
+***
 
 ### height
 
-• `get` **height**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **height**(): `number`
+
+Defined in: [media/Texture.ts:32](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Texture.ts#L32)
+
+##### Returns
 
 `number`
 
-#### Defined in
-
-[media/Texture.ts:32](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L32)
-
-___
+***
 
 ### url
 
-• `get` **url**(): `string`
+#### Get Signature
 
-#### Returns
+> **get** **url**(): `string`
+
+Defined in: [media/Media.ts:26](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L26)
+
+##### Returns
 
 `string`
 
-#### Inherited from
+#### Set Signature
 
-Media.url
+> **set** **url**(`url`): `void`
 
-#### Defined in
+Defined in: [media/Media.ts:30](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L30)
 
-[media/Media.ts:26](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L26)
+##### Parameters
 
-• `set` **url**(`url`): `void`
+###### url
 
-#### Parameters
+`string`
 
-| Name | Type |
-| :------ | :------ |
-| `url` | `string` |
-
-#### Returns
+##### Returns
 
 `void`
 
 #### Inherited from
 
-Media.url
+[`Media`](../variables/default.md#media).[`url`](../variables/default.md#mediaurl)
 
-#### Defined in
-
-[media/Media.ts:30](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L30)
-
-___
+***
 
 ### width
 
-• `get` **width**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **width**(): `number`
+
+Defined in: [media/Texture.ts:28](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Texture.ts#L28)
+
+##### Returns
 
 `number`
 
-#### Defined in
-
-[media/Texture.ts:28](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Texture.ts#L28)
-
 ## Methods
 
-### $onError
+### $onError()
 
-▸ `Protected` **$onError**(): `void`
+> `protected` **$onError**(): `void`
 
-#### Returns
-
-`void`
-
-#### Inherited from
-
-[Media](../README.md#media).[$onError](../README.md#$onerror)
-
-#### Defined in
-
-[media/Media.ts:56](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L56)
-
-___
-
-### $onLoad
-
-▸ `Protected` **$onLoad**(): `void`
+Defined in: [media/Media.ts:56](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L56)
 
 #### Returns
 
@@ -349,23 +270,85 @@ ___
 
 #### Inherited from
 
-[Media](../README.md#media).[$onLoad](../README.md#$onload)
+[`Media`](../variables/default.md#media).[`$onError`](../variables/default.md#mediaonerror)
 
-#### Defined in
+***
 
-[media/Media.ts:50](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L50)
+### $onLoad()
 
-___
+> `protected` **$onLoad**(): `void`
 
-### emit
+Defined in: [media/Media.ts:50](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L50)
 
-▸ **emit**(`event`): `boolean`
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[`Media`](../variables/default.md#media).[`$onLoad`](../variables/default.md#mediaonload)
+
+***
+
+### emit()
+
+#### Call Signature
+
+> **emit**(`event`): `boolean`
+
+Defined in: [event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L42)
+
+##### Parameters
+
+###### event
+
+[`Event`](../variables/default.md#event)
+
+##### Returns
+
+`boolean`
+
+##### Inherited from
+
+[`Media`](../variables/default.md#media).[`emit`](../variables/default.md#mediaemit)
+
+#### Call Signature
+
+> **emit**(`type`, ...`args`): `boolean`
+
+Defined in: [event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L43)
+
+##### Parameters
+
+###### type
+
+`string`
+
+###### args
+
+...`any`[]
+
+##### Returns
+
+`boolean`
+
+##### Inherited from
+
+[`Media`](../variables/default.md#media).[`emit`](../variables/default.md#mediaemit)
+
+***
+
+### hasEventListener()
+
+> **hasEventListener**(`type`): `boolean`
+
+Defined in: [event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L80)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `event` | [`Event`](../README.md#event) |
+##### type
+
+`string`
 
 #### Returns
 
@@ -373,146 +356,98 @@ ___
 
 #### Inherited from
 
-[Media](../README.md#media).[emit](../README.md#emit)
+[`Media`](../variables/default.md#media).[`hasEventListener`](../variables/default.md#mediahaseventlistener)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:42](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L42)
+### off()
 
-▸ **emit**(`type`, `...args`): `boolean`
+> **off**(`type`, `listener?`): `this`
 
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `...args` | `any`[] |
-
-#### Returns
-
-`boolean`
-
-#### Inherited from
-
-[Media](../README.md#media).[emit](../README.md#emit)
-
-#### Defined in
-
-[event/EventEmitter.ts:43](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L43)
-
-___
-
-### hasEventListener
-
-▸ **hasEventListener**(`type`): `boolean`
+Defined in: [event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L16)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
+##### type
+
+`string`
+
+##### listener?
+
+[`Listener`](../type-aliases/Listener.md)
 
 #### Returns
 
-`boolean`
+`this`
 
 #### Inherited from
 
-[Media](../README.md#media).[hasEventListener](../README.md#haseventlistener)
+[`Media`](../variables/default.md#media).[`off`](../variables/default.md#mediaoff)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L80)
+### on()
 
-___
+> **on**(`type`, `listener`): `this`
 
-### off
-
-▸ **off**(`type`, `listener?`): [`Texture`](../README.md#texture)
+Defined in: [media/Media.ts:36](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/media/Media.ts#L36)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener?` | [`Listener`](../README.md#listener) |
+##### type
+
+`string`
+
+##### listener
+
+(...`args`) => `void`
 
 #### Returns
 
-[`Texture`](../README.md#texture)
+`this`
 
 #### Inherited from
 
-[Media](../README.md#media).[off](../README.md#off)
+[`Media`](../variables/default.md#media).[`on`](../variables/default.md#mediaon)
 
-#### Defined in
+***
 
-[event/EventEmitter.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L16)
+### once()
 
-___
+> **once**(`type`, `listener`): `this`
 
-### on
-
-▸ **on**(`type`, `listener`): [`Texture`](../README.md#texture)
+Defined in: [event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L33)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener` | (...`args`: `any`[]) => `void` |
+##### type
+
+`string`
+
+##### listener
+
+[`Listener`](../type-aliases/Listener.md)
 
 #### Returns
 
-[`Texture`](../README.md#texture)
+`this`
 
 #### Inherited from
 
-[Media](../README.md#media).[on](../README.md#on)
+[`Media`](../variables/default.md#media).[`once`](../variables/default.md#mediaonce)
 
-#### Defined in
+***
 
-[media/Media.ts:36](https://github.com/Lanfei/playable.js/blob/2369e26/src/media/Media.ts#L36)
+### removeAllListeners()
 
-___
+> **removeAllListeners**(): `this`
 
-### once
-
-▸ **once**(`type`, `listener`): [`Texture`](../README.md#texture)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `type` | `string` |
-| `listener` | [`Listener`](../README.md#listener) |
+Defined in: [event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/event/EventEmitter.ts#L85)
 
 #### Returns
 
-[`Texture`](../README.md#texture)
+`this`
 
 #### Inherited from
 
-[Media](../README.md#media).[once](../README.md#once)
-
-#### Defined in
-
-[event/EventEmitter.ts:33](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L33)
-
-___
-
-### removeAllListeners
-
-▸ **removeAllListeners**(): [`Texture`](../README.md#texture)
-
-#### Returns
-
-[`Texture`](../README.md#texture)
-
-#### Inherited from
-
-[Media](../README.md#media).[removeAllListeners](../README.md#removealllisteners)
-
-#### Defined in
-
-[event/EventEmitter.ts:85](https://github.com/Lanfei/playable.js/blob/2369e26/src/event/EventEmitter.ts#L85)
+[`Media`](../variables/default.md#media).[`removeAllListeners`](../variables/default.md#mediaremovealllisteners)

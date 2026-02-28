@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "es2020",
+		"moduleResolution": "bundler",
 		"declaration": true,
 		"declarationDir": ".",
 		"emitDeclarationOnly": true

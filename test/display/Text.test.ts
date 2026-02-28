@@ -1,5 +1,5 @@
 import * as playable from '../../src/';
-import {assert} from 'chai';
+import {assert} from 'vitest';
 
 describe('Text', () => {
 	let stage = new playable.Stage();
@@ -10,7 +10,7 @@ describe('Text', () => {
 		stage.removeAllChildren();
 	});
 
-	after(() => {
+	afterAll(() => {
 		stage.removeSelf();
 	});
 

@@ -1,6 +1,12 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / Matrix
 
 # Class: Matrix
+
+Defined in: [geom/Matrix.ts:10](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L10)
 
 ```
             {a  b  0}
@@ -8,438 +14,458 @@
             {tx ty 1}
 ```
 
-## Table of contents
-
-### Constructors
-
-- [constructor](Matrix.md#constructor)
-
-### Properties
-
-- [a](Matrix.md#a)
-- [b](Matrix.md#b)
-- [c](Matrix.md#c)
-- [d](Matrix.md#d)
-- [tx](Matrix.md#tx)
-- [ty](Matrix.md#ty)
-- [$pool](Matrix.md#$pool)
-
-### Methods
-
-- [append](Matrix.md#append)
-- [equal](Matrix.md#equal)
-- [identity](Matrix.md#identity)
-- [invert](Matrix.md#invert)
-- [prepend](Matrix.md#prepend)
-- [release](Matrix.md#release)
-- [rotate](Matrix.md#rotate)
-- [scale](Matrix.md#scale)
-- [set](Matrix.md#set)
-- [skew](Matrix.md#skew)
-- [translate](Matrix.md#translate)
-- [create](Matrix.md#create)
-- [recycle](Matrix.md#recycle)
-
 ## Constructors
 
-### constructor
+### Constructor
 
-• `Protected` **new Matrix**(`a?`, `b?`, `c?`, `d?`, `tx?`, `ty?`)
+> `protected` **new Matrix**(`a?`, `b?`, `c?`, `d?`, `tx?`, `ty?`): [`Matrix`](../variables/default.md#matrix)
+
+Defined in: [geom/Matrix.ts:19](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L19)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `a?` | `number` |
-| `b?` | `number` |
-| `c?` | `number` |
-| `d?` | `number` |
-| `tx?` | `number` |
-| `ty?` | `number` |
+##### a?
 
-#### Defined in
+`number`
 
-[geom/Matrix.ts:19](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L19)
+##### b?
+
+`number`
+
+##### c?
+
+`number`
+
+##### d?
+
+`number`
+
+##### tx?
+
+`number`
+
+##### ty?
+
+`number`
+
+#### Returns
+
+[`Matrix`](../variables/default.md#matrix)
 
 ## Properties
 
 ### a
 
-• **a**: `number`
+> **a**: `number`
 
-#### Defined in
+Defined in: [geom/Matrix.ts:12](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L12)
 
-[geom/Matrix.ts:12](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L12)
-
-___
+***
 
 ### b
 
-• **b**: `number`
+> **b**: `number`
 
-#### Defined in
+Defined in: [geom/Matrix.ts:13](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L13)
 
-[geom/Matrix.ts:13](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L13)
-
-___
+***
 
 ### c
 
-• **c**: `number`
+> **c**: `number`
 
-#### Defined in
+Defined in: [geom/Matrix.ts:14](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L14)
 
-[geom/Matrix.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L14)
-
-___
+***
 
 ### d
 
-• **d**: `number`
+> **d**: `number`
 
-#### Defined in
+Defined in: [geom/Matrix.ts:15](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L15)
 
-[geom/Matrix.ts:15](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L15)
-
-___
+***
 
 ### tx
 
-• **tx**: `number`
+> **tx**: `number`
 
-#### Defined in
+Defined in: [geom/Matrix.ts:16](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L16)
 
-[geom/Matrix.ts:16](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L16)
-
-___
+***
 
 ### ty
 
-• **ty**: `number`
+> **ty**: `number`
 
-#### Defined in
+Defined in: [geom/Matrix.ts:17](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L17)
 
-[geom/Matrix.ts:17](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L17)
-
-___
+***
 
 ### $pool
 
-▪ `Static` `Protected` `Readonly` **$pool**: [`Matrix`](../README.md#matrix)[] = `[]`
+> `protected` `readonly` `static` **$pool**: [`Matrix`](../variables/default.md#matrix)[] = `[]`
 
-#### Defined in
-
-[geom/Matrix.ts:134](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L134)
+Defined in: [geom/Matrix.ts:134](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L134)
 
 ## Methods
 
-### append
+### append()
 
-▸ **append**(`m`): [`Matrix`](../README.md#matrix)
+#### Call Signature
+
+> **append**(`m`): `this`
+
+Defined in: [geom/Matrix.ts:79](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L79)
+
+##### Parameters
+
+###### m
+
+[`Matrix`](../variables/default.md#matrix)
+
+##### Returns
+
+`this`
+
+#### Call Signature
+
+> **append**(`a`, `b`, `c`, `d`, `tx`, `ty`): `this`
+
+Defined in: [geom/Matrix.ts:80](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L80)
+
+##### Parameters
+
+###### a
+
+`number`
+
+###### b
+
+`number`
+
+###### c
+
+`number`
+
+###### d
+
+`number`
+
+###### tx
+
+`number`
+
+###### ty
+
+`number`
+
+##### Returns
+
+`this`
+
+***
+
+### equal()
+
+> **equal**(`m`): `boolean`
+
+Defined in: [geom/Matrix.ts:123](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L123)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `m` | [`Matrix`](../README.md#matrix) |
+##### m
 
-#### Returns
-
-[`Matrix`](../README.md#matrix)
-
-#### Defined in
-
-[geom/Matrix.ts:79](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L79)
-
-▸ **append**(`a`, `b`, `c`, `d`, `tx`, `ty`): [`Matrix`](../README.md#matrix)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
-| `tx` | `number` |
-| `ty` | `number` |
-
-#### Returns
-
-[`Matrix`](../README.md#matrix)
-
-#### Defined in
-
-[geom/Matrix.ts:80](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L80)
-
-___
-
-### equal
-
-▸ **equal**(`m`): `boolean`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `m` | [`Matrix`](../README.md#matrix) |
+[`Matrix`](../variables/default.md#matrix)
 
 #### Returns
 
 `boolean`
 
-#### Defined in
+***
 
-[geom/Matrix.ts:123](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L123)
+### identity()
 
-___
+> **identity**(): `this`
 
-### identity
-
-▸ **identity**(): [`Matrix`](../README.md#matrix)
+Defined in: [geom/Matrix.ts:37](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L37)
 
 #### Returns
 
-[`Matrix`](../README.md#matrix)
+`this`
 
-#### Defined in
+***
 
-[geom/Matrix.ts:37](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L37)
+### invert()
 
-___
+> **invert**(): `this`
 
-### invert
-
-▸ **invert**(): [`Matrix`](../README.md#matrix)
+Defined in: [geom/Matrix.ts:41](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L41)
 
 #### Returns
 
-[`Matrix`](../README.md#matrix)
+`this`
 
-#### Defined in
+***
 
-[geom/Matrix.ts:41](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L41)
+### prepend()
 
-___
+#### Call Signature
 
-### prepend
+> **prepend**(`m`): `this`
 
-▸ **prepend**(`m`): [`Matrix`](../README.md#matrix)
+Defined in: [geom/Matrix.ts:58](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L58)
 
-#### Parameters
+##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `m` | [`Matrix`](../README.md#matrix) |
+###### m
 
-#### Returns
+[`Matrix`](../variables/default.md#matrix)
 
-[`Matrix`](../README.md#matrix)
+##### Returns
 
-#### Defined in
+`this`
 
-[geom/Matrix.ts:58](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L58)
+#### Call Signature
 
-▸ **prepend**(`a`, `b`, `c`, `d`, `tx`, `ty`): [`Matrix`](../README.md#matrix)
+> **prepend**(`a`, `b`, `c`, `d`, `tx`, `ty`): `this`
 
-#### Parameters
+Defined in: [geom/Matrix.ts:59](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L59)
 
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
-| `tx` | `number` |
-| `ty` | `number` |
+##### Parameters
 
-#### Returns
+###### a
 
-[`Matrix`](../README.md#matrix)
+`number`
 
-#### Defined in
+###### b
 
-[geom/Matrix.ts:59](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L59)
+`number`
 
-___
+###### c
 
-### release
+`number`
 
-▸ **release**(): `void`
+###### d
 
-#### Returns
+`number`
 
-`void`
+###### tx
 
-#### Defined in
+`number`
 
-[geom/Matrix.ts:130](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L130)
+###### ty
 
-___
+`number`
 
-### rotate
+##### Returns
 
-▸ **rotate**(`angle`): [`Matrix`](../README.md#matrix)
+`this`
 
-#### Parameters
+***
 
-| Name | Type |
-| :------ | :------ |
-| `angle` | `number` |
+### release()
 
-#### Returns
+> **release**(): `void`
 
-[`Matrix`](../README.md#matrix)
-
-#### Defined in
-
-[geom/Matrix.ts:104](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L104)
-
-___
-
-### scale
-
-▸ **scale**(`x`, `y?`): [`Matrix`](../README.md#matrix)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `x` | `number` |
-| `y?` | `number` |
-
-#### Returns
-
-[`Matrix`](../README.md#matrix)
-
-#### Defined in
-
-[geom/Matrix.ts:100](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L100)
-
-___
-
-### set
-
-▸ **set**(`a`, `b`, `c`, `d`, `tx`, `ty`): [`Matrix`](../README.md#matrix)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a` | `number` |
-| `b` | `number` |
-| `c` | `number` |
-| `d` | `number` |
-| `tx` | `number` |
-| `ty` | `number` |
-
-#### Returns
-
-[`Matrix`](../README.md#matrix)
-
-#### Defined in
-
-[geom/Matrix.ts:27](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L27)
-
-___
-
-### skew
-
-▸ **skew**(`skewX`, `skewY`): [`Matrix`](../README.md#matrix)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `skewX` | `number` |
-| `skewY` | `number` |
-
-#### Returns
-
-[`Matrix`](../README.md#matrix)
-
-#### Defined in
-
-[geom/Matrix.ts:110](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L110)
-
-___
-
-### translate
-
-▸ **translate**(`v`): [`Matrix`](../README.md#matrix)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `v` | [`Vector`](../README.md#vector) |
-
-#### Returns
-
-[`Matrix`](../README.md#matrix)
-
-#### Defined in
-
-[geom/Matrix.ts:114](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L114)
-
-▸ **translate**(`x`, `y`): [`Matrix`](../README.md#matrix)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `x` | `number` |
-| `y` | `number` |
-
-#### Returns
-
-[`Matrix`](../README.md#matrix)
-
-#### Defined in
-
-[geom/Matrix.ts:115](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L115)
-
-___
-
-### create
-
-▸ `Static` **create**(`a?`, `b?`, `c?`, `d?`, `tx?`, `ty?`): [`Matrix`](../README.md#matrix)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `a?` | `number` |
-| `b?` | `number` |
-| `c?` | `number` |
-| `d?` | `number` |
-| `tx?` | `number` |
-| `ty?` | `number` |
-
-#### Returns
-
-[`Matrix`](../README.md#matrix)
-
-#### Defined in
-
-[geom/Matrix.ts:136](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L136)
-
-___
-
-### recycle
-
-▸ `Static` **recycle**(`m`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `m` | [`Matrix`](../README.md#matrix) |
+Defined in: [geom/Matrix.ts:130](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L130)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[geom/Matrix.ts:152](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Matrix.ts#L152)
+### rotate()
+
+> **rotate**(`angle`): `this`
+
+Defined in: [geom/Matrix.ts:104](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L104)
+
+#### Parameters
+
+##### angle
+
+`number`
+
+#### Returns
+
+`this`
+
+***
+
+### scale()
+
+> **scale**(`x`, `y?`): `this`
+
+Defined in: [geom/Matrix.ts:100](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L100)
+
+#### Parameters
+
+##### x
+
+`number`
+
+##### y?
+
+`number`
+
+#### Returns
+
+`this`
+
+***
+
+### set()
+
+> **set**(`a`, `b`, `c`, `d`, `tx`, `ty`): `this`
+
+Defined in: [geom/Matrix.ts:27](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L27)
+
+#### Parameters
+
+##### a
+
+`number`
+
+##### b
+
+`number`
+
+##### c
+
+`number`
+
+##### d
+
+`number`
+
+##### tx
+
+`number`
+
+##### ty
+
+`number`
+
+#### Returns
+
+`this`
+
+***
+
+### skew()
+
+> **skew**(`skewX`, `skewY`): `this`
+
+Defined in: [geom/Matrix.ts:110](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L110)
+
+#### Parameters
+
+##### skewX
+
+`number`
+
+##### skewY
+
+`number`
+
+#### Returns
+
+`this`
+
+***
+
+### translate()
+
+#### Call Signature
+
+> **translate**(`v`): `this`
+
+Defined in: [geom/Matrix.ts:114](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L114)
+
+##### Parameters
+
+###### v
+
+[`Vector`](../variables/default.md#vector)
+
+##### Returns
+
+`this`
+
+#### Call Signature
+
+> **translate**(`x`, `y`): `this`
+
+Defined in: [geom/Matrix.ts:115](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L115)
+
+##### Parameters
+
+###### x
+
+`number`
+
+###### y
+
+`number`
+
+##### Returns
+
+`this`
+
+***
+
+### create()
+
+> `static` **create**(`a?`, `b?`, `c?`, `d?`, `tx?`, `ty?`): [`Matrix`](../variables/default.md#matrix)
+
+Defined in: [geom/Matrix.ts:136](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L136)
+
+#### Parameters
+
+##### a?
+
+`number`
+
+##### b?
+
+`number`
+
+##### c?
+
+`number`
+
+##### d?
+
+`number`
+
+##### tx?
+
+`number`
+
+##### ty?
+
+`number`
+
+#### Returns
+
+[`Matrix`](../variables/default.md#matrix)
+
+***
+
+### recycle()
+
+> `static` **recycle**(`m`): `void`
+
+Defined in: [geom/Matrix.ts:152](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Matrix.ts#L152)
+
+#### Parameters
+
+##### m
+
+[`Matrix`](../variables/default.md#matrix)
+
+#### Returns
+
+`void`

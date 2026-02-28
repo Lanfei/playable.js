@@ -1,421 +1,407 @@
+[**API Reference**](../README.md)
+
+***
+
 [API Reference](../README.md) / Rectangle
 
 # Class: Rectangle
 
-## Table of contents
-
-### Constructors
-
-- [constructor](Rectangle.md#constructor)
-
-### Properties
-
-- [height](Rectangle.md#height)
-- [width](Rectangle.md#width)
-- [x](Rectangle.md#x)
-- [y](Rectangle.md#y)
-- [$pool](Rectangle.md#$pool)
-
-### Accessors
-
-- [bottom](Rectangle.md#bottom)
-- [bottomRight](Rectangle.md#bottomright)
-- [left](Rectangle.md#left)
-- [right](Rectangle.md#right)
-- [top](Rectangle.md#top)
-- [topLeft](Rectangle.md#topleft)
-
-### Methods
-
-- [contains](Rectangle.md#contains)
-- [equal](Rectangle.md#equal)
-- [release](Rectangle.md#release)
-- [set](Rectangle.md#set)
-- [create](Rectangle.md#create)
-- [recycle](Rectangle.md#recycle)
+Defined in: [geom/Rectangle.ts:3](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L3)
 
 ## Constructors
 
-### constructor
+### Constructor
 
-• `Protected` **new Rectangle**(`x?`, `y?`, `width?`, `height?`)
+> `protected` **new Rectangle**(`x?`, `y?`, `width?`, `height?`): [`Rectangle`](../variables/default.md#rectangle)
+
+Defined in: [geom/Rectangle.ts:10](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L10)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `x?` | `number` |
-| `y?` | `number` |
-| `width?` | `number` |
-| `height?` | `number` |
+##### x?
 
-#### Defined in
+`number`
 
-[geom/Rectangle.ts:10](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L10)
+##### y?
+
+`number`
+
+##### width?
+
+`number`
+
+##### height?
+
+`number`
+
+#### Returns
+
+[`Rectangle`](../variables/default.md#rectangle)
 
 ## Properties
 
 ### height
 
-• **height**: `number`
+> **height**: `number`
 
-#### Defined in
+Defined in: [geom/Rectangle.ts:8](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L8)
 
-[geom/Rectangle.ts:8](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L8)
-
-___
+***
 
 ### width
 
-• **width**: `number`
+> **width**: `number`
 
-#### Defined in
+Defined in: [geom/Rectangle.ts:7](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L7)
 
-[geom/Rectangle.ts:7](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L7)
-
-___
+***
 
 ### x
 
-• **x**: `number`
+> **x**: `number`
 
-#### Defined in
+Defined in: [geom/Rectangle.ts:5](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L5)
 
-[geom/Rectangle.ts:5](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L5)
-
-___
+***
 
 ### y
 
-• **y**: `number`
+> **y**: `number`
 
-#### Defined in
+Defined in: [geom/Rectangle.ts:6](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L6)
 
-[geom/Rectangle.ts:6](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L6)
-
-___
+***
 
 ### $pool
 
-▪ `Static` `Protected` `Readonly` **$pool**: [`Rectangle`](../README.md#rectangle)[] = `[]`
+> `protected` `readonly` `static` **$pool**: [`Rectangle`](../variables/default.md#rectangle)[] = `[]`
 
-#### Defined in
-
-[geom/Rectangle.ts:92](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L92)
+Defined in: [geom/Rectangle.ts:92](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L92)
 
 ## Accessors
 
 ### bottom
 
-• `get` **bottom**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **bottom**(): `number`
+
+Defined in: [geom/Rectangle.ts:23](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L23)
+
+##### Returns
 
 `number`
 
-#### Defined in
+#### Set Signature
 
-[geom/Rectangle.ts:23](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L23)
+> **set** **bottom**(`bottom`): `void`
 
-• `set` **bottom**(`bottom`): `void`
+Defined in: [geom/Rectangle.ts:27](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L27)
 
-#### Parameters
+##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `bottom` | `number` |
+###### bottom
 
-#### Returns
+`number`
+
+##### Returns
 
 `void`
 
-#### Defined in
-
-[geom/Rectangle.ts:27](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L27)
-
-___
+***
 
 ### bottomRight
 
-• `get` **bottomRight**(): [`Vector`](../README.md#vector)
+#### Get Signature
 
-#### Returns
+> **get** **bottomRight**(): [`Vector`](../variables/default.md#vector)
 
-[`Vector`](../README.md#vector)
+Defined in: [geom/Rectangle.ts:57](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L57)
 
-#### Defined in
+##### Returns
 
-[geom/Rectangle.ts:57](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L57)
+[`Vector`](../variables/default.md#vector)
 
-• `set` **bottomRight**(`v`): `void`
+#### Set Signature
 
-#### Parameters
+> **set** **bottomRight**(`v`): `void`
 
-| Name | Type |
-| :------ | :------ |
-| `v` | [`Vector`](../README.md#vector) |
+Defined in: [geom/Rectangle.ts:61](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L61)
 
-#### Returns
+##### Parameters
+
+###### v
+
+[`Vector`](../variables/default.md#vector)
+
+##### Returns
 
 `void`
 
-#### Defined in
-
-[geom/Rectangle.ts:61](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L61)
-
-___
+***
 
 ### left
 
-• `get` **left**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **left**(): `number`
+
+Defined in: [geom/Rectangle.ts:31](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L31)
+
+##### Returns
 
 `number`
 
-#### Defined in
+#### Set Signature
 
-[geom/Rectangle.ts:31](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L31)
+> **set** **left**(`left`): `void`
 
-• `set` **left**(`left`): `void`
+Defined in: [geom/Rectangle.ts:35](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L35)
 
-#### Parameters
+##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `left` | `number` |
+###### left
 
-#### Returns
+`number`
+
+##### Returns
 
 `void`
 
-#### Defined in
-
-[geom/Rectangle.ts:35](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L35)
-
-___
+***
 
 ### right
 
-• `get` **right**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **right**(): `number`
+
+Defined in: [geom/Rectangle.ts:40](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L40)
+
+##### Returns
 
 `number`
 
-#### Defined in
+#### Set Signature
 
-[geom/Rectangle.ts:40](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L40)
+> **set** **right**(`right`): `void`
 
-• `set` **right**(`right`): `void`
+Defined in: [geom/Rectangle.ts:44](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L44)
 
-#### Parameters
+##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `right` | `number` |
+###### right
 
-#### Returns
+`number`
+
+##### Returns
 
 `void`
 
-#### Defined in
-
-[geom/Rectangle.ts:44](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L44)
-
-___
+***
 
 ### top
 
-• `get` **top**(): `number`
+#### Get Signature
 
-#### Returns
+> **get** **top**(): `number`
+
+Defined in: [geom/Rectangle.ts:14](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L14)
+
+##### Returns
 
 `number`
 
-#### Defined in
+#### Set Signature
 
-[geom/Rectangle.ts:14](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L14)
+> **set** **top**(`top`): `void`
 
-• `set` **top**(`top`): `void`
+Defined in: [geom/Rectangle.ts:18](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L18)
 
-#### Parameters
+##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `top` | `number` |
+###### top
 
-#### Returns
+`number`
+
+##### Returns
 
 `void`
 
-#### Defined in
-
-[geom/Rectangle.ts:18](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L18)
-
-___
+***
 
 ### topLeft
 
-• `get` **topLeft**(): [`Vector`](../README.md#vector)
+#### Get Signature
 
-#### Returns
+> **get** **topLeft**(): [`Vector`](../variables/default.md#vector)
 
-[`Vector`](../README.md#vector)
+Defined in: [geom/Rectangle.ts:48](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L48)
 
-#### Defined in
+##### Returns
 
-[geom/Rectangle.ts:48](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L48)
+[`Vector`](../variables/default.md#vector)
 
-• `set` **topLeft**(`v`): `void`
+#### Set Signature
 
-#### Parameters
+> **set** **topLeft**(`v`): `void`
 
-| Name | Type |
-| :------ | :------ |
-| `v` | [`Vector`](../README.md#vector) |
+Defined in: [geom/Rectangle.ts:52](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L52)
 
-#### Returns
+##### Parameters
+
+###### v
+
+[`Vector`](../variables/default.md#vector)
+
+##### Returns
 
 `void`
-
-#### Defined in
-
-[geom/Rectangle.ts:52](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L52)
 
 ## Methods
 
-### contains
+### contains()
 
-▸ **contains**(`v`): `boolean`
+#### Call Signature
+
+> **contains**(`v`): `boolean`
+
+Defined in: [geom/Rectangle.ts:74](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L74)
+
+##### Parameters
+
+###### v
+
+[`Vector`](../variables/default.md#vector)
+
+##### Returns
+
+`boolean`
+
+#### Call Signature
+
+> **contains**(`x`, `y`): `boolean`
+
+Defined in: [geom/Rectangle.ts:75](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L75)
+
+##### Parameters
+
+###### x
+
+`number`
+
+###### y
+
+`number`
+
+##### Returns
+
+`boolean`
+
+***
+
+### equal()
+
+> **equal**(`r`): `boolean`
+
+Defined in: [geom/Rectangle.ts:83](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L83)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `v` | [`Vector`](../README.md#vector) |
+##### r
+
+[`Rectangle`](../variables/default.md#rectangle)
 
 #### Returns
 
 `boolean`
 
-#### Defined in
+***
 
-[geom/Rectangle.ts:74](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L74)
+### release()
 
-▸ **contains**(`x`, `y`): `boolean`
+> **release**(): `void`
 
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `x` | `number` |
-| `y` | `number` |
-
-#### Returns
-
-`boolean`
-
-#### Defined in
-
-[geom/Rectangle.ts:75](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L75)
-
-___
-
-### equal
-
-▸ **equal**(`r`): `boolean`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `r` | [`Rectangle`](../README.md#rectangle) |
-
-#### Returns
-
-`boolean`
-
-#### Defined in
-
-[geom/Rectangle.ts:83](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L83)
-
-___
-
-### release
-
-▸ **release**(): `void`
+Defined in: [geom/Rectangle.ts:88](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L88)
 
 #### Returns
 
 `void`
 
-#### Defined in
+***
 
-[geom/Rectangle.ts:88](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L88)
+### set()
 
-___
+> **set**(`x`, `y`, `width`, `height`): `this`
 
-### set
-
-▸ **set**(`x`, `y`, `width`, `height`): [`Rectangle`](../README.md#rectangle)
+Defined in: [geom/Rectangle.ts:66](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L66)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `x` | `number` |
-| `y` | `number` |
-| `width` | `number` |
-| `height` | `number` |
+##### x
+
+`number`
+
+##### y
+
+`number`
+
+##### width
+
+`number`
+
+##### height
+
+`number`
 
 #### Returns
 
-[`Rectangle`](../README.md#rectangle)
+`this`
 
-#### Defined in
+***
 
-[geom/Rectangle.ts:66](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L66)
+### create()
 
-___
+> `static` **create**(`x?`, `y?`, `width?`, `height?`): [`Rectangle`](../variables/default.md#rectangle)
 
-### create
-
-▸ `Static` **create**(`x?`, `y?`, `width?`, `height?`): [`Rectangle`](../README.md#rectangle)
+Defined in: [geom/Rectangle.ts:94](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L94)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `x?` | `number` |
-| `y?` | `number` |
-| `width?` | `number` |
-| `height?` | `number` |
+##### x?
+
+`number`
+
+##### y?
+
+`number`
+
+##### width?
+
+`number`
+
+##### height?
+
+`number`
 
 #### Returns
 
-[`Rectangle`](../README.md#rectangle)
+[`Rectangle`](../variables/default.md#rectangle)
 
-#### Defined in
+***
 
-[geom/Rectangle.ts:94](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L94)
+### recycle()
 
-___
+> `static` **recycle**(`r`): `void`
 
-### recycle
-
-▸ `Static` **recycle**(`r`): `void`
+Defined in: [geom/Rectangle.ts:103](https://github.com/Lanfei/playable.js/blob/004dd2949dc30ea042ea81ee39afc5c0553fde31/src/geom/Rectangle.ts#L103)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `r` | [`Rectangle`](../README.md#rectangle) |
+##### r
+
+[`Rectangle`](../variables/default.md#rectangle)
 
 #### Returns
 
 `void`
-
-#### Defined in
-
-[geom/Rectangle.ts:103](https://github.com/Lanfei/playable.js/blob/2369e26/src/geom/Rectangle.ts#L103)
