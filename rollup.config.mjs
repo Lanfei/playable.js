@@ -12,7 +12,7 @@ export default [{
 		exports: 'named'
 	},
 	plugins: [
-		typescript({tsconfig: false, target: "es2020", include: ['src/**/*.ts']})
+		typescript({tsconfig: false, target: "es2020", declaration: false, include: ['src/**/*.ts']})
 	]
 }, {
 	input: 'src/index.ts',
@@ -21,7 +21,7 @@ export default [{
 		format: 'es'
 	},
 	plugins: [
-		typescript({tsconfig: false, target: "es2020", include: ['src/**/*.ts']})
+		typescript({tsconfig: false, target: "es2020", declaration: false, include: ['src/**/*.ts']})
 	]
 }, {
 	input: 'src/index.ts',
@@ -32,7 +32,7 @@ export default [{
 		exports: 'named'
 	},
 	plugins: [
-		typescript({tsconfig: false, target: "es2020", include: ['src/**/*.ts']})
+		typescript({tsconfig: false, target: "es2020", declaration: false, include: ['src/**/*.ts']})
 	]
 }, {
 	input: 'src/index.ts',
@@ -44,7 +44,7 @@ export default [{
 		sourcemap: true
 	},
 	plugins: [
-		typescript({tsconfig: false, target: "es2020", include: ['src/**/*.ts']}),
+		typescript({tsconfig: false, target: "es2020", declaration: false, include: ['src/**/*.ts']}),
 		terser()
 	]
 }];

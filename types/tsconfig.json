@@ -2,6 +2,8 @@
 	"compilerOptions": {
 		"target": "es2020",
 		"moduleResolution": "bundler",
+		"rootDir": "../src",
+		"strict": false,
 		"declaration": true,
 		"declarationDir": ".",
 		"emitDeclarationOnly": true
