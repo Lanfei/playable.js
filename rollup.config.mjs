@@ -4,6 +4,16 @@ import terser from '@rollup/plugin-terser';
 
 const pkg = JSON.parse(fs.readFileSync('./package.json').toString());
 
+const tsOptions = {
+	tsconfig: false,
+	target: 'es2020',
+	module: 'es2020',
+	moduleResolution: 'bundler',
+	strict: false,
+	declaration: false,
+	include: ['src/**/*.ts'],
+};
+
 export default [{
 	input: 'src/index.ts',
 	output: {
@@ -12,7 +22,7 @@ export default [{
 		exports: 'named'
 	},
 	plugins: [
-		typescript({tsconfig: false, target: "es2020", declaration: false, include: ['src/**/*.ts']})
+		typescript(tsOptions)
 	]
 }, {
 	input: 'src/index.ts',
@@ -21,7 +31,7 @@ export default [{
 		format: 'es'
 	},
 	plugins: [
-		typescript({tsconfig: false, target: "es2020", declaration: false, include: ['src/**/*.ts']})
+		typescript(tsOptions)
 	]
 }, {
 	input: 'src/index.ts',
@@ -32,7 +42,7 @@ export default [{
 		exports: 'named'
 	},
 	plugins: [
-		typescript({tsconfig: false, target: "es2020", declaration: false, include: ['src/**/*.ts']})
+		typescript(tsOptions)
 	]
 }, {
 	input: 'src/index.ts',
@@ -44,7 +54,7 @@ export default [{
 		sourcemap: true
 	},
 	plugins: [
-		typescript({tsconfig: false, target: "es2020", declaration: false, include: ['src/**/*.ts']}),
+		typescript(tsOptions),
 		terser()
 	]
 }];

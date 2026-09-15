@@ -11,24 +11,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-          cache: 'npm'
+          cache: 'pnpm'
 
-      - run: npm ci
+      - run: pnpm install --frozen-lockfile
 
       - uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ hashFiles('package-lock.json') }}
+          key: playwright-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: playwright-
 
-      - run: npx playwright install --with-deps
+      - run: pnpm exec playwright install --with-deps
 
-      - run: npm run build
+      - run: pnpm run build
 
-      - run: npm run coverage
+      - run: pnpm run coverage
 
       - uses: codecov/codecov-action@v5
         with:
